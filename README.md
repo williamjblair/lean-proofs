@@ -1,4 +1,4 @@
-# verified-lean-proofs
+# lean-proofs
 
 A small, self-checking index of formal Lean 4 proofs of solved research problems,
 hosted as stable `formal_proof` targets for

@@ -6,7 +6,7 @@
 # as a contribution target.
 #
 # `axioms_clean: true` is enforced by scripts/check_axioms.sh on every push.
-repo: willblair0708/verified-lean-proofs
+repo: willblair0708/lean-proofs
 toolchain: leanprover/lean4:v4.29.1
 mathlib: v4.29.1
 

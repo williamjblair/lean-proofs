@@ -1,4 +1,4 @@
-name = "verified-lean-proofs"
+name = "lean-proofs"
 version = "0.1.0"
 keywords = ["math", "formal-proofs", "erdos"]
 defaultTargets = ["ErdosProblems"]
