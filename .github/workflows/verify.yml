@@ -24,3 +24,12 @@ jobs:
 
       - name: Manifest is in sync
         run: bash scripts/check_manifest.sh
+
+      # Tamper-evident proof evidence: regenerate attestations.json (file +
+      # lake-manifest + audit-output hashes, axiom footprint) and fail if the
+      # committed copy drifted. Reproducible across machines, so no auto-commit.
+      - name: Proof attestations are in sync
+        run: |
+          pip install --quiet pyyaml
+          python3 scripts/emit_attestations.py
+          git diff --exit-code attestations.json

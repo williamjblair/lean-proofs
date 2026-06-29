@@ -1,0 +1,24 @@
+{
+  "schema": "lean-proofs.attestations.v0.1",
+  "repo": "willblair0708/lean-proofs",
+  "toolchain": "leanprover/lean4:v4.29.1",
+  "mathlib": "v4.29.1",
+  "verifier_method": "lean_kernel",
+  "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
+  "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
+  "verifier_output_hash": "sha256:9602f000bd75ea20f8a337cbfe98f7180c68934330abfef57f64eefc0e942193",
+  "attestations": [
+    {
+      "problem": 154,
+      "theorem": "Erdos154.erdos_154_sumset",
+      "file": "ErdosProblems/Erdos154Sumset.lean",
+      "proof_hash": "sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    }
+  ]
+}
