@@ -23,3 +23,2051 @@ proofs:
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/154.lean
     fc_pr: https://github.com/google-deepmind/formal-conjectures/pull/4340
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.nonsquare_representable
+    statement: >-
+      Every nonsquare natural number N >= 2 has an Erdős 686 representation,
+      already with k=2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_iff_square_representable
+    statement: >-
+      Exact positive reduction: the full Erdős 686 statement is equivalent to
+      representing every square a^2 with a >= 2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_iff_square_counterexample
+    statement: >-
+      Exact negative reduction: a counterexample to the full Erdős 686
+      statement exists iff a square counterexample exists.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_family_representable
+    statement: >-
+      Every square N = (4t+6)^2 has an Erdős 686 representation, already with
+      k=2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_minus_one_family_representable
+    statement: >-
+      Every square N = (16t^2+48t+35)^2 has an Erdős 686 representation,
+      already with k=2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_pell_third_family_representable
+    statement: >-
+      Every square N = (64t^3+288t^2+424t+204)^2 has an Erdős 686
+      representation, already with k=2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_pell_fourth_family_representable
+    statement: >-
+      Every square N = (256t^4+1536t^3+3408t^2+3312t+1189)^2 has an Erdős
+      686 representation, already with k=2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k2Pell_family_representable
+    statement: >-
+      Every nontrivial rung of the elementary k=2 Pell/Chebyshev recurrence
+      gives an Erdős 686 representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k2PellRoot_one
+    statement: >-
+      Indexing check: recurrence rung 1 is exactly the root family 4t+6.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k2PellRoot_two
+    statement: >-
+      Indexing check: recurrence rung 2 is exactly the root family
+      16t^2+48t+35.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k2PellRoot_three
+    statement: >-
+      Indexing check: recurrence rung 3 is exactly the cubic explicit
+      Pell-root family.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k2PellRoot_four
+    statement: >-
+      Indexing check: recurrence rung 4 is exactly the quartic explicit
+      Pell-root family.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k2PellRoot_five_redundant
+    statement: >-
+      Indexing check: recurrence rung 5 is already in the 4u+6 root family.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k2PellRoot_six
+    statement: >-
+      Indexing check: recurrence rung 6 is the degree-six Pell-root family.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_original_representable_of_pell_shape
+    statement: >-
+      Conditional construction: a Pell-shape identity
+      (2m+3)^2 = (((2n+3)^2-1)a^2+1), together with m >= n+2, gives an
+      Erdős 686 representation of a^2 already with k=2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_original_representable_of_odd_pell_shape
+    statement: >-
+      Conditional construction: an odd x with 2n+7 <= x and
+      x^2 = (((2n+3)^2-1)a^2+1) gives an Erdős 686 representation of a^2
+      already with k=2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_original_representable_of_pell_solution_natAbs
+    statement: >-
+      Mathlib-Pell bridge: an odd, large enough x-coordinate of a
+      Pell.Solution₁ for d=(2n+3)^2-1 gives an Erdős 686 representation of
+      (y.natAbs)^2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_pell_power_family_representable
+    statement: >-
+      Every square whose root is the absolute y-coordinate of a power e >= 2
+      of the fundamental k=2 Pell unit (2n+3,1) has an Erdős 686
+      representation, already with k=2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_k_two_quotient_closure_of_pell_power
+    statement: >-
+      Closure operation: any k=2 square representation can be composed with a
+      nontrivial Pell power of its numerator block to produce another k=2
+      square representation over the same denominator.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.square_k_two_representable_iff_pell_shape
+    statement: >-
+      Exact bridge: a k=2 quotient representation of a^2 is equivalent to
+      solving (2m+3)^2 = (((2n+3)^2-1)a^2+1) with m >= n+2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_three_square_quotient_solution_to_admissible_cubic_point
+    statement: >-
+      Structural k=3 reduction: every square quotient solution gives an
+      admissible even integral point on x(x^2-4)=a^2y(y^2-4).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_three_broken_diagonal_rational_point
+    statement: >-
+      Structural k=3 identity: the broken diagonal gives an exact rational
+      point on x(x^2-4)=a^2 y(y^2-4) for every square root a.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_six_pair_cubic_of_quotient_solution
+    statement: >-
+      Structural k=6 reduction: every length-six quotient solution gives a
+      cubic equation in the paired quadratic values (x+1)(x+6).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.centeredBlockProduct_center
+    statement: >-
+      Uniform centered normalization: C_k(2n+k+1) = 2^k P_k(n) for the
+      integer centered block product C_k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.quotient_eq_iff_centeredBlockProduct_eq
+    statement: >-
+      The rational quotient equation is equivalent to the centered integer
+      equation C_k(2m+k+1)=N C_k(2n+k+1).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.quotient_solution_with_gap_of_solution
+    statement: >-
+      Any quotient solution for a natural N gives a gap d=m-n with k<=d and
+      the cleared equality P_k(n+d)=N P_k(n).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.ratio_window_nat
+    statement: >-
+      Any cleared gap-form quotient solution for a natural N forces the exact
+      power window (n+d+k)^k <= N(n+k)^k and N(n+1)^k <= (n+d+1)^k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.ratio_window_sixtyfour_nat
+    statement: >-
+      Any cleared gap-form N=64 quotient solution forces the exact natural
+      arithmetic ratio window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.shift_lt_two_mul_base_of_sixtyfour_window
+    statement: >-
+      For k>=7, the lower side of the N=64 ratio window forces
+      n+d+k < 2(n+k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.gap_lt_n_add_k_of_sixtyfour_gap_solution
+    statement: >-
+      Any cleared gap-form N=64 quotient solution with k>=7 has gap d<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.ratio_window_linearize_of_pow_bracket
+    statement: >-
+      Generic rational-bracket linearization: if N*B^k<A^k and the lower ratio
+      window has (n+d+k)^k<=N(n+k)^k, then B(n+d+k)<A(n+k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.ratio_window_gap_bound_of_pow_bracket
+    statement: >-
+      Generic rational-bracket gap bound: if B<=A, N*B^k<A^k, and the lower
+      ratio window has (n+d+k)^k<=N(n+k)^k, then B*d<(A-B)(n+k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.ratio_window_succ_gap_bound_of_pow_bracket
+    statement: >-
+      Successor rational-bracket gap bound: if N*R^k<(R+1)^k and the lower
+      ratio window has (n+d+k)^k<=N(n+k)^k, then R*d<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.ratio_window_upper_linearize_of_pow_bracket
+    statement: >-
+      Generic upper-side rational-bracket linearization: if A^k<N*B^k and the
+      upper ratio window has N(n+1)^k<=(n+d+1)^k, then
+      A(n+1)<B(n+d+1).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.ratio_window_upper_gap_bound_of_pow_bracket
+    statement: >-
+      Generic upper-side gap bound: if B<=A, A^k<N*B^k, and the upper ratio
+      window has N(n+1)^k<=(n+d+1)^k, then (A-B)(n+1)<B*d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.ratio_window_upper_succ_gap_bound_of_pow_bracket
+    statement: >-
+      Successor upper-side gap bound: if (R+1)^k<N*R^k and the upper ratio
+      window has N(n+1)^k<=(n+d+1)^k, then n+1<R*d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.succ_gap_lt_n_add_k_of_sixtyfour_gap_solution
+    statement: >-
+      Generic N=64 gap-form consequence: if (R+1)/R is above 64^(1/k), then
+      every cleared quotient solution has R*d<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.upper_succ_n_add_one_lt_mul_gap_of_sixtyfour_window
+    statement: >-
+      N=64 upper-side window consequence: if 64^(1/k) is above (R+1)/R, then
+      n+1<R*d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.upper_succ_n_add_one_lt_mul_gap_of_sixtyfour_gap_solution
+    statement: >-
+      Gap-form N=64 upper-side consequence: if 64^(1/k) is above (R+1)/R,
+      then every cleared quotient solution has n+1<R*d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.prime_dvd_finset_prod_exists
+    statement: >-
+      Generic support extraction: a prime divisor of a finite natural product
+      divides one factor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_upper_prime_dvd_lower_term
+    statement: >-
+      Odd-block support: if equal odd blocks have a prime divisor in the
+      shifted odd block, that prime divides some term of the original interval.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_upper_prime_le
+    statement: >-
+      Numeric support bound: any prime divisor of the shifted odd block under
+      odd-block equality is at most n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_upper_odd_prime_le
+    statement: >-
+      Odd-prime wrapper for the support bound, matching the existing N=64
+      prime-anatomy hypotheses.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_upper_oddBlock_smooth
+    statement: >-
+      Smoothness form: equal odd blocks force every odd prime divisor of the
+      shifted odd block to be at most n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_ne_of_upper_large_prime
+    statement: >-
+      Large-prime escape: a prime divisor of the shifted odd block larger than
+      n+k rules out odd-block equality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_ne_of_upper_large_odd_prime
+    statement: >-
+      Odd-prime wrapper for the large-prime odd-block escape criterion.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_upper_term_prime_dvd_lower_term
+    statement: >-
+      Term support: a prime divisor of one shifted odd-part term must divide
+      some original interval term under odd-block equality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_ne_of_upper_term_large_odd_prime
+    statement: >-
+      Term-level large-prime escape: a large odd prime divisor of one shifted
+      odd-part term rules out odd-block equality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddPart_factorization_of_ne_two
+    statement: >-
+      Odd-part removal preserves the p-adic exponent for primes p != 2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.unique_dvd_add_of_mem_Icc_of_lt
+    statement: >-
+      A number p>k divides at most one term in a translated interval indexed
+      by Finset.Icc 1 k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.existsUnique_dvd_add_Icc_of_exists_of_lt
+    statement: >-
+      Existence plus p>k gives a unique support index in a translated
+      interval.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.not_dvd_add_of_ne_unique
+    statement: >-
+      If p>k divides one translated interval term, it divides no distinct
+      indexed term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.dvd_oddBlock_of_dvd_oddPart
+    statement: >-
+      A divisor of one indexed odd-part term divides the full odd block.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_factorization_sum_eq_of_eq
+    statement: >-
+      Odd-block equality expands to equality of p-factorization sums over
+      the two intervals.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.sum_oddPart_factorization_eq_single_of_dvd_add
+    statement: >-
+      For p>k, a factorization sum over odd parts collapses to the unique
+      supported term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_large_prime_factorization_eq
+    statement: >-
+      Under odd-block equality, an odd prime p>k has equal exponent in a
+      shifted supported term and its lower support term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.pow_dvd_of_factorization_eq
+    statement: >-
+      Equal prime factorizations transfer prime-power divisibility between
+      nonzero natural numbers.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_large_prime_pow_dvd_lower
+    statement: >-
+      Under odd-block equality, every p^e dividing the shifted supported term
+      transfers to the matched lower term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_large_prime_existsUnique_lower_dvd
+    statement: >-
+      For p>k, odd-block equality gives a unique lower support index for a
+      prime dividing an upper odd-part term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.LargePrimeMatch
+    statement: >-
+      Structure packaging unique lower support, valuation equality, and
+      prime-power transfer for large prime matches.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_large_prime_match
+    statement: >-
+      Main valuation package: an odd prime p>k in one shifted odd-part term
+      has a unique lower match with exponent and power-divisibility transfer.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.LargePrimeMatch.gap_dvd
+    statement: >-
+      A large-prime match plus block separation transfers prime-power
+      divisibility to the upper-minus-lower gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.LargePrimeMatch.modEq
+    statement: >-
+      Congruence form of the prime-power transfer forced by a large-prime
+      match.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_upper_large_prime_power_gap_support
+    statement: >-
+      Under odd-block equality, every large odd prime power in an upper odd part
+      divides one upper-minus-lower gap factor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_upper_large_prime_power_dvd_gapProduct
+    statement: >-
+      The same large odd prime power divides the full upper-gap product for that
+      upper term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.prime_of_mem_factorization_support
+    statement: >-
+      Any natural number in the support of a natural factorization is prime.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.pow_factorization_dvd_of_mem_factorization_support
+    statement: >-
+      The full prime power selected by a natural factorization support entry
+      divides the original number.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_upper_largeOddKernel_factor_dvd_gapProduct
+    statement: >-
+      Every large-prime factorization component of an upper odd part divides the
+      corresponding upper-gap product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.LargePrimeMatch.pow_dvd_shiftedDiffProductAt
+    statement: >-
+      Gap-form consequence: a matched prime power divides the
+      shifted-difference row indexed by its lower support.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_large_prime_pow_dvd_shiftedDiffProductAt
+    statement: >-
+      Odd-block equality transfers an upper matched prime power into the
+      shifted-difference row of the matched lower support.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_eq_large_prime_pow_dvd_shiftedDiffProductRows
+    statement: >-
+      Row-product form: the transferred large-prime power divides the
+      shifted-difference row product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_ne_of_upper_large_prime_power_row_lt
+    statement: >-
+      If every possible matched shifted-difference row is smaller than a forced
+      upper odd prime power, the odd blocks are unequal.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_ne_of_upper_large_prime_power_rows_lt
+    statement: >-
+      If the shifted-difference row product is smaller than a forced upper odd
+      prime power, the odd blocks are unequal.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.two_mul_shift_lt_three_mul_base_of_sixtyfour_window
+    statement: >-
+      For k>=11, the N=64 ratio window and (3/2)^k>64 force
+      2(n+d+k)<3(n+k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.twice_gap_lt_n_add_k_of_sixtyfour_gap_solution
+    statement: >-
+      Any cleared gap-form N=64 quotient solution with k>=11 has
+      2d<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.twice_gap_lt_n_add_k_of_sixtyfour_solution
+    statement: >-
+      Any original-variable N=64 quotient solution with k>=11 has
+      2(m-n)<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.three_mul_shift_lt_four_mul_base_of_sixtyfour_window
+    statement: >-
+      For k>=15, the N=64 ratio window and (4/3)^k>64 force
+      3(n+d+k)<4(n+k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.three_mul_gap_lt_n_add_k_of_sixtyfour_gap_solution
+    statement: >-
+      Any cleared gap-form N=64 quotient solution with k>=15 has
+      3d<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.three_mul_gap_lt_n_add_k_of_sixtyfour_solution
+    statement: >-
+      Any original-variable N=64 quotient solution with k>=15 has
+      3(m-n)<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.four_mul_shift_lt_five_mul_base_of_sixtyfour_window
+    statement: >-
+      For k>=19, the N=64 ratio window and (5/4)^k>64 force
+      4(n+d+k)<5(n+k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.four_mul_gap_lt_n_add_k_of_sixtyfour_gap_solution
+    statement: >-
+      Any cleared gap-form N=64 quotient solution with k>=19 has
+      4d<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.four_mul_gap_lt_n_add_k_of_sixtyfour_solution
+    statement: >-
+      Any original-variable N=64 quotient solution with k>=19 has
+      4(m-n)<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.five_mul_shift_lt_six_mul_base_of_sixtyfour_window
+    statement: >-
+      For k>=23, the N=64 ratio window and (6/5)^k>64 force
+      5(n+d+k)<6(n+k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.five_mul_gap_lt_n_add_k_of_sixtyfour_gap_solution
+    statement: >-
+      Any cleared gap-form N=64 quotient solution with k>=23 has
+      5d<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.five_mul_gap_lt_n_add_k_of_sixtyfour_solution
+    statement: >-
+      Any original-variable N=64 quotient solution with k>=23 has
+      5(m-n)<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.six_mul_shift_lt_seven_mul_base_of_sixtyfour_window
+    statement: >-
+      For k>=27, the N=64 ratio window and (7/6)^k>64 force
+      6(n+d+k)<7(n+k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.six_mul_gap_lt_n_add_k_of_sixtyfour_gap_solution
+    statement: >-
+      Any cleared gap-form N=64 quotient solution with k>=27 has
+      6d<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.six_mul_gap_lt_n_add_k_of_sixtyfour_solution
+    statement: >-
+      Any original-variable N=64 quotient solution with k>=27 has
+      6(m-n)<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.seven_mul_shift_lt_eight_mul_base_of_sixtyfour_window
+    statement: >-
+      For k>=32, the N=64 ratio window and (8/7)^k>64 force
+      7(n+d+k)<8(n+k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.seven_mul_gap_lt_n_add_k_of_sixtyfour_gap_solution
+    statement: >-
+      Any cleared gap-form N=64 quotient solution with k>=32 has
+      7d<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.seven_mul_gap_lt_n_add_k_of_sixtyfour_solution
+    statement: >-
+      Any original-variable N=64 quotient solution with k>=32 has
+      7(m-n)<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.branch_factor_value_dvd_leading_value_of_eq
+    statement: >-
+      If k=qg and a^g=64, then Y^q-aX^q divides the leading value
+      Y^k-64X^k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.branch_factor_eight_value_dvd_leading_value
+    statement: >-
+      Concrete leading branch factor: Y^q-8X^q divides Y^(2q)-64X^(2q).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.branch_factor_four_value_dvd_leading_value
+    statement: >-
+      Concrete leading branch factor: Y^q-4X^q divides Y^(3q)-64X^(3q).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.branch_factor_two_value_dvd_leading_value
+    statement: >-
+      Concrete leading branch factor: Y^q-2X^q divides Y^(6q)-64X^(6q).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.two_or_three_dvd_of_not_coprime_six
+    statement: >-
+      If k is not coprime to 6, then either 2 divides k or 3 divides k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.branch_factor_value_exists_of_not_coprime_six
+    statement: >-
+      If k is positive and not coprime to 6, then the leading value
+      Y^k-64X^k has an explicit integer branch factor of the form
+      Y^q-8X^q or Y^q-4X^q.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_prime_power_eq_64_of_coprime_six
+    statement: >-
+      If p is prime, p divides k, and gcd(k,6)=1, then 64 is not a pth power.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.rat_no_prime_power_eq_64_of_coprime_six
+    statement: >-
+      If p is prime, p divides k, and gcd(k,6)=1, then 64 is not a pth power
+      in the rational numbers.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.X_pow_sub_C_sixtyfour_irreducible_of_coprime_six
+    statement: >-
+      If gcd(k,6)=1, then the leading branch polynomial X^k-64 is irreducible
+      over the rational numbers.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.two_pow_quotient_implies_oddBlock_eq
+    statement: >-
+      If the quotient of two equal-length blocks is a power of two, then the
+      products of their odd parts are equal.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.sixtyfour_quotient_implies_oddBlock_eq
+    statement: >-
+      Any N=64 quotient representation forces equality of the two odd-block
+      products.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_dvd_shiftedDiffProductRows_of_oddBlock_eq
+    statement: >-
+      Equal odd-block products force the lower odd-block product to divide the
+      shifted difference row product depending only on k and the gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_ne_of_shiftedDiffProductRows_lt
+    statement: >-
+      If the lower odd-block product is larger than the shifted difference row
+      product, then the two disjoint odd blocks are unequal.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.oddBlock_ne_of_shiftedDiffProductAt_lt_oddPart
+    statement: >-
+      If one lower term's odd part is larger than its shifted difference row,
+      then the two disjoint odd blocks are unequal.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.smooth_blocks_of_sixtyfour_gap_solution
+    statement: >-
+      Any gap-form N=64 quotient solution forces every term in both blocks to
+      be smooth up to d+k-1.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.smooth_blocks_of_sixtyfour_solution
+    statement: >-
+      Any original-variable N=64 quotient solution gives the gap, the N=64
+      ratio window, and smoothness of both blocks up to d+k-1.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.gap_lt_n_add_k_of_sixtyfour_solution
+    statement: >-
+      Any original-variable N=64 quotient solution with k>=7 has gap
+      m-n<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.succ_gap_lt_n_add_k_of_sixtyfour_solution
+    statement: >-
+      Generic original-variable N=64 consequence: if (R+1)/R is above
+      64^(1/k), then any quotient solution has R*(m-n)<n+k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.upper_succ_n_add_one_lt_mul_gap_of_sixtyfour_solution
+    statement: >-
+      Generic original-variable N=64 upper-side consequence: if 64^(1/k) is
+      above (R+1)/R, then any quotient solution has n+1<R*(m-n).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.nonsquare_or_known_square_family_representable
+    statement: >-
+      Every N >= 2 that is either nonsquare, a square of the form (4t+6)^2,
+      a square of the form (16t^2+48t+35)^2, or a square of the form
+      (64t^3+288t^2+424t+204)^2 has an Erdős 686 representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.nonsquare_or_known_square_root_family_representable
+    statement: >-
+      Every N >= 2 that is either nonsquare or a square whose square root has
+      the form 4t+6 or (4t+6)^2-1 has an Erdős 686 representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.nonsquare_or_mod_four_two_square_root_family_representable
+    statement: >-
+      Every N >= 2 that is either nonsquare or a square whose square root is
+      congruent to 2 mod 4 and at least 6, or one less than the square of such
+      a number, has an Erdős 686 representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.covered_square_root_representable
+    statement: >-
+      Every square whose root lies in the currently banked infinite square-root
+      coverage, including the full elementary k=2 Pell/Chebyshev recurrence,
+      is represented.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_iff_uncovered_square_root_representable
+    statement: >-
+      Exact constructive frontier: the full Erdős 686 statement is equivalent
+      to representing every square root outside the expanded banked coverage.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.augmented_covered_square_root_representable
+    statement: >-
+      Every square whose root lies in the banked infinite coverage or is one of
+      the explicit roots 3 and 4 is represented.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_iff_augmented_uncovered_square_root_representable
+    statement: >-
+      Exact constructive frontier after adding the explicit 9 and 16
+      witnesses: full Erdős 686 is equivalent to representing every remaining
+      square root outside the augmented expanded coverage.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.augmented_uncovered_square_root_le_ten
+    statement: >-
+      Finite augmented-frontier classifier: among roots 2 <= a <= 10, only
+      roots a in {2,5,7,8,9} remain outside the augmented constructive
+      coverage.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.pell_covered_square_root_representable
+    statement: >-
+      Every square whose root lies in the uniform elementary k=2
+      Pell/Chebyshev recurrence is represented.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.covered_square_root_pell_covered
+    statement: >-
+      The uniform elementary k=2 Pell/Chebyshev recurrence subsumes the older
+      hand-listed square-root coverage package.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.augmented_pell_covered_square_root_representable
+    statement: >-
+      Every square whose root lies in the uniform Pell recurrence, or is one
+      of the explicit roots 3 and 4, is represented.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.augmented_covered_square_root_pell_covered
+    statement: >-
+      The augmented uniform Pell coverage subsumes the older augmented
+      coverage with the explicit roots 3 and 4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_iff_augmented_pell_uncovered_square_root_representable
+    statement: >-
+      Clean constructive frontier: full Erdős 686 is equivalent to
+      representing every square root outside the augmented uniform
+      Pell-recurrence coverage.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_le_four
+    statement: >-
+      The candidate counterexample N=4 has no representation with block length
+      2 <= k <= 4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_holdout_square_two_or_four
+    statement: >-
+      The five first unresolved square roots a in {2,5,7,8,9} have no quotient
+      representation with k=2 or k=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_three
+    statement: >-
+      The square N=64 has no quotient representation with k=3.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_six
+    statement: >-
+      The square N=64 has no quotient representation with k=6.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_eight
+    statement: >-
+      The square N=64 has no quotient representation with k=8.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_sixteen_low_n
+    statement: >-
+      The square N=64 has no k=16 quotient representation in the finite range
+      n < 343.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_sixteen
+    statement: >-
+      The square N=64 has no quotient representation with k=16.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_two_three_four_or_six
+    statement: >-
+      The square N=64 has no quotient representation with k in {2,3,4,6}.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_two_three_four_six_or_eight
+    statement: >-
+      The square N=64 has no quotient representation with k in {2,3,4,6,8}.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_two_three_four_six_eight_or_sixteen
+    statement: >-
+      The square N=64 has no quotient representation with k in
+      {2,3,4,6,8,16}.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_oddBlock_separation
+    statement: >-
+      If odd-block separation holds for all disjoint blocks of length at least
+      four, then N=64 has no quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_oddBlock_separation
+    statement: >-
+      If odd-block separation holds for all disjoint blocks of length at least
+      four, then N=64 refutes the universal Erdos 686 representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_oddBlock_ratio_window_escape
+    statement: >-
+      If odd-block separation holds for every N=64 ratio-window candidate, then
+      N=64 has no quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_oddBlock_ratio_window_escape
+    statement: >-
+      If odd-block separation holds for every N=64 ratio-window candidate, then
+      N=64 refutes the universal Erdos 686 representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_oddPart_row_escape
+    statement: >-
+      If every remaining N=64 gap-form candidate has a lower term whose odd
+      part is larger than its shifted difference row, then N=64 has no quotient
+      representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_oddPart_row_escape
+    statement: >-
+      If the row-level odd-part escape holds for every remaining N=64 gap-form
+      candidate, then N=64 refutes the universal Erdos 686 representation
+      statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_oddPart_row_ratio_window_escape
+    statement: >-
+      If every N=64 ratio-window candidate has a lower term whose odd part is
+      larger than its shifted difference row, then N=64 has no quotient
+      representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_oddPart_row_ratio_window_escape
+    statement: >-
+      If the row-level odd-part escape holds for every N=64 ratio-window
+      candidate, then N=64 refutes the universal Erdos 686 representation
+      statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_not_smooth_escape
+    statement: >-
+      If every remaining N=64 gap-form candidate has a term in one of the two
+      blocks that is not smooth up to d+k-1, then N=64 has no quotient
+      representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_not_smooth_escape
+    statement: >-
+      If the nonsmooth-term escape holds for every remaining N=64 gap-form
+      candidate, then N=64 refutes the universal Erdos 686 representation
+      statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_not_smooth_ratio_window_escape
+    statement: >-
+      If every N=64 ratio-window candidate has a term in one of the two blocks
+      that is not smooth up to d+k-1, then N=64 has no quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_not_smooth_ratio_window_escape
+    statement: >-
+      If the nonsmooth-term escape holds for every N=64 ratio-window candidate,
+      then N=64 refutes the universal Erdos 686 representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_large_prime_factor_escape
+    statement: >-
+      If every remaining N=64 gap-form candidate has a prime factor larger
+      than d+k-1 in one of the two blocks, then N=64 has no quotient
+      representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_large_prime_factor_escape
+    statement: >-
+      If the large-prime-factor escape holds for every remaining N=64
+      gap-form candidate, then N=64 refutes the universal Erdos 686
+      representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_large_prime_factor_ratio_window_escape
+    statement: >-
+      If every N=64 ratio-window candidate has a prime factor larger than
+      d+k-1 in one of the two blocks, then N=64 has no quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_large_prime_factor_ratio_window_escape
+    statement: >-
+      If the large-prime-factor escape holds for every N=64 ratio-window
+      candidate, then N=64 refutes the universal Erdos 686 representation
+      statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_upper_large_prime_power_rows_ratio_window_escape
+    statement: >-
+      If every N=64 ratio-window candidate has an upper odd prime power larger
+      than the shifted-difference row product, then N=64 has no quotient
+      representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_upper_large_prime_power_rows_ratio_window_escape
+    statement: >-
+      If the prime-power row-size escape holds for every N=64 ratio-window
+      candidate, then N=64 refutes the universal Erdos 686 representation
+      statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_sixtyfour_of_upper_large_prime_power_row_ratio_window_escape
+    statement: >-
+      If every N=64 ratio-window candidate has an upper odd prime power larger
+      than every possible matched shifted-difference row, then N=64 has no
+      quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_sixtyfour_upper_large_prime_power_row_ratio_window_escape
+    statement: >-
+      If the pointwise prime-power row-size escape holds for every N=64
+      ratio-window candidate, then N=64 refutes the universal Erdos 686
+      representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_three
+    statement: >-
+      There are no natural numbers n,m with m >= n+3 satisfying
+      4 = ((m+1)(m+2)(m+3)) / ((n+1)(n+2)(n+3)), the k=3, N=4
+      variant of Erdős problem 686.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_19257
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 19257; the proof
+      adds the exact reduced certificate slice 2250 <= s < 2500.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_17332
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 17332; the proof
+      adds the exact reduced certificate slice 2000 <= s < 2250.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_15406
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 15406; the proof
+      adds the exact reduced certificate slice 1750 <= s < 2000.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_13480
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 13480; the proof
+      adds the exact reduced certificate slice 1500 <= s < 1750.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_11555
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 11555; the proof
+      adds the exact reduced certificate slice 1250 <= s < 1500.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_9584
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 9584; the proof
+      adds the exact reduced certificate slice 1000 <= s < 1250.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_7703
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 7703; the proof
+      combines the exact linearized first-two-row reduction with a
+      kernel-checked s<1000 certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_700
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 700; the newest
+      band uses linearized ratio-window bounds and a kernel-checked finite
+      skeleton certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_600
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 600; the newest
+      band uses linearized ratio-window bounds and a kernel-checked finite
+      skeleton certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_500
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 500; the newest
+      band uses linearized ratio-window bounds and a kernel-checked finite
+      skeleton certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_400
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 400; the proof
+      splits the ratio-window search into kernel-checked finite skeleton
+      certificates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_300
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 300; the proof
+      splits the ratio-window search into kernel-checked finite skeleton
+      certificates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_200
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 200; the proof
+      splits the ratio-window search into kernel-checked finite skeleton
+      certificates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_125
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 125; the proof
+      combines the ratio window with a kernel-checked finite skeleton
+      certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_100
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 100; the proof
+      combines the ratio window with a kernel-checked finite skeleton
+      certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_two_rows_linear_reduction
+    statement: >-
+      Reduction: any remaining k=5 first-two-row candidate with gap at least
+      125 yields n+1 = 3d+s, s >= 13, tight linear bounds for n+1, and two
+      explicit reduced product divisibilities depending on s.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_two_rows_combined_linear_dvd
+    statement: >-
+      Compact first-two-row reduction: with a = n+1 = 3d+t, the first two
+      localized k=5 row divisibilities are equivalent to one divisibility by
+      a(a+1) involving d(d+1)(d+2)(d+3)(16d+5t+4).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_two_rows_core_dvd_linear
+    statement: >-
+      Core-cancelled first-two-row reduction: with a = n+1 = 3d+t and
+      C=d(d+1)(d+2)(d+3), the first two localized k=5 row divisibilities are
+      equivalent to (a/gcd(a,C))*((a+1)/gcd(a+1,C)) dividing 16d+5t+4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_second_row_upper_edge_primitive_core
+    statement: >-
+      Primitive upper-edge reduction: if d-1=qR, t+4=qS, gcd(R,S)=1, and
+      a=3d+t, then the second localized k=5 row divisibility is equivalent to
+      3R+S dividing the four core terms (qR+1)(qR+2)(qR+3)(qR+4).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_row_lower_edge_primitive_core
+    statement: >-
+      Primitive lower-edge reduction: if d+4=qU, t=qV+12, gcd(U,V)=1, and
+      a=3d+t, then the first localized k=5 row divisibility is equivalent to
+      3U+V dividing the four core terms (qU-4)(qU-3)(qU-2)(qU-1).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_row_div_gcd_dvd_edge_gcd
+    statement: >-
+      Localized first-row edge-gcd refinement: if a=3d+t and a divides
+      C(d+4), then a/gcd(a,C) divides gcd(d+4,t-12).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_second_row_div_gcd_dvd_edge_gcd
+    statement: >-
+      Localized second-row edge-gcd refinement: if a=3d+t and a+1 divides
+      C(d-1), then (a+1)/gcd(a+1,C) divides gcd(d-1,t+4).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_row_missing_lcm_dvd_edge_gcd24
+    statement: >-
+      Localized first-row overlap refinement: after removing both the
+      four-term core and the lower edge d+4 from a, the remaining lcm-missing
+      part divides gcd(d+4,24).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_second_row_missing_lcm_dvd_edge_gcd24
+    statement: >-
+      Localized second-row overlap refinement: after removing both the
+      four-term core and the upper edge d-1 from a+1, the remaining
+      lcm-missing part divides gcd(d-1,24).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_row_iff_missing_lcm_dvd_edge_gcd24
+    statement: >-
+      First-row localized overlap equivalence: the divisibility a divides
+      C(d+4) is equivalent to the lcm-missing part of a dividing gcd(d+4,24).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_second_row_iff_missing_lcm_dvd_edge_gcd24
+    statement: >-
+      Second-row localized overlap equivalence: the divisibility a+1 divides
+      C(d-1) is equivalent to the lcm-missing part of a+1 dividing gcd(d-1,24).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_two_rows_iff_localized_overlap
+    statement: >-
+      Pairwise localized-overlap equivalence: the first two k=5 row
+      divisibilities are equivalent to the two row-local lcm-missing
+      divisibilities against gcd(d+4,24) and gcd(d-1,24).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_row_iff_missing_lcm_dvd_edge_t_gcd24
+    statement: >-
+      First-row t-refined localized overlap equivalence: a divides C(d+4)
+      iff the lcm-missing part of a divides gcd(gcd(d+4,t-12),24).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_second_row_iff_missing_lcm_dvd_edge_t_gcd24
+    statement: >-
+      Second-row t-refined localized overlap equivalence: a+1 divides C(d-1)
+      iff the lcm-missing part of a+1 divides gcd(gcd(d-1,t+4),24).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_two_rows_iff_localized_t_overlap
+    statement: >-
+      Pairwise t-refined localized-overlap equivalence: the first two k=5 row
+      divisibilities are equivalent to the two row-local lcm-missing
+      divisibilities against gcd(gcd(d+4,t-12),24) and gcd(gcd(d-1,t+4),24).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_T0_dvd_row_one_reduced_product
+    statement: >-
+      The five-term row-0 reduced lcm T0(t) divides the corresponding row-0
+      reduced product t(t-3)(t-6)(t-9)(t-12).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_T1_dvd_row_two_reduced_product
+    statement: >-
+      The five-term row-1 reduced lcm T1(t) divides the corresponding row-1
+      reduced product (t+4)(t+1)(t-2)(t-5)(t-8).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_Q0dt_dvd_24
+    statement: >-
+      The first t-refined row-local budget gcd(gcd(d+4,t-12),24) divides 24.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_Q1dt_dvd_24
+    statement: >-
+      The second t-refined row-local budget gcd(gcd(d-1,t+4),24) divides 24.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_row0_collision_filter_implies_reduced_product_filter
+    statement: >-
+      Conditional collision-lcm reduction for row 0: if K5(d) divides 24,
+      then the exact row-0 collision filter implies divisibility by
+      24*24 times the row-0 reduced product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_row1_collision_filter_implies_reduced_product_filter
+    statement: >-
+      Conditional collision-lcm reduction for row 1: if K5(d-1) divides 24,
+      then the exact row-1 collision filter implies divisibility by
+      24*24 times the row-1 reduced product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_row0_weak_product_to_tbudget_linear
+    statement: >-
+      Weak row-0 product divisibility by
+      139968*d(d+1)(d+2)(d+3)(d+4) implies the sharper t-budget divisibility
+      by 576*t(t-3)(t-6)(t-9)(t-12).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_row1_weak_product_to_tbudget_linear
+    statement: >-
+      Weak row-1 product divisibility by
+      139968*(d-1)d(d+1)(d+2)(d+3) implies the sharper t-budget divisibility
+      by 576*(t+4)(t+1)(t-2)(t-5)(t-8).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_A0_R0_identity
+    statement: >-
+      Polynomial identity for transferring the row-0 t-budget into an
+      r-budget after writing a = 24t+r.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_A1_R1_identity
+    statement: >-
+      Polynomial identity for transferring the row-1 t-budget into an
+      r-budget after writing a = 24t+r.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_row0_tbudget_to_rbudget
+    statement: >-
+      If a = 24t+r, row-0 divisibility by 576*A0(t) implies the gcd-stripped
+      r-budget divisibility by R0(r).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_row1_tbudget_to_rbudget
+    statement: >-
+      If a = 24t+r, row-1 divisibility by 576*A1(t) implies the gcd-stripped
+      r-budget divisibility by R1(r).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_weak_candidates_fail_exact_collision_rows
+    statement: >-
+      The seven residual weak-certificate pairs fail the exact collision-lcm
+      row filters by direct prime-power arithmetic.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_Q0dt_coprime_Q1dt
+    statement: >-
+      The two t-refined row-local budgets gcd(gcd(d+4,t-12),24) and
+      gcd(gcd(d-1,t+4),24) are coprime.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_divisor_of_Q0dt_forces_congruences
+    statement: >-
+      Any divisor of a number bounded by the first t-refined row-local budget
+      divides d+4, t-12, and 24.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_divisor_of_Q1dt_forces_congruences
+    statement: >-
+      Any divisor of a number bounded by the second t-refined row-local budget
+      divides d-1, t+4, and 24.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_missing_cofactors_coprime_of_dvd_Q0dt_Q1dt
+    statement: >-
+      Missing cofactors that divide the two t-refined row-local budgets are
+      coprime, making the row-local split stronger than a product-only
+      divisibility by 24.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_first_two_rows_localized_overlap_refinement
+    statement: >-
+      Combined localized-overlap refinement for the first two k=5 rows:
+      the lcm-missing parts divide gcd(d+4,24) and gcd(d-1,24), while the
+      core-cancelled row parts divide gcd(d+4,t-12) and gcd(d-1,t+4).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_exact_reduced_t_product_divisibility
+    statement: >-
+      In the exact reduced k=5 system, any large-t candidate forces 24s+t and
+      24s+t+1 to divide two explicit products depending only on t.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_row_one_t_product_dvd_iff_of_coprime
+    statement: >-
+      In the exact reduced k=5 system, the first t-product divisibility is
+      equivalent to the first reduced row divisibility when 24s+t is coprime
+      to 24.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_row_two_t_product_dvd_iff_of_coprime
+    statement: >-
+      In the exact reduced k=5 system, the second t-product divisibility is
+      equivalent to the second reduced row divisibility when 24s+t+1 is
+      coprime to 24.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_exact_reduced_combined_t_product_window
+    statement: >-
+      In the exact reduced k=5 system, any large-t candidate forces
+      (24s+t)(24s+t+1) to divide one t-only product while 24s+t lies in a
+      narrow linear window around 220t.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_of_first_two_rows_force_gap_lt_125
+    statement: >-
+      Conditional bridge: if the first two localized divisor-skeleton rows
+      force the gap below 125 throughout the k=5 ratio window, then N=4 has no
+      k=5 quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_of_first_two_rows_linear_force_gap_lt_125
+    statement: >-
+      Conditional bridge: if the first two localized divisor-skeleton rows
+      force the gap below 125 under the exact linearized k=5 ratio-window
+      bounds, then N=4 has no k=5 quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_of_exact_reduced_first_two_rows_contradiction
+    statement: >-
+      Conditional bridge: if the exact reduced first-two-row s,t divisibility
+      system has no solutions in its linear interval, then N=4 has no k=5
+      quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_of_combined_t_product_escape
+    statement: >-
+      Conditional bridge: excluding the combined t-product divisibility in its
+      narrow linear window proves that N=4 has no k=5 quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.finite_difference_vanishes_of_four_gap_solution
+    statement: >-
+      Any hypothetical gap-form N=4 solution forces the integer quotients in
+      the polynomial congruences (n+a)q_a = H_{k,d}(a), for a=0,...,k, to
+      have zero alternating k-th finite difference.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.exists_finite_difference_quotients_of_four_gap_solution
+    statement: >-
+      Any hypothetical gap-form N=4 solution has integer polynomial-congruence
+      quotients q_a for a=0,...,k, and those quotients satisfy the zero
+      alternating finite-difference certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.finite_difference_skeletonQuotient_eq_coeff_four_gap_solution
+    statement: >-
+      Corrected finite-difference package: under an exact gap-form N=4
+      equality, the localized skeleton quotients have top finite difference
+      equal to the top coefficient of H_{k,d}(X)/(X+n) times (k-1)!.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.skeletonQuotient_chain_four
+    statement: >-
+      Any hypothetical cleared N=4 gap solution forces the localized
+      divisor-skeleton quotients to be positive and strictly decreasing across
+      adjacent rows.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.lower_lcm_escape_of_large_prime_power_residual_bound
+    statement: >-
+      Local obstruction: a large prime-power divisor of one lower-block term,
+      combined with nonzero bounded centered residuals, prevents the
+      lower-block lcm from dividing the centered difference product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.lower_lcm_escape_of_rough_power_gt_cap
+    statement: >-
+      Rough-cap instantiation: a certified bound for |n-q*d| plus a
+      sufficiently large lower-block prime power triggers the centered-lcm
+      escape criterion.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.divisor_skeleton_escape_of_lower_lcm_centered_escape
+    statement: >-
+      Conditional bridge: if the ratio window always prevents the lower-block
+      lcm from dividing the centered difference product, then the localized
+      divisor-skeleton escape theorem follows.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_divisor_skeleton_escape
+    statement: >-
+      Conditional bridge: if the localized divisor-skeleton escape theorem
+      holds throughout the remaining N=4, k>=5 ratio window, then N=4 is a
+      counterexample to the full Erdős 686 universal representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_lower_lcm_centered_escape
+    statement: >-
+      Conditional bridge: if the ratio window always prevents the lower-block
+      lcm from dividing the centered difference product, then N=4 is a
+      counterexample to the full Erdős 686 universal representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_lower_term_factorization_escape
+    statement: >-
+      Conditional bridge: if a lower-block term always has a p-adic valuation
+      gap against the centered difference product throughout the remaining N=4,
+      k>=5 ratio window, then N=4 is a counterexample to the full Erdős 686
+      universal representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_polynomial_congruence_escape
+    statement: >-
+      Conditional bridge: if the N=4 ratio window always forces some
+      polynomial congruence at a=0,1,...,k+1 to fail, then N=4 is a
+      counterexample to the full Erdős 686 universal representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_finite_difference_nonzero
+    statement: >-
+      Conditional bridge: if the finite-difference certificate attached to the
+      polynomial congruence quotients is always nonzero throughout the remaining
+      N=4, k>=5 ratio window, then N=4 is a counterexample to the full Erdős
+      686 universal representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
