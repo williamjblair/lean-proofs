@@ -4386,6 +4386,64 @@ theorem dvd_div_gcd_of_dvd_mul {D x y : ℕ} (hDpos : 0 < D)
     (Nat.mul_dvd_mul_iff_left hgpos).mp hdiv
   exact hcop.dvd_of_dvd_mul_left hdiv'
 
+/-- Exact cancellation of the gcd part of a divisor against the left factor:
+for `0 < M`, `M ∣ c * L` iff the reduced divisor
+`M / gcd c M` divides `L`. -/
+theorem dvd_mul_iff_div_gcd_dvd {M c L : ℕ} (hMpos : 0 < M) :
+    M ∣ c * L ↔ M / Nat.gcd c M ∣ L := by
+  constructor
+  · intro h
+    have h' : M / Nat.gcd M c ∣ L := dvd_div_gcd_of_dvd_mul hMpos h
+    simpa [Nat.gcd_comm] using h'
+  · intro h
+    let g := Nat.gcd c M
+    have hgM : g ∣ M := Nat.gcd_dvd_right c M
+    have hgc : g ∣ c := Nat.gcd_dvd_left c M
+    rcases h with ⟨t, ht⟩
+    change L = M / g * t at ht
+    refine ⟨(c / g) * t, ?_⟩
+    have hM_eq : M = g * (M / g) := (Nat.mul_div_cancel' hgM).symm
+    have hc_eq : c = g * (c / g) := (Nat.mul_div_cancel' hgc).symm
+    calc
+      c * L = c * ((M / g) * t) := by rw [ht]
+      _ = (g * (c / g)) * ((M / g) * t) := by
+        conv_lhs => rw [hc_eq]
+      _ = (g * (M / g)) * ((c / g) * t) := by ring
+      _ = M * ((c / g) * t) := by rw [← hM_eq]
+
+/-- The half-row divisor is positive under the split-level hypotheses
+`4 ∣ A`, `B ≥ 3`, and `0 < A`. -/
+theorem powerTwoSplit_half_row_pos {A B : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hApos : 0 < A) :
+    0 < B * (A / 2) - 1 := by
+  rcases hA4 with ⟨q, hAeq⟩
+  have hqpos : 0 < q := by omega
+  have hhalf : A / 2 = 2 * q := by
+    rw [hAeq]
+    omega
+  have htwoq_ge : 2 ≤ 2 * q := by omega
+  have hprod_ge : 6 ≤ B * (2 * q) := by
+    have hmul := Nat.mul_le_mul hBge htwoq_ge
+    simpa using hmul
+  rw [hhalf]
+  omega
+
+/-- Reduced-divisor form of the split/gcd row-two obstruction. This replaces
+the false auxiliary bound `gcd (gcd alpha beta) M ≤ B^2`: the exact condition
+is divisibility by `M / gcd (gcd alpha beta) M`. -/
+theorem powerTwoSplit_gcd_dvd_iff_reduced_divisor
+    {A B l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hApos : 0 < A) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    M ∣ c * (l * m) ↔ M / Nat.gcd c M ∣ l * m := by
+  dsimp
+  exact dvd_mul_iff_div_gcd_dvd (powerTwoSplit_half_row_pos hA4 hBge hApos)
+
 /-- The row-one equation in the pure power-two quotient kernel forces the
 right half of the canonical divisor split:
 `(B * A - 1) / gcd (B * A - 1) v` divides `A - v`. -/

@@ -219,6 +219,18 @@
   exact obstruction is therefore the reduced-divisor condition
   `M / d ∤ l * m`, equivalently `M ∤ Nat.gcd alpha beta * (l * m)` once the
   alpha-to-gcd reduction is proved.
+- [R] Formalized the reduced-divisor cancellation replacing the false
+  `d ≤ B * B` target. The generic theorem
+  `Erdos699.dvd_mul_iff_div_gcd_dvd` proves, for `0 < M`, the exact
+  equivalence `M ∣ c * L ↔ M / Nat.gcd c M ∣ L`. The helper
+  `Erdos699.powerTwoSplit_half_row_pos` proves the half-row modulus is
+  positive from `4 ∣ A`, `3 ≤ B`, and `0 < A`, and
+  `Erdos699.powerTwoSplit_gcd_dvd_iff_reduced_divisor` specializes the
+  cancellation to `c = Nat.gcd alpha beta`, `M = B * (A / 2) - 1`, and
+  `L = l * m`. Thus, after the still-open alpha-to-gcd reduction, row-two
+  survival is exactly the reduced-divisor divisibility
+  `(B * (A / 2) - 1) / Nat.gcd (Nat.gcd alpha beta) (B * (A / 2) - 1) ∣
+  l * m`.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under
