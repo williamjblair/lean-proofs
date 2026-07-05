@@ -299,6 +299,14 @@ private theorem dvd_sub_of_mod_eq {j p r : ℕ} (hmod : j % p = r) : p ∣ j - r
   rw [hmod] at h
   omega
 
+theorem mod_eq_of_dvd_sub {j p r : ℕ} (hrj : r ≤ j) (hrp : r < p)
+    (hpdvd : p ∣ j - r) :
+    j % p = r := by
+  rcases hpdvd with ⟨a, ha⟩
+  have hEq : j = p * a + r := by omega
+  rw [hEq]
+  simp [Nat.add_mod, Nat.mod_eq_of_lt hrp]
+
 theorem dvd_mul_sub_one_of_mod_le_one {j p : ℕ} (hmod : j % p ≤ 1) :
     p ∣ j * (j - 1) := by
   have hcase : j % p = 0 ∨ j % p = 1 := by omega
@@ -333,6 +341,62 @@ theorem i_three_window_two_product_forcing {n j p : ℕ}
     p ∣ j * (j - 1) * (j - 2) :=
   dvd_mul_sub_one_sub_two_of_mod_le_two
     (i_three_window_two_digit_forcing hnone hp hp5 hn hpdvd)
+
+theorem three_mul_mod_eq_one_of_dvd_pred {j p : ℕ}
+    (hp : p.Prime) (hj : 0 < j) (hpdvd : p ∣ 3 * j - 1) :
+    (3 * j) % p = 1 := by
+  rcases hpdvd with ⟨a, ha⟩
+  have hEq : 3 * j = p * a + 1 := by omega
+  rw [hEq]
+  simp [Nat.add_mod, Nat.mod_eq_of_lt hp.one_lt]
+
+theorem three_mul_mod_eq_two_of_dvd_sub_two {j p : ℕ}
+    (hp5 : 5 ≤ p) (hj : 0 < j) (hpdvd : p ∣ 3 * j - 2) :
+    (3 * j) % p = 2 := by
+  rcases hpdvd with ⟨a, ha⟩
+  have hEq : 3 * j = p * a + 2 := by omega
+  rw [hEq]
+  simp [Nat.add_mod, Nat.mod_eq_of_lt (by omega : 2 < p)]
+
+theorem no_prime_ge_five_dvd_three_mul_sub_one_of_dvd_mul_sub_one {j p : ℕ}
+    (hp : p.Prime) (hp5 : 5 ≤ p) (hj : 0 < j) (hlin : p ∣ 3 * j - 1)
+    (hprod : p ∣ j * (j - 1)) : False := by
+  have hmodlin : (3 * j) % p = 1 := three_mul_mod_eq_one_of_dvd_pred hp hj hlin
+  have h3mod : 3 % p = 3 := Nat.mod_eq_of_lt (by omega : 3 < p)
+  rcases hp.dvd_mul.mp hprod with hjdvd | hj1dvd
+  · have hjmod : j % p = 0 := Nat.dvd_iff_mod_eq_zero.mp hjdvd
+    rw [Nat.mul_mod, h3mod, hjmod] at hmodlin
+    norm_num at hmodlin
+  · have hjmod : j % p = 1 := mod_eq_of_dvd_sub (by omega) (by omega) hj1dvd
+    rw [Nat.mul_mod, h3mod, hjmod, Nat.mod_eq_of_lt (by omega : 3 < p)] at hmodlin
+    omega
+
+theorem no_prime_ge_five_dvd_three_mul_sub_two_of_dvd_triple {j p : ℕ}
+    (hp : p.Prime) (hp5 : 5 ≤ p) (hj : 2 ≤ j) (hlin : p ∣ 3 * j - 2)
+    (hprod : p ∣ j * (j - 1) * (j - 2)) : False := by
+  have hj_pos : 0 < j := by omega
+  have hmodlin : (3 * j) % p = 2 := three_mul_mod_eq_two_of_dvd_sub_two hp5 hj_pos hlin
+  have h3mod : 3 % p = 3 := Nat.mod_eq_of_lt (by omega : 3 < p)
+  rcases hp.dvd_mul.mp hprod with hleft | hj2dvd
+  · rcases hp.dvd_mul.mp hleft with hjdvd | hj1dvd
+    · have hjmod : j % p = 0 := Nat.dvd_iff_mod_eq_zero.mp hjdvd
+      rw [Nat.mul_mod, h3mod, hjmod] at hmodlin
+      norm_num at hmodlin
+    · have hjmod : j % p = 1 := mod_eq_of_dvd_sub (by omega) (by omega) hj1dvd
+      rw [Nat.mul_mod, h3mod, hjmod, Nat.mod_eq_of_lt (by omega : 3 < p)] at hmodlin
+      omega
+  · have hjmod : j % p = 2 := mod_eq_of_dvd_sub hj (by omega) hj2dvd
+    rw [Nat.mul_mod, h3mod, hjmod] at hmodlin
+    by_cases hp_eq_five : p = 5
+    · subst p
+      norm_num at hmodlin
+    · have hp_ne_six : p ≠ 6 := by
+        intro hp6
+        subst p
+        exact (by decide : ¬ Nat.Prime 6) hp
+      have h6lt : 6 < p := by omega
+      rw [Nat.mod_eq_of_lt h6lt] at hmodlin
+      omega
 
 /-- Product of the prime divisors of `m` that are at least `lo`, without multiplicity. -/
 def primeRadicalGE (lo m : ℕ) : ℕ :=

@@ -53,4 +53,9 @@
   `Erdos699.i_three_window_two_primeRadicalGE_dvd`, packaging the `i = 3`
   per-prime window forcing as radical divisibility for all primes `p ≥ 5`
   dividing `n - 1` and `n - 2`. Full T4/T5 remain open.
+- [R] Proved T5 residue-kill support lemmas
+  `Erdos699.no_prime_ge_five_dvd_three_mul_sub_one_of_dvd_mul_sub_one` and
+  `Erdos699.no_prime_ge_five_dvd_three_mul_sub_two_of_dvd_triple`: in the
+  `n = 3 * j` branch, a prime `p ≥ 5` cannot divide both the relevant window
+  row and the forced product. Full T5 remains open.
 - [OPEN] T4 and all later rungs remain unclaimed in this branch.
