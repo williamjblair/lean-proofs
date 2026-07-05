@@ -280,6 +280,18 @@
   show that a universal no-survivor theorem for admissible positive splits
   eliminates the pure quotient kernel. This is still a conditional reduction:
   the universal no-survivor statement remains open.
+- [R] Proved the converse reduced-divisor construction and the existence-level
+  equivalence. `Erdos699.powerTwoQuotientKernel_of_reduced_divisor_survival_split`
+  proves that any admissible positive split with
+  `r * s = B * A - 1`, `r * l + s * m = A`, `r * l < s * m`,
+  `alpha = r - B * m`, `beta = s - B * l`, and
+  `M / d ∣ l * m` constructs the quotient-kernel point
+  `powerTwoQuotientKernel A B (r * l) (l * m)`, under the global
+  `A` power-of-two, `4 ∣ A`, odd `B`, and `3 ≤ B` hypotheses. Consequently,
+  `Erdos699.exists_powerTwoQuotientKernel_iff_exists_reduced_divisor_survival_split`
+  proves that quotient-kernel existence is equivalent to existence of such a
+  surviving reduced-divisor split. This identifies the C2 target exactly; it
+  does not prove the no-survivor side.
 - [R] Isolated a sufficient inequality certificate for the remaining
   split/gcd obstruction. The generic theorem
   `Erdos699.not_dvd_mul_of_reduced_divisor_gt` proves that, for positive

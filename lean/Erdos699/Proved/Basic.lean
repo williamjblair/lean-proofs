@@ -7842,6 +7842,98 @@ theorem not_exists_powerTwoQuotientKernel_of_no_reduced_divisor_survival_split
     powerTwoQuotientKernel.not_of_no_reduced_divisor_survival_split
       hnoSurvivor hkernel
 
+/-- Converse reduced-divisor constructor: an admissible positive split whose
+reduced divisor survives row two gives an actual pure power-two quotient-kernel
+point. This is the reverse direction of the C2 reduction; it does not assert
+that such a split exists. -/
+theorem powerTwoQuotientKernel_of_reduced_divisor_survival_split
+    {A B r s l m alpha beta : ℕ}
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (hgap : r * l < s * m)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hred :
+      let c := Nat.gcd alpha beta
+      let M := B * (A / 2) - 1
+      let d := Nat.gcd c M
+      M / d ∣ l * m) :
+    powerTwoQuotientKernel A B (r * l) (l * m) := by
+  have hvpos : 0 < r * l := Nat.mul_pos hrpos hlpos
+  have hgap_kernel : 0 < A - 2 * (r * l) := by
+    rw [← hA]
+    omega
+  have hAv : A - r * l = s * m := by
+    rw [← hA]
+    omega
+  have hdelta : A - r * (l * 2) = s * m - r * l := by
+    rw [← hA]
+    have htwor : r * (l * 2) = r * l + r * l := by ring
+    rw [htwor]
+    omega
+  have hrow : (r * l) * (A - r * l) = (l * m) * (B * A - 1) := by
+    rw [hAv, ← hD]
+    ring
+  have hrowtwo_split :
+      B * (A / 2) - 1 ∣ (l * m) * (s * m - r * l) := by
+    exact
+      (powerTwoSplitSubtractive_row_two_delta_dvd_iff_reduced_divisor
+        (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+        (alpha := alpha) (beta := beta) hA4 hBge hrpos hspos hlpos hmpos
+        hgap hD hA halpha hbeta).mpr hred
+  have hhalf :
+      B * (A / 2) - 1 ∣ (l * m) * (A - 2 * (r * l)) := by
+    simpa [hdelta, mul_assoc, mul_comm, mul_left_comm] using hrowtwo_split
+  exact ⟨hA4, hApow, hBodd, hBge, hvpos, hgap_kernel, hrow, hhalf⟩
+
+/-- Existence-level form of the C2 reduced-divisor bridge: under the global
+power-of-two and odd-row hypotheses, pure quotient-kernel points are exactly
+surviving admissible positive splits. The open obstruction is therefore the
+non-existence of the right-hand side. -/
+theorem exists_powerTwoQuotientKernel_iff_exists_reduced_divisor_survival_split
+    {A B : ℕ}
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B) :
+    (∃ v h : ℕ, powerTwoQuotientKernel A B v h) ↔
+      ∃ r s l m alpha beta : ℕ,
+        0 < r ∧ 0 < s ∧ 0 < l ∧ 0 < m ∧
+          r * s = B * A - 1 ∧
+            r * l + s * m = A ∧
+              r * l < s * m ∧
+                alpha = r - B * m ∧
+                  beta = s - B * l ∧
+                    let c := Nat.gcd alpha beta
+                    let M := B * (A / 2) - 1
+                    let d := Nat.gcd c M
+                    M / d ∣ l * m := by
+  constructor
+  · rintro ⟨v, h, hkernel⟩
+    rcases
+      powerTwoQuotientKernel.exists_row_one_split_with_reduced_divisor_survival
+        hkernel with
+      ⟨r, s, l, m, alpha, beta, hrpos, hspos, hlpos, hmpos, hD, _hv, _hAv,
+        hsum, hgap, _hh, halpha, hbeta, hred⟩
+    exact ⟨r, s, l, m, alpha, beta, hrpos, hspos, hlpos, hmpos, hD, hsum,
+      hgap, halpha, hbeta, hred⟩
+  · rintro
+      ⟨r, s, l, m, alpha, beta, hrpos, hspos, hlpos, hmpos, hD, hsum, hgap,
+        halpha, hbeta, hred⟩
+    exact
+      ⟨r * l, l * m,
+        powerTwoQuotientKernel_of_reduced_divisor_survival_split
+          hApow hA4 hBodd hBge hrpos hspos hlpos hmpos hD hsum hgap
+          halpha hbeta hred⟩
+
 /-- Conditional consumer for the split/gcd obstruction: once
 `powerTwoSplitGcdObstruction A B` is supplied, the pure power-two quotient
 kernel is empty for that `A, B`. This does not prove the obstruction itself;
