@@ -289,6 +289,74 @@ theorem t2_collapse_of_no_common {n j : ℕ}
         omega
       exact ⟨hn_eq, hj_odd⟩
 
+theorem two_mul_mod_eq_one_of_dvd_pred {j p : ℕ}
+    (hp : p.Prime) (hpdvd : p ∣ 2 * j - 1) (hj : 0 < j) :
+    (2 * j) % p = 1 := by
+  rcases hpdvd with ⟨a, ha⟩
+  have hEq : 2 * j = p * a + 1 := by omega
+  rw [hEq]
+  simp [Nat.add_mod, Nat.mod_eq_of_lt hp.one_lt]
+
+theorem prime_dvd_choose_two_of_dvd_two_mul_sub_one {j p : ℕ}
+    (hp : p.Prime) (hp_ne_two : p ≠ 2) (hpdvd : p ∣ 2 * j - 1) (hj : 0 < j) :
+    p ∣ Nat.choose (2 * j) 2 := by
+  apply prime_dvd_choose_of_not_dominated hp
+  intro hdom
+  have hdigits := (dominated_iff_forall_digits hp.two_le).mp hdom 0
+  have hp_two_le : 2 ≤ p := hp.two_le
+  have hp_gt_two : 2 < p := by omega
+  have hn_mod : (2 * j) % p = 1 := two_mul_mod_eq_one_of_dvd_pred hp hpdvd hj
+  have htwo_mod : 2 % p = 2 := Nat.mod_eq_of_lt hp_gt_two
+  simp [digit, hn_mod, htwo_mod] at hdigits
+
+theorem prime_dvd_central_of_dvd_two_mul_sub_one {j p : ℕ}
+    (hp : p.Prime) (hp_ne_two : p ≠ 2) (hpdvd : p ∣ 2 * j - 1) (hj : 0 < j) :
+    p ∣ Nat.choose (2 * j) j := by
+  apply prime_dvd_choose_of_not_dominated hp
+  intro hdom
+  have hdigits := (dominated_iff_forall_digits hp.two_le).mp hdom 0
+  have hp_two_le : 2 ≤ p := hp.two_le
+  have hp_gt_two : 2 < p := by omega
+  have hn_mod : (2 * j) % p = 1 := two_mul_mod_eq_one_of_dvd_pred hp hpdvd hj
+  have hp_not_dvd_j : ¬ p ∣ j := by
+    intro hpj
+    have hj_mod0 : j % p = 0 := Nat.dvd_iff_mod_eq_zero.mp hpj
+    have htwom0 : (2 * j) % p = 0 := by
+      rw [Nat.mul_mod, hj_mod0]
+      simp
+    omega
+  have hle : j % p ≤ 1 := by
+    simpa [digit, hn_mod] using hdigits
+  have hj_mod_ne_zero : j % p ≠ 0 := by
+    intro hj_mod0
+    exact hp_not_dvd_j (Nat.dvd_iff_mod_eq_zero.mpr hj_mod0)
+  have hj_mod : j % p = 1 := by omega
+  have htwom_calc : (2 * j) % p = 2 := by
+    rw [Nat.mul_mod, hj_mod, Nat.mod_eq_of_lt hp_gt_two]
+    exact Nat.mod_eq_of_lt hp_gt_two
+  omega
+
+theorem t2_i_eq_two {n j : ℕ} (hj : 2 < j) (hjn : 2 * j ≤ n) :
+    ∃ p : ℕ, commonPrimeDivisor n 2 j p := by
+  by_contra hnone_exists
+  rw [not_exists] at hnone_exists
+  have hj_pos : 0 < j := by omega
+  have hcollapse := t2_collapse_of_no_common hnone_exists hj hjn
+  rcases hcollapse with ⟨hn_eq, _⟩
+  have hpred_ne_one : 2 * j - 1 ≠ 1 := by omega
+  obtain ⟨p, hp, hpdvd⟩ := Nat.exists_prime_and_dvd hpred_ne_one
+  have hp_ne_two : p ≠ 2 := by
+    intro hp_eq
+    subst p
+    rcases hpdvd with ⟨a, ha⟩
+    omega
+  have hp_choose_two : p ∣ Nat.choose (2 * j) 2 :=
+    prime_dvd_choose_two_of_dvd_two_mul_sub_one hp hp_ne_two hpdvd hj_pos
+  have hp_choose_j : p ∣ Nat.choose (2 * j) j :=
+    prime_dvd_central_of_dvd_two_mul_sub_one hp hp_ne_two hpdvd hj_pos
+  exact hnone_exists p ⟨hp, hp.two_le, by simpa [hn_eq] using hp_choose_two,
+    by simpa [hn_eq] using hp_choose_j⟩
+
 theorem t1_i_eq_one {n j : ℕ} (hj : 2 ≤ j) (hjn : 2 * j ≤ n) :
     ∃ p : ℕ, commonPrimeDivisor n 1 j p := by
   by_contra hnone

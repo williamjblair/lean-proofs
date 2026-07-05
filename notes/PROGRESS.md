@@ -24,7 +24,8 @@
   `relevantPrime i p`, so primes `p < i` impose no digit-domination condition.
 - [R] Proved `Erdos699.t2_collapse_of_no_common`: under the no-common-prime
   assumption for row `i = 2`, `2 < j`, and `2 * j ≤ n`, the obstruction
-  collapses to `n = 2 * j` with `j` odd. The final T2 forced-digit kill is
-  still open.
-- [OPEN] T2, full T3 confinement beyond the top-range lemma, and all later
-  rungs remain unclaimed in this branch.
+  collapses to `n = 2 * j` with `j` odd.
+- [R] Proved full T2 as `Erdos699.t2_i_eq_two`: for `2 < j` and
+  `2 * j ≤ n`, there is a prime `p ≥ 2` dividing both `C(n,2)` and `C(n,j)`.
+- [OPEN] Full T3 confinement beyond the top-range lemma, and all later rungs
+  remain unclaimed in this branch.
