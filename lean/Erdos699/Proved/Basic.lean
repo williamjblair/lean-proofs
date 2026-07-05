@@ -3197,6 +3197,79 @@ def squeezedNormalizedCaseIKernel (F X t g : ℕ) : Prop :=
                     t * (X - t) = g * (F * X - 1) ∧
                       F * X / 2 - 1 ∣ g * (X - 2 * t)
 
+def squeezedNormalizedRowOneCandidate (F X t g : ℕ) : Prop :=
+  0 < F ∧
+    0 < X ∧
+      0 < t ∧
+        Odd F ∧
+          4 ∣ X ∧
+            3 ≤ F ∧
+              2 * t < X ∧
+                4 * F ≤ X ∧
+                  2 * (F * F) ≤ X ∧
+                    t * (X - t) = g * (F * X - 1)
+
+theorem squeezedNormalizedRowOneCandidate_half_row_pos {F X t g : ℕ}
+    (h : squeezedNormalizedRowOneCandidate F X t g) :
+    0 < F * X / 2 - 1 := by
+  rcases h with
+    ⟨_hF_pos, hX_pos, _ht_pos, _hFodd, h4X, hF_ge, _h2t_lt, _h4F, _h2F2,
+      _hrow⟩
+  rcases h4X with ⟨a, ha⟩
+  have ha_pos : 0 < a := by
+    rw [ha] at hX_pos
+    omega
+  rw [ha]
+  have hdiv : F * (4 * a) / 2 = F * (2 * a) := by
+    calc
+      F * (4 * a) / 2 = 2 * (F * (2 * a)) / 2 := by ring_nf
+      _ = F * (2 * a) := Nat.mul_div_right (F * (2 * a)) (by decide : 0 < 2)
+  rw [hdiv]
+  have htwoa : 2 ≤ 2 * a := by omega
+  have hprod : 6 ≤ F * (2 * a) := by
+    simpa using Nat.mul_le_mul hF_ge htwoa
+  omega
+
+theorem squeezedNormalizedCaseIKernel_iff_rowOneCandidate_and_halfRow_dvd
+    {F X t g : ℕ} :
+    squeezedNormalizedCaseIKernel F X t g ↔
+      squeezedNormalizedRowOneCandidate F X t g ∧
+        F * X / 2 - 1 ∣ g * (X - 2 * t) := by
+  simp [squeezedNormalizedCaseIKernel, squeezedNormalizedRowOneCandidate, and_assoc]
+
+theorem squeezedNormalizedRowOneCandidate_halfRow_dvd_iff_gcd_eq {F X t g : ℕ}
+    (_hrow : squeezedNormalizedRowOneCandidate F X t g) :
+    (F * X / 2 - 1 ∣ g * (X - 2 * t)) ↔
+      Nat.gcd (g * (X - 2 * t)) (F * X / 2 - 1) = F * X / 2 - 1 := by
+  constructor
+  · intro hdvd
+    exact Nat.gcd_eq_right hdvd
+  · intro hgcd
+    rw [← hgcd]
+    exact Nat.gcd_dvd_left (g * (X - 2 * t)) (F * X / 2 - 1)
+
+theorem squeezedNormalizedCaseIKernel_iff_rowOneCandidate_and_halfRow_gcd_eq
+    {F X t g : ℕ} :
+    squeezedNormalizedCaseIKernel F X t g ↔
+      squeezedNormalizedRowOneCandidate F X t g ∧
+        Nat.gcd (g * (X - 2 * t)) (F * X / 2 - 1) = F * X / 2 - 1 := by
+  rw [squeezedNormalizedCaseIKernel_iff_rowOneCandidate_and_halfRow_dvd]
+  constructor
+  · rintro ⟨hrow, hdvd⟩
+    exact ⟨hrow, (squeezedNormalizedRowOneCandidate_halfRow_dvd_iff_gcd_eq hrow).mp hdvd⟩
+  · rintro ⟨hrow, hgcd⟩
+    exact ⟨hrow, (squeezedNormalizedRowOneCandidate_halfRow_dvd_iff_gcd_eq hrow).mpr hgcd⟩
+
+theorem squeezedNormalizedRowOneCandidate_not_caseIKernel_of_halfRow_gcd_lt
+    {F X t g : ℕ} (_hrow : squeezedNormalizedRowOneCandidate F X t g)
+    (hgcd : Nat.gcd (g * (X - 2 * t)) (F * X / 2 - 1) < F * X / 2 - 1) :
+    ¬ squeezedNormalizedCaseIKernel F X t g := by
+  intro hkernel
+  have hgcd_eq :
+      Nat.gcd (g * (X - 2 * t)) (F * X / 2 - 1) = F * X / 2 - 1 :=
+    (squeezedNormalizedCaseIKernel_iff_rowOneCandidate_and_halfRow_gcd_eq.mp hkernel).2
+  omega
+
 theorem squeezedNormalized_gap_pos {F X t g : ℕ}
     (h : squeezedNormalizedCaseIKernel F X t g) :
     0 < X - 2 * t := by

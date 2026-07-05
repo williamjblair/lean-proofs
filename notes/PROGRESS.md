@@ -306,6 +306,15 @@
   `Erdos699.squeezedNormalized_discriminant_eq_gap_sq` gives the C4-ready
   form `X^2 - 4 * g * (F * X - 1) = (X - 2 * t)^2`. This is exact algebra
   for the Pell/discriminant lane, not a squeezed-kernel emptiness proof.
+- [R] Formalized the squeezed row-one candidate and half-row gcd filter:
+  `Erdos699.squeezedNormalizedRowOneCandidate` drops only the final half-row
+  divisor from `Erdos699.squeezedNormalizedCaseIKernel`.
+  `Erdos699.squeezedNormalizedCaseIKernel_iff_rowOneCandidate_and_halfRow_gcd_eq`
+  proves that a row-one candidate is a full squeezed kernel point exactly when
+  `gcd (g * (X - 2 * t)) (F * X / 2 - 1) = F * X / 2 - 1`, and
+  `Erdos699.squeezedNormalizedRowOneCandidate_not_caseIKernel_of_halfRow_gcd_lt`
+  packages the strict gcd obstruction used by the compute diagnostics. This
+  is a filter bridge, not an emptiness proof.
 - [E] Added an exact bounded scanner for the squeezed normalized Case-I kernel:
   `compute.kernel.scan_squeezed_normalized_case_i_kernel` enumerates odd
   `F ≥ 3`, `4 ∣ X`, `4 * F ≤ X`, `2 * F^2 ≤ X`, row-one factor candidates
