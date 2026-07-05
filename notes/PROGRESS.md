@@ -140,6 +140,19 @@
   split identity `alpha * beta + 1 = B * B * (l * m)` from
   `r * s = B * A - 1`, `r * l + s * m = A`, `r = B * m + alpha`, and
   `s = B * l + beta`. The global obstruction theorem remains open.
+- [R] Proved the canonical row-one split extraction for the pure quotient
+  kernel. The generic lemma `Erdos699.dvd_div_gcd_of_dvd_mul` shows that
+  if `0 < D` and `D ∣ x * y`, then `D / Nat.gcd D x ∣ y`. The specialization
+  `Erdos699.powerTwoQuotientKernel.row_one_split_right_dvd` applies this to
+  `D = B * A - 1`, proving that
+  `(B * A - 1) / Nat.gcd (B * A - 1) v ∣ A - v` for every
+  `powerTwoQuotientKernel A B v h`. Finally,
+  `Erdos699.powerTwoQuotientKernel.exists_row_one_split` packages the
+  canonical witnesses `r, s, l, m` with `0 < r`, `0 < s`, `0 < l`,
+  `0 < m`, `r * s = B * A - 1`, `v = r * l`, `A - v = s * m`,
+  `r * l + s * m = A`, `r * l < s * m`, and `h = l * m`. This proves the
+  row-one split part of the conditional Task A bridge; the half-row reduction
+  to `B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m)` remains open.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under

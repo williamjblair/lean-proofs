@@ -3878,6 +3878,137 @@ theorem powerTwoSplitAdditive_alpha_beta_mul {A B r s l m alpha beta : ℕ}
   rw [← hA] at hDadd
   nlinarith
 
+/-- If `D` divides a product, the cofactor of the part of `D` already present
+in the left factor divides the right factor. This is the arithmetic split
+lemma used to move from a row-one product divisibility to the canonical
+divisor split. -/
+theorem dvd_div_gcd_of_dvd_mul {D x y : ℕ} (hDpos : 0 < D)
+    (hdvd : D ∣ x * y) :
+    D / Nat.gcd D x ∣ y := by
+  let g := Nat.gcd D x
+  have hgD : g ∣ D := Nat.gcd_dvd_left D x
+  have hgx : g ∣ x := Nat.gcd_dvd_right D x
+  have hgpos : 0 < g := Nat.gcd_pos_of_pos_left x hDpos
+  have hD_eq : D = g * (D / g) := (Nat.mul_div_cancel' hgD).symm
+  have hx_eq : x = g * (x / g) := (Nat.mul_div_cancel' hgx).symm
+  have hcop : (D / g).Coprime (x / g) :=
+    Nat.coprime_div_gcd_div_gcd (m := D) (n := x) hgpos
+  have hdiv0 : g * (D / g) ∣ (g * (x / g)) * y := by
+    rw [← hD_eq, ← hx_eq]
+    exact hdvd
+  have hdiv : g * (D / g) ∣ g * ((x / g) * y) := by
+    rw [← mul_assoc]
+    exact hdiv0
+  have hdiv' : D / g ∣ (x / g) * y :=
+    (Nat.mul_dvd_mul_iff_left hgpos).mp hdiv
+  exact hcop.dvd_of_dvd_mul_left hdiv'
+
+/-- The row-one equation in the pure power-two quotient kernel forces the
+right half of the canonical divisor split:
+`(B * A - 1) / gcd (B * A - 1) v` divides `A - v`. -/
+theorem powerTwoQuotientKernel.row_one_split_right_dvd {A B v h : ℕ}
+    (hkernel : powerTwoQuotientKernel A B v h) :
+    (B * A - 1) / Nat.gcd (B * A - 1) v ∣ A - v := by
+  rcases hkernel with ⟨_hA4, hApow, _hBodd, hBge, _hvpos, _hgap, hrow, _hhalf⟩
+  have hApos : 0 < A := by
+    rcases hApow with ⟨a, rfl⟩
+    exact Nat.pow_pos (by decide : 0 < 2)
+  have hAge1 : 1 ≤ A := hApos
+  have hBAge : 3 ≤ B * A := by
+    have hmul : B * 1 ≤ B * A := Nat.mul_le_mul_left B hAge1
+    omega
+  have hDpos : 0 < B * A - 1 := by omega
+  have hDvd : B * A - 1 ∣ v * (A - v) :=
+    ⟨h, by rw [hrow, mul_comm]⟩
+  exact dvd_div_gcd_of_dvd_mul hDpos hDvd
+
+/-- Every pure power-two quotient-kernel point has a canonical row-one split.
+This packages the row-one equation into positive factors `r, s, l, m` with
+`r * s = B * A - 1`, `v = r * l`, `A - v = s * m`, the strict gap
+`r * l < s * m`, and quotient `h = l * m`. -/
+theorem powerTwoQuotientKernel.exists_row_one_split {A B v h : ℕ}
+    (hkernel : powerTwoQuotientKernel A B v h) :
+    ∃ r s l m : ℕ,
+      0 < r ∧ 0 < s ∧ 0 < l ∧ 0 < m ∧
+        r * s = B * A - 1 ∧
+          v = r * l ∧
+            A - v = s * m ∧
+              r * l + s * m = A ∧
+                r * l < s * m ∧
+                  h = l * m := by
+  rcases hkernel with ⟨hA4, hApow, hBodd, hBge, hvpos, hgap, hrow, hhalf⟩
+  let D := B * A - 1
+  let r := Nat.gcd D v
+  let s := D / r
+  let l := v / r
+  let m := (A - v) / s
+  have hApos : 0 < A := by
+    rcases hApow with ⟨a, rfl⟩
+    exact Nat.pow_pos (by decide : 0 < 2)
+  have hAge1 : 1 ≤ A := hApos
+  have hBAge : 3 ≤ B * A := by
+    have hmul : B * 1 ≤ B * A := Nat.mul_le_mul_left B hAge1
+    omega
+  have hDpos : 0 < D := by
+    dsimp [D]
+    omega
+  have hrv : r ∣ v := Nat.gcd_dvd_right D v
+  have hrD : r ∣ D := Nat.gcd_dvd_left D v
+  have hrpos : 0 < r := Nat.gcd_pos_of_pos_left v hDpos
+  have hrs : r * s = D := by
+    dsimp [s]
+    exact Nat.mul_div_cancel' hrD
+  have hrs_unfold : r * s = B * A - 1 := by
+    simpa [D] using hrs
+  have hD_unfold : B * A - 1 = r * s := hrs_unfold.symm
+  have hspos : 0 < s := by
+    by_contra hsnot
+    have hs0 : s = 0 := Nat.eq_zero_of_not_pos hsnot
+    rw [hs0, mul_zero] at hrs
+    omega
+  have hv_eq : v = r * l := by
+    dsimp [l]
+    exact (Nat.mul_div_cancel' hrv).symm
+  have hs_dvd : s ∣ A - v := by
+    dsimp [s, r, D]
+    exact powerTwoQuotientKernel.row_one_split_right_dvd
+      (A := A) (B := B) (v := v) (h := h)
+      ⟨hA4, hApow, hBodd, hBge, hvpos, hgap, hrow, hhalf⟩
+  have hAv_eq : A - v = s * m := by
+    dsimp [m]
+    exact (Nat.mul_div_cancel' hs_dvd).symm
+  have hlpos : 0 < l := by
+    by_contra hlnot
+    have hl0 : l = 0 := Nat.eq_zero_of_not_pos hlnot
+    rw [hl0, mul_zero] at hv_eq
+    omega
+  have hAvpos : 0 < A - v := by omega
+  have hmpos : 0 < m := by
+    by_contra hmnot
+    have hm0 : m = 0 := Nat.eq_zero_of_not_pos hmnot
+    rw [hm0, mul_zero] at hAv_eq
+    omega
+  have hvleA : v ≤ A := by omega
+  have hsum : r * l + s * m = A := by
+    have hsum0 : v + (A - v) = A := Nat.add_sub_of_le hvleA
+    rw [hAv_eq, hv_eq] at hsum0
+    exact hsum0
+  have hsplit_gap : r * l < s * m := by
+    have hv_lt_Av : v < A - v := by omega
+    rw [hAv_eq, hv_eq] at hv_lt_Av
+    exact hv_lt_Av
+  have hrow0 := hrow
+  rw [hAv_eq, hv_eq, hD_unfold] at hrow0
+  have hrow_split : (r * s) * (l * m) = h * (r * s) := by
+    simpa [mul_assoc, mul_comm, mul_left_comm] using hrow0
+  have hDsplitpos : 0 < r * s := Nat.mul_pos hrpos hspos
+  have hlm_eq_h : l * m = h := by
+    exact Nat.mul_left_cancel hDsplitpos (by
+      simpa [mul_assoc, mul_comm, mul_left_comm] using hrow_split)
+  refine ⟨r, s, l, m, hrpos, hspos, hlpos, hmpos, hrs_unfold, hv_eq, hAv_eq,
+    hsum, hsplit_gap, ?_⟩
+  exact hlm_eq_h.symm
+
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure
 power-of-two quotient kernel: once `X = A * H`, `u = H * v`, `g = H^2 * h`,

@@ -12,6 +12,9 @@ namespace Erdos699
 #check powerTwoSplitGcdObstruction
 #check powerTwoSplitGcdObstruction.not_dvd
 #check powerTwoSplitAdditive_alpha_beta_mul
+#check dvd_div_gcd_of_dvd_mul
+#check powerTwoQuotientKernel.row_one_split_right_dvd
+#check powerTwoQuotientKernel.exists_row_one_split
 #check powerTwoQuotientKernel_of_squeezedNormalized_decomposition
 #check exists_powerTwoQuotientKernel_of_squeezedNormalized_decomposition
 #check coprime_left_mul_right_sub_one
