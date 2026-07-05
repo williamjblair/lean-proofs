@@ -119,5 +119,11 @@
   that if `t * (X - t) = g * (n - 1)`, then the row-two large-prime part
   divides `g * (X - 2 * t)`. This banks the coprime cancellation core of the
   joint-row squeeze; full T7 remains open.
+- [R] Proved the T7 row-one factor-existence wrapper:
+  `Erdos699.i_three_caseI_row_one_exists_factor` packages row-one divisibility
+  as an explicit `g` with `t * (X - t) = g * (n - 1)`, and
+  `Erdos699.i_three_caseI_exists_joint_large_part_factor` combines that factor
+  with the row-two large-prime-part cancellation. This states the usable joint
+  system for later kernel work; full T7 remains open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

@@ -1175,6 +1175,15 @@ theorem i_three_caseI_row_one_sub_one_dvd_t_mul_X_sub_t {n F X j t : ℕ}
     (i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd
       hnone (by omega : 1 < n) h2n h3n)
 
+theorem i_three_caseI_row_one_exists_factor {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (htX : t ≤ X) :
+    ∃ g : ℕ, t * (X - t) = g * (n - 1) := by
+  rcases i_three_caseI_row_one_sub_one_dvd_t_mul_X_sub_t
+      hnone hn hj hn_gt hj_pos h2n h3n htX with ⟨g, hg⟩
+  exact ⟨g, by simpa [mul_comm] using hg⟩
+
 theorem four_mul_t_mul_X_sub_t_le_sq {X t : ℕ} (h2tX : 2 * t ≤ X) :
     4 * (t * (X - t)) ≤ X * X := by
   have htX : t ≤ X := by omega
@@ -1400,6 +1409,19 @@ theorem i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t {n F X j t g :
     (primePowerPartGE_five_sub_two_coprime_sub_one hn_gt_two)
     (i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t
       hnone hn hj hn_ge_two hn_gt_two hj_two htX h2tX)
+
+theorem i_three_caseI_exists_joint_large_part_factor {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h2tX : 2 * t ≤ X) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        primePowerPartGE 5 (n - 2) ∣ g * (X - 2 * t) := by
+  rcases i_three_caseI_row_one_exists_factor
+      hnone hn hj hn_gt hj_pos h2n h3n (by omega : t ≤ X) with ⟨g, hg⟩
+  exact ⟨g, hg,
+    i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t
+      hnone hn hj (by omega : 2 ≤ n) hn_gt hj_two (by omega : t ≤ X) h2tX hg⟩
 
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
