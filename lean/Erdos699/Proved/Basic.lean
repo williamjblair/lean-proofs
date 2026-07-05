@@ -1014,6 +1014,63 @@ theorem not_exists_kernelInRange_1535_767_4_1536 :
         subst t
         norm_num [Nat.gcd])
 
+theorem not_exists_kernelInRange_3071_1535_4_3072 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 3071 1535 4 3072 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 3071) (N2 := 1535) (minT := 4) (bound := 3072) (candidates := [333])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨767, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_le : t ≤ 1536 := by omega
+        have hrow : 3071 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have h37prod : 37 ∣ t * (t - 1) := by
+          exact Nat.dvd_trans (by norm_num) hrow
+        have h83prod : 83 ∣ t * (t - 1) := by
+          exact Nat.dvd_trans (by norm_num) hrow
+        have hp37 : Nat.Prime 37 := by decide +kernel
+        have hp83 : Nat.Prime 83 := by decide +kernel
+        rcases hp37.dvd_mul.mp h37prod with h37t | h37tm1
+        · rcases hp83.dvd_mul.mp h83prod with h83t | h83tm1
+          · exfalso
+            rcases h37t with ⟨a, ha⟩
+            rcases h83t with ⟨b, hb⟩
+            have hb_le : b ≤ 18 := by omega
+            interval_cases b <;> omega
+          · have ht_eq : t = 333 := by
+              rcases h37t with ⟨a, ha⟩
+              rcases h83tm1 with ⟨b, hb⟩
+              have hb_le : b ≤ 18 := by omega
+              interval_cases b <;> omega
+            simp [ht_eq]
+        · rcases hp83.dvd_mul.mp h83prod with h83t | h83tm1
+          · exfalso
+            rcases h37tm1 with ⟨a, ha⟩
+            rcases h83t with ⟨b, hb⟩
+            have hb_le : b ≤ 18 := by omega
+            interval_cases b <;> omega
+          · exfalso
+            rcases h37tm1 with ⟨a, ha⟩
+            rcases h83tm1 with ⟨b, hb⟩
+            have hb_le : b ≤ 18 := by omega
+            interval_cases b <;> omega)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
     ¬ consecutiveDivisorKernel N1 N2 t := by
@@ -2545,6 +2602,24 @@ theorem i_three_caseI_1536_exists_common_from_row_bounds {j : ℕ}
     i_three_caseI_exists_common_from_kernelInRange_empty
       (n := 1536) (j := j)
       (by simpa using not_exists_kernelInRange_1535_767_4_1536)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_3072_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 3072) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 3072 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 3072) (j := j)
+      (by simpa using not_exists_kernelInRange_3071_1535_4_3072)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_3072_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 3072) :
+    ∃ q : ℕ, commonPrimeDivisor 3072 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 3072) (j := j)
+      (by simpa using not_exists_kernelInRange_3071_1535_4_3072)
       (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
 
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
