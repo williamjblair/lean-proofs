@@ -81,5 +81,9 @@
   `Erdos699.i_three_window_one_prime_pow_dvd_mul_sub_one` shows that under
   row-3 no-common-prime hypotheses, every prime power `p^e ∣ n - 1` with
   `p ≥ 5` divides `j * (j - 1)`. Full T6 remains open.
+- [R] Proved T6 full-power forcing for the `n - 2` row:
+  `Erdos699.i_three_window_two_prime_pow_dvd_mul_sub_one_sub_two` shows that
+  under row-3 no-common-prime hypotheses, every prime power `p^e ∣ n - 2`
+  with `p ≥ 5` divides `j * (j - 1) * (j - 2)`. Full T6 remains open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
