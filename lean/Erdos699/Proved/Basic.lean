@@ -6800,6 +6800,75 @@ theorem powerTwoSplitSubtractive_parity_product_gap_of_canonical_gcd_quotient_in
     hA4 hBge hrpos hspos hlpos hmpos hD hA halpha hbeta
     ⟨alpha / c, beta / c, halpha_div, hbeta_div, hquot⟩
 
+/-- In an admissible power-two split, the canonical normalized gcd-quotient
+target is equivalent to the exact reduced-divisor gap. This is the split-level
+version of `parity_reduced_divisor_gap_iff_gcd_quotient_ineq`, with canonical
+quotients `alpha / gcd alpha beta` and `beta / gcd alpha beta`. -/
+theorem powerTwoSplitSubtractive_reduced_divisor_gap_iff_canonical_gcd_quotient_ineq
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (_hgap : r * l < s * m)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    let x := alpha / c
+    let y := beta / c
+    l * m < M / Nat.gcd c M ↔
+      ((Odd c ∧
+          2 * (l * m + 1) ≤ 2 * c * (x * y) + B * (x * l + y * m)) ∨
+        (Even c ∧
+          l * m + 1 ≤ 2 * c * (x * y) + B * (x * l + y * m))) := by
+  dsimp
+  let c := Nat.gcd alpha beta
+  have hsplit_lt := powerTwoSplitSubtractive_lt (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) hBge hrpos hspos hlpos hmpos hD hA
+  have halpha_pos : 0 < alpha := by
+    rw [halpha]
+    exact Nat.sub_pos_of_lt hsplit_lt.1
+  have hcpos : 0 < c := Nat.gcd_pos_of_pos_left beta halpha_pos
+  have hparity :
+      l * m < (B * (A / 2) - 1) / Nat.gcd c (B * (A / 2) - 1) ↔
+        (Odd c ∧ l * m < (B * (A / 2) - 1) / c) ∨
+          (Even c ∧ l * m < (B * (A / 2) - 1) / (c / 2)) :=
+    powerTwoSplitSubtractive_reduced_divisor_gap_iff_parity_gap
+      (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+      (alpha := alpha) (beta := beta) (c := c)
+      hA4 hBodd hBge hrpos hspos hlpos hmpos hD hA halpha hbeta rfl hcpos
+  have hcalpha : c ∣ alpha := Nat.gcd_dvd_left alpha beta
+  have hcbeta : c ∣ beta := Nat.gcd_dvd_right alpha beta
+  have halpha_div : alpha = c * (alpha / c) := by
+    have h := Nat.div_mul_cancel hcalpha
+    simpa [mul_comm] using h.symm
+  have hbeta_div : beta = c * (beta / c) := by
+    have h := Nat.div_mul_cancel hcbeta
+    simpa [mul_comm] using h.symm
+  have hA2 : 2 ∣ A := dvd_trans (by decide : 2 ∣ 4) hA4
+  have hhalf :
+      2 * (B * (A / 2) - 1) =
+        2 * (alpha * beta) + B * (alpha * l + beta * m) :=
+    powerTwoSplitSubtractive_half_row_alpha_beta_identity hA2 hBge hrpos hspos
+      hlpos hmpos hD hA halpha hbeta
+  have hhalf_quot :
+      2 * (B * (A / 2) - 1) =
+        2 * ((c * (alpha / c)) * (c * (beta / c))) +
+          B * ((c * (alpha / c)) * l + (c * (beta / c)) * m) := by
+    rw [← halpha_div, ← hbeta_div]
+    exact hhalf
+  exact hparity.trans
+    (parity_reduced_divisor_gap_iff_gcd_quotient_ineq
+      (M := B * (A / 2) - 1) (B := B) (l := l) (m := m)
+      (c := c) (x := alpha / c) (y := beta / c) (L := l * m)
+      hcpos hhalf_quot)
+
 /-- Canonical-division interface for the stronger linear normalized
 gcd-quotient inequality. The linear target discards the nonnegative
 `2*c*x*y` term from the quotient target. -/

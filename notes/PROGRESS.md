@@ -359,6 +359,15 @@
   is the exact reduced-divisor obstruction in normalized variables, not a
   stronger replacement. It still does not prove the universal quotient
   inequality.
+- [R] Specialized the exact quotient/reduced-divisor equivalence to
+  admissible power-two splits with canonical quotient variables. The theorem
+  `Erdos699.powerTwoSplitSubtractive_reduced_divisor_gap_iff_canonical_gcd_quotient_ineq`
+  proves that, for a positive subtractive split, the reduced-divisor gap
+  `l*m < M / gcd c M` is equivalent to the odd/even canonical quotient
+  inequalities with `c = gcd alpha beta`,
+  `x = alpha / c`, and `y = beta / c`. This removes the remaining
+  existential witness layer from the exact equivalence itself; proving the
+  universal canonical quotient inequality remains open.
 - [R] Canonicalized the normalized gcd-quotient target and recorded a Lean
   warning against a false shortcut. The split identities
   `Erdos699.powerTwoSplitSubtractive_gcd_quotient_product_identity`,
