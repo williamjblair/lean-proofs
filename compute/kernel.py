@@ -165,7 +165,7 @@ def _product(values: list[int]) -> int:
 
 
 def _row_one_split_diagnostic(
-    factors: list[tuple[int, int]], n2: int, t: int
+    factors: list[tuple[int, int]], n1: int, n2: int, t: int
 ) -> dict[str, Any]:
     zero_prime_powers: list[int] = []
     one_prime_powers: list[int] = []
@@ -176,6 +176,13 @@ def _row_one_split_diagnostic(
             one_prime_powers.append(prime_power)
         else:
             raise ValueError("t is not a row-one CRT candidate")
+    row_one_product = t * (t - 1)
+    if row_one_product % n1 != 0:
+        raise ValueError("t is not a row-one CRT candidate")
+    row_one_quotient = row_one_product // n1
+    row_one_quotient_gcd = math.gcd(row_one_quotient, n2)
+    gap_gcd = math.gcd(t - 2, n2)
+    quotient_gap_gcd_product = row_one_quotient_gcd * gap_gcd
     row_two_product = t * (t - 1) * (t - 2)
     row_two_remainder = row_two_product % n2
     return {
@@ -184,6 +191,11 @@ def _row_one_split_diagnostic(
         "one_prime_powers": one_prime_powers,
         "zero_product": _product(zero_prime_powers),
         "one_product": _product(one_prime_powers),
+        "row_one_quotient": row_one_quotient,
+        "row_one_quotient_gcd": row_one_quotient_gcd,
+        "gap_gcd": gap_gcd,
+        "quotient_gap_gcd_product": quotient_gap_gcd_product,
+        "quotient_gap_gcd_product_lt_n2": quotient_gap_gcd_product < n2,
         "row_two_remainder": row_two_remainder,
         "row_two_gcd": math.gcd(row_two_product, n2),
         "survives_row_two": row_two_remainder == 0,
@@ -278,7 +290,8 @@ def scan_kernel_crt(
     if include_row_one_splits or include_row_one_split_summary:
         factors = prime_power_factorization(n1)
         row_one_candidate_splits = [
-            _row_one_split_diagnostic(factors, n2, t) for t in row_one_candidates
+            _row_one_split_diagnostic(factors, n1, n2, t)
+            for t in row_one_candidates
         ]
         if include_row_one_splits:
             result["row_one_candidate_splits"] = row_one_candidate_splits

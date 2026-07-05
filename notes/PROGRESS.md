@@ -506,5 +506,16 @@
   `{1: 108, 5: 15, 11: 2, 23: 2, 29: 1, 101: 1, 115: 1}`. This is exact
   finite evidence for the C2 divisor-split lane, not a proof that the kernel
   is empty.
+- [E] Extended row-one split diagnostics with the exact quotient-gap finite
+  certificate terms used by the Lean theorem
+  `Erdos699.not_exists_kernelBelow_iff_forall_mem_quotient_gap_gcd_mul_lt_of_list_exact_odd`:
+  `row_one_quotient`, `row_one_quotient_gcd`, `gap_gcd`,
+  `quotient_gap_gcd_product`, and the strict flag
+  `quotient_gap_gcd_product_lt_n2`. The command
+  `python3 -m compute.kernel --case-i-power-two --min-exponent 61 --max-exponent 61 --include-row-one-splits`
+  reports `7` row-one split candidates, `0` survivors, and
+  `quotient_gap_gcd_product = 1 < N2` for every listed candidate. This is
+  exact finite evidence aligned to the quotient-gap certificate interface,
+  not a proof that the kernel is empty.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

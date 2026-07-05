@@ -124,6 +124,11 @@ def test_crt_scan_can_include_row_one_split_diagnostics_on_request() -> None:
             "one_prime_powers": [5],
             "zero_product": 3,
             "one_product": 5,
+            "row_one_quotient": 2,
+            "row_one_quotient_gcd": 2,
+            "gap_gcd": 2,
+            "quotient_gap_gcd_product": 4,
+            "quotient_gap_gcd_product_lt_n2": True,
             "row_two_remainder": 8,
             "row_two_gcd": 2,
             "survives_row_two": False,
@@ -134,6 +139,11 @@ def test_crt_scan_can_include_row_one_split_diagnostics_on_request() -> None:
             "one_prime_powers": [3],
             "zero_product": 5,
             "one_product": 3,
+            "row_one_quotient": 6,
+            "row_one_quotient_gcd": 2,
+            "gap_gcd": 2,
+            "quotient_gap_gcd_product": 4,
+            "quotient_gap_gcd_product_lt_n2": True,
             "row_two_remainder": 6,
             "row_two_gcd": 2,
             "survives_row_two": False,
@@ -144,6 +154,11 @@ def test_crt_scan_can_include_row_one_split_diagnostics_on_request() -> None:
             "one_prime_powers": [],
             "zero_product": 15,
             "one_product": 1,
+            "row_one_quotient": 14,
+            "row_one_quotient_gcd": 14,
+            "gap_gcd": 1,
+            "quotient_gap_gcd_product": 14,
+            "quotient_gap_gcd_product_lt_n2": False,
             "row_two_remainder": 0,
             "row_two_gcd": 14,
             "survives_row_two": True,
@@ -166,6 +181,31 @@ def test_crt_scan_can_include_row_one_split_diagnostics_on_request() -> None:
         55,
         60,
     ]
+
+
+def test_crt_split_diagnostics_match_quotient_gap_factorization_when_odd() -> None:
+    result = scan_kernel_crt(95, 47, 96, min_t=4, include_row_one_splits=True)
+    splits = result["row_one_candidate_splits"]
+    assert splits == [
+        {
+            "t": 20,
+            "zero_prime_powers": [5],
+            "one_prime_powers": [19],
+            "zero_product": 5,
+            "one_product": 19,
+            "row_one_quotient": 4,
+            "row_one_quotient_gcd": 1,
+            "gap_gcd": 1,
+            "quotient_gap_gcd_product": 1,
+            "quotient_gap_gcd_product_lt_n2": True,
+            "row_two_remainder": 25,
+            "row_two_gcd": 1,
+            "survives_row_two": False,
+        }
+    ]
+    assert all(
+        item["quotient_gap_gcd_product"] == item["row_two_gcd"] for item in splits
+    )
 
 
 def test_crt_scan_can_include_row_one_split_summary_on_request() -> None:
@@ -274,6 +314,11 @@ def test_kernel_cli_can_include_row_one_split_diagnostics() -> None:
         "one_prime_powers": [5],
         "zero_product": 3,
         "one_product": 5,
+        "row_one_quotient": 2,
+        "row_one_quotient_gcd": 2,
+        "gap_gcd": 2,
+        "quotient_gap_gcd_product": 4,
+        "quotient_gap_gcd_product_lt_n2": True,
         "row_two_remainder": 8,
         "row_two_gcd": 2,
         "survives_row_two": False,
@@ -367,6 +412,11 @@ def test_case_i_power_two_family_scan_can_include_row_one_splits() -> None:
             "one_prime_powers": [19],
             "zero_product": 5,
             "one_product": 19,
+            "row_one_quotient": 4,
+            "row_one_quotient_gcd": 1,
+            "gap_gcd": 1,
+            "quotient_gap_gcd_product": 1,
+            "quotient_gap_gcd_product_lt_n2": True,
             "row_two_remainder": 25,
             "row_two_gcd": 1,
             "survives_row_two": False,
