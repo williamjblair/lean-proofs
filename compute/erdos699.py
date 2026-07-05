@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from math import comb
 
 
@@ -45,17 +46,22 @@ def binom_mod_prime_nonzero_by_lucas(n: int, k: int, p: int) -> bool:
     return comb(n, k) % p != 0
 
 
-def criterion_obstruction_primes(n: int, i: int, j: int) -> list[int]:
+def criterion_obstruction_primes(
+    n: int, i: int, j: int, primes: Iterable[int] | None = None
+) -> list[int]:
     if not (1 <= i < j <= n // 2):
         return []
+    prime_source = primes_upto(n) if primes is None else primes
     return [
         p
-        for p in primes_upto(n)
-        if p >= i and not (dominated(i, n, p) or dominated(j, n, p))
+        for p in prime_source
+        if i <= p <= n and not (dominated(i, n, p) or dominated(j, n, p))
     ]
 
 
-def counterexample_candidate(n: int, i: int, j: int) -> bool:
+def counterexample_candidate(
+    n: int, i: int, j: int, primes: Iterable[int] | None = None
+) -> bool:
     if not (1 <= i < j <= n // 2):
         return False
-    return criterion_obstruction_primes(n, i, j) == []
+    return criterion_obstruction_primes(n, i, j, primes=primes) == []
