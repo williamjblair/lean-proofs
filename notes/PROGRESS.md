@@ -2,6 +2,21 @@
 
 ## 2026-07-05
 
+- [R]/[E] Corrected a normalized-branch trap: the weakened all-quantified
+  kill lemma with hypotheses `Odd F`, `3 ≤ F`, `4 ∣ X`, `0 < X - 2 * u`,
+  `4 * F ≤ X`, `2 * F^2 ≤ X`, row one
+  `u * (X - u) = g * (F * X - 1)`, and half-row divisibility is false without
+  `0 < u`. Exact counterexample: `(F, X, u, g) = (3, 20, 0, 0)`. Verified
+  by direct integer arithmetic, by the Python regression
+  `test_squeezed_normalized_predicate_excludes_zero_row_degeneracy`, and by a
+  Lean stdin counterexample to the weakened statement. This does not retract a
+  banked theorem: `Erdos699.squeezedNormalizedCaseIKernel` and
+  `Erdos699.squeezedNormalizedRowOneCandidate` already include `0 < t`. New
+  Lean guard lemmas
+  `Erdos699.squeezedNormalizedCaseIKernel_zero_t_false` and
+  `Erdos699.squeezedNormalizedRowOneCandidate_zero_t_false` make the exclusion
+  explicit. Any future normalized kill statement must keep `0 < u` or derive
+  it from the original `0 < j` factorization hypotheses.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.

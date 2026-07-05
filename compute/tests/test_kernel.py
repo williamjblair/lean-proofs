@@ -489,6 +489,22 @@ def test_squeezed_normalized_predicate_checks_all_rows() -> None:
     assert not squeezed_normalized_case_i_kernel_holds(2, 72, 16, 7)
 
 
+def test_squeezed_normalized_predicate_excludes_zero_row_degeneracy() -> None:
+    F, X, u, g = 3, 20, 0, 0
+    weakened_hypotheses = (
+        F % 2 == 1
+        and 3 <= F
+        and X % 4 == 0
+        and 0 < X - 2 * u
+        and 4 * F <= X
+        and 2 * (F * F) <= X
+        and u * (X - u) == g * (F * X - 1)
+        and (g * (X - 2 * u)) % (F * (X // 2) - 1) == 0
+    )
+    assert weakened_hypotheses
+    assert not squeezed_normalized_case_i_kernel_holds(F, X, u, g)
+
+
 def test_squeezed_discriminant_generator_finds_row_one_candidates() -> None:
     assert squeezed_row_one_candidates_discriminant(3, 48) == [
         {"F": 3, "X": 48, "t": 22, "g": 4}

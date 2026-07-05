@@ -3209,6 +3209,16 @@ def squeezedNormalizedRowOneCandidate (F X t g : ℕ) : Prop :=
                   2 * (F * F) ≤ X ∧
                     t * (X - t) = g * (F * X - 1)
 
+theorem squeezedNormalizedCaseIKernel_zero_t_false {F X g : ℕ} :
+    ¬ squeezedNormalizedCaseIKernel F X 0 g := by
+  intro h
+  exact Nat.lt_irrefl 0 h.2.2.1
+
+theorem squeezedNormalizedRowOneCandidate_zero_t_false {F X g : ℕ} :
+    ¬ squeezedNormalizedRowOneCandidate F X 0 g := by
+  intro h
+  exact Nat.lt_irrefl 0 h.2.2.1
+
 theorem squeezedNormalizedRowOneCandidate_half_row_pos {F X t g : ℕ}
     (h : squeezedNormalizedRowOneCandidate F X t g) :
     0 < F * X / 2 - 1 := by
