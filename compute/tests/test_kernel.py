@@ -763,6 +763,31 @@ def test_power_two_quotient_scan_matches_bruteforce() -> None:
     assert result["survivor_count"] == len(brute_survivors) == 0
     assert result["row_one_candidates"] == brute_row_one
     assert result["survivors"] == []
+    assert result["reduced_divisor_gap_summary"] == {
+        "candidate_count": 2,
+        "gap_holds_count": 2,
+        "gap_failure_count": 0,
+        "min_gap_margin": 726,
+        "min_gap_candidate": {
+            "exponent": 9,
+            "A": 512,
+            "B": 3,
+            "v": 205,
+            "h": 41,
+            "r": 5,
+            "s": 307,
+            "l": 41,
+            "m": 1,
+            "alpha": 2,
+            "beta": 184,
+            "c": 2,
+            "d": 1,
+            "reduced_divisor": 767,
+            "l_times_m": 41,
+            "gap_margin": 726,
+            "gap_holds": True,
+        },
+    }
 
 
 def test_power_two_quotient_scan_rejects_inverted_exponent_range() -> None:
@@ -973,6 +998,8 @@ def test_kernel_cli_can_scan_power_two_quotient_kernel() -> None:
     assert payload["mode"] == "power_two_quotient_kernel"
     assert payload["row_one_candidate_count"] == 2
     assert payload["survivor_count"] == 0
+    assert payload["reduced_divisor_gap_summary"]["gap_failure_count"] == 0
+    assert payload["reduced_divisor_gap_summary"]["min_gap_margin"] == 726
 
 
 def test_kernel_cli_can_include_squeezed_candidate_summary() -> None:

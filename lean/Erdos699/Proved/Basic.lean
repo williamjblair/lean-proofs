@@ -4444,6 +4444,74 @@ theorem powerTwoSplit_gcd_dvd_iff_reduced_divisor
   dsimp
   exact dvd_mul_iff_div_gcd_dvd (powerTwoSplit_half_row_pos hA4 hBge hApos)
 
+/-- A size certificate for failure of row-two divisibility after reducing by
+the gcd part of the modulus. If the reduced divisor is strictly larger than
+the positive right factor, then `M` cannot divide `c * L`. -/
+theorem not_dvd_mul_of_reduced_divisor_gt {M c L : ℕ}
+    (hMpos : 0 < M)
+    (hLpos : 0 < L)
+    (hlt : L < M / Nat.gcd c M) :
+    ¬ M ∣ c * L := by
+  intro hdvd
+  have hred : M / Nat.gcd c M ∣ L :=
+    (dvd_mul_iff_div_gcd_dvd hMpos).mp hdvd
+  have hle : M / Nat.gcd c M ≤ L := Nat.le_of_dvd hLpos hred
+  exact (not_le_of_gt hlt) hle
+
+/-- Split-level reduced-divisor gap certificate: if
+`l*m < M / gcd (gcd alpha beta) M`, then the split/gcd row-two divisibility
+fails. -/
+theorem powerTwoSplitSubtractive_not_gcd_dvd_of_reduced_divisor_gap
+    {A B l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hApos : 0 < A)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hgap :
+      l * m <
+        (B * (A / 2) - 1) /
+          Nat.gcd (Nat.gcd alpha beta) (B * (A / 2) - 1)) :
+    ¬ B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m) := by
+  exact not_dvd_mul_of_reduced_divisor_gt
+    (powerTwoSplit_half_row_pos hA4 hBge hApos)
+    (Nat.mul_pos hlpos hmpos) hgap
+
+/-- If every admissible positive split satisfies the reduced-divisor gap
+inequality, then the split/gcd obstruction holds. This isolates the remaining
+research target as an inequality rather than a divisibility statement. -/
+theorem powerTwoSplitGcdObstruction_of_reduced_divisor_gap {A B : ℕ}
+    (hgapAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  l * m <
+                                    (B * (A / 2) - 1) /
+                                      Nat.gcd (Nat.gcd alpha beta)
+                                        (B * (A / 2) - 1)) :
+    powerTwoSplitGcdObstruction A B := by
+  intro hApow hA4 hBodd hBge r s l m alpha beta c hrpos hspos hlpos hmpos
+    hD hA hsplitgap halpha hbeta hc
+  have hApos : 0 < A := by
+    rcases hApow with ⟨a, rfl⟩
+    exact Nat.pow_pos (by decide : 0 < 2)
+  rw [hc]
+  exact powerTwoSplitSubtractive_not_gcd_dvd_of_reduced_divisor_gap
+    hA4 hBge hApos hlpos hmpos
+    (hgapAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+      hmpos hD hA hsplitgap halpha hbeta)
+
 /-- The two split identities force the part of the half-row modulus contained
 in `alpha` to be exactly the part contained in `gcd alpha beta`. The key
 point is that a common divisor of `alpha` and `M` divides `B * beta * m` by

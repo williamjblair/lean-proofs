@@ -248,6 +248,28 @@
   `powerTwoQuotientKernel A B v h`. This does not prove the obstruction
   itself; it closes the exact formal bridge from the pure quotient kernel to
   the remaining split/gcd obstruction.
+- [R] Isolated a sufficient inequality certificate for the remaining
+  split/gcd obstruction. The generic theorem
+  `Erdos699.not_dvd_mul_of_reduced_divisor_gt` proves that, for positive
+  `M` and positive `L`, `L < M / Nat.gcd c M` implies
+  `¬ M ∣ c * L`. The split specialization
+  `Erdos699.powerTwoSplitSubtractive_not_gcd_dvd_of_reduced_divisor_gap`
+  applies this to `M = B * (A / 2) - 1`,
+  `c = Nat.gcd alpha beta`, and `L = l * m`, while
+  `Erdos699.powerTwoSplitGcdObstruction_of_reduced_divisor_gap` proves that
+  a universal reduced-divisor gap inequality for all admissible positive
+  splits implies `powerTwoSplitGcdObstruction A B`. This is a conditional
+  reduction to an inequality target, not a proof of that inequality.
+- [E] Extended the power-two quotient scanner with exact reduced-divisor gap
+  diagnostics. Reproduce the existing perimeter plus the new gap summary with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(50,2001); print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"], r["reduced_divisor_gap_summary"])'`.
+  It reports `49000` instances, `404` row-one candidates, `0` row-two
+  survivors, and
+  `{"candidate_count": 404, "gap_holds_count": 404, "gap_failure_count": 0,
+  "min_gap_margin": 726, ...}` with the minimum-margin candidate
+  `(a, A, B, v, h, r, s, l, m, alpha, beta, c, d, reduced_divisor, l*m) =
+  (9, 512, 3, 205, 41, 5, 307, 41, 1, 2, 184, 2, 1, 767, 41)`. This is exact
+  bounded evidence for the inequality certificate, not a global proof.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under

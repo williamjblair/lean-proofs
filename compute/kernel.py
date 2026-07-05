@@ -466,6 +466,68 @@ def _power_two_quotient_row_one_candidates(
     return sorted(candidates.values(), key=lambda item: item["v"])
 
 
+def _power_two_reduced_divisor_gap_diagnostic(
+    candidate: dict[str, int],
+) -> dict[str, int | bool]:
+    A = candidate["A"]
+    B = candidate["B"]
+    v = candidate["v"]
+    row_one_modulus = B * A - 1
+    half_row_modulus = B * (A // 2) - 1
+    r = math.gcd(row_one_modulus, v)
+    s = row_one_modulus // r
+    l = v // r
+    m = (A - v) // s
+    alpha = r - B * m
+    beta = s - B * l
+    c = math.gcd(alpha, beta)
+    d = math.gcd(c, half_row_modulus)
+    reduced_divisor = half_row_modulus // d
+    l_times_m = l * m
+    gap_margin = reduced_divisor - l_times_m
+    return {
+        "exponent": candidate["exponent"],
+        "A": A,
+        "B": B,
+        "v": v,
+        "h": candidate["h"],
+        "r": r,
+        "s": s,
+        "l": l,
+        "m": m,
+        "alpha": alpha,
+        "beta": beta,
+        "c": c,
+        "d": d,
+        "reduced_divisor": reduced_divisor,
+        "l_times_m": l_times_m,
+        "gap_margin": gap_margin,
+        "gap_holds": l_times_m < reduced_divisor,
+    }
+
+
+def _power_two_reduced_divisor_gap_summary(
+    candidates: list[dict[str, int]],
+) -> dict[str, Any]:
+    diagnostics = [
+        _power_two_reduced_divisor_gap_diagnostic(candidate)
+        for candidate in candidates
+    ]
+    gap_holds_count = sum(1 for item in diagnostics if item["gap_holds"])
+    min_gap_candidate = min(
+        diagnostics, key=lambda item: int(item["gap_margin"]), default=None
+    )
+    return {
+        "candidate_count": len(diagnostics),
+        "gap_holds_count": gap_holds_count,
+        "gap_failure_count": len(diagnostics) - gap_holds_count,
+        "min_gap_margin": (
+            None if min_gap_candidate is None else min_gap_candidate["gap_margin"]
+        ),
+        "min_gap_candidate": min_gap_candidate,
+    }
+
+
 def scan_power_two_quotient_kernel(
     max_exponent: int, max_b: int, min_exponent: int = 2
 ) -> dict[str, Any]:
@@ -495,6 +557,9 @@ def scan_power_two_quotient_kernel(
         "survivor_count": len(survivors),
         "row_one_candidates": row_one_candidates,
         "survivors": survivors,
+        "reduced_divisor_gap_summary": _power_two_reduced_divisor_gap_summary(
+            row_one_candidates
+        ),
     }
 
 

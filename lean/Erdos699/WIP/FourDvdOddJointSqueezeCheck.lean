@@ -39,6 +39,9 @@ namespace Erdos699
 #check powerTwoSplitSubtractive_row_two_alpha_dvd_iff_gcd_dvd
 #check powerTwoSplitSubtractive_row_two_delta_dvd_iff_gcd_dvd
 #check powerTwoQuotientKernel.not_of_splitGcdObstruction
+#check not_dvd_mul_of_reduced_divisor_gt
+#check powerTwoSplitSubtractive_not_gcd_dvd_of_reduced_divisor_gap
+#check powerTwoSplitGcdObstruction_of_reduced_divisor_gap
 #check dvd_div_gcd_of_dvd_mul
 #check powerTwoQuotientKernel.row_one_split_right_dvd
 #check powerTwoQuotientKernel.exists_row_one_split
