@@ -256,6 +256,18 @@
   `powerTwoQuotientKernel A B v h`. This does not prove the obstruction
   itself; it closes the exact formal bridge from the pure quotient kernel to
   the remaining split/gcd obstruction.
+- [R] Composed the row-two bridge all the way to the corrected reduced
+  divisor. `Erdos699.powerTwoSplitSubtractive_row_two_alpha_dvd_iff_reduced_divisor`
+  rewrites the `alpha` row-two divisor to `M / d ∣ l * m`, and
+  `Erdos699.powerTwoSplitSubtractive_row_two_delta_dvd_iff_reduced_divisor`
+  rewrites the quotient-kernel delta divisor
+  `M ∣ (l * m) * (s * m - r * l)` to the same reduced-divisor condition,
+  where `c = Nat.gcd alpha beta`, `M = B * (A / 2) - 1`, and
+  `d = Nat.gcd c M`. The negated theorem
+  `Erdos699.powerTwoSplitSubtractive_row_two_delta_obstruction_iff_reduced_divisor`
+  states the surviving obstruction exactly as `M / d ∤ l * m`. This is an
+  exact equivalence for admissible splits, not a proof that the obstruction
+  holds universally.
 - [R] Isolated a sufficient inequality certificate for the remaining
   split/gcd obstruction. The generic theorem
   `Erdos699.not_dvd_mul_of_reduced_divisor_gt` proves that, for positive

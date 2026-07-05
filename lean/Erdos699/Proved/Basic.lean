@@ -7504,6 +7504,98 @@ theorem powerTwoSplitSubtractive_row_two_delta_dvd_iff_gcd_dvd
     (powerTwoSplitSubtractive_row_two_alpha_dvd_iff_gcd_dvd hA4 hBge hrpos
       hspos hlpos hmpos hD hA halpha hbeta)
 
+/-- Subtractive split row-two bridge from the `alpha` divisor directly to the
+reduced divisor `M / gcd (gcd alpha beta) M`. -/
+theorem powerTwoSplitSubtractive_row_two_alpha_dvd_iff_reduced_divisor
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    let d := Nat.gcd c M
+    M ∣ (l * m) * alpha ↔ M / d ∣ l * m := by
+  dsimp
+  have hApos : 0 < A := by
+    rw [← hA]
+    positivity
+  exact
+    (powerTwoSplitSubtractive_row_two_alpha_dvd_iff_gcd_dvd hA4 hBge
+      hrpos hspos hlpos hmpos hD hA halpha hbeta).trans
+      (powerTwoSplit_row_two_survival_iff_reduced_divisor
+        (A := A) (B := B) (l := l) (m := m) (alpha := alpha)
+        (beta := beta) hA4 hBge hApos)
+
+/-- Complete split row-two bridge from the quotient-kernel delta divisor
+directly to the reduced divisor `M / gcd (gcd alpha beta) M`. -/
+theorem powerTwoSplitSubtractive_row_two_delta_dvd_iff_reduced_divisor
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hgap : r * l < s * m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    let d := Nat.gcd c M
+    M ∣ (l * m) * (s * m - r * l) ↔ M / d ∣ l * m := by
+  dsimp
+  have hApos : 0 < A := by
+    rw [← hA]
+    positivity
+  exact
+    (powerTwoSplitSubtractive_row_two_delta_dvd_iff_gcd_dvd hA4 hBge
+      hrpos hspos hlpos hmpos hgap hD hA halpha hbeta).trans
+      (powerTwoSplit_row_two_survival_iff_reduced_divisor
+        (A := A) (B := B) (l := l) (m := m) (alpha := alpha)
+        (beta := beta) hA4 hBge hApos)
+
+/-- Negated complete split row-two bridge: failure of the quotient-kernel
+delta divisibility is exactly failure of the reduced divisor to divide
+`l*m`. -/
+theorem powerTwoSplitSubtractive_row_two_delta_obstruction_iff_reduced_divisor
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hgap : r * l < s * m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    let d := Nat.gcd c M
+    (¬ M ∣ (l * m) * (s * m - r * l)) ↔ ¬ M / d ∣ l * m := by
+  dsimp
+  have hiff :=
+    powerTwoSplitSubtractive_row_two_delta_dvd_iff_reduced_divisor
+      (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+      (alpha := alpha) (beta := beta) hA4 hBge hrpos hspos hlpos hmpos
+      hgap hD hA halpha hbeta
+  dsimp at hiff
+  constructor
+  · intro h hdvd
+    exact h (hiff.mpr hdvd)
+  · intro h hdvd
+    exact h (hiff.mp hdvd)
+
 /-- The row-one equation in the pure power-two quotient kernel forces the
 right half of the canonical divisor split:
 `(B * A - 1) / gcd (B * A - 1) v` divides `A - v`. -/
