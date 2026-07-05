@@ -422,6 +422,78 @@ theorem no_prime_ge_five_dvd_sub_two_of_no_common_eq_three_mul {n j p : ℕ}
     simpa [hn_eq] using hpdvd
   exact no_prime_ge_five_dvd_three_mul_sub_two_of_dvd_triple hp hp5 hj hlin hprod
 
+theorem twoPower_of_unique_prime_dvd_two {m : ℕ} (hm0 : m ≠ 0)
+    (huniq : ∀ {p : ℕ}, p.Prime → p ∣ m → p = 2) :
+    twoPower m := by
+  exact ⟨m.primeFactorsList.length, Nat.eq_prime_pow_of_unique_prime_dvd hm0 huniq⟩
+
+theorem twoPower_of_no_prime_ge_five_and_not_three {m : ℕ} (hm0 : m ≠ 0)
+    (hno5 : ∀ p : ℕ, p.Prime → 5 ≤ p → ¬ p ∣ m) (hnot3 : ¬ 3 ∣ m) :
+    twoPower m := by
+  apply twoPower_of_unique_prime_dvd_two hm0
+  intro p hp hpm
+  by_cases hp2 : p = 2
+  · exact hp2
+  by_cases hp3 : p = 3
+  · exact False.elim (hnot3 (by simpa [hp3] using hpm))
+  have hp4 : p ≠ 4 := by
+    intro hp_eq
+    subst p
+    exact (by decide : ¬ Nat.Prime 4) hp
+  have hp5 : 5 ≤ p := by
+    have hp2le : 2 ≤ p := hp.two_le
+    omega
+  exact False.elim ((hno5 p hp hp5) hpm)
+
+theorem not_three_dvd_sub_one_of_eq_three_mul {n j : ℕ} (hn_eq : n = 3 * j)
+    (hj : 0 < j) :
+    ¬ 3 ∣ n - 1 := by
+  intro h
+  rcases h with ⟨a, ha⟩
+  omega
+
+theorem not_three_dvd_sub_two_of_eq_three_mul {n j : ℕ} (hn_eq : n = 3 * j)
+    (hj : 0 < j) :
+    ¬ 3 ∣ n - 2 := by
+  intro h
+  rcases h with ⟨a, ha⟩
+  omega
+
+theorem twoPower_sub_one_of_no_common_eq_three_mul {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn_eq : n = 3 * j)
+    (hj : 0 < j) :
+    twoPower (n - 1) := by
+  apply twoPower_of_no_prime_ge_five_and_not_three
+  · omega
+  · intro p hp hp5 hpdvd
+    exact no_prime_ge_five_dvd_sub_one_of_no_common_eq_three_mul hnone hn_eq hp hp5 hj hpdvd
+  · exact not_three_dvd_sub_one_of_eq_three_mul hn_eq hj
+
+theorem twoPower_sub_two_of_no_common_eq_three_mul {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn_eq : n = 3 * j)
+    (hj : 2 ≤ j) :
+    twoPower (n - 2) := by
+  apply twoPower_of_no_prime_ge_five_and_not_three
+  · omega
+  · intro p hp hp5 hpdvd
+    exact no_prime_ge_five_dvd_sub_two_of_no_common_eq_three_mul hnone hn_eq hp hp5 hj hpdvd
+  · exact not_three_dvd_sub_two_of_eq_three_mul hn_eq (by omega)
+
+theorem eq_three_of_no_common_eq_three_mul {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn_eq : n = 3 * j)
+    (hj : 2 ≤ j) :
+    n = 3 :=
+  eq_three_of_sub_one_sub_two_twoPowers
+    (twoPower_sub_one_of_no_common_eq_three_mul hnone hn_eq (by omega))
+    (twoPower_sub_two_of_no_common_eq_three_mul hnone hn_eq hj)
+
+theorem no_common_eq_three_mul_false_of_two_le {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn_eq : n = 3 * j)
+    (hj : 2 ≤ j) :
+    False := by
+  have hn3 : n = 3 := eq_three_of_no_common_eq_three_mul hnone hn_eq hj
+  omega
+
 /-- Product of the prime divisors of `m` that are at least `lo`, without multiplicity. -/
 def primeRadicalGE (lo m : ℕ) : ℕ :=
   ∏ p ∈ m.primeFactors.filter (fun p => lo ≤ p), p

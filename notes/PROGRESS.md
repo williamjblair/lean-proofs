@@ -63,4 +63,10 @@
   `Erdos699.no_prime_ge_five_dvd_sub_two_of_no_common_eq_three_mul`: under
   the row-3 no-common-prime hypothesis and `n = 3 * j`, no prime `p ≥ 5`
   divides `n - 1` or `n - 2`. Full T5 remains open.
+- [R] Proved the conditional T5 endpoint
+  `Erdos699.eq_three_of_no_common_eq_three_mul` and contradiction theorem
+  `Erdos699.no_common_eq_three_mul_false_of_two_le`: under row-3
+  no-common-prime, `n = 3 * j`, and `2 ≤ j`, the branch is impossible. Full
+  T5 remains open because the formal collapse to `n = 3 * j` is not yet
+  proved.
 - [OPEN] T4 and all later rungs remain unclaimed in this branch.
