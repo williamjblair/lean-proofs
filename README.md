@@ -14,7 +14,7 @@ re-checkable guarantee, not a one-time assertion.
 
 ```
 ErdosProblems/          one Lean file per problem
-Audit.lean              #print axioms for every headline theorem
+Audit.lean              #print axioms for proof targets and conditional surfaces
 proofs.yaml             machine-readable index (consumed by erdos-fc-sync)
 scripts/check_axioms.sh the verification gate
 scripts/check_manifest.sh keeps proofs.yaml in sync with the audit
@@ -48,7 +48,8 @@ bash scripts/check_axioms.sh
 ## Adding a proof
 
 1. Add `ErdosProblems/Erdos<n>.lean`, building cleanly against the pinned Mathlib.
-2. Add its module import and a `#print axioms` line to `Audit.lean`.
+2. Add its module import and a `#print axioms` line to the manifest-tracked
+   section of `Audit.lean`.
 3. Add an entry to `proofs.yaml`.
 4. `bash scripts/check_axioms.sh && bash scripts/check_manifest.sh` must pass.
 
