@@ -654,6 +654,12 @@ def _power_two_parity_branch_gap_summary(
         for item in diagnostics
         if int(item["parity_gcd_bound"]) > int(item["B"]) * int(item["B"])
     ]
+    odd_denominator_exceptions = [
+        item for item in denominator_exceptions if item["c_parity"] == "odd"
+    ]
+    even_denominator_exceptions = [
+        item for item in denominator_exceptions if item["c_parity"] == "even"
+    ]
     max_denominator_exception = max(
         denominator_exceptions,
         key=lambda item: int(item["parity_gcd_bound"]) - int(item["B"]) * int(item["B"]),
@@ -683,6 +689,8 @@ def _power_two_parity_branch_gap_summary(
         "parity_denominator_gt_B_sq_count": (
             len(diagnostics) - denominator_le_B_sq_count
         ),
+        "odd_parity_denominator_gt_B_sq_count": len(odd_denominator_exceptions),
+        "even_parity_denominator_gt_B_sq_count": len(even_denominator_exceptions),
         "max_parity_denominator_over_B_sq_candidate": max_denominator_exception,
         "min_parity_gap_candidate": min_parity_gap_candidate,
         "min_parity_product_candidate": min_parity_product_candidate,

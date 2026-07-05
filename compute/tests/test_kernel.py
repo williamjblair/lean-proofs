@@ -815,6 +815,8 @@ def test_power_two_quotient_scan_matches_bruteforce() -> None:
             "min_parity_product_margin": 725,
             "parity_denominator_le_B_sq_count": 2,
             "parity_denominator_gt_B_sq_count": 0,
+            "odd_parity_denominator_gt_B_sq_count": 0,
+            "even_parity_denominator_gt_B_sq_count": 0,
             "max_parity_denominator_over_B_sq_candidate": None,
             "min_parity_gap_candidate": {
                 "exponent": 9,
@@ -890,6 +892,8 @@ def test_power_two_quotient_gap_summary_counts_B_sq_denominator_exceptions() -> 
     parity_summary = summary["parity_branch_gap_summary"]
     assert parity_summary["parity_denominator_le_B_sq_count"] == 0
     assert parity_summary["parity_denominator_gt_B_sq_count"] == 1
+    assert parity_summary["odd_parity_denominator_gt_B_sq_count"] == 0
+    assert parity_summary["even_parity_denominator_gt_B_sq_count"] == 1
     assert parity_summary["max_parity_denominator_over_B_sq_candidate"] == {
         "exponent": 52,
         "A": 2**52,
@@ -957,6 +961,8 @@ def test_power_two_quotient_scan_certifies_large_prime_modulus() -> None:
         "min_parity_product_margin": 1654181948285415973,
         "parity_denominator_le_B_sq_count": 3,
         "parity_denominator_gt_B_sq_count": 0,
+        "odd_parity_denominator_gt_B_sq_count": 0,
+        "even_parity_denominator_gt_B_sq_count": 0,
         "max_parity_denominator_over_B_sq_candidate": None,
         "min_parity_gap_candidate": {
             "exponent": 60,

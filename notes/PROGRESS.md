@@ -325,6 +325,19 @@
   applies this to the parity denominator `c` in the odd branch and `c/2` in
   the even branch. This does not prove Task A: the remaining exceptional
   branch is exactly the even case with `c/2 > B^2`.
+- [R] Added the large-parity-denominator-only reduction. The split theorem
+  `Erdos699.powerTwoSplitSubtractive_parity_product_gap_of_large_denominator_product_gap`
+  proves the full parity product gap once the odd branch is known for
+  `B^2 < c` and the even branch is known for `B^2 < c/2`, because the
+  complementary small-denominator cases are discharged by the previous
+  `B^2` theorem. The consumers
+  `Erdos699.powerTwoSplitGcdObstruction_of_large_parity_denominator_product_gap`,
+  `Erdos699.powerTwoQuotientKernel.not_of_large_parity_denominator_product_gap`,
+  and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_large_parity_denominator_product_gap`
+  compose this restricted target all the way to the pure quotient kernel.
+  This is a conditional reduction, not a proof of the large-denominator
+  branches.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
@@ -374,13 +387,13 @@
 - [E] Added exact diagnostics for the small parity-denominator branch from
   the new Lean lemma. Reproduce the enlarged power-two quotient perimeter and
   denominator split with
-  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"], p["parity_denominator_le_B_sq_count"], p["parity_denominator_gt_B_sq_count"], p["max_parity_denominator_over_B_sq_candidate"]["exponent"], p["max_parity_denominator_over_B_sq_candidate"]["B"], p["max_parity_denominator_over_B_sq_candidate"]["parity_gcd_bound"], p["max_parity_denominator_over_B_sq_candidate"]["parity_product_gap_holds"])'`.
-  It reports `69000 880 0 878 2 52 5 39 True`. Thus all but two candidates in
-  the range are covered by the new `b ≤ B^2` sufficient branch, and the
-  largest exceptional denominator is the known `A = 2^52`, `B = 5`,
-  `c/2 = 39` case, which still satisfies the product gap in the diagnostic.
-  This is exact bounded evidence and a branch split, not a proof of the
-  exceptional branch.
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"], p["parity_denominator_le_B_sq_count"], p["parity_denominator_gt_B_sq_count"], p["odd_parity_denominator_gt_B_sq_count"], p["even_parity_denominator_gt_B_sq_count"], p["max_parity_denominator_over_B_sq_candidate"]["exponent"], p["max_parity_denominator_over_B_sq_candidate"]["B"], p["max_parity_denominator_over_B_sq_candidate"]["parity_gcd_bound"], p["max_parity_denominator_over_B_sq_candidate"]["parity_product_gap_holds"])'`.
+  It reports `69000 880 0 878 2 0 2 52 5 39 True`. Thus all but two
+  candidates in the range are covered by the new `b ≤ B^2` sufficient branch,
+  and both large-denominator exceptions are even-branch cases. The largest
+  exceptional denominator is the known `A = 2^52`, `B = 5`, `c/2 = 39` case,
+  which still satisfies the product gap in the diagnostic. This is exact
+  bounded evidence and a branch split, not a proof of the exceptional branch.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` leaves an
   uncertified prime factor at least `2^64`, the scan raises. With

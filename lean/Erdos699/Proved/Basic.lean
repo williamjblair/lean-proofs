@@ -4921,6 +4921,46 @@ theorem powerTwoSplitSubtractive_parity_product_gap_of_bound_by_B_sq
       product_gap_of_factor_bound_by_B_sq hBge hlpos hmpos hc2pos hcB
         hc2_le_alpha hc2_le_beta hab hhalf⟩
 
+/-- To prove the split product-form parity gap, it suffices to handle only
+the large parity-denominator cases. The small denominator cases are discharged
+by `powerTwoSplitSubtractive_parity_product_gap_of_bound_by_B_sq`. -/
+theorem powerTwoSplitSubtractive_parity_product_gap_of_large_denominator_product_gap
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hlargeOdd :
+      let c := Nat.gcd alpha beta
+      let M := B * (A / 2) - 1
+      Odd c → B * B < c → c * (l * m + 1) ≤ M)
+    (hlargeEven :
+      let c := Nat.gcd alpha beta
+      let M := B * (A / 2) - 1
+      Even c → B * B < c / 2 → (c / 2) * (l * m + 1) ≤ M) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    (Odd c ∧ c * (l * m + 1) ≤ M) ∨
+      (Even c ∧ (c / 2) * (l * m + 1) ≤ M) := by
+  dsimp at hlargeOdd hlargeEven ⊢
+  rcases Nat.even_or_odd (Nat.gcd alpha beta) with hceven | hcodd
+  · rcases le_or_gt (Nat.gcd alpha beta / 2) (B * B) with hsmall | hlarge
+    · exact powerTwoSplitSubtractive_parity_product_gap_of_bound_by_B_sq
+        hA4 hBge hrpos hspos hlpos hmpos hD hA halpha hbeta
+        (Or.inr ⟨hceven, hsmall⟩)
+    · exact Or.inr ⟨hceven, hlargeEven hceven hlarge⟩
+  · rcases le_or_gt (Nat.gcd alpha beta) (B * B) with hsmall | hlarge
+    · exact powerTwoSplitSubtractive_parity_product_gap_of_bound_by_B_sq
+        hA4 hBge hrpos hspos hlpos hmpos hD hA halpha hbeta
+        (Or.inl ⟨hcodd, hsmall⟩)
+    · exact Or.inl ⟨hcodd, hlargeOdd hcodd hlarge⟩
+
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
     {A B l m alpha beta : ℕ}
@@ -5051,6 +5091,42 @@ theorem powerTwoSplitGcdObstruction_of_parity_product_gap {A B : ℕ}
     hA4 hBodd hBge hApos hlpos hmpos hcpos
     (hgapAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
       hmpos hD hA hsplitgap halpha hbeta)
+
+/-- If every admissible positive split satisfies the product-form parity gap
+only in the large parity-denominator branches, then the split/gcd obstruction
+holds. The complementary small-denominator branches are proved by
+`powerTwoSplitSubtractive_parity_product_gap_of_bound_by_B_sq`. -/
+theorem powerTwoSplitGcdObstruction_of_large_parity_denominator_product_gap
+    {A B : ℕ}
+    (hlargeAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  (Odd c → B * B < c →
+                                    c * (l * m + 1) ≤ M) ∧
+                                  (Even c → B * B < c / 2 →
+                                    (c / 2) * (l * m + 1) ≤ M)) :
+    powerTwoSplitGcdObstruction A B := by
+  refine powerTwoSplitGcdObstruction_of_parity_product_gap ?_
+  intro hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos hmpos
+    hD hA hsplitgap halpha hbeta
+  have hlarge := hlargeAll hApow hA4 hBodd hBge r s l m alpha beta hrpos
+    hspos hlpos hmpos hD hA hsplitgap halpha hbeta
+  exact powerTwoSplitSubtractive_parity_product_gap_of_large_denominator_product_gap
+    hA4 hBge hrpos hspos hlpos hmpos hD hA halpha hbeta hlarge.1 hlarge.2
 
 /-- Split-level reduced-divisor gap certificate: if
 `l*m < M / gcd (gcd alpha beta) M`, then the split/gcd row-two divisibility
@@ -5576,6 +5652,68 @@ theorem not_exists_powerTwoQuotientKernel_of_parity_product_gap
     ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
   rintro ⟨v, h, hkernel⟩
   exact powerTwoQuotientKernel.not_of_parity_product_gap hgapAll hkernel
+
+/-- Direct conditional kernel kill from the large-denominator-only
+product-form parity target. The small parity-denominator branches are already
+handled by `powerTwoSplitSubtractive_parity_product_gap_of_bound_by_B_sq`. -/
+theorem powerTwoQuotientKernel.not_of_large_parity_denominator_product_gap
+    {A B v h : ℕ}
+    (hlargeAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  (Odd c → B * B < c →
+                                    c * (l * m + 1) ≤ M) ∧
+                                  (Even c → B * B < c / 2 →
+                                    (c / 2) * (l * m + 1) ≤ M)) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_splitGcdObstruction
+    (powerTwoSplitGcdObstruction_of_large_parity_denominator_product_gap
+      hlargeAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_large_parity_denominator_product_gap`. -/
+theorem not_exists_powerTwoQuotientKernel_of_large_parity_denominator_product_gap
+    {A B : ℕ}
+    (hlargeAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  (Odd c → B * B < c →
+                                    c * (l * m + 1) ≤ M) ∧
+                                  (Even c → B * B < c / 2 →
+                                    (c / 2) * (l * m + 1) ≤ M)) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact
+    powerTwoQuotientKernel.not_of_large_parity_denominator_product_gap
+      hlargeAll hkernel
 
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure
