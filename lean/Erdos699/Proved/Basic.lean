@@ -5094,6 +5094,36 @@ theorem gcdQuotientBareIdentity_counterexample_not_quotient_gap :
   · exact ⟨9, by norm_num⟩
   norm_num
 
+/-- Exact warning example: adding the quotient row-sum identity and `4 ∣ A`
+still does not imply the stronger linear target. The actual power-of-two
+row-sum hypothesis is not replaceable by four-divisibility alone. -/
+theorem gcdQuotientFourDvdRowSum_counterexample_not_linear_gap :
+    ∃ A B c x y l m : ℕ,
+      4 ∣ A ∧
+        Odd B ∧
+          3 ≤ B ∧
+            Even c ∧
+              0 < c ∧
+                0 < x ∧
+                  0 < y ∧
+                    0 < l ∧
+                      0 < m ∧
+                        Nat.Coprime x y ∧
+                          c * c * (x * y) + 1 = B * B * (l * m) ∧
+                            A = 2 * B * (l * m) + c * (x * l + y * m) ∧
+                              x * l < y * m ∧
+                                ¬ l * m + 1 ≤ B * (x * l + y * m) := by
+  refine ⟨73176, 3, 38, 1, 38, 469, 13, ?_⟩
+  constructor
+  · norm_num
+  constructor
+  · exact ⟨1, by norm_num⟩
+  constructor
+  · norm_num
+  constructor
+  · exact ⟨19, by norm_num⟩
+  norm_num
+
 /-- Product identity in normalized gcd-quotient variables. -/
 theorem powerTwoSplitSubtractive_gcd_quotient_product_identity
     {A B r s l m alpha beta c x y : ℕ}

@@ -457,6 +457,17 @@
   It reports `69000 880 0 880 0 357 9 3 even 399 42`. This is a
   conditional formal target plus exact bounded evidence; it does not prove
   the universal linear inequality.
+- [R] Recorded a Lean warning against weakening the linear target's row-sum
+  hypothesis to mere four-divisibility. The theorem
+  `Erdos699.gcdQuotientFourDvdRowSum_counterexample_not_linear_gap` gives
+  the exact tuple
+  `(A, B, c, x, y, l, m) = (73176, 3, 38, 1, 38, 469, 13)`, satisfying
+  `4 ∣ A`, `Odd B`, `3 ≤ B`, `Even c`, `Nat.Coprime x y`, the quotient
+  product identity `c*c*(x*y)+1 = B*B*(l*m)`, the quotient row-sum identity
+  `A = 2*B*(l*m) + c*(x*l + y*m)`, and the orientation `x*l < y*m`, while
+  refuting the linear conclusion `l*m + 1 ≤ B*(x*l + y*m)`. Thus
+  four-divisibility plus the normalized identities is not enough; the actual
+  power-of-two row-sum hypothesis remains essential.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` leaves an
   uncertified prime factor at least `2^64`, the scan raises. With
