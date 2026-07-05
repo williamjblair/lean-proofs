@@ -58,4 +58,9 @@
   `Erdos699.no_prime_ge_five_dvd_three_mul_sub_two_of_dvd_triple`: in the
   `n = 3 * j` branch, a prime `p ≥ 5` cannot divide both the relevant window
   row and the forced product. Full T5 remains open.
+- [R] Proved T5 no-large-window-prime bridge lemmas
+  `Erdos699.no_prime_ge_five_dvd_sub_one_of_no_common_eq_three_mul` and
+  `Erdos699.no_prime_ge_five_dvd_sub_two_of_no_common_eq_three_mul`: under
+  the row-3 no-common-prime hypothesis and `n = 3 * j`, no prime `p ≥ 5`
+  divides `n - 1` or `n - 2`. Full T5 remains open.
 - [OPEN] T4 and all later rungs remain unclaimed in this branch.

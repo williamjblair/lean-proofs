@@ -398,6 +398,30 @@ theorem no_prime_ge_five_dvd_three_mul_sub_two_of_dvd_triple {j p : ℕ}
       rw [Nat.mod_eq_of_lt h6lt] at hmodlin
       omega
 
+theorem no_prime_ge_five_dvd_sub_one_of_no_common_eq_three_mul {n j p : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn_eq : n = 3 * j)
+    (hp : p.Prime) (hp5 : 5 ≤ p) (hj : 0 < j) (hpdvd : p ∣ n - 1) :
+    False := by
+  have hn_gt : 1 < n := by omega
+  have hprod : p ∣ j * (j - 1) :=
+    i_three_window_one_product_forcing (n := n) (j := j) (p := p)
+      hnone hp hp5 hn_gt hpdvd
+  have hlin : p ∣ 3 * j - 1 := by
+    simpa [hn_eq] using hpdvd
+  exact no_prime_ge_five_dvd_three_mul_sub_one_of_dvd_mul_sub_one hp hp5 hj hlin hprod
+
+theorem no_prime_ge_five_dvd_sub_two_of_no_common_eq_three_mul {n j p : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn_eq : n = 3 * j)
+    (hp : p.Prime) (hp5 : 5 ≤ p) (hj : 2 ≤ j) (hpdvd : p ∣ n - 2) :
+    False := by
+  have hn_gt : 2 < n := by omega
+  have hprod : p ∣ j * (j - 1) * (j - 2) :=
+    i_three_window_two_product_forcing (n := n) (j := j) (p := p)
+      hnone hp hp5 hn_gt hpdvd
+  have hlin : p ∣ 3 * j - 2 := by
+    simpa [hn_eq] using hpdvd
+  exact no_prime_ge_five_dvd_three_mul_sub_two_of_dvd_triple hp hp5 hj hlin hprod
+
 /-- Product of the prime divisors of `m` that are at least `lo`, without multiplicity. -/
 def primeRadicalGE (lo m : ℕ) : ℕ :=
   ∏ p ∈ m.primeFactors.filter (fun p => lo ≤ p), p
