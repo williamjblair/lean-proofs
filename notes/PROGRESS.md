@@ -360,6 +360,15 @@
   package the same fact for the two C2 kernel predicates. This formalizes the
   "every row-one kernel candidate lies in a CRT split class" direction; it is
   not a proof that the kernel is empty.
+- [R] Proved the reverse split-to-canonical identification:
+  `Erdos699.rowOneDivisorSplit_gcd_eq_zeroPart_of_one_le` and
+  `Erdos699.rowOneDivisorSplit_div_gcd_eq_onePart_of_one_le` show that any
+  positive `rowOneDivisorSplit N1 zeroPart onePart t` has
+  `zeroPart = gcd N1 t` and `onePart = N1 / gcd N1 t`; the paired wrapper is
+  `Erdos699.rowOneDivisorSplit_eq_gcdDiv_parts_of_one_le`. This completes the
+  formal equivalence between positive row-one split records and the canonical
+  gcd/div split class, still without proving any row-two incompatibility or
+  kernel emptiness.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters

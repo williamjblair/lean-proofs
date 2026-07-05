@@ -316,6 +316,39 @@ theorem rowOneDivisorSplit_gcdDiv_of_consecutiveDivisorKernelBelow
     rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t :=
   rowOneDivisorSplit_gcdDiv_of_consecutiveDivisorKernel hN1 hkernel.2
 
+theorem rowOneDivisorSplit_gcd_eq_zeroPart_of_one_le
+    {N1 zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) (ht : 1 ≤ t) :
+    Nat.gcd N1 t = zeroPart := by
+  apply Nat.dvd_antisymm
+  · have hgcd_dvd_prod : Nat.gcd N1 t ∣ zeroPart * onePart := by
+      simpa [hsplit.1] using (Nat.gcd_dvd_left N1 t)
+    have hcop : (Nat.gcd N1 t).Coprime onePart :=
+      Nat.Coprime.of_dvd (Nat.gcd_dvd_right N1 t) hsplit.2.2
+        ((Nat.coprime_self_sub_right ht).mpr (by simp))
+    exact hcop.dvd_of_dvd_mul_right hgcd_dvd_prod
+  · apply Nat.dvd_gcd
+    · exact ⟨onePart, hsplit.1.symm⟩
+    · exact hsplit.2.1
+
+theorem rowOneDivisorSplit_div_gcd_eq_onePart_of_one_le
+    {N1 zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) (ht : 1 ≤ t) :
+    N1 / Nat.gcd N1 t = onePart := by
+  have hgcd : Nat.gcd N1 t = zeroPart :=
+    rowOneDivisorSplit_gcd_eq_zeroPart_of_one_le hsplit ht
+  have ht_pos : 0 < t := lt_of_lt_of_le Nat.zero_lt_one ht
+  have hzero_pos : 0 < zeroPart := Nat.pos_of_dvd_of_pos hsplit.2.1 ht_pos
+  rw [hgcd, ← hsplit.1]
+  exact Nat.mul_div_right onePart hzero_pos
+
+theorem rowOneDivisorSplit_eq_gcdDiv_parts_of_one_le
+    {N1 zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) (ht : 1 ≤ t) :
+    Nat.gcd N1 t = zeroPart ∧ N1 / Nat.gcd N1 t = onePart :=
+  ⟨rowOneDivisorSplit_gcd_eq_zeroPart_of_one_le hsplit ht,
+    rowOneDivisorSplit_div_gcd_eq_onePart_of_one_le hsplit ht⟩
+
 theorem rowOneDivisorSplit_kernel_iff_row_two {N1 N2 zeroPart onePart t : ℕ}
     (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
     consecutiveDivisorKernel N1 N2 t ↔ N2 ∣ t * (t - 1) * (t - 2) := by
