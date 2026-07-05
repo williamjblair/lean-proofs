@@ -1249,6 +1249,28 @@
   `total_row_one_candidate_count = 6`, `survivor_count = 0`, and
   `all_strict_lt_n2 = True`. These are additional end-to-end Lean-certified
   finite instances, not a general Case-I theorem.
+- [R]/[E] Extended the lower-bounded Case-I finite certificate chain through
+  four further `n = 3 * 2^A` members. The helper
+  `Erdos699.coprime_mul_dvd_of_dvd_of_dvd` lets the row-one split covers use
+  CRT uniqueness instead of large quotient enumeration. The theorems
+  `Erdos699.not_exists_kernelInRange_100663295_50331647_4_100663296`,
+  `Erdos699.not_exists_kernelInRange_201326591_100663295_4_201326592`,
+  `Erdos699.not_exists_kernelInRange_402653183_201326591_4_402653184`, and
+  `Erdos699.not_exists_kernelInRange_805306367_402653183_4_805306368` prove
+  the exact lower-bounded C2 kernel is empty for `A = 25`, `A = 26`,
+  `A = 27`, and `A = 28`, using row-one lists
+  `[19257326, 20132660, 39389985]`, `[33417252]`,
+  `[17134179, 24038997, 41173175]`, and `[365758927]` respectively. The
+  wrappers `Erdos699.i_three_caseI_100663296_exists_common_from_row_bounds`,
+  `Erdos699.i_three_caseI_201326592_exists_common_from_row_bounds`,
+  `Erdos699.i_three_caseI_402653184_exists_common_from_row_bounds`, and
+  `Erdos699.i_three_caseI_805306368_exists_common_from_row_bounds` give the
+  original row-3 common-prime conclusion for every `j` with `3 < j` and
+  `2 * j ≤ n` at those four `n`. Reproduce the exact scan with
+  `python3 -m compute.kernel --case-i-power-two --min-exponent 25 --max-exponent 28 --include-row-one-candidates --include-row-one-splits --include-quotient-gap-summary`;
+  it reports four instances, `total_row_one_candidate_count = 8`,
+  `survivor_count = 0`, and `all_strict_lt_n2 = True`. These are additional
+  end-to-end Lean-certified finite instances, not a general Case-I theorem.
 - [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
   product inequality is false under C2 shape hypotheses alone:
   `n = 54,734,052`, `N1 = n - 1`, `N2 = n / 2 - 1`, and

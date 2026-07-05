@@ -218,6 +218,14 @@ theorem eq_mul_add_one_of_sub_one_eq_mul {t k a : ℕ} (ht : 1 ≤ t)
     t = k * a + 1 := by
   omega
 
+theorem coprime_mul_dvd_of_dvd_of_dvd {a b n : ℕ} (hcop : a.Coprime b)
+    (ha : a ∣ n) (hb : b ∣ n) : a * b ∣ n := by
+  rcases ha with ⟨x, rfl⟩
+  have hbax : b ∣ a * x := by simpa [mul_comm] using hb
+  have hbx : b ∣ x := hcop.symm.dvd_of_dvd_mul_left hbax
+  rcases hbx with ⟨y, rfl⟩
+  exact ⟨y, by ring⟩
+
 theorem rowOneDivisorSplit_modEq_zero {N1 zeroPart onePart t : ℕ}
     (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
     t ≡ 0 [MOD zeroPart] := by
@@ -1923,6 +1931,531 @@ theorem not_exists_kernelInRange_50331647_25165823_4_50331648 :
             rcases h6563tm1 with ⟨a, ha⟩
             rcases h7669tm1 with ⟨b, hb⟩
             omega)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_100663295_50331647_4_100663296 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 100663295 50331647 4 100663296 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 100663295) (N2 := 50331647) (minT := 4) (bound := 100663296)
+      (candidates := [19257326, 20132660, 39389985])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨25165823, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_one : 1 ≤ t := by omega
+        have ht_lt_N1 : t < 100663295 := by omega
+        have hrow : 100663295 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have hbranch_eq :
+            ∀ {zeroPart onePart u : ℕ},
+              rowOneDivisorSplit 100663295 zeroPart onePart t →
+              rowOneDivisorSplit 100663295 zeroPart onePart u →
+              1 ≤ u → u < 100663295 → t = u := by
+          intro zeroPart onePart u htsp husp hu_one hu_lt
+          exact rowOneDivisorSplit_eq_of_lt htsp husp ht_one hu_one ht_lt_N1 hu_lt
+        have h5 : 5 ∣ t ∨ 5 ∣ t - 1 := by
+          exact
+            (primePow_dvd_mul_sub_one_iff
+                (Nat.Prime.isPrimePow Nat.prime_five) ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h23 : 23 ∣ t ∨ 23 ∣ t - 1 := by
+          have hpp : IsPrimePow 23 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 23)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h875333 : 875333 ∣ t ∨ 875333 ∣ t - 1 := by
+          have hpp : IsPrimePow 875333 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 875333)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h5cop23 : (5 : ℕ).Coprime 23 := by
+          rw [Nat.coprime_iff_gcd_eq_one]
+          norm_num [Nat.gcd]
+        have h5cop875333 : (5 : ℕ).Coprime 875333 := by
+          rw [Nat.coprime_iff_gcd_eq_one]
+          norm_num [Nat.gcd]
+        have h23cop875333 : (23 : ℕ).Coprime 875333 := by
+          rw [Nat.coprime_iff_gcd_eq_one]
+          norm_num [Nat.gcd]
+        have h115cop875333 : (5 * 23 : ℕ).Coprime 875333 := by
+          rw [Nat.coprime_iff_gcd_eq_one]
+          norm_num [Nat.gcd]
+        rcases h5 with h5t | h5tm1
+        · rcases h23 with h23t | h23tm1
+          · rcases h875333 with h875333t | h875333tm1
+            · exfalso
+              have h115t : 5 * 23 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd h5cop23 h5t h23t
+              have hN1t : 100663295 ∣ t := by
+                have hprod : (5 * 23) * 875333 ∣ t :=
+                  coprime_mul_dvd_of_dvd_of_dvd h115cop875333 h115t h875333t
+                simpa [show (5 * 23) * 875333 = 100663295 by norm_num] using hprod
+              have hN1_le_t : 100663295 ≤ t := Nat.le_of_dvd (by omega : 0 < t) hN1t
+              omega
+            · exfalso
+              have h115t : 5 * 23 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd h5cop23 h5t h23t
+              have htsplit : rowOneDivisorSplit 100663295 115 875333 t := by
+                exact ⟨by norm_num, by simpa using h115t, h875333tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 100663295 115 875333 81405970 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 81405970 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              omega
+          · rcases h875333 with h875333t | h875333tm1
+            · have h4376665t : 5 * 875333 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd h5cop875333 h5t h875333t
+              have htsplit : rowOneDivisorSplit 100663295 4376665 23 t := by
+                exact ⟨by norm_num, by simpa using h4376665t, h23tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 100663295 4376665 23 39389985 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 39389985 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              simp [ht_eq]
+            · have h20132659tm1 : 23 * 875333 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd h23cop875333 h23tm1 h875333tm1
+              have htsplit : rowOneDivisorSplit 100663295 5 20132659 t := by
+                exact ⟨by norm_num, h5t, by simpa using h20132659tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 100663295 5 20132659 20132660 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 20132660 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              simp [ht_eq]
+        · rcases h23 with h23t | h23tm1
+          · rcases h875333 with h875333t | h875333tm1
+            · exfalso
+              have h20132659t : 23 * 875333 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd h23cop875333 h23t h875333t
+              have htsplit : rowOneDivisorSplit 100663295 20132659 5 t := by
+                exact ⟨by norm_num, by simpa using h20132659t, h5tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 100663295 20132659 5 80530636 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 80530636 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              omega
+            · exfalso
+              have h4376665tm1 : 5 * 875333 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd h5cop875333 h5tm1 h875333tm1
+              have htsplit : rowOneDivisorSplit 100663295 23 4376665 t := by
+                exact ⟨by norm_num, h23t, by simpa using h4376665tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 100663295 23 4376665 61273311 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 61273311 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              omega
+          · rcases h875333 with h875333t | h875333tm1
+            · have h115tm1 : 5 * 23 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd h5cop23 h5tm1 h23tm1
+              have htsplit : rowOneDivisorSplit 100663295 875333 115 t := by
+                exact ⟨by norm_num, h875333t, by simpa using h115tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 100663295 875333 115 19257326 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 19257326 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              simp [ht_eq]
+            · exfalso
+              have h115tm1 : 5 * 23 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd h5cop23 h5tm1 h23tm1
+              have hN1tm1 : 100663295 ∣ t - 1 := by
+                have hprod : (5 * 23) * 875333 ∣ t - 1 :=
+                  coprime_mul_dvd_of_dvd_of_dvd h115cop875333 h115tm1 h875333tm1
+                simpa [show (5 * 23) * 875333 = 100663295 by norm_num] using hprod
+              have htsplit : rowOneDivisorSplit 100663295 1 100663295 t := by
+                exact ⟨by norm_num, one_dvd t, hN1tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 100663295 1 100663295 1 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 1 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              omega)
+      (by
+        intro t htmem
+        have htmem' : t = 19257326 ∨ t = 20132660 ∨ t = 39389985 := by
+          simpa only [List.mem_cons, List.not_mem_nil, or_false] using htmem
+        omega)
+      (by
+        intro t htmem
+        have htmem' : t = 19257326 ∨ t = 20132660 ∨ t = 39389985 := by
+          simpa only [List.mem_cons, List.not_mem_nil, or_false] using htmem
+        rcases htmem' with rfl | rfl | rfl
+        · norm_num [Nat.gcd]
+        · norm_num [Nat.gcd]
+        · norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_201326591_100663295_4_201326592 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 201326591 100663295 4 201326592 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 201326591) (N2 := 100663295) (minT := 4) (bound := 201326592)
+      (candidates := [33417252])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨50331647, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_one : 1 ≤ t := by omega
+        have ht_lt_N1 : t < 201326591 := by omega
+        have hrow : 201326591 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have hbranch_eq :
+            ∀ {zeroPart onePart u : ℕ},
+              rowOneDivisorSplit 201326591 zeroPart onePart t →
+              rowOneDivisorSplit 201326591 zeroPart onePart u →
+              1 ≤ u → u < 201326591 → t = u := by
+          intro zeroPart onePart u htsp husp hu_one hu_lt
+          exact rowOneDivisorSplit_eq_of_lt htsp husp ht_one hu_one ht_lt_N1 hu_lt
+        have h1223 : 1223 ∣ t ∨ 1223 ∣ t - 1 := by
+          have hpp : IsPrimePow 1223 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 1223)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h164617 : 164617 ∣ t ∨ 164617 ∣ t - 1 := by
+          have hpp : IsPrimePow 164617 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 164617)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        rcases h1223 with h1223t | h1223tm1
+        · rcases h164617 with h164617t | h164617tm1
+          · exfalso
+            have hcop : (1223 : ℕ).Coprime 164617 := by
+              rw [Nat.coprime_iff_gcd_eq_one]
+              norm_num [Nat.gcd]
+            have hN1t : 201326591 ∣ t := by
+              have hprod : 1223 * 164617 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd hcop h1223t h164617t
+              simpa [show 1223 * 164617 = 201326591 by norm_num] using hprod
+            have hN1_le_t : 201326591 ≤ t := Nat.le_of_dvd (by omega : 0 < t) hN1t
+            omega
+          · have htsplit : rowOneDivisorSplit 201326591 1223 164617 t := by
+              exact ⟨by norm_num, h1223t, h164617tm1⟩
+            have husplit :
+                rowOneDivisorSplit 201326591 1223 164617 33417252 := by
+              norm_num [rowOneDivisorSplit]
+            have ht_eq : t = 33417252 :=
+              hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+            simp [ht_eq]
+        · rcases h164617 with h164617t | h164617tm1
+          · exfalso
+            have htsplit : rowOneDivisorSplit 201326591 164617 1223 t := by
+              exact ⟨by norm_num, h164617t, h1223tm1⟩
+            have husplit :
+                rowOneDivisorSplit 201326591 164617 1223 167909340 := by
+              norm_num [rowOneDivisorSplit]
+            have ht_eq : t = 167909340 :=
+              hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+            omega
+          · exfalso
+            have hcop : (1223 : ℕ).Coprime 164617 := by
+              rw [Nat.coprime_iff_gcd_eq_one]
+              norm_num [Nat.gcd]
+            have hN1tm1 : 201326591 ∣ t - 1 := by
+              have hprod : 1223 * 164617 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd hcop h1223tm1 h164617tm1
+              simpa [show 1223 * 164617 = 201326591 by norm_num] using hprod
+            have htsplit : rowOneDivisorSplit 201326591 1 201326591 t := by
+              exact ⟨by norm_num, one_dvd t, hN1tm1⟩
+            have husplit :
+                rowOneDivisorSplit 201326591 1 201326591 1 := by
+              norm_num [rowOneDivisorSplit]
+            have ht_eq : t = 1 :=
+              hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+            omega)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_402653183_201326591_4_402653184 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 402653183 201326591 4 402653184 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 402653183) (N2 := 201326591) (minT := 4) (bound := 402653184)
+      (candidates := [17134179, 24038997, 41173175])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨100663295, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_one : 1 ≤ t := by omega
+        have ht_pos : 0 < t := Nat.lt_of_lt_of_le (by norm_num : 0 < 4) hmin
+        have ht_lt_N1 : t < 402653183 := by omega
+        have hrow : 402653183 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have hbranch_eq :
+            ∀ {zeroPart onePart u : ℕ},
+              rowOneDivisorSplit 402653183 zeroPart onePart t →
+              rowOneDivisorSplit 402653183 zeroPart onePart u →
+              1 ≤ u → u < 402653183 → t = u := by
+          intro zeroPart onePart u htsp husp hu_one hu_lt
+          exact rowOneDivisorSplit_eq_of_lt htsp husp ht_one hu_one ht_lt_N1 hu_lt
+        have h47 : 47 ∣ t ∨ 47 ∣ t - 1 := by
+          have hpp : IsPrimePow 47 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 47)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h67 : 67 ∣ t ∨ 67 ∣ t - 1 := by
+          have hpp : IsPrimePow 67 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 67)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h127867 : 127867 ∣ t ∨ 127867 ∣ t - 1 := by
+          have hpp : IsPrimePow 127867 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 127867)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h47cop67 : (47 : ℕ).Coprime 67 := by
+          rw [Nat.coprime_iff_gcd_eq_one]
+          norm_num [Nat.gcd]
+        have h47cop127867 : (47 : ℕ).Coprime 127867 := by
+          rw [Nat.coprime_iff_gcd_eq_one]
+          norm_num [Nat.gcd]
+        have h67cop127867 : (67 : ℕ).Coprime 127867 := by
+          rw [Nat.coprime_iff_gcd_eq_one]
+          norm_num [Nat.gcd]
+        have h3149cop127867 : (47 * 67 : ℕ).Coprime 127867 := by
+          rw [Nat.coprime_iff_gcd_eq_one]
+          norm_num [Nat.gcd]
+        rcases h47 with h47t | h47tm1
+        · rcases h67 with h67t | h67tm1
+          · rcases h127867 with h127867t | h127867tm1
+            · exfalso
+              have h3149t : 47 * 67 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd h47cop67 h47t h67t
+              have hN1t : 402653183 ∣ t := by
+                have hprod : (47 * 67) * 127867 ∣ t :=
+                  coprime_mul_dvd_of_dvd_of_dvd h3149cop127867 h3149t h127867t
+                simpa [show (47 * 67) * 127867 = 402653183 by norm_num] using hprod
+              exact (not_lt_of_ge (Nat.le_of_dvd ht_pos hN1t)) ht_lt_N1
+            · have h3149t : 47 * 67 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd h47cop67 h47t h67t
+              have htsplit : rowOneDivisorSplit 402653183 3149 127867 t := by
+                exact ⟨by norm_num, by simpa using h3149t, h127867tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 402653183 3149 127867 41173175 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 41173175 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              simp [ht_eq]
+          · rcases h127867 with h127867t | h127867tm1
+            · exfalso
+              have h6009749t : 47 * 127867 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd h47cop127867 h47t h127867t
+              have htsplit : rowOneDivisorSplit 402653183 6009749 67 t := by
+                exact ⟨by norm_num, by simpa using h6009749t, h67tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 402653183 6009749 67 378614187 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 378614187 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              have hbound' := hbound
+              rw [ht_eq] at hbound'
+              norm_num at hbound'
+            · have h8567089tm1 : 67 * 127867 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd h67cop127867 h67tm1 h127867tm1
+              have htsplit : rowOneDivisorSplit 402653183 47 8567089 t := by
+                exact ⟨by norm_num, h47t, by simpa using h8567089tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 402653183 47 8567089 17134179 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 17134179 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              simp [ht_eq]
+        · rcases h67 with h67t | h67tm1
+          · rcases h127867 with h127867t | h127867tm1
+            · exfalso
+              have h8567089t : 67 * 127867 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd h67cop127867 h67t h127867t
+              have htsplit : rowOneDivisorSplit 402653183 8567089 47 t := by
+                exact ⟨by norm_num, by simpa using h8567089t, h47tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 402653183 8567089 47 385519005 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 385519005 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              have hbound' := hbound
+              rw [ht_eq] at hbound'
+              norm_num at hbound'
+            · have h6009749tm1 : 47 * 127867 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd h47cop127867 h47tm1 h127867tm1
+              have htsplit : rowOneDivisorSplit 402653183 67 6009749 t := by
+                exact ⟨by norm_num, h67t, by simpa using h6009749tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 402653183 67 6009749 24038997 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 24038997 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              simp [ht_eq]
+          · rcases h127867 with h127867t | h127867tm1
+            · exfalso
+              have h3149tm1 : 47 * 67 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd h47cop67 h47tm1 h67tm1
+              have htsplit : rowOneDivisorSplit 402653183 127867 3149 t := by
+                exact ⟨by norm_num, h127867t, by simpa using h3149tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 402653183 127867 3149 361480009 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 361480009 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              have hbound' := hbound
+              rw [ht_eq] at hbound'
+              norm_num at hbound'
+            · exfalso
+              have h3149tm1 : 47 * 67 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd h47cop67 h47tm1 h67tm1
+              have hN1tm1 : 402653183 ∣ t - 1 := by
+                have hprod : (47 * 67) * 127867 ∣ t - 1 :=
+                  coprime_mul_dvd_of_dvd_of_dvd h3149cop127867 h3149tm1 h127867tm1
+                simpa [show (47 * 67) * 127867 = 402653183 by norm_num] using hprod
+              have htsplit : rowOneDivisorSplit 402653183 1 402653183 t := by
+                exact ⟨by norm_num, one_dvd t, hN1tm1⟩
+              have husplit :
+                  rowOneDivisorSplit 402653183 1 402653183 1 := by
+                norm_num [rowOneDivisorSplit]
+              have ht_eq : t = 1 :=
+                hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+              have hmin' := hmin
+              rw [ht_eq] at hmin'
+              norm_num at hmin')
+      (by
+        intro t htmem
+        have htmem' : t = 17134179 ∨ t = 24038997 ∨ t = 41173175 := by
+          simpa only [List.mem_cons, List.not_mem_nil, or_false] using htmem
+        omega)
+      (by
+        intro t htmem
+        have htmem' : t = 17134179 ∨ t = 24038997 ∨ t = 41173175 := by
+          simpa only [List.mem_cons, List.not_mem_nil, or_false] using htmem
+        rcases htmem' with rfl | rfl | rfl
+        · norm_num [Nat.gcd]
+        · norm_num [Nat.gcd]
+        · norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_805306367_402653183_4_805306368 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 805306367 402653183 4 805306368 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 805306367) (N2 := 402653183) (minT := 4) (bound := 805306368)
+      (candidates := [365758927])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨201326591, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_one : 1 ≤ t := by omega
+        have ht_pos : 0 < t := Nat.lt_of_lt_of_le (by norm_num : 0 < 4) hmin
+        have ht_lt_N1 : t < 805306367 := by omega
+        have hrow : 805306367 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have hbranch_eq :
+            ∀ {zeroPart onePart u : ℕ},
+              rowOneDivisorSplit 805306367 zeroPart onePart t →
+              rowOneDivisorSplit 805306367 zeroPart onePart u →
+              1 ≤ u → u < 805306367 → t = u := by
+          intro zeroPart onePart u htsp husp hu_one hu_lt
+          exact rowOneDivisorSplit_eq_of_lt htsp husp ht_one hu_one ht_lt_N1 hu_lt
+        have h51349 : 51349 ∣ t ∨ 51349 ∣ t - 1 := by
+          have hpp : IsPrimePow 51349 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 51349)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h15683 : 15683 ∣ t ∨ 15683 ∣ t - 1 := by
+          have hpp : IsPrimePow 15683 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 15683)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        rcases h51349 with h51349t | h51349tm1
+        · rcases h15683 with h15683t | h15683tm1
+          · exfalso
+            have hcop : (51349 : ℕ).Coprime 15683 := by
+              rw [Nat.coprime_iff_gcd_eq_one]
+              norm_num [Nat.gcd]
+            have hN1t : 805306367 ∣ t := by
+              have hprod : 51349 * 15683 ∣ t :=
+                coprime_mul_dvd_of_dvd_of_dvd hcop h51349t h15683t
+              simpa [show 51349 * 15683 = 805306367 by norm_num] using hprod
+            exact (not_lt_of_ge (Nat.le_of_dvd ht_pos hN1t)) ht_lt_N1
+          · have htsplit : rowOneDivisorSplit 805306367 51349 15683 t := by
+              exact ⟨by norm_num, h51349t, h15683tm1⟩
+            have husplit :
+                rowOneDivisorSplit 805306367 51349 15683 365758927 := by
+              norm_num [rowOneDivisorSplit]
+            have ht_eq : t = 365758927 :=
+              hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+            simp [ht_eq]
+        · rcases h15683 with h15683t | h15683tm1
+          · exfalso
+            have htsplit : rowOneDivisorSplit 805306367 15683 51349 t := by
+              exact ⟨by norm_num, h15683t, h51349tm1⟩
+            have husplit :
+                rowOneDivisorSplit 805306367 15683 51349 439547441 := by
+              norm_num [rowOneDivisorSplit]
+            have ht_eq : t = 439547441 :=
+              hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+            have hbound' := hbound
+            rw [ht_eq] at hbound'
+            norm_num at hbound'
+          · exfalso
+            have hcop : (51349 : ℕ).Coprime 15683 := by
+              rw [Nat.coprime_iff_gcd_eq_one]
+              norm_num [Nat.gcd]
+            have hN1tm1 : 805306367 ∣ t - 1 := by
+              have hprod : 51349 * 15683 ∣ t - 1 :=
+                coprime_mul_dvd_of_dvd_of_dvd hcop h51349tm1 h15683tm1
+              simpa [show 51349 * 15683 = 805306367 by norm_num] using hprod
+            have htsplit : rowOneDivisorSplit 805306367 1 805306367 t := by
+              exact ⟨by norm_num, one_dvd t, hN1tm1⟩
+            have husplit :
+                rowOneDivisorSplit 805306367 1 805306367 1 := by
+              norm_num [rowOneDivisorSplit]
+            have ht_eq : t = 1 :=
+              hbranch_eq htsplit husplit (by norm_num) (by norm_num)
+            have hmin' := hmin
+            rw [ht_eq] at hmin'
+            norm_num at hmin')
       (by
         intro t htmem
         simp at htmem
@@ -3735,6 +4268,78 @@ theorem i_three_caseI_50331648_exists_common_from_row_bounds {j : ℕ}
     i_three_caseI_exists_common_from_kernelInRange_empty
       (n := 50331648) (j := j)
       (by simpa using not_exists_kernelInRange_50331647_25165823_4_50331648)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_100663296_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 100663296) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 100663296 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 100663296) (j := j)
+      (by simpa using not_exists_kernelInRange_100663295_50331647_4_100663296)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_100663296_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 100663296) :
+    ∃ q : ℕ, commonPrimeDivisor 100663296 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 100663296) (j := j)
+      (by simpa using not_exists_kernelInRange_100663295_50331647_4_100663296)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_201326592_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 201326592) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 201326592 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 201326592) (j := j)
+      (by simpa using not_exists_kernelInRange_201326591_100663295_4_201326592)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_201326592_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 201326592) :
+    ∃ q : ℕ, commonPrimeDivisor 201326592 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 201326592) (j := j)
+      (by simpa using not_exists_kernelInRange_201326591_100663295_4_201326592)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_402653184_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 402653184) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 402653184 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 402653184) (j := j)
+      (by simpa using not_exists_kernelInRange_402653183_201326591_4_402653184)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_402653184_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 402653184) :
+    ∃ q : ℕ, commonPrimeDivisor 402653184 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 402653184) (j := j)
+      (by simpa using not_exists_kernelInRange_402653183_201326591_4_402653184)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_805306368_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 805306368) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 805306368 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 805306368) (j := j)
+      (by simpa using not_exists_kernelInRange_805306367_402653183_4_805306368)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_805306368_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 805306368) :
+    ∃ q : ℕ, commonPrimeDivisor 805306368 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 805306368) (j := j)
+      (by simpa using not_exists_kernelInRange_805306367_402653183_4_805306368)
       (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
 
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
