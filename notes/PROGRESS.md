@@ -224,6 +224,12 @@
   `Erdos699.i_three_caseI_factor_sq_squeeze_of_half_coprime_four_from_row_bound`
   package the existing branch-free wrappers under the original row-bound
   hypothesis. Full T7 remains open.
+- [R] Proved the `4 ∣ n` half-row wrapper:
+  `Erdos699.half_sub_one_coprime_four_of_four_dvd` shows that
+  `(n / 2 - 1).Coprime 4` is automatic when `4 ∣ n` and `2 < n`, and
+  `Erdos699.i_three_caseI_factor_sq_squeeze_of_four_dvd_from_row_bound`
+  removes the explicit coprime-four hypothesis from the row-bound
+  factor-square squeeze in this subcase. Full T7 remains open.
 - [R] Proved the direct coprime-to-4 half-row squeeze:
   `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four`
   replaces the explicit lower-bound input

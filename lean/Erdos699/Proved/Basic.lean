@@ -1434,6 +1434,27 @@ theorem half_sub_one_coprime_sub_one_of_even {n : ℕ}
   rw [hdiv, hsub_one]
   exact htarget
 
+theorem half_sub_one_coprime_four_of_four_dvd {n : ℕ}
+    (h4n : 4 ∣ n) (hn : 2 < n) :
+    (n / 2 - 1).Coprime 4 := by
+  rcases h4n with ⟨m, hm⟩
+  subst n
+  have hdiv : 4 * m / 2 = 2 * m := by omega
+  rw [hdiv]
+  apply Nat.coprime_of_dvd
+  intro p hp hpd hp4
+  have hp_eq_two : p = 2 := by
+    have hp_le_four : p ≤ 4 := Nat.le_of_dvd (by norm_num : 0 < 4) hp4
+    interval_cases p
+    · exact False.elim ((by decide : ¬ Nat.Prime 0) hp)
+    · exact False.elim ((by decide : ¬ Nat.Prime 1) hp)
+    · rfl
+    · exact False.elim (by norm_num at hp4)
+    · exact False.elim ((by decide : ¬ Nat.Prime 4) hp)
+  subst p
+  rcases hpd with ⟨a, ha⟩
+  omega
+
 theorem primePowerPartGE_five_half_sub_one_coprime_sub_one {n : ℕ}
     (h2n : 2 ∣ n) (hn : 2 < n) :
     (primePowerPartGE 5 (n / 2 - 1)).Coprime (n - 1) :=
@@ -2253,6 +2274,16 @@ theorem i_three_caseI_factor_sq_squeeze_of_half_coprime_four_from_row_bound {n F
   i_three_caseI_factor_sq_squeeze_of_half_coprime_four
     hnone hn hj hn_gt hj_pos hj_two h2n h3n hX_even
     (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn) hcop4
+
+theorem i_three_caseI_factor_sq_squeeze_of_four_dvd_from_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hX_even : 2 ∣ X) (hjn : 2 * j ≤ n) :
+    2 * (F * F) ≤ X :=
+  i_three_caseI_factor_sq_squeeze_of_half_coprime_four_from_row_bound
+    hnone hn hj hn_gt hj_pos hj_two h2n h3n hX_even hjn
+    (half_sub_one_coprime_four_of_four_dvd h4n hn_gt)
 
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
