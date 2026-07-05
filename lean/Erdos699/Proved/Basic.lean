@@ -205,6 +205,12 @@ theorem rowOneDivisorSplit_iff_modEq_of_one_le {N1 zeroPart onePart t : ℕ}
   · intro hmods
     exact rowOneDivisorSplit_of_modEq hprod hmods.1 hmods.2 ht
 
+theorem rowOneDivisorSplit_coprime_of_one_le {N1 zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) (ht : 1 ≤ t) :
+    zeroPart.Coprime onePart := by
+  exact Nat.Coprime.of_dvd hsplit.2.1 hsplit.2.2
+    ((Nat.coprime_self_sub_right ht).mpr (by simp))
+
 theorem rowOneDivisorSplit_modEq_chineseRemainder_of_coprime
     {N1 zeroPart onePart t : ℕ} (hcop : zeroPart.Coprime onePart)
     (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) (ht : 1 ≤ t) :
@@ -229,6 +235,15 @@ theorem rowOneDivisorSplit_modEq_unique_of_coprime
       u ≡ (Nat.chineseRemainder hcop 0 1 : ℕ) [MOD N1] :=
     rowOneDivisorSplit_modEq_chineseRemainder_of_coprime hcop husplit hu
   exact htcrt.trans hucrt.symm
+
+theorem rowOneDivisorSplit_modEq_unique
+    {N1 zeroPart onePart t u : ℕ}
+    (htsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (husplit : rowOneDivisorSplit N1 zeroPart onePart u) (ht : 1 ≤ t)
+    (hu : 1 ≤ u) :
+    t ≡ u [MOD N1] := by
+  exact rowOneDivisorSplit_modEq_unique_of_coprime
+    (rowOneDivisorSplit_coprime_of_one_le htsplit ht) htsplit husplit ht hu
 
 theorem rowOneDivisorSplit_kernel_iff_row_two {N1 N2 zeroPart onePart t : ℕ}
     (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
