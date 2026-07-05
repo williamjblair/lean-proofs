@@ -5,6 +5,8 @@ import json
 import math
 from typing import Any
 
+from compute.erdos699 import criterion_obstruction_primes, primes_upto
+
 
 _MR_BASES_64 = (
     2,
@@ -146,7 +148,20 @@ def squeezed_normalized_case_i_kernel_holds(F: int, X: int, t: int, g: int) -> b
     )
 
 
-def _squeezed_candidate_diagnostic(candidate: dict[str, int]) -> dict[str, Any]:
+def squeezed_candidate_original_row_three_obstructions(
+    F: int, X: int, t: int, prime_limit: int
+) -> list[int]:
+    if F < 0 or X < 0 or t < 0 or prime_limit < 0:
+        raise ValueError("F, X, t, and prime_limit must be nonnegative")
+    n = F * X
+    j = F * t
+    return criterion_obstruction_primes(n, 3, j, primes=primes_upto(prime_limit))
+
+
+def _squeezed_candidate_diagnostic(
+    candidate: dict[str, int],
+    original_obstruction_prime_limit: int | None = None,
+) -> dict[str, Any]:
     F = candidate["F"]
     X = candidate["X"]
     t = candidate["t"]
@@ -155,7 +170,7 @@ def _squeezed_candidate_diagnostic(candidate: dict[str, int]) -> dict[str, Any]:
     gap = X - 2 * t
     half_row_value = g * gap
     half_row_remainder = half_row_value % half_row
-    return {
+    diagnostic = {
         **candidate,
         "half_row": half_row,
         "gap": gap,
@@ -164,6 +179,20 @@ def _squeezed_candidate_diagnostic(candidate: dict[str, int]) -> dict[str, Any]:
         "half_row_gcd": math.gcd(half_row_value, half_row),
         "survives_half_row": half_row_remainder == 0,
     }
+    if original_obstruction_prime_limit is not None:
+        obstructions = squeezed_candidate_original_row_three_obstructions(
+            F, X, t, original_obstruction_prime_limit
+        )
+        diagnostic.update(
+            {
+                "original_n": F * X,
+                "original_j": F * t,
+                "original_obstruction_prime_limit": original_obstruction_prime_limit,
+                "original_row_three_obstruction_primes": obstructions,
+                "original_row_three_has_obstruction": bool(obstructions),
+            }
+        )
+    return diagnostic
 
 
 def _squeezed_candidate_summary(
@@ -222,9 +251,12 @@ def scan_squeezed_normalized_case_i_kernel(
     include_candidates: bool = False,
     include_candidate_diagnostics: bool = False,
     include_candidate_summary: bool = False,
+    original_obstruction_prime_limit: int | None = None,
 ) -> dict[str, Any]:
     if max_f < 0 or max_x < 0:
         raise ValueError("max_f and max_x must be nonnegative")
+    if original_obstruction_prime_limit is not None and original_obstruction_prime_limit < 0:
+        raise ValueError("original_obstruction_prime_limit must be nonnegative")
     candidates: list[dict[str, int]] = []
     survivors: list[dict[str, int]] = []
     for F in range(3, max_f + 1, 2):
@@ -250,7 +282,8 @@ def scan_squeezed_normalized_case_i_kernel(
         result["candidates"] = candidates
     if include_candidate_diagnostics or include_candidate_summary:
         candidate_diagnostics = [
-            _squeezed_candidate_diagnostic(candidate) for candidate in candidates
+            _squeezed_candidate_diagnostic(candidate, original_obstruction_prime_limit)
+            for candidate in candidates
         ]
         if include_candidate_diagnostics:
             result["candidate_diagnostics"] = candidate_diagnostics
@@ -619,6 +652,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--include-row-one-splits", action="store_true")
     parser.add_argument("--include-row-one-split-summary", action="store_true")
     parser.add_argument("--include-quotient-gap-summary", action="store_true")
+    parser.add_argument("--original-obstruction-prime-limit", type=int)
     args = parser.parse_args(argv)
     if args.case_i_power_two:
         if args.max_exponent is None:
@@ -642,6 +676,7 @@ def main(argv: list[str] | None = None) -> int:
             include_candidates=args.include_candidates,
             include_candidate_diagnostics=args.include_candidate_diagnostics,
             include_candidate_summary=args.include_candidate_summary,
+            original_obstruction_prime_limit=args.original_obstruction_prime_limit,
         )
     else:
         if args.n1 is None or args.n2 is None or args.bound is None:

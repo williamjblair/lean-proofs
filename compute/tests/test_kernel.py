@@ -14,6 +14,7 @@ from compute.kernel import (
     prime_power_factorization,
     scan_case_i_power_two_kernel,
     scan_kernel_crt,
+    squeezed_candidate_original_row_three_obstructions,
 )
 
 
@@ -615,6 +616,13 @@ def test_squeezed_normalized_predicate_has_positive_row_counterexample() -> None
     assert squeezed_normalized_case_i_kernel_holds(F, X, u, g)
 
 
+def test_squeezed_candidate_original_row_three_obstructions_find_digit_kill() -> None:
+    F, X, u = 3, 432184014644, 186954166997
+    assert squeezed_candidate_original_row_three_obstructions(F, X, u, 3) == []
+    assert squeezed_candidate_original_row_three_obstructions(F, X, u, 5) == [5]
+    assert squeezed_candidate_original_row_three_obstructions(F, X, u, 11) == [5, 11]
+
+
 def test_squeezed_discriminant_generator_finds_row_one_candidates() -> None:
     assert squeezed_row_one_candidates_discriminant(3, 48) == [
         {"F": 3, "X": 48, "t": 22, "g": 4}
@@ -774,6 +782,34 @@ def test_squeezed_normalized_scan_can_include_candidate_diagnostics() -> None:
     ]
 
 
+def test_squeezed_normalized_scan_can_include_original_obstruction_diagnostics() -> None:
+    result = scan_squeezed_normalized_case_i_kernel(
+        max_f=3,
+        max_x=48,
+        include_candidate_diagnostics=True,
+        original_obstruction_prime_limit=11,
+    )
+    assert result["candidate_diagnostics"] == [
+        {
+            "F": 3,
+            "X": 48,
+            "t": 22,
+            "g": 4,
+            "half_row": 71,
+            "gap": 4,
+            "half_row_value": 16,
+            "half_row_remainder": 16,
+            "half_row_gcd": 1,
+            "survives_half_row": False,
+            "original_n": 144,
+            "original_j": 66,
+            "original_obstruction_prime_limit": 11,
+            "original_row_three_obstruction_primes": [3, 11],
+            "original_row_three_has_obstruction": True,
+        }
+    ]
+
+
 def test_squeezed_normalized_scan_can_include_half_row_summary() -> None:
     result = scan_squeezed_normalized_case_i_kernel(
         max_f=9,
@@ -835,3 +871,30 @@ def test_kernel_cli_can_include_squeezed_candidate_summary() -> None:
         {"half_row_gcd": 1, "count": 6},
         {"half_row_gcd": 3, "count": 1},
     ]
+
+
+def test_kernel_cli_can_include_squeezed_original_obstruction_diagnostics() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--squeezed-normalized-case-i",
+            "--max-f",
+            "3",
+            "--max-x",
+            "48",
+            "--include-candidate-diagnostics",
+            "--original-obstruction-prime-limit",
+            "11",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["candidate_diagnostics"][0]["original_n"] == 144
+    assert payload["candidate_diagnostics"][0]["original_j"] == 66
+    assert payload["candidate_diagnostics"][0][
+        "original_row_three_obstruction_primes"
+    ] == [3, 11]

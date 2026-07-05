@@ -26,6 +26,18 @@
   emptiness of `squeezedNormalizedCaseIKernel` is false and must not be used
   as a kernel attack target without additional original-problem digit
   constraints.
+- [E] Added an exact C1-style diagnostic that puts the original row-3 Lucas
+  obstruction filter back on top of factorized normalized points:
+  `compute.kernel.squeezed_candidate_original_row_three_obstructions(F, X, t,
+  prime_limit)` checks primes `3 ≤ p ≤ prime_limit` for the original point
+  `n = F * X`, `j = F * t`. For the positive normalized survivor above,
+  `python3 -c 'from compute.kernel import squeezed_candidate_original_row_three_obstructions as f; print(f(3, 432184014644, 186954166997, 11))'`
+  returns `[5, 11]`. The squeezed-normalized scanner also accepts
+  `--original-obstruction-prime-limit`; reproduce a small diagnostic with
+  `python3 -m compute.kernel --squeezed-normalized-case-i --max-f 3 --max-x 48 --include-candidate-diagnostics --original-obstruction-prime-limit 11`,
+  which reports original row-3 obstruction primes `[3, 11]` for the single
+  row-one candidate. This is exact finite-prime-cap evidence and tooling, not
+  a proof that every normalized survivor is killed by digit constraints.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.
