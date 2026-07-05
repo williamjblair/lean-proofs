@@ -4444,6 +4444,151 @@ theorem powerTwoSplit_gcd_dvd_iff_reduced_divisor
   dsimp
   exact dvd_mul_iff_div_gcd_dvd (powerTwoSplit_half_row_pos hA4 hBge hApos)
 
+/-- The two split identities force the part of the half-row modulus contained
+in `alpha` to be exactly the part contained in `gcd alpha beta`. The key
+point is that a common divisor of `alpha` and `M` divides `B * beta * m` by
+the half-row identity, while `alpha * beta + 1 = B^2 * l * m` makes it
+coprime to `B * m`. -/
+theorem gcd_alpha_half_row_eq_gcd_gcd_of_identities {M B l m alpha beta : ℕ}
+    (hhalf : 2 * M = 2 * (alpha * beta) + B * (alpha * l + beta * m))
+    (hab : alpha * beta + 1 = B * B * (l * m)) :
+    Nat.gcd alpha M = Nat.gcd (Nat.gcd alpha beta) M := by
+  let d := Nat.gcd alpha M
+  have hdalpha : d ∣ alpha := Nat.gcd_dvd_left alpha M
+  have hdM : d ∣ M := Nat.gcd_dvd_right alpha M
+  have hdcoprime : d.Coprime (B * m) := by
+    rw [Nat.coprime_iff_gcd_eq_one]
+    let e := Nat.gcd d (B * m)
+    apply Nat.eq_one_of_dvd_one
+    have hed : e ∣ d := Nat.gcd_dvd_left d (B * m)
+    have heBm : e ∣ B * m := Nat.gcd_dvd_right d (B * m)
+    have healpha : e ∣ alpha := Nat.dvd_trans hed hdalpha
+    have healphabeta : e ∣ alpha * beta := dvd_mul_of_dvd_left healpha beta
+    have heRhs0 : e ∣ (B * m) * (B * l) := dvd_mul_of_dvd_left heBm (B * l)
+    have heRhs : e ∣ B * B * (l * m) := by
+      convert heRhs0 using 1
+      ring
+    have heSucc : e ∣ alpha * beta + 1 := by
+      rw [hab]
+      exact heRhs
+    have hone : e ∣ (alpha * beta + 1) - alpha * beta :=
+      Nat.dvd_sub heSucc healphabeta
+    simpa using hone
+  have hdbeta : d ∣ beta := by
+    have hd_twoM : d ∣ 2 * M := dvd_mul_of_dvd_right hdM 2
+    have hd_rhs : d ∣ 2 * (alpha * beta) + B * (alpha * l + beta * m) := by
+      rw [← hhalf]
+      exact hd_twoM
+    have hd_alphabeta : d ∣ alpha * beta := dvd_mul_of_dvd_left hdalpha beta
+    have hd_two_alphabeta : d ∣ 2 * (alpha * beta) :=
+      dvd_mul_of_dvd_right hd_alphabeta 2
+    have hd_rest : d ∣ B * (alpha * l + beta * m) :=
+      (Nat.dvd_add_iff_right hd_two_alphabeta).mpr hd_rhs
+    have hd_alpha_l : d ∣ alpha * l := dvd_mul_of_dvd_left hdalpha l
+    have hd_B_alpha_l : d ∣ B * (alpha * l) :=
+      dvd_mul_of_dvd_right hd_alpha_l B
+    have hd_rest' : d ∣ B * (alpha * l) + B * (beta * m) := by
+      convert hd_rest using 1
+      ring
+    have hd_B_beta_m : d ∣ B * (beta * m) :=
+      (Nat.dvd_add_iff_right hd_B_alpha_l).mpr hd_rest'
+    have hd_Bm_beta : d ∣ (B * m) * beta := by
+      convert hd_B_beta_m using 1
+      ring
+    exact hdcoprime.dvd_of_dvd_mul_left hd_Bm_beta
+  apply Nat.dvd_antisymm
+  · apply Nat.dvd_gcd
+    · exact Nat.dvd_gcd hdalpha hdbeta
+    · exact hdM
+  · apply Nat.dvd_gcd
+    · exact Nat.dvd_trans
+        (Nat.gcd_dvd_left (Nat.gcd alpha beta) M)
+        (Nat.gcd_dvd_left alpha beta)
+    · exact Nat.gcd_dvd_right (Nat.gcd alpha beta) M
+
+/-- Under the split identities, row-two divisibility with the `alpha` factor
+is equivalent to row-two divisibility with `gcd alpha beta`. -/
+theorem alpha_mul_dvd_iff_gcd_mul_dvd_of_split_identities
+    {M B l m alpha beta : ℕ}
+    (hMpos : 0 < M)
+    (hhalf : 2 * M = 2 * (alpha * beta) + B * (alpha * l + beta * m))
+    (hab : alpha * beta + 1 = B * B * (l * m)) :
+    M ∣ (l * m) * alpha ↔ M ∣ Nat.gcd alpha beta * (l * m) := by
+  have hgcd : Nat.gcd alpha M = Nat.gcd (Nat.gcd alpha beta) M :=
+    gcd_alpha_half_row_eq_gcd_gcd_of_identities hhalf hab
+  have hleft : M ∣ alpha * (l * m) ↔ M / Nat.gcd alpha M ∣ l * m :=
+    dvd_mul_iff_div_gcd_dvd hMpos
+  have hright :
+      M ∣ Nat.gcd alpha beta * (l * m) ↔
+        M / Nat.gcd (Nat.gcd alpha beta) M ∣ l * m :=
+    dvd_mul_iff_div_gcd_dvd hMpos
+  constructor
+  · intro h
+    have h_alpha : M ∣ alpha * (l * m) := by
+      convert h using 1
+      ring
+    exact hright.mpr (by
+      simpa [hgcd] using hleft.mp h_alpha)
+  · intro h
+    have hred := hright.mp h
+    have h_alpha : M ∣ alpha * (l * m) :=
+      hleft.mpr (by simpa [hgcd] using hred)
+    convert h_alpha using 1
+    ring
+
+/-- Subtractive split specialization of the alpha-to-gcd row-two bridge. -/
+theorem powerTwoSplitSubtractive_row_two_alpha_dvd_iff_gcd_dvd
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    B * (A / 2) - 1 ∣ (l * m) * alpha ↔
+      B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m) := by
+  have hApos : 0 < A := by
+    rw [← hA]
+    positivity
+  have hA2 : 2 ∣ A := dvd_trans (by decide : 2 ∣ 4) hA4
+  have hMpos : 0 < B * (A / 2) - 1 :=
+    powerTwoSplit_half_row_pos hA4 hBge hApos
+  have hhalf :
+      2 * (B * (A / 2) - 1) =
+        2 * (alpha * beta) + B * (alpha * l + beta * m) :=
+    powerTwoSplitSubtractive_half_row_alpha_beta_identity hA2 hBge hrpos
+      hspos hlpos hmpos hD hA halpha hbeta
+  have hab : alpha * beta + 1 = B * B * (l * m) :=
+    powerTwoSplitSubtractive_alpha_beta_mul hBge hrpos hspos hlpos hmpos hD
+      hA halpha hbeta
+  exact alpha_mul_dvd_iff_gcd_mul_dvd_of_split_identities hMpos hhalf hab
+
+/-- Complete split row-two bridge: the delta divisibility appearing directly
+from the quotient kernel is equivalent to the split/gcd obstruction divisor. -/
+theorem powerTwoSplitSubtractive_row_two_delta_dvd_iff_gcd_dvd
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hgap : r * l < s * m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    B * (A / 2) - 1 ∣ (l * m) * (s * m - r * l) ↔
+      B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m) :=
+  (powerTwoSplitSubtractive_row_two_delta_dvd_iff_alpha_dvd hA4 hBge hrpos
+    hspos hlpos hmpos hgap hD hA halpha).trans
+    (powerTwoSplitSubtractive_row_two_alpha_dvd_iff_gcd_dvd hA4 hBge hrpos
+      hspos hlpos hmpos hD hA halpha hbeta)
+
 /-- The row-one equation in the pure power-two quotient kernel forces the
 right half of the canonical divisor split:
 `(B * A - 1) / gcd (B * A - 1) v` divides `A - v`. -/
@@ -4579,6 +4724,38 @@ theorem powerTwoQuotientKernel.exists_row_one_split_with_row_two {A B v h : ℕ}
     ⟨r, s, l, m, hrpos, hspos, hlpos, hmpos, hD, hv, hAv, hsum, hgap, hh⟩
   exact ⟨r, s, l, m, hrpos, hspos, hlpos, hmpos, hD, hv, hAv, hsum, hgap, hh,
     powerTwoQuotientKernel.row_two_split_dvd hkernel hv hAv hh⟩
+
+/-- Conditional consumer for the split/gcd obstruction: once
+`powerTwoSplitGcdObstruction A B` is supplied, the pure power-two quotient
+kernel is empty for that `A, B`. This does not prove the obstruction itself;
+it proves that the current split/gcd target is exactly strong enough to kill
+the quotient kernel. -/
+theorem powerTwoQuotientKernel.not_of_splitGcdObstruction {A B v h : ℕ}
+    (hobs : powerTwoSplitGcdObstruction A B) :
+    ¬ powerTwoQuotientKernel A B v h := by
+  intro hkernel
+  rcases hkernel with
+    ⟨hA4, hApow, hBodd, hBge, hvpos, hgap_kernel, hrow, hhalf⟩
+  let hkernel' : powerTwoQuotientKernel A B v h :=
+    ⟨hA4, hApow, hBodd, hBge, hvpos, hgap_kernel, hrow, hhalf⟩
+  rcases powerTwoQuotientKernel.exists_row_one_split_with_row_two hkernel' with
+    ⟨r, s, l, m, hrpos, hspos, hlpos, hmpos, hD, _hv, _hAv, hsum, hgap,
+      _hh, hrowtwo⟩
+  let alpha := r - B * m
+  let beta := s - B * l
+  have hrowtwo_gcd :
+      B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m) := by
+    exact
+      (powerTwoSplitSubtractive_row_two_delta_dvd_iff_gcd_dvd
+        (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+        (alpha := alpha) (beta := beta) hA4 hBge hrpos hspos hlpos hmpos
+        hgap hD hsum rfl rfl).mp hrowtwo
+  exact
+    (powerTwoSplitGcdObstruction.not_dvd
+      (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+      (alpha := alpha) (beta := beta) (c := Nat.gcd alpha beta)
+      hobs hApow hA4 hBodd hBge hrpos hspos hlpos hmpos hD hsum hgap
+      rfl rfl rfl) hrowtwo_gcd
 
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure

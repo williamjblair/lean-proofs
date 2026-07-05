@@ -34,6 +34,11 @@ namespace Erdos699
 #check dvd_mul_iff_div_gcd_dvd
 #check powerTwoSplit_half_row_pos
 #check powerTwoSplit_gcd_dvd_iff_reduced_divisor
+#check gcd_alpha_half_row_eq_gcd_gcd_of_identities
+#check alpha_mul_dvd_iff_gcd_mul_dvd_of_split_identities
+#check powerTwoSplitSubtractive_row_two_alpha_dvd_iff_gcd_dvd
+#check powerTwoSplitSubtractive_row_two_delta_dvd_iff_gcd_dvd
+#check powerTwoQuotientKernel.not_of_splitGcdObstruction
 #check dvd_div_gcd_of_dvd_mul
 #check powerTwoQuotientKernel.row_one_split_right_dvd
 #check powerTwoQuotientKernel.exists_row_one_split

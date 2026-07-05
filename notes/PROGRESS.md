@@ -152,7 +152,7 @@
   `0 < m`, `r * s = B * A - 1`, `v = r * l`, `A - v = s * m`,
   `r * l + s * m = A`, `r * l < s * m`, and `h = l * m`. This proves the
   row-one split part of the conditional Task A bridge; the half-row reduction
-  to `B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m)` remains open.
+  to `B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m)` is closed below.
 - [R] Proved the first half-row split bridge for the pure quotient kernel.
   `Erdos699.powerTwoQuotientKernel.row_two_split_dvd` rewrites the kernel
   half-row divisor through split equations `v = r * l`, `A - v = s * m`, and
@@ -162,7 +162,7 @@
   combines the canonical positive row-one split with this split-form row-two
   divisibility. This is still short of the needed alpha/beta/gcd reduction to
   `B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m)`, and does not prove
-  Task A.
+  Task A; the exact alpha/beta/gcd reduction is closed below.
 - [R] Proved the subtractive alpha/beta non-truncation bridge for positive
   row-one splits. The integer identities
   `Erdos699.powerTwoSplit_alpha_int_identity` and
@@ -206,7 +206,8 @@
   the concrete bridge
   `B * (A / 2) - 1 ∣ (l * m) * (s * m - r * l) ↔
   B * (A / 2) - 1 ∣ (l * m) * alpha`. The remaining unproved step is the
-  alpha-to-`Nat.gcd alpha beta` reduction, and then the final obstruction.
+  final split/gcd obstruction; the alpha-to-`Nat.gcd alpha beta` reduction is
+  closed below.
 - [R] Refuted the proposed auxiliary bound
   `Nat.gcd (Nat.gcd alpha beta) M ≤ B * B` as a possible final obstruction.
   `Erdos699.powerTwoSplit_gcd_bound_counterexample_not_row_two_survival`
@@ -217,8 +218,7 @@
   theorem proves this is not row-two survival:
   `M ∤ Nat.gcd alpha beta * (l * m)` and `l * m < M / d`. The surviving
   exact obstruction is therefore the reduced-divisor condition
-  `M / d ∤ l * m`, equivalently `M ∤ Nat.gcd alpha beta * (l * m)` once the
-  alpha-to-gcd reduction is proved.
+  `M / d ∤ l * m`, equivalently `M ∤ Nat.gcd alpha beta * (l * m)`.
 - [R] Formalized the reduced-divisor cancellation replacing the false
   `d ≤ B * B` target. The generic theorem
   `Erdos699.dvd_mul_iff_div_gcd_dvd` proves, for `0 < M`, the exact
@@ -227,10 +227,27 @@
   positive from `4 ∣ A`, `3 ≤ B`, and `0 < A`, and
   `Erdos699.powerTwoSplit_gcd_dvd_iff_reduced_divisor` specializes the
   cancellation to `c = Nat.gcd alpha beta`, `M = B * (A / 2) - 1`, and
-  `L = l * m`. Thus, after the still-open alpha-to-gcd reduction, row-two
-  survival is exactly the reduced-divisor divisibility
+  `L = l * m`. Together with the alpha-to-gcd bridge below, row-two survival
+  is exactly the reduced-divisor divisibility
   `(B * (A / 2) - 1) / Nat.gcd (Nat.gcd alpha beta) (B * (A / 2) - 1) ∣
   l * m`.
+- [R] Closed the alpha-to-gcd half-row bridge and the conditional Task A
+  consumer. The generic theorem
+  `Erdos699.gcd_alpha_half_row_eq_gcd_gcd_of_identities` proves from
+  `2 * M = 2 * (alpha * beta) + B * (alpha * l + beta * m)` and
+  `alpha * beta + 1 = B * B * (l * m)` that
+  `Nat.gcd alpha M = Nat.gcd (Nat.gcd alpha beta) M`. Consequently,
+  `Erdos699.alpha_mul_dvd_iff_gcd_mul_dvd_of_split_identities` proves
+  `M ∣ (l * m) * alpha ↔ M ∣ Nat.gcd alpha beta * (l * m)`.
+  The split-specialized theorem
+  `Erdos699.powerTwoSplitSubtractive_row_two_delta_dvd_iff_gcd_dvd` now
+  rewrites the quotient-kernel row-two divisor directly into the split/gcd
+  obstruction divisor, and
+  `Erdos699.powerTwoQuotientKernel.not_of_splitGcdObstruction` proves that
+  `powerTwoSplitGcdObstruction A B` rules out every
+  `powerTwoQuotientKernel A B v h`. This does not prove the obstruction
+  itself; it closes the exact formal bridge from the pure quotient kernel to
+  the remaining split/gcd obstruction.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under
