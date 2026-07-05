@@ -3,6 +3,7 @@
 import Mathlib.Data.Nat.Choose.Factorization
 import Mathlib.Data.Nat.Choose.Lucas
 import Mathlib.Data.Nat.Digits.Lemmas
+import Mathlib.Tactic.NormNum.Prime
 
 namespace Erdos699
 
@@ -941,6 +942,13 @@ theorem not_exists_kernelInRange_6143_3071_4_6144_of_prime
     (hp : Nat.Prime 6143) :
     ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 6143 3071 4 6144 t :=
   not_exists_kernelInRange_of_prime_row_one_short hp (by norm_num) (by norm_num)
+
+theorem prime_6143 : Nat.Prime 6143 := by
+  norm_num
+
+theorem not_exists_kernelInRange_6143_3071_4_6144 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 6143 3071 4 6144 t :=
+  not_exists_kernelInRange_6143_3071_4_6144_of_prime prime_6143
 
 theorem not_exists_kernelInRange_95_47_4_96 :
     ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 95 47 4 96 t := by
@@ -2661,6 +2669,24 @@ theorem i_three_caseI_96_exists_common_from_row_bounds {j : ℕ}
     i_three_caseI_exists_common_from_kernelInRange_empty
       (n := 96) (j := j)
       (by simpa using not_exists_kernelInRange_95_47_4_96)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_6144_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 6144) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 6144 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 6144) (j := j)
+      (by simpa using not_exists_kernelInRange_6143_3071_4_6144)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_6144_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 6144) :
+    ∃ q : ℕ, commonPrimeDivisor 6144 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 6144) (j := j)
+      (by simpa using not_exists_kernelInRange_6143_3071_4_6144)
       (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
 
 theorem i_three_caseI_768_not_no_common_from_row_bounds {j : ℕ}

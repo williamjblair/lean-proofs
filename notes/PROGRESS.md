@@ -706,16 +706,20 @@
   `Erdos699.not_exists_kernelInRange_of_prime_row_one_short` proves that if
   `N1` is prime, `2 ≤ minT`, and `bound < 2 * (N1 - 1)`, then the
   lower-bounded kernel `consecutiveDivisorKernelInRange N1 N2 minT bound` is
-  empty. The conditional instance
-  `Erdos699.not_exists_kernelInRange_6143_3071_4_6144_of_prime` applies this
-  to the `A = 11`, `n = 3 * 2^11` Case-I numbers, under the explicit
-  hypothesis `Nat.Prime 6143`. The exact compute command
+  empty. The Lean theorem `Erdos699.prime_6143` certifies `Nat.Prime 6143`
+  via Mathlib's `norm_num` prime certificate, and
+  `Erdos699.not_exists_kernelInRange_6143_3071_4_6144` applies the consumer
+  to the `A = 11`, `n = 3 * 2^11` Case-I numbers. The surface wrappers
+  `Erdos699.i_three_caseI_6144_not_no_common_from_row_bounds` and
+  `Erdos699.i_three_caseI_6144_exists_common_from_row_bounds` give the
+  original row-3 common-prime conclusion for every `j` with `3 < j` and
+  `2 * j ≤ 6144`. The exact compute command
   `python3 -m compute.kernel --n1 6143 --n2 3071 --bound 6144 --min-t 4 --include-row-one-candidates --include-row-one-splits --include-quotient-gap-summary`
   reports `row_one_candidates = []`, `survivor_count = 0`, and
-  `all_strict_lt_n2 = True`. This banks the short-prime-modulus logic but
-  does not yet bank a Lean primality certificate for `6143`.
+  `all_strict_lt_n2 = True`. This is an end-to-end Lean-certified finite
+  instance, not a general Case-I theorem.
 - [R]/[E] Connected finite lower-bounded certificates back to the original
-  problem surface for five `n = 3 * 2^A` Case-I members. For `A = 5`,
+  problem surface for six `n = 3 * 2^A` Case-I members. For `A = 5`,
   `Erdos699.i_three_caseI_96_not_no_common_from_row_bounds` rules out the
   no-common-prime counterexample criterion for every `j` with `3 < j` and
   `2 * j ≤ 96`, and
@@ -737,7 +741,13 @@
   split over `37` and `83`, and
   `Erdos699.i_three_caseI_3072_exists_common_from_row_bounds` gives the
   analogous common-prime witness statement for every `j` with `3 < j` and
-  `2 * j ≤ 3072`. For `A = 12`,
+  `2 * j ≤ 3072`. For `A = 11`,
+  `Erdos699.not_exists_kernelInRange_6143_3071_4_6144` proves the exact
+  lower-bounded kernel certificate with empty row-one list, using
+  `Erdos699.prime_6143` and the short-prime-modulus consumer, and
+  `Erdos699.i_three_caseI_6144_exists_common_from_row_bounds` gives the
+  analogous common-prime witness statement for every `j` with `3 < j` and
+  `2 * j ≤ 6144`. For `A = 12`,
   `Erdos699.not_exists_kernelInRange_12287_6143_4_12288` proves the exact
   lower-bounded kernel certificate with row-one list `[2234]`, using a
   modular split over `11` and `1117`, and
