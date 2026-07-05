@@ -7,5 +7,8 @@ namespace Erdos699
 #check squeezedNormalizedCaseIKernel
 #check i_three_caseI_four_dvd_odd_factor_squeezedNormalized_from_row_bound
 #check i_three_caseI_four_dvd_odd_factor_false_of_no_squeezedNormalized
+#check squeezedNormalized_gap_pos
+#check squeezedNormalized_gap_sq_eq_sq
+#check squeezedNormalized_discriminant_eq_gap_sq
 
 end Erdos699

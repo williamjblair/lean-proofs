@@ -3197,6 +3197,29 @@ def squeezedNormalizedCaseIKernel (F X t g : ℕ) : Prop :=
                     t * (X - t) = g * (F * X - 1) ∧
                       F * X / 2 - 1 ∣ g * (X - 2 * t)
 
+theorem squeezedNormalized_gap_pos {F X t g : ℕ}
+    (h : squeezedNormalizedCaseIKernel F X t g) :
+    0 < X - 2 * t := by
+  rcases h with
+    ⟨_hF_pos, _hX_pos, _ht_pos, _hFodd, _h4X, _hF_ge, h2t_lt, _h4F, _h2F2,
+      _hrow, _hhalf⟩
+  omega
+
+theorem squeezedNormalized_gap_sq_eq_sq {F X t g : ℕ}
+    (h : squeezedNormalizedCaseIKernel F X t g) :
+    4 * (g * (F * X - 1)) + (X - 2 * t) * (X - 2 * t) = X * X := by
+  rcases h with
+    ⟨_hF_pos, _hX_pos, _ht_pos, _hFodd, _h4X, _hF_ge, h2t_lt, _h4F, _h2F2,
+      hrow, _hhalf⟩
+  exact row_one_factor_gap_sq_eq_sq (n := F * X) (X := X) (t := t) (g := g)
+    (by omega : 2 * t ≤ X) hrow
+
+theorem squeezedNormalized_discriminant_eq_gap_sq {F X t g : ℕ}
+    (h : squeezedNormalizedCaseIKernel F X t g) :
+    X * X - 4 * (g * (F * X - 1)) = (X - 2 * t) * (X - 2 * t) := by
+  have hsq := squeezedNormalized_gap_sq_eq_sq h
+  omega
+
 theorem i_three_caseI_four_dvd_odd_factor_squeezedNormalized_from_row_bound
     {n F X j t : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)

@@ -298,6 +298,14 @@
   `Erdos699.i_three_caseI_four_dvd_odd_factor_false_of_no_squeezedNormalized`
   is the conditional kill wrapper if the squeezed kernel is proved empty.
   This names the missing lemma target; it is not an emptiness proof.
+- [R] Proved the squeezed normalized Pell/discriminant package:
+  `Erdos699.squeezedNormalized_gap_pos` extracts `0 < X - 2 * t` from the
+  strict noncentral branch, `Erdos699.squeezedNormalized_gap_sq_eq_sq`
+  specializes the row-one factor identity to
+  `4 * (g * (F * X - 1)) + (X - 2 * t)^2 = X^2`, and
+  `Erdos699.squeezedNormalized_discriminant_eq_gap_sq` gives the C4-ready
+  form `X^2 - 4 * g * (F * X - 1) = (X - 2 * t)^2`. This is exact algebra
+  for the Pell/discriminant lane, not a squeezed-kernel emptiness proof.
 - [E] Added an exact bounded scanner for the squeezed normalized Case-I kernel:
   `compute.kernel.scan_squeezed_normalized_case_i_kernel` enumerates odd
   `F ≥ 3`, `4 ∣ X`, `4 * F ≤ X`, `2 * F^2 ≤ X`, row-one factor candidates
