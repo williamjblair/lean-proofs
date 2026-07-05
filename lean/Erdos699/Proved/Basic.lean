@@ -153,6 +153,24 @@ theorem prime_dvd_choose_of_units_digit_lt {n k p : ℕ} (hp : p.Prime)
 def commonPrimeDivisor (n i j p : ℕ) : Prop :=
   p.Prime ∧ i ≤ p ∧ p ∣ Nat.choose n i ∧ p ∣ Nat.choose n j
 
+theorem not_dominated_of_digit_lt {n k p r : ℕ} (hp : 2 ≤ p)
+    (hbad : digit n p r < digit k p r) :
+    ¬ dominated k n p := by
+  intro hdom
+  have hdigits := (dominated_iff_forall_digits hp).mp hdom r
+  omega
+
+theorem commonPrimeDivisor_of_digit_failures {n i j p ri rj : ℕ}
+    (hp : p.Prime) (hip : i ≤ p)
+    (hi_bad : digit n p ri < digit i p ri)
+    (hj_bad : digit n p rj < digit j p rj) :
+    commonPrimeDivisor n i j p := by
+  refine ⟨hp, hip, ?_, ?_⟩
+  · exact prime_dvd_choose_of_not_dominated hp
+      (not_dominated_of_digit_lt hp.two_le hi_bad)
+  · exact prime_dvd_choose_of_not_dominated hp
+      (not_dominated_of_digit_lt hp.two_le hj_bad)
+
 /-- The consecutive-divisor kernel: two fixed divisors packed into products of
 one, then two, consecutive gaps from `t`. -/
 def consecutiveDivisorKernel (N1 N2 t : ℕ) : Prop :=
@@ -3586,6 +3604,13 @@ theorem squeezedNormalizedCounterexample_commonPrimeDivisor_five :
     intro hdom
     have hdigits := (dominated_iff_forall_digits (by norm_num : 2 ≤ 5)).mp hdom 1
     norm_num [digit] at hdigits
+
+theorem squeezedNormalizedCounterexample_commonPrimeDivisor_eleven :
+    commonPrimeDivisor 1296552043932 3 560862500991 11 := by
+  exact commonPrimeDivisor_of_digit_failures
+    (n := 1296552043932) (i := 3) (j := 560862500991)
+    (p := 11) (ri := 0) (rj := 1)
+    (by decide) (by norm_num) (by norm_num [digit]) (by norm_num [digit])
 
 theorem squeezedNormalizedCounterexample_exists_commonPrimeDivisor :
     ∃ p : ℕ, commonPrimeDivisor 1296552043932 3 560862500991 p :=

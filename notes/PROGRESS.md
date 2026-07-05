@@ -61,6 +61,15 @@
   the failures `i` at level `0` with digits `3 > 2` and `j` at level `1`
   with digits `10 > 2`. This is finite-cap diagnostic evidence, not a global
   digit-forcing theorem.
+- [R] Proved the Lean digit-failure bridge
+  `Erdos699.not_dominated_of_digit_lt` and
+  `Erdos699.commonPrimeDivisor_of_digit_failures`: a certified pair of digit
+  inequalities for rows `i` and `j`, at a prime `p ≥ i`, yields
+  `commonPrimeDivisor n i j p` through the Lucas bridge. Added
+  `Erdos699.squeezedNormalizedCounterexample_commonPrimeDivisor_eleven`, the
+  `p = 11` Lean certificate for the positive squeezed-normalized survivor,
+  complementing the existing `p = 5` certificate. This is a proof-shaped
+  bridge for finite digit witnesses, not a global normalized-kernel theorem.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.
