@@ -313,5 +313,12 @@
   exponents `2..12`, reports `5` total row-one candidates, and `0` kernel
   survivors. This is exact finite evidence for the C2 lane, not a kernel
   emptiness proof.
+- [E] Replaced the kernel enumerator's trial-division factorization with
+  deterministic 64-bit Miller-Rabin plus Pollard-Rho splitting, keeping exact
+  integer arithmetic throughout. The command
+  `python3 -m compute.kernel --case-i-power-two --min-exponent 60 --max-exponent 60`
+  now scans the Case-I family member `n = 3 * 2^60` locally and reports
+  `1` row-one candidate and `0` kernel survivors. This is exact finite
+  evidence for the C2 lane, not a proof that the kernel is empty.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

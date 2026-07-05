@@ -2,6 +2,8 @@ import json
 import subprocess
 import sys
 
+import pytest
+
 from compute.kernel import (
     consecutive_kernel_holds,
     kernel_survivors_bruteforce,
@@ -11,10 +13,39 @@ from compute.kernel import (
 )
 
 
+def _factorization_product(factors: list[tuple[int, int]]) -> int:
+    product = 1
+    for _prime, prime_power in factors:
+        product *= prime_power
+    return product
+
+
 def test_prime_power_factorization_exact() -> None:
     assert prime_power_factorization(1) == []
     assert prime_power_factorization(72) == [(2, 8), (3, 9)]
     assert prime_power_factorization(325) == [(5, 25), (13, 13)]
+
+
+def test_prime_power_factorization_handles_large_semiprime() -> None:
+    n = 1_000_000_007 * 1_000_000_009
+    factors = prime_power_factorization(n)
+    assert factors == [
+        (1_000_000_007, 1_000_000_007),
+        (1_000_000_009, 1_000_000_009),
+    ]
+    assert _factorization_product(factors) == n
+
+
+def test_prime_power_factorization_reconstructs_case_i_exponent_sixty_inputs() -> None:
+    for n in [3 * (2**60) - 1, 3 * (2**59) - 1]:
+        factors = prime_power_factorization(n)
+        assert _factorization_product(factors) == n
+        assert all(prime_power % prime == 0 for prime, prime_power in factors)
+
+
+def test_prime_power_factorization_rejects_outside_deterministic_range() -> None:
+    with pytest.raises(ValueError, match=r"n < 2\^64"):
+        prime_power_factorization(2**64)
 
 
 def test_kernel_predicate_uses_both_rows_and_bound() -> None:
@@ -109,3 +140,13 @@ def test_kernel_cli_can_scan_case_i_power_two_family() -> None:
     assert payload["mode"] == "case_i_power_two_kernel"
     assert payload["max_exponent"] == 5
     assert payload["instances"] == scan_case_i_power_two_kernel(5)["instances"]
+
+
+def test_case_i_power_two_family_scan_reaches_exponent_sixty() -> None:
+    result = scan_case_i_power_two_kernel(60, min_exponent=60)
+    assert result["mode"] == "case_i_power_two_kernel"
+    assert result["min_exponent"] == 60
+    assert result["max_exponent"] == 60
+    assert result["instance_count"] == 1
+    assert result["instances"][0]["exponent"] == 60
+    assert result["instances"][0]["n"] == 3 * (2**60)

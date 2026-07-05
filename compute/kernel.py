@@ -2,25 +2,105 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from typing import Any
+
+
+_MR_BASES_64 = (
+    2,
+    3,
+    5,
+    7,
+    11,
+    13,
+    17,
+    325,
+    9375,
+    28178,
+    450775,
+    9780504,
+    1795265022,
+)
+
+
+def _is_prime(n: int) -> bool:
+    if n < 2:
+        return False
+    small_primes = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
+    for p in small_primes:
+        if n == p:
+            return True
+        if n % p == 0:
+            return False
+    d = n - 1
+    s = 0
+    while d % 2 == 0:
+        s += 1
+        d //= 2
+    for base in _MR_BASES_64:
+        a = base % n
+        if a == 0:
+            continue
+        x = pow(a, d, n)
+        if x == 1 or x == n - 1:
+            continue
+        for _ in range(s - 1):
+            x = pow(x, 2, n)
+            if x == n - 1:
+                break
+        else:
+            return False
+    return True
+
+
+def _pollard_rho_factor(n: int) -> int:
+    if n % 2 == 0:
+        return 2
+    if n % 3 == 0:
+        return 3
+    c = 1
+    while True:
+        x = 2
+        y = 2
+        d = 1
+        while d == 1:
+            x = (x * x + c) % n
+            y = (y * y + c) % n
+            y = (y * y + c) % n
+            d = math.gcd(abs(x - y), n)
+        if d != n:
+            return d
+        c += 1
+
+
+def _collect_prime_factors(n: int, factors: list[int]) -> None:
+    if n == 1:
+        return
+    if _is_prime(n):
+        factors.append(n)
+        return
+    factor = _pollard_rho_factor(n)
+    _collect_prime_factors(factor, factors)
+    _collect_prime_factors(n // factor, factors)
 
 
 def prime_power_factorization(n: int) -> list[tuple[int, int]]:
     if n < 1:
         raise ValueError("n must be positive")
+    if n >= 2**64:
+        raise ValueError("prime_power_factorization currently requires n < 2^64")
+    prime_factors: list[int] = []
+    _collect_prime_factors(n, prime_factors)
+    prime_factors.sort()
     factors: list[tuple[int, int]] = []
-    remaining = n
-    p = 2
-    while p * p <= remaining:
-        if remaining % p == 0:
-            power = 1
-            while remaining % p == 0:
-                power *= p
-                remaining //= p
-            factors.append((p, power))
-        p = 3 if p == 2 else p + 2
-    if remaining > 1:
-        factors.append((remaining, remaining))
+    i = 0
+    while i < len(prime_factors):
+        p = prime_factors[i]
+        power = 1
+        while i < len(prime_factors) and prime_factors[i] == p:
+            power *= p
+            i += 1
+        factors.append((p, power))
     return factors
 
 
