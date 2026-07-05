@@ -157,7 +157,13 @@ def _row_one_residue_classes(n1: int) -> tuple[list[int], int]:
     return classes, modulus
 
 
-def scan_kernel_crt(n1: int, n2: int, bound: int, min_t: int = 0) -> dict[str, Any]:
+def scan_kernel_crt(
+    n1: int,
+    n2: int,
+    bound: int,
+    min_t: int = 0,
+    include_row_one_candidates: bool = False,
+) -> dict[str, Any]:
     if n1 < 1 or n2 < 1:
         raise ValueError("n1 and n2 must be positive")
     if bound < 0 or min_t < 0:
@@ -176,7 +182,7 @@ def scan_kernel_crt(n1: int, n2: int, bound: int, min_t: int = 0) -> dict[str, A
             t += modulus
     row_one_candidates = sorted(set(row_one_candidates))
     survivors = sorted(set(survivors))
-    return {
+    result: dict[str, Any] = {
         "mode": "kernel_crt",
         "algorithm": "row_one_prime_power_crt",
         "n1": n1,
@@ -189,10 +195,16 @@ def scan_kernel_crt(n1: int, n2: int, bound: int, min_t: int = 0) -> dict[str, A
         "survivor_count": len(survivors),
         "survivors": survivors,
     }
+    if include_row_one_candidates:
+        result["row_one_candidates"] = row_one_candidates
+    return result
 
 
 def scan_case_i_power_two_kernel(
-    max_exponent: int, min_exponent: int = 2, min_t: int = 4
+    max_exponent: int,
+    min_exponent: int = 2,
+    min_t: int = 4,
+    include_row_one_candidates: bool = False,
 ) -> dict[str, Any]:
     if min_exponent < 0 or max_exponent < min_exponent:
         raise ValueError("require 0 <= min_exponent <= max_exponent")
@@ -201,7 +213,13 @@ def scan_case_i_power_two_kernel(
     instances: list[dict[str, Any]] = []
     for exponent in range(min_exponent, max_exponent + 1):
         n = 3 * (2**exponent)
-        scan = scan_kernel_crt(n - 1, n // 2 - 1, n, min_t=min_t)
+        scan = scan_kernel_crt(
+            n - 1,
+            n // 2 - 1,
+            n,
+            min_t=min_t,
+            include_row_one_candidates=include_row_one_candidates,
+        )
         instances.append({"exponent": exponent, "n": n, **scan})
     return {
         "mode": "case_i_power_two_kernel",
@@ -229,19 +247,29 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--case-i-power-two", action="store_true")
     parser.add_argument("--min-exponent", type=int, default=2)
     parser.add_argument("--max-exponent", type=int)
+    parser.add_argument("--include-row-one-candidates", action="store_true")
     args = parser.parse_args(argv)
     if args.case_i_power_two:
         if args.max_exponent is None:
             parser.error("--case-i-power-two requires --max-exponent")
         min_t = 4 if args.min_t is None else args.min_t
         result = scan_case_i_power_two_kernel(
-            args.max_exponent, min_exponent=args.min_exponent, min_t=min_t
+            args.max_exponent,
+            min_exponent=args.min_exponent,
+            min_t=min_t,
+            include_row_one_candidates=args.include_row_one_candidates,
         )
     else:
         if args.n1 is None or args.n2 is None or args.bound is None:
             parser.error("scalar scan requires --n1, --n2, and --bound")
         min_t = 0 if args.min_t is None else args.min_t
-        result = scan_kernel_crt(args.n1, args.n2, args.bound, min_t=min_t)
+        result = scan_kernel_crt(
+            args.n1,
+            args.n2,
+            args.bound,
+            min_t=min_t,
+            include_row_one_candidates=args.include_row_one_candidates,
+        )
     print(json.dumps(result, sort_keys=True))
     return 0
 

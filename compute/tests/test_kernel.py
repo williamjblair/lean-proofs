@@ -84,6 +84,33 @@ def test_crt_scan_can_apply_problem_lower_bound() -> None:
     assert not consecutive_kernel_holds(15, 14, 120, 1, min_t=4)
 
 
+def test_crt_scan_can_include_row_one_candidates_on_request() -> None:
+    default_result = scan_kernel_crt(15, 14, 120, min_t=4)
+    result = scan_kernel_crt(
+        15, 14, 120, min_t=4, include_row_one_candidates=True
+    )
+    expected_candidates = [
+        6,
+        10,
+        15,
+        16,
+        21,
+        25,
+        30,
+        31,
+        36,
+        40,
+        45,
+        46,
+        51,
+        55,
+        60,
+    ]
+    assert "row_one_candidates" not in default_result
+    assert result["row_one_candidates"] == expected_candidates
+    assert result["row_one_candidate_count"] == len(expected_candidates)
+
+
 def test_kernel_cli_emits_json() -> None:
     completed = subprocess.run(
         [
@@ -104,6 +131,46 @@ def test_kernel_cli_emits_json() -> None:
     payload = json.loads(completed.stdout)
     assert payload["mode"] == "kernel_crt"
     assert payload["survivors"] == kernel_survivors_bruteforce(15, 14, 120)
+
+
+def test_kernel_cli_can_include_row_one_candidates() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--n1",
+            "15",
+            "--n2",
+            "14",
+            "--bound",
+            "120",
+            "--min-t",
+            "4",
+            "--include-row-one-candidates",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["row_one_candidates"] == [
+        6,
+        10,
+        15,
+        16,
+        21,
+        25,
+        30,
+        31,
+        36,
+        40,
+        45,
+        46,
+        51,
+        55,
+        60,
+    ]
 
 
 def test_case_i_power_two_family_scan_matches_scalar_scans() -> None:
@@ -140,6 +207,14 @@ def test_kernel_cli_can_scan_case_i_power_two_family() -> None:
     assert payload["mode"] == "case_i_power_two_kernel"
     assert payload["max_exponent"] == 5
     assert payload["instances"] == scan_case_i_power_two_kernel(5)["instances"]
+
+
+def test_case_i_power_two_family_scan_can_include_row_one_candidates() -> None:
+    result = scan_case_i_power_two_kernel(
+        5, min_exponent=5, include_row_one_candidates=True
+    )
+    assert result["instances"][0]["row_one_candidates"] == [20]
+    assert result["instances"][0]["row_one_candidate_count"] == 1
 
 
 def test_case_i_power_two_family_scan_reaches_exponent_sixty() -> None:

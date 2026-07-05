@@ -320,5 +320,15 @@
   now scans the Case-I family member `n = 3 * 2^60` locally and reports
   `1` row-one candidate and `0` kernel survivors. This is exact finite
   evidence for the C2 lane, not a proof that the kernel is empty.
+- [E] Added opt-in row-one candidate output to the exact CRT kernel
+  enumerator via `--include-row-one-candidates`, so C2 split survivors can be
+  inspected without bloating default logs. The full deterministic 64-bit
+  supported scan
+  `python3 -c 'from compute.kernel import scan_case_i_power_two_kernel as s; r=s(62); print(r["instance_count"], r["total_row_one_candidate_count"], r["survivor_count"])'`
+  checks exponents `2..62` in the `n = 3 * 2^A` Case-I family and reports
+  `61` instances, `130` row-one candidates, and `0` kernel survivors. The
+  largest row-one candidate count in this range is `7`, attained at exponent
+  `61`. This is exact finite evidence for the C2 lane, not a proof that the
+  kernel is empty.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
