@@ -1217,6 +1217,179 @@ theorem not_exists_kernelInRange_24575_12287_4_24576 :
         subst t
         norm_num [Nat.gcd])
 
+theorem not_exists_kernelInRange_49151_24575_4_49152 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 49151 24575 4 49152 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 49151) (N2 := 24575) (minT := 4) (bound := 49152) (candidates := [23507])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨12287, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_le : t ≤ 24576 := by omega
+        have hrow : 49151 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have h23prod : 23 ∣ t * (t - 1) := by
+          exact Nat.dvd_trans (by norm_num) hrow
+        have h2137prod : 2137 ∣ t * (t - 1) := by
+          exact Nat.dvd_trans (by norm_num) hrow
+        have hp23 : Nat.Prime 23 := by decide +kernel
+        have hp2137 : Nat.Prime 2137 := by decide +kernel
+        rcases hp23.dvd_mul.mp h23prod with h23t | h23tm1
+        · rcases hp2137.dvd_mul.mp h2137prod with h2137t | h2137tm1
+          · exfalso
+            rcases h23t with ⟨a, ha⟩
+            rcases h2137t with ⟨b, hb⟩
+            have hb_le : b ≤ 11 := by omega
+            interval_cases b <;> omega
+          · exfalso
+            rcases h23t with ⟨a, ha⟩
+            rcases h2137tm1 with ⟨b, hb⟩
+            have hb_le : b ≤ 11 := by omega
+            interval_cases b <;> omega
+        · rcases hp2137.dvd_mul.mp h2137prod with h2137t | h2137tm1
+          · have ht_eq : t = 23507 := by
+              rcases h23tm1 with ⟨a, ha⟩
+              rcases h2137t with ⟨b, hb⟩
+              have hb_le : b ≤ 11 := by omega
+              interval_cases b <;> omega
+            simp [ht_eq]
+          · exfalso
+            rcases h23tm1 with ⟨a, ha⟩
+            rcases h2137tm1 with ⟨b, hb⟩
+            have hb_le : b ≤ 11 := by omega
+            interval_cases b <;> omega)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_98303_49151_4_98304 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 98303 49151 4 98304 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 98303) (N2 := 49151) (minT := 4) (bound := 98304) (candidates := [7486])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨24575, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_le : t ≤ 49152 := by omega
+        have hrow : 98303 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have h197prod : 197 ∣ t * (t - 1) := by
+          exact Nat.dvd_trans (by norm_num) hrow
+        have h499prod : 499 ∣ t * (t - 1) := by
+          exact Nat.dvd_trans (by norm_num) hrow
+        have hp197 : Nat.Prime 197 := by decide +kernel
+        have hp499 : Nat.Prime 499 := by decide +kernel
+        rcases hp197.dvd_mul.mp h197prod with h197t | h197tm1
+        · rcases hp499.dvd_mul.mp h499prod with h499t | h499tm1
+          · exfalso
+            rcases h197t with ⟨a, ha⟩
+            rcases h499t with ⟨b, hb⟩
+            have hb_le : b ≤ 98 := by omega
+            interval_cases b <;> omega
+          · have ht_eq : t = 7486 := by
+              rcases h197t with ⟨a, ha⟩
+              rcases h499tm1 with ⟨b, hb⟩
+              have hb_le : b ≤ 98 := by omega
+              interval_cases b <;> omega
+            simp [ht_eq]
+        · rcases hp499.dvd_mul.mp h499prod with h499t | h499tm1
+          · exfalso
+            rcases h197tm1 with ⟨a, ha⟩
+            rcases h499t with ⟨b, hb⟩
+            have hb_le : b ≤ 98 := by omega
+            interval_cases b <;> omega
+          · exfalso
+            rcases h197tm1 with ⟨a, ha⟩
+            rcases h499tm1 with ⟨b, hb⟩
+            have hb_le : b ≤ 98 := by omega
+            interval_cases b <;> omega)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_196607_98303_4_196608 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 196607 98303 4 196608 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 196607) (N2 := 98303) (minT := 4) (bound := 196608) (candidates := [55573])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨49151, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_le : t ≤ 98304 := by omega
+        have h421prod : 421 ∣ t * (t - 1) := by
+          have hrow : 196607 ∣ t * (t - 1) :=
+            rowOneDivisorSplit_dvd_mul_sub_one hsplit
+          exact Nat.dvd_trans (by norm_num) hrow
+        have h467prod : 467 ∣ t * (t - 1) := by
+          have hrow : 196607 ∣ t * (t - 1) :=
+            rowOneDivisorSplit_dvd_mul_sub_one hsplit
+          exact Nat.dvd_trans (by norm_num) hrow
+        have hp421 : Nat.Prime 421 := by decide +kernel
+        have hp467 : Nat.Prime 467 := by decide +kernel
+        rcases hp421.dvd_mul.mp h421prod with h421t | h421tm1
+        · rcases hp467.dvd_mul.mp h467prod with h467t | h467tm1
+          · exfalso
+            rcases h421t with ⟨a, ha⟩
+            rcases h467t with ⟨b, hb⟩
+            have hb_le : b ≤ 210 := by omega
+            interval_cases b <;> omega
+          · exfalso
+            rcases h421t with ⟨a, ha⟩
+            rcases h467tm1 with ⟨b, hb⟩
+            have hb_le : b ≤ 210 := by omega
+            interval_cases b <;> omega
+        · rcases hp467.dvd_mul.mp h467prod with h467t | h467tm1
+          · have ht_eq : t = 55573 := by
+              rcases h421tm1 with ⟨a, ha⟩
+              rcases h467t with ⟨b, hb⟩
+              have hb_le : b ≤ 210 := by omega
+              interval_cases b <;> omega
+            simp [ht_eq]
+          · exfalso
+            rcases h421tm1 with ⟨a, ha⟩
+            rcases h467tm1 with ⟨b, hb⟩
+            have hb_le : b ≤ 210 := by omega
+            interval_cases b <;> omega)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
     ¬ consecutiveDivisorKernel N1 N2 t := by
@@ -2820,6 +2993,60 @@ theorem i_three_caseI_24576_exists_common_from_row_bounds {j : ℕ}
     i_three_caseI_exists_common_from_kernelInRange_empty
       (n := 24576) (j := j)
       (by simpa using not_exists_kernelInRange_24575_12287_4_24576)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_49152_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 49152) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 49152 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 49152) (j := j)
+      (by simpa using not_exists_kernelInRange_49151_24575_4_49152)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_49152_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 49152) :
+    ∃ q : ℕ, commonPrimeDivisor 49152 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 49152) (j := j)
+      (by simpa using not_exists_kernelInRange_49151_24575_4_49152)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_98304_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 98304) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 98304 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 98304) (j := j)
+      (by simpa using not_exists_kernelInRange_98303_49151_4_98304)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_98304_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 98304) :
+    ∃ q : ℕ, commonPrimeDivisor 98304 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 98304) (j := j)
+      (by simpa using not_exists_kernelInRange_98303_49151_4_98304)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_196608_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 196608) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 196608 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 196608) (j := j)
+      (by simpa using not_exists_kernelInRange_196607_98303_4_196608)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_196608_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 196608) :
+    ∃ q : ℕ, commonPrimeDivisor 196608 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 196608) (j := j)
+      (by simpa using not_exists_kernelInRange_196607_98303_4_196608)
       (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
 
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
