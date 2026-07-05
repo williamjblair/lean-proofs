@@ -340,18 +340,22 @@
   `parity_product_gap_holds_count = 404`,
   `parity_product_gap_failure_count = 0`, and minimum product margin `725`.
   This is bounded exact evidence for the product target, not a global proof.
-- [E] Pushed the exact factorized power-two quotient scan through exponent
-  `62` for odd `B <= 2001`, with skips reported for row-one moduli beyond
-  the current deterministic `< 2^64` factorizer. Reproduce with
+- [E] Upgraded the exact factorizer so row-one moduli above `2^64` are no
+  longer skipped merely for size: they are recursively split when possible,
+  and the scan counts them only when every terminal prime factor is certified
+  below the deterministic `2^64` primality range. Unresolved large probable
+  prime factors still raise/skip. Reproduce the enlarged power-two quotient
+  perimeter through exponent `62` for odd `B <= 2001` with
   `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(62,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"], r["reduced_divisor_gap_summary"]["gap_failure_count"], p["parity_product_gap_failure_count"], p["min_parity_product_margin"])'`.
-  It reports `61000 53013 7987 557 0 0 0 725`. This is exact evidence only
-  for the `53013` factorized instances; the `7987` skipped instances remain
-  outside this command's verification perimeter.
+  It reports `61000 60235 765 664 0 0 0 725`. This is exact evidence only
+  for the `60235` fully certified factorized instances; the `765` skipped
+  instances remain outside this command's verification perimeter.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
-  scans. The default remains strict: if factoring `B * 2^a - 1` is outside
-  the current deterministic 64-bit factorizer, the scan raises. With
+  scans. The default remains strict: if factoring `B * 2^a - 1` leaves an
+  uncertified prime factor at least `2^64`, the scan raises. With
   `--skip-factorization-failures`, skipped instances are listed explicitly and
-  are not counted as factorized evidence. Reproduce the boundary check with
+  are not counted as factorized evidence. Reproduce the large-prime boundary
+  check with
   `python3 -m compute.kernel --power-two-quotient-kernel --min-exponent 60 --max-exponent 60 --max-b 17 --skip-factorization-failures`;
   it reports `instance_count = 8`, `factorized_instance_count = 7`,
   `skipped_instance_count = 1`, the skipped pair `(a, B) = (60, 17)` with

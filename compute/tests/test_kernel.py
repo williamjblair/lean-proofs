@@ -52,9 +52,16 @@ def test_prime_power_factorization_reconstructs_case_i_exponent_sixty_inputs() -
         assert all(prime_power % prime == 0 for prime, prime_power in factors)
 
 
-def test_prime_power_factorization_rejects_outside_deterministic_range() -> None:
-    with pytest.raises(ValueError, match=r"n < 2\^64"):
-        prime_power_factorization(2**64)
+def test_prime_power_factorization_splits_large_certified_composite() -> None:
+    n = 1025 * 2**54 - 1
+    factors = prime_power_factorization(n)
+    assert factors == [(31, 31), (619, 619), (962257463766691, 962257463766691)]
+    assert _factorization_product(factors) == n
+
+
+def test_prime_power_factorization_rejects_large_uncertified_prime_factor() -> None:
+    with pytest.raises(ValueError, match=r"cannot certify primality"):
+        prime_power_factorization(17 * 2**60 - 1)
 
 
 def test_kernel_predicate_uses_both_rows_and_bound() -> None:
@@ -885,7 +892,10 @@ def test_power_two_quotient_scan_can_report_factorization_skips() -> None:
             "A": 2**60,
             "B": 17,
             "row_one_modulus": 17 * 2**60 - 1,
-            "reason": "prime_power_factorization currently requires n < 2^64",
+            "reason": (
+                "prime_power_factorization cannot certify primality for "
+                "factor >= 2^64"
+            ),
         }
     ]
     assert result["row_one_candidate_count"] == 3
@@ -960,12 +970,28 @@ def test_power_two_quotient_scan_can_report_factorization_skips() -> None:
 
 
 def test_power_two_quotient_scan_is_strict_by_default_on_factorization_limit() -> None:
-    with pytest.raises(ValueError, match=r"n < 2\^64"):
+    with pytest.raises(ValueError, match=r"cannot certify primality"):
         scan_power_two_quotient_kernel(
             max_exponent=60,
             max_b=17,
             min_exponent=60,
         )
+
+
+def test_power_two_quotient_scan_factors_large_composite_modulus() -> None:
+    result = scan_power_two_quotient_kernel(
+        max_exponent=54,
+        max_b=1025,
+        min_exponent=54,
+        skip_factorization_failures=True,
+    )
+
+    assert result["instance_count"] == 512
+    assert result["factorized_instance_count"] == 512
+    assert result["skipped_instance_count"] == 0
+    assert result["skipped_instances"] == []
+    assert result["row_one_candidate_count"] == 19
+    assert result["survivor_count"] == 0
 
 
 def test_squeezed_normalized_scan_can_include_candidate_diagnostics() -> None:
@@ -1204,7 +1230,10 @@ def test_kernel_cli_can_report_power_two_factorization_skips() -> None:
             "A": 2**60,
             "B": 17,
             "row_one_modulus": 17 * 2**60 - 1,
-            "reason": "prime_power_factorization currently requires n < 2^64",
+            "reason": (
+                "prime_power_factorization cannot certify primality for "
+                "factor >= 2^64"
+            ),
         }
     ]
     assert payload["survivor_count"] == 0

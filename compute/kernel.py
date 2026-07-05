@@ -24,8 +24,13 @@ _MR_BASES_64 = (
     1795265022,
 )
 
+_CERTIFIED_PRIME_LIMIT = 2**64
+_UNCERTIFIED_PRIME_FACTOR_REASON = (
+    "prime_power_factorization cannot certify primality for factor >= 2^64"
+)
 
-def _is_prime(n: int) -> bool:
+
+def _passes_miller_rabin_bases(n: int) -> bool:
     if n < 2:
         return False
     small_primes = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
@@ -55,6 +60,12 @@ def _is_prime(n: int) -> bool:
     return True
 
 
+def _is_certified_prime(n: int) -> bool:
+    if n >= _CERTIFIED_PRIME_LIMIT:
+        raise ValueError(_UNCERTIFIED_PRIME_FACTOR_REASON)
+    return _passes_miller_rabin_bases(n)
+
+
 def _pollard_rho_factor(n: int) -> int:
     if n % 2 == 0:
         return 2
@@ -78,9 +89,11 @@ def _pollard_rho_factor(n: int) -> int:
 def _collect_prime_factors(n: int, factors: list[int]) -> None:
     if n == 1:
         return
-    if _is_prime(n):
+    if n < _CERTIFIED_PRIME_LIMIT and _is_certified_prime(n):
         factors.append(n)
         return
+    if n >= _CERTIFIED_PRIME_LIMIT and _passes_miller_rabin_bases(n):
+        raise ValueError(_UNCERTIFIED_PRIME_FACTOR_REASON)
     factor = _pollard_rho_factor(n)
     _collect_prime_factors(factor, factors)
     _collect_prime_factors(n // factor, factors)
@@ -89,8 +102,6 @@ def _collect_prime_factors(n: int, factors: list[int]) -> None:
 def prime_power_factorization(n: int) -> list[tuple[int, int]]:
     if n < 1:
         raise ValueError("n must be positive")
-    if n >= 2**64:
-        raise ValueError("prime_power_factorization currently requires n < 2^64")
     prime_factors: list[int] = []
     _collect_prime_factors(n, prime_factors)
     prime_factors.sort()
