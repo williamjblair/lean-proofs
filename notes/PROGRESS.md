@@ -77,5 +77,9 @@
   `Erdos699.digit_eq_zero_of_pow_dvd_sub_one`, and row-3 transfer lemmas
   forcing `j`'s units digit to be at most `1` and levels `1..e-1` to vanish
   when `p^e ∣ n - 1`. Full T6 remains open.
+- [R] Proved first T6 full-power forcing for the `n - 1` row:
+  `Erdos699.i_three_window_one_prime_pow_dvd_mul_sub_one` shows that under
+  row-3 no-common-prime hypotheses, every prime power `p^e ∣ n - 1` with
+  `p ≥ 5` divides `j * (j - 1)`. Full T6 remains open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

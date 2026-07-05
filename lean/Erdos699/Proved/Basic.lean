@@ -403,6 +403,110 @@ theorem i_three_window_one_high_digit_zero_of_prime_pow_dvd_sub_one {n j p e r :
   have hle : digit j p r ≤ 0 := by simpa [hn_digit] using hdigitsj
   omega
 
+theorem pow_dvd_of_forall_digit_eq_zero {j p e : ℕ}
+    (hp_pos : 0 < p) (hzero : ∀ r : ℕ, r < e → digit j p r = 0) :
+    p ^ e ∣ j := by
+  induction e with
+  | zero =>
+      simp
+  | succ e ih =>
+      have hlow : p ^ e ∣ j :=
+        ih fun r hr => hzero r (Nat.lt_trans hr (Nat.lt_succ_self e))
+      rcases hlow with ⟨a, ha⟩
+      have hpow_pos : 0 < p ^ e := pow_pos hp_pos e
+      have hdiv : j / p ^ e = a := by
+        rw [ha]
+        exact Nat.mul_div_cancel_left a hpow_pos
+      have hdigit : digit j p e = 0 := hzero e (Nat.lt_succ_self e)
+      have hpa : p ∣ a := by
+        rw [digit, hdiv] at hdigit
+        exact Nat.dvd_iff_mod_eq_zero.mpr hdigit
+      rcases hpa with ⟨b, hb⟩
+      refine ⟨b, ?_⟩
+      rw [ha, hb, pow_succ']
+      ac_rfl
+
+theorem pow_dvd_sub_one_of_unit_digit_one_high_zero {j p e : ℕ}
+    (hp : p.Prime) (hunit : digit j p 0 = 1)
+    (hzero : ∀ r : ℕ, 1 ≤ r → r < e → digit j p r = 0) :
+    p ^ e ∣ j - 1 := by
+  induction e with
+  | zero =>
+      simp
+  | succ e ih =>
+      by_cases he0 : e = 0
+      · subst e
+        have hjmod : j % p = 1 := by
+          simpa [digit] using hunit
+        refine ⟨j / p, ?_⟩
+        have hj_eq : j = p * (j / p) + 1 := by
+          have h := Nat.div_add_mod j p
+          rw [hjmod] at h
+          omega
+        have htarget : j - 1 = p * (j / p) := by omega
+        simpa using htarget
+      · have he_pos : 0 < e := Nat.pos_of_ne_zero he0
+        have hlow : p ^ e ∣ j - 1 :=
+          ih fun r hrpos hrlt => hzero r hrpos (Nat.lt_trans hrlt (Nat.lt_succ_self e))
+        rcases hlow with ⟨a, ha⟩
+        have hj_pos : 0 < j := by
+          by_contra hj_not
+          have hj0 : j = 0 := Nat.eq_zero_of_not_pos hj_not
+          have hunit0 : digit j p 0 = 0 := by simp [digit, hj0]
+          omega
+        have hj_eq : j = p ^ e * a + 1 := by omega
+        have hpow_pos : 0 < p ^ e := pow_pos hp.pos e
+        have hrem_lt : 1 < p ^ e := Nat.one_lt_pow (Nat.ne_of_gt he_pos) hp.one_lt
+        have hdiv : j / p ^ e = a := by
+          rw [hj_eq, Nat.add_comm]
+          rw [Nat.add_mul_div_left _ _ hpow_pos, Nat.div_eq_of_lt hrem_lt]
+          simp
+        have hdigit : digit j p e = 0 :=
+          hzero e (by omega) (Nat.lt_succ_self e)
+        have hpa : p ∣ a := by
+          rw [digit, hdiv] at hdigit
+          exact Nat.dvd_iff_mod_eq_zero.mpr hdigit
+        rcases hpa with ⟨b, hb⟩
+        refine ⟨b, ?_⟩
+        rw [ha, hb, pow_succ']
+        ac_rfl
+
+theorem pow_dvd_mul_sub_one_of_digit_le_one_high_zero {j p e : ℕ}
+    (hp : p.Prime) (hunit_le : digit j p 0 ≤ 1)
+    (hzero : ∀ r : ℕ, 1 ≤ r → r < e → digit j p r = 0) :
+    p ^ e ∣ j * (j - 1) := by
+  by_cases he0 : e = 0
+  · subst e
+    simp
+  · have hunit_cases : digit j p 0 = 0 ∨ digit j p 0 = 1 := by omega
+    rcases hunit_cases with hunit0 | hunit1
+    · have hall_zero : ∀ r : ℕ, r < e → digit j p r = 0 := by
+        intro r hr
+        by_cases hr0 : r = 0
+        · simpa [hr0] using hunit0
+        · exact hzero r (Nat.succ_le_of_lt (Nat.pos_of_ne_zero hr0)) hr
+      have hpow : p ^ e ∣ j := pow_dvd_of_forall_digit_eq_zero hp.pos hall_zero
+      exact dvd_mul_of_dvd_left hpow (j - 1)
+    · have hpow : p ^ e ∣ j - 1 :=
+        pow_dvd_sub_one_of_unit_digit_one_high_zero hp hunit1 hzero
+      exact dvd_mul_of_dvd_right hpow j
+
+theorem i_three_window_one_prime_pow_dvd_mul_sub_one {n j p e : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hp : p.Prime) (hp5 : 5 ≤ p) (hn : 1 < n) (hpdvd : p ^ e ∣ n - 1) :
+    p ^ e ∣ j * (j - 1) := by
+  by_cases he0 : e = 0
+  · subst e
+    simp
+  have hunit_le : digit j p 0 ≤ 1 := by
+    exact i_three_window_one_units_digit_le_one_of_prime_pow_dvd_sub_one
+      hnone hp hp5 hn (Nat.pos_of_ne_zero he0) hpdvd
+  have hzero : ∀ r : ℕ, 1 ≤ r → r < e → digit j p r = 0 := by
+    intro r hrpos hrlt
+    exact i_three_window_one_high_digit_zero_of_prime_pow_dvd_sub_one
+      hnone hp hp5 hn hrpos hrlt hpdvd
+  exact pow_dvd_mul_sub_one_of_digit_le_one_high_zero hp hunit_le hzero
+
 theorem dvd_mul_sub_one_of_mod_le_one {j p : ℕ} (hmod : j % p ≤ 1) :
     p ∣ j * (j - 1) := by
   have hcase : j % p = 0 ∨ j % p = 1 := by omega
