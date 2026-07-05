@@ -66,7 +66,10 @@
 - [R] Proved the conditional T5 endpoint
   `Erdos699.eq_three_of_no_common_eq_three_mul` and contradiction theorem
   `Erdos699.no_common_eq_three_mul_false_of_two_le`: under row-3
-  no-common-prime, `n = 3 * j`, and `2 ≤ j`, the branch is impossible. Full
-  T5 remains open because the formal collapse to `n = 3 * j` is not yet
-  proved.
+  no-common-prime, `n = 3 * j`, and `2 ≤ j`, the branch is impossible. This
+  is the endpoint used by the full T5 Case I-A0 proof below.
+- [R] Proved full T5 Case I-A0 as
+  `Erdos699.t5_i_eq_three_odd_three_exactly_once`: for row `i = 3`,
+  `n` odd, `3 ∣ n`, `¬ 9 ∣ n`, `3 < j`, and `2 * j ≤ n`, a relevant common
+  prime divisor exists.
 - [OPEN] T4 and all later rungs remain unclaimed in this branch.

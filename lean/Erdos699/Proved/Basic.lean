@@ -571,6 +571,95 @@ theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
   rw [mul_comm j (Nat.choose n j), ← hidentity]
   exact dvd_mul_right n _
 
+theorem prime_dvd_choose_three_of_prime_ge_five_dvd {n p : ℕ} (hp : p.Prime)
+    (hp5 : 5 ≤ p) (hpn : p ∣ n) :
+    p ∣ Nat.choose n 3 := by
+  apply prime_dvd_choose_of_not_dominated hp
+  intro hdom
+  have hdigits := (dominated_iff_forall_digits hp.two_le).mp hdom 0
+  have hn_mod : n % p = 0 := Nat.dvd_iff_mod_eq_zero.mp hpn
+  have hthree_mod : 3 % p = 3 := Nat.mod_eq_of_lt (by omega : 3 < p)
+  simp [digit, hn_mod, hthree_mod] at hdigits
+
+theorem dvd_j_of_no_common_i_three {d n j : ℕ}
+    (hnone : ∀ p : ℕ, ¬ commonPrimeDivisor n 3 j p) (hn : 0 < n) (hj : 0 < j)
+    (hdn : d ∣ n) (hrel : ∀ p : ℕ, p.Prime → p ∣ d → 3 ≤ p)
+    (hdchoose : ∀ p : ℕ, p.Prime → p ∣ d → p ∣ Nat.choose n 3) :
+    d ∣ j := by
+  have hcop : d.Coprime (Nat.choose n j) := by
+    apply Nat.coprime_of_dvd
+    intro p hp hpd hpchoose
+    exact hnone p ⟨hp, hrel p hp hpd, hdchoose p hp hpd, hpchoose⟩
+  have hn_dvd : n ∣ j * Nat.choose n j := n_dvd_mul_choose_self hn hj
+  have hdprod : d ∣ j * Nat.choose n j := Nat.dvd_trans hdn hn_dvd
+  exact (hcop.dvd_mul_right).mp hdprod
+
+theorem prime_ge_five_of_dvd_div_three_odd_not_nine {n p : ℕ}
+    (hodd : Odd n) (h3n : 3 ∣ n) (hnot9 : ¬ 9 ∣ n) (hp : p.Prime)
+    (hpd : p ∣ n / 3) :
+    5 ≤ p := by
+  have hn_eq : n = 3 * (n / 3) := (Nat.mul_div_cancel' h3n).symm
+  have hdn : n / 3 ∣ n := by
+    refine ⟨3, ?_⟩
+    simpa [mul_comm] using hn_eq
+  by_cases hp2 : p = 2
+  · subst p
+    have h2n : 2 ∣ n := Nat.dvd_trans hpd hdn
+    have hn_even : Even n := even_iff_two_dvd.mpr h2n
+    exact False.elim ((Nat.not_odd_iff_even.mpr hn_even) hodd)
+  by_cases hp3 : p = 3
+  · subst p
+    rcases hpd with ⟨a, ha⟩
+    apply False.elim
+    apply hnot9
+    refine ⟨a, ?_⟩
+    rw [hn_eq, ha]
+    omega
+  have hp4 : p ≠ 4 := by
+    intro hp_eq
+    subst p
+    exact (by decide : ¬ Nat.Prime 4) hp
+  have hp2le : 2 ≤ p := hp.two_le
+  omega
+
+theorem t5_collapse_eq_three_mul_of_no_common {n j : ℕ}
+    (hnone : ∀ p : ℕ, ¬ commonPrimeDivisor n 3 j p) (hodd : Odd n)
+    (h3n : 3 ∣ n) (hnot9 : ¬ 9 ∣ n) (hj : 3 < j) (hjn : 2 * j ≤ n) :
+    n = 3 * j := by
+  let d := n / 3
+  have hj_pos : 0 < j := by omega
+  have hn_pos : 0 < n := by omega
+  have hn_eq : n = 3 * d := by
+    dsimp [d]
+    exact (Nat.mul_div_cancel' h3n).symm
+  have hdn : d ∣ n := by
+    refine ⟨3, ?_⟩
+    simpa [mul_comm] using hn_eq
+  have hrel : ∀ p : ℕ, p.Prime → p ∣ d → 3 ≤ p := by
+    intro p hp hpd
+    have hp5 : 5 ≤ p :=
+      prime_ge_five_of_dvd_div_three_odd_not_nine hodd h3n hnot9 hp (by simpa [d] using hpd)
+    omega
+  have hdchoose : ∀ p : ℕ, p.Prime → p ∣ d → p ∣ Nat.choose n 3 := by
+    intro p hp hpd
+    have hp5 : 5 ≤ p :=
+      prime_ge_five_of_dvd_div_three_odd_not_nine hodd h3n hnot9 hp (by simpa [d] using hpd)
+    exact prime_dvd_choose_three_of_prime_ge_five_dvd hp hp5 (Nat.dvd_trans hpd hdn)
+  have hdj : d ∣ j := dvd_j_of_no_common_i_three hnone hn_pos hj_pos hdn hrel hdchoose
+  have hd_pos : 0 < d := by omega
+  have hj_lt_two_d : j < 2 * d := by omega
+  have hj_eq_d : j = d := Nat.eq_of_dvd_of_lt_two_mul (by omega) hdj hj_lt_two_d
+  rw [hn_eq, hj_eq_d]
+
+theorem t5_i_eq_three_odd_three_exactly_once {n j : ℕ} (hodd : Odd n)
+    (h3n : 3 ∣ n) (hnot9 : ¬ 9 ∣ n) (hj : 3 < j) (hjn : 2 * j ≤ n) :
+    ∃ p : ℕ, commonPrimeDivisor n 3 j p := by
+  by_contra hnone_exists
+  rw [not_exists] at hnone_exists
+  have hn_eq : n = 3 * j :=
+    t5_collapse_eq_three_mul_of_no_common hnone_exists hodd h3n hnot9 hj hjn
+  exact no_common_eq_three_mul_false_of_two_le hnone_exists hn_eq (by omega)
+
 theorem prime_dvd_choose_two_of_odd_prime_dvd {n p : ℕ} (hp : p.Prime)
     (hp_ne_two : p ≠ 2) (hpn : p ∣ n) :
     p ∣ Nat.choose n 2 := by
