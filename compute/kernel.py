@@ -31,6 +31,43 @@ _UNCERTIFIED_PRIME_FACTOR_REASON = (
 _POCKLINGTON_WITNESS_LIMIT = 256
 
 
+def _empty_factorization_certification_summary() -> dict[str, int | None]:
+    return {
+        "deterministic_prime_count": 0,
+        "pocklington_prime_count": 0,
+        "largest_deterministic_prime": None,
+        "largest_pocklington_prime": None,
+    }
+
+
+def _record_certified_prime(
+    summary: dict[str, int | None], prime: int, method: str
+) -> None:
+    count_key = f"{method}_prime_count"
+    largest_key = f"largest_{method}_prime"
+    summary[count_key] = int(summary[count_key] or 0) + 1
+    largest = summary[largest_key]
+    if largest is None or prime > largest:
+        summary[largest_key] = prime
+
+
+def _merge_factorization_certification_summary(
+    target: dict[str, int | None], source: dict[str, int | None]
+) -> None:
+    for method in ("deterministic", "pocklington"):
+        count_key = f"{method}_prime_count"
+        largest_key = f"largest_{method}_prime"
+        target[count_key] = int(target[count_key] or 0) + int(
+            source[count_key] or 0
+        )
+        source_largest = source[largest_key]
+        target_largest = target[largest_key]
+        if source_largest is not None and (
+            target_largest is None or source_largest > target_largest
+        ):
+            target[largest_key] = source_largest
+
+
 def _passes_miller_rabin_bases(n: int) -> bool:
     if n < 2:
         return False
@@ -79,13 +116,15 @@ def _pocklington_witness_for_prime_factor(n: int, q: int) -> int | None:
     return None
 
 
-def _is_pocklington_certified_prime(n: int) -> bool:
+def _is_pocklington_certified_prime(
+    n: int, summary: dict[str, int | None]
+) -> bool:
     if n < 2:
         return False
     if n < _CERTIFIED_PRIME_LIMIT:
         return _is_certified_prime(n)
     try:
-        factors = prime_power_factorization(n - 1)
+        factors = _prime_power_factorization_with_summary(n - 1, summary)
     except ValueError:
         return False
     factor_product = 1
@@ -119,27 +158,33 @@ def _pollard_rho_factor(n: int) -> int:
         c += 1
 
 
-def _collect_prime_factors(n: int, factors: list[int]) -> None:
+def _collect_prime_factors(
+    n: int, factors: list[int], summary: dict[str, int | None]
+) -> None:
     if n == 1:
         return
     if n < _CERTIFIED_PRIME_LIMIT and _is_certified_prime(n):
         factors.append(n)
+        _record_certified_prime(summary, n, "deterministic")
         return
     if n >= _CERTIFIED_PRIME_LIMIT and _passes_miller_rabin_bases(n):
-        if _is_pocklington_certified_prime(n):
+        if _is_pocklington_certified_prime(n, summary):
             factors.append(n)
+            _record_certified_prime(summary, n, "pocklington")
             return
         raise ValueError(_UNCERTIFIED_PRIME_FACTOR_REASON)
     factor = _pollard_rho_factor(n)
-    _collect_prime_factors(factor, factors)
-    _collect_prime_factors(n // factor, factors)
+    _collect_prime_factors(factor, factors, summary)
+    _collect_prime_factors(n // factor, factors, summary)
 
 
-def prime_power_factorization(n: int) -> list[tuple[int, int]]:
+def _prime_power_factorization_with_summary(
+    n: int, summary: dict[str, int | None]
+) -> list[tuple[int, int]]:
     if n < 1:
         raise ValueError("n must be positive")
     prime_factors: list[int] = []
-    _collect_prime_factors(n, prime_factors)
+    _collect_prime_factors(n, prime_factors, summary)
     prime_factors.sort()
     factors: list[tuple[int, int]] = []
     i = 0
@@ -151,6 +196,11 @@ def prime_power_factorization(n: int) -> list[tuple[int, int]]:
             i += 1
         factors.append((p, power))
     return factors
+
+
+def prime_power_factorization(n: int) -> list[tuple[int, int]]:
+    summary = _empty_factorization_certification_summary()
+    return _prime_power_factorization_with_summary(n, summary)
 
 
 def _is_power_of_two(n: int) -> bool:
@@ -479,11 +529,14 @@ def _power_two_quotient_residue(zero_part: int, one_part: int, A: int) -> int:
 
 def _power_two_quotient_row_one_candidates(
     exponent: int, A: int, B: int
-) -> list[dict[str, int]]:
+) -> tuple[list[dict[str, int]], dict[str, int | None]]:
     row_one_modulus = B * A - 1
+    certification_summary = _empty_factorization_certification_summary()
     prime_powers = [
         prime_power
-        for _p, prime_power in prime_power_factorization(row_one_modulus)
+        for _p, prime_power in _prime_power_factorization_with_summary(
+            row_one_modulus, certification_summary
+        )
     ]
     candidates: dict[int, dict[str, int]] = {}
 
@@ -510,7 +563,10 @@ def _power_two_quotient_row_one_candidates(
         visit(index + 1, zero_part, one_part * prime_power)
 
     visit(0, 1, 1)
-    return sorted(candidates.values(), key=lambda item: item["v"])
+    return (
+        sorted(candidates.values(), key=lambda item: item["v"]),
+        certification_summary,
+    )
 
 
 def _power_two_reduced_divisor_gap_diagnostic(
@@ -651,12 +707,17 @@ def scan_power_two_quotient_kernel(
     skipped_instances: list[dict[str, int | str]] = []
     instance_count = 0
     factorized_instance_count = 0
+    factorization_certification_summary = (
+        _empty_factorization_certification_summary()
+    )
     for exponent in range(min_exponent, max_exponent + 1):
         A = 2**exponent
         for B in range(3, max_b + 1, 2):
             instance_count += 1
             try:
-                candidates = _power_two_quotient_row_one_candidates(exponent, A, B)
+                candidates, certification_summary = (
+                    _power_two_quotient_row_one_candidates(exponent, A, B)
+                )
             except ValueError as exc:
                 if not skip_factorization_failures:
                     raise
@@ -671,6 +732,9 @@ def scan_power_two_quotient_kernel(
                 )
                 continue
             factorized_instance_count += 1
+            _merge_factorization_certification_summary(
+                factorization_certification_summary, certification_summary
+            )
             for candidate in candidates:
                 row_one_candidates.append(candidate)
                 if power_two_quotient_kernel_holds(
@@ -685,6 +749,7 @@ def scan_power_two_quotient_kernel(
         "max_b": max_b,
         "instance_count": instance_count,
         "factorized_instance_count": factorized_instance_count,
+        "factorization_certification_summary": factorization_certification_summary,
         "skipped_instance_count": len(skipped_instances),
         "skipped_instances": skipped_instances,
         "row_one_candidate_count": len(row_one_candidates),

@@ -346,9 +346,10 @@
   Pocklington witnesses whose `n - 1` factors are recursively certified.
   Reproduce the enlarged power-two quotient perimeter through exponent `70`
   for odd `B <= 2001` with
-  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"], r["reduced_divisor_gap_summary"]["gap_failure_count"], p["parity_product_gap_failure_count"], p["min_parity_product_margin"])'`.
-  It reports `69000 69000 0 880 0 0 0 725`. This is exact bounded evidence
-  for the listed range, not a proof of the universal parity-product gap.
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; c=r["factorization_certification_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"], r["reduced_divisor_gap_summary"]["gap_failure_count"], p["parity_product_gap_failure_count"], p["min_parity_product_margin"], c["pocklington_prime_count"], c["largest_pocklington_prime"])'`.
+  It reports `69000 69000 0 880 0 0 0 725 2551
+  2201803372637972080885759`. This is exact bounded evidence for the listed
+  range, not a proof of the universal parity-product gap.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` leaves an
   uncertified prime factor at least `2^64`, the scan raises. With

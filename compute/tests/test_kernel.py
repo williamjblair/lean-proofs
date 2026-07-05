@@ -887,6 +887,11 @@ def test_power_two_quotient_scan_certifies_large_prime_modulus() -> None:
     assert result["factorized_instance_count"] == 8
     assert result["skipped_instance_count"] == 0
     assert result["skipped_instances"] == []
+    assert result["factorization_certification_summary"]["pocklington_prime_count"] == 1
+    assert (
+        result["factorization_certification_summary"]["largest_pocklington_prime"]
+        == 17 * 2**60 - 1
+    )
     assert result["row_one_candidate_count"] == 3
     assert result["survivor_count"] == 0
     assert result["reduced_divisor_gap_summary"]["candidate_count"] == 3
@@ -970,6 +975,8 @@ def test_power_two_quotient_scan_factors_large_composite_modulus() -> None:
     assert result["factorized_instance_count"] == 512
     assert result["skipped_instance_count"] == 0
     assert result["skipped_instances"] == []
+    assert result["factorization_certification_summary"]["pocklington_prime_count"] == 0
+    assert result["factorization_certification_summary"]["largest_pocklington_prime"] is None
     assert result["row_one_candidate_count"] == 19
     assert result["survivor_count"] == 0
 
@@ -1205,6 +1212,11 @@ def test_kernel_cli_can_certify_large_prime_power_two_modulus() -> None:
     assert payload["factorized_instance_count"] == 8
     assert payload["skipped_instance_count"] == 0
     assert payload["skipped_instances"] == []
+    assert payload["factorization_certification_summary"]["pocklington_prime_count"] == 1
+    assert (
+        payload["factorization_certification_summary"]["largest_pocklington_prime"]
+        == 17 * 2**60 - 1
+    )
     assert payload["survivor_count"] == 0
 
 
