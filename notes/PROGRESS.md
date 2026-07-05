@@ -298,6 +298,15 @@
   `Erdos699.i_three_caseI_four_dvd_odd_factor_false_of_no_squeezedNormalized`
   is the conditional kill wrapper if the squeezed kernel is proved empty.
   This names the missing lemma target; it is not an emptiness proof.
+- [E] Added an exact bounded scanner for the squeezed normalized Case-I kernel:
+  `compute.kernel.scan_squeezed_normalized_case_i_kernel` enumerates odd
+  `F ≥ 3`, `4 ∣ X`, `4 * F ≤ X`, `2 * F^2 ≤ X`, row-one factor candidates
+  `t * (X - t) = g * (F * X - 1)` with `0 < t` and `2 * t < X`, then filters
+  the half-row divisor `F * X / 2 - 1 ∣ g * (X - 2 * t)`. Reproduce with
+  `python3 -m compute.kernel --squeezed-normalized-case-i --max-f 99 --max-x 5000`;
+  it reports `1564` row-one factor candidates and `0` full squeezed survivors.
+  This is exact finite evidence for the named squeezed-kernel target, not an
+  emptiness proof.
 - [R] Formalized the consecutive-divisor kernel target:
   `Erdos699.consecutiveDivisorKernel` and
   `Erdos699.consecutiveDivisorKernelBelow` name the two-row kernel and the

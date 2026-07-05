@@ -7,6 +7,8 @@ import pytest
 
 from compute.kernel import (
     consecutive_kernel_holds,
+    scan_squeezed_normalized_case_i_kernel,
+    squeezed_normalized_case_i_kernel_holds,
     kernel_survivors_bruteforce,
     prime_power_factorization,
     scan_case_i_power_two_kernel,
@@ -476,3 +478,61 @@ def test_case_i_power_two_family_scan_reaches_exponent_sixty() -> None:
     assert result["instance_count"] == 1
     assert result["instances"][0]["exponent"] == 60
     assert result["instances"][0]["n"] == 3 * (2**60)
+
+
+def test_squeezed_normalized_predicate_checks_all_rows() -> None:
+    assert not squeezed_normalized_case_i_kernel_holds(3, 48, 22, 4)
+    assert not squeezed_normalized_case_i_kernel_holds(3, 48, 22, 3)
+    assert not squeezed_normalized_case_i_kernel_holds(3, 48, 24, 0)
+    assert not squeezed_normalized_case_i_kernel_holds(3, 36, 8, 2)
+    assert not squeezed_normalized_case_i_kernel_holds(2, 72, 16, 7)
+
+
+def test_squeezed_normalized_scan_matches_bruteforce() -> None:
+    result = scan_squeezed_normalized_case_i_kernel(max_f=9, max_x=120)
+    brute = []
+    for f in range(1, 10):
+        for x in range(1, 121):
+            for t in range(1, x // 2 + 1):
+                n1 = f * x - 1
+                product = t * (x - t)
+                if n1 <= 0 or product % n1 != 0:
+                    continue
+                g = product // n1
+                if squeezed_normalized_case_i_kernel_holds(f, x, t, g):
+                    brute.append({"F": f, "X": x, "t": t, "g": g})
+    assert result["mode"] == "squeezed_normalized_case_i_kernel"
+    assert result["max_f"] == 9
+    assert result["max_x"] == 120
+    assert result["survivors"] == brute
+    assert result["candidate_count"] == 7
+    assert result["survivor_count"] == len(brute) == 0
+
+
+def test_squeezed_normalized_scan_records_empty_ranges() -> None:
+    result = scan_squeezed_normalized_case_i_kernel(max_f=25, max_x=600)
+    assert result["candidate_count"] == 80
+    assert result["survivor_count"] == 0
+    assert result["survivors"] == []
+
+
+def test_kernel_cli_can_scan_squeezed_normalized_case_i_kernel() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--squeezed-normalized-case-i",
+            "--max-f",
+            "9",
+            "--max-x",
+            "120",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["mode"] == "squeezed_normalized_case_i_kernel"
+    assert payload["candidate_count"] == 7
+    assert payload["survivors"] == []

@@ -130,6 +130,60 @@ def consecutive_kernel_holds(
     )
 
 
+def squeezed_normalized_case_i_kernel_holds(F: int, X: int, t: int, g: int) -> bool:
+    if F < 0 or X < 0 or t < 0 or g < 0:
+        raise ValueError("F, X, t, and g must be nonnegative")
+    if F == 0 or X == 0 or t == 0:
+        return False
+    if F % 2 == 0 or X % 4 != 0 or F < 3:
+        return False
+    if 2 * t >= X or 4 * F > X or 2 * (F * F) > X:
+        return False
+    n = F * X
+    return (
+        t * (X - t) == g * (n - 1)
+        and (g * (X - 2 * t)) % (n // 2 - 1) == 0
+    )
+
+
+def scan_squeezed_normalized_case_i_kernel(
+    max_f: int,
+    max_x: int,
+    include_candidates: bool = False,
+) -> dict[str, Any]:
+    if max_f < 0 or max_x < 0:
+        raise ValueError("max_f and max_x must be nonnegative")
+    candidates: list[dict[str, int]] = []
+    survivors: list[dict[str, int]] = []
+    for F in range(3, max_f + 1, 2):
+        min_x = max(4 * F, 2 * F * F)
+        first_x = ((min_x + 3) // 4) * 4
+        for X in range(first_x, max_x + 1, 4):
+            n = F * X
+            n1 = n - 1
+            for t in range(1, (X - 1) // 2 + 1):
+                row_one_product = t * (X - t)
+                g, remainder = divmod(row_one_product, n1)
+                if remainder != 0:
+                    continue
+                candidate = {"F": F, "X": X, "t": t, "g": g}
+                candidates.append(candidate)
+                if squeezed_normalized_case_i_kernel_holds(F, X, t, g):
+                    survivors.append(candidate)
+    result: dict[str, Any] = {
+        "mode": "squeezed_normalized_case_i_kernel",
+        "algorithm": "bounded_row_one_factor_scan",
+        "max_f": max_f,
+        "max_x": max_x,
+        "candidate_count": len(candidates),
+        "survivor_count": len(survivors),
+        "survivors": survivors,
+    }
+    if include_candidates:
+        result["candidates"] = candidates
+    return result
+
+
 def kernel_survivors_bruteforce(
     n1: int, n2: int, bound: int, min_t: int = 0
 ) -> list[int]:
@@ -356,8 +410,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--bound", type=int)
     parser.add_argument("--min-t", type=int)
     parser.add_argument("--case-i-power-two", action="store_true")
+    parser.add_argument("--squeezed-normalized-case-i", action="store_true")
+    parser.add_argument("--max-f", type=int)
+    parser.add_argument("--max-x", type=int)
     parser.add_argument("--min-exponent", type=int, default=2)
     parser.add_argument("--max-exponent", type=int)
+    parser.add_argument("--include-candidates", action="store_true")
     parser.add_argument("--include-row-one-candidates", action="store_true")
     parser.add_argument("--include-row-one-splits", action="store_true")
     parser.add_argument("--include-row-one-split-summary", action="store_true")
@@ -373,6 +431,14 @@ def main(argv: list[str] | None = None) -> int:
             include_row_one_candidates=args.include_row_one_candidates,
             include_row_one_splits=args.include_row_one_splits,
             include_row_one_split_summary=args.include_row_one_split_summary,
+        )
+    elif args.squeezed_normalized_case_i:
+        if args.max_f is None or args.max_x is None:
+            parser.error("--squeezed-normalized-case-i requires --max-f and --max-x")
+        result = scan_squeezed_normalized_case_i_kernel(
+            args.max_f,
+            args.max_x,
+            include_candidates=args.include_candidates,
         )
     else:
         if args.n1 is None or args.n2 is None or args.bound is None:
