@@ -199,14 +199,24 @@ def _squeezed_candidate_summary(
     candidate_diagnostics: list[dict[str, Any]],
 ) -> dict[str, Any]:
     gcd_counts: dict[int, int] = {}
+    first_obstruction_counts: dict[int, int] = {}
     surviving_half_row_count = 0
+    original_obstruction_prime_limit: int | None = None
+    with_original_obstruction_count = 0
     for candidate in candidate_diagnostics:
         half_row_gcd = candidate["half_row_gcd"]
         gcd_counts[half_row_gcd] = gcd_counts.get(half_row_gcd, 0) + 1
         if candidate["survives_half_row"]:
             surviving_half_row_count += 1
+        if "original_row_three_obstruction_primes" in candidate:
+            original_obstruction_prime_limit = candidate["original_obstruction_prime_limit"]
+            obstructions = candidate["original_row_three_obstruction_primes"]
+            if obstructions:
+                with_original_obstruction_count += 1
+                first = obstructions[0]
+                first_obstruction_counts[first] = first_obstruction_counts.get(first, 0) + 1
     candidate_count = len(candidate_diagnostics)
-    return {
+    summary = {
         "candidate_count": candidate_count,
         "surviving_half_row_count": surviving_half_row_count,
         "failed_half_row_count": candidate_count - surviving_half_row_count,
@@ -215,6 +225,19 @@ def _squeezed_candidate_summary(
             for half_row_gcd in sorted(gcd_counts)
         ],
     }
+    if original_obstruction_prime_limit is not None:
+        original_obstruction_summary = {
+            "prime_limit": original_obstruction_prime_limit,
+            "candidate_count": candidate_count,
+            "with_obstruction_count": with_original_obstruction_count,
+            "without_obstruction_count": candidate_count - with_original_obstruction_count,
+            "first_obstruction_prime_histogram": [
+                {"prime": prime, "count": first_obstruction_counts[prime]}
+                for prime in sorted(first_obstruction_counts)
+            ],
+        }
+        summary["original_row_three_obstruction_summary"] = original_obstruction_summary
+    return summary
 
 
 def squeezed_row_one_candidates_discriminant(F: int, X: int) -> list[dict[str, int]]:

@@ -827,6 +827,26 @@ def test_squeezed_normalized_scan_can_include_half_row_summary() -> None:
     }
 
 
+def test_squeezed_normalized_summary_can_include_original_obstruction_counts() -> None:
+    result = scan_squeezed_normalized_case_i_kernel(
+        max_f=9,
+        max_x=120,
+        include_candidate_summary=True,
+        original_obstruction_prime_limit=11,
+    )
+    assert result["candidate_summary"]["original_row_three_obstruction_summary"] == {
+        "prime_limit": 11,
+        "candidate_count": 7,
+        "with_obstruction_count": 7,
+        "without_obstruction_count": 0,
+        "first_obstruction_prime_histogram": [
+            {"prime": 3, "count": 5},
+            {"prime": 5, "count": 1},
+            {"prime": 7, "count": 1},
+        ],
+    }
+
+
 def test_kernel_cli_can_scan_squeezed_normalized_case_i_kernel() -> None:
     completed = subprocess.run(
         [

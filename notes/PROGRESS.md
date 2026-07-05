@@ -38,6 +38,13 @@
   which reports original row-3 obstruction primes `[3, 11]` for the single
   row-one candidate. This is exact finite-prime-cap evidence and tooling, not
   a proof that every normalized survivor is killed by digit constraints.
+- [E] Extended the squeezed-normalized candidate summary with an exact
+  original row-3 obstruction aggregate. Reproduce with
+  `python3 -m compute.kernel --squeezed-normalized-case-i --max-f 9 --max-x 120 --include-candidate-summary --original-obstruction-prime-limit 11`;
+  it reports `candidate_count = 7`, `with_obstruction_count = 7`,
+  `without_obstruction_count = 0`, and first-obstruction histogram
+  `{3: 5, 5: 1, 7: 1}`. This is still bounded finite evidence under a prime
+  cap, not a global digit-compatibility theorem.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.
