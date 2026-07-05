@@ -2382,6 +2382,28 @@ theorem i_three_caseI_four_dvd_consecutive_kernel_in_range_from_no_common {n j :
     ⟨hcop, hkernel⟩
   exact ⟨hcop, by omega, hkernel.1, hkernel.2⟩
 
+theorem i_three_caseI_96_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 96) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 96 3 j q := by
+  intro hnone
+  have hkernel :
+      consecutiveDivisorKernelInRange (96 - 1) (96 / 2 - 1) 4 96 j :=
+    (i_three_caseI_four_dvd_consecutive_kernel_in_range_from_no_common
+      hnone (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+      hj_gt hjn).2
+  norm_num at hkernel
+  exact not_exists_kernelInRange_95_47_4_96 ⟨j, hkernel⟩
+
+theorem i_three_caseI_96_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 96) :
+    ∃ q : ℕ, commonPrimeDivisor 96 3 j q := by
+  by_contra hnone_exists
+  exact
+    i_three_caseI_96_not_no_common_from_row_bounds hj_gt hjn
+      (by
+        intro q hq
+        exact hnone_exists ⟨q, hq⟩)
+
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
     {d n F X j t : ℕ} (hdn : d ∣ n - 2) (hcop4 : d.Coprime 4)
     (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hj_two : 2 ≤ j)

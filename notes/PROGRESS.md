@@ -639,6 +639,14 @@
   reports `row_one_candidates = [20]`, `survivor_count = 0`, and
   `all_strict_lt_n2 = True`. This is a small Lean-certified finite
   certificate bridge, not a proof of the general kernel.
+- [R] Connected that finite lower-bounded certificate back to the original
+  problem surface for the first nontrivial `n = 3 * 2^5` Case-I member:
+  `Erdos699.i_three_caseI_96_not_no_common_from_row_bounds` rules out the
+  no-common-prime counterexample criterion for every `j` with `3 < j` and
+  `2 * j ≤ 96`, and
+  `Erdos699.i_three_caseI_96_exists_common_from_row_bounds` gives the
+  corresponding witness statement `∃ q, commonPrimeDivisor 96 3 j q`. This is
+  an end-to-end Lean-certified finite instance, not a general Case-I theorem.
 - [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
   product inequality is false under C2 shape hypotheses alone:
   `n = 54,734,052`, `N1 = n - 1`, `N2 = n / 2 - 1`, and
