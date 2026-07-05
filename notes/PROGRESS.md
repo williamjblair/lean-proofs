@@ -703,7 +703,7 @@
   original common-prime conclusion. This is a certificate consumer, not a
   proof that the kernel is empty.
 - [R]/[E] Connected finite lower-bounded certificates back to the original
-  problem surface for four `n = 3 * 2^A` Case-I members. For `A = 5`,
+  problem surface for five `n = 3 * 2^A` Case-I members. For `A = 5`,
   `Erdos699.i_three_caseI_96_not_no_common_from_row_bounds` rules out the
   no-common-prime counterexample criterion for every `j` with `3 < j` and
   `2 * j ≤ 96`, and
@@ -725,12 +725,21 @@
   split over `37` and `83`, and
   `Erdos699.i_three_caseI_3072_exists_common_from_row_bounds` gives the
   analogous common-prime witness statement for every `j` with `3 < j` and
-  `2 * j ≤ 3072`. Reproduce the exact `A = 9` scan with
+  `2 * j ≤ 3072`. For `A = 12`,
+  `Erdos699.not_exists_kernelInRange_12287_6143_4_12288` proves the exact
+  lower-bounded kernel certificate with row-one list `[2234]`, using a
+  modular split over `11` and `1117`, and
+  `Erdos699.i_three_caseI_12288_exists_common_from_row_bounds` gives the
+  analogous common-prime witness statement for every `j` with `3 < j` and
+  `2 * j ≤ 12288`. Reproduce the exact `A = 9` scan with
   `python3 -m compute.kernel --n1 1535 --n2 767 --bound 1536 --min-t 4 --include-row-one-candidates --include-quotient-gap-summary`,
   which reports `row_one_candidates = [615]`, `survivor_count = 0`, and
   `all_strict_lt_n2 = True`. Reproduce the exact `A = 10` scan with
   `python3 -m compute.kernel --n1 3071 --n2 1535 --bound 3072 --min-t 4 --include-row-one-candidates --include-quotient-gap-summary`,
   which reports `row_one_candidates = [333]`, `survivor_count = 0`, and
+  `all_strict_lt_n2 = True`. Reproduce the exact `A = 12` scan with
+  `python3 -m compute.kernel --n1 12287 --n2 6143 --bound 12288 --min-t 4 --include-row-one-candidates --include-row-one-splits --include-quotient-gap-summary`,
+  which reports `row_one_candidates = [2234]`, `survivor_count = 0`, and
   `all_strict_lt_n2 = True`. These are end-to-end Lean-certified finite
   instances, not a general Case-I theorem.
 - [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
