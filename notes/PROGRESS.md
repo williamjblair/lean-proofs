@@ -1207,6 +1207,25 @@
   `[55573]`, `survivor_count = 0`, and `all_strict_lt_n2 = True`. These are
   additional end-to-end Lean-certified finite instances, not a general Case-I
   theorem.
+- [R]/[E] Extended the lower-bounded Case-I finite certificate chain through
+  four further `n = 3 * 2^A` members. `Erdos699.not_exists_kernelInRange_393215_196607_4_393216`,
+  `Erdos699.not_exists_kernelInRange_786431_393215_4_786432`,
+  `Erdos699.not_exists_kernelInRange_1572863_786431_4_1572864`, and
+  `Erdos699.not_exists_kernelInRange_3145727_1572863_4_3145728` prove the
+  exact lower-bounded C2 kernel is empty for `A = 17`, `A = 18`, `A = 19`,
+  and `A = 20`, using row-one lists `[157286]`, `[]`, `[22153]`, and
+  `[967916]` respectively. The wrappers
+  `Erdos699.i_three_caseI_393216_exists_common_from_row_bounds`,
+  `Erdos699.i_three_caseI_786432_exists_common_from_row_bounds`,
+  `Erdos699.i_three_caseI_1572864_exists_common_from_row_bounds`, and
+  `Erdos699.i_three_caseI_3145728_exists_common_from_row_bounds` give the
+  original row-3 common-prime conclusion for every `j` with `3 < j` and
+  `2 * j ≤ n` at those four `n`. Reproduce the exact scan with
+  `python3 -m compute.kernel --case-i-power-two --min-exponent 17 --max-exponent 20 --include-row-one-candidates --include-row-one-splits --include-quotient-gap-summary`;
+  it reports four instances, row-one candidates `[157286]`, `[]`, `[22153]`,
+  and `[967916]`, `survivor_count = 0`, and `all_strict_lt_n2 = True`. These
+  are additional end-to-end Lean-certified finite instances, not a general
+  Case-I theorem.
 - [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
   product inequality is false under C2 shape hypotheses alone:
   `n = 54,734,052`, `N1 = n - 1`, `N2 = n / 2 - 1`, and
