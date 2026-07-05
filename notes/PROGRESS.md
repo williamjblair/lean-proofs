@@ -45,6 +45,14 @@
   `without_obstruction_count = 0`, and first-obstruction histogram
   `{3: 5, 5: 1, 7: 1}`. This is still bounded finite evidence under a prime
   cap, not a global digit-compatibility theorem.
+- [E] Added a single-candidate normalized/original classifier:
+  `python3 -m compute.kernel --diagnose-squeezed-candidate --candidate-f 3 --candidate-x 432184014644 --candidate-t 186954166997 --candidate-g 35360510289 --original-obstruction-prime-limit 11`
+  reports `row_one_holds = true`,
+  `squeezed_normalized_case_i_kernel_holds = true`,
+  `original_row_three_point_in_range = true`, and
+  `original_row_three_obstruction_primes = [5, 11]`. This is the exact
+  reproducible classification of the positive normalized survivor as outside
+  the original no-common-prime surface under the checked finite cap.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.

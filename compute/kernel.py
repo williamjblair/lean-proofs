@@ -158,6 +158,46 @@ def squeezed_candidate_original_row_three_obstructions(
     return criterion_obstruction_primes(n, 3, j, primes=primes_upto(prime_limit))
 
 
+def diagnose_squeezed_normalized_candidate(
+    F: int,
+    X: int,
+    t: int,
+    g: int,
+    original_obstruction_prime_limit: int | None = None,
+) -> dict[str, Any]:
+    if F < 0 or X < 0 or t < 0 or g < 0:
+        raise ValueError("F, X, t, and g must be nonnegative")
+    if original_obstruction_prime_limit is not None and original_obstruction_prime_limit < 0:
+        raise ValueError("original_obstruction_prime_limit must be nonnegative")
+    n = F * X
+    j = F * t
+    diagnostic: dict[str, Any] = {
+        "F": F,
+        "X": X,
+        "t": t,
+        "g": g,
+        "n": n,
+        "j": j,
+        "row_one_holds": t * (X - t) == g * (n - 1),
+        "squeezed_normalized_case_i_kernel_holds":
+            squeezed_normalized_case_i_kernel_holds(F, X, t, g),
+        "original_row_three_point_in_range": 1 <= 3 < j <= n // 2,
+    }
+    if original_obstruction_prime_limit is not None:
+        obstructions = squeezed_candidate_original_row_three_obstructions(
+            F, X, t, original_obstruction_prime_limit
+        )
+        diagnostic.update(
+            {
+                "original_obstruction_prime_limit": original_obstruction_prime_limit,
+                "original_row_three_obstruction_primes": obstructions,
+                "original_row_three_has_obstruction": bool(obstructions),
+                "original_row_three_digit_compatible_under_cap": not obstructions,
+            }
+        )
+    return diagnostic
+
+
 def _squeezed_candidate_diagnostic(
     candidate: dict[str, int],
     original_obstruction_prime_limit: int | None = None,
@@ -664,6 +704,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--min-t", type=int)
     parser.add_argument("--case-i-power-two", action="store_true")
     parser.add_argument("--squeezed-normalized-case-i", action="store_true")
+    parser.add_argument("--diagnose-squeezed-candidate", action="store_true")
+    parser.add_argument("--candidate-f", type=int)
+    parser.add_argument("--candidate-x", type=int)
+    parser.add_argument("--candidate-t", type=int)
+    parser.add_argument("--candidate-g", type=int)
     parser.add_argument("--max-f", type=int)
     parser.add_argument("--max-x", type=int)
     parser.add_argument("--min-exponent", type=int, default=2)
@@ -677,7 +722,25 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--include-quotient-gap-summary", action="store_true")
     parser.add_argument("--original-obstruction-prime-limit", type=int)
     args = parser.parse_args(argv)
-    if args.case_i_power_two:
+    if args.diagnose_squeezed_candidate:
+        if (
+            args.candidate_f is None
+            or args.candidate_x is None
+            or args.candidate_t is None
+            or args.candidate_g is None
+        ):
+            parser.error(
+                "--diagnose-squeezed-candidate requires --candidate-f, "
+                "--candidate-x, --candidate-t, and --candidate-g"
+            )
+        result = diagnose_squeezed_normalized_candidate(
+            args.candidate_f,
+            args.candidate_x,
+            args.candidate_t,
+            args.candidate_g,
+            original_obstruction_prime_limit=args.original_obstruction_prime_limit,
+        )
+    elif args.case_i_power_two:
         if args.max_exponent is None:
             parser.error("--case-i-power-two requires --max-exponent")
         min_t = 4 if args.min_t is None else args.min_t

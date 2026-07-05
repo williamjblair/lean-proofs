@@ -7,6 +7,7 @@ import pytest
 
 from compute.kernel import (
     consecutive_kernel_holds,
+    diagnose_squeezed_normalized_candidate,
     scan_squeezed_normalized_case_i_kernel,
     squeezed_normalized_case_i_kernel_holds,
     squeezed_row_one_candidates_discriminant,
@@ -616,6 +617,31 @@ def test_squeezed_normalized_predicate_has_positive_row_counterexample() -> None
     assert squeezed_normalized_case_i_kernel_holds(F, X, u, g)
 
 
+def test_diagnose_squeezed_normalized_candidate_classifies_original_digit_failure() -> None:
+    diagnostic = diagnose_squeezed_normalized_candidate(
+        3,
+        432184014644,
+        186954166997,
+        35360510289,
+        original_obstruction_prime_limit=11,
+    )
+    assert diagnostic == {
+        "F": 3,
+        "X": 432184014644,
+        "t": 186954166997,
+        "g": 35360510289,
+        "n": 1296552043932,
+        "j": 560862500991,
+        "row_one_holds": True,
+        "squeezed_normalized_case_i_kernel_holds": True,
+        "original_row_three_point_in_range": True,
+        "original_obstruction_prime_limit": 11,
+        "original_row_three_obstruction_primes": [5, 11],
+        "original_row_three_has_obstruction": True,
+        "original_row_three_digit_compatible_under_cap": False,
+    }
+
+
 def test_squeezed_candidate_original_row_three_obstructions_find_digit_kill() -> None:
     F, X, u = 3, 432184014644, 186954166997
     assert squeezed_candidate_original_row_three_obstructions(F, X, u, 3) == []
@@ -918,3 +944,31 @@ def test_kernel_cli_can_include_squeezed_original_obstruction_diagnostics() -> N
     assert payload["candidate_diagnostics"][0][
         "original_row_three_obstruction_primes"
     ] == [3, 11]
+
+
+def test_kernel_cli_can_diagnose_single_squeezed_candidate() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--diagnose-squeezed-candidate",
+            "--candidate-f",
+            "3",
+            "--candidate-x",
+            "432184014644",
+            "--candidate-t",
+            "186954166997",
+            "--candidate-g",
+            "35360510289",
+            "--original-obstruction-prime-limit",
+            "11",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["squeezed_normalized_case_i_kernel_holds"] is True
+    assert payload["original_row_three_obstruction_primes"] == [5, 11]
+    assert payload["original_row_three_digit_compatible_under_cap"] is False
