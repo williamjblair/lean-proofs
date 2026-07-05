@@ -537,5 +537,11 @@
   verify this is not a row-3 obstruction candidate because primes `541` and
   `8431` divide `n` and violate Lucas digit domination for `j = t`. Reproduce
   with `python3 -m pytest compute/tests/test_kernel.py compute/tests/test_criterion.py -q`.
+- [R] Proved the normalized Case-I gap-square identity:
+  `Erdos699.four_mul_t_mul_X_sub_t_add_gap_sq_eq_sq` formalizes
+  `4 * t * (X - t) + (X - 2 * t)^2 = X^2` under `2 * t ≤ X`, and
+  `Erdos699.row_one_factor_gap_sq_eq_sq` specializes it to the row-one factor
+  equation `t * (X - t) = g * (n - 1)`. This banks the exact algebra used by
+  the squeezed normalized/Pell-style C2 lane; it is not a kernel contradiction.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

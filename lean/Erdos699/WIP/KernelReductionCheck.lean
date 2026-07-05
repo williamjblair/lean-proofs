@@ -54,5 +54,7 @@ namespace Erdos699
 #check not_consecutiveDivisorKernelBelow_of_row_two_gcd_lt
 #check rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_of_row_two_gcd_lt
 #check i_three_caseI_four_dvd_consecutive_kernel_below_from_no_common
+#check four_mul_t_mul_X_sub_t_add_gap_sq_eq_sq
+#check row_one_factor_gap_sq_eq_sq
 
 end Erdos699

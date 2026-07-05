@@ -1970,6 +1970,27 @@ theorem four_mul_t_mul_X_sub_t_le_sq {X t : ℕ} (h2tX : 2 * t ≤ X) :
     simpa [hcast_sub] using hcalc
   exact_mod_cast h_int
 
+theorem four_mul_t_mul_X_sub_t_add_gap_sq_eq_sq {X t : ℕ} (h2tX : 2 * t ≤ X) :
+    4 * (t * (X - t)) + (X - 2 * t) * (X - 2 * t) = X * X := by
+  have htX : t ≤ X := by omega
+  have hcast_Xt : ((X - t : ℕ) : ℤ) = (X : ℤ) - (t : ℤ) := Nat.cast_sub htX
+  have hcast_gap : ((X - 2 * t : ℕ) : ℤ) = (X : ℤ) - 2 * (t : ℤ) := by
+    have h :
+        ((X - 2 * t : ℕ) : ℤ) = (X : ℤ) - ((2 * t : ℕ) : ℤ) :=
+      Nat.cast_sub h2tX
+    simpa [Nat.cast_mul, mul_assoc, mul_comm, mul_left_comm] using h
+  have h_int :
+      ((4 * (t * (X - t)) + (X - 2 * t) * (X - 2 * t) : ℕ) : ℤ) =
+        ((X * X : ℕ) : ℤ) := by
+    simp [hcast_Xt, hcast_gap]
+    ring
+  exact_mod_cast h_int
+
+theorem row_one_factor_gap_sq_eq_sq {n X t g : ℕ} (h2tX : 2 * t ≤ X)
+    (hrow1 : t * (X - t) = g * (n - 1)) :
+    4 * (g * (n - 1)) + (X - 2 * t) * (X - 2 * t) = X * X := by
+  simpa [hrow1] using four_mul_t_mul_X_sub_t_add_gap_sq_eq_sq (X := X) (t := t) h2tX
+
 theorem four_mul_d_le_sq_of_dvd_t_mul_X_sub_t {d X t : ℕ}
     (ht_pos : 0 < t) (h2tX : 2 * t ≤ X) (hdvd : d ∣ t * (X - t)) :
     4 * d ≤ X * X := by
