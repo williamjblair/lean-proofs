@@ -4458,6 +4458,95 @@ theorem not_dvd_mul_of_reduced_divisor_gt {M c L : ℕ}
   have hle : M / Nat.gcd c M ≤ L := Nat.le_of_dvd hLpos hred
   exact (not_le_of_gt hlt) hle
 
+/-- If the right modulus is odd, the gcd of an even left factor with it is at
+most half of the left factor. This is the parity refinement behind the
+current reduced-divisor C2 target. -/
+theorem gcd_le_half_of_even_left_odd_right {c M : ℕ}
+    (hcpos : 0 < c)
+    (hceven : Even c)
+    (hModd : Odd M) :
+    Nat.gcd c M ≤ c / 2 := by
+  rcases hceven with ⟨k, hk⟩
+  have hkpos : 0 < k := by omega
+  have hgcd_dvd_c : Nat.gcd c M ∣ c := Nat.gcd_dvd_left c M
+  have hgcd_dvd_M : Nat.gcd c M ∣ M := Nat.gcd_dvd_right c M
+  have hgcd_odd : Odd (Nat.gcd c M) := hModd.of_dvd_nat hgcd_dvd_M
+  have hcop_two : (Nat.gcd c M).Coprime 2 :=
+    Nat.coprime_two_right.mpr hgcd_odd
+  have htwo : c = 2 * k := by omega
+  have hdvd_two_k : Nat.gcd c M ∣ 2 * k := by
+    simpa [htwo] using hgcd_dvd_c
+  have hdvd_k : Nat.gcd c M ∣ k := by
+    exact hcop_two.dvd_of_dvd_mul_right (by simpa [mul_comm] using hdvd_two_k)
+  have hle : Nat.gcd c M ≤ k := Nat.le_of_dvd hkpos hdvd_k
+  have hcdiv : c / 2 = k := by omega
+  simpa [hcdiv] using hle
+
+/-- Parity-branch sufficient gap certificate. For odd `c`, it is enough to
+show `L < M / c`; for even `c`, because the odd modulus can only share at most
+half of `c`, it is enough to show `L < M / (c / 2)`. -/
+theorem not_dvd_mul_of_parity_reduced_divisor_gt {M c L : ℕ}
+    (hMpos : 0 < M)
+    (hModd : Odd M)
+    (hcpos : 0 < c)
+    (hLpos : 0 < L)
+    (hgap : (Odd c ∧ L < M / c) ∨ (Even c ∧ L < M / (c / 2))) :
+    ¬ M ∣ c * L := by
+  refine not_dvd_mul_of_reduced_divisor_gt hMpos hLpos ?_
+  have hgcdpos : 0 < Nat.gcd c M := Nat.gcd_pos_of_pos_left M hcpos
+  rcases hgap with ⟨_hcodd, hgapc⟩ | ⟨hceven, hgapc⟩
+  · have hgcd_le_c : Nat.gcd c M ≤ c := Nat.gcd_le_left M hcpos
+    have hdiv_le : M / c ≤ M / Nat.gcd c M :=
+      Nat.div_le_div_left hgcd_le_c hgcdpos
+    exact lt_of_lt_of_le hgapc hdiv_le
+  · have hgcd_le_half : Nat.gcd c M ≤ c / 2 :=
+      gcd_le_half_of_even_left_odd_right hcpos hceven hModd
+    have hdiv_le : M / (c / 2) ≤ M / Nat.gcd c M :=
+      Nat.div_le_div_left hgcd_le_half hgcdpos
+    exact lt_of_lt_of_le hgapc hdiv_le
+
+/-- The half-row modulus is odd for the power-of-two split setting. -/
+theorem powerTwoSplit_half_row_odd {A B : ℕ}
+    (hA4 : 4 ∣ A)
+    (hApos : 0 < A)
+    (hBodd : Odd B) :
+    Odd (B * (A / 2) - 1) := by
+  rcases hA4 with ⟨q, hAeq⟩
+  rcases hBodd with ⟨_b, _hBeq⟩
+  have hqpos : 0 < q := by omega
+  have hBpos : 0 < B := by omega
+  have hBqpos : 0 < B * q := Nat.mul_pos hBpos hqpos
+  have hhalf : A / 2 = 2 * q := by
+    rw [hAeq]
+    omega
+  have hmul : B * (2 * q) = 2 * (B * q) := by ring
+  refine ⟨B * q - 1, ?_⟩
+  rw [hhalf, hmul]
+  omega
+
+/-- Split-level parity-branch certificate for the reduced divisor target. -/
+theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
+    {A B l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hApos : 0 < A)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hcpos : 0 < Nat.gcd alpha beta)
+    (hgap :
+      let c := Nat.gcd alpha beta
+      let M := B * (A / 2) - 1
+      (Odd c ∧ l * m < M / c) ∨ (Even c ∧ l * m < M / (c / 2))) :
+    ¬ B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m) := by
+  dsimp at hgap
+  exact not_dvd_mul_of_parity_reduced_divisor_gt
+    (powerTwoSplit_half_row_pos hA4 hBge hApos)
+    (powerTwoSplit_half_row_odd hA4 hApos hBodd)
+    hcpos
+    (Nat.mul_pos hlpos hmpos)
+    hgap
+
 /-- Split-level reduced-divisor gap certificate: if
 `l*m < M / gcd (gcd alpha beta) M`, then the split/gcd row-two divisibility
 fails. -/

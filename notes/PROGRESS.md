@@ -260,6 +260,16 @@
   a universal reduced-divisor gap inequality for all admissible positive
   splits implies `powerTwoSplitGcdObstruction A B`. This is a conditional
   reduction to an inequality target, not a proof of that inequality.
+- [R] Added a parity-refined sufficient inequality certificate for the same
+  reduced-divisor target. `Erdos699.gcd_le_half_of_even_left_odd_right`
+  proves that if `M` is odd and `c` is positive even, then
+  `Nat.gcd c M ≤ c / 2`; `Erdos699.powerTwoSplit_half_row_odd` proves the
+  half-row modulus `B * (A / 2) - 1` is odd under the split hypotheses; and
+  `Erdos699.not_dvd_mul_of_parity_reduced_divisor_gt` plus
+  `Erdos699.powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap`
+  prove the branch certificate: for odd `c`, `l*m < M/c` suffices, while for
+  even `c`, `l*m < M/(c/2)` suffices. This is still conditional; it does not
+  prove the branch inequalities.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
@@ -277,6 +287,16 @@
   `(a, A, B, v, h, r, s, l, m, alpha, beta, c, d, reduced_divisor, l*m) =
   (9, 512, 3, 205, 41, 5, 307, 41, 1, 2, 184, 2, 1, 767, 41)`. This is exact
   bounded evidence for the inequality certificate, not a global proof.
+- [E] Extended the power-two quotient gap diagnostics with the parity-branch
+  sufficient target. Reproduce with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(50,2001); print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"], r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"])'`.
+  It reports `49000` instances, `404` row-one candidates, `0` row-two
+  survivors, and parity summary
+  `candidate_count = 404`, `odd_c_count = 179`, `even_c_count = 225`,
+  `parity_gap_holds_count = 404`, `parity_gap_failure_count = 0`, with
+  minimum parity margin `726` at the same `(a, B, v, h) = (9, 3, 205, 41)`
+  candidate. This is bounded exact evidence for the parity branch target, not
+  a global proof.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` is outside
   the current deterministic 64-bit factorizer, the scan raises. With

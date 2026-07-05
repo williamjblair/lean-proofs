@@ -468,7 +468,7 @@ def _power_two_quotient_row_one_candidates(
 
 def _power_two_reduced_divisor_gap_diagnostic(
     candidate: dict[str, int],
-) -> dict[str, int | bool]:
+) -> dict[str, int | str | bool]:
     A = candidate["A"]
     B = candidate["B"]
     v = candidate["v"]
@@ -485,6 +485,12 @@ def _power_two_reduced_divisor_gap_diagnostic(
     reduced_divisor = half_row_modulus // d
     l_times_m = l * m
     gap_margin = reduced_divisor - l_times_m
+    c_is_even = c % 2 == 0
+    parity_gcd_bound = c // 2 if c_is_even else c
+    if parity_gcd_bound <= 0:
+        raise AssertionError("positive split diagnostic must have positive gcd bound")
+    parity_reduced_divisor_lower_bound = half_row_modulus // parity_gcd_bound
+    parity_gap_margin = parity_reduced_divisor_lower_bound - l_times_m
     return {
         "exponent": candidate["exponent"],
         "A": A,
@@ -503,6 +509,37 @@ def _power_two_reduced_divisor_gap_diagnostic(
         "l_times_m": l_times_m,
         "gap_margin": gap_margin,
         "gap_holds": l_times_m < reduced_divisor,
+        "c_parity": "even" if c_is_even else "odd",
+        "parity_gcd_bound": parity_gcd_bound,
+        "parity_reduced_divisor_lower_bound": parity_reduced_divisor_lower_bound,
+        "parity_gap_margin": parity_gap_margin,
+        "parity_gap_holds": l_times_m < parity_reduced_divisor_lower_bound,
+    }
+
+
+def _power_two_parity_branch_gap_summary(
+    diagnostics: list[dict[str, int | str | bool]],
+) -> dict[str, Any]:
+    parity_gap_holds_count = sum(
+        1 for item in diagnostics if item["parity_gap_holds"]
+    )
+    min_parity_gap_candidate = min(
+        diagnostics,
+        key=lambda item: int(item["parity_gap_margin"]),
+        default=None,
+    )
+    return {
+        "candidate_count": len(diagnostics),
+        "odd_c_count": sum(1 for item in diagnostics if item["c_parity"] == "odd"),
+        "even_c_count": sum(1 for item in diagnostics if item["c_parity"] == "even"),
+        "parity_gap_holds_count": parity_gap_holds_count,
+        "parity_gap_failure_count": len(diagnostics) - parity_gap_holds_count,
+        "min_parity_gap_margin": (
+            None
+            if min_parity_gap_candidate is None
+            else min_parity_gap_candidate["parity_gap_margin"]
+        ),
+        "min_parity_gap_candidate": min_parity_gap_candidate,
     }
 
 
@@ -525,6 +562,9 @@ def _power_two_reduced_divisor_gap_summary(
             None if min_gap_candidate is None else min_gap_candidate["gap_margin"]
         ),
         "min_gap_candidate": min_gap_candidate,
+        "parity_branch_gap_summary": _power_two_parity_branch_gap_summary(
+            diagnostics
+        ),
     }
 
 
