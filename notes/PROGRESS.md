@@ -116,6 +116,24 @@
   `∃ v h, powerTwoQuotientKernel A (F * H) v h`. The remaining digit-work is
   now narrowed to constructing such an odd factor `H` from
   `rowNDigitPowerConstraint X u` and the power-of-two quotient of `X`.
+- [R] Proved the all-odd-prime-powers-forced divisor extraction. The theorem
+  `Erdos699.rowNDigitPowerConstraint.dvd_of_factor_dvd` shows that if
+  `H ∣ X`, `H ≠ 0`, and every prime divisor of `H` is at least `3`, then
+  `rowNDigitPowerConstraint X u` forces `H ∣ u`. The helper
+  `Erdos699.odd_prime_divisor_ge_three` discharges the prime-divisor condition
+  when `H` is odd, and
+  `Erdos699.exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigit_factor`
+  combines this with the quotient bridge to produce
+  `∃ v h, powerTwoQuotientKernel A (F * H) v h` from a squeezed normalized
+  kernel point plus `rowNDigitPowerConstraint X u`, `X = A * H`, `4 ∣ A`,
+  `A = 2 ^ a`, and odd `H`. This is the unguarded/all-forced branch; the
+  globally guarded row-`n` reduction still needs its branch condition.
+- [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
+  sharp target from the split analysis is the obstruction
+  `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under
+  `A = 2 ^ a`, `4 ∣ A`, odd `B ≥ 3`, `r * s = B * A - 1`,
+  `r * l + s * m = A`, and `r * l < s * m`. This is a research target, not a
+  banked theorem.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.

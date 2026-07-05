@@ -3768,6 +3768,41 @@ theorem not_rowNDigitPowerConstraint_of_prime_power_counterexample
   intro h
   exact hu (h hp hp3 hX)
 
+/-- Any prime divisor of an odd natural number is at least `3`. -/
+theorem odd_prime_divisor_ge_three {H p : ℕ} (hHodd : Odd H)
+    (hp : Nat.Prime p) (hpd : p ∣ H) :
+    3 ≤ p := by
+  rw [← hp.odd_iff]
+  rw [← Nat.not_even_iff_odd]
+  intro hpeven
+  have hp2 : p = 2 := hp.even_iff.mp hpeven
+  subst p
+  exact hHodd.not_two_dvd_nat hpd
+
+/-- Extract a full divisor from the row-`n` digit-power condition when every
+prime divisor of that factor is relevant for row `3`. This is the formal
+version of turning the odd prime-power part of `X` into a divisor of `u`. -/
+theorem rowNDigitPowerConstraint.dvd_of_factor_dvd
+    {X u H : ℕ} (hrow : rowNDigitPowerConstraint X u) (hHX : H ∣ X)
+    (hH0 : H ≠ 0) (hprime : ∀ p : ℕ, Nat.Prime p → p ∣ H → 3 ≤ p) :
+    H ∣ u := by
+  by_cases hu0 : u = 0
+  · subst u
+    exact dvd_zero H
+  · rw [← Nat.factorization_prime_le_iff_dvd hH0 hu0]
+    intro p hp
+    by_cases hHp0 : H.factorization p = 0
+    · simp [hHp0]
+    · have hp_dvd_H : p ∣ H := by
+        rw [hp.dvd_iff_one_le_factorization hH0]
+        omega
+      have hp3 : 3 ≤ p := hprime p hp hp_dvd_H
+      have hpowH : p ^ H.factorization p ∣ H := by
+        rw [hp.pow_dvd_iff_le_factorization hH0]
+      have hpowX : p ^ H.factorization p ∣ X := Nat.dvd_trans hpowH hHX
+      have hpowu : p ^ H.factorization p ∣ u := hrow hp hp3 hpowX
+      exact (hp.pow_dvd_iff_le_factorization hu0).mp hpowu
+
 /-- The pure power-of-two quotient kernel isolated after imposing the
 normalized row-`n` digit-power constraint. The conjectural next lemma is that
 this predicate is empty. -/
@@ -3964,6 +3999,28 @@ theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_factor_dvd
       hkernel hX hu hA4 hApow hHodd hcopRow hcopHalf with
     ⟨h, hq⟩
   exact ⟨v, h, hq⟩
+
+/-- Combine the row-`n` digit-power extraction with the quotient-kernel
+bridge in the all-odd-prime-powers-forced branch. If `X = A * H` with odd
+`H`, and `A` is the power-of-two quotient, then a squeezed normalized kernel
+point yields a pure `powerTwoQuotientKernel` point. -/
+theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigit_factor
+    {F X u g A H : ℕ}
+    (hkernel : squeezedNormalizedCaseIKernel F X u g)
+    (hrow : rowNDigitPowerConstraint X u)
+    (hX : X = A * H)
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H) :
+    ∃ v h : ℕ, powerTwoQuotientKernel A (F * H) v h := by
+  have hH0 : H ≠ 0 := ne_of_gt hHodd.pos
+  have hHX : H ∣ X := by
+    refine ⟨A, ?_⟩
+    rw [hX, mul_comm]
+  have hHu : H ∣ u := hrow.dvd_of_factor_dvd hHX hH0
+    (fun p hp hpd => odd_prime_divisor_ge_three hHodd hp hpd)
+  exact exists_powerTwoQuotientKernel_of_squeezedNormalized_factor_dvd
+    hkernel hX hHu hA4 hApow hHodd
 
 theorem squeezedNormalizedCaseIKernel_zero_t_false {F X g : ℕ} :
     ¬ squeezedNormalizedCaseIKernel F X 0 g := by
