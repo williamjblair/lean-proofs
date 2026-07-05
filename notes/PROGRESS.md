@@ -268,6 +268,18 @@
   states the surviving obstruction exactly as `M / d ∤ l * m`. This is an
   exact equivalence for admissible splits, not a proof that the obstruction
   holds universally.
+- [R] Lifted reduced-divisor survival to the pure quotient-kernel interface.
+  `Erdos699.powerTwoQuotientKernel.exists_row_one_split_with_reduced_divisor_survival`
+  proves that every `powerTwoQuotientKernel A B v h` yields positive split
+  data `r,s,l,m,alpha,beta` satisfying the row-one split equations and
+  `M / d ∣ l * m`, with `c = Nat.gcd alpha beta`,
+  `M = B * (A / 2) - 1`, and `d = Nat.gcd c M`. The consumers
+  `Erdos699.powerTwoQuotientKernel.not_of_no_reduced_divisor_survival_split`
+  and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_no_reduced_divisor_survival_split`
+  show that a universal no-survivor theorem for admissible positive splits
+  eliminates the pure quotient kernel. This is still a conditional reduction:
+  the universal no-survivor statement remains open.
 - [R] Isolated a sufficient inequality certificate for the remaining
   split/gcd obstruction. The generic theorem
   `Erdos699.not_dvd_mul_of_reduced_divisor_gt` proves that, for positive

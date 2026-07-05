@@ -7732,6 +7732,116 @@ theorem powerTwoQuotientKernel.exists_row_one_split_with_row_two {A B v h : ℕ}
   exact ⟨r, s, l, m, hrpos, hspos, hlpos, hmpos, hD, hv, hAv, hsum, hgap, hh,
     powerTwoQuotientKernel.row_two_split_dvd hkernel hv hAv hh⟩
 
+/-- A quotient-kernel point produces a canonical positive row-one split whose
+row-two condition is exactly reduced-divisor survival. -/
+theorem powerTwoQuotientKernel.exists_row_one_split_with_reduced_divisor_survival
+    {A B v h : ℕ}
+    (hkernel : powerTwoQuotientKernel A B v h) :
+    ∃ r s l m alpha beta : ℕ,
+      0 < r ∧ 0 < s ∧ 0 < l ∧ 0 < m ∧
+        r * s = B * A - 1 ∧
+          v = r * l ∧
+            A - v = s * m ∧
+              r * l + s * m = A ∧
+                r * l < s * m ∧
+                  h = l * m ∧
+                    alpha = r - B * m ∧
+                      beta = s - B * l ∧
+                        let c := Nat.gcd alpha beta
+                        let M := B * (A / 2) - 1
+                        let d := Nat.gcd c M
+                        M / d ∣ l * m := by
+  rcases hkernel with
+    ⟨hA4, hApow, hBodd, hBge, hvpos, hgap_kernel, hrow, hhalf⟩
+  let hkernel' : powerTwoQuotientKernel A B v h :=
+    ⟨hA4, hApow, hBodd, hBge, hvpos, hgap_kernel, hrow, hhalf⟩
+  rcases powerTwoQuotientKernel.exists_row_one_split_with_row_two hkernel' with
+    ⟨r, s, l, m, hrpos, hspos, hlpos, hmpos, hD, hv, hAv, hsum, hgap,
+      hh, hrowtwo⟩
+  let alpha := r - B * m
+  let beta := s - B * l
+  have hred :
+      let c := Nat.gcd alpha beta
+      let M := B * (A / 2) - 1
+      let d := Nat.gcd c M
+      M / d ∣ l * m := by
+    dsimp [alpha, beta]
+    exact
+      (powerTwoSplitSubtractive_row_two_delta_dvd_iff_reduced_divisor
+        (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+        (alpha := r - B * m) (beta := s - B * l) hA4 hBge hrpos hspos
+        hlpos hmpos hgap hD hsum rfl rfl).mp hrowtwo
+  exact ⟨r, s, l, m, alpha, beta, hrpos, hspos, hlpos, hmpos, hD, hv, hAv,
+    hsum, hgap, hh, rfl, rfl, hred⟩
+
+/-- Exact no-survivor consumer: if every admissible positive split fails the
+reduced-divisor survival condition, then the quotient kernel is empty at the
+pointwise level. -/
+theorem powerTwoQuotientKernel.not_of_no_reduced_divisor_survival_split
+    {A B v h : ℕ}
+    (hnoSurvivor :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  let d := Nat.gcd c M
+                                  ¬ M / d ∣ l * m) :
+    ¬ powerTwoQuotientKernel A B v h := by
+  intro hkernel
+  rcases hkernel with
+    ⟨hA4, hApow, hBodd, hBge, hvpos, hgap_kernel, hrow, hhalf⟩
+  let hkernel' : powerTwoQuotientKernel A B v h :=
+    ⟨hA4, hApow, hBodd, hBge, hvpos, hgap_kernel, hrow, hhalf⟩
+  rcases
+    powerTwoQuotientKernel.exists_row_one_split_with_reduced_divisor_survival
+      hkernel' with
+    ⟨r, s, l, m, alpha, beta, hrpos, hspos, hlpos, hmpos, hD, _hv, _hAv,
+      hsum, hgap, _hh, halpha, hbeta, hred⟩
+  exact
+    (hnoSurvivor hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos
+      hlpos hmpos hD hsum hgap halpha hbeta) hred
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_no_reduced_divisor_survival_split`. -/
+theorem not_exists_powerTwoQuotientKernel_of_no_reduced_divisor_survival_split
+    {A B : ℕ}
+    (hnoSurvivor :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  let d := Nat.gcd c M
+                                  ¬ M / d ∣ l * m) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact
+    powerTwoQuotientKernel.not_of_no_reduced_divisor_survival_split
+      hnoSurvivor hkernel
+
 /-- Conditional consumer for the split/gcd obstruction: once
 `powerTwoSplitGcdObstruction A B` is supplied, the pure power-two quotient
 kernel is empty for that `A, B`. This does not prove the obstruction itself;
