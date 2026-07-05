@@ -28,6 +28,7 @@ _CERTIFIED_PRIME_LIMIT = 2**64
 _UNCERTIFIED_PRIME_FACTOR_REASON = (
     "prime_power_factorization cannot certify primality for factor >= 2^64"
 )
+_POCKLINGTON_WITNESS_LIMIT = 256
 
 
 def _passes_miller_rabin_bases(n: int) -> bool:
@@ -66,6 +67,38 @@ def _is_certified_prime(n: int) -> bool:
     return _passes_miller_rabin_bases(n)
 
 
+def _pocklington_witness_for_prime_factor(n: int, q: int) -> int | None:
+    exponent = (n - 1) // q
+    for a in range(2, _POCKLINGTON_WITNESS_LIMIT + 1):
+        if math.gcd(a, n) != 1:
+            continue
+        if pow(a, n - 1, n) != 1:
+            return None
+        if math.gcd(pow(a, exponent, n) - 1, n) == 1:
+            return a
+    return None
+
+
+def _is_pocklington_certified_prime(n: int) -> bool:
+    if n < 2:
+        return False
+    if n < _CERTIFIED_PRIME_LIMIT:
+        return _is_certified_prime(n)
+    try:
+        factors = prime_power_factorization(n - 1)
+    except ValueError:
+        return False
+    factor_product = 1
+    for _prime, prime_power in factors:
+        factor_product *= prime_power
+    if factor_product != n - 1 or factor_product * factor_product <= n:
+        return False
+    return all(
+        _pocklington_witness_for_prime_factor(n, prime) is not None
+        for prime, _prime_power in factors
+    )
+
+
 def _pollard_rho_factor(n: int) -> int:
     if n % 2 == 0:
         return 2
@@ -93,6 +126,9 @@ def _collect_prime_factors(n: int, factors: list[int]) -> None:
         factors.append(n)
         return
     if n >= _CERTIFIED_PRIME_LIMIT and _passes_miller_rabin_bases(n):
+        if _is_pocklington_certified_prime(n):
+            factors.append(n)
+            return
         raise ValueError(_UNCERTIFIED_PRIME_FACTOR_REASON)
     factor = _pollard_rho_factor(n)
     _collect_prime_factors(factor, factors)

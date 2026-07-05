@@ -59,9 +59,9 @@ def test_prime_power_factorization_splits_large_certified_composite() -> None:
     assert _factorization_product(factors) == n
 
 
-def test_prime_power_factorization_rejects_large_uncertified_prime_factor() -> None:
-    with pytest.raises(ValueError, match=r"cannot certify primality"):
-        prime_power_factorization(17 * 2**60 - 1)
+def test_prime_power_factorization_certifies_large_pocklington_prime() -> None:
+    n = 17 * 2**60 - 1
+    assert prime_power_factorization(n) == [(n, n)]
 
 
 def test_kernel_predicate_uses_both_rows_and_bound() -> None:
@@ -875,7 +875,7 @@ def test_power_two_quotient_scan_rejects_inverted_exponent_range() -> None:
         scan_power_two_quotient_kernel(max_exponent=4, max_b=101, min_exponent=5)
 
 
-def test_power_two_quotient_scan_can_report_factorization_skips() -> None:
+def test_power_two_quotient_scan_certifies_large_prime_modulus() -> None:
     result = scan_power_two_quotient_kernel(
         max_exponent=60,
         max_b=17,
@@ -884,20 +884,9 @@ def test_power_two_quotient_scan_can_report_factorization_skips() -> None:
     )
 
     assert result["instance_count"] == 8
-    assert result["factorized_instance_count"] == 7
-    assert result["skipped_instance_count"] == 1
-    assert result["skipped_instances"] == [
-        {
-            "exponent": 60,
-            "A": 2**60,
-            "B": 17,
-            "row_one_modulus": 17 * 2**60 - 1,
-            "reason": (
-                "prime_power_factorization cannot certify primality for "
-                "factor >= 2^64"
-            ),
-        }
-    ]
+    assert result["factorized_instance_count"] == 8
+    assert result["skipped_instance_count"] == 0
+    assert result["skipped_instances"] == []
     assert result["row_one_candidate_count"] == 3
     assert result["survivor_count"] == 0
     assert result["reduced_divisor_gap_summary"]["candidate_count"] == 3
@@ -967,15 +956,6 @@ def test_power_two_quotient_scan_can_report_factorization_skips() -> None:
             "parity_product_gap_holds": True,
         },
     }
-
-
-def test_power_two_quotient_scan_is_strict_by_default_on_factorization_limit() -> None:
-    with pytest.raises(ValueError, match=r"cannot certify primality"):
-        scan_power_two_quotient_kernel(
-            max_exponent=60,
-            max_b=17,
-            min_exponent=60,
-        )
 
 
 def test_power_two_quotient_scan_factors_large_composite_modulus() -> None:
@@ -1201,7 +1181,7 @@ def test_kernel_cli_can_scan_power_two_quotient_kernel() -> None:
     assert payload["reduced_divisor_gap_summary"]["min_gap_margin"] == 726
 
 
-def test_kernel_cli_can_report_power_two_factorization_skips() -> None:
+def test_kernel_cli_can_certify_large_prime_power_two_modulus() -> None:
     completed = subprocess.run(
         [
             sys.executable,
@@ -1222,20 +1202,9 @@ def test_kernel_cli_can_report_power_two_factorization_skips() -> None:
     )
     payload = json.loads(completed.stdout)
     assert payload["instance_count"] == 8
-    assert payload["factorized_instance_count"] == 7
-    assert payload["skipped_instance_count"] == 1
-    assert payload["skipped_instances"] == [
-        {
-            "exponent": 60,
-            "A": 2**60,
-            "B": 17,
-            "row_one_modulus": 17 * 2**60 - 1,
-            "reason": (
-                "prime_power_factorization cannot certify primality for "
-                "factor >= 2^64"
-            ),
-        }
-    ]
+    assert payload["factorized_instance_count"] == 8
+    assert payload["skipped_instance_count"] == 0
+    assert payload["skipped_instances"] == []
     assert payload["survivor_count"] == 0
 
 

@@ -341,30 +341,27 @@
   `parity_product_gap_failure_count = 0`, and minimum product margin `725`.
   This is bounded exact evidence for the product target, not a global proof.
 - [E] Upgraded the exact factorizer so row-one moduli above `2^64` are no
-  longer skipped merely for size: they are recursively split when possible,
-  and the scan counts them only when every terminal prime factor is certified
-  below the deterministic `2^64` primality range. Unresolved large probable
-  prime factors still raise/skip. Reproduce the enlarged power-two quotient
-  perimeter through exponent `62` for odd `B <= 2001` with
-  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(62,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"], r["reduced_divisor_gap_summary"]["gap_failure_count"], p["parity_product_gap_failure_count"], p["min_parity_product_margin"])'`.
-  It reports `61000 60235 765 664 0 0 0 725`. This is exact evidence only
-  for the `60235` fully certified factorized instances; the `765` skipped
-  instances remain outside this command's verification perimeter.
+  longer skipped merely for size: composites are recursively split when
+  possible, and large probable primes are accepted only through exact
+  Pocklington witnesses whose `n - 1` factors are recursively certified.
+  Reproduce the enlarged power-two quotient perimeter through exponent `70`
+  for odd `B <= 2001` with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"], r["reduced_divisor_gap_summary"]["gap_failure_count"], p["parity_product_gap_failure_count"], p["min_parity_product_margin"])'`.
+  It reports `69000 69000 0 880 0 0 0 725`. This is exact bounded evidence
+  for the listed range, not a proof of the universal parity-product gap.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` leaves an
   uncertified prime factor at least `2^64`, the scan raises. With
   `--skip-factorization-failures`, skipped instances are listed explicitly and
-  are not counted as factorized evidence. Reproduce the large-prime boundary
+  are not counted as factorized evidence. Reproduce the now-certified
+  large-prime boundary
   check with
   `python3 -m compute.kernel --power-two-quotient-kernel --min-exponent 60 --max-exponent 60 --max-b 17 --skip-factorization-failures`;
-  it reports `instance_count = 8`, `factorized_instance_count = 7`,
-  `skipped_instance_count = 1`, the skipped pair `(a, B) = (60, 17)` with
-  row-one modulus `19599665578316398591`, `row_one_candidate_count = 3`,
+  it reports `instance_count = 8`, `factorized_instance_count = 8`,
+  `skipped_instance_count = 0`, `row_one_candidate_count = 3`,
   `survivor_count = 0`, and reduced-divisor gap summary
   `candidate_count = 3`, `gap_failure_count = 0`,
-  `min_gap_margin = 1654181948285415974`. This is exact evidence only for the
-  seven factorized instances; the skipped instance remains unverified by this
-  command.
+  `min_gap_margin = 1654181948285415974`.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under
