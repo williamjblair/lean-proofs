@@ -19,6 +19,14 @@
   the package's `i = 3` and `i = 4` row perimeters with the corrected
   `p ≥ i` obstruction criterion; they do not claim the historical all-row
   `n ≤ 8000` perimeter.
+- [E] Added a factorization-backed CRT scanner for the structured family
+  `n = 2^A * M`, `M ∈ {1,3,5,7,9,11,13,15,21,25}`. The command
+  `python3 -m compute.scan --power-two-family --family-max-exponent 36 --i 3 --i 4 --i 5`
+  returned `candidate_count = 0` across `981` row cells, representing
+  `1,584,842,928,062` checked triples up to `2^36`; the maximum intermediate
+  CRT state count was `18`. This reproduces the package's structured-family
+  perimeter for rows `i ∈ {3,4,5}` using full Lucas domination verification on
+  every CRT survivor.
 - [R] Added Lean definitions `Erdos699.digit`, `Erdos699.dominated`, and
   `Erdos699.relevantPrime`, plus theorem
   `Erdos699.relevantPrime_ignores_small`. Reproduce with:
