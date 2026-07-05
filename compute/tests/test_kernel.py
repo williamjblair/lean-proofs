@@ -795,6 +795,41 @@ def test_power_two_quotient_scan_rejects_inverted_exponent_range() -> None:
         scan_power_two_quotient_kernel(max_exponent=4, max_b=101, min_exponent=5)
 
 
+def test_power_two_quotient_scan_can_report_factorization_skips() -> None:
+    result = scan_power_two_quotient_kernel(
+        max_exponent=60,
+        max_b=17,
+        min_exponent=60,
+        skip_factorization_failures=True,
+    )
+
+    assert result["instance_count"] == 8
+    assert result["factorized_instance_count"] == 7
+    assert result["skipped_instance_count"] == 1
+    assert result["skipped_instances"] == [
+        {
+            "exponent": 60,
+            "A": 2**60,
+            "B": 17,
+            "row_one_modulus": 17 * 2**60 - 1,
+            "reason": "prime_power_factorization currently requires n < 2^64",
+        }
+    ]
+    assert result["row_one_candidate_count"] == 3
+    assert result["survivor_count"] == 0
+    assert result["reduced_divisor_gap_summary"]["candidate_count"] == 3
+    assert result["reduced_divisor_gap_summary"]["gap_failure_count"] == 0
+
+
+def test_power_two_quotient_scan_is_strict_by_default_on_factorization_limit() -> None:
+    with pytest.raises(ValueError, match=r"n < 2\^64"):
+        scan_power_two_quotient_kernel(
+            max_exponent=60,
+            max_b=17,
+            min_exponent=60,
+        )
+
+
 def test_squeezed_normalized_scan_can_include_candidate_diagnostics() -> None:
     default_result = scan_squeezed_normalized_case_i_kernel(max_f=9, max_x=120)
     result = scan_squeezed_normalized_case_i_kernel(
@@ -1000,6 +1035,41 @@ def test_kernel_cli_can_scan_power_two_quotient_kernel() -> None:
     assert payload["survivor_count"] == 0
     assert payload["reduced_divisor_gap_summary"]["gap_failure_count"] == 0
     assert payload["reduced_divisor_gap_summary"]["min_gap_margin"] == 726
+
+
+def test_kernel_cli_can_report_power_two_factorization_skips() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--power-two-quotient-kernel",
+            "--min-exponent",
+            "60",
+            "--max-exponent",
+            "60",
+            "--max-b",
+            "17",
+            "--skip-factorization-failures",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["instance_count"] == 8
+    assert payload["factorized_instance_count"] == 7
+    assert payload["skipped_instance_count"] == 1
+    assert payload["skipped_instances"] == [
+        {
+            "exponent": 60,
+            "A": 2**60,
+            "B": 17,
+            "row_one_modulus": 17 * 2**60 - 1,
+            "reason": "prime_power_factorization currently requires n < 2^64",
+        }
+    ]
+    assert payload["survivor_count"] == 0
 
 
 def test_kernel_cli_can_include_squeezed_candidate_summary() -> None:

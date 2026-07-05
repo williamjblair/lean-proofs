@@ -277,6 +277,20 @@
   `(a, A, B, v, h, r, s, l, m, alpha, beta, c, d, reduced_divisor, l*m) =
   (9, 512, 3, 205, 41, 5, 307, 41, 1, 2, 184, 2, 1, 767, 41)`. This is exact
   bounded evidence for the inequality certificate, not a global proof.
+- [E] Added opt-in skip/reporting for factorization-limited power-two quotient
+  scans. The default remains strict: if factoring `B * 2^a - 1` is outside
+  the current deterministic 64-bit factorizer, the scan raises. With
+  `--skip-factorization-failures`, skipped instances are listed explicitly and
+  are not counted as factorized evidence. Reproduce the boundary check with
+  `python3 -m compute.kernel --power-two-quotient-kernel --min-exponent 60 --max-exponent 60 --max-b 17 --skip-factorization-failures`;
+  it reports `instance_count = 8`, `factorized_instance_count = 7`,
+  `skipped_instance_count = 1`, the skipped pair `(a, B) = (60, 17)` with
+  row-one modulus `19599665578316398591`, `row_one_candidate_count = 3`,
+  `survivor_count = 0`, and reduced-divisor gap summary
+  `candidate_count = 3`, `gap_failure_count = 0`,
+  `min_gap_margin = 1654181948285415974`. This is exact evidence only for the
+  seven factorized instances; the skipped instance remains unverified by this
+  command.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under

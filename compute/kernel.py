@@ -529,18 +529,39 @@ def _power_two_reduced_divisor_gap_summary(
 
 
 def scan_power_two_quotient_kernel(
-    max_exponent: int, max_b: int, min_exponent: int = 2
+    max_exponent: int,
+    max_b: int,
+    min_exponent: int = 2,
+    skip_factorization_failures: bool = False,
 ) -> dict[str, Any]:
     if min_exponent < 0 or max_exponent < min_exponent or max_b < 0:
         raise ValueError("require 0 <= min_exponent <= max_exponent and 0 <= max_b")
     row_one_candidates: list[dict[str, int]] = []
     survivors: list[dict[str, int]] = []
+    skipped_instances: list[dict[str, int | str]] = []
     instance_count = 0
+    factorized_instance_count = 0
     for exponent in range(min_exponent, max_exponent + 1):
         A = 2**exponent
         for B in range(3, max_b + 1, 2):
             instance_count += 1
-            for candidate in _power_two_quotient_row_one_candidates(exponent, A, B):
+            try:
+                candidates = _power_two_quotient_row_one_candidates(exponent, A, B)
+            except ValueError as exc:
+                if not skip_factorization_failures:
+                    raise
+                skipped_instances.append(
+                    {
+                        "exponent": exponent,
+                        "A": A,
+                        "B": B,
+                        "row_one_modulus": B * A - 1,
+                        "reason": str(exc),
+                    }
+                )
+                continue
+            factorized_instance_count += 1
+            for candidate in candidates:
                 row_one_candidates.append(candidate)
                 if power_two_quotient_kernel_holds(
                     candidate["A"], candidate["B"], candidate["v"], candidate["h"]
@@ -553,6 +574,9 @@ def scan_power_two_quotient_kernel(
         "max_exponent": max_exponent,
         "max_b": max_b,
         "instance_count": instance_count,
+        "factorized_instance_count": factorized_instance_count,
+        "skipped_instance_count": len(skipped_instances),
+        "skipped_instances": skipped_instances,
         "row_one_candidate_count": len(row_one_candidates),
         "survivor_count": len(survivors),
         "row_one_candidates": row_one_candidates,
@@ -930,6 +954,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--include-quotient-gap-summary", action="store_true")
     parser.add_argument("--original-obstruction-prime-limit", type=int)
     parser.add_argument("--include-original-obstruction-witnesses", action="store_true")
+    parser.add_argument("--skip-factorization-failures", action="store_true")
     args = parser.parse_args(argv)
     if args.diagnose_squeezed_candidate:
         if (
@@ -983,6 +1008,7 @@ def main(argv: list[str] | None = None) -> int:
             args.max_exponent,
             args.max_b,
             min_exponent=args.min_exponent,
+            skip_factorization_failures=args.skip_factorization_failures,
         )
     else:
         if args.n1 is None or args.n2 is None or args.bound is None:
