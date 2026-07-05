@@ -11,6 +11,14 @@
   `1 ≤ i < j ≤ n / 2` for `n ≤ 2000`, and returned `candidate_count = 0`
   over `332,833,500` triples. This is a local reproduction artifact only; it
   does not claim the historical `n ≤ 8000` perimeter.
+- [E] Added a row-specialized exact scanner for fixed-`i` perimeters. The
+  command `python3 -m compute.scan --limit 40000 --i 3 --row-scan` returned
+  `candidate_count = 0` over `399,880,009` checked triples, and
+  `python3 -m compute.scan --limit 30000 --i 4 --row-scan` returned
+  `candidate_count = 0` over `224,880,016` checked triples. These reproduce
+  the package's `i = 3` and `i = 4` row perimeters with the corrected
+  `p ≥ i` obstruction criterion; they do not claim the historical all-row
+  `n ≤ 8000` perimeter.
 - [R] Added Lean definitions `Erdos699.digit`, `Erdos699.dominated`, and
   `Erdos699.relevantPrime`, plus theorem
   `Erdos699.relevantPrime_ignores_small`. Reproduce with:
