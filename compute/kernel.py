@@ -188,6 +188,34 @@ def _squeezed_candidate_summary(
     }
 
 
+def squeezed_row_one_candidates_discriminant(F: int, X: int) -> list[dict[str, int]]:
+    if F < 0 or X < 0:
+        raise ValueError("F and X must be nonnegative")
+    if F == 0 or X == 0:
+        return []
+    if F % 2 == 0 or F < 3 or X % 4 != 0:
+        return []
+    if 4 * F > X or 2 * (F * F) > X:
+        return []
+    n1 = F * X - 1
+    max_g = (X * X - 1) // (4 * n1)
+    candidates: list[dict[str, int]] = []
+    for g in range(1, max_g + 1):
+        discriminant = X * X - 4 * g * n1
+        gap = math.isqrt(discriminant)
+        if gap == 0 or gap * gap != discriminant:
+            continue
+        if (X - gap) % 2 != 0:
+            continue
+        t = (X - gap) // 2
+        if t == 0 or 2 * t >= X:
+            continue
+        if t * (X - t) != g * n1:
+            continue
+        candidates.append({"F": F, "X": X, "t": t, "g": g})
+    return sorted(candidates, key=lambda item: (item["t"], item["g"]))
+
+
 def scan_squeezed_normalized_case_i_kernel(
     max_f: int,
     max_x: int,
@@ -203,20 +231,15 @@ def scan_squeezed_normalized_case_i_kernel(
         min_x = max(4 * F, 2 * F * F)
         first_x = ((min_x + 3) // 4) * 4
         for X in range(first_x, max_x + 1, 4):
-            n = F * X
-            n1 = n - 1
-            for t in range(1, (X - 1) // 2 + 1):
-                row_one_product = t * (X - t)
-                g, remainder = divmod(row_one_product, n1)
-                if remainder != 0:
-                    continue
-                candidate = {"F": F, "X": X, "t": t, "g": g}
+            for candidate in squeezed_row_one_candidates_discriminant(F, X):
                 candidates.append(candidate)
+                t = candidate["t"]
+                g = candidate["g"]
                 if squeezed_normalized_case_i_kernel_holds(F, X, t, g):
                     survivors.append(candidate)
     result: dict[str, Any] = {
         "mode": "squeezed_normalized_case_i_kernel",
-        "algorithm": "bounded_row_one_factor_scan",
+        "algorithm": "bounded_discriminant_scan",
         "max_f": max_f,
         "max_x": max_x,
         "candidate_count": len(candidates),

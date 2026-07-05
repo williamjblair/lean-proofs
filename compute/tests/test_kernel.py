@@ -9,6 +9,7 @@ from compute.kernel import (
     consecutive_kernel_holds,
     scan_squeezed_normalized_case_i_kernel,
     squeezed_normalized_case_i_kernel_holds,
+    squeezed_row_one_candidates_discriminant,
     kernel_survivors_bruteforce,
     prime_power_factorization,
     scan_case_i_power_two_kernel,
@@ -488,6 +489,40 @@ def test_squeezed_normalized_predicate_checks_all_rows() -> None:
     assert not squeezed_normalized_case_i_kernel_holds(2, 72, 16, 7)
 
 
+def test_squeezed_discriminant_generator_finds_row_one_candidates() -> None:
+    assert squeezed_row_one_candidates_discriminant(3, 48) == [
+        {"F": 3, "X": 48, "t": 22, "g": 4}
+    ]
+    assert squeezed_row_one_candidates_discriminant(5, 112) == [
+        {"F": 5, "X": 112, "t": 26, "g": 4}
+    ]
+    assert squeezed_row_one_candidates_discriminant(3, 52) == []
+
+
+def test_squeezed_discriminant_generator_matches_bruteforce_row_one_stage() -> None:
+    discriminant_candidates = []
+    brute_candidates = []
+    for f in range(1, 10):
+        for x in range(1, 121):
+            discriminant_candidates.extend(squeezed_row_one_candidates_discriminant(f, x))
+            for t in range(1, x // 2 + 1):
+                n = f * x
+                n1 = n - 1
+                product = t * (x - t)
+                if (
+                    n1 > 0
+                    and f % 2 == 1
+                    and f >= 3
+                    and x % 4 == 0
+                    and 4 * f <= x
+                    and 2 * (f * f) <= x
+                    and 2 * t < x
+                    and product % n1 == 0
+                ):
+                    brute_candidates.append({"F": f, "X": x, "t": t, "g": product // n1})
+    assert discriminant_candidates == brute_candidates
+
+
 def test_squeezed_normalized_scan_matches_bruteforce() -> None:
     result = scan_squeezed_normalized_case_i_kernel(max_f=9, max_x=120)
     brute = []
@@ -502,6 +537,7 @@ def test_squeezed_normalized_scan_matches_bruteforce() -> None:
                 if squeezed_normalized_case_i_kernel_holds(f, x, t, g):
                     brute.append({"F": f, "X": x, "t": t, "g": g})
     assert result["mode"] == "squeezed_normalized_case_i_kernel"
+    assert result["algorithm"] == "bounded_discriminant_scan"
     assert result["max_f"] == 9
     assert result["max_x"] == 120
     assert result["survivors"] == brute

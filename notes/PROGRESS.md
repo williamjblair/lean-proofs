@@ -336,6 +336,17 @@
   `1191` candidates at gcd `1`, `179` at gcd `3`, `72` at gcd `5`, and `45`
   at gcd `7`. This is exact finite evidence for the named squeezed-kernel
   target, not an emptiness proof.
+- [E] Replaced the squeezed scanner's row-one stage with the exact
+  discriminant formulation `X^2 - 4 * g * (F * X - 1) = (X - 2 * t)^2`,
+  matching the Lean theorem `Erdos699.squeezedNormalized_discriminant_eq_gap_sq`.
+  Unit tests cross-check the discriminant generator against brute force for
+  `F ≤ 9`, `X ≤ 120`. The command
+  `python3 -m compute.kernel --squeezed-normalized-case-i --max-f 501 --max-x 100000 --include-candidate-summary`
+  reports `68076` row-one discriminant candidates and `0` full squeezed
+  survivors; the half-row gcd histogram begins with `49283` candidates at
+  gcd `1`, `7815` at gcd `3`, `3423` at gcd `5`, and `1924` at gcd `7`.
+  This is exact finite evidence for the discriminant/Pell lane, not an
+  emptiness proof.
 - [R] Formalized the consecutive-divisor kernel target:
   `Erdos699.consecutiveDivisorKernel` and
   `Erdos699.consecutiveDivisorKernelBelow` name the two-row kernel and the
