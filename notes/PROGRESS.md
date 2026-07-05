@@ -156,6 +156,15 @@
   `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze` packages this for the
   case-I counterexample hypotheses, still assuming the explicit half-row
   lower bound and non-central branch. Full T7 remains open.
+- [R] Proved the direct coprime-to-4 half-row squeeze:
+  `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four`
+  replaces the explicit lower-bound input
+  `n / 2 - 1 ≤ primePowerPartGE 5 (n - 2)` with
+  `(n / 2 - 1).Coprime 4`. The supporting lemmas prove
+  `n / 2 - 1 ∣ n - 2`, exclude prime divisors `2` and `3` under
+  `2 ∣ n`, `3 ∣ n`, and `2 < n`, then force
+  `n / 2 - 1 ∣ g * (X - 2 * t)` from the corrected `p ≥ i` row-two
+  condition. The non-central branch and full T7 remain open.
 - [R] Proved the T7 central branch kill:
   `Erdos699.central_branch_false_of_sub_one_dvd_t_mul_X_sub_t` shows that
   `2 * t = X` contradicts the row-one divisor `n - 1 ∣ t * (X - t)` when

@@ -1047,6 +1047,23 @@ theorem primePowerPartGE_dvd_self {lo m : ℕ} (hm : m ≠ 0) :
   intro p hp _hlo _hpdvd
   exact (hp.pow_dvd_iff_le_factorization hm).mpr le_rfl
 
+theorem divisor_dvd_i_three_window_two_product_of_forall_prime_ge_five {d n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hd0 : d ≠ 0) (hdn : d ∣ n - 2)
+    (hrel : ∀ p : ℕ, p.Prime → p ∣ d → 5 ≤ p) (hn : 2 < n) :
+    d ∣ j * (j - 1) * (j - 2) := by
+  have hd_eq : primePowerPartGE 5 d = d := by
+    exact primePowerPartGE_eq_self_of_forall_prime_ge hd0 hrel
+  rw [← hd_eq]
+  apply primePowerPartGE_dvd_of_forall_prime_power_dvd
+  intro p hp hp5 _hpdvd
+  have hpow_dvd_d : p ^ d.factorization p ∣ d :=
+    (hp.pow_dvd_iff_le_factorization hd0).mpr le_rfl
+  have hpow_dvd_sub_two : p ^ d.factorization p ∣ n - 2 :=
+    Nat.dvd_trans hpow_dvd_d hdn
+  exact i_three_window_two_prime_pow_dvd_mul_sub_one_sub_two
+    hnone hp hp5 hn hpow_dvd_sub_two
+
 theorem finset_prod_prime_powers_coprime_four_of_ge_five {s : Finset ℕ}
     {f : ℕ → ℕ} (hge : ∀ p ∈ s, 5 ≤ p) (hprime : ∀ p ∈ s, p.Prime) :
     (∏ p ∈ s, p ^ f p).Coprime 4 := by
@@ -1336,6 +1353,92 @@ theorem primePowerPartGE_five_sub_two_coprime_sub_one {n : ℕ} (hn : 2 < n) :
   exact Nat.Coprime.coprime_dvd_left
     (primePowerPartGE_dvd_self (by omega : n - 2 ≠ 0)) hbase
 
+theorem half_sub_one_dvd_sub_two_of_even {n : ℕ} (h2n : 2 ∣ n) :
+    n / 2 - 1 ∣ n - 2 := by
+  rcases h2n with ⟨m, hm⟩
+  subst n
+  refine ⟨2, ?_⟩
+  omega
+
+theorem half_sub_one_ne_zero_of_even_three_dvd {n : ℕ}
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hn : 2 < n) :
+    n / 2 - 1 ≠ 0 := by
+  rcases h2n with ⟨m, hm⟩
+  subst n
+  have h3m : 3 ∣ m := by
+    have h3_two_mul : 3 ∣ 2 * m := by simpa [mul_comm] using h3n
+    rcases (by decide : Nat.Prime 3).dvd_mul.mp h3_two_mul with h32 | h3m
+    · norm_num at h32
+    · exact h3m
+  rcases h3m with ⟨a, ha⟩
+  omega
+
+theorem not_two_dvd_of_coprime_four {d : ℕ} (hcop4 : d.Coprime 4) :
+    ¬ 2 ∣ d := by
+  intro h2d
+  have h2g : 2 ∣ Nat.gcd d 4 := Nat.dvd_gcd h2d (by norm_num : 2 ∣ 4)
+  have hgcd : Nat.gcd d 4 = 1 := hcop4.gcd_eq_one
+  rw [hgcd] at h2g
+  norm_num at h2g
+
+theorem not_three_dvd_half_sub_one_of_even_three_dvd {n : ℕ}
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hn : 2 < n) :
+    ¬ 3 ∣ n / 2 - 1 := by
+  rcases h2n with ⟨m, hm⟩
+  subst n
+  have h3m : 3 ∣ m := by
+    have h3_two_mul : 3 ∣ 2 * m := by simpa [mul_comm] using h3n
+    rcases (by decide : Nat.Prime 3).dvd_mul.mp h3_two_mul with h32 | h3m
+    · norm_num at h32
+    · exact h3m
+  intro h
+  rcases h3m with ⟨a, ha⟩
+  rcases h with ⟨b, hb⟩
+  omega
+
+theorem half_sub_one_prime_ge_five_of_even_three_dvd_coprime_four {n : ℕ}
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hn : 2 < n)
+    (hcop4 : (n / 2 - 1).Coprime 4) :
+    ∀ p : ℕ, p.Prime → p ∣ n / 2 - 1 → 5 ≤ p := by
+  intro p hp hpd
+  by_cases hp2 : p = 2
+  · subst p
+    exact False.elim (not_two_dvd_of_coprime_four hcop4 hpd)
+  by_cases hp3 : p = 3
+  · subst p
+    exact False.elim (not_three_dvd_half_sub_one_of_even_three_dvd h2n h3n hn hpd)
+  have hp4 : p ≠ 4 := by
+    intro hp_eq
+    subst p
+    exact (by decide : ¬ Nat.Prime 4) hp
+  have hp2le : 2 ≤ p := hp.two_le
+  omega
+
+theorem half_sub_one_coprime_sub_one_of_even {n : ℕ}
+    (h2n : 2 ∣ n) (hn : 2 < n) :
+    (n / 2 - 1).Coprime (n - 1) := by
+  rcases h2n with ⟨m, hm⟩
+  subst n
+  have hdiv : 2 * m / 2 = m := by omega
+  have hsub_one : 2 * m - 1 = (m - 1) + ((m - 1) + 1) := by omega
+  have hbase : (m - 1).Coprime ((m - 1) + 1) :=
+    Nat.coprime_self_add_right.mpr (by simp)
+  have htarget : (m - 1).Coprime ((m - 1) + ((m - 1) + 1)) :=
+    Nat.coprime_self_add_right.mpr hbase
+  rw [hdiv, hsub_one]
+  exact htarget
+
+theorem i_three_caseI_half_sub_one_dvd_row_two_product {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hn : 2 < n)
+    (hcop4 : (n / 2 - 1).Coprime 4) :
+    n / 2 - 1 ∣ j * (j - 1) * (j - 2) :=
+  divisor_dvd_i_three_window_two_product_of_forall_prime_ge_five hnone
+    (half_sub_one_ne_zero_of_even_three_dvd h2n h3n hn)
+    (half_sub_one_dvd_sub_two_of_even h2n)
+    (half_sub_one_prime_ge_five_of_even_three_dvd_coprime_four h2n h3n hn hcop4)
+    hn
+
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
     {d n F X j t : ℕ} (hdn : d ∣ n - 2) (hcop4 : d.Coprime 4)
     (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hj_two : 2 ≤ j)
@@ -1434,6 +1537,17 @@ theorem i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t
     (primePowerPartGE_five_coprime_four (n - 2)) hn hj hn_ge_two hj_two htX h2tX
     (i_three_window_two_primePowerPartGE_dvd hnone hn_gt_two)
 
+theorem i_three_caseI_row_two_half_sub_one_dvd_t_mul_X_sub_t_mul_X_sub_two_t
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_two : 2 ≤ j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hcop4 : (n / 2 - 1).Coprime 4)
+    (htX : t ≤ X) (h2tX : 2 * t ≤ X) :
+    n / 2 - 1 ∣ t * (X - t) * (X - 2 * t) :=
+  sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
+    (half_sub_one_dvd_sub_two_of_even h2n) hcop4 hn hj (by omega : 2 ≤ n)
+    hj_two htX h2tX
+    (i_three_caseI_half_sub_one_dvd_row_two_product hnone h2n h3n hn_gt hcop4)
+
 theorem i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t {n F X j t g : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hn_gt_two : 2 < n)
@@ -1444,6 +1558,18 @@ theorem i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t {n F X j t g :
     (primePowerPartGE_five_sub_two_coprime_sub_one hn_gt_two)
     (i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t
       hnone hn hj hn_ge_two hn_gt_two hj_two htX h2tX)
+
+theorem i_three_caseI_joint_half_sub_one_dvd_factor_mul_X_sub_two_t {n F X j t g : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_two : 2 ≤ j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hcop4 : (n / 2 - 1).Coprime 4)
+    (htX : t ≤ X) (h2tX : 2 * t ≤ X)
+    (hrow1 : t * (X - t) = g * (n - 1)) :
+    n / 2 - 1 ∣ g * (X - 2 * t) :=
+  dvd_factor_mul_of_eq_mul_and_coprime hrow1
+    (half_sub_one_coprime_sub_one_of_even h2n hn_gt)
+    (i_three_caseI_row_two_half_sub_one_dvd_t_mul_X_sub_t_mul_X_sub_two_t
+      hnone hn hj hn_gt hj_two h2n h3n hcop4 htX h2tX)
 
 theorem i_three_caseI_joint_large_part_le_factor_mul_X_sub_two_t {n F X j t g : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
@@ -1698,6 +1824,51 @@ theorem i_three_caseI_noncentral_factor_sq_squeeze {n F X j t : ℕ}
   two_mul_factor_sq_le_of_even_half_cube_bound hn hn_gt hX_even
     (i_three_caseI_noncentral_half_sub_one_cube_bound
       hnone hn hj hn_gt hj_pos hj_two h2n h3n hbranch hhalf)
+
+theorem i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hX_even : 2 ∣ X)
+    (hbranch : 0 < X - 2 * t) (hcop4 : (n / 2 - 1).Coprime 4) :
+    2 * (F * F) ≤ X := by
+  rcases i_three_caseI_row_one_exists_factor
+      hnone hn hj hn_gt hj_pos h2n h3n (by omega : t ≤ X) with ⟨g, hrow1⟩
+  have hdvd : n / 2 - 1 ∣ g * (X - 2 * t) :=
+    i_three_caseI_joint_half_sub_one_dvd_factor_mul_X_sub_two_t
+      hnone hn hj hn_gt hj_two h2n h3n hcop4 (by omega : t ≤ X)
+      (by omega : 2 * t ≤ X) hrow1
+  have hle : n / 2 - 1 ≤ g * (X - 2 * t) := by
+    have ht_pos : 0 < t := by
+      by_cases ht0 : t = 0
+      · subst t
+        simp at hj
+        omega
+      · exact Nat.pos_of_ne_zero ht0
+    have hXt_pos : 0 < X - t := by omega
+    have hleft_pos : 0 < t * (X - t) := Nat.mul_pos ht_pos hXt_pos
+    have hright_pos : 0 < g * (n - 1) := by
+      simpa [hrow1] using hleft_pos
+    have hg_pos : 0 < g := by
+      by_cases hg0 : g = 0
+      · subst g
+        simp at hright_pos
+      · exact Nat.pos_of_ne_zero hg0
+    exact Nat.le_of_dvd (Nat.mul_pos hg_pos hbranch) hdvd
+  have hrow_bound : 4 * (g * (n - 1)) ≤ X * X := by
+    simpa [hrow1] using four_mul_t_mul_X_sub_t_le_sq (by omega : 2 * t ≤ X)
+  have hgap : 4 * ((n - 1) * (n / 2 - 1)) ≤ X * X * (X - 2 * t) := by
+    calc
+      4 * ((n - 1) * (n / 2 - 1))
+          ≤ 4 * ((n - 1) * (g * (X - 2 * t))) := by
+            exact Nat.mul_le_mul_left 4 (Nat.mul_le_mul_left (n - 1) hle)
+      _ = (4 * (g * (n - 1))) * (X - 2 * t) := by ring
+      _ ≤ (X * X) * (X - 2 * t) := by
+            exact Nat.mul_le_mul_right (X - 2 * t) hrow_bound
+      _ = X * X * (X - 2 * t) := by ring
+  have hcube : 4 * ((n - 1) * (n / 2 - 1)) ≤ X * X * X := by
+    exact hgap.trans (by
+      simpa [mul_assoc] using Nat.mul_le_mul_left (X * X) (Nat.sub_le X (2 * t)))
+  exact two_mul_factor_sq_le_of_even_half_cube_bound hn hn_gt hX_even hcube
 
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
