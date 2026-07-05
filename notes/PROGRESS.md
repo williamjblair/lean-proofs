@@ -33,4 +33,7 @@
   collapses to `n = 2 * j` with `j` odd.
 - [R] Proved full T2 as `Erdos699.t2_i_eq_two`: for `2 < j` and
   `2 * j ≤ n`, there is a prime `p ≥ 2` dividing both `C(n,2)` and `C(n,j)`.
+- [R] Proved the T5 elementary endpoint
+  `Erdos699.eq_three_of_sub_one_sub_two_twoPowers`: if `n - 1` and `n - 2`
+  are both powers of two, then `n = 3`. Full T5 remains open.
 - [OPEN] T4 and all later rungs remain unclaimed in this branch.

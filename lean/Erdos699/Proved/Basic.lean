@@ -201,6 +201,48 @@ theorem t3_no_large_prime_dvd_fallingWindowProduct_of_no_common {n i j p : ℕ}
     constructor <;> omega
   exact (t3_top_interval_prime_free_of_no_common hnone hij hjn hp) hinterval
 
+/-- A natural number that is exactly a power of two. -/
+def twoPower (m : ℕ) : Prop :=
+  ∃ a : ℕ, m = 2 ^ a
+
+theorem twoPower_eq_one_of_odd {m : ℕ} (hm : twoPower m) (hodd : Odd m) :
+    m = 1 := by
+  rcases hm with ⟨a, rfl⟩
+  by_cases ha : a = 0
+  · simp [ha]
+  · rcases Nat.exists_eq_succ_of_ne_zero ha with ⟨b, rfl⟩
+    have heven : Even (2 ^ (b + 1)) := by
+      rw [pow_succ]
+      exact even_iff_two_dvd.mpr ⟨2 ^ b, by rw [mul_comm]⟩
+    have hnot_odd : ¬ Odd (2 ^ (b + 1)) := Nat.not_odd_iff_even.mpr heven
+    exact False.elim (hnot_odd hodd)
+
+theorem eq_three_of_sub_one_sub_two_twoPowers {n : ℕ}
+    (h1 : twoPower (n - 1)) (h2 : twoPower (n - 2)) :
+    n = 3 := by
+  rcases h2 with ⟨b, hb⟩
+  by_cases hb0 : b = 0
+  · have hn2 : n - 2 = 1 := by simpa [hb0] using hb
+    omega
+  · have heven_n2 : Even (n - 2) := by
+      rcases Nat.exists_eq_succ_of_ne_zero hb0 with ⟨c, rfl⟩
+      rw [hb, pow_succ]
+      exact even_iff_two_dvd.mpr ⟨2 ^ c, by rw [mul_comm]⟩
+    have hmod_n2 : (n - 2) % 2 = 0 := Nat.even_iff.mp heven_n2
+    have hsucc : n - 1 = n - 2 + 1 := by
+      have hpos : 0 < n - 2 := by
+        rw [hb]
+        exact pow_pos (by decide : 0 < 2) b
+      omega
+    have hmod_n1 : (n - 1) % 2 = 1 := by
+      rw [hsucc, Nat.add_mod, hmod_n2]
+    have hodd_n1 : Odd (n - 1) := Nat.odd_iff.mpr hmod_n1
+    have hn1 : n - 1 = 1 := twoPower_eq_one_of_odd h1 hodd_n1
+    have hpos : 0 < n - 2 := by
+      rw [hb]
+      exact pow_pos (by decide : 0 < 2) b
+    omega
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :
