@@ -85,5 +85,13 @@
   `Erdos699.i_three_window_two_prime_pow_dvd_mul_sub_one_sub_two` shows that
   under row-3 no-common-prime hypotheses, every prime power `p^e ∣ n - 2`
   with `p ≥ 5` divides `j * (j - 1) * (j - 2)`. Full T6 remains open.
+- [R] Proved T6 full-multiplicity large-prime-part packaging:
+  `Erdos699.primePowerPartGE`,
+  `Erdos699.i_three_window_one_primePowerPartGE_dvd`, and
+  `Erdos699.i_three_window_two_primePowerPartGE_dvd` package the existing
+  per-prime-power row forcing into full multiplicity for all primes `p ≥ 5`.
+  Also proved the case-I row-one bridge
+  `Erdos699.i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd`.
+  Full T6/T7 remain open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

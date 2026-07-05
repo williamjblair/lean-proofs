@@ -943,6 +943,131 @@ theorem i_three_window_two_primeRadicalGE_dvd {n j : ℕ}
   primeRadicalGE_dvd_of_forall_prime_dvd fun p hp hp5 hpdvd =>
     i_three_window_two_product_forcing (p := p) hnone hp hp5 hn hpdvd
 
+/-- Product of the full prime-power divisors of `m` whose prime is at least `lo`. -/
+def primePowerPartGE (lo m : ℕ) : ℕ :=
+  ∏ p ∈ m.primeFactors.filter (fun p => lo ≤ p), p ^ m.factorization p
+
+theorem prime_power_coprime_finset_prime_power_prod_of_not_mem {p : ℕ} {e : ℕ}
+    {s : Finset ℕ} {f : ℕ → ℕ} (hp : p.Prime)
+    (hs : ∀ q ∈ s, q.Prime) (hnot : p ∉ s) :
+    (p ^ e).Coprime (∏ q ∈ s, q ^ f q) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+      simp
+  | insert a s ha ih =>
+      rw [Finset.prod_insert ha]
+      have hp_ne_a : p ≠ a := by
+        intro hpa
+        apply hnot
+        rw [hpa]
+        exact Finset.mem_insert_self a s
+      have hpa_coprime : (p ^ e).Coprime (a ^ f a) :=
+        Nat.coprime_pow_primes e (f a) hp
+          (hs a (Finset.mem_insert_self a s)) hp_ne_a
+      have hp_not_s : p ∉ s := by
+        intro hps
+        exact hnot (Finset.mem_insert_of_mem hps)
+      have hprod : (p ^ e).Coprime (∏ q ∈ s, q ^ f q) :=
+        ih (fun q hq => hs q (Finset.mem_insert_of_mem hq)) hp_not_s
+      exact hpa_coprime.mul_right hprod
+
+theorem finset_prod_prime_powers_dvd_of_forall_dvd {s : Finset ℕ} {e : ℕ → ℕ}
+    {x : ℕ} (hprime : ∀ p ∈ s, p.Prime)
+    (hdiv : ∀ p ∈ s, p ^ e p ∣ x) :
+    (∏ p ∈ s, p ^ e p) ∣ x := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+      simp
+  | insert a s ha ih =>
+      rw [Finset.prod_insert ha]
+      have hacoprime : (a ^ e a).Coprime (∏ p ∈ s, p ^ e p) :=
+        prime_power_coprime_finset_prime_power_prod_of_not_mem
+          (p := a) (e := e a) (s := s) (f := e)
+          (hprime a (Finset.mem_insert_self a s))
+          (fun p hp => hprime p (Finset.mem_insert_of_mem hp)) ha
+      exact Nat.Coprime.mul_dvd_of_dvd_of_dvd hacoprime
+        (hdiv a (Finset.mem_insert_self a s))
+        (ih (fun p hp => hprime p (Finset.mem_insert_of_mem hp))
+          (fun p hp => hdiv p (Finset.mem_insert_of_mem hp)))
+
+theorem primePowerPartGE_dvd_of_forall_prime_power_dvd {lo m x : ℕ}
+    (h : ∀ p : ℕ, p.Prime → lo ≤ p → p ∣ m → p ^ m.factorization p ∣ x) :
+    primePowerPartGE lo m ∣ x := by
+  classical
+  unfold primePowerPartGE
+  apply finset_prod_prime_powers_dvd_of_forall_dvd
+  · intro p hp_mem
+    exact (Nat.mem_primeFactors.mp (Finset.mem_filter.mp hp_mem).1).1
+  · intro p hp_mem
+    rcases Finset.mem_filter.mp hp_mem with ⟨hpm, hlo⟩
+    exact h p (Nat.mem_primeFactors.mp hpm).1 hlo (Nat.mem_primeFactors.mp hpm).2.1
+
+theorem i_three_window_one_primePowerPartGE_dvd {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn : 1 < n) :
+    primePowerPartGE 5 (n - 1) ∣ j * (j - 1) := by
+  apply primePowerPartGE_dvd_of_forall_prime_power_dvd
+  intro p hp hp5 _hpdvd
+  have hm_ne : n - 1 ≠ 0 := by omega
+  have hpowdvd : p ^ (n - 1).factorization p ∣ n - 1 :=
+    (hp.pow_dvd_iff_le_factorization hm_ne).mpr le_rfl
+  exact i_three_window_one_prime_pow_dvd_mul_sub_one hnone hp hp5 hn hpowdvd
+
+theorem i_three_window_two_primePowerPartGE_dvd {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn : 2 < n) :
+    primePowerPartGE 5 (n - 2) ∣ j * (j - 1) * (j - 2) := by
+  apply primePowerPartGE_dvd_of_forall_prime_power_dvd
+  intro p hp hp5 _hpdvd
+  have hm_ne : n - 2 ≠ 0 := by omega
+  have hpowdvd : p ^ (n - 2).factorization p ∣ n - 2 :=
+    (hp.pow_dvd_iff_le_factorization hm_ne).mpr le_rfl
+  exact i_three_window_two_prime_pow_dvd_mul_sub_one_sub_two hnone hp hp5 hn hpowdvd
+
+theorem primePowerPartGE_eq_self_of_forall_prime_ge {lo m : ℕ}
+    (hm : m ≠ 0) (hlo : ∀ p : ℕ, p.Prime → p ∣ m → lo ≤ p) :
+    primePowerPartGE lo m = m := by
+  classical
+  unfold primePowerPartGE
+  have hfilter : m.primeFactors.filter (fun p => lo ≤ p) = m.primeFactors := by
+    ext p
+    constructor
+    · intro hp
+      exact (Finset.mem_filter.mp hp).1
+    · intro hp
+      exact Finset.mem_filter.mpr
+        ⟨hp, hlo p (Nat.mem_primeFactors.mp hp).1 (Nat.mem_primeFactors.mp hp).2.1⟩
+  rw [hfilter]
+  simpa [Nat.prod_factorization_eq_prod_primeFactors] using
+    Nat.prod_factorization_pow_eq_self hm
+
+theorem i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : 1 < n) (h2n : 2 ∣ n) (h3n : 3 ∣ n) :
+    n - 1 ∣ j * (j - 1) := by
+  have hlarge : primePowerPartGE 5 (n - 1) = n - 1 := by
+    apply primePowerPartGE_eq_self_of_forall_prime_ge
+    · omega
+    · intro p hp hpdvd
+      by_cases hp2 : p = 2
+      · subst p
+        rcases h2n with ⟨a, ha⟩
+        rcases hpdvd with ⟨b, hb⟩
+        omega
+      by_cases hp3 : p = 3
+      · subst p
+        rcases h3n with ⟨a, ha⟩
+        rcases hpdvd with ⟨b, hb⟩
+        omega
+      have hp4 : p ≠ 4 := by
+        intro hp_eq
+        subst p
+        exact (by decide : ¬ Nat.Prime 4) hp
+      have hp2le : 2 ≤ p := hp.two_le
+      omega
+  rw [← hlarge]
+  exact i_three_window_one_primePowerPartGE_dvd hnone hn
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :
