@@ -719,7 +719,7 @@
   `all_strict_lt_n2 = True`. This is an end-to-end Lean-certified finite
   instance, not a general Case-I theorem.
 - [R]/[E] Connected finite lower-bounded certificates back to the original
-  problem surface for six `n = 3 * 2^A` Case-I members. For `A = 5`,
+  problem surface for seven `n = 3 * 2^A` Case-I members. For `A = 5`,
   `Erdos699.i_three_caseI_96_not_no_common_from_row_bounds` rules out the
   no-common-prime counterexample criterion for every `j` with `3 < j` and
   `2 * j ≤ 96`, and
@@ -753,7 +753,13 @@
   modular split over `11` and `1117`, and
   `Erdos699.i_three_caseI_12288_exists_common_from_row_bounds` gives the
   analogous common-prime witness statement for every `j` with `3 < j` and
-  `2 * j ≤ 12288`. Reproduce the exact `A = 9` scan with
+  `2 * j ≤ 12288`. For `A = 13`,
+  `Erdos699.not_exists_kernelInRange_24575_12287_4_24576` proves the exact
+  lower-bounded kernel certificate with row-one list `[2950]`, using the
+  `25` residue filter and the prime split at `983`, and
+  `Erdos699.i_three_caseI_24576_exists_common_from_row_bounds` gives the
+  analogous common-prime witness statement for every `j` with `3 < j` and
+  `2 * j ≤ 24576`. Reproduce the exact `A = 9` scan with
   `python3 -m compute.kernel --n1 1535 --n2 767 --bound 1536 --min-t 4 --include-row-one-candidates --include-quotient-gap-summary`,
   which reports `row_one_candidates = [615]`, `survivor_count = 0`, and
   `all_strict_lt_n2 = True`. Reproduce the exact `A = 10` scan with
@@ -762,6 +768,9 @@
   `all_strict_lt_n2 = True`. Reproduce the exact `A = 12` scan with
   `python3 -m compute.kernel --n1 12287 --n2 6143 --bound 12288 --min-t 4 --include-row-one-candidates --include-row-one-splits --include-quotient-gap-summary`,
   which reports `row_one_candidates = [2234]`, `survivor_count = 0`, and
+  `all_strict_lt_n2 = True`. Reproduce the exact `A = 13` scan with
+  `python3 -m compute.kernel --n1 24575 --n2 12287 --bound 24576 --min-t 4 --include-row-one-candidates --include-row-one-splits --include-quotient-gap-summary`,
+  which reports `row_one_candidates = [2950]`, `survivor_count = 0`, and
   `all_strict_lt_n2 = True`. These are end-to-end Lean-certified finite
   instances, not a general Case-I theorem.
 - [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
