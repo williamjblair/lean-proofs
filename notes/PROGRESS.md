@@ -296,5 +296,13 @@
   shows that the `4 ∣ n` Case-I hypotheses force coprime factors
   `n - 1` and `n / 2 - 1` into this bounded kernel. This does not prove the
   kernel empty.
+- [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
+  `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
+  residue choices for `N1 ∣ t(t-1)`, then filters
+  `N2 ∣ t(t-1)(t-2)` under the half-row bound. Unit tests cross-check CRT
+  output against brute force on small kernels. Reproduce the sample with
+  `python3 -m compute.kernel --n1 15 --n2 14 --bound 120`; it reports
+  `4` row-one CRT classes, `17` row-one candidates, and `8` survivors. This
+  is an exact C2 enumerator, not a proof that the kernel is empty.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
