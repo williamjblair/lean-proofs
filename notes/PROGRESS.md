@@ -153,6 +153,16 @@
   `r * l + s * m = A`, `r * l < s * m`, and `h = l * m`. This proves the
   row-one split part of the conditional Task A bridge; the half-row reduction
   to `B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m)` remains open.
+- [R] Proved the first half-row split bridge for the pure quotient kernel.
+  `Erdos699.powerTwoQuotientKernel.row_two_split_dvd` rewrites the kernel
+  half-row divisor through split equations `v = r * l`, `A - v = s * m`, and
+  `h = l * m`, giving
+  `B * (A / 2) - 1 ∣ (l * m) * (s * m - r * l)`. The packaged theorem
+  `Erdos699.powerTwoQuotientKernel.exists_row_one_split_with_row_two`
+  combines the canonical positive row-one split with this split-form row-two
+  divisibility. This is still short of the needed alpha/beta/gcd reduction to
+  `B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m)`, and does not prove
+  Task A.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under

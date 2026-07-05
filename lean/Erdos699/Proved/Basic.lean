@@ -4009,6 +4009,36 @@ theorem powerTwoQuotientKernel.exists_row_one_split {A B v h : ℕ}
     hsum, hsplit_gap, ?_⟩
   exact hlm_eq_h.symm
 
+/-- Row two in split coordinates. Once a quotient-kernel point is expressed
+with `v = r * l`, `A - v = s * m`, and `h = l * m`, the half-row divisor is
+exactly a divisor of `(l * m) * (s * m - r * l)`. -/
+theorem powerTwoQuotientKernel.row_two_split_dvd {A B v h r s l m : ℕ}
+    (hkernel : powerTwoQuotientKernel A B v h)
+    (hv : v = r * l)
+    (hAv : A - v = s * m)
+    (hh : h = l * m) :
+    B * (A / 2) - 1 ∣ (l * m) * (s * m - r * l) := by
+  rcases hkernel with ⟨_hA4, _hApow, _hBodd, _hBge, _hvpos, _hgap, _hrow, hhalf⟩
+  have hgap_eq : A - v * 2 = s * m - r * l := by omega
+  simpa [hh, hgap_eq, two_mul, mul_assoc, mul_comm, mul_left_comm] using hhalf
+
+/-- Combined row-one and row-two split package for the pure quotient kernel. -/
+theorem powerTwoQuotientKernel.exists_row_one_split_with_row_two {A B v h : ℕ}
+    (hkernel : powerTwoQuotientKernel A B v h) :
+    ∃ r s l m : ℕ,
+      0 < r ∧ 0 < s ∧ 0 < l ∧ 0 < m ∧
+        r * s = B * A - 1 ∧
+          v = r * l ∧
+            A - v = s * m ∧
+              r * l + s * m = A ∧
+                r * l < s * m ∧
+                  h = l * m ∧
+                    B * (A / 2) - 1 ∣ (l * m) * (s * m - r * l) := by
+  rcases powerTwoQuotientKernel.exists_row_one_split hkernel with
+    ⟨r, s, l, m, hrpos, hspos, hlpos, hmpos, hD, hv, hAv, hsum, hgap, hh⟩
+  exact ⟨r, s, l, m, hrpos, hspos, hlpos, hmpos, hD, hv, hAv, hsum, hgap, hh,
+    powerTwoQuotientKernel.row_two_split_dvd hkernel hv hAv hh⟩
+
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure
 power-of-two quotient kernel: once `X = A * H`, `u = H * v`, `g = H^2 * h`,
