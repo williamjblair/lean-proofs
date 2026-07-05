@@ -1218,6 +1218,56 @@ theorem i_three_caseI_row_one_four_mul_sub_one_le_X_sq {n F X j t : ℕ}
     (i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd
       hnone (by omega : 1 < n) h2n h3n)
 
+theorem four_mul_factor_le_of_even_four_le_of_four_mul_sub_one_le_sq {n F X : ℕ}
+    (hn : n = F * X) (hX_even : 2 ∣ X) (hX_four : 4 ≤ X)
+    (hsize : 4 * (n - 1) ≤ X * X) :
+    4 * F ≤ X := by
+  by_contra hnot
+  have hlt : X < 4 * F := Nat.lt_of_not_ge hnot
+  have hn_pos : 0 < n := by
+    subst n
+    have hF_pos : 0 < F := by omega
+    have hX_pos : 0 < X := by omega
+    exact Nat.mul_pos hF_pos hX_pos
+  have hcast_sub : ((n - 1 : ℕ) : ℤ) = (n : ℤ) - 1 :=
+    Nat.cast_sub (by omega : 1 ≤ n)
+  have hsize_int : (4 : ℤ) * ((n : ℤ) - 1) ≤ (X : ℤ) * (X : ℤ) := by
+    have h := hsize
+    have hcast : ((4 * (n - 1) : ℕ) : ℤ) = (4 : ℤ) * ((n : ℤ) - 1) := by
+      rw [Nat.cast_mul, hcast_sub]
+      norm_num
+    have hcast_right : ((X * X : ℕ) : ℤ) = (X : ℤ) * (X : ℤ) := by norm_num
+    exact hcast ▸ hcast_right ▸ (by exact_mod_cast h)
+  have hn_int : (n : ℤ) = (F : ℤ) * (X : ℤ) := by exact_mod_cast hn
+  have hdiff_ge_two_nat : 2 ≤ 4 * F - X := by
+    rcases hX_even with ⟨a, ha⟩
+    subst X
+    have hdiff_pos : 0 < 4 * F - 2 * a := by omega
+    have hdiff_even : 2 ∣ 4 * F - 2 * a := by
+      refine ⟨2 * F - a, ?_⟩
+      omega
+    rcases hdiff_even with ⟨b, hb⟩
+    have hb_pos : 0 < b := by omega
+    omega
+  have hcast_diff : ((4 * F - X : ℕ) : ℤ) = (4 : ℤ) * (F : ℤ) - (X : ℤ) :=
+    Nat.cast_sub hlt.le
+  have hdiff_ge_two : (2 : ℤ) ≤ (4 : ℤ) * (F : ℤ) - (X : ℤ) := by
+    have h : (2 : ℤ) ≤ ((4 * F - X : ℕ) : ℤ) := by
+      exact_mod_cast hdiff_ge_two_nat
+    simpa [hcast_diff] using h
+  have hX_four_int : (4 : ℤ) ≤ X := by exact_mod_cast hX_four
+  nlinarith
+
+theorem i_three_caseI_row_one_four_mul_factor_le_X {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hX_even : 2 ∣ X) (hX_four : 4 ≤ X)
+    (h2tX : 2 * t ≤ X) :
+    4 * F ≤ X :=
+  four_mul_factor_le_of_even_four_le_of_four_mul_sub_one_le_sq hn hX_even hX_four
+    (i_three_caseI_row_one_four_mul_sub_one_le_X_sq
+      hnone hn hj hn_gt hj_pos h2n h3n h2tX)
+
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
     {d n F X j t : ℕ} (hdn : d ∣ n - 2) (hcop4 : d.Coprime 4)
     (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hj_two : 2 ≤ j)
