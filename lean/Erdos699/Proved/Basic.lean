@@ -597,6 +597,55 @@ theorem exists_kernelBelow_iff_exists_mem_row_two_gcd_eq_of_list_exact
       (exists_consecutiveDivisorKernelBelow_iff_exists_bound_gcdDiv_split_and_row_two_gcd_eq
         hN1).mpr ⟨t, hbound, hsplit, hgcd⟩
 
+theorem not_exists_kernelBelow_iff_forall_mem_gcd_ne_of_list_exact
+    {N1 N2 bound : ℕ} {candidates : List ℕ} (hN1 : 0 < N1)
+    (hcover :
+      ∀ t : ℕ,
+        2 * t ≤ bound →
+          rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t →
+            t ∈ candidates)
+    (hsound :
+      ∀ t : ℕ,
+        t ∈ candidates →
+          2 * t ≤ bound ∧
+            rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t) :
+    (¬ ∃ t : ℕ, consecutiveDivisorKernelBelow N1 N2 bound t) ↔
+      ∀ t : ℕ,
+        t ∈ candidates → Nat.gcd (t * (t - 1) * (t - 2)) N2 ≠ N2 := by
+  rw [exists_kernelBelow_iff_exists_mem_row_two_gcd_eq_of_list_exact
+    hN1 hcover hsound]
+  constructor
+  · intro hnone t htmem hgcd
+    exact hnone ⟨t, htmem, hgcd⟩
+  · intro hfail
+    rintro ⟨t, htmem, hgcd⟩
+    exact hfail t htmem hgcd
+
+theorem not_exists_kernelBelow_iff_forall_mem_gcd_lt_of_list_exact
+    {N1 N2 bound : ℕ} {candidates : List ℕ} (hN1 : 0 < N1) (hN2 : 0 < N2)
+    (hcover :
+      ∀ t : ℕ,
+        2 * t ≤ bound →
+          rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t →
+            t ∈ candidates)
+    (hsound :
+      ∀ t : ℕ,
+        t ∈ candidates →
+          2 * t ≤ bound ∧
+            rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t) :
+    (¬ ∃ t : ℕ, consecutiveDivisorKernelBelow N1 N2 bound t) ↔
+      ∀ t : ℕ,
+        t ∈ candidates → Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2 := by
+  rw [not_exists_kernelBelow_iff_forall_mem_gcd_ne_of_list_exact
+    hN1 hcover hsound]
+  constructor
+  · intro hfail t htmem
+    have hle : Nat.gcd (t * (t - 1) * (t - 2)) N2 ≤ N2 :=
+      Nat.gcd_le_right _ hN2
+    exact lt_of_le_of_ne hle (hfail t htmem)
+  · intro hfail t htmem
+    exact ne_of_lt (hfail t htmem)
+
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
     ¬ consecutiveDivisorKernel N1 N2 t := by

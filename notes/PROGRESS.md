@@ -428,6 +428,15 @@
   membership plus row-two gcd equality. This is the formal survivor-extraction
   contract for checked CRT candidate lists; it is not a proof that the kernel
   is empty.
+- [R] Added exact-list C2 no-survivor equivalences:
+  `Erdos699.not_exists_kernelBelow_iff_forall_mem_gcd_ne_of_list_exact`
+  turns bounded kernel emptiness into the finite condition that every member
+  of an exact canonical candidate list has row-two gcd not equal to `N2`. The
+  positive-modulus wrapper
+  `Erdos699.not_exists_kernelBelow_iff_forall_mem_gcd_lt_of_list_exact`
+  replaces inequality by the stronger finite check `gcd < N2`. This is an
+  exact finite-list certificate contract, still conditional on the list cover
+  and soundness hypotheses.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
