@@ -2038,6 +2038,41 @@ theorem i_three_caseI_factor_sq_squeeze_of_half_coprime_four {n F X j t : ℕ}
     exact i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four
       hnone hn hj hn_gt hj_pos hj_two h2n h3n hX_even hbranch hcop4
 
+theorem two_mul_t_le_X_of_factorized_half_bound {n F X j t : ℕ}
+    (hn : n = F * X) (hj : j = F * t) (hj_pos : 0 < j) (hjn : 2 * j ≤ n) :
+    2 * t ≤ X := by
+  have hF_pos : 0 < F := by
+    by_cases hF0 : F = 0
+    · subst F
+      simp at hj
+      omega
+    · exact Nat.pos_of_ne_zero hF0
+  subst n
+  subst j
+  have hmul : F * (2 * t) ≤ F * X := by
+    simpa [mul_assoc, mul_comm, mul_left_comm] using hjn
+  exact Nat.le_of_mul_le_mul_left hmul hF_pos
+
+theorem i_three_caseI_factor_sq_squeeze_of_half_bound_from_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hX_even : 2 ∣ X)
+    (hjn : 2 * j ≤ n) (hhalf : n / 2 - 1 ≤ primePowerPartGE 5 (n - 2)) :
+    2 * (F * F) ≤ X :=
+  i_three_caseI_factor_sq_squeeze_of_half_bound
+    hnone hn hj hn_gt hj_pos hj_two h2n h3n hX_even
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn) hhalf
+
+theorem i_three_caseI_factor_sq_squeeze_of_half_coprime_four_from_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hX_even : 2 ∣ X)
+    (hjn : 2 * j ≤ n) (hcop4 : (n / 2 - 1).Coprime 4) :
+    2 * (F * F) ≤ X :=
+  i_three_caseI_factor_sq_squeeze_of_half_coprime_four
+    hnone hn hj hn_gt hj_pos hj_two h2n h3n hX_even
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn) hcop4
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :

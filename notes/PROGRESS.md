@@ -163,6 +163,14 @@
   assuming `n / 2 - 1 ≤ primePowerPartGE 5 (n - 2)`. The coprime-to-4 version
   `Erdos699.i_three_caseI_factor_sq_squeeze_of_half_coprime_four` does the same
   for `(n / 2 - 1).Coprime 4`. Full T7 remains open.
+- [R] Proved row-bound T7 factor-square wrappers:
+  `Erdos699.two_mul_t_le_X_of_factorized_half_bound` derives the normalized
+  `2 * t ≤ X` hypothesis from the original row bound `2 * j ≤ n`, using
+  `n = F * X`, `j = F * t`, and `0 < j` to cancel the positive factor `F`.
+  `Erdos699.i_three_caseI_factor_sq_squeeze_of_half_bound_from_row_bound` and
+  `Erdos699.i_three_caseI_factor_sq_squeeze_of_half_coprime_four_from_row_bound`
+  package the existing branch-free wrappers under the original row-bound
+  hypothesis. Full T7 remains open.
 - [R] Proved the direct coprime-to-4 half-row squeeze:
   `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four`
   replaces the explicit lower-bound input
