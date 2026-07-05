@@ -157,12 +157,46 @@ def _row_one_residue_classes(n1: int) -> tuple[list[int], int]:
     return classes, modulus
 
 
+def _product(values: list[int]) -> int:
+    result = 1
+    for value in values:
+        result *= value
+    return result
+
+
+def _row_one_split_diagnostic(
+    factors: list[tuple[int, int]], n2: int, t: int
+) -> dict[str, Any]:
+    zero_prime_powers: list[int] = []
+    one_prime_powers: list[int] = []
+    for _p, prime_power in factors:
+        if t % prime_power == 0:
+            zero_prime_powers.append(prime_power)
+        elif (t - 1) % prime_power == 0:
+            one_prime_powers.append(prime_power)
+        else:
+            raise ValueError("t is not a row-one CRT candidate")
+    row_two_product = t * (t - 1) * (t - 2)
+    row_two_remainder = row_two_product % n2
+    return {
+        "t": t,
+        "zero_prime_powers": zero_prime_powers,
+        "one_prime_powers": one_prime_powers,
+        "zero_product": _product(zero_prime_powers),
+        "one_product": _product(one_prime_powers),
+        "row_two_remainder": row_two_remainder,
+        "row_two_gcd": math.gcd(row_two_product, n2),
+        "survives_row_two": row_two_remainder == 0,
+    }
+
+
 def scan_kernel_crt(
     n1: int,
     n2: int,
     bound: int,
     min_t: int = 0,
     include_row_one_candidates: bool = False,
+    include_row_one_splits: bool = False,
 ) -> dict[str, Any]:
     if n1 < 1 or n2 < 1:
         raise ValueError("n1 and n2 must be positive")
@@ -197,6 +231,11 @@ def scan_kernel_crt(
     }
     if include_row_one_candidates:
         result["row_one_candidates"] = row_one_candidates
+    if include_row_one_splits:
+        factors = prime_power_factorization(n1)
+        result["row_one_candidate_splits"] = [
+            _row_one_split_diagnostic(factors, n2, t) for t in row_one_candidates
+        ]
     return result
 
 
@@ -205,6 +244,7 @@ def scan_case_i_power_two_kernel(
     min_exponent: int = 2,
     min_t: int = 4,
     include_row_one_candidates: bool = False,
+    include_row_one_splits: bool = False,
 ) -> dict[str, Any]:
     if min_exponent < 0 or max_exponent < min_exponent:
         raise ValueError("require 0 <= min_exponent <= max_exponent")
@@ -219,6 +259,7 @@ def scan_case_i_power_two_kernel(
             n,
             min_t=min_t,
             include_row_one_candidates=include_row_one_candidates,
+            include_row_one_splits=include_row_one_splits,
         )
         instances.append({"exponent": exponent, "n": n, **scan})
     return {
@@ -248,6 +289,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--min-exponent", type=int, default=2)
     parser.add_argument("--max-exponent", type=int)
     parser.add_argument("--include-row-one-candidates", action="store_true")
+    parser.add_argument("--include-row-one-splits", action="store_true")
     args = parser.parse_args(argv)
     if args.case_i_power_two:
         if args.max_exponent is None:
@@ -258,6 +300,7 @@ def main(argv: list[str] | None = None) -> int:
             min_exponent=args.min_exponent,
             min_t=min_t,
             include_row_one_candidates=args.include_row_one_candidates,
+            include_row_one_splits=args.include_row_one_splits,
         )
     else:
         if args.n1 is None or args.n2 is None or args.bound is None:
@@ -269,6 +312,7 @@ def main(argv: list[str] | None = None) -> int:
             args.bound,
             min_t=min_t,
             include_row_one_candidates=args.include_row_one_candidates,
+            include_row_one_splits=args.include_row_one_splits,
         )
     print(json.dumps(result, sort_keys=True))
     return 0

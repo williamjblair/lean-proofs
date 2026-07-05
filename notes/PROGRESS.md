@@ -330,5 +330,13 @@
   largest row-one candidate count in this range is `7`, attained at exponent
   `61`. This is exact finite evidence for the C2 lane, not a proof that the
   kernel is empty.
+- [E] Added opt-in divisor-split diagnostics via `--include-row-one-splits`.
+  Each row-one CRT candidate now records the exact prime-power product forced
+  into `t`, the product forced into `t - 1`, the row-two remainder, the
+  row-two gcd, and whether the candidate survives. The command
+  `python3 -m compute.kernel --case-i-power-two --min-exponent 61 --max-exponent 61 --include-row-one-splits`
+  reports `7` row-one split candidates at exponent `61`; all have
+  `row_two_gcd = 1` and `survivor_count = 0`. This is exact finite evidence
+  for the C2 divisor-split lane, not a proof that the kernel is empty.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

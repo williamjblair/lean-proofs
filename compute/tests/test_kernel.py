@@ -111,6 +111,63 @@ def test_crt_scan_can_include_row_one_candidates_on_request() -> None:
     assert result["row_one_candidate_count"] == len(expected_candidates)
 
 
+def test_crt_scan_can_include_row_one_split_diagnostics_on_request() -> None:
+    default_result = scan_kernel_crt(15, 14, 120, min_t=4)
+    result = scan_kernel_crt(
+        15, 14, 120, min_t=4, include_row_one_splits=True
+    )
+    assert "row_one_candidate_splits" not in default_result
+    assert result["row_one_candidate_splits"][:3] == [
+        {
+            "t": 6,
+            "zero_prime_powers": [3],
+            "one_prime_powers": [5],
+            "zero_product": 3,
+            "one_product": 5,
+            "row_two_remainder": 8,
+            "row_two_gcd": 2,
+            "survives_row_two": False,
+        },
+        {
+            "t": 10,
+            "zero_prime_powers": [5],
+            "one_prime_powers": [3],
+            "zero_product": 5,
+            "one_product": 3,
+            "row_two_remainder": 6,
+            "row_two_gcd": 2,
+            "survives_row_two": False,
+        },
+        {
+            "t": 15,
+            "zero_prime_powers": [3, 5],
+            "one_prime_powers": [],
+            "zero_product": 15,
+            "one_product": 1,
+            "row_two_remainder": 0,
+            "row_two_gcd": 14,
+            "survives_row_two": True,
+        },
+    ]
+    assert [item["t"] for item in result["row_one_candidate_splits"]] == [
+        6,
+        10,
+        15,
+        16,
+        21,
+        25,
+        30,
+        31,
+        36,
+        40,
+        45,
+        46,
+        51,
+        55,
+        60,
+    ]
+
+
 def test_kernel_cli_emits_json() -> None:
     completed = subprocess.run(
         [
@@ -173,6 +230,39 @@ def test_kernel_cli_can_include_row_one_candidates() -> None:
     ]
 
 
+def test_kernel_cli_can_include_row_one_split_diagnostics() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--n1",
+            "15",
+            "--n2",
+            "14",
+            "--bound",
+            "120",
+            "--min-t",
+            "4",
+            "--include-row-one-splits",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["row_one_candidate_splits"][0] == {
+        "t": 6,
+        "zero_prime_powers": [3],
+        "one_prime_powers": [5],
+        "zero_product": 3,
+        "one_product": 5,
+        "row_two_remainder": 8,
+        "row_two_gcd": 2,
+        "survives_row_two": False,
+    }
+
+
 def test_case_i_power_two_family_scan_matches_scalar_scans() -> None:
     result = scan_case_i_power_two_kernel(5)
     assert result["mode"] == "case_i_power_two_kernel"
@@ -215,6 +305,24 @@ def test_case_i_power_two_family_scan_can_include_row_one_candidates() -> None:
     )
     assert result["instances"][0]["row_one_candidates"] == [20]
     assert result["instances"][0]["row_one_candidate_count"] == 1
+
+
+def test_case_i_power_two_family_scan_can_include_row_one_splits() -> None:
+    result = scan_case_i_power_two_kernel(
+        5, min_exponent=5, include_row_one_splits=True
+    )
+    assert result["instances"][0]["row_one_candidate_splits"] == [
+        {
+            "t": 20,
+            "zero_prime_powers": [5],
+            "one_prime_powers": [19],
+            "zero_product": 5,
+            "one_product": 19,
+            "row_two_remainder": 25,
+            "row_two_gcd": 1,
+            "survives_row_two": False,
+        }
+    ]
 
 
 def test_case_i_power_two_family_scan_reaches_exponent_sixty() -> None:
