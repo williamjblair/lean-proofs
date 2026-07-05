@@ -343,6 +343,14 @@
   formalizes the "at most one bounded candidate per split" side of C2 under
   the explicit short-interval hypothesis; it is not a proof that the kernel is
   empty.
+- [R] Specialized bounded fixed-split uniqueness to the Case-I row-one
+  modulus `n - 1`: `Erdos699.sub_one_short_bound_of_two_lt` proves
+  `n < 2 * (n - 1)` from `2 < n`, and
+  `Erdos699.rowOneDivisorSplit_eq_of_sub_one_consecutiveDivisorKernelBelow`
+  shows that two positive bounded kernel candidates with the same
+  `rowOneDivisorSplit (n - 1) zeroPart onePart` are equal. This is the
+  problem-shape version of "at most one bounded candidate per split"; it is
+  not a proof that the kernel is empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters

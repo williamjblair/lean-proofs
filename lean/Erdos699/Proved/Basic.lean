@@ -276,6 +276,21 @@ theorem rowOneDivisorSplit_eq_of_consecutiveDivisorKernelBelow_short
   rowOneDivisorSplit_eq_of_half_bound hbound htsplit husplit ht hu
     htkernel.1 hukernel.1
 
+theorem sub_one_short_bound_of_two_lt {n : ℕ} (hn : 2 < n) :
+    n < 2 * (n - 1) := by
+  omega
+
+theorem rowOneDivisorSplit_eq_of_sub_one_consecutiveDivisorKernelBelow
+    {n N2 zeroPart onePart t u : ℕ} (hn : 2 < n)
+    (htsplit : rowOneDivisorSplit (n - 1) zeroPart onePart t)
+    (husplit : rowOneDivisorSplit (n - 1) zeroPart onePart u)
+    (ht : 1 ≤ t) (hu : 1 ≤ u)
+    (htkernel : consecutiveDivisorKernelBelow (n - 1) N2 n t)
+    (hukernel : consecutiveDivisorKernelBelow (n - 1) N2 n u) :
+    t = u :=
+  rowOneDivisorSplit_eq_of_consecutiveDivisorKernelBelow_short
+    (sub_one_short_bound_of_two_lt hn) htsplit husplit ht hu htkernel hukernel
+
 theorem rowOneDivisorSplit_kernel_iff_row_two {N1 N2 zeroPart onePart t : ℕ}
     (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
     consecutiveDivisorKernel N1 N2 t ↔ N2 ∣ t * (t - 1) * (t - 2) := by
