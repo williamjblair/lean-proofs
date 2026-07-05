@@ -3781,6 +3781,137 @@ def powerTwoQuotientKernel (A B v h : ℕ) : Prop :=
               v * (A - v) = h * (B * A - 1) ∧
                 B * (A / 2) - 1 ∣ h * (A - 2 * v)
 
+/-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
+factor `H`. This formalizes the algebraic part of the reduction to the pure
+power-of-two quotient kernel: once `X = A * H`, `u = H * v`, `g = H^2 * h`,
+and the half-row modulus is coprime to `H`, any squeezed kernel point yields a
+`powerTwoQuotientKernel` point for `A` and `F * H`. -/
+theorem powerTwoQuotientKernel_of_squeezedNormalized_decomposition
+    {F X u g A H v h : ℕ}
+    (hkernel : squeezedNormalizedCaseIKernel F X u g)
+    (hX : X = A * H)
+    (hu : u = H * v)
+    (hg : g = H * H * h)
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hcopHalf : Nat.Coprime H (F * H * (A / 2) - 1)) :
+    powerTwoQuotientKernel A (F * H) v h := by
+  rcases hkernel with
+    ⟨_hFpos, _hXpos, hupos, hFodd, _h4X, hFge, h2u_lt, _h4F, _h2F2,
+      hrow, hhalf⟩
+  have hHpos : 0 < H := hHodd.pos
+  have hBodd : Odd (F * H) := hFodd.mul hHodd
+  have hBge : 3 ≤ F * H := by
+    exact le_trans hFge (Nat.le_mul_of_pos_right F hHpos)
+  have h2v_lt_A : 2 * v < A := by
+    have hmul : H * (2 * v) < H * A := by
+      simpa [hu, hX, mul_assoc, mul_comm, mul_left_comm] using h2u_lt
+    exact (Nat.mul_lt_mul_left hHpos).mp hmul
+  have hgap : 0 < A - 2 * v := by omega
+  have hvpos : 0 < v := by
+    by_contra hv
+    have hv0 : v = 0 := Nat.eq_zero_of_not_pos hv
+    subst v
+    simp at hu
+    omega
+  have hv_le_A : v ≤ A := by omega
+  have hsub_u : X - u = H * (A - v) := by
+    rw [hX, hu]
+    rw [mul_comm A H]
+    exact (Nat.mul_sub_left_distrib H A v).symm
+  have hsub_gap : X - 2 * u = H * (A - 2 * v) := by
+    rw [hX, hu]
+    have hleft : 2 * (H * v) = H * (2 * v) := by ring
+    rw [hleft]
+    rw [mul_comm A H]
+    exact (Nat.mul_sub_left_distrib H A (2 * v)).symm
+  have hhalf_eq : F * X / 2 - 1 = F * H * (A / 2) - 1 := by
+    rcases hA4 with ⟨c, hc⟩
+    subst A
+    rw [hX]
+    have h4c : 4 * c / 2 = 2 * c := by
+      calc
+        4 * c / 2 = (2 * (2 * c)) / 2 := by ring_nf
+        _ = 2 * c := Nat.mul_div_right (2 * c) (by decide : 0 < 2)
+    have hdiv : F * (4 * c * H) / 2 = F * H * (2 * c) := by
+      calc
+        F * (4 * c * H) / 2 = (2 * (F * H * (2 * c))) / 2 := by ring_nf
+        _ = F * H * (2 * c) :=
+            Nat.mul_div_right (F * H * (2 * c)) (by decide : 0 < 2)
+    rw [hdiv, h4c]
+  have hrow_subst :
+      (H * v) * (H * (A - v)) = (H * H * h) * (F * (A * H) - 1) := by
+    have hrow' := hrow
+    rw [hsub_u, hu, hg, hX] at hrow'
+    exact hrow'
+  have hrow_scaled :
+      H * H * (v * (A - v)) = H * H * (h * (F * H * A - 1)) := by
+    simpa [mul_assoc, mul_comm, mul_left_comm] using hrow_subst
+  have hHHpos : 0 < H * H := Nat.mul_pos hHpos hHpos
+  have hrow_reduced : v * (A - v) = h * (F * H * A - 1) := by
+    exact Nat.mul_left_cancel hHHpos hrow_scaled
+  have hrow_reduced' : v * (A - v) = h * ((F * H) * A - 1) := by
+    simpa [mul_assoc] using hrow_reduced
+  have hhalf_scaled :
+      F * H * (A / 2) - 1 ∣ H * (H * (H * (h * (A - 2 * v)))) := by
+    have hhalf_subst :
+        F * H * (A / 2) - 1 ∣ (H * H * h) * (H * (A - 2 * v)) := by
+      simpa [hhalf_eq, hg, hsub_gap] using hhalf
+    convert hhalf_subst using 1
+    ring
+  have hcopM : Nat.Coprime (F * H * (A / 2) - 1) H := hcopHalf.symm
+  have hdvd1 : F * H * (A / 2) - 1 ∣ H * (H * (h * (A - 2 * v))) :=
+    hcopM.dvd_of_dvd_mul_left hhalf_scaled
+  have hdvd2 : F * H * (A / 2) - 1 ∣ H * (h * (A - 2 * v)) :=
+    hcopM.dvd_of_dvd_mul_left hdvd1
+  have hdvd3 : F * H * (A / 2) - 1 ∣ h * (A - 2 * v) :=
+    hcopM.dvd_of_dvd_mul_left hdvd2
+  refine ⟨hA4, hApow, hBodd, hBge, hvpos, hgap, ?_, ?_⟩
+  · simpa using hrow_reduced'
+  · simpa [mul_assoc] using hdvd3
+
+/-- Existential quotient form of
+`powerTwoQuotientKernel_of_squeezedNormalized_decomposition`: row-one
+coprimality forces `H^2 ∣ g`, so the quotient `h` exists. -/
+theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_decomposition
+    {F X u g A H v : ℕ}
+    (hkernel : squeezedNormalizedCaseIKernel F X u g)
+    (hX : X = A * H)
+    (hu : u = H * v)
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hcopRow : Nat.Coprime H (F * H * A - 1))
+    (hcopHalf : Nat.Coprime H (F * H * (A / 2) - 1)) :
+    ∃ h : ℕ, powerTwoQuotientKernel A (F * H) v h := by
+  have hkernel' := hkernel
+  rcases hkernel with
+    ⟨_hFpos, _hXpos, _hupos, _hFodd, _h4X, _hFge, _h2u_lt, _h4F, _h2F2,
+      hrow, _hhalf⟩
+  have hsub_u : X - u = H * (A - v) := by
+    rw [hX, hu]
+    rw [mul_comm A H]
+    exact (Nat.mul_sub_left_distrib H A v).symm
+  have hrow_subst :
+      (H * v) * (H * (A - v)) = g * (F * (A * H) - 1) := by
+    have hrow' := hrow
+    rw [hsub_u, hu, hX] at hrow'
+    exact hrow'
+  have hrow_scaled : H * H * (v * (A - v)) = g * (F * H * A - 1) := by
+    simpa [mul_assoc, mul_comm, mul_left_comm] using hrow_subst
+  have hH2_dvd_gD : H * H ∣ g * (F * H * A - 1) := by
+    rw [← hrow_scaled]
+    exact Nat.dvd_mul_right (H * H) (v * (A - v))
+  have hcopH2D : Nat.Coprime (H * H) (F * H * A - 1) :=
+    hcopRow.mul_left hcopRow
+  have hH2_dvd_g : H * H ∣ g :=
+    hcopH2D.dvd_of_dvd_mul_right hH2_dvd_gD
+  rcases hH2_dvd_g with ⟨h, hg⟩
+  exact ⟨h,
+    powerTwoQuotientKernel_of_squeezedNormalized_decomposition
+      hkernel' hX hu hg hA4 hApow hHodd hcopHalf⟩
+
 theorem squeezedNormalizedCaseIKernel_zero_t_false {F X g : ℕ} :
     ¬ squeezedNormalizedCaseIKernel F X 0 g := by
   intro h

@@ -97,6 +97,16 @@
   which reports `49000 404 0` for `2 ≤ a ≤ 50` and odd `3 ≤ B ≤ 2001`.
   This is exact bounded evidence and a formal target definition, not a proof
   that `powerTwoQuotientKernel` is empty.
+- [R] Proved the quotient algebra from the corrected squeezed kernel into the
+  pure target. `Erdos699.powerTwoQuotientKernel_of_squeezedNormalized_decomposition`
+  shows that, given `X = A * H`, `u = H * v`, `g = H * H * h`, `4 ∣ A`,
+  `A = 2 ^ a`, odd `H`, and `H` coprime to the half-row modulus, a squeezed
+  normalized kernel point yields `powerTwoQuotientKernel A (F * H) v h`.
+  `Erdos699.exists_powerTwoQuotientKernel_of_squeezedNormalized_decomposition`
+  also derives the quotient `h` from row-one coprimality by proving
+  `H * H ∣ g`. This banks the algebraic quotient step only; the extraction of
+  the odd digit-forced factor `H` from `rowNDigitPowerConstraint`, and the
+  empty-kernel theorem for `powerTwoQuotientKernel`, remain open.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.
