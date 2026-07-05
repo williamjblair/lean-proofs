@@ -315,6 +315,16 @@
   product target is equivalent to the reduced-divisor gap under the
   admissible power-two split hypotheses. This still does not prove the
   universal product inequality or the kernel.
+- [R] Split off the small parity-denominator branch of the product target.
+  The generic theorem `Erdos699.product_gap_of_factor_bound_by_B_sq` proves
+  that if a branch denominator `b` satisfies `b ≤ B^2` and is bounded by both
+  split factors `alpha` and `beta`, then the product gap
+  `b * (l*m + 1) ≤ M` follows from the product identity
+  `alpha*beta + 1 = B^2*l*m` and the half-row identity. The split wrapper
+  `Erdos699.powerTwoSplitSubtractive_parity_product_gap_of_bound_by_B_sq`
+  applies this to the parity denominator `c` in the odd branch and `c/2` in
+  the even branch. This does not prove Task A: the remaining exceptional
+  branch is exactly the even case with `c/2 > B^2`.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
@@ -361,6 +371,16 @@
   It reports `69000 69000 0 880 0 0 0 725 2551
   2201803372637972080885759`. This is exact bounded evidence for the listed
   range, not a proof of the universal parity-product gap.
+- [E] Added exact diagnostics for the small parity-denominator branch from
+  the new Lean lemma. Reproduce the enlarged power-two quotient perimeter and
+  denominator split with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"], p["parity_denominator_le_B_sq_count"], p["parity_denominator_gt_B_sq_count"], p["max_parity_denominator_over_B_sq_candidate"]["exponent"], p["max_parity_denominator_over_B_sq_candidate"]["B"], p["max_parity_denominator_over_B_sq_candidate"]["parity_gcd_bound"], p["max_parity_denominator_over_B_sq_candidate"]["parity_product_gap_holds"])'`.
+  It reports `69000 880 0 878 2 52 5 39 True`. Thus all but two candidates in
+  the range are covered by the new `b ≤ B^2` sufficient branch, and the
+  largest exceptional denominator is the known `A = 2^52`, `B = 5`,
+  `c/2 = 39` case, which still satisfies the product gap in the diagnostic.
+  This is exact bounded evidence and a branch split, not a proof of the
+  exceptional branch.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` leaves an
   uncertified prime factor at least `2^64`, the scan raises. With

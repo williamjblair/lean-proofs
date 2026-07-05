@@ -6,6 +6,7 @@ import sys
 import pytest
 
 from compute.kernel import (
+    _power_two_reduced_divisor_gap_summary,
     consecutive_kernel_holds,
     diagnose_squeezed_normalized_candidate,
     power_two_quotient_kernel_holds,
@@ -812,6 +813,9 @@ def test_power_two_quotient_scan_matches_bruteforce() -> None:
             "parity_product_gap_holds_count": 2,
             "parity_product_gap_failure_count": 0,
             "min_parity_product_margin": 725,
+            "parity_denominator_le_B_sq_count": 2,
+            "parity_denominator_gt_B_sq_count": 0,
+            "max_parity_denominator_over_B_sq_candidate": None,
             "min_parity_gap_candidate": {
                 "exponent": 9,
                 "A": 512,
@@ -870,6 +874,51 @@ def test_power_two_quotient_scan_matches_bruteforce() -> None:
     }
 
 
+def test_power_two_quotient_gap_summary_counts_B_sq_denominator_exceptions() -> None:
+    summary = _power_two_reduced_divisor_gap_summary(
+        [
+            {
+                "exponent": 52,
+                "A": 2**52,
+                "B": 5,
+                "v": 945_038_995_613_201,
+                "h": 149_346_249_379_105,
+            }
+        ]
+    )
+
+    parity_summary = summary["parity_branch_gap_summary"]
+    assert parity_summary["parity_denominator_le_B_sq_count"] == 0
+    assert parity_summary["parity_denominator_gt_B_sq_count"] == 1
+    assert parity_summary["max_parity_denominator_over_B_sq_candidate"] == {
+        "exponent": 52,
+        "A": 2**52,
+        "B": 5,
+        "v": 945_038_995_613_201,
+        "h": 149_346_249_379_105,
+        "r": 32_587_551_572_869,
+        "s": 691,
+        "l": 29,
+        "m": 5_149_870_668_245,
+        "alpha": 6_838_198_231_644,
+        "beta": 546,
+        "c": 78,
+        "d": 39,
+        "reduced_divisor": 288_692_283_805_801,
+        "l_times_m": 149_346_249_379_105,
+        "gap_margin": 139_346_034_426_696,
+        "gap_holds": True,
+        "c_parity": "even",
+        "parity_gcd_bound": 39,
+        "parity_reduced_divisor_lower_bound": 288_692_283_805_801,
+        "parity_gap_margin": 139_346_034_426_696,
+        "parity_gap_holds": True,
+        "parity_product_bound": 5_824_503_725_785_134,
+        "parity_product_margin": 5_434_495_342_641_105,
+        "parity_product_gap_holds": True,
+    }
+
+
 def test_power_two_quotient_scan_rejects_inverted_exponent_range() -> None:
     with pytest.raises(ValueError, match="0 <= min_exponent <= max_exponent"):
         scan_power_two_quotient_kernel(max_exponent=4, max_b=101, min_exponent=5)
@@ -906,6 +955,9 @@ def test_power_two_quotient_scan_certifies_large_prime_modulus() -> None:
         "parity_product_gap_holds_count": 3,
         "parity_product_gap_failure_count": 0,
         "min_parity_product_margin": 1654181948285415973,
+        "parity_denominator_le_B_sq_count": 3,
+        "parity_denominator_gt_B_sq_count": 0,
+        "max_parity_denominator_over_B_sq_candidate": None,
         "min_parity_gap_candidate": {
             "exponent": 60,
             "A": 2**60,

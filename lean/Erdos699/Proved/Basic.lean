@@ -4553,6 +4553,46 @@ theorem parity_product_gap_iff_parity_reduced_divisor_gap {M c L : ℕ}
         simpa [hcdiv] using hkpos
       exact Or.inr ⟨hceven, (lt_div_iff_mul_succ_le hc2pos).mp hgap⟩
 
+/-- If a factor `b` of the split gcd is at most `B^2`, then the floor-free
+product gap follows from the product and half-row identities. This isolates
+the remaining product-gap work to the exceptional large-denominator branch. -/
+theorem product_gap_of_factor_bound_by_B_sq {M B l m alpha beta b : ℕ}
+    (hBge : 3 ≤ B)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hbpos : 0 < b)
+    (hb_le_B2 : b ≤ B * B)
+    (hb_le_alpha : b ≤ alpha)
+    (hb_le_beta : b ≤ beta)
+    (hab : alpha * beta + 1 = B * B * (l * m))
+    (hhalf : 2 * M = 2 * (alpha * beta) + B * (alpha * l + beta * m)) :
+    b * (l * m + 1) ≤ M := by
+  have hlge : 1 ≤ l := Nat.succ_le_of_lt hlpos
+  have hmge : 1 ≤ m := Nat.succ_le_of_lt hmpos
+  have hb_alpha_l : b ≤ alpha * l := by
+    have hmul : b * 1 ≤ alpha * l := Nat.mul_le_mul hb_le_alpha hlge
+    simpa using hmul
+  have hb_beta_m : b ≤ beta * m := by
+    have hmul : b * 1 ≤ beta * m := Nat.mul_le_mul hb_le_beta hmge
+    simpa using hmul
+  have hbL_le_B2L : b * (l * m) ≤ (B * B) * (l * m) :=
+    Nat.mul_le_mul_right (l * m) hb_le_B2
+  have hsum_ge : 2 * b ≤ alpha * l + beta * m := by
+    nlinarith
+  have hBsum_ge : 6 * b ≤ B * (alpha * l + beta * m) := by
+    have hmul : 3 * (2 * b) ≤ B * (alpha * l + beta * m) :=
+      Nat.mul_le_mul hBge hsum_ge
+    nlinarith
+  have hBsum_ge_add : 2 * b + 2 ≤ B * (alpha * l + beta * m) := by
+    nlinarith
+  have hmain :
+      2 * (b * (l * m + 1)) + 2 ≤
+        2 * ((B * B) * (l * m)) + B * (alpha * l + beta * m) := by
+    nlinarith
+  have htwice : 2 * (b * (l * m + 1)) ≤ 2 * M := by
+    nlinarith
+  exact Nat.le_of_mul_le_mul_left htwice (by decide : 0 < 2)
+
 /-- Product-form parity certificate. For odd `c`, it is enough to prove
 `c * (L + 1) ≤ M`; for even `c`, it is enough to prove
 `(c / 2) * (L + 1) ≤ M`. -/
@@ -4815,6 +4855,71 @@ theorem powerTwoSplitSubtractive_reduced_divisor_gap_iff_parity_product_gap
     hA4 hBodd hBge hrpos hspos hlpos hmpos hD hA halpha hbeta hc hcpos).trans
     (parity_product_gap_iff_parity_reduced_divisor_gap
       (M := B * (A / 2) - 1) (c := c) (L := l * m) hcpos).symm
+
+/-- In an admissible power-two split, any branch where the parity denominator
+is at most `B^2` automatically satisfies the product-form parity gap. The
+universal product target is therefore reduced to the exceptional even branch
+where `c / 2 > B^2`. -/
+theorem powerTwoSplitSubtractive_parity_product_gap_of_bound_by_B_sq
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hbound :
+      let c := Nat.gcd alpha beta
+      (Odd c ∧ c ≤ B * B) ∨ (Even c ∧ c / 2 ≤ B * B)) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    (Odd c ∧ c * (l * m + 1) ≤ M) ∨
+      (Even c ∧ (c / 2) * (l * m + 1) ≤ M) := by
+  dsimp at hbound ⊢
+  have hA2 : 2 ∣ A := dvd_trans (by decide : 2 ∣ 4) hA4
+  have hhalf :
+      2 * (B * (A / 2) - 1) =
+        2 * (alpha * beta) + B * (alpha * l + beta * m) :=
+    powerTwoSplitSubtractive_half_row_alpha_beta_identity hA2 hBge hrpos hspos
+      hlpos hmpos hD hA halpha hbeta
+  have hab : alpha * beta + 1 = B * B * (l * m) :=
+    powerTwoSplitSubtractive_alpha_beta_mul hBge hrpos hspos hlpos hmpos hD hA
+      halpha hbeta
+  have hsplit_lt := powerTwoSplitSubtractive_lt (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) hBge hrpos hspos hlpos hmpos hD hA
+  have halpha_pos : 0 < alpha := by
+    rw [halpha]
+    exact Nat.sub_pos_of_lt hsplit_lt.1
+  have hbeta_pos : 0 < beta := by
+    rw [hbeta]
+    exact Nat.sub_pos_of_lt hsplit_lt.2
+  have hc_le_alpha : Nat.gcd alpha beta ≤ alpha :=
+    Nat.gcd_le_left beta halpha_pos
+  have hc_le_beta : Nat.gcd alpha beta ≤ beta :=
+    Nat.gcd_le_right alpha hbeta_pos
+  rcases hbound with ⟨hcodd, hcB⟩ | ⟨hceven, hcB⟩
+  · exact Or.inl ⟨hcodd,
+      product_gap_of_factor_bound_by_B_sq hBge hlpos hmpos
+        (Nat.gcd_pos_of_pos_left beta halpha_pos) hcB hc_le_alpha hc_le_beta
+        hab hhalf⟩
+  · have hc2_le_alpha : Nat.gcd alpha beta / 2 ≤ alpha :=
+      (Nat.div_le_self (Nat.gcd alpha beta) 2).trans hc_le_alpha
+    have hc2_le_beta : Nat.gcd alpha beta / 2 ≤ beta :=
+      (Nat.div_le_self (Nat.gcd alpha beta) 2).trans hc_le_beta
+    have hc2pos : 0 < Nat.gcd alpha beta / 2 := by
+      rcases hceven with ⟨k, hk⟩
+      have hcgcd_pos : 0 < Nat.gcd alpha beta :=
+        Nat.gcd_pos_of_pos_left beta halpha_pos
+      have hkpos : 0 < k := by omega
+      have hcdiv : Nat.gcd alpha beta / 2 = k := by omega
+      simpa [hcdiv] using hkpos
+    exact Or.inr ⟨hceven,
+      product_gap_of_factor_bound_by_B_sq hBge hlpos hmpos hc2pos hcB
+        hc2_le_alpha hc2_le_beta hab hhalf⟩
 
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap

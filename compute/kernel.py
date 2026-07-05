@@ -644,6 +644,21 @@ def _power_two_parity_branch_gap_summary(
         key=lambda item: int(item["parity_product_margin"]),
         default=None,
     )
+    denominator_le_B_sq_count = sum(
+        1
+        for item in diagnostics
+        if int(item["parity_gcd_bound"]) <= int(item["B"]) * int(item["B"])
+    )
+    denominator_exceptions = [
+        item
+        for item in diagnostics
+        if int(item["parity_gcd_bound"]) > int(item["B"]) * int(item["B"])
+    ]
+    max_denominator_exception = max(
+        denominator_exceptions,
+        key=lambda item: int(item["parity_gcd_bound"]) - int(item["B"]) * int(item["B"]),
+        default=None,
+    )
     return {
         "candidate_count": len(diagnostics),
         "odd_c_count": sum(1 for item in diagnostics if item["c_parity"] == "odd"),
@@ -664,6 +679,11 @@ def _power_two_parity_branch_gap_summary(
             if min_parity_product_candidate is None
             else min_parity_product_candidate["parity_product_margin"]
         ),
+        "parity_denominator_le_B_sq_count": denominator_le_B_sq_count,
+        "parity_denominator_gt_B_sq_count": (
+            len(diagnostics) - denominator_le_B_sq_count
+        ),
+        "max_parity_denominator_over_B_sq_candidate": max_denominator_exception,
         "min_parity_gap_candidate": min_parity_gap_candidate,
         "min_parity_product_candidate": min_parity_product_candidate,
     }
