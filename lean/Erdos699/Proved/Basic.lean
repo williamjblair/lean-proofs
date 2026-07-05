@@ -3878,6 +3878,254 @@ theorem powerTwoSplitAdditive_alpha_beta_mul {A B r s l m alpha beta : ℕ}
   rw [← hA] at hDadd
   nlinarith
 
+/-- Integer form of the first subtractive split identity. It is the algebraic
+reason the natural subtraction `r - B * m` is non-truncated in every positive
+row-one split with `B ≥ 3`. -/
+theorem powerTwoSplit_alpha_int_identity {A B r s l m : ℕ}
+    (hBpos : 0 < B)
+    (hApos : 0 < A)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A) :
+    (s : ℤ) * ((r : ℤ) - (B : ℤ) * (m : ℤ)) =
+      (B : ℤ) * (r : ℤ) * (l : ℤ) - 1 := by
+  have hDadd : r * s + 1 = B * A := by
+    have hBApos : 0 < B * A := Nat.mul_pos hBpos hApos
+    omega
+  have hDaddZ : (r : ℤ) * (s : ℤ) + 1 = (B : ℤ) * (A : ℤ) := by
+    exact_mod_cast hDadd
+  have hAZ : (r : ℤ) * (l : ℤ) + (s : ℤ) * (m : ℤ) = (A : ℤ) := by
+    exact_mod_cast hA
+  nlinarith
+
+/-- Integer form of the second subtractive split identity. -/
+theorem powerTwoSplit_beta_int_identity {A B r s l m : ℕ}
+    (hBpos : 0 < B)
+    (hApos : 0 < A)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A) :
+    (r : ℤ) * ((s : ℤ) - (B : ℤ) * (l : ℤ)) =
+      (B : ℤ) * (s : ℤ) * (m : ℤ) - 1 := by
+  have hDadd : r * s + 1 = B * A := by
+    have hBApos : 0 < B * A := Nat.mul_pos hBpos hApos
+    omega
+  have hDaddZ : (r : ℤ) * (s : ℤ) + 1 = (B : ℤ) * (A : ℤ) := by
+    exact_mod_cast hDadd
+  have hAZ : (r : ℤ) * (l : ℤ) + (s : ℤ) * (m : ℤ) = (A : ℤ) := by
+    exact_mod_cast hA
+  nlinarith
+
+/-- In every positive row-one split with `B ≥ 3`, the subtractive alpha/beta
+terms are genuinely positive: `B * m < r` and `B * l < s`. -/
+theorem powerTwoSplitSubtractive_lt {A B r s l m : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A) :
+    B * m < r ∧ B * l < s := by
+  have hBpos : 0 < B := by omega
+  have hApos : 0 < A := by
+    rw [← hA]
+    positivity
+  have halpha_id := powerTwoSplit_alpha_int_identity
+    (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+    hBpos hApos hD hA
+  have hbeta_id := powerTwoSplit_beta_int_identity
+    (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+    hBpos hApos hD hA
+  have hBrl_ge_nat : 3 ≤ B * r * l := by
+    have hBr : 3 ≤ B * r := by
+      have hmul := Nat.mul_le_mul hBge hrpos
+      simpa using hmul
+    have hBrl : 3 * 1 ≤ (B * r) * l := Nat.mul_le_mul hBr hlpos
+    simpa [mul_assoc] using hBrl
+  have hBsm_ge_nat : 3 ≤ B * s * m := by
+    have hBs : 3 ≤ B * s := by
+      have hmul := Nat.mul_le_mul hBge hspos
+      simpa using hmul
+    have hBsm : 3 * 1 ≤ (B * s) * m := Nat.mul_le_mul hBs hmpos
+    simpa [mul_assoc] using hBsm
+  have hBrl_ge : (3 : ℤ) ≤ (B : ℤ) * (r : ℤ) * (l : ℤ) := by
+    exact_mod_cast hBrl_ge_nat
+  have hBsm_ge : (3 : ℤ) ≤ (B : ℤ) * (s : ℤ) * (m : ℤ) := by
+    exact_mod_cast hBsm_ge_nat
+  have hleft_prod_pos : (0 : ℤ) < (B : ℤ) * (r : ℤ) * (l : ℤ) - 1 := by
+    nlinarith
+  have hright_prod_pos : (0 : ℤ) < (B : ℤ) * (s : ℤ) * (m : ℤ) - 1 := by
+    nlinarith
+  have hsZ : (0 : ℤ) < (s : ℤ) := by exact_mod_cast hspos
+  have hrZ : (0 : ℤ) < (r : ℤ) := by exact_mod_cast hrpos
+  have hbm_lt_r_Z : (B : ℤ) * (m : ℤ) < (r : ℤ) := by
+    nlinarith
+  have hbl_lt_s_Z : (B : ℤ) * (l : ℤ) < (s : ℤ) := by
+    nlinarith
+  constructor
+  · exact_mod_cast hbm_lt_r_Z
+  · exact_mod_cast hbl_lt_s_Z
+
+/-- The subtractive alpha/beta definitions in the split/gcd obstruction are
+equivalent to the additive form required by the split product identity. -/
+theorem powerTwoSplitSubtractive_to_additive {A B r s l m alpha beta : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    r = B * m + alpha ∧ s = B * l + beta := by
+  rcases powerTwoSplitSubtractive_lt (A := A) (B := B) (r := r) (s := s)
+    (l := l) (m := m) hBge hrpos hspos hlpos hmpos hD hA with ⟨hbm, hbl⟩
+  constructor <;> omega
+
+/-- Subtractive alpha/beta form of the exact split product identity:
+`(r - B*m) * (s - B*l) + 1 = B^2*l*m`. -/
+theorem powerTwoSplitSubtractive_alpha_beta_mul {A B r s l m alpha beta : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    alpha * beta + 1 = B * B * (l * m) := by
+  have hBpos : 0 < B := by omega
+  have hApos : 0 < A := by
+    rw [← hA]
+    positivity
+  rcases powerTwoSplitSubtractive_to_additive (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) (alpha := alpha) (beta := beta)
+    hBge hrpos hspos hlpos hmpos hD hA halpha hbeta with
+    ⟨halpha_add, hbeta_add⟩
+  exact powerTwoSplitAdditive_alpha_beta_mul hBpos hApos hD hA halpha_add
+    hbeta_add
+
+/-- Additive half-row identity used by the row-two-to-gcd reduction:
+`2M = 2 alpha beta + B(alpha*l + beta*m)`, where
+`M = B * (A / 2) - 1`. -/
+theorem powerTwoSplitHalfRow_alpha_beta_identity {A B r s l m alpha beta : ℕ}
+    (hA2 : 2 ∣ A)
+    (hBpos : 0 < B)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : r = B * m + alpha)
+    (hbeta : s = B * l + beta) :
+    2 * (B * (A / 2) - 1) =
+      2 * (alpha * beta) + B * (alpha * l + beta * m) := by
+  have hApos : 0 < A := by
+    rw [← hA, halpha, hbeta]
+    positivity
+  have hAeq : A = 2 * (A / 2) := (Nat.mul_div_cancel' hA2).symm
+  have hMpos : 0 < B * (A / 2) := by
+    have hAhalf_pos : 0 < A / 2 := by omega
+    exact Nat.mul_pos hBpos hAhalf_pos
+  have hprod := powerTwoSplitAdditive_alpha_beta_mul hBpos hApos hD hA
+    halpha hbeta
+  have hA' := hA
+  rw [halpha, hbeta] at hA'
+  rw [hAeq] at hA'
+  have hA_mul :
+      B * ((B * m + alpha) * l + (B * l + beta) * m) =
+        B * (2 * (A / 2)) := by
+    rw [hA']
+  ring_nf at hA_mul hprod
+  have hsum :
+      B * (A / 2) * 2 =
+        (2 * (alpha * beta) + B * (alpha * l + beta * m)) + 2 := by
+    ring_nf
+    nlinarith
+  omega
+
+/-- Subtractive version of `powerTwoSplitHalfRow_alpha_beta_identity`. -/
+theorem powerTwoSplitSubtractive_half_row_alpha_beta_identity
+    {A B r s l m alpha beta : ℕ}
+    (hA2 : 2 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    2 * (B * (A / 2) - 1) =
+      2 * (alpha * beta) + B * (alpha * l + beta * m) := by
+  have hBpos : 0 < B := by omega
+  rcases powerTwoSplitSubtractive_to_additive (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) (alpha := alpha) (beta := beta)
+    hBge hrpos hspos hlpos hmpos hD hA halpha hbeta with
+    ⟨halpha_add, hbeta_add⟩
+  exact powerTwoSplitHalfRow_alpha_beta_identity hA2 hBpos hlpos hmpos hD hA
+    halpha_add hbeta_add
+
+/-- Additive row-two alpha identity. This is the exact arithmetic behind the
+congruence `B(A - 2r*l) ≡ -2s*alpha (mod M)`. -/
+theorem powerTwoSplitRowTwo_alpha_identity {A B r s l m alpha : ℕ}
+    (hA2 : 2 ∣ A)
+    (hBpos : 0 < B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hgap : r * l < s * m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : r = B * m + alpha) :
+    B * (s * m - r * l) + 2 * s * alpha =
+      2 * (B * (A / 2) - 1) := by
+  have hApos : 0 < A := by
+    rw [← hA]
+    positivity
+  have hAeq : A = 2 * (A / 2) := (Nat.mul_div_cancel' hA2).symm
+  have hDadd : r * s + 1 = B * A := by
+    have hBApos : 0 < B * A := Nat.mul_pos hBpos hApos
+    omega
+  let delta := s * m - r * l
+  have hdelta : delta + r * l = s * m := by
+    dsimp [delta]
+    exact Nat.sub_add_cancel (le_of_lt hgap)
+  let M := B * (A / 2) - 1
+  have hMpos0 : 0 < B * (A / 2) := by
+    have hAhalf_pos : 0 < A / 2 := by omega
+    exact Nat.mul_pos hBpos hAhalf_pos
+  have hM : M + 1 = B * (A / 2) := by
+    dsimp [M]
+    omega
+  change B * delta + 2 * s * alpha = 2 * M
+  nlinarith
+
+/-- Subtractive version of `powerTwoSplitRowTwo_alpha_identity`. -/
+theorem powerTwoSplitSubtractive_row_two_alpha_identity
+    {A B r s l m alpha : ℕ}
+    (hA2 : 2 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hgap : r * l < s * m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m) :
+    B * (s * m - r * l) + 2 * s * alpha =
+      2 * (B * (A / 2) - 1) := by
+  have hBpos : 0 < B := by omega
+  rcases powerTwoSplitSubtractive_to_additive (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) (alpha := alpha) (beta := s - B * l)
+    hBge hrpos hspos hlpos hmpos hD hA halpha rfl with
+    ⟨halpha_add, _hbeta_add⟩
+  exact powerTwoSplitRowTwo_alpha_identity hA2 hBpos hrpos hspos hlpos hmpos
+    hgap hD hA halpha_add
+
 /-- If `D` divides a product, the cofactor of the part of `D` already present
 in the left factor divides the right factor. This is the arithmetic split
 lemma used to move from a row-one product divisibility to the canonical

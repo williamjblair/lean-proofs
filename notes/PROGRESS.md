@@ -163,6 +163,31 @@
   divisibility. This is still short of the needed alpha/beta/gcd reduction to
   `B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m)`, and does not prove
   Task A.
+- [R] Proved the subtractive alpha/beta non-truncation bridge for positive
+  row-one splits. The integer identities
+  `Erdos699.powerTwoSplit_alpha_int_identity` and
+  `Erdos699.powerTwoSplit_beta_int_identity` state
+  `s * (r - B*m) = B*r*l - 1` and `r * (s - B*l) = B*s*m - 1` over `ℤ`.
+  From these,
+  `Erdos699.powerTwoSplitSubtractive_lt` proves `B * m < r` and
+  `B * l < s` under `B ≥ 3` and positive `r, s, l, m`.
+  Consequently, `Erdos699.powerTwoSplitSubtractive_to_additive` converts the
+  split/gcd obstruction's natural-subtraction definitions
+  `alpha = r - B * m`, `beta = s - B * l` into the additive equalities
+  `r = B * m + alpha`, `s = B * l + beta`, and
+  `Erdos699.powerTwoSplitSubtractive_alpha_beta_mul` proves
+  `alpha * beta + 1 = B * B * (l * m)` directly from the subtractive form.
+  The half-row identities
+  `Erdos699.powerTwoSplitHalfRow_alpha_beta_identity` and
+  `Erdos699.powerTwoSplitSubtractive_half_row_alpha_beta_identity` prove
+  `2 * (B * (A / 2) - 1) =
+  2 * (alpha * beta) + B * (alpha * l + beta * m)`, and
+  `Erdos699.powerTwoSplitRowTwo_alpha_identity` plus
+  `Erdos699.powerTwoSplitSubtractive_row_two_alpha_identity` prove
+  `B * (s * m - r * l) + 2 * s * alpha =
+  2 * (B * (A / 2) - 1)`. This closes the earlier gap in using the
+  additive identity and banks the congruence arithmetic needed for row two,
+  but still does not prove the row-two-to-gcd equivalence or Task A.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under

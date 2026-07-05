@@ -12,6 +12,15 @@ namespace Erdos699
 #check powerTwoSplitGcdObstruction
 #check powerTwoSplitGcdObstruction.not_dvd
 #check powerTwoSplitAdditive_alpha_beta_mul
+#check powerTwoSplit_alpha_int_identity
+#check powerTwoSplit_beta_int_identity
+#check powerTwoSplitSubtractive_lt
+#check powerTwoSplitSubtractive_to_additive
+#check powerTwoSplitSubtractive_alpha_beta_mul
+#check powerTwoSplitHalfRow_alpha_beta_identity
+#check powerTwoSplitSubtractive_half_row_alpha_beta_identity
+#check powerTwoSplitRowTwo_alpha_identity
+#check powerTwoSplitSubtractive_row_two_alpha_identity
 #check dvd_div_gcd_of_dvd_mul
 #check powerTwoQuotientKernel.row_one_split_right_dvd
 #check powerTwoQuotientKernel.exists_row_one_split
