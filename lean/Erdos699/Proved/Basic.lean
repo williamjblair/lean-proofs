@@ -3,6 +3,7 @@
 import Mathlib.Data.Nat.Choose.Factorization
 import Mathlib.Data.Nat.Choose.Lucas
 import Mathlib.Data.Nat.Digits.Lemmas
+import Mathlib.Data.Nat.Factorization.PrimePow
 import Mathlib.Tactic.NormNum.Prime
 
 namespace Erdos699
@@ -206,6 +207,16 @@ theorem rowOneDivisorSplit_dvd_mul_sub_one {N1 zeroPart onePart t : ℕ}
   rcases hsplit with ⟨hprod, hzero, hone⟩
   rw [← hprod]
   exact Nat.mul_dvd_mul hzero hone
+
+theorem primePow_dvd_mul_sub_one_iff {d t : ℕ} (hd : IsPrimePow d) (ht : 1 ≤ t) :
+    d ∣ t * (t - 1) ↔ d ∣ t ∨ d ∣ t - 1 := by
+  have hcop : t.Coprime (t - 1) := (Nat.coprime_self_sub_right ht).mpr (by simp)
+  exact Nat.Coprime.isPrimePow_dvd_mul hcop hd
+
+theorem eq_mul_add_one_of_sub_one_eq_mul {t k a : ℕ} (ht : 1 ≤ t)
+    (h : t - 1 = k * a) :
+    t = k * a + 1 := by
+  omega
 
 theorem rowOneDivisorSplit_modEq_zero {N1 zeroPart onePart t : ℕ}
     (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
@@ -1561,6 +1572,357 @@ theorem not_exists_kernelInRange_3145727_1572863_4_3145728 :
             rcases h241979tm1 with ⟨b, hb⟩
             have hb_le : b ≤ 6 := by omega
             interval_cases b <;> omega)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_6291455_3145727_4_6291456 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 6291455 3145727 4 6291456 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 6291455) (N2 := 3145727) (minT := 4) (bound := 6291456)
+      (candidates := [1258291])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨1572863, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_one : 1 ≤ t := by omega
+        have ht_le : t ≤ 3145728 := by omega
+        have hrow : 6291455 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have h5 : 5 ∣ t ∨ 5 ∣ t - 1 := by
+          exact
+            (primePow_dvd_mul_sub_one_iff
+                (Nat.Prime.isPrimePow Nat.prime_five) ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h1258291 : 1258291 ∣ t ∨ 1258291 ∣ t - 1 := by
+          have hpp : IsPrimePow 1258291 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 1258291)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        rcases h5 with h5t | h5tm1
+        · rcases h1258291 with h1258291t | h1258291tm1
+          · exfalso
+            rcases h5t with ⟨a, ha⟩
+            rcases h1258291t with ⟨b, hb⟩
+            omega
+          · exfalso
+            rcases h5t with ⟨a, ha⟩
+            rcases h1258291tm1 with ⟨b, hb⟩
+            omega
+        · rcases h1258291 with h1258291t | h1258291tm1
+          · have ht_eq : t = 1258291 := by
+              rcases h5tm1 with ⟨a, ha⟩
+              rcases h1258291t with ⟨b, hb⟩
+              omega
+            simp [ht_eq]
+          · exfalso
+            rcases h5tm1 with ⟨a, ha⟩
+            rcases h1258291tm1 with ⟨b, hb⟩
+            omega)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_12582911_6291455_4_12582912 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 12582911 6291455 4 12582912 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 12582911) (N2 := 6291455) (minT := 4) (bound := 12582912)
+      (candidates := [727937])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨3145727, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_one : 1 ≤ t := by omega
+        have ht_le : t ≤ 6291456 := by omega
+        have hrow : 12582911 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have h121 : 121 ∣ t ∨ 121 ∣ t - 1 := by
+          have hpp : IsPrimePow 121 := by
+            rw [show 121 = 11 ^ 2 by norm_num]
+            rw [isPrimePow_pow_iff (by norm_num : 2 ≠ 0)]
+            exact Nat.Prime.isPrimePow (by norm_num : Nat.Prime 11)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h103991 : 103991 ∣ t ∨ 103991 ∣ t - 1 := by
+          have hpp : IsPrimePow 103991 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 103991)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        rcases h121 with h121t | h121tm1
+        · rcases h103991 with h103991t | h103991tm1
+          · exfalso
+            rcases h121t with ⟨a, ha⟩
+            rcases h103991t with ⟨b, hb⟩
+            omega
+          · exfalso
+            rcases h121t with ⟨a, ha⟩
+            rcases h103991tm1 with ⟨b, hb⟩
+            omega
+        · rcases h103991 with h103991t | h103991tm1
+          · have ht_eq : t = 727937 := by
+              rcases h121tm1 with ⟨a, ha⟩
+              rcases h103991t with ⟨b, hb⟩
+              omega
+            simp [ht_eq]
+          · exfalso
+            rcases h121tm1 with ⟨a, ha⟩
+            rcases h103991tm1 with ⟨b, hb⟩
+            omega)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_25165823_12582911_4_25165824 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 25165823 12582911 4 25165824 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 25165823) (N2 := 12582911) (minT := 4) (bound := 25165824)
+      (candidates := [4612973, 9271620, 11281232])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨6291455, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_one : 1 ≤ t := by omega
+        have ht_le : t ≤ 12582912 := by omega
+        have hrow : 25165823 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have h19 : 19 ∣ t ∨ 19 ∣ t - 1 := by
+          have hpp : IsPrimePow 19 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 19)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h29 : 29 ∣ t ∨ 29 ∣ t - 1 := by
+          have hpp : IsPrimePow 29 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 29)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h45673 : 45673 ∣ t ∨ 45673 ∣ t - 1 := by
+          have hpp : IsPrimePow 45673 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 45673)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h000 :
+            ∀ {t a b c : ℕ}, 4 ≤ t → t ≤ 12582912 →
+              t = 19 * a → t = 29 * b → t = 45673 * c → False := by
+          intro t a b c hmin ht ha hb hc
+          omega
+        have h001 :
+            ∀ {t a b c : ℕ}, 4 ≤ t → t ≤ 12582912 →
+              t = 19 * a → t = 29 * b → t = 45673 * c + 1 → False := by
+          intro t a b c hmin ht ha hb hc
+          omega
+        have h010 :
+            ∀ {t a b c : ℕ}, 4 ≤ t → t ≤ 12582912 →
+              t = 19 * a → t = 29 * b + 1 → t = 45673 * c → False := by
+          intro t a b c hmin ht ha hb hc
+          omega
+        have h011 :
+            ∀ {t a b c : ℕ}, 4 ≤ t → t ≤ 12582912 →
+              t = 19 * a → t = 29 * b + 1 → t = 45673 * c + 1 →
+                t = 9271620 := by
+          intro t a b c hmin ht ha hb hc
+          omega
+        have h100 :
+            ∀ {t a b c : ℕ}, 4 ≤ t → t ≤ 12582912 →
+              t = 19 * a + 1 → t = 29 * b → t = 45673 * c → False := by
+          intro t a b c hmin ht ha hb hc
+          omega
+        have h101 :
+            ∀ {t a b c : ℕ}, 4 ≤ t → t ≤ 12582912 →
+              t = 19 * a + 1 → t = 29 * b → t = 45673 * c + 1 →
+                t = 11281232 := by
+          intro t a b c hmin ht ha hb hc
+          omega
+        have h110 :
+            ∀ {t a b c : ℕ}, 4 ≤ t → t ≤ 12582912 →
+              t = 19 * a + 1 → t = 29 * b + 1 → t = 45673 * c →
+                t = 4612973 := by
+          intro t a b c hmin ht ha hb hc
+          omega
+        have h111 :
+            ∀ {t a b c : ℕ}, 4 ≤ t → t ≤ 12582912 →
+              t = 19 * a + 1 → t = 29 * b + 1 → t = 45673 * c + 1 → False := by
+          intro t a b c hmin ht ha hb hc
+          omega
+        rcases h19 with h19t | h19tm1
+        · rcases h29 with h29t | h29tm1
+          · rcases h45673 with h45673t | h45673tm1
+            · exfalso
+              rcases h19t with ⟨a, ha⟩
+              rcases h29t with ⟨b, hb⟩
+              rcases h45673t with ⟨c, hc⟩
+              exact h000 hmin ht_le ha hb hc
+            · exfalso
+              rcases h19t with ⟨a, ha⟩
+              rcases h29t with ⟨b, hb⟩
+              rcases h45673tm1 with ⟨c, hc⟩
+              have hc' : t = 45673 * c + 1 :=
+                eq_mul_add_one_of_sub_one_eq_mul ht_one hc
+              exact h001 hmin ht_le ha hb hc'
+          · rcases h45673 with h45673t | h45673tm1
+            · exfalso
+              rcases h19t with ⟨a, ha⟩
+              rcases h29tm1 with ⟨b, hb⟩
+              rcases h45673t with ⟨c, hc⟩
+              have hb' : t = 29 * b + 1 :=
+                eq_mul_add_one_of_sub_one_eq_mul ht_one hb
+              exact h010 hmin ht_le ha hb' hc
+            · have ht_eq : t = 9271620 := by
+                rcases h19t with ⟨a, ha⟩
+                rcases h29tm1 with ⟨b, hb⟩
+                rcases h45673tm1 with ⟨c, hc⟩
+                have hb' : t = 29 * b + 1 :=
+                  eq_mul_add_one_of_sub_one_eq_mul ht_one hb
+                have hc' : t = 45673 * c + 1 :=
+                  eq_mul_add_one_of_sub_one_eq_mul ht_one hc
+                exact h011 hmin ht_le ha hb' hc'
+              simp [ht_eq]
+        · rcases h29 with h29t | h29tm1
+          · rcases h45673 with h45673t | h45673tm1
+            · exfalso
+              rcases h19tm1 with ⟨a, ha⟩
+              rcases h29t with ⟨b, hb⟩
+              rcases h45673t with ⟨c, hc⟩
+              have ha' : t = 19 * a + 1 :=
+                eq_mul_add_one_of_sub_one_eq_mul ht_one ha
+              exact h100 hmin ht_le ha' hb hc
+            · have ht_eq : t = 11281232 := by
+                rcases h19tm1 with ⟨a, ha⟩
+                rcases h29t with ⟨b, hb⟩
+                rcases h45673tm1 with ⟨c, hc⟩
+                have ha' : t = 19 * a + 1 :=
+                  eq_mul_add_one_of_sub_one_eq_mul ht_one ha
+                have hc' : t = 45673 * c + 1 :=
+                  eq_mul_add_one_of_sub_one_eq_mul ht_one hc
+                exact h101 hmin ht_le ha' hb hc'
+              simp [ht_eq]
+          · rcases h45673 with h45673t | h45673tm1
+            · have ht_eq : t = 4612973 := by
+                rcases h19tm1 with ⟨a, ha⟩
+                rcases h29tm1 with ⟨b, hb⟩
+                rcases h45673t with ⟨c, hc⟩
+                have ha' : t = 19 * a + 1 :=
+                  eq_mul_add_one_of_sub_one_eq_mul ht_one ha
+                have hb' : t = 29 * b + 1 :=
+                  eq_mul_add_one_of_sub_one_eq_mul ht_one hb
+                exact h110 hmin ht_le ha' hb' hc
+              simp [ht_eq]
+            · exfalso
+              rcases h19tm1 with ⟨a, ha⟩
+              rcases h29tm1 with ⟨b, hb⟩
+              rcases h45673tm1 with ⟨c, hc⟩
+              have ha' : t = 19 * a + 1 :=
+                eq_mul_add_one_of_sub_one_eq_mul ht_one ha
+              have hb' : t = 29 * b + 1 :=
+                eq_mul_add_one_of_sub_one_eq_mul ht_one hb
+              have hc' : t = 45673 * c + 1 :=
+                eq_mul_add_one_of_sub_one_eq_mul ht_one hc
+              exact h111 hmin ht_le ha' hb' hc')
+      (by
+        intro t htmem
+        have htmem' : t = 4612973 ∨ t = 9271620 ∨ t = 11281232 := by
+          simpa only [List.mem_cons, List.not_mem_nil, or_false] using htmem
+        omega)
+      (by
+        intro t htmem
+        have htmem' : t = 4612973 ∨ t = 9271620 ∨ t = 11281232 := by
+          simpa only [List.mem_cons, List.not_mem_nil, or_false] using htmem
+        rcases htmem' with rfl | rfl | rfl
+        · norm_num [Nat.gcd]
+        · norm_num [Nat.gcd]
+        · norm_num [Nat.gcd])
+
+theorem not_exists_kernelInRange_50331647_25165823_4_50331648 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 50331647 25165823 4 50331648 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 50331647) (N2 := 25165823) (minT := 4) (bound := 50331648)
+      (candidates := [13788863])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨12582911, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_one : 1 ≤ t := by omega
+        have ht_le : t ≤ 25165824 := by omega
+        have hrow : 50331647 ∣ t * (t - 1) :=
+          rowOneDivisorSplit_dvd_mul_sub_one hsplit
+        have h6563 : 6563 ∣ t ∨ 6563 ∣ t - 1 := by
+          have hpp : IsPrimePow 6563 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 6563)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        have h7669 : 7669 ∣ t ∨ 7669 ∣ t - 1 := by
+          have hpp : IsPrimePow 7669 :=
+            Nat.Prime.isPrimePow (by norm_num : Nat.Prime 7669)
+          exact
+            (primePow_dvd_mul_sub_one_iff hpp ht_one).mp
+              (Nat.dvd_trans (by norm_num) hrow)
+        rcases h6563 with h6563t | h6563tm1
+        · rcases h7669 with h7669t | h7669tm1
+          · exfalso
+            rcases h6563t with ⟨a, ha⟩
+            rcases h7669t with ⟨b, hb⟩
+            omega
+          · have ht_eq : t = 13788863 := by
+              rcases h6563t with ⟨a, ha⟩
+              rcases h7669tm1 with ⟨b, hb⟩
+              omega
+            simp [ht_eq]
+        · rcases h7669 with h7669t | h7669tm1
+          · exfalso
+            rcases h6563tm1 with ⟨a, ha⟩
+            rcases h7669t with ⟨b, hb⟩
+            omega
+          · exfalso
+            rcases h6563tm1 with ⟨a, ha⟩
+            rcases h7669tm1 with ⟨b, hb⟩
+            omega)
       (by
         intro t htmem
         simp at htmem
@@ -3301,6 +3663,78 @@ theorem i_three_caseI_3145728_exists_common_from_row_bounds {j : ℕ}
     i_three_caseI_exists_common_from_kernelInRange_empty
       (n := 3145728) (j := j)
       (by simpa using not_exists_kernelInRange_3145727_1572863_4_3145728)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_6291456_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 6291456) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 6291456 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 6291456) (j := j)
+      (by simpa using not_exists_kernelInRange_6291455_3145727_4_6291456)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_6291456_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 6291456) :
+    ∃ q : ℕ, commonPrimeDivisor 6291456 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 6291456) (j := j)
+      (by simpa using not_exists_kernelInRange_6291455_3145727_4_6291456)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_12582912_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 12582912) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 12582912 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 12582912) (j := j)
+      (by simpa using not_exists_kernelInRange_12582911_6291455_4_12582912)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_12582912_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 12582912) :
+    ∃ q : ℕ, commonPrimeDivisor 12582912 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 12582912) (j := j)
+      (by simpa using not_exists_kernelInRange_12582911_6291455_4_12582912)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_25165824_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 25165824) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 25165824 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 25165824) (j := j)
+      (by simpa using not_exists_kernelInRange_25165823_12582911_4_25165824)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_25165824_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 25165824) :
+    ∃ q : ℕ, commonPrimeDivisor 25165824 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 25165824) (j := j)
+      (by simpa using not_exists_kernelInRange_25165823_12582911_4_25165824)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_50331648_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 50331648) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 50331648 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 50331648) (j := j)
+      (by simpa using not_exists_kernelInRange_50331647_25165823_4_50331648)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_50331648_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 50331648) :
+    ∃ q : ℕ, commonPrimeDivisor 50331648 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 50331648) (j := j)
+      (by simpa using not_exists_kernelInRange_50331647_25165823_4_50331648)
       (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
 
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple

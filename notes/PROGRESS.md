@@ -1226,6 +1226,29 @@
   and `[967916]`, `survivor_count = 0`, and `all_strict_lt_n2 = True`. These
   are additional end-to-end Lean-certified finite instances, not a general
   Case-I theorem.
+- [R]/[E] Extended the lower-bounded Case-I finite certificate chain through
+  four more `n = 3 * 2^A` members. `Erdos699.primePow_dvd_mul_sub_one_iff`
+  and `Erdos699.eq_mul_add_one_of_sub_one_eq_mul` support the larger
+  row-one covers without large quotient enumeration. The theorems
+  `Erdos699.not_exists_kernelInRange_6291455_3145727_4_6291456`,
+  `Erdos699.not_exists_kernelInRange_12582911_6291455_4_12582912`,
+  `Erdos699.not_exists_kernelInRange_25165823_12582911_4_25165824`, and
+  `Erdos699.not_exists_kernelInRange_50331647_25165823_4_50331648` prove the
+  exact lower-bounded C2 kernel is empty for `A = 21`, `A = 22`, `A = 23`,
+  and `A = 24`, using row-one lists `[1258291]`, `[727937]`,
+  `[4612973, 9271620, 11281232]`, and `[13788863]` respectively. The wrappers
+  `Erdos699.i_three_caseI_6291456_exists_common_from_row_bounds`,
+  `Erdos699.i_three_caseI_12582912_exists_common_from_row_bounds`,
+  `Erdos699.i_three_caseI_25165824_exists_common_from_row_bounds`, and
+  `Erdos699.i_three_caseI_50331648_exists_common_from_row_bounds` give the
+  original row-3 common-prime conclusion for every `j` with `3 < j` and
+  `2 * j ≤ n` at those four `n`. Reproduce the exact scan with
+  `python3 -m compute.kernel --case-i-power-two --min-exponent 21 --max-exponent 24 --include-row-one-candidates --include-row-one-splits --include-quotient-gap-summary`;
+  it reports four instances, row-one candidates `[1258291]`, `[727937]`,
+  `[4612973, 9271620, 11281232]`, and `[13788863]`,
+  `total_row_one_candidate_count = 6`, `survivor_count = 0`, and
+  `all_strict_lt_n2 = True`. These are additional end-to-end Lean-certified
+  finite instances, not a general Case-I theorem.
 - [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
   product inequality is false under C2 shape hypotheses alone:
   `n = 54,734,052`, `N1 = n - 1`, `N2 = n / 2 - 1`, and
