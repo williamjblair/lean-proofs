@@ -3768,6 +3768,19 @@ theorem not_rowNDigitPowerConstraint_of_prime_power_counterexample
   intro h
   exact hu (h hp hp3 hX)
 
+/-- The pure power-of-two quotient kernel isolated after imposing the
+normalized row-`n` digit-power constraint. The conjectural next lemma is that
+this predicate is empty. -/
+def powerTwoQuotientKernel (A B v h : ℕ) : Prop :=
+  4 ∣ A ∧
+    (∃ a : ℕ, A = 2 ^ a) ∧
+      Odd B ∧
+        3 ≤ B ∧
+          0 < v ∧
+            0 < A - 2 * v ∧
+              v * (A - v) = h * (B * A - 1) ∧
+                B * (A / 2) - 1 ∣ h * (A - 2 * v)
+
 theorem squeezedNormalizedCaseIKernel_zero_t_false {F X g : ℕ} :
     ¬ squeezedNormalizedCaseIKernel F X 0 g := by
   intro h

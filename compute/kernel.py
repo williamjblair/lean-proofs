@@ -106,6 +106,10 @@ def prime_power_factorization(n: int) -> list[tuple[int, int]]:
     return factors
 
 
+def _is_power_of_two(n: int) -> bool:
+    return 0 < n and (n & (n - 1)) == 0
+
+
 def _crt_pair_coprime(residue: int, modulus: int, target: int, factor: int) -> int:
     step = ((target - residue) % factor) * pow(modulus, -1, factor) % factor
     return residue + modulus * step
@@ -145,6 +149,23 @@ def squeezed_normalized_case_i_kernel_holds(F: int, X: int, t: int, g: int) -> b
     return (
         t * (X - t) == g * (n - 1)
         and (g * (X - 2 * t)) % (n // 2 - 1) == 0
+    )
+
+
+def power_two_quotient_kernel_holds(A: int, B: int, v: int, h: int) -> bool:
+    if A < 0 or B < 0 or v < 0 or h < 0:
+        raise ValueError("A, B, v, and h must be nonnegative")
+    if A % 4 != 0 or not _is_power_of_two(A):
+        return False
+    if B % 2 == 0 or B < 3:
+        return False
+    if v == 0 or A - 2 * v <= 0:
+        return False
+    row_one_modulus = B * A - 1
+    half_row_modulus = B * (A // 2) - 1
+    return (
+        v * (A - v) == h * row_one_modulus
+        and (h * (A - 2 * v)) % half_row_modulus == 0
     )
 
 
@@ -398,6 +419,83 @@ def scan_squeezed_normalized_case_i_kernel(
                 candidate_diagnostics
             )
     return result
+
+
+def _power_two_quotient_residue(zero_part: int, one_part: int, A: int) -> int:
+    if one_part == 1:
+        return 0
+    if zero_part == 1:
+        return A % one_part
+    step = ((A % one_part) * pow(zero_part, -1, one_part)) % one_part
+    return zero_part * step
+
+
+def _power_two_quotient_row_one_candidates(
+    exponent: int, A: int, B: int
+) -> list[dict[str, int]]:
+    row_one_modulus = B * A - 1
+    prime_powers = [
+        prime_power
+        for _p, prime_power in prime_power_factorization(row_one_modulus)
+    ]
+    candidates: dict[int, dict[str, int]] = {}
+
+    def visit(index: int, zero_part: int, one_part: int) -> None:
+        if index == len(prime_powers):
+            residue = _power_two_quotient_residue(zero_part, one_part, A)
+            v = residue % row_one_modulus
+            if not (0 < v and 2 * v < A):
+                return
+            product = v * (A - v)
+            if product % row_one_modulus != 0:
+                return
+            h = product // row_one_modulus
+            candidates[v] = {
+                "exponent": exponent,
+                "A": A,
+                "B": B,
+                "v": v,
+                "h": h,
+            }
+            return
+        prime_power = prime_powers[index]
+        visit(index + 1, zero_part * prime_power, one_part)
+        visit(index + 1, zero_part, one_part * prime_power)
+
+    visit(0, 1, 1)
+    return sorted(candidates.values(), key=lambda item: item["v"])
+
+
+def scan_power_two_quotient_kernel(
+    max_exponent: int, max_b: int, min_exponent: int = 2
+) -> dict[str, Any]:
+    if min_exponent < 0 or max_exponent < min_exponent or max_b < 0:
+        raise ValueError("require 0 <= min_exponent <= max_exponent and 0 <= max_b")
+    row_one_candidates: list[dict[str, int]] = []
+    survivors: list[dict[str, int]] = []
+    instance_count = 0
+    for exponent in range(min_exponent, max_exponent + 1):
+        A = 2**exponent
+        for B in range(3, max_b + 1, 2):
+            instance_count += 1
+            for candidate in _power_two_quotient_row_one_candidates(exponent, A, B):
+                row_one_candidates.append(candidate)
+                if power_two_quotient_kernel_holds(
+                    candidate["A"], candidate["B"], candidate["v"], candidate["h"]
+                ):
+                    survivors.append(candidate)
+    return {
+        "mode": "power_two_quotient_kernel",
+        "algorithm": "power_two_quotient_divisor_split",
+        "min_exponent": min_exponent,
+        "max_exponent": max_exponent,
+        "max_b": max_b,
+        "instance_count": instance_count,
+        "row_one_candidate_count": len(row_one_candidates),
+        "survivor_count": len(survivors),
+        "row_one_candidates": row_one_candidates,
+        "survivors": survivors,
+    }
 
 
 def kernel_survivors_bruteforce(
@@ -747,6 +845,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--min-t", type=int)
     parser.add_argument("--case-i-power-two", action="store_true")
     parser.add_argument("--squeezed-normalized-case-i", action="store_true")
+    parser.add_argument("--power-two-quotient-kernel", action="store_true")
     parser.add_argument("--diagnose-squeezed-candidate", action="store_true")
     parser.add_argument("--candidate-f", type=int)
     parser.add_argument("--candidate-x", type=int)
@@ -754,6 +853,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--candidate-g", type=int)
     parser.add_argument("--max-f", type=int)
     parser.add_argument("--max-x", type=int)
+    parser.add_argument("--max-b", type=int)
     parser.add_argument("--min-exponent", type=int, default=2)
     parser.add_argument("--max-exponent", type=int)
     parser.add_argument("--include-candidates", action="store_true")
@@ -808,6 +908,16 @@ def main(argv: list[str] | None = None) -> int:
             include_candidate_diagnostics=args.include_candidate_diagnostics,
             include_candidate_summary=args.include_candidate_summary,
             original_obstruction_prime_limit=args.original_obstruction_prime_limit,
+        )
+    elif args.power_two_quotient_kernel:
+        if args.max_exponent is None or args.max_b is None:
+            parser.error(
+                "--power-two-quotient-kernel requires --max-exponent and --max-b"
+            )
+        result = scan_power_two_quotient_kernel(
+            args.max_exponent,
+            args.max_b,
+            min_exponent=args.min_exponent,
         )
     else:
         if args.n1 is None or args.n2 is None or args.bound is None:

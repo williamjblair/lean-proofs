@@ -8,6 +8,7 @@ namespace Erdos699
 #check rowNDigitPowerConstraint
 #check rowNDigitPowerConstraintExact
 #check rowNDigitPowerConstraintExact_of_rowNDigitPowerConstraint
+#check powerTwoQuotientKernel
 #check squeezedNormalizedCaseIKernel_zero_t_false
 #check i_three_caseI_four_dvd_odd_factor_squeezedNormalized_from_row_bound
 #check i_three_caseI_four_dvd_odd_factor_false_of_no_squeezedNormalized

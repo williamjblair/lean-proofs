@@ -8,7 +8,9 @@ import pytest
 from compute.kernel import (
     consecutive_kernel_holds,
     diagnose_squeezed_normalized_candidate,
+    power_two_quotient_kernel_holds,
     scan_squeezed_normalized_case_i_kernel,
+    scan_power_two_quotient_kernel,
     squeezed_normalized_case_i_kernel_holds,
     squeezed_row_one_candidates_discriminant,
     kernel_survivors_bruteforce,
@@ -731,6 +733,43 @@ def test_squeezed_normalized_scan_records_empty_ranges() -> None:
     assert result["survivors"] == []
 
 
+def test_power_two_quotient_predicate_checks_all_rows() -> None:
+    assert power_two_quotient_kernel_holds(512, 3, 205, 41) is False
+    assert power_two_quotient_kernel_holds(1024, 3, 111, 33) is False
+    assert power_two_quotient_kernel_holds(12, 3, 2, 1) is False
+
+
+def test_power_two_quotient_scan_matches_bruteforce() -> None:
+    result = scan_power_two_quotient_kernel(max_exponent=10, max_b=101)
+    brute_row_one = []
+    brute_survivors = []
+    for exponent in range(2, 11):
+        A = 2**exponent
+        for B in range(3, 102, 2):
+            D = B * A - 1
+            M = B * (A // 2) - 1
+            for v in range(1, A // 2):
+                product = v * (A - v)
+                if product % D != 0:
+                    continue
+                h = product // D
+                item = {"exponent": exponent, "A": A, "B": B, "v": v, "h": h}
+                brute_row_one.append(item)
+                if (h * (A - 2 * v)) % M == 0:
+                    brute_survivors.append(item)
+    assert result["mode"] == "power_two_quotient_kernel"
+    assert result["algorithm"] == "power_two_quotient_divisor_split"
+    assert result["row_one_candidate_count"] == len(brute_row_one) == 2
+    assert result["survivor_count"] == len(brute_survivors) == 0
+    assert result["row_one_candidates"] == brute_row_one
+    assert result["survivors"] == []
+
+
+def test_power_two_quotient_scan_rejects_inverted_exponent_range() -> None:
+    with pytest.raises(ValueError, match="0 <= min_exponent <= max_exponent"):
+        scan_power_two_quotient_kernel(max_exponent=4, max_b=101, min_exponent=5)
+
+
 def test_squeezed_normalized_scan_can_include_candidate_diagnostics() -> None:
     default_result = scan_squeezed_normalized_case_i_kernel(max_f=9, max_x=120)
     result = scan_squeezed_normalized_case_i_kernel(
@@ -912,6 +951,28 @@ def test_kernel_cli_can_scan_squeezed_normalized_case_i_kernel() -> None:
     assert payload["mode"] == "squeezed_normalized_case_i_kernel"
     assert payload["candidate_count"] == 7
     assert payload["survivors"] == []
+
+
+def test_kernel_cli_can_scan_power_two_quotient_kernel() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--power-two-quotient-kernel",
+            "--max-exponent",
+            "10",
+            "--max-b",
+            "101",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["mode"] == "power_two_quotient_kernel"
+    assert payload["row_one_candidate_count"] == 2
+    assert payload["survivor_count"] == 0
 
 
 def test_kernel_cli_can_include_squeezed_candidate_summary() -> None:

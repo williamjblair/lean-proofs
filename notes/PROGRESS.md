@@ -84,6 +84,19 @@
   `179 ^ 1 ∣ 432184014644` but `179 ^ 1 ∤ 186954166997`. This banks the
   corrected digit hypothesis and the survivor exclusion; it does not prove
   the remaining power-two quotient lemma.
+- [R]/[E] Formalized the reduced power-two quotient target as
+  `Erdos699.powerTwoQuotientKernel`, matching the post-digit-reduction system
+  with `4 ∣ A`, `A = 2 ^ a`, odd `B ≥ 3`, `0 < v`, `0 < A - 2 * v`, row one
+  `v * (A - v) = h * (B * A - 1)`, and half-row divisibility
+  `B * (A / 2) - 1 ∣ h * (A - 2 * v)`. Added the exact divisor-split scanner
+  `compute.kernel.scan_power_two_quotient_kernel` and CLI flag
+  `--power-two-quotient-kernel`; it factors `B * A - 1`, enumerates the
+  coprime row-one split classes, and then checks the half-row divisibility.
+  Reproduce the bounded perimeter with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(50, 2001); print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"])'`,
+  which reports `49000 404 0` for `2 ≤ a ≤ 50` and odd `3 ≤ B ≤ 2001`.
+  This is exact bounded evidence and a formal target definition, not a proof
+  that `powerTwoQuotientKernel` is empty.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.
