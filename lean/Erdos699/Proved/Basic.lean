@@ -291,6 +291,31 @@ theorem rowOneDivisorSplit_eq_of_sub_one_consecutiveDivisorKernelBelow
   rowOneDivisorSplit_eq_of_consecutiveDivisorKernelBelow_short
     (sub_one_short_bound_of_two_lt hn) htsplit husplit ht hu htkernel hukernel
 
+theorem rowOneDivisorSplit_gcdDiv_of_dvd_mul_sub_one {N1 t : ℕ}
+    (hN1 : 0 < N1) (hrow : N1 ∣ t * (t - 1)) :
+    rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t := by
+  have hgcd_dvd : Nat.gcd N1 t ∣ N1 := Nat.gcd_dvd_left N1 t
+  have hprod : Nat.gcd N1 t * (N1 / Nat.gcd N1 t) = N1 :=
+    Nat.mul_div_cancel' hgcd_dvd
+  have hzero : Nat.gcd N1 t ∣ t := Nat.gcd_dvd_right N1 t
+  have hprod_mod : t * (t - 1) ≡ t * 0 [MOD N1] := by
+    simpa using (Nat.modEq_zero_iff_dvd.mpr hrow : t * (t - 1) ≡ 0 [MOD N1])
+  have hone_mod : t - 1 ≡ 0 [MOD N1 / Nat.gcd N1 t] := by
+    simpa using (Nat.ModEq.cancel_left_div_gcd (m := N1) (c := t)
+      (a := t - 1) (b := 0) hN1 hprod_mod)
+  exact ⟨hprod, hzero, Nat.modEq_zero_iff_dvd.mp hone_mod⟩
+
+theorem rowOneDivisorSplit_gcdDiv_of_consecutiveDivisorKernel {N1 N2 t : ℕ}
+    (hN1 : 0 < N1) (hkernel : consecutiveDivisorKernel N1 N2 t) :
+    rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t :=
+  rowOneDivisorSplit_gcdDiv_of_dvd_mul_sub_one hN1 hkernel.1
+
+theorem rowOneDivisorSplit_gcdDiv_of_consecutiveDivisorKernelBelow
+    {N1 N2 bound t : ℕ} (hN1 : 0 < N1)
+    (hkernel : consecutiveDivisorKernelBelow N1 N2 bound t) :
+    rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t :=
+  rowOneDivisorSplit_gcdDiv_of_consecutiveDivisorKernel hN1 hkernel.2
+
 theorem rowOneDivisorSplit_kernel_iff_row_two {N1 N2 zeroPart onePart t : ℕ}
     (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
     consecutiveDivisorKernel N1 N2 t ↔ N2 ∣ t * (t - 1) * (t - 2) := by
