@@ -168,6 +168,23 @@ def test_crt_scan_can_include_row_one_split_diagnostics_on_request() -> None:
     ]
 
 
+def test_crt_scan_can_include_row_one_split_summary_on_request() -> None:
+    default_result = scan_kernel_crt(15, 14, 120, min_t=4)
+    result = scan_kernel_crt(
+        15, 14, 120, min_t=4, include_row_one_split_summary=True
+    )
+    assert "row_one_split_summary" not in default_result
+    assert result["row_one_split_summary"] == {
+        "candidate_count": 15,
+        "surviving_split_count": 6,
+        "failed_split_count": 9,
+        "row_two_gcd_histogram": [
+            {"row_two_gcd": 2, "count": 9},
+            {"row_two_gcd": 14, "count": 6},
+        ],
+    }
+
+
 def test_kernel_cli_emits_json() -> None:
     completed = subprocess.run(
         [
@@ -263,6 +280,38 @@ def test_kernel_cli_can_include_row_one_split_diagnostics() -> None:
     }
 
 
+def test_kernel_cli_can_include_row_one_split_summary() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--n1",
+            "15",
+            "--n2",
+            "14",
+            "--bound",
+            "120",
+            "--min-t",
+            "4",
+            "--include-row-one-split-summary",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["row_one_split_summary"] == {
+        "candidate_count": 15,
+        "surviving_split_count": 6,
+        "failed_split_count": 9,
+        "row_two_gcd_histogram": [
+            {"row_two_gcd": 2, "count": 9},
+            {"row_two_gcd": 14, "count": 6},
+        ],
+    }
+
+
 def test_case_i_power_two_family_scan_matches_scalar_scans() -> None:
     result = scan_case_i_power_two_kernel(5)
     assert result["mode"] == "case_i_power_two_kernel"
@@ -323,6 +372,22 @@ def test_case_i_power_two_family_scan_can_include_row_one_splits() -> None:
             "survives_row_two": False,
         }
     ]
+
+
+def test_case_i_power_two_family_scan_can_include_split_summary() -> None:
+    result = scan_case_i_power_two_kernel(5, include_row_one_split_summary=True)
+    assert result["row_one_split_summary"] == {
+        "candidate_count": 1,
+        "surviving_split_count": 0,
+        "failed_split_count": 1,
+        "row_two_gcd_histogram": [{"row_two_gcd": 1, "count": 1}],
+    }
+    assert result["instances"][-1]["row_one_split_summary"] == {
+        "candidate_count": 1,
+        "surviving_split_count": 0,
+        "failed_split_count": 1,
+        "row_two_gcd_histogram": [{"row_two_gcd": 1, "count": 1}],
+    }
 
 
 def test_case_i_power_two_family_scan_reaches_exponent_sixty() -> None:

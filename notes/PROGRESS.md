@@ -338,5 +338,13 @@
   reports `7` row-one split candidates at exponent `61`; all have
   `row_two_gcd = 1` and `survivor_count = 0`. This is exact finite evidence
   for the C2 divisor-split lane, not a proof that the kernel is empty.
+- [E] Added opt-in row-one split summaries via
+  `--include-row-one-split-summary`. The command
+  `python3 -m compute.kernel --case-i-power-two --max-exponent 62 --include-row-one-split-summary`
+  reports `130` row-one split candidates across exponents `2..62`, with
+  `0` surviving row two. The aggregate row-two gcd histogram is
+  `{1: 108, 5: 15, 11: 2, 23: 2, 29: 1, 101: 1, 115: 1}`. This is exact
+  finite evidence for the C2 divisor-split lane, not a proof that the kernel
+  is empty.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

@@ -190,6 +190,49 @@ def _row_one_split_diagnostic(
     }
 
 
+def _row_one_split_summary(splits: list[dict[str, Any]]) -> dict[str, Any]:
+    gcd_counts: dict[int, int] = {}
+    surviving_split_count = 0
+    for split in splits:
+        row_two_gcd = split["row_two_gcd"]
+        gcd_counts[row_two_gcd] = gcd_counts.get(row_two_gcd, 0) + 1
+        if split["survives_row_two"]:
+            surviving_split_count += 1
+    candidate_count = len(splits)
+    return {
+        "candidate_count": candidate_count,
+        "surviving_split_count": surviving_split_count,
+        "failed_split_count": candidate_count - surviving_split_count,
+        "row_two_gcd_histogram": [
+            {"row_two_gcd": row_two_gcd, "count": gcd_counts[row_two_gcd]}
+            for row_two_gcd in sorted(gcd_counts)
+        ],
+    }
+
+
+def _merge_row_one_split_summaries(summaries: list[dict[str, Any]]) -> dict[str, Any]:
+    gcd_counts: dict[int, int] = {}
+    candidate_count = 0
+    surviving_split_count = 0
+    failed_split_count = 0
+    for summary in summaries:
+        candidate_count += summary["candidate_count"]
+        surviving_split_count += summary["surviving_split_count"]
+        failed_split_count += summary["failed_split_count"]
+        for row in summary["row_two_gcd_histogram"]:
+            row_two_gcd = row["row_two_gcd"]
+            gcd_counts[row_two_gcd] = gcd_counts.get(row_two_gcd, 0) + row["count"]
+    return {
+        "candidate_count": candidate_count,
+        "surviving_split_count": surviving_split_count,
+        "failed_split_count": failed_split_count,
+        "row_two_gcd_histogram": [
+            {"row_two_gcd": row_two_gcd, "count": gcd_counts[row_two_gcd]}
+            for row_two_gcd in sorted(gcd_counts)
+        ],
+    }
+
+
 def scan_kernel_crt(
     n1: int,
     n2: int,
@@ -197,6 +240,7 @@ def scan_kernel_crt(
     min_t: int = 0,
     include_row_one_candidates: bool = False,
     include_row_one_splits: bool = False,
+    include_row_one_split_summary: bool = False,
 ) -> dict[str, Any]:
     if n1 < 1 or n2 < 1:
         raise ValueError("n1 and n2 must be positive")
@@ -231,11 +275,17 @@ def scan_kernel_crt(
     }
     if include_row_one_candidates:
         result["row_one_candidates"] = row_one_candidates
-    if include_row_one_splits:
+    if include_row_one_splits or include_row_one_split_summary:
         factors = prime_power_factorization(n1)
-        result["row_one_candidate_splits"] = [
+        row_one_candidate_splits = [
             _row_one_split_diagnostic(factors, n2, t) for t in row_one_candidates
         ]
+        if include_row_one_splits:
+            result["row_one_candidate_splits"] = row_one_candidate_splits
+        if include_row_one_split_summary:
+            result["row_one_split_summary"] = _row_one_split_summary(
+                row_one_candidate_splits
+            )
     return result
 
 
@@ -245,6 +295,7 @@ def scan_case_i_power_two_kernel(
     min_t: int = 4,
     include_row_one_candidates: bool = False,
     include_row_one_splits: bool = False,
+    include_row_one_split_summary: bool = False,
 ) -> dict[str, Any]:
     if min_exponent < 0 or max_exponent < min_exponent:
         raise ValueError("require 0 <= min_exponent <= max_exponent")
@@ -260,9 +311,10 @@ def scan_case_i_power_two_kernel(
             min_t=min_t,
             include_row_one_candidates=include_row_one_candidates,
             include_row_one_splits=include_row_one_splits,
+            include_row_one_split_summary=include_row_one_split_summary,
         )
         instances.append({"exponent": exponent, "n": n, **scan})
-    return {
+    result: dict[str, Any] = {
         "mode": "case_i_power_two_kernel",
         "algorithm": "case_i_power_two_kernel_crt",
         "min_exponent": min_exponent,
@@ -275,6 +327,11 @@ def scan_case_i_power_two_kernel(
         "survivor_count": sum(item["survivor_count"] for item in instances),
         "instances": instances,
     }
+    if include_row_one_split_summary:
+        result["row_one_split_summary"] = _merge_row_one_split_summaries(
+            [item["row_one_split_summary"] for item in instances]
+        )
+    return result
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -290,6 +347,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--max-exponent", type=int)
     parser.add_argument("--include-row-one-candidates", action="store_true")
     parser.add_argument("--include-row-one-splits", action="store_true")
+    parser.add_argument("--include-row-one-split-summary", action="store_true")
     args = parser.parse_args(argv)
     if args.case_i_power_two:
         if args.max_exponent is None:
@@ -301,6 +359,7 @@ def main(argv: list[str] | None = None) -> int:
             min_t=min_t,
             include_row_one_candidates=args.include_row_one_candidates,
             include_row_one_splits=args.include_row_one_splits,
+            include_row_one_split_summary=args.include_row_one_split_summary,
         )
     else:
         if args.n1 is None or args.n2 is None or args.bound is None:
@@ -313,6 +372,7 @@ def main(argv: list[str] | None = None) -> int:
             min_t=min_t,
             include_row_one_candidates=args.include_row_one_candidates,
             include_row_one_splits=args.include_row_one_splits,
+            include_row_one_split_summary=args.include_row_one_split_summary,
         )
     print(json.dumps(result, sort_keys=True))
     return 0
