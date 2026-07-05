@@ -245,6 +245,37 @@ theorem rowOneDivisorSplit_modEq_unique
   exact rowOneDivisorSplit_modEq_unique_of_coprime
     (rowOneDivisorSplit_coprime_of_one_le htsplit ht) htsplit husplit ht hu
 
+theorem rowOneDivisorSplit_eq_of_lt
+    {N1 zeroPart onePart t u : ℕ}
+    (htsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (husplit : rowOneDivisorSplit N1 zeroPart onePart u) (ht : 1 ≤ t)
+    (hu : 1 ≤ u) (htlt : t < N1) (hult : u < N1) :
+    t = u := by
+  exact Nat.ModEq.eq_of_lt_of_lt
+    (rowOneDivisorSplit_modEq_unique htsplit husplit ht hu) htlt hult
+
+theorem rowOneDivisorSplit_eq_of_half_bound
+    {N1 bound zeroPart onePart t u : ℕ} (hbound : bound < 2 * N1)
+    (htsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (husplit : rowOneDivisorSplit N1 zeroPart onePart u) (ht : 1 ≤ t)
+    (hu : 1 ≤ u) (htbound : 2 * t ≤ bound) (hubound : 2 * u ≤ bound) :
+    t = u := by
+  have ht_double_lt : 2 * t < 2 * N1 := lt_of_le_of_lt htbound hbound
+  have hu_double_lt : 2 * u < 2 * N1 := lt_of_le_of_lt hubound hbound
+  exact rowOneDivisorSplit_eq_of_lt htsplit husplit ht hu
+    (Nat.lt_of_mul_lt_mul_left ht_double_lt)
+    (Nat.lt_of_mul_lt_mul_left hu_double_lt)
+
+theorem rowOneDivisorSplit_eq_of_consecutiveDivisorKernelBelow_short
+    {N1 N2 bound zeroPart onePart t u : ℕ} (hbound : bound < 2 * N1)
+    (htsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (husplit : rowOneDivisorSplit N1 zeroPart onePart u) (ht : 1 ≤ t)
+    (hu : 1 ≤ u) (htkernel : consecutiveDivisorKernelBelow N1 N2 bound t)
+    (hukernel : consecutiveDivisorKernelBelow N1 N2 bound u) :
+    t = u :=
+  rowOneDivisorSplit_eq_of_half_bound hbound htsplit husplit ht hu
+    htkernel.1 hukernel.1
+
 theorem rowOneDivisorSplit_kernel_iff_row_two {N1 N2 zeroPart onePart t : ℕ}
     (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
     consecutiveDivisorKernel N1 N2 t ↔ N2 ∣ t * (t - 1) * (t - 2) := by

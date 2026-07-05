@@ -333,6 +333,16 @@
   `Erdos699.rowOneDivisorSplit_modEq_unique` removes the explicit coprime
   input from fixed-split uniqueness. This matches the C2 setting where
   `t ≥ 4`; it is not a proof that the kernel is empty.
+- [R] Proved bounded fixed-split uniqueness for C2:
+  `Erdos699.rowOneDivisorSplit_eq_of_lt` upgrades same-split modular
+  uniqueness to equality when both candidates are below `N1`,
+  `Erdos699.rowOneDivisorSplit_eq_of_half_bound` derives that condition from
+  `2 * t ≤ bound`, `2 * u ≤ bound`, and `bound < 2 * N1`, and
+  `Erdos699.rowOneDivisorSplit_eq_of_consecutiveDivisorKernelBelow_short`
+  packages the same conclusion for `consecutiveDivisorKernelBelow`. This
+  formalizes the "at most one bounded candidate per split" side of C2 under
+  the explicit short-interval hypothesis; it is not a proof that the kernel is
+  empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
