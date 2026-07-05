@@ -16,6 +16,7 @@ from compute.kernel import (
     scan_case_i_power_two_kernel,
     scan_kernel_crt,
     squeezed_candidate_original_row_three_obstructions,
+    squeezed_candidate_original_row_three_obstruction_witnesses,
 )
 
 
@@ -649,6 +650,24 @@ def test_squeezed_candidate_original_row_three_obstructions_find_digit_kill() ->
     assert squeezed_candidate_original_row_three_obstructions(F, X, u, 11) == [5, 11]
 
 
+def test_squeezed_candidate_original_obstruction_witnesses_record_digit_levels() -> None:
+    F, X, u = 3, 432184014644, 186954166997
+    assert squeezed_candidate_original_row_three_obstruction_witnesses(
+        F, X, u, 11
+    ) == [
+        {
+            "prime": 5,
+            "i_failure": {"level": 0, "k_digit": 3, "n_digit": 2},
+            "j_failure": {"level": 1, "k_digit": 3, "n_digit": 1},
+        },
+        {
+            "prime": 11,
+            "i_failure": {"level": 0, "k_digit": 3, "n_digit": 2},
+            "j_failure": {"level": 1, "k_digit": 10, "n_digit": 2},
+        },
+    ]
+
+
 def test_squeezed_discriminant_generator_finds_row_one_candidates() -> None:
     assert squeezed_row_one_candidates_discriminant(3, 48) == [
         {"F": 3, "X": 48, "t": 22, "g": 4}
@@ -963,6 +982,7 @@ def test_kernel_cli_can_diagnose_single_squeezed_candidate() -> None:
             "35360510289",
             "--original-obstruction-prime-limit",
             "11",
+            "--include-original-obstruction-witnesses",
         ],
         check=True,
         text=True,
@@ -972,3 +992,15 @@ def test_kernel_cli_can_diagnose_single_squeezed_candidate() -> None:
     assert payload["squeezed_normalized_case_i_kernel_holds"] is True
     assert payload["original_row_three_obstruction_primes"] == [5, 11]
     assert payload["original_row_three_digit_compatible_under_cap"] is False
+    assert payload["original_row_three_obstruction_witnesses"] == [
+        {
+            "i_failure": {"k_digit": 3, "level": 0, "n_digit": 2},
+            "j_failure": {"k_digit": 3, "level": 1, "n_digit": 1},
+            "prime": 5,
+        },
+        {
+            "i_failure": {"k_digit": 3, "level": 0, "n_digit": 2},
+            "j_failure": {"k_digit": 10, "level": 1, "n_digit": 2},
+            "prime": 11,
+        },
+    ]

@@ -53,6 +53,14 @@
   `original_row_three_obstruction_primes = [5, 11]`. This is the exact
   reproducible classification of the positive normalized survivor as outside
   the original no-common-prime surface under the checked finite cap.
+- [E] Extended the single-candidate classifier with opt-in digit-level
+  obstruction witnesses. Reproduce with
+  `python3 -m compute.kernel --diagnose-squeezed-candidate --candidate-f 3 --candidate-x 432184014644 --candidate-t 186954166997 --candidate-g 35360510289 --original-obstruction-prime-limit 11 --include-original-obstruction-witnesses`;
+  it reports for `p = 5` the failures `i` at level `0` with digits
+  `3 > 2` and `j` at level `1` with digits `3 > 1`, and for `p = 11`
+  the failures `i` at level `0` with digits `3 > 2` and `j` at level `1`
+  with digits `10 > 2`. This is finite-cap diagnostic evidence, not a global
+  digit-forcing theorem.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.

@@ -5,7 +5,7 @@ import json
 import math
 from typing import Any
 
-from compute.erdos699 import criterion_obstruction_primes, primes_upto
+from compute.erdos699 import criterion_obstruction_primes, digit, primes_upto
 
 
 _MR_BASES_64 = (
@@ -158,12 +158,44 @@ def squeezed_candidate_original_row_three_obstructions(
     return criterion_obstruction_primes(n, 3, j, primes=primes_upto(prime_limit))
 
 
+def _first_digit_failure(k: int, n: int, p: int) -> dict[str, int] | None:
+    m = max(k, n)
+    level = 0
+    while p**level <= m:
+        k_digit = digit(k, p, level)
+        n_digit = digit(n, p, level)
+        if k_digit > n_digit:
+            return {"level": level, "k_digit": k_digit, "n_digit": n_digit}
+        level += 1
+    return None
+
+
+def squeezed_candidate_original_row_three_obstruction_witnesses(
+    F: int, X: int, t: int, prime_limit: int
+) -> list[dict[str, Any]]:
+    if F < 0 or X < 0 or t < 0 or prime_limit < 0:
+        raise ValueError("F, X, t, and prime_limit must be nonnegative")
+    n = F * X
+    j = F * t
+    witnesses: list[dict[str, Any]] = []
+    for p in squeezed_candidate_original_row_three_obstructions(F, X, t, prime_limit):
+        i_failure = _first_digit_failure(3, n, p)
+        j_failure = _first_digit_failure(j, n, p)
+        if i_failure is None or j_failure is None:
+            raise AssertionError("obstruction prime must fail both digit dominations")
+        witnesses.append(
+            {"prime": p, "i_failure": i_failure, "j_failure": j_failure}
+        )
+    return witnesses
+
+
 def diagnose_squeezed_normalized_candidate(
     F: int,
     X: int,
     t: int,
     g: int,
     original_obstruction_prime_limit: int | None = None,
+    include_original_obstruction_witnesses: bool = False,
 ) -> dict[str, Any]:
     if F < 0 or X < 0 or t < 0 or g < 0:
         raise ValueError("F, X, t, and g must be nonnegative")
@@ -194,6 +226,17 @@ def diagnose_squeezed_normalized_candidate(
                 "original_row_three_has_obstruction": bool(obstructions),
                 "original_row_three_digit_compatible_under_cap": not obstructions,
             }
+        )
+        if include_original_obstruction_witnesses:
+            diagnostic["original_row_three_obstruction_witnesses"] = (
+                squeezed_candidate_original_row_three_obstruction_witnesses(
+                    F, X, t, original_obstruction_prime_limit
+                )
+            )
+    elif include_original_obstruction_witnesses:
+        raise ValueError(
+            "include_original_obstruction_witnesses requires "
+            "original_obstruction_prime_limit"
         )
     return diagnostic
 
@@ -721,6 +764,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--include-row-one-split-summary", action="store_true")
     parser.add_argument("--include-quotient-gap-summary", action="store_true")
     parser.add_argument("--original-obstruction-prime-limit", type=int)
+    parser.add_argument("--include-original-obstruction-witnesses", action="store_true")
     args = parser.parse_args(argv)
     if args.diagnose_squeezed_candidate:
         if (
@@ -739,6 +783,7 @@ def main(argv: list[str] | None = None) -> int:
             args.candidate_t,
             args.candidate_g,
             original_obstruction_prime_limit=args.original_obstruction_prime_limit,
+            include_original_obstruction_witnesses=args.include_original_obstruction_witnesses,
         )
     elif args.case_i_power_two:
         if args.max_exponent is None:
