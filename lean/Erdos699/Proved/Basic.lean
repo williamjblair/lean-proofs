@@ -1410,6 +1410,34 @@ theorem i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t {n F X j t g :
     (i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t
       hnone hn hj hn_ge_two hn_gt_two hj_two htX h2tX)
 
+theorem i_three_caseI_joint_large_part_le_factor_mul_X_sub_two_t {n F X j t g : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n)
+    (hj_two : 2 ≤ j) (hrow1 : t * (X - t) = g * (n - 1))
+    (hbranch : 0 < X - 2 * t) :
+    primePowerPartGE 5 (n - 2) ≤ g * (X - 2 * t) := by
+  have hdvd :
+      primePowerPartGE 5 (n - 2) ∣ g * (X - 2 * t) :=
+    i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t
+      hnone hn hj (by omega : 2 ≤ n) hn_gt hj_two
+      (by omega : t ≤ X) (by omega : 2 * t ≤ X) hrow1
+  have ht_pos : 0 < t := by
+    by_cases ht0 : t = 0
+    · subst t
+      simp at hj
+      omega
+    · exact Nat.pos_of_ne_zero ht0
+  have hXt_pos : 0 < X - t := by omega
+  have hleft_pos : 0 < t * (X - t) := Nat.mul_pos ht_pos hXt_pos
+  have hright_pos : 0 < g * (n - 1) := by
+    simpa [hrow1] using hleft_pos
+  have hg_pos : 0 < g := by
+    by_cases hg0 : g = 0
+    · subst g
+      simp at hright_pos
+    · exact Nat.pos_of_ne_zero hg0
+  exact Nat.le_of_dvd (Nat.mul_pos hg_pos hbranch) hdvd
+
 theorem i_three_caseI_exists_joint_large_part_factor {n F X j t : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
@@ -1422,6 +1450,21 @@ theorem i_three_caseI_exists_joint_large_part_factor {n F X j t : ℕ}
   exact ⟨g, hg,
     i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t
       hnone hn hj (by omega : 2 ≤ n) hn_gt hj_two (by omega : t ≤ X) h2tX hg⟩
+
+theorem i_three_caseI_exists_joint_large_part_factor_le {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hbranch : 0 < X - 2 * t) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        primePowerPartGE 5 (n - 2) ∣ g * (X - 2 * t) ∧
+          primePowerPartGE 5 (n - 2) ≤ g * (X - 2 * t) := by
+  rcases i_three_caseI_exists_joint_large_part_factor
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n (by omega : 2 * t ≤ X) with
+    ⟨g, hrow1, hdvd⟩
+  exact ⟨g, hrow1, hdvd,
+    i_three_caseI_joint_large_part_le_factor_mul_X_sub_two_t
+      hnone hn hj hn_gt hj_two hrow1 hbranch⟩
 
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by

@@ -125,5 +125,10 @@
   `Erdos699.i_three_caseI_exists_joint_large_part_factor` combines that factor
   with the row-two large-prime-part cancellation. This states the usable joint
   system for later kernel work; full T7 remains open.
+- [R] Proved the T7 non-central large-part size bound:
+  `Erdos699.i_three_caseI_joint_large_part_le_factor_mul_X_sub_two_t` and
+  `Erdos699.i_three_caseI_exists_joint_large_part_factor_le` show that on the
+  explicit branch `0 < X - 2 * t`, the row-two large-prime part is at most
+  `g * (X - 2 * t)`. The central branch `X = 2 * t` and full T7 remain open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
