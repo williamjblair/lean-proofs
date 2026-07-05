@@ -409,6 +409,15 @@
   `Erdos699.not_exists_consecutiveDivisorKernelBelow_of_forall_bound_gcdDiv_split_row_two_gcd_lt`
   turn a per-candidate row-two failure certificate into kernel emptiness. This
   is a conditional certificate interface, not a proof that the kernel is empty.
+- [R] Added finite-list C2 certificate bridges:
+  `Erdos699.not_exists_consecutiveDivisorKernelBelow_of_list_covers_bound_gcdDiv_split_row_two_gcd_ne`
+  and
+  `Erdos699.not_exists_consecutiveDivisorKernelBelow_of_list_covers_bound_gcdDiv_split_row_two_gcd_lt`
+  show that a list covering all bounded canonical row-one gcd/div split
+  candidates, together with a row-two gcd failure proof for every list member,
+  proves bounded kernel emptiness. This is the formal interface for turning a
+  future checked CRT candidate list into a Lean no-survivor certificate; it is
+  not a proof that the kernel is empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
