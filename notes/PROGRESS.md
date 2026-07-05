@@ -165,6 +165,17 @@
   `2 ∣ n`, `3 ∣ n`, and `2 < n`, then force
   `n / 2 - 1 ∣ g * (X - 2 * t)` from the corrected `p ≥ i` row-two
   condition. The non-central branch and full T7 remain open.
+- [R] Proved the T7 half-row large-prime-part squeeze:
+  `Erdos699.i_three_caseI_half_sub_one_large_part_dvd_row_two_product` shows
+  that the forced divisor `primePowerPartGE 5 (n / 2 - 1)` divides
+  `j * (j - 1) * (j - 2)`. The normalized and joint-row endpoints
+  `Erdos699.i_three_caseI_row_two_half_sub_one_large_part_dvd_t_mul_X_sub_t_mul_X_sub_two_t`,
+  `Erdos699.i_three_caseI_joint_half_sub_one_large_part_dvd_factor_mul_X_sub_two_t`,
+  `Erdos699.i_three_caseI_joint_half_sub_one_large_part_gap_bound`, and
+  `Erdos699.i_three_caseI_joint_half_sub_one_large_part_cube_bound` push this
+  2-adic-free half-row factor through the row-two congruence bridge and the
+  row-one cancellation. This intentionally does not claim the missing power of
+  `2`; full T7 remains open.
 - [R] Proved the T7 central branch kill:
   `Erdos699.central_branch_false_of_sub_one_dvd_t_mul_X_sub_t` shows that
   `2 * t = X` contradicts the row-one divisor `n - 1 ∣ t * (X - t)` when

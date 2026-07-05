@@ -1360,6 +1360,12 @@ theorem half_sub_one_dvd_sub_two_of_even {n : ℕ} (h2n : 2 ∣ n) :
   refine ⟨2, ?_⟩
   omega
 
+theorem half_sub_one_ne_zero_of_even {n : ℕ} (h2n : 2 ∣ n) (hn : 2 < n) :
+    n / 2 - 1 ≠ 0 := by
+  rcases h2n with ⟨m, hm⟩
+  subst n
+  omega
+
 theorem half_sub_one_ne_zero_of_even_three_dvd {n : ℕ}
     (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hn : 2 < n) :
     n / 2 - 1 ≠ 0 := by
@@ -1427,6 +1433,27 @@ theorem half_sub_one_coprime_sub_one_of_even {n : ℕ}
     Nat.coprime_self_add_right.mpr hbase
   rw [hdiv, hsub_one]
   exact htarget
+
+theorem primePowerPartGE_five_half_sub_one_coprime_sub_one {n : ℕ}
+    (h2n : 2 ∣ n) (hn : 2 < n) :
+    (primePowerPartGE 5 (n / 2 - 1)).Coprime (n - 1) :=
+  Nat.Coprime.coprime_dvd_left
+    (primePowerPartGE_dvd_self (half_sub_one_ne_zero_of_even h2n hn))
+    (half_sub_one_coprime_sub_one_of_even h2n hn)
+
+theorem i_three_caseI_half_sub_one_large_part_dvd_row_two_product {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (h2n : 2 ∣ n) (hn : 2 < n) :
+    primePowerPartGE 5 (n / 2 - 1) ∣ j * (j - 1) * (j - 2) := by
+  apply primePowerPartGE_dvd_of_forall_prime_power_dvd
+  intro p hp hp5 _hpdvd
+  have hhalf_ne : n / 2 - 1 ≠ 0 := half_sub_one_ne_zero_of_even h2n hn
+  have hpow_dvd_half : p ^ (n / 2 - 1).factorization p ∣ n / 2 - 1 :=
+    (hp.pow_dvd_iff_le_factorization hhalf_ne).mpr le_rfl
+  have hpow_dvd_sub_two : p ^ (n / 2 - 1).factorization p ∣ n - 2 :=
+    Nat.dvd_trans hpow_dvd_half (half_sub_one_dvd_sub_two_of_even h2n)
+  exact i_three_window_two_prime_pow_dvd_mul_sub_one_sub_two
+    hnone hp hp5 hn hpow_dvd_sub_two
 
 theorem i_three_caseI_half_sub_one_dvd_row_two_product {n j : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
@@ -1548,6 +1575,20 @@ theorem i_three_caseI_row_two_half_sub_one_dvd_t_mul_X_sub_t_mul_X_sub_two_t
     hj_two htX h2tX
     (i_three_caseI_half_sub_one_dvd_row_two_product hnone h2n h3n hn_gt hcop4)
 
+theorem i_three_caseI_row_two_half_sub_one_large_part_dvd_t_mul_X_sub_t_mul_X_sub_two_t
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_two : 2 ≤ j)
+    (h2n : 2 ∣ n) (htX : t ≤ X) (h2tX : 2 * t ≤ X) :
+    primePowerPartGE 5 (n / 2 - 1) ∣ t * (X - t) * (X - 2 * t) := by
+  have hlarge_dvd_sub_two : primePowerPartGE 5 (n / 2 - 1) ∣ n - 2 :=
+    Nat.dvd_trans
+      (primePowerPartGE_dvd_self (half_sub_one_ne_zero_of_even h2n hn_gt))
+      (half_sub_one_dvd_sub_two_of_even h2n)
+  exact sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
+    hlarge_dvd_sub_two (primePowerPartGE_five_coprime_four (n / 2 - 1))
+    hn hj (by omega : 2 ≤ n) hj_two htX h2tX
+    (i_three_caseI_half_sub_one_large_part_dvd_row_two_product hnone h2n hn_gt)
+
 theorem i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t {n F X j t g : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hn_gt_two : 2 < n)
@@ -1571,6 +1612,17 @@ theorem i_three_caseI_joint_half_sub_one_dvd_factor_mul_X_sub_two_t {n F X j t g
     (i_three_caseI_row_two_half_sub_one_dvd_t_mul_X_sub_t_mul_X_sub_two_t
       hnone hn hj hn_gt hj_two h2n h3n hcop4 htX h2tX)
 
+theorem i_three_caseI_joint_half_sub_one_large_part_dvd_factor_mul_X_sub_two_t
+    {n F X j t g : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_two : 2 ≤ j)
+    (h2n : 2 ∣ n) (htX : t ≤ X) (h2tX : 2 * t ≤ X)
+    (hrow1 : t * (X - t) = g * (n - 1)) :
+    primePowerPartGE 5 (n / 2 - 1) ∣ g * (X - 2 * t) :=
+  dvd_factor_mul_of_eq_mul_and_coprime hrow1
+    (primePowerPartGE_five_half_sub_one_coprime_sub_one h2n hn_gt)
+    (i_three_caseI_row_two_half_sub_one_large_part_dvd_t_mul_X_sub_t_mul_X_sub_two_t
+      hnone hn hj hn_gt hj_two h2n htX h2tX)
+
 theorem i_three_caseI_joint_large_part_le_factor_mul_X_sub_two_t {n F X j t g : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n)
@@ -1582,6 +1634,33 @@ theorem i_three_caseI_joint_large_part_le_factor_mul_X_sub_two_t {n F X j t g : 
     i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t
       hnone hn hj (by omega : 2 ≤ n) hn_gt hj_two
       (by omega : t ≤ X) (by omega : 2 * t ≤ X) hrow1
+  have ht_pos : 0 < t := by
+    by_cases ht0 : t = 0
+    · subst t
+      simp at hj
+      omega
+    · exact Nat.pos_of_ne_zero ht0
+  have hXt_pos : 0 < X - t := by omega
+  have hleft_pos : 0 < t * (X - t) := Nat.mul_pos ht_pos hXt_pos
+  have hright_pos : 0 < g * (n - 1) := by
+    simpa [hrow1] using hleft_pos
+  have hg_pos : 0 < g := by
+    by_cases hg0 : g = 0
+    · subst g
+      simp at hright_pos
+    · exact Nat.pos_of_ne_zero hg0
+  exact Nat.le_of_dvd (Nat.mul_pos hg_pos hbranch) hdvd
+
+theorem i_three_caseI_joint_half_sub_one_large_part_le_factor_mul_X_sub_two_t
+    {n F X j t g : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (hrow1 : t * (X - t) = g * (n - 1))
+    (hbranch : 0 < X - 2 * t) :
+    primePowerPartGE 5 (n / 2 - 1) ≤ g * (X - 2 * t) := by
+  have hdvd : primePowerPartGE 5 (n / 2 - 1) ∣ g * (X - 2 * t) :=
+    i_three_caseI_joint_half_sub_one_large_part_dvd_factor_mul_X_sub_two_t
+      hnone hn hj hn_gt hj_two h2n (by omega : t ≤ X) (by omega : 2 * t ≤ X)
+      hrow1
   have ht_pos : 0 < t := by
     by_cases ht0 : t = 0
     · subst t
@@ -1620,6 +1699,26 @@ theorem i_three_caseI_joint_large_part_gap_bound {n F X j t g : ℕ}
           exact Nat.mul_le_mul_right (X - 2 * t) hrow_bound
     _ = X * X * (X - 2 * t) := by ring
 
+theorem i_three_caseI_joint_half_sub_one_large_part_gap_bound {n F X j t g : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (hrow1 : t * (X - t) = g * (n - 1))
+    (hbranch : 0 < X - 2 * t) :
+    4 * ((n - 1) * primePowerPartGE 5 (n / 2 - 1)) ≤ X * X * (X - 2 * t) := by
+  have hlarge : primePowerPartGE 5 (n / 2 - 1) ≤ g * (X - 2 * t) :=
+    i_three_caseI_joint_half_sub_one_large_part_le_factor_mul_X_sub_two_t
+      hnone hn hj hn_gt hj_two h2n hrow1 hbranch
+  have hrow_bound : 4 * (g * (n - 1)) ≤ X * X := by
+    simpa [hrow1] using four_mul_t_mul_X_sub_t_le_sq (by omega : 2 * t ≤ X)
+  calc
+    4 * ((n - 1) * primePowerPartGE 5 (n / 2 - 1))
+        ≤ 4 * ((n - 1) * (g * (X - 2 * t))) := by
+          exact Nat.mul_le_mul_left 4 (Nat.mul_le_mul_left (n - 1) hlarge)
+    _ = (4 * (g * (n - 1))) * (X - 2 * t) := by ring
+    _ ≤ (X * X) * (X - 2 * t) := by
+          exact Nat.mul_le_mul_right (X - 2 * t) hrow_bound
+    _ = X * X * (X - 2 * t) := by ring
+
 theorem i_three_caseI_joint_large_part_cube_bound {n F X j t g : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n)
@@ -1628,6 +1727,19 @@ theorem i_three_caseI_joint_large_part_cube_bound {n F X j t g : ℕ}
     4 * ((n - 1) * primePowerPartGE 5 (n - 2)) ≤ X * X * X := by
   have hgap :=
     i_three_caseI_joint_large_part_gap_bound hnone hn hj hn_gt hj_two hrow1 hbranch
+  have hgap_le : X - 2 * t ≤ X := Nat.sub_le X (2 * t)
+  exact hgap.trans (by
+    simpa [mul_assoc] using Nat.mul_le_mul_left (X * X) hgap_le)
+
+theorem i_three_caseI_joint_half_sub_one_large_part_cube_bound {n F X j t g : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (hrow1 : t * (X - t) = g * (n - 1))
+    (hbranch : 0 < X - 2 * t) :
+    4 * ((n - 1) * primePowerPartGE 5 (n / 2 - 1)) ≤ X * X * X := by
+  have hgap :=
+    i_three_caseI_joint_half_sub_one_large_part_gap_bound
+      hnone hn hj hn_gt hj_two h2n hrow1 hbranch
   have hgap_le : X - 2 * t ≤ X := Nat.sub_le X (2 * t)
   exact hgap.trans (by
     simpa [mul_assoc] using Nat.mul_le_mul_left (X * X) hgap_le)
