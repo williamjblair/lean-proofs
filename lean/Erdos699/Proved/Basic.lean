@@ -19,6 +19,105 @@ instance (k n p : ℕ) : Decidable (dominated k n p) :=
     (Decidable ((Finset.range (max k n + 1)).filter
       (fun r => digit n p r < digit k p r) = ∅))
 
+theorem dominated_iff_forall_mem_range (k n p : ℕ) :
+    dominated k n p ↔
+      ∀ r ∈ Finset.range (max k n + 1), digit k p r ≤ digit n p r := by
+  classical
+  unfold dominated
+  rw [Finset.filter_eq_empty_iff]
+  constructor
+  · intro h r hr
+    exact Nat.not_lt.mp (h hr)
+  · intro h r hr
+    exact Nat.not_lt.mpr (h r hr)
+
+theorem dominated_iff_forall_digits {k n p : ℕ} (hp : 2 ≤ p) :
+    dominated k n p ↔ ∀ r : ℕ, digit k p r ≤ digit n p r := by
+  classical
+  constructor
+  · intro h r
+    by_cases hr : r ∈ Finset.range (max k n + 1)
+    · exact (dominated_iff_forall_mem_range k n p).mp h r hr
+    · have hle : max k n + 1 ≤ r := by
+        exact Nat.le_of_not_gt (by simpa [Finset.mem_range] using hr)
+      have hm_lt_r : max k n < r := Nat.lt_of_succ_le hle
+      have hp_one : 1 < p := Nat.lt_of_lt_of_le one_lt_two hp
+      have hr_lt_pow : r < p ^ r := Nat.lt_pow_self hp_one
+      have hk_lt : k < p ^ r := (le_max_left k n).trans_lt (hm_lt_r.trans hr_lt_pow)
+      have hn_lt : n < p ^ r := (le_max_right k n).trans_lt (hm_lt_r.trans hr_lt_pow)
+      simp [digit, Nat.div_eq_of_lt hk_lt, Nat.div_eq_of_lt hn_lt]
+  · intro h
+    exact (dominated_iff_forall_mem_range k n p).mpr fun r _ => h r
+
+theorem prime_not_dvd_small_choose_of_le {p a b : ℕ} (hp : p.Prime) (ha : a < p)
+    (hb : b ≤ a) :
+    ¬ p ∣ Nat.choose a b := by
+  have hchoose_ne : Nat.choose a b ≠ 0 := Nat.choose_ne_zero hb
+  intro hdiv
+  have hfac_pos : 0 < (Nat.choose a b).factorization p :=
+    hp.factorization_pos_of_dvd hchoose_ne hdiv
+  have hfac_zero : (Nat.choose a b).factorization p = 0 :=
+    Nat.factorization_choose_eq_zero_of_lt ha
+  omega
+
+theorem prime_not_dvd_finset_prod {α : Type*} {s : Finset α} {f : α → ℕ} {p : ℕ}
+    (hp : p.Prime) (h : ∀ a ∈ s, ¬ p ∣ f a) :
+    ¬ p ∣ s.prod f := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+      simpa using hp.not_dvd_one
+  | insert a s ha ih =>
+      intro hdiv
+      rw [Finset.prod_insert ha] at hdiv
+      rcases hp.dvd_mul.mp hdiv with hpa | hps
+      · exact h a (Finset.mem_insert_self a s) hpa
+      · exact ih (fun x hx => h x (Finset.mem_insert_of_mem hx)) hps
+
+theorem lucas_nonzero_mod_prime_iff_dominated {n k p : ℕ} (hp : p.Prime) :
+    Nat.choose n k % p ≠ 0 ↔ dominated k n p := by
+  classical
+  letI : Fact p.Prime := ⟨hp⟩
+  let a := max k n + 1
+  have hp_one : 1 < p := hp.one_lt
+  have hn_bound : n < p ^ a := by
+    have hn_lt_a : n < a := (le_max_right k n).trans_lt (Nat.lt_succ_self _)
+    exact hn_lt_a.trans (Nat.lt_pow_self hp_one)
+  have hk_bound : k < p ^ a := by
+    have hk_lt_a : k < a := (le_max_left k n).trans_lt (Nat.lt_succ_self _)
+    exact hk_lt_a.trans (Nat.lt_pow_self hp_one)
+  have hlucas :
+      Nat.choose n k ≡
+        ∏ i ∈ Finset.range a, Nat.choose (n / p ^ i % p) (k / p ^ i % p) [MOD p] :=
+    Choose.lucas_theorem_nat (n := n) (k := k) (p := p) (a := a) hn_bound hk_bound
+  constructor
+  · intro hnonzero
+    by_contra hdom
+    rw [dominated_iff_forall_mem_range k n p] at hdom
+    push Not at hdom
+    obtain ⟨r, hr, hbad⟩ := hdom
+    have hfactor_zero : Nat.choose (n / p ^ r % p) (k / p ^ r % p) = 0 :=
+      Nat.choose_eq_zero_of_lt hbad
+    have hprod_zero :
+        (∏ i ∈ Finset.range a, Nat.choose (n / p ^ i % p) (k / p ^ i % p)) = 0 :=
+      Finset.prod_eq_zero hr hfactor_zero
+    rw [Nat.ModEq] at hlucas
+    exact hnonzero (by simpa [hprod_zero] using hlucas)
+  · intro hdom
+    have hprod_not_dvd :
+        ¬ p ∣ (∏ i ∈ Finset.range a, Nat.choose (n / p ^ i % p) (k / p ^ i % p)) := by
+      refine prime_not_dvd_finset_prod hp ?_
+      intro r hr
+      apply prime_not_dvd_small_choose_of_le hp
+      · exact Nat.mod_lt _ hp.pos
+      · exact (dominated_iff_forall_mem_range k n p).mp hdom r hr
+    rw [Nat.ModEq] at hlucas
+    intro hzero
+    have hprod_zero :
+        (∏ i ∈ Finset.range a, Nat.choose (n / p ^ i % p) (k / p ^ i % p)) % p = 0 := by
+      simpa [hlucas] using hzero
+    exact hprod_not_dvd (Nat.dvd_iff_mod_eq_zero.mpr hprod_zero)
+
 /-- A prime `p` is relevant to row `i` exactly when `p ≥ i`. -/
 def relevantPrime (i p : ℕ) : Prop :=
   p.Prime ∧ i ≤ p
