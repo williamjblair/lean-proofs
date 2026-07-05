@@ -544,6 +544,59 @@ theorem not_exists_consecutiveDivisorKernelBelow_of_list_covers_bound_gcdDiv_spl
   not_exists_consecutiveDivisorKernelBelow_of_list_covers_bound_gcdDiv_split_row_two_gcd_ne
     hN1 hcover fun t htmem => ne_of_lt (hfail t htmem)
 
+theorem exists_kernelBelow_iff_exists_mem_cert_of_list_covers
+    {N1 N2 bound : ℕ} {candidates : List ℕ} (hN1 : 0 < N1)
+    (hcover :
+      ∀ t : ℕ,
+        2 * t ≤ bound →
+          rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t →
+            t ∈ candidates) :
+    (∃ t : ℕ, consecutiveDivisorKernelBelow N1 N2 bound t) ↔
+      ∃ t : ℕ,
+        t ∈ candidates ∧
+          2 * t ≤ bound ∧
+            rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t ∧
+              Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 := by
+  constructor
+  · intro hexists
+    rcases
+        (exists_consecutiveDivisorKernelBelow_iff_exists_bound_gcdDiv_split_and_row_two_gcd_eq
+          hN1).mp hexists with
+      ⟨t, hbound, hsplit, hgcd⟩
+    exact ⟨t, hcover t hbound hsplit, hbound, hsplit, hgcd⟩
+  · rintro ⟨t, _htmem, hbound, hsplit, hgcd⟩
+    exact
+      (exists_consecutiveDivisorKernelBelow_iff_exists_bound_gcdDiv_split_and_row_two_gcd_eq
+        hN1).mpr ⟨t, hbound, hsplit, hgcd⟩
+
+theorem exists_kernelBelow_iff_exists_mem_row_two_gcd_eq_of_list_exact
+    {N1 N2 bound : ℕ} {candidates : List ℕ} (hN1 : 0 < N1)
+    (hcover :
+      ∀ t : ℕ,
+        2 * t ≤ bound →
+          rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t →
+            t ∈ candidates)
+    (hsound :
+      ∀ t : ℕ,
+        t ∈ candidates →
+          2 * t ≤ bound ∧
+            rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t) :
+    (∃ t : ℕ, consecutiveDivisorKernelBelow N1 N2 bound t) ↔
+      ∃ t : ℕ,
+        t ∈ candidates ∧ Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 := by
+  constructor
+  · intro hexists
+    rcases
+        (exists_kernelBelow_iff_exists_mem_cert_of_list_covers
+          hN1 hcover).mp hexists with
+      ⟨t, htmem, _hbound, _hsplit, hgcd⟩
+    exact ⟨t, htmem, hgcd⟩
+  · rintro ⟨t, htmem, hgcd⟩
+    rcases hsound t htmem with ⟨hbound, hsplit⟩
+    exact
+      (exists_consecutiveDivisorKernelBelow_iff_exists_bound_gcdDiv_split_and_row_two_gcd_eq
+        hN1).mpr ⟨t, hbound, hsplit, hgcd⟩
+
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
     ¬ consecutiveDivisorKernel N1 N2 t := by

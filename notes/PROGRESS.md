@@ -418,6 +418,16 @@
   proves bounded kernel emptiness. This is the formal interface for turning a
   future checked CRT candidate list into a Lean no-survivor certificate; it is
   not a proof that the kernel is empty.
+- [R] Added finite-list C2 survivor equivalences:
+  `Erdos699.exists_kernelBelow_iff_exists_mem_cert_of_list_covers`
+  shows that, under a list-cover hypothesis, bounded kernel nonemptiness is
+  equivalent to a listed candidate that still satisfies the bound, canonical
+  row-one split, and row-two gcd equality. The exact-list version
+  `Erdos699.exists_kernelBelow_iff_exists_mem_row_two_gcd_eq_of_list_exact`
+  adds a list-soundness hypothesis and reduces the finite search side to
+  membership plus row-two gcd equality. This is the formal survivor-extraction
+  contract for checked CRT candidate lists; it is not a proof that the kernel
+  is empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
