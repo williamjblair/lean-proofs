@@ -1459,6 +1459,18 @@ theorem i_three_caseI_joint_large_part_gap_bound {n F X j t g : ℕ}
           exact Nat.mul_le_mul_right (X - 2 * t) hrow_bound
     _ = X * X * (X - 2 * t) := by ring
 
+theorem i_three_caseI_joint_large_part_cube_bound {n F X j t g : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n)
+    (hj_two : 2 ≤ j) (hrow1 : t * (X - t) = g * (n - 1))
+    (hbranch : 0 < X - 2 * t) :
+    4 * ((n - 1) * primePowerPartGE 5 (n - 2)) ≤ X * X * X := by
+  have hgap :=
+    i_three_caseI_joint_large_part_gap_bound hnone hn hj hn_gt hj_two hrow1 hbranch
+  have hgap_le : X - 2 * t ≤ X := Nat.sub_le X (2 * t)
+  exact hgap.trans (by
+    simpa [mul_assoc] using Nat.mul_le_mul_left (X * X) hgap_le)
+
 theorem i_three_caseI_exists_joint_large_part_factor {n F X j t : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
@@ -1502,6 +1514,40 @@ theorem i_three_caseI_exists_joint_large_part_gap_bound {n F X j t : ℕ}
     ⟨g, hrow1, hdvd, hle⟩
   exact ⟨g, hrow1, hdvd, hle,
     i_three_caseI_joint_large_part_gap_bound hnone hn hj hn_gt hj_two hrow1 hbranch⟩
+
+theorem i_three_caseI_exists_joint_large_part_cube_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hbranch : 0 < X - 2 * t) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        primePowerPartGE 5 (n - 2) ∣ g * (X - 2 * t) ∧
+          primePowerPartGE 5 (n - 2) ≤ g * (X - 2 * t) ∧
+            4 * ((n - 1) * primePowerPartGE 5 (n - 2)) ≤ X * X * X := by
+  rcases i_three_caseI_exists_joint_large_part_gap_bound
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n hbranch with
+    ⟨g, hrow1, hdvd, hle, _hgap⟩
+  exact ⟨g, hrow1, hdvd, hle,
+    i_three_caseI_joint_large_part_cube_bound hnone hn hj hn_gt hj_two hrow1 hbranch⟩
+
+theorem i_three_caseI_joint_lower_part_cube_bound {n F X j t g L : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n)
+    (hj_two : 2 ≤ j) (hrow1 : t * (X - t) = g * (n - 1))
+    (hbranch : 0 < X - 2 * t) (hL : L ≤ primePowerPartGE 5 (n - 2)) :
+    4 * ((n - 1) * L) ≤ X * X * X := by
+  have hcube :=
+    i_three_caseI_joint_large_part_cube_bound hnone hn hj hn_gt hj_two hrow1 hbranch
+  exact (Nat.mul_le_mul_left 4 (Nat.mul_le_mul_left (n - 1) hL)).trans hcube
+
+theorem i_three_caseI_joint_half_sub_one_cube_bound {n F X j t g : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n)
+    (hj_two : 2 ≤ j) (hrow1 : t * (X - t) = g * (n - 1))
+    (hbranch : 0 < X - 2 * t)
+    (hhalf : n / 2 - 1 ≤ primePowerPartGE 5 (n - 2)) :
+    4 * ((n - 1) * (n / 2 - 1)) ≤ X * X * X :=
+  i_three_caseI_joint_lower_part_cube_bound hnone hn hj hn_gt hj_two hrow1 hbranch hhalf
 
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by

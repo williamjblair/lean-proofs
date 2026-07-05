@@ -136,5 +136,13 @@
   row-one parabola bound with the large-part size bound to get
   `4 * ((n - 1) * primePowerPartGE 5 (n - 2)) ≤ X * X * (X - 2 * t)` on the
   explicit branch `0 < X - 2 * t`. Full T7 remains open.
+- [R] Proved the T7 non-central cube squeeze:
+  `Erdos699.i_three_caseI_joint_large_part_cube_bound` and
+  `Erdos699.i_three_caseI_exists_joint_large_part_cube_bound` weaken the gap
+  product bound to `4 * ((n - 1) * primePowerPartGE 5 (n - 2)) ≤ X * X * X`.
+  `Erdos699.i_three_caseI_joint_lower_part_cube_bound` and
+  `Erdos699.i_three_caseI_joint_half_sub_one_cube_bound` also specialize this
+  under an explicit lower bound on `primePowerPartGE 5 (n - 2)`. The half-row
+  lower bound and full T7 remain open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
