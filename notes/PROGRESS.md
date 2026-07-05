@@ -350,6 +350,15 @@
   `Erdos699.not_exists_powerTwoQuotientKernel_of_gcd_quotient_ineq` compose
   this normalized inequality target all the way to the pure quotient kernel.
   This is conditional; it does not prove the normalized quotient inequality.
+- [R] Sharpened the normalized quotient target from a sufficient condition to
+  an exact branch equivalence. The theorem
+  `Erdos699.parity_reduced_divisor_gap_iff_gcd_quotient_ineq` proves that,
+  under the same half-row identity with `alpha = c*x`, `beta = c*y`, and
+  `0 < c`, the parity reduced-divisor gap is equivalent to the odd/even
+  normalized quotient inequalities above. This confirms the quotient target
+  is the exact reduced-divisor obstruction in normalized variables, not a
+  stronger replacement. It still does not prove the universal quotient
+  inequality.
 - [R] Canonicalized the normalized gcd-quotient target and recorded a Lean
   warning against a false shortcut. The split identities
   `Erdos699.powerTwoSplitSubtractive_gcd_quotient_product_identity`,

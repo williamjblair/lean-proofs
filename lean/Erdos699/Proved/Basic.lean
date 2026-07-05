@@ -6154,6 +6154,58 @@ theorem parity_product_gap_of_gcd_quotient_ineq {M B l m c x y L : ℕ}
     exact Or.inr ⟨⟨q, hcq⟩,
       Nat.le_of_mul_le_mul_left htwice (by decide : 0 < 2)⟩
 
+/-- Exact quotient form of the reduced-divisor parity gap. Under the half-row
+identity with `alpha = c*x` and `beta = c*y`, the scanner's quotient target is
+not merely sufficient: it is equivalent to the reduced-divisor gap branch by
+branch. -/
+theorem parity_reduced_divisor_gap_iff_gcd_quotient_ineq
+    {M B l m c x y L : ℕ}
+    (hcpos : 0 < c)
+    (hhalf :
+      2 * M =
+        2 * ((c * x) * (c * y)) + B * ((c * x) * l + (c * y) * m)) :
+    let T := 2 * c * (x * y) + B * (x * l + y * m)
+    (((Odd c ∧ L < M / c) ∨ (Even c ∧ L < M / (c / 2))) ↔
+      ((Odd c ∧ 2 * (L + 1) ≤ T) ∨ (Even c ∧ L + 1 ≤ T))) := by
+  dsimp
+  let T := 2 * c * (x * y) + B * (x * l + y * m)
+  have hfactor : c * T = 2 * M := by
+    calc
+      c * T =
+          2 * ((c * x) * (c * y)) + B * ((c * x) * l + (c * y) * m) := by
+        dsimp [T]
+        ring
+      _ = 2 * M := hhalf.symm
+  constructor
+  · rintro (⟨hcodd, hgap⟩ | ⟨hceven, hgap⟩)
+    · have hprod : c * (L + 1) ≤ M :=
+        (lt_div_iff_mul_succ_le hcpos).mp hgap
+      have htwice : c * (2 * (L + 1)) ≤ c * T := by
+        calc
+          c * (2 * (L + 1)) = 2 * (c * (L + 1)) := by ring
+          _ ≤ 2 * M := Nat.mul_le_mul_left 2 hprod
+          _ = c * T := hfactor.symm
+      exact Or.inl ⟨hcodd, Nat.le_of_mul_le_mul_left htwice hcpos⟩
+    · rcases hceven with ⟨q, hcq⟩
+      have hqpos : 0 < q := by omega
+      have hcdiv : c / 2 = q := by omega
+      have hgapq : L < M / q := by simpa [hcdiv] using hgap
+      have hprod : q * (L + 1) ≤ M :=
+        (lt_div_iff_mul_succ_le hqpos).mp hgapq
+      have hqT : q * T = M := by
+        have htwice : 2 * (q * T) = 2 * M := by
+          rw [← hfactor, hcq]
+          ring
+        exact Nat.mul_left_cancel (by decide : 0 < 2) htwice
+      have hle : q * (L + 1) ≤ q * T := by
+        simpa [hqT] using hprod
+      exact Or.inr ⟨⟨q, hcq⟩, Nat.le_of_mul_le_mul_left hle hqpos⟩
+  · intro hquot
+    have hprod : (Odd c ∧ c * (L + 1) ≤ M) ∨
+        (Even c ∧ (c / 2) * (L + 1) ≤ M) := by
+      exact parity_product_gap_of_gcd_quotient_ineq hhalf hquot
+    exact (parity_product_gap_iff_parity_reduced_divisor_gap hcpos).mp hprod
+
 /-- Linear form of the normalized gcd-quotient target. It is stronger than
 `parity_product_gap_of_gcd_quotient_ineq`: the nonnegative term
 `2*c*x*y` is discarded from the right-hand side. -/
