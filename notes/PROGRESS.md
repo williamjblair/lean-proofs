@@ -230,6 +230,15 @@
   `Erdos699.i_three_caseI_factor_sq_squeeze_of_four_dvd_from_row_bound`
   removes the explicit coprime-four hypothesis from the row-bound
   factor-square squeeze in this subcase. Full T7 remains open.
+- [R] Proved the `4 ∣ n` full half-row package:
+  `Erdos699.primePowerPartGE_five_half_sub_one_eq_self_of_four_dvd_three_dvd`
+  identifies the large-prime part with all of `n / 2 - 1` when `4 ∣ n`,
+  `3 ∣ n`, and `2 < n`. The wrappers
+  `Erdos699.i_three_caseI_exists_joint_half_sub_one_cube_from_four_dvd_row_bound`
+  and `Erdos699.i_three_caseI_half_sub_one_cube_from_four_dvd_row_bound`
+  upgrade the existing row-bound large-prime-part cube package to the full
+  half-row cube inequality in this subcase. Full T7 remains open outside this
+  `4 ∣ n` branch.
 - [R] Proved the direct coprime-to-4 half-row squeeze:
   `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four`
   replaces the explicit lower-bound input

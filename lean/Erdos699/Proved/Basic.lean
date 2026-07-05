@@ -1455,6 +1455,15 @@ theorem half_sub_one_coprime_four_of_four_dvd {n : ℕ}
   rcases hpd with ⟨a, ha⟩
   omega
 
+theorem primePowerPartGE_five_half_sub_one_eq_self_of_four_dvd_three_dvd {n : ℕ}
+    (h4n : 4 ∣ n) (h3n : 3 ∣ n) (hn : 2 < n) :
+    primePowerPartGE 5 (n / 2 - 1) = n / 2 - 1 := by
+  have h2n : 2 ∣ n := Nat.dvd_trans (by norm_num : 2 ∣ 4) h4n
+  exact primePowerPartGE_eq_self_of_forall_prime_ge
+    (half_sub_one_ne_zero_of_even h2n hn)
+    (half_sub_one_prime_ge_five_of_even_three_dvd_coprime_four h2n h3n hn
+      (half_sub_one_coprime_four_of_four_dvd h4n hn))
+
 theorem primePowerPartGE_five_half_sub_one_coprime_sub_one {n : ℕ}
     (h2n : 2 ∣ n) (hn : 2 < n) :
     (primePowerPartGE 5 (n / 2 - 1)).Coprime (n - 1) :=
@@ -2252,6 +2261,33 @@ theorem i_three_caseI_half_large_part_cube_from_row_bound {n F X j t : ℕ}
     4 * ((n - 1) * primePowerPartGE 5 (n / 2 - 1)) ≤ X * X * X := by
   rcases i_three_caseI_exists_joint_half_large_part_cube_from_row_bound
       hnone hn hj hn_gt hj_pos hj_two h2n h3n hjn with
+    ⟨_g, _hrow1, _hdvd, _hle, hcube⟩
+  exact hcube
+
+theorem i_three_caseI_exists_joint_half_sub_one_cube_from_four_dvd_row_bound
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hjn : 2 * j ≤ n) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        n / 2 - 1 ∣ g * (X - 2 * t) ∧
+          n / 2 - 1 ≤ g * (X - 2 * t) ∧
+            4 * ((n - 1) * (n / 2 - 1)) ≤ X * X * X := by
+  have hlarge :=
+    i_three_caseI_exists_joint_half_large_part_cube_from_row_bound
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n hjn
+  simpa [primePowerPartGE_five_half_sub_one_eq_self_of_four_dvd_three_dvd
+    h4n h3n hn_gt] using hlarge
+
+theorem i_three_caseI_half_sub_one_cube_from_four_dvd_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hjn : 2 * j ≤ n) :
+    4 * ((n - 1) * (n / 2 - 1)) ≤ X * X * X := by
+  rcases i_three_caseI_exists_joint_half_sub_one_cube_from_four_dvd_row_bound
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n h4n hjn with
     ⟨_g, _hrow1, _hdvd, _hle, hcube⟩
   exact hcube
 
