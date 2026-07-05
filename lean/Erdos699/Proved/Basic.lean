@@ -646,6 +646,152 @@ theorem not_exists_kernelBelow_iff_forall_mem_gcd_lt_of_list_exact
   · intro hfail t htmem
     exact ne_of_lt (hfail t htmem)
 
+theorem odd_eq_one_of_dvd_two {c : ℕ} (hcOdd : Odd c) (hc : c ∣ 2) :
+    c = 1 := by
+  rcases (Nat.dvd_prime Nat.prime_two).mp hc with h | h
+  · exact h
+  · subst c
+    contradiction
+
+theorem dvd_two_of_dvd_sub_two_and_dvd_mul_pred {c t : ℕ}
+    (ht : 2 ≤ t) (hgap : c ∣ t - 2) (hprod : c ∣ t * (t - 1)) :
+    c ∣ 2 := by
+  have htmod : t ≡ 2 [MOD c] := by
+    have h0 : t - 2 ≡ 0 [MOD c] := Nat.modEq_zero_iff_dvd.mpr hgap
+    have h2 := Nat.ModEq.add_right 2 h0
+    have ht_eq : t - 2 + 2 = t := by omega
+    simpa [ht_eq] using h2
+  have hpredmod : t - 1 ≡ 1 [MOD c] := by
+    have h := Nat.ModEq.sub_right (n := c) (a := 1) (b := t) (c := 2)
+      (by omega) (by omega) htmod
+    simpa using h
+  have hprodmod : t * (t - 1) ≡ 2 * 1 [MOD c] := Nat.ModEq.mul htmod hpredmod
+  have hprod0 : t * (t - 1) ≡ 0 [MOD c] := Nat.modEq_zero_iff_dvd.mpr hprod
+  have h20 : 2 ≡ 0 [MOD c] := by
+    simpa using hprodmod.symm.trans hprod0
+  exact Nat.modEq_zero_iff_dvd.mp h20
+
+theorem gcd_mul_left_cancel_of_coprime {a b n : ℕ} (h : a.Coprime n) :
+    Nat.gcd (a * b) n = Nat.gcd b n := by
+  apply Nat.dvd_antisymm
+  · apply Nat.dvd_gcd
+    · have hd_left : Nat.gcd (a * b) n ∣ a * b := Nat.gcd_dvd_left (a * b) n
+      have hd_right : Nat.gcd (a * b) n ∣ n := Nat.gcd_dvd_right (a * b) n
+      have hcop : (Nat.gcd (a * b) n).Coprime a :=
+        (Nat.Coprime.of_dvd_right hd_right h).symm
+      exact hcop.dvd_of_dvd_mul_left hd_left
+    · exact Nat.gcd_dvd_right (a * b) n
+  · apply Nat.dvd_gcd
+    · exact dvd_mul_of_dvd_right (Nat.gcd_dvd_left b n) a
+    · exact Nat.gcd_dvd_right b n
+
+theorem gcd_mul_eq_mul_gcd_of_coprime_gcds {a b n : ℕ}
+    (h : (Nat.gcd a n).Coprime (Nat.gcd b n)) :
+    Nat.gcd (a * b) n = Nat.gcd a n * Nat.gcd b n := by
+  let D := Nat.gcd a n
+  let E := Nat.gcd b n
+  apply Nat.dvd_antisymm
+  · let q := Nat.gcd (a * b) n
+    have hq_ab : q ∣ a * b := Nat.gcd_dvd_left (a * b) n
+    have hq_n : q ∣ n := Nat.gcd_dvd_right (a * b) n
+    have hDq : Nat.gcd q a = D := by
+      apply Nat.dvd_antisymm
+      · apply Nat.dvd_gcd
+        · exact Nat.gcd_dvd_right q a
+        · exact Nat.dvd_trans (Nat.gcd_dvd_left q a) hq_n
+      · apply Nat.dvd_gcd
+        · exact Nat.dvd_gcd
+            (dvd_mul_of_dvd_left (Nat.gcd_dvd_left a n) b)
+            (Nat.gcd_dvd_right a n)
+        · exact Nat.gcd_dvd_left a n
+    have hEq : Nat.gcd q b = E := by
+      apply Nat.dvd_antisymm
+      · apply Nat.dvd_gcd
+        · exact Nat.gcd_dvd_right q b
+        · exact Nat.dvd_trans (Nat.gcd_dvd_left q b) hq_n
+      · apply Nat.dvd_gcd
+        · exact Nat.dvd_gcd
+            (dvd_mul_of_dvd_right (Nat.gcd_dvd_left b n) a)
+            (Nat.gcd_dvd_right b n)
+        · exact Nat.gcd_dvd_left b n
+    have hq_de : q ∣ D * E := by
+      have htmp :=
+        (Nat.dvd_gcd_mul_gcd_iff_dvd_mul (k := q) (n := a) (m := b)).mpr hq_ab
+      simpa [D, E, hDq, hEq] using htmp
+    exact hq_de
+  · apply Nat.dvd_gcd
+    · exact h.mul_dvd_of_dvd_of_dvd
+        (dvd_mul_of_dvd_left (Nat.gcd_dvd_left a n) b)
+        (dvd_mul_of_dvd_right (Nat.gcd_dvd_left b n) a)
+    · exact h.mul_dvd_of_dvd_of_dvd (Nat.gcd_dvd_right a n) (Nat.gcd_dvd_right b n)
+
+theorem rowTwo_gcd_eq_rowOneQuotient_gap_gcd_mul_of_odd
+    {N1 N2 t : ℕ}
+    (_hN1 : 0 < N1)
+    (_hN2 : 0 < N2)
+    (hcop : N1.Coprime N2)
+    (hodd : Odd N2)
+    (ht : 2 ≤ t)
+    (hrow1 : N1 ∣ t * (t - 1)) :
+    Nat.gcd (t * (t - 1) * (t - 2)) N2 =
+      Nat.gcd ((t * (t - 1)) / N1) N2 * Nat.gcd (t - 2) N2 := by
+  let g := (t * (t - 1)) / N1
+  have hprod_eq : N1 * g = t * (t - 1) := by
+    simpa [g] using (Nat.mul_div_cancel' hrow1)
+  have hDEcop : (Nat.gcd g N2).Coprime (Nat.gcd (t - 2) N2) := by
+    rw [Nat.coprime_iff_gcd_eq_one]
+    let c := Nat.gcd (Nat.gcd g N2) (Nat.gcd (t - 2) N2)
+    have hcD : c ∣ Nat.gcd g N2 := Nat.gcd_dvd_left _ _
+    have hcE : c ∣ Nat.gcd (t - 2) N2 := Nat.gcd_dvd_right _ _
+    have hcg : c ∣ g := Nat.dvd_trans hcD (Nat.gcd_dvd_left g N2)
+    have hcgap : c ∣ t - 2 := Nat.dvd_trans hcE (Nat.gcd_dvd_left (t - 2) N2)
+    have hcN2 : c ∣ N2 := Nat.dvd_trans hcD (Nat.gcd_dvd_right g N2)
+    have hcprod : c ∣ t * (t - 1) := by
+      rw [← hprod_eq]
+      exact dvd_mul_of_dvd_right hcg N1
+    exact odd_eq_one_of_dvd_two
+      (hodd.of_dvd_nat hcN2)
+      (dvd_two_of_dvd_sub_two_and_dvd_mul_pred ht hcgap hcprod)
+  calc
+    Nat.gcd (t * (t - 1) * (t - 2)) N2
+        = Nat.gcd ((N1 * g) * (t - 2)) N2 := by rw [hprod_eq]
+    _ = Nat.gcd (N1 * (g * (t - 2))) N2 := by rw [mul_assoc]
+    _ = Nat.gcd (g * (t - 2)) N2 := gcd_mul_left_cancel_of_coprime hcop
+    _ = Nat.gcd g N2 * Nat.gcd (t - 2) N2 :=
+        gcd_mul_eq_mul_gcd_of_coprime_gcds hDEcop
+    _ = Nat.gcd ((t * (t - 1)) / N1) N2 * Nat.gcd (t - 2) N2 := by rfl
+
+theorem rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd
+    {N1 N2 t : ℕ}
+    (hN1 : 0 < N1)
+    (hN2 : 0 < N2)
+    (hcop : N1.Coprime N2)
+    (hodd : Odd N2)
+    (ht : 2 ≤ t)
+    (hrow1 : N1 ∣ t * (t - 1))
+    (hH :
+      Nat.gcd ((t * (t - 1)) / N1) N2 *
+        Nat.gcd (t - 2) N2 < N2) :
+    Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2 := by
+  rw [rowTwo_gcd_eq_rowOneQuotient_gap_gcd_mul_of_odd
+    hN1 hN2 hcop hodd ht hrow1]
+  exact hH
+
+theorem rowOneDivisorSplit_rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd
+    {N1 N2 zeroPart onePart t : ℕ}
+    (hN1 : 0 < N1)
+    (hN2 : 0 < N2)
+    (hcop : N1.Coprime N2)
+    (hodd : Odd N2)
+    (ht : 2 ≤ t)
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (hH :
+      Nat.gcd ((t * (t - 1)) / N1) N2 *
+        Nat.gcd (t - 2) N2 < N2) :
+    Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2 :=
+  rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd
+    hN1 hN2 hcop hodd ht (rowOneDivisorSplit_dvd_mul_sub_one hsplit) hH
+
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
     ¬ consecutiveDivisorKernel N1 N2 t := by

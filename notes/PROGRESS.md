@@ -437,6 +437,17 @@
   replaces inequality by the stronger finite check `gcd < N2`. This is an
   exact finite-list certificate contract, still conditional on the list cover
   and soundness hypotheses.
+- [R] Proved the odd quotient-gap row-two factorization:
+  `Erdos699.rowTwo_gcd_eq_rowOneQuotient_gap_gcd_mul_of_odd` shows that if
+  `N1 ∣ t * (t - 1)`, `N1.Coprime N2`, `Odd N2`, and `2 ≤ t`, then
+  `gcd (t * (t - 1) * (t - 2)) N2` factors as
+  `gcd ((t * (t - 1)) / N1) N2 * gcd (t - 2) N2`. The strict wrapper
+  `Erdos699.rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd` and the
+  split-facing wrapper
+  `Erdos699.rowOneDivisorSplit_rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd`
+  turn the quotient-gap product inequality into the existing C2 row-two gcd
+  obstruction. This is a conditional obstruction interface, not a proof that
+  the kernel is empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
