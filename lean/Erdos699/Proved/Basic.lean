@@ -175,6 +175,36 @@ theorem rowOneDivisorSplit_dvd_mul_sub_one {N1 zeroPart onePart t : ℕ}
   rw [← hprod]
   exact Nat.mul_dvd_mul hzero hone
 
+theorem rowOneDivisorSplit_modEq_zero {N1 zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
+    t ≡ 0 [MOD zeroPart] := by
+  exact Nat.modEq_zero_iff_dvd.mpr hsplit.2.1
+
+theorem rowOneDivisorSplit_modEq_one_of_one_le {N1 zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) (ht : 1 ≤ t) :
+    t ≡ 1 [MOD onePart] := by
+  exact ((Nat.modEq_iff_dvd' ht).mpr hsplit.2.2).symm
+
+theorem rowOneDivisorSplit_of_modEq {N1 zeroPart onePart t : ℕ}
+    (hprod : zeroPart * onePart = N1) (hzero : t ≡ 0 [MOD zeroPart])
+    (hone : t ≡ 1 [MOD onePart]) (ht : 1 ≤ t) :
+    rowOneDivisorSplit N1 zeroPart onePart t := by
+  exact
+    ⟨hprod, Nat.modEq_zero_iff_dvd.mp hzero,
+      (Nat.modEq_iff_dvd' ht).mp hone.symm⟩
+
+theorem rowOneDivisorSplit_iff_modEq_of_one_le {N1 zeroPart onePart t : ℕ}
+    (hprod : zeroPart * onePart = N1) (ht : 1 ≤ t) :
+    rowOneDivisorSplit N1 zeroPart onePart t ↔
+      t ≡ 0 [MOD zeroPart] ∧ t ≡ 1 [MOD onePart] := by
+  constructor
+  · intro hsplit
+    exact
+      ⟨rowOneDivisorSplit_modEq_zero hsplit,
+        rowOneDivisorSplit_modEq_one_of_one_le hsplit ht⟩
+  · intro hmods
+    exact rowOneDivisorSplit_of_modEq hprod hmods.1 hmods.2 ht
+
 theorem rowOneDivisorSplit_kernel_iff_row_two {N1 N2 zeroPart onePart t : ℕ}
     (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
     consecutiveDivisorKernel N1 N2 t ↔ N2 ∣ t * (t - 1) * (t - 2) := by

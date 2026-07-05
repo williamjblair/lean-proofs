@@ -310,6 +310,15 @@
   formalize the exact row-two gcd obstruction used by the C2 split
   diagnostics. This is a conditional kernel tool, not a proof that the kernel
   is empty.
+- [R] Proved the C2 row-one split congruence bridge:
+  `Erdos699.rowOneDivisorSplit_modEq_zero`,
+  `Erdos699.rowOneDivisorSplit_modEq_one_of_one_le`,
+  `Erdos699.rowOneDivisorSplit_of_modEq`, and
+  `Erdos699.rowOneDivisorSplit_iff_modEq_of_one_le` identify the formal split
+  with the CRT congruences `t ≡ 0 [MOD zeroPart]` and
+  `t ≡ 1 [MOD onePart]` under the explicit hypothesis `1 ≤ t`. This is the
+  Lean bridge from the C2 `{0,1}` residue enumeration to the divisor-split
+  predicate; it is not a proof that the kernel is empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
