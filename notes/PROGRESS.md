@@ -48,4 +48,9 @@
   `Erdos699.i_three_window_two_product_forcing`. These turn the existing
   `i = 3` residue bounds into divisibility by `j * (j - 1)` and
   `j * (j - 1) * (j - 2)`. Full T4/T5 remain open.
+- [R] Defined `Erdos699.primeRadicalGE` and proved
+  `Erdos699.i_three_window_one_primeRadicalGE_dvd` and
+  `Erdos699.i_three_window_two_primeRadicalGE_dvd`, packaging the `i = 3`
+  per-prime window forcing as radical divisibility for all primes `p ≥ 5`
+  dividing `n - 1` and `n - 2`. Full T4/T5 remain open.
 - [OPEN] T4 and all later rungs remain unclaimed in this branch.

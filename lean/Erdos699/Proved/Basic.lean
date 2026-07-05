@@ -334,6 +334,72 @@ theorem i_three_window_two_product_forcing {n j p : ℕ}
   dvd_mul_sub_one_sub_two_of_mod_le_two
     (i_three_window_two_digit_forcing hnone hp hp5 hn hpdvd)
 
+/-- Product of the prime divisors of `m` that are at least `lo`, without multiplicity. -/
+def primeRadicalGE (lo m : ℕ) : ℕ :=
+  ∏ p ∈ m.primeFactors.filter (fun p => lo ≤ p), p
+
+theorem prime_coprime_finset_prod_of_not_mem {p : ℕ} (hp : p.Prime) (s : Finset ℕ)
+    (hs : ∀ q ∈ s, q.Prime) (hnot : p ∉ s) :
+    p.Coprime (∏ q ∈ s, q) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp
+  | insert a s ha ih =>
+      rw [Finset.prod_insert ha]
+      have hp_ne_a : p ≠ a := by
+        intro hpa
+        apply hnot
+        rw [hpa]
+        exact Finset.mem_insert_self a s
+      have hpa_coprime : p.Coprime a :=
+        (Nat.coprime_primes hp (hs a (Finset.mem_insert_self a s))).mpr hp_ne_a
+      have hp_not_s : p ∉ s := by
+        intro hps
+        exact hnot (Finset.mem_insert_of_mem hps)
+      have hprod : p.Coprime (∏ q ∈ s, q) :=
+        ih (fun q hq => hs q (Finset.mem_insert_of_mem hq)) hp_not_s
+      exact hpa_coprime.mul_right hprod
+
+theorem finset_prod_primes_dvd_of_forall_dvd {s : Finset ℕ} {x : ℕ}
+    (hprime : ∀ p ∈ s, p.Prime) (hdiv : ∀ p ∈ s, p ∣ x) :
+    (∏ p ∈ s, p) ∣ x := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp
+  | insert a s ha ih =>
+      rw [Finset.prod_insert ha]
+      have hacoprime : a.Coprime (∏ p ∈ s, p) :=
+        prime_coprime_finset_prod_of_not_mem (hprime a (Finset.mem_insert_self a s)) s
+          (fun p hp => hprime p (Finset.mem_insert_of_mem hp)) ha
+      exact Nat.Coprime.mul_dvd_of_dvd_of_dvd hacoprime
+        (hdiv a (Finset.mem_insert_self a s))
+        (ih (fun p hp => hprime p (Finset.mem_insert_of_mem hp))
+          (fun p hp => hdiv p (Finset.mem_insert_of_mem hp)))
+
+theorem primeRadicalGE_dvd_of_forall_prime_dvd {lo m x : ℕ}
+    (h : ∀ p : ℕ, p.Prime → lo ≤ p → p ∣ m → p ∣ x) :
+    primeRadicalGE lo m ∣ x := by
+  classical
+  unfold primeRadicalGE
+  apply finset_prod_primes_dvd_of_forall_dvd
+  · intro p hp_mem
+    exact (Nat.mem_primeFactors.mp (Finset.mem_filter.mp hp_mem).1).1
+  · intro p hp_mem
+    rcases Finset.mem_filter.mp hp_mem with ⟨hpm, hlo⟩
+    exact h p (Nat.mem_primeFactors.mp hpm).1 hlo (Nat.mem_primeFactors.mp hpm).2.1
+
+theorem i_three_window_one_primeRadicalGE_dvd {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn : 1 < n) :
+    primeRadicalGE 5 (n - 1) ∣ j * (j - 1) :=
+  primeRadicalGE_dvd_of_forall_prime_dvd fun p hp hp5 hpdvd =>
+    i_three_window_one_product_forcing (p := p) hnone hp hp5 hn hpdvd
+
+theorem i_three_window_two_primeRadicalGE_dvd {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q) (hn : 2 < n) :
+    primeRadicalGE 5 (n - 2) ∣ j * (j - 1) * (j - 2) :=
+  primeRadicalGE_dvd_of_forall_prime_dvd fun p hp hp5 hpdvd =>
+    i_three_window_two_product_forcing (p := p) hnone hp hp5 hn hpdvd
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :
