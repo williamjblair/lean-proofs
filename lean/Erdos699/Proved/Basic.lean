@@ -3743,6 +3743,31 @@ def squeezedNormalizedRowOneCandidate (F X t g : ℕ) : Prop :=
                   2 * (F * F) ≤ X ∧
                     t * (X - t) = g * (F * X - 1)
 
+/-- Normalized row-`n` digit-power constraint: every odd prime-power part of
+`X` with prime at least the row index `3` must also divide `u`. -/
+def rowNDigitPowerConstraint (X u : ℕ) : Prop :=
+  ∀ ⦃p e : ℕ⦄, Nat.Prime p → 3 ≤ p → p ^ e ∣ X → p ^ e ∣ u
+
+/-- Exact guarded variant of `rowNDigitPowerConstraint`: require the
+prime-power transfer only when row `3` is not digit-dominated by `F * X` at
+that prime. The argument order in `dominated` is `k n p`. -/
+def rowNDigitPowerConstraintExact (F X u : ℕ) : Prop :=
+  ∀ ⦃p e : ℕ⦄,
+    Nat.Prime p → 3 ≤ p → ¬ dominated 3 (F * X) p → p ^ e ∣ X → p ^ e ∣ u
+
+theorem rowNDigitPowerConstraintExact_of_rowNDigitPowerConstraint {F X u : ℕ}
+    (h : rowNDigitPowerConstraint X u) :
+    rowNDigitPowerConstraintExact F X u := by
+  intro p e hp hp3 _hnot hpow
+  exact h hp hp3 hpow
+
+theorem not_rowNDigitPowerConstraint_of_prime_power_counterexample
+    {X u p e : ℕ} (hp : Nat.Prime p) (hp3 : 3 ≤ p)
+    (hX : p ^ e ∣ X) (hu : ¬ p ^ e ∣ u) :
+    ¬ rowNDigitPowerConstraint X u := by
+  intro h
+  exact hu (h hp hp3 hX)
+
 theorem squeezedNormalizedCaseIKernel_zero_t_false {F X g : ℕ} :
     ¬ squeezedNormalizedCaseIKernel F X 0 g := by
   intro h
@@ -3774,6 +3799,13 @@ theorem exists_squeezedNormalizedCaseIKernel_counterexample_positive_t :
     ∃ F X t g : ℕ, squeezedNormalizedCaseIKernel F X t g :=
   ⟨3, 432184014644, 186954166997, 35360510289,
     squeezedNormalizedCaseIKernel_counterexample_positive_t⟩
+
+theorem squeezedNormalizedCounterexample_not_rowNDigitPowerConstraint :
+    ¬ rowNDigitPowerConstraint 432184014644 186954166997 := by
+  exact
+    not_rowNDigitPowerConstraint_of_prime_power_counterexample
+      (X := 432184014644) (u := 186954166997) (p := 179) (e := 1)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num)
 
 theorem squeezedNormalizedCounterexample_commonPrimeDivisor_five :
     commonPrimeDivisor 1296552043932 3 560862500991 5 := by

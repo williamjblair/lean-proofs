@@ -70,6 +70,20 @@
   `p = 11` Lean certificate for the positive squeezed-normalized survivor,
   complementing the existing `p = 5` certificate. This is a proof-shaped
   bridge for finite digit witnesses, not a global normalized-kernel theorem.
+- [R] Formalized the normalized row-`n` digit-power hypothesis suggested by
+  the corrected C1 lane:
+  `Erdos699.rowNDigitPowerConstraint X u` states that every prime power
+  `p ^ e` with `Nat.Prime p` and `3 ≤ p` dividing `X` must divide `u`, and
+  `Erdos699.rowNDigitPowerConstraintExact F X u` adds the exact guard
+  `¬ dominated 3 (F * X) p` with the repository's argument order for
+  `dominated`. The theorem
+  `Erdos699.rowNDigitPowerConstraintExact_of_rowNDigitPowerConstraint` records
+  the clean-to-exact implication, and
+  `Erdos699.squeezedNormalizedCounterexample_not_rowNDigitPowerConstraint`
+  proves the known positive squeezed-normalized survivor is excluded because
+  `179 ^ 1 ∣ 432184014644` but `179 ^ 1 ∤ 186954166997`. This banks the
+  corrected digit hypothesis and the survivor exclusion; it does not prove
+  the remaining power-two quotient lemma.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.
