@@ -130,5 +130,11 @@
   `Erdos699.i_three_caseI_exists_joint_large_part_factor_le` show that on the
   explicit branch `0 < X - 2 * t`, the row-two large-prime part is at most
   `g * (X - 2 * t)`. The central branch `X = 2 * t` and full T7 remain open.
+- [R] Proved the T7 non-central gap product bound:
+  `Erdos699.i_three_caseI_joint_large_part_gap_bound` and
+  `Erdos699.i_three_caseI_exists_joint_large_part_gap_bound` combine the
+  row-one parabola bound with the large-part size bound to get
+  `4 * ((n - 1) * primePowerPartGE 5 (n - 2)) ≤ X * X * (X - 2 * t)` on the
+  explicit branch `0 < X - 2 * t`. Full T7 remains open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
