@@ -615,6 +615,25 @@
   reports `15` row-one candidates, `6` row-two survivors, and
   `all_strict_lt_n2 = False`. This is exact finite evidence for the
   quotient-gap certificate lane, not a proof that the kernel is empty.
+- [R]/[E] Formalized the lower-bounded kernel target needed by compute
+  certificates that use `min_t`. The old predicate
+  `Erdos699.consecutiveDivisorKernelBelow` intentionally has no lower bound;
+  the new Lean witnesses `Erdos699.consecutiveDivisorKernelBelow_zero` and
+  `Erdos699.consecutiveDivisorKernelBelow_one` show why it cannot consume
+  `min_t = 4` certificates directly. The new predicate
+  `Erdos699.consecutiveDivisorKernelInRange` adds `minT ≤ t`, and
+  `Erdos699.consecutiveDivisorKernelInRange_iff_bounds_gcdDiv_split_and_row_two_gcd_eq`
+  gives its row-one split/gcd characterization. The consumer
+  `Erdos699.not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd`
+  turns an exact lower-bounded row-one list cover plus quotient-gap failures
+  into lower-bounded kernel emptiness. As a first concrete certificate,
+  `Erdos699.not_exists_kernelInRange_95_47_4_96` proves in Lean that there is
+  no `4 ≤ t`, `2 * t ≤ 96` kernel point for `N1 = 95`, `N2 = 47`, using the
+  finite row-one list `[20]`. The matching exact compute command
+  `python3 -m compute.kernel --n1 95 --n2 47 --bound 96 --min-t 4 --include-row-one-candidates --include-quotient-gap-summary`
+  reports `row_one_candidates = [20]`, `survivor_count = 0`, and
+  `all_strict_lt_n2 = True`. This is a small Lean-certified finite
+  certificate bridge, not a proof of the general kernel.
 - [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
   product inequality is false under C2 shape hypotheses alone:
   `n = 54,734,052`, `N1 = n - 1`, `N2 = n / 2 - 1`, and

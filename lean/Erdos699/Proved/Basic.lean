@@ -162,6 +162,19 @@ def consecutiveDivisorKernel (N1 N2 t : ℕ) : Prop :=
 def consecutiveDivisorKernelBelow (N1 N2 bound t : ℕ) : Prop :=
   2 * t ≤ bound ∧ consecutiveDivisorKernel N1 N2 t
 
+theorem consecutiveDivisorKernelBelow_zero (N1 N2 bound : ℕ) :
+    consecutiveDivisorKernelBelow N1 N2 bound 0 := by
+  simp [consecutiveDivisorKernelBelow, consecutiveDivisorKernel]
+
+theorem consecutiveDivisorKernelBelow_one (N1 N2 bound : ℕ) (hbound : 2 ≤ bound) :
+    consecutiveDivisorKernelBelow N1 N2 bound 1 := by
+  simp [consecutiveDivisorKernelBelow, consecutiveDivisorKernel, hbound]
+
+/-- The same kernel with both the problem's lower row bound and half-row bound.
+This is the formal target for compute certificates that use `min_t`. -/
+def consecutiveDivisorKernelInRange (N1 N2 minT bound t : ℕ) : Prop :=
+  minT ≤ t ∧ 2 * t ≤ bound ∧ consecutiveDivisorKernel N1 N2 t
+
 /-- A row-one divisor split: one factor of `N1` is assigned to `t`, and the
 other to `t - 1`. This is the formal version of the `{0,1}` choices used by
 the CRT kernel scanner. -/
@@ -468,6 +481,24 @@ theorem consecutiveDivisorKernelBelow_iff_bound_gcdDiv_split_and_row_two_gcd_eq
     exact
       ⟨h.1,
         (rowOneDivisorSplit_consecutiveDivisorKernel_iff_row_two_gcd_eq h.2.1).mpr h.2.2⟩
+
+theorem consecutiveDivisorKernelInRange_iff_bounds_gcdDiv_split_and_row_two_gcd_eq
+    {N1 N2 minT bound t : ℕ} (hN1 : 0 < N1) :
+    consecutiveDivisorKernelInRange N1 N2 minT bound t ↔
+      minT ≤ t ∧ 2 * t ≤ bound ∧
+        rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t ∧
+          Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 := by
+  constructor
+  · intro hkernel
+    exact
+      ⟨hkernel.1, hkernel.2.1,
+        (consecutiveDivisorKernel_iff_gcdDiv_split_and_row_two_gcd_eq
+          hN1).mp hkernel.2.2⟩
+  · intro h
+    exact
+      ⟨h.1, h.2.1,
+        (consecutiveDivisorKernel_iff_gcdDiv_split_and_row_two_gcd_eq
+          hN1).mpr h.2.2⟩
 
 theorem exists_consecutiveDivisorKernelBelow_iff_exists_bound_gcdDiv_split_and_row_two_gcd_eq
     {N1 N2 bound : ℕ} (hN1 : 0 < N1) :
@@ -846,6 +877,58 @@ theorem not_exists_kernelBelow_iff_forall_mem_quotient_gap_gcd_mul_lt_of_list_ex
     exact
       rowOneDivisorSplit_rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd
         hN1 hN2 hcop hodd (hge2 t htmem) hsplit (hfail t htmem)
+
+theorem not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+    {N1 N2 minT bound : ℕ} {candidates : List ℕ}
+    (hN1 : 0 < N1) (hN2 : 0 < N2) (hcop : N1.Coprime N2) (hodd : Odd N2)
+    (hcover :
+      ∀ t : ℕ,
+        minT ≤ t →
+          2 * t ≤ bound →
+            rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t →
+              t ∈ candidates)
+    (hge2 : ∀ t : ℕ, t ∈ candidates → 2 ≤ t)
+    (hfail :
+      ∀ t : ℕ,
+        t ∈ candidates →
+          Nat.gcd ((t * (t - 1)) / N1) N2 * Nat.gcd (t - 2) N2 < N2) :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange N1 N2 minT bound t := by
+  rintro ⟨t, hkernel⟩
+  rcases
+      (consecutiveDivisorKernelInRange_iff_bounds_gcdDiv_split_and_row_two_gcd_eq
+        hN1).mp hkernel with
+    ⟨hmin, hbound, hsplit, hgcd_eq⟩
+  have hmem : t ∈ candidates := hcover t hmin hbound hsplit
+  have hgcd_lt : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2 :=
+    rowOneDivisorSplit_rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd
+      hN1 hN2 hcop hodd (hge2 t hmem) hsplit (hfail t hmem)
+  omega
+
+theorem not_exists_kernelInRange_95_47_4_96 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 95 47 4 96 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 95) (N2 := 47) (minT := 4) (bound := 96) (candidates := [20])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨23, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_le : t ≤ 48 := by omega
+        interval_cases t <;> simp [rowOneDivisorSplit, Nat.gcd] at hsplit ⊢)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
 
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
