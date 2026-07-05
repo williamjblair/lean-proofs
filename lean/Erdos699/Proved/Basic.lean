@@ -5964,6 +5964,47 @@ theorem powerTwoSplit_gcd_dvd_iff_reduced_divisor
   dsimp
   exact dvd_mul_iff_div_gcd_dvd (powerTwoSplit_half_row_pos hA4 hBge hApos)
 
+/-- Explicit row-two-survival form of
+`powerTwoSplit_gcd_dvd_iff_reduced_divisor`, naming the reduced divisor
+`d = gcd c M`. -/
+theorem powerTwoSplit_row_two_survival_iff_reduced_divisor
+    {A B l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hApos : 0 < A) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    let d := Nat.gcd c M
+    M ∣ c * (l * m) ↔ M / d ∣ l * m := by
+  dsimp
+  exact dvd_mul_iff_div_gcd_dvd (powerTwoSplit_half_row_pos hA4 hBge hApos)
+
+/-- Negated form of `dvd_mul_iff_div_gcd_dvd`: failure of divisibility by
+`M` after multiplying by `c` is exactly failure of divisibility by the reduced
+divisor `M / gcd c M`. -/
+theorem not_dvd_mul_iff_not_div_gcd_dvd {M c L : ℕ} (hMpos : 0 < M) :
+    (¬ M ∣ c * L) ↔ ¬ M / Nat.gcd c M ∣ L := by
+  constructor
+  · intro h hdvd
+    exact h ((dvd_mul_iff_div_gcd_dvd hMpos).mpr hdvd)
+  · intro h hdvd
+    exact h ((dvd_mul_iff_div_gcd_dvd hMpos).mp hdvd)
+
+/-- Explicit obstruction form of the row-two reduced-divisor equivalence:
+the surviving target is `M / d ∤ l*m`, not an upper bound on `d`. -/
+theorem powerTwoSplit_row_two_obstruction_iff_reduced_divisor
+    {A B l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hApos : 0 < A) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    let d := Nat.gcd c M
+    (¬ M ∣ c * (l * m)) ↔ ¬ M / d ∣ l * m := by
+  dsimp
+  exact not_dvd_mul_iff_not_div_gcd_dvd
+    (powerTwoSplit_half_row_pos hA4 hBge hApos)
+
 /-- A size certificate for failure of row-two divisibility after reducing by
 the gcd part of the modulus. If the reduced divisor is strictly larger than
 the positive right factor, then `M` cannot divide `c * L`. -/

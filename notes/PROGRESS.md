@@ -231,6 +231,14 @@
   is exactly the reduced-divisor divisibility
   `(B * (A / 2) - 1) / Nat.gcd (Nat.gcd alpha beta) (B * (A / 2) - 1) ∣
   l * m`.
+- [R] Added explicit survival and obstruction wrappers for the corrected
+  reduced-divisor target. `Erdos699.powerTwoSplit_row_two_survival_iff_reduced_divisor`
+  names `d = Nat.gcd c M` and proves row-two survival is equivalent to
+  `M / d ∣ l * m`; `Erdos699.not_dvd_mul_iff_not_div_gcd_dvd` and
+  `Erdos699.powerTwoSplit_row_two_obstruction_iff_reduced_divisor` prove the
+  negated form `M ∤ c * (l * m) ↔ M / d ∤ l * m`. This is an exact
+  restatement of the remaining obstruction, not a proof that the obstruction
+  always holds.
 - [R] Closed the alpha-to-gcd half-row bridge and the conditional Task A
   consumer. The generic theorem
   `Erdos699.gcd_alpha_half_row_eq_gcd_gcd_of_identities` proves from
