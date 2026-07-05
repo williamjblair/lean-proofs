@@ -118,6 +118,36 @@ theorem lucas_nonzero_mod_prime_iff_dominated {n k p : ℕ} (hp : p.Prime) :
       simpa [hlucas] using hzero
     exact hprod_not_dvd (Nat.dvd_iff_mod_eq_zero.mpr hprod_zero)
 
+/-- A prime `p` that is large enough for row `i` and divides both binomial coefficients. -/
+def commonPrimeDivisor (n i j p : ℕ) : Prop :=
+  p.Prime ∧ i ≤ p ∧ p ∣ Nat.choose n i ∧ p ∣ Nat.choose n j
+
+theorem t1_i_eq_one {n j : ℕ} (hj : 2 ≤ j) (hjn : 2 * j ≤ n) :
+    ∃ p : ℕ, commonPrimeDivisor n 1 j p := by
+  by_contra hnone
+  rw [not_exists] at hnone
+  have hj_pos : 0 < j := Nat.lt_of_lt_of_le (by decide : 0 < 2) hj
+  have hn_pos : 0 < n := (Nat.mul_pos (by decide : 0 < 2) hj_pos).trans_le hjn
+  have hcop : n.Coprime (Nat.choose n j) := by
+    apply Nat.coprime_of_dvd
+    intro p hp hpn hpc
+    have hp_one : 1 ≤ p := hp.one_le
+    have hp_choose_one : p ∣ Nat.choose n 1 := by
+      simpa [Nat.choose_one_right] using hpn
+    exact hnone p ⟨hp, hp_one, hp_choose_one, hpc⟩
+  have hidentity :
+      n * Nat.choose (n - 1) (j - 1) = Nat.choose n j * j := by
+    have h := Nat.add_one_mul_choose_eq (n - 1) (j - 1)
+    have hn_sub : n - 1 + 1 = n := Nat.sub_add_cancel hn_pos
+    have hj_sub : j - 1 + 1 = j := Nat.sub_add_cancel hj_pos
+    simpa [hn_sub, hj_sub] using h
+  have hdiv_product : n ∣ j * Nat.choose n j := by
+    rw [mul_comm j (Nat.choose n j), ← hidentity]
+    exact dvd_mul_right n _
+  have hdiv_j : n ∣ j := (hcop.dvd_mul_right).mp hdiv_product
+  have hn_le_j : n ≤ j := Nat.le_of_dvd hj_pos hdiv_j
+  omega
+
 /-- A prime `p` is relevant to row `i` exactly when `p ≥ i`. -/
 def relevantPrime (i p : ℕ) : Prop :=
   p.Prime ∧ i ≤ p
