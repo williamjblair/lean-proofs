@@ -118,9 +118,54 @@ theorem lucas_nonzero_mod_prime_iff_dominated {n k p : ℕ} (hp : p.Prime) :
       simpa [hlucas] using hzero
     exact hprod_not_dvd (Nat.dvd_iff_mod_eq_zero.mpr hprod_zero)
 
+theorem prime_dvd_choose_of_not_dominated {n k p : ℕ} (hp : p.Prime)
+    (hnd : ¬ dominated k n p) :
+    p ∣ Nat.choose n k := by
+  by_contra hnot_dvd
+  have hnonzero : Nat.choose n k % p ≠ 0 := by
+    intro hzero
+    exact hnot_dvd (Nat.dvd_iff_mod_eq_zero.mpr hzero)
+  exact hnd ((lucas_nonzero_mod_prime_iff_dominated hp).mp hnonzero)
+
+theorem not_dominated_of_units_digit_lt {n k p : ℕ} (hp : p.Prime)
+    (hpn : p ≤ n) (hn2p : n < 2 * p) (hlow : n - p < k) (hhigh : k < p) :
+    ¬ dominated k n p := by
+  intro hdom
+  have hdigits := (dominated_iff_forall_digits hp.two_le).mp hdom 0
+  have hn_mod : n % p = n - p := by
+    have hsub_lt : n - p < p := by
+      rw [Nat.sub_lt_iff_lt_add hpn]
+      simpa [two_mul, Nat.add_comm] using hn2p
+    rw [Nat.mod_eq_sub_mod hpn]
+    exact Nat.mod_eq_of_lt hsub_lt
+  have hk_mod : k % p = k := Nat.mod_eq_of_lt hhigh
+  have hle : k ≤ n - p := by
+    simpa [digit, hn_mod, hk_mod] using hdigits
+  omega
+
+theorem prime_dvd_choose_of_units_digit_lt {n k p : ℕ} (hp : p.Prime)
+    (hpn : p ≤ n) (hn2p : n < 2 * p) (hlow : n - p < k) (hhigh : k < p) :
+    p ∣ Nat.choose n k :=
+  prime_dvd_choose_of_not_dominated hp
+    (not_dominated_of_units_digit_lt hp hpn hn2p hlow hhigh)
+
 /-- A prime `p` that is large enough for row `i` and divides both binomial coefficients. -/
 def commonPrimeDivisor (n i j p : ℕ) : Prop :=
   p.Prime ∧ i ≤ p ∧ p ∣ Nat.choose n i ∧ p ∣ Nat.choose n j
+
+theorem commonPrimeDivisor_of_prime_in_top_interval {n i j p : ℕ}
+    (hp : p.Prime) (hij : i < j) (hjn : 2 * j ≤ n) (hleft : n - i < p)
+    (hright : p ≤ n) :
+    commonPrimeDivisor n i j p := by
+  have hi_lt_p : i < p := by omega
+  have hj_lt_p : j < p := by omega
+  have hn_lt_2p : n < 2 * p := by omega
+  have hlow_i : n - p < i := by omega
+  have hlow_j : n - p < j := by omega
+  exact
+    ⟨hp, hi_lt_p.le,
+      prime_dvd_choose_of_units_digit_lt hp hright hn_lt_2p hlow_i hi_lt_p,
+      prime_dvd_choose_of_units_digit_lt hp hright hn_lt_2p hlow_j hj_lt_p⟩
 
 theorem t1_i_eq_one {n j : ℕ} (hj : 2 ≤ j) (hjn : 2 * j ≤ n) :
     ∃ p : ℕ, commonPrimeDivisor n 1 j p := by

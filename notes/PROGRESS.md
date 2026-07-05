@@ -15,4 +15,9 @@
   sorry-free Lucas bridge for the decidable digit-domination predicate.
 - [R] Proved `Erdos699.t1_i_eq_one`: for `2 ≤ j` and `2 * j ≤ n`, there is
   a prime common divisor of `C(n,1)` and `C(n,j)`.
-- [OPEN] T2, T3, and all later rungs remain unclaimed in this branch.
+- [R] Proved the top-range lemma
+  `Erdos699.commonPrimeDivisor_of_prime_in_top_interval`: if `p` is prime,
+  `n - i < p ≤ n`, `i < j`, and `2 * j ≤ n`, then `p` is a relevant common
+  prime divisor of `C(n,i)` and `C(n,j)`.
+- [OPEN] T2, full T3 confinement beyond the top-range lemma, and all later
+  rungs remain unclaimed in this branch.
