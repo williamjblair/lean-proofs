@@ -10,6 +10,8 @@ namespace Erdos699
 #check rowOneDivisorSplit_modEq_one_of_one_le
 #check rowOneDivisorSplit_of_modEq
 #check rowOneDivisorSplit_iff_modEq_of_one_le
+#check rowOneDivisorSplit_modEq_chineseRemainder_of_coprime
+#check rowOneDivisorSplit_modEq_unique_of_coprime
 #check rowOneDivisorSplit_kernel_iff_row_two
 #check not_consecutiveDivisorKernel_of_row_two_gcd_lt
 #check rowOneDivisorSplit_not_consecutiveDivisorKernel_of_row_two_gcd_lt

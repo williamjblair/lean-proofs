@@ -319,6 +319,14 @@
   `t ≡ 1 [MOD onePart]` under the explicit hypothesis `1 ≤ t`. This is the
   Lean bridge from the C2 `{0,1}` residue enumeration to the divisor-split
   predicate; it is not a proof that the kernel is empty.
+- [R] Proved fixed-split CRT uniqueness for C2:
+  `Erdos699.rowOneDivisorSplit_modEq_chineseRemainder_of_coprime` shows that
+  a candidate with a coprime split is congruent modulo `N1` to the corresponding
+  `Nat.chineseRemainder` representative, and
+  `Erdos699.rowOneDivisorSplit_modEq_unique_of_coprime` shows that any two
+  candidates with the same coprime split are congruent modulo `N1`. This
+  formalizes the "one residue class per `{0,1}` split" side of the C2 CRT
+  enumeration; it is not a proof that the kernel is empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
