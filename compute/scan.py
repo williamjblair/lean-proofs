@@ -40,6 +40,7 @@ def scan_full(limit: int, i_values: Iterable[int] | None = None) -> dict[str, An
 
     return {
         "mode": "full",
+        "algorithm": "short_circuit_obstruction",
         "limit": limit,
         "i_values": selected_i,
         "checked_triples": checked_triples,

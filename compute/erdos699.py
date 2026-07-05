@@ -59,9 +59,23 @@ def criterion_obstruction_primes(
     ]
 
 
+def has_obstruction_prime(
+    n: int, i: int, j: int, primes: Iterable[int] | None = None
+) -> bool:
+    if not (1 <= i < j <= n // 2):
+        return False
+    prime_source = primes_upto(n) if primes is None else primes
+    for p in reversed(list(prime_source)):
+        if p < i:
+            break
+        if p <= n and not (dominated(i, n, p) or dominated(j, n, p)):
+            return True
+    return False
+
+
 def counterexample_candidate(
     n: int, i: int, j: int, primes: Iterable[int] | None = None
 ) -> bool:
     if not (1 <= i < j <= n // 2):
         return False
-    return criterion_obstruction_primes(n, i, j, primes=primes) == []
+    return not has_obstruction_prime(n, i, j, primes=primes)

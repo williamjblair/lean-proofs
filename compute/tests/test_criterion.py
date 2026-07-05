@@ -3,6 +3,7 @@ from compute.erdos699 import (
     counterexample_candidate,
     criterion_obstruction_primes,
     dominated,
+    has_obstruction_prime,
     primes_upto,
 )
 
@@ -34,3 +35,17 @@ def test_lucas_digit_predicate_matches_binomial_mod_prime_for_small_values() -> 
         for n in range(0, 60):
             for k in range(0, n + 1):
                 assert binom_mod_prime_nonzero_by_lucas(n, k, p) == dominated(k, n, p)
+
+
+def test_short_circuit_obstruction_matches_obstruction_list() -> None:
+    for n in range(1, 90):
+        primes = primes_upto(n)
+        for i in range(1, n // 2):
+            for j in range(i + 1, n // 2 + 1):
+                obstructions = criterion_obstruction_primes(n, i, j, primes=primes)
+                assert has_obstruction_prime(n, i, j, primes=primes) == bool(
+                    obstructions
+                )
+                assert counterexample_candidate(n, i, j, primes=primes) == (
+                    not obstructions
+                )

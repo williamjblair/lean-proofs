@@ -22,6 +22,11 @@ def test_scan_full_can_restrict_i_values() -> None:
     assert result["candidates"] == []
 
 
+def test_scan_full_uses_short_circuit_algorithm_metadata() -> None:
+    result = scan_full(20)
+    assert result["algorithm"] == "short_circuit_obstruction"
+
+
 def test_scan_cli_emits_json() -> None:
     completed = subprocess.run(
         [sys.executable, "-m", "compute.scan", "--limit", "35"],
