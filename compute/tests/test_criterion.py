@@ -1,0 +1,36 @@
+from compute.erdos699 import (
+    binom_mod_prime_nonzero_by_lucas,
+    counterexample_candidate,
+    criterion_obstruction_primes,
+    dominated,
+    primes_upto,
+)
+
+
+def test_primes_below_i_are_free_in_counterexample_criterion() -> None:
+    n, i, j = 10, 4, 5
+    assert 2 < i and 3 < i
+    assert dominated(i, n, 2) is False
+    assert dominated(j, n, 3) is False
+    obstructions = criterion_obstruction_primes(n, i, j)
+    assert 2 not in obstructions
+    assert 3 not in obstructions
+    assert 7 in obstructions
+    assert counterexample_candidate(n, i, j) is False
+
+
+def test_i_three_does_not_constrain_two() -> None:
+    n, i, j = 8, 3, 4
+    assert 2 < i
+    assert dominated(i, n, 2) is False
+    obstructions = criterion_obstruction_primes(n, i, j)
+    assert 2 not in obstructions
+    assert 7 in obstructions
+    assert counterexample_candidate(n, i, j) is False
+
+
+def test_lucas_digit_predicate_matches_binomial_mod_prime_for_small_values() -> None:
+    for p in primes_upto(13):
+        for n in range(0, 60):
+            for k in range(0, n + 1):
+                assert binom_mod_prime_nonzero_by_lucas(n, k, p) == dominated(k, n, p)

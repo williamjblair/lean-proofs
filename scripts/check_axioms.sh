@@ -14,9 +14,11 @@ ALLOWED='[propext, Classical.choice, Quot.sound]'
 fail() { echo "FAIL: $*" >&2; exit 1; }
 
 # 1. No literal sorry / admit in the hosted proofs.
-if grep -rnoE '\b(sorry|admit)\b' ErdosProblems/ ; then
-  fail "literal sorry/admit in ErdosProblems/"
-fi
+for proof_dir in ErdosProblems lean/Erdos699/Proved; do
+  if [ -d "$proof_dir" ] && grep -rnoE '\b(sorry|admit)\b' "$proof_dir" ; then
+    fail "literal sorry/admit in $proof_dir/"
+  fi
+done
 
 # 2/3. Build the audit and inspect the axiom report.
 report="$(lake env lean Audit.lean 2>&1)"

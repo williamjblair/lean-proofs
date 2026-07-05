@@ -3,3 +3,5 @@
 /build/
 Audit.olean
 *.olean
+__pycache__/
+*.py[cod]
