@@ -144,5 +144,11 @@
   `Erdos699.i_three_caseI_joint_half_sub_one_cube_bound` also specialize this
   under an explicit lower bound on `primePowerPartGE 5 (n - 2)`. The half-row
   lower bound and full T7 remain open.
+- [R] Proved the packaged T7 half-row cube bound:
+  `Erdos699.i_three_caseI_exists_joint_half_sub_one_cube_bound` packages the
+  row-one factor together with the conditional half-row squeeze, and
+  `Erdos699.i_three_caseI_noncentral_half_sub_one_cube_bound` projects the
+  inequality alone. The required lower bound
+  `n / 2 - 1 ≤ primePowerPartGE 5 (n - 2)` remains an explicit open input.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
