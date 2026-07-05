@@ -243,6 +243,56 @@ theorem eq_three_of_sub_one_sub_two_twoPowers {n : ℕ}
       exact pow_pos (by decide : 0 < 2) b
     omega
 
+theorem i_three_window_one_digit_forcing {n j p : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hp : p.Prime) (hp5 : 5 ≤ p) (hn : 1 < n) (hpdvd : p ∣ n - 1) :
+    j % p ≤ 1 := by
+  have hn_mod : n % p = 1 := by
+    rcases hpdvd with ⟨a, ha⟩
+    have hEq : n = p * a + 1 := by omega
+    rw [hEq]
+    simp [Nat.add_mod, Nat.mod_eq_of_lt hp.one_lt]
+  have hchoose3 : p ∣ Nat.choose n 3 := by
+    apply prime_dvd_choose_of_not_dominated hp
+    intro hdom
+    have hdigits := (dominated_iff_forall_digits hp.two_le).mp hdom 0
+    have h3mod : 3 % p = 3 := Nat.mod_eq_of_lt (by omega)
+    simp [digit, hn_mod, h3mod] at hdigits
+  have hnot_choose_j : ¬ p ∣ Nat.choose n j := by
+    intro hpj
+    exact hnone p ⟨hp, by omega, hchoose3, hpj⟩
+  have hnonzero : Nat.choose n j % p ≠ 0 := by
+    intro hzero
+    exact hnot_choose_j (Nat.dvd_iff_mod_eq_zero.mpr hzero)
+  have hdomj : dominated j n p := (lucas_nonzero_mod_prime_iff_dominated hp).mp hnonzero
+  have hdigitsj := (dominated_iff_forall_digits hp.two_le).mp hdomj 0
+  simpa [digit, hn_mod] using hdigitsj
+
+theorem i_three_window_two_digit_forcing {n j p : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hp : p.Prime) (hp5 : 5 ≤ p) (hn : 2 < n) (hpdvd : p ∣ n - 2) :
+    j % p ≤ 2 := by
+  have hn_mod : n % p = 2 := by
+    rcases hpdvd with ⟨a, ha⟩
+    have hEq : n = p * a + 2 := by omega
+    rw [hEq]
+    simp [Nat.add_mod, Nat.mod_eq_of_lt (by omega : 2 < p)]
+  have hchoose3 : p ∣ Nat.choose n 3 := by
+    apply prime_dvd_choose_of_not_dominated hp
+    intro hdom
+    have hdigits := (dominated_iff_forall_digits hp.two_le).mp hdom 0
+    have h3mod : 3 % p = 3 := Nat.mod_eq_of_lt (by omega)
+    simp [digit, hn_mod, h3mod] at hdigits
+  have hnot_choose_j : ¬ p ∣ Nat.choose n j := by
+    intro hpj
+    exact hnone p ⟨hp, by omega, hchoose3, hpj⟩
+  have hnonzero : Nat.choose n j % p ≠ 0 := by
+    intro hzero
+    exact hnot_choose_j (Nat.dvd_iff_mod_eq_zero.mpr hzero)
+  have hdomj : dominated j n p := (lucas_nonzero_mod_prime_iff_dominated hp).mp hnonzero
+  have hdigitsj := (dominated_iff_forall_digits hp.two_le).mp hdomj 0
+  simpa [digit, hn_mod] using hdigitsj
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :

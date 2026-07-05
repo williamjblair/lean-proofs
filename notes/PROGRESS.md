@@ -36,4 +36,9 @@
 - [R] Proved the T5 elementary endpoint
   `Erdos699.eq_three_of_sub_one_sub_two_twoPowers`: if `n - 1` and `n - 2`
   are both powers of two, then `n = 3`. Full T5 remains open.
+- [R] Proved `i = 3` window digit-forcing support lemmas
+  `Erdos699.i_three_window_one_digit_forcing` and
+  `Erdos699.i_three_window_two_digit_forcing`: under a no-common-prime
+  hypothesis, primes `p ≥ 5` dividing `n - 1` force `j % p ≤ 1`, and primes
+  `p ≥ 5` dividing `n - 2` force `j % p ≤ 2`. Full T4/T5 remain open.
 - [OPEN] T4 and all later rungs remain unclaimed in this branch.
