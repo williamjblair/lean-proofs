@@ -4,5 +4,8 @@ namespace Erdos699
 
 #check i_three_caseI_four_dvd_odd_factor_joint_package_from_row_bound
 #check i_three_caseI_four_dvd_odd_factor_joint_squeeze_from_row_bound
+#check squeezedNormalizedCaseIKernel
+#check i_three_caseI_four_dvd_odd_factor_squeezedNormalized_from_row_bound
+#check i_three_caseI_four_dvd_odd_factor_false_of_no_squeezedNormalized
 
 end Erdos699

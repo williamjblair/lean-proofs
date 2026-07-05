@@ -3184,6 +3184,72 @@ theorem i_three_caseI_four_dvd_odd_factor_joint_squeeze_from_row_bound
     ⟨_g, _hrow1, _hdvd, _hle, _hcube, hrow, hsq⟩
   exact ⟨hrow, hsq⟩
 
+def squeezedNormalizedCaseIKernel (F X t g : ℕ) : Prop :=
+  0 < F ∧
+    0 < X ∧
+      0 < t ∧
+        Odd F ∧
+          4 ∣ X ∧
+            3 ≤ F ∧
+              2 * t < X ∧
+                4 * F ≤ X ∧
+                  2 * (F * F) ≤ X ∧
+                    t * (X - t) = g * (F * X - 1) ∧
+                      F * X / 2 - 1 ∣ g * (X - 2 * t)
+
+theorem i_three_caseI_four_dvd_odd_factor_squeezedNormalized_from_row_bound
+    {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hFodd : Odd F) (hF_ge : 3 ≤ F) (hjn : 2 * j ≤ n) :
+    ∃ g : ℕ, squeezedNormalizedCaseIKernel F X t g := by
+  have hF_pos : 0 < F := by omega
+  have hX_pos : 0 < X := by
+    by_cases hX0 : X = 0
+    · subst X
+      simp at hn
+      omega
+    · exact Nat.pos_of_ne_zero hX0
+  have ht_pos : 0 < t := by
+    by_cases ht0 : t = 0
+    · subst t
+      simp at hj
+      omega
+    · exact Nat.pos_of_ne_zero ht0
+  have h4X : 4 ∣ X := four_dvd_right_factor_of_four_dvd_mul_odd hFodd (by
+    simpa [hn] using h4n)
+  have h2tX : 2 * t ≤ X :=
+    two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn
+  have h2t_lt : 2 * t < X := by
+    have hne : 2 * t ≠ X := by
+      intro hcentral
+      exact i_three_caseI_central_branch_false
+        hnone hn hj hn_gt hj_pos h2n h3n hcentral
+    omega
+  rcases
+      i_three_caseI_four_dvd_odd_factor_joint_package_from_row_bound
+        hnone hn hj hn_gt hj_pos hj_two h2n h3n h4n hFodd hjn with
+    ⟨g, hrow1, hdvd, _hle, _hcube, hrow, hsq⟩
+  refine ⟨g, ?_⟩
+  exact
+    ⟨hF_pos, hX_pos, ht_pos, hFodd, h4X, hF_ge, h2t_lt, hrow, hsq,
+      by simpa [hn] using hrow1, by simpa [hn] using hdvd⟩
+
+theorem i_three_caseI_four_dvd_odd_factor_false_of_no_squeezedNormalized
+    {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hFodd : Odd F) (hF_ge : 3 ≤ F) (hjn : 2 * j ≤ n)
+    (hkill : ∀ u g : ℕ, ¬ squeezedNormalizedCaseIKernel F X u g) :
+    False := by
+  rcases
+      i_three_caseI_four_dvd_odd_factor_squeezedNormalized_from_row_bound
+        hnone hn hj hn_gt hj_pos hj_two h2n h3n h4n hFodd hF_ge hjn with
+    ⟨g, hg⟩
+  exact hkill t g hg
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :
