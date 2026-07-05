@@ -279,6 +279,18 @@
   and `Erdos699.not_exists_powerTwoQuotientKernel_of_parity_reduced_divisor_gap`
   compose this all the way to the pure quotient kernel. This changes the
   formal target surface only; it is not a proof of the universal parity gap.
+- [R] Proved that the parity branch denominator is exact under the split
+  half-row identity, not merely a lower bound. The generic theorem
+  `Erdos699.gcd_alpha_beta_dvd_two_half_row_of_identity` proves
+  `c | 2*M` for `c = gcd alpha beta`; then
+  `Erdos699.gcd_alpha_beta_half_row_eq_self_of_odd` proves
+  `gcd c M = c` when `c` is odd, while
+  `Erdos699.gcd_alpha_beta_half_row_eq_half_of_even` proves
+  `gcd c M = c/2` when `c` is even and `M` is odd. The split wrapper
+  `Erdos699.powerTwoSplitSubtractive_reduced_divisor_gap_iff_parity_gap`
+  upgrades the parity reduced-divisor gap to an exact equivalence with the
+  reduced-divisor gap for admissible power-two splits. This still does not
+  prove the universal gap inequality.
 - [R] Added the floor-free product form of the parity target. The helper
   `Erdos699.lt_div_of_mul_succ_le` proves that
   `b * (L + 1) ≤ M` implies `L < M / b`; the generic theorem
@@ -328,6 +340,13 @@
   `parity_product_gap_holds_count = 404`,
   `parity_product_gap_failure_count = 0`, and minimum product margin `725`.
   This is bounded exact evidence for the product target, not a global proof.
+- [E] Pushed the exact factorized power-two quotient scan through exponent
+  `62` for odd `B <= 2001`, with skips reported for row-one moduli beyond
+  the current deterministic `< 2^64` factorizer. Reproduce with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(62,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"], r["reduced_divisor_gap_summary"]["gap_failure_count"], p["parity_product_gap_failure_count"], p["min_parity_product_margin"])'`.
+  It reports `61000 53013 7987 557 0 0 0 725`. This is exact evidence only
+  for the `53013` factorized instances; the `7987` skipped instances remain
+  outside this command's verification perimeter.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` is outside
   the current deterministic 64-bit factorizer, the scan raises. With

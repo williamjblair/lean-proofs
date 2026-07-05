@@ -4536,6 +4536,106 @@ theorem not_dvd_mul_of_parity_product_gap {M c L : ℕ}
       simpa [hcdiv] using hkpos
     exact Or.inr ⟨hceven, lt_div_of_mul_succ_le hc2pos hbound⟩
 
+/-- The half-row identity forces `gcd alpha beta` to divide `2*M`. This is
+the exact denominator fact behind the parity branch of the reduced-divisor
+target. -/
+theorem gcd_alpha_beta_dvd_two_half_row_of_identity {M B l m alpha beta c : ℕ}
+    (hc : c = Nat.gcd alpha beta)
+    (hhalf : 2 * M = 2 * (alpha * beta) + B * (alpha * l + beta * m)) :
+    c ∣ 2 * M := by
+  subst c
+  have hcalpha : Nat.gcd alpha beta ∣ alpha := Nat.gcd_dvd_left alpha beta
+  have hcbeta : Nat.gcd alpha beta ∣ beta := Nat.gcd_dvd_right alpha beta
+  have hcab : Nat.gcd alpha beta ∣ alpha * beta :=
+    dvd_mul_of_dvd_left hcalpha beta
+  have hc2ab : Nat.gcd alpha beta ∣ 2 * (alpha * beta) :=
+    dvd_mul_of_dvd_right hcab 2
+  have hcal : Nat.gcd alpha beta ∣ alpha * l :=
+    dvd_mul_of_dvd_left hcalpha l
+  have hcbm : Nat.gcd alpha beta ∣ beta * m :=
+    dvd_mul_of_dvd_left hcbeta m
+  have hcsum : Nat.gcd alpha beta ∣ alpha * l + beta * m :=
+    Nat.dvd_add hcal hcbm
+  have hcBsum : Nat.gcd alpha beta ∣ B * (alpha * l + beta * m) :=
+    dvd_mul_of_dvd_right hcsum B
+  rw [hhalf]
+  exact Nat.dvd_add hc2ab hcBsum
+
+/-- If `c = gcd alpha beta` is odd, the half-row identity forces the full
+`c` into the half-row modulus: `gcd c M = c`. -/
+theorem gcd_alpha_beta_half_row_eq_self_of_odd {M B l m alpha beta c : ℕ}
+    (hc : c = Nat.gcd alpha beta)
+    (hhalf : 2 * M = 2 * (alpha * beta) + B * (alpha * l + beta * m))
+    (hcodd : Odd c) :
+    Nat.gcd c M = c := by
+  have hcdvd2M : c ∣ 2 * M :=
+    gcd_alpha_beta_dvd_two_half_row_of_identity hc hhalf
+  have hcop2 : c.Coprime 2 := Nat.coprime_two_right.mpr hcodd
+  have hcM : c ∣ M :=
+    hcop2.dvd_of_dvd_mul_right (by simpa [mul_comm] using hcdvd2M)
+  exact Nat.dvd_antisymm (Nat.gcd_dvd_left c M) (Nat.dvd_gcd (dvd_rfl) hcM)
+
+/-- If `c = gcd alpha beta` is even and the half-row modulus is odd, the
+half-row identity forces exactly the odd half of `c` into the modulus:
+`gcd c M = c / 2`. -/
+theorem gcd_alpha_beta_half_row_eq_half_of_even {M B l m alpha beta c : ℕ}
+    (hc : c = Nat.gcd alpha beta)
+    (hhalf : 2 * M = 2 * (alpha * beta) + B * (alpha * l + beta * m))
+    (hModd : Odd M)
+    (hcpos : 0 < c)
+    (hceven : Even c) :
+    Nat.gcd c M = c / 2 := by
+  rcases hceven with ⟨q, hcq⟩
+  have hqpos : 0 < q := by omega
+  have hcdvd2M : c ∣ 2 * M :=
+    gcd_alpha_beta_dvd_two_half_row_of_identity hc hhalf
+  have hqM : q ∣ M := by
+    rcases hcdvd2M with ⟨t, ht⟩
+    refine ⟨t, ?_⟩
+    rw [hcq] at ht
+    have ht' : 2 * M = 2 * (q * t) := by
+      calc
+        2 * M = (q + q) * t := ht
+        _ = 2 * (q * t) := by ring
+    exact Nat.mul_left_cancel (by decide : 0 < 2) ht'
+  have hqC : q ∣ c := by
+    refine ⟨2, ?_⟩
+    rw [hcq]
+    ring
+  have hqGcd : q ∣ Nat.gcd c M := Nat.dvd_gcd hqC hqM
+  have hGcdpos : 0 < Nat.gcd c M := Nat.gcd_pos_of_pos_left M hcpos
+  have hq_le : q ≤ Nat.gcd c M := Nat.le_of_dvd hGcdpos hqGcd
+  have hGcd_le : Nat.gcd c M ≤ c / 2 :=
+    gcd_le_half_of_even_left_odd_right hcpos ⟨q, hcq⟩ hModd
+  have hcdiv : c / 2 = q := by omega
+  exact le_antisymm (by simpa [hcdiv] using hGcd_le) (by simpa [hcdiv] using hq_le)
+
+/-- Under the half-row identity, the parity branch is exactly the
+reduced-divisor denominator split: odd `c` contributes all of `c`, and even
+`c` contributes exactly `c/2`. -/
+theorem reduced_divisor_gap_iff_parity_gap_of_half_row_identity
+    {M B l m alpha beta c L : ℕ}
+    (hc : c = Nat.gcd alpha beta)
+    (hhalf : 2 * M = 2 * (alpha * beta) + B * (alpha * l + beta * m))
+    (hModd : Odd M)
+    (hcpos : 0 < c) :
+    L < M / Nat.gcd c M ↔
+      (Odd c ∧ L < M / c) ∨ (Even c ∧ L < M / (c / 2)) := by
+  constructor
+  · intro hgap
+    rcases Nat.even_or_odd c with hceven | hcodd
+    · have hgcd := gcd_alpha_beta_half_row_eq_half_of_even hc hhalf hModd
+        hcpos hceven
+      exact Or.inr ⟨hceven, by simpa [hgcd] using hgap⟩
+    · have hgcd := gcd_alpha_beta_half_row_eq_self_of_odd hc hhalf hcodd
+      exact Or.inl ⟨hcodd, by simpa [hgcd] using hgap⟩
+  · rintro (⟨hcodd, hgap⟩ | ⟨hceven, hgap⟩)
+    · have hgcd := gcd_alpha_beta_half_row_eq_self_of_odd hc hhalf hcodd
+      simpa [hgcd] using hgap
+    · have hgcd := gcd_alpha_beta_half_row_eq_half_of_even hc hhalf hModd
+        hcpos hceven
+      simpa [hgcd] using hgap
+
 /-- The half-row modulus is odd for the power-of-two split setting. -/
 theorem powerTwoSplit_half_row_odd {A B : ℕ}
     (hA4 : 4 ∣ A)
@@ -4554,6 +4654,102 @@ theorem powerTwoSplit_half_row_odd {A B : ℕ}
   refine ⟨B * q - 1, ?_⟩
   rw [hhalf, hmul]
   omega
+
+/-- Split specialization of
+`gcd_alpha_beta_half_row_eq_self_of_odd`. In an admissible power-two split,
+odd `c = gcd alpha beta` is exactly the part of the half-row modulus carried
+by `c`. -/
+theorem powerTwoSplitSubtractive_half_row_gcd_eq_self_of_odd
+    {A B r s l m alpha beta c : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hc : c = Nat.gcd alpha beta)
+    (hcodd : Odd c) :
+    Nat.gcd c (B * (A / 2) - 1) = c := by
+  have hA2 : 2 ∣ A := dvd_trans (by decide : 2 ∣ 4) hA4
+  have hhalf :
+      2 * (B * (A / 2) - 1) =
+        2 * (alpha * beta) + B * (alpha * l + beta * m) :=
+    powerTwoSplitSubtractive_half_row_alpha_beta_identity hA2 hBge hrpos hspos
+      hlpos hmpos hD hA halpha hbeta
+  exact gcd_alpha_beta_half_row_eq_self_of_odd hc hhalf hcodd
+
+/-- Split specialization of
+`gcd_alpha_beta_half_row_eq_half_of_even`. In an admissible power-two split
+with odd `B`, even `c = gcd alpha beta` contributes exactly `c/2` to the
+half-row modulus. -/
+theorem powerTwoSplitSubtractive_half_row_gcd_eq_half_of_even
+    {A B r s l m alpha beta c : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hc : c = Nat.gcd alpha beta)
+    (hcpos : 0 < c)
+    (hceven : Even c) :
+    Nat.gcd c (B * (A / 2) - 1) = c / 2 := by
+  have hApos : 0 < A := by
+    rw [← hA]
+    positivity
+  have hA2 : 2 ∣ A := dvd_trans (by decide : 2 ∣ 4) hA4
+  have hhalf :
+      2 * (B * (A / 2) - 1) =
+        2 * (alpha * beta) + B * (alpha * l + beta * m) :=
+    powerTwoSplitSubtractive_half_row_alpha_beta_identity hA2 hBge hrpos hspos
+      hlpos hmpos hD hA halpha hbeta
+  exact gcd_alpha_beta_half_row_eq_half_of_even hc hhalf
+    (powerTwoSplit_half_row_odd hA4 hApos hBodd) hcpos hceven
+
+/-- In an admissible power-two split, the parity branch gap is equivalent to
+the reduced-divisor gap. This upgrades the parity branch from a sufficient
+condition to the exact denominator split for the remaining obstruction. -/
+theorem powerTwoSplitSubtractive_reduced_divisor_gap_iff_parity_gap
+    {A B r s l m alpha beta c : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hc : c = Nat.gcd alpha beta)
+    (hcpos : 0 < c) :
+    let M := B * (A / 2) - 1
+    l * m < M / Nat.gcd c M ↔
+      (Odd c ∧ l * m < M / c) ∨ (Even c ∧ l * m < M / (c / 2)) := by
+  dsimp
+  have hApos : 0 < A := by
+    rw [← hA]
+    positivity
+  have hA2 : 2 ∣ A := dvd_trans (by decide : 2 ∣ 4) hA4
+  have hhalf :
+      2 * (B * (A / 2) - 1) =
+        2 * (alpha * beta) + B * (alpha * l + beta * m) :=
+    powerTwoSplitSubtractive_half_row_alpha_beta_identity hA2 hBge hrpos hspos
+      hlpos hmpos hD hA halpha hbeta
+  exact reduced_divisor_gap_iff_parity_gap_of_half_row_identity
+    (M := B * (A / 2) - 1) (B := B) (l := l) (m := m)
+    (alpha := alpha) (beta := beta) (c := c) (L := l * m)
+    hc hhalf (powerTwoSplit_half_row_odd hA4 hApos hBodd) hcpos
 
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
