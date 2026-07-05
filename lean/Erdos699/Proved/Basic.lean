@@ -1319,6 +1319,37 @@ theorem four_mul_factor_le_of_even_four_le_of_four_mul_sub_one_le_sq {n F X : �
   have hX_four_int : (4 : ℤ) ≤ X := by exact_mod_cast hX_four
   nlinarith
 
+theorem four_dvd_right_factor_of_four_dvd_mul_odd {F X : ℕ}
+    (hFodd : Odd F) (h4 : 4 ∣ F * X) :
+    4 ∣ X := by
+  have h2mul : 2 ∣ F * X := Nat.dvd_trans (by norm_num : 2 ∣ 4) h4
+  have h2X : 2 ∣ X := by
+    rcases (by decide : Nat.Prime 2).dvd_mul.mp h2mul with h2F | h2X
+    · have hnot_odd : ¬ Odd F :=
+        Nat.not_odd_iff_even.mpr (even_iff_two_dvd.mpr h2F)
+      exact False.elim (hnot_odd hFodd)
+    · exact h2X
+  rcases h2X with ⟨Y, hX⟩
+  subst X
+  have h2FY : 2 ∣ F * Y := by
+    rcases h4 with ⟨a, ha⟩
+    refine ⟨a, ?_⟩
+    have hdouble : F * Y * 2 = (2 * a) * 2 := by
+      calc
+        F * Y * 2 = F * (2 * Y) := by ring
+        _ = 4 * a := ha
+        _ = (2 * a) * 2 := by ring
+    exact Nat.mul_right_cancel (by decide : 0 < 2) hdouble
+  have h2Y : 2 ∣ Y := by
+    rcases (by decide : Nat.Prime 2).dvd_mul.mp h2FY with h2F | h2Y
+    · have hnot_odd : ¬ Odd F :=
+        Nat.not_odd_iff_even.mpr (even_iff_two_dvd.mpr h2F)
+      exact False.elim (hnot_odd hFodd)
+    · exact h2Y
+  rcases h2Y with ⟨Z, hY⟩
+  refine ⟨Z, ?_⟩
+  omega
+
 theorem i_three_caseI_row_one_four_mul_factor_le_X {n F X j t : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
@@ -2126,6 +2157,25 @@ theorem i_three_caseI_row_one_four_mul_factor_le_X_from_row_bound {n F X j t : �
     hnone hn hj hn_gt hj_pos h2n h3n hX_even hX_four
     (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
 
+theorem i_three_caseI_row_one_four_mul_factor_le_X_of_four_dvd_odd_factor_from_row_bound
+    {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n) (hFodd : Odd F)
+    (hjn : 2 * j ≤ n) :
+    4 * F ≤ X := by
+  have h4X : 4 ∣ X := four_dvd_right_factor_of_four_dvd_mul_odd hFodd (by
+    simpa [hn] using h4n)
+  have hX_even : 2 ∣ X := Nat.dvd_trans (by norm_num : 2 ∣ 4) h4X
+  have hX_pos : 0 < X := by
+    by_contra hnot
+    have hX0 : X = 0 := Nat.eq_zero_of_not_pos hnot
+    subst X
+    omega
+  have hX_four : 4 ≤ X := Nat.le_of_dvd hX_pos h4X
+  exact i_three_caseI_row_one_four_mul_factor_le_X_from_row_bound
+    hnone hn hj hn_gt hj_pos h2n h3n hX_even hX_four hjn
+
 theorem i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t_from_row_bound
     {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
@@ -2320,6 +2370,19 @@ theorem i_three_caseI_factor_sq_squeeze_of_four_dvd_from_row_bound {n F X j t : 
   i_three_caseI_factor_sq_squeeze_of_half_coprime_four_from_row_bound
     hnone hn hj hn_gt hj_pos hj_two h2n h3n hX_even hjn
     (half_sub_one_coprime_four_of_four_dvd h4n hn_gt)
+
+theorem i_three_caseI_factor_sq_squeeze_of_four_dvd_odd_factor_from_row_bound
+    {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hFodd : Odd F) (hjn : 2 * j ≤ n) :
+    2 * (F * F) ≤ X := by
+  have h4X : 4 ∣ X := four_dvd_right_factor_of_four_dvd_mul_odd hFodd (by
+    simpa [hn] using h4n)
+  have hX_even : 2 ∣ X := Nat.dvd_trans (by norm_num : 2 ∣ 4) h4X
+  exact i_three_caseI_factor_sq_squeeze_of_four_dvd_from_row_bound
+    hnone hn hj hn_gt hj_pos hj_two h2n h3n h4n hX_even hjn
 
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by

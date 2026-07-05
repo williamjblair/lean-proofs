@@ -271,5 +271,14 @@
   `2 * t = X` contradicts the row-one divisor `n - 1 ∣ t * (X - t)` when
   `n = F * X` and `2 < n`; `Erdos699.i_three_caseI_central_branch_false`
   packages this under the case-I row-one hypotheses. Full T7 remains open.
+- [R] Proved odd-cofactor parity wrappers for the normalized `4 ∣ n` Case-I
+  branch: `Erdos699.four_dvd_right_factor_of_four_dvd_mul_odd` shows `4 ∣ X`
+  from `Odd F` and `4 ∣ F * X`;
+  `Erdos699.i_three_caseI_row_one_four_mul_factor_le_X_of_four_dvd_odd_factor_from_row_bound`
+  and
+  `Erdos699.i_three_caseI_factor_sq_squeeze_of_four_dvd_odd_factor_from_row_bound`
+  remove the explicit `X` parity inputs from the row-one cofactor and
+  factor-square squeezes under the odd-cofactor normalization. Full T7 remains
+  open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
