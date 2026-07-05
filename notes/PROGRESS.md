@@ -163,6 +163,18 @@
   `Erdos699.i_three_caseI_joint_half_sub_one_cube_bound` also specialize this
   under an explicit lower bound on `primePowerPartGE 5 (n - 2)`. The half-row
   lower bound and full T7 remain open.
+- [R] Proved branch-free row-bound joint-row packages:
+  `Erdos699.x_sub_two_t_pos_of_row_bound` derives `0 < X - 2 * t` from the
+  original row condition `2 * j ≤ n`, `n = F * X`, `j = F * t`, and the
+  central-branch contradiction. The wrappers
+  `Erdos699.i_three_caseI_exists_joint_large_part_factor_le_from_row_bound`,
+  `Erdos699.i_three_caseI_exists_joint_large_part_gap_bound_from_row_bound`,
+  `Erdos699.i_three_caseI_exists_joint_large_part_cube_bound_from_row_bound`,
+  `Erdos699.i_three_caseI_exists_joint_half_large_part_cube_from_row_bound`,
+  and `Erdos699.i_three_caseI_half_large_part_cube_from_row_bound` remove the
+  explicit non-central branch from the packaged joint-row consequences under
+  the original row bound. The half-row lower-bound obstruction and full T7
+  remain open.
 - [R] Proved the packaged T7 half-row cube bound:
   `Erdos699.i_three_caseI_exists_joint_half_sub_one_cube_bound` packages the
   row-one factor together with the conditional half-row squeeze, and

@@ -2161,6 +2161,79 @@ theorem i_three_caseI_joint_half_sub_one_large_part_dvd_factor_mul_X_sub_two_t_f
     (t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
     (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn) hrow1
 
+theorem x_sub_two_t_pos_of_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hjn : 2 * j ≤ n) :
+    0 < X - 2 * t := by
+  have h2tX := two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn
+  by_cases hcentral : 2 * t = X
+  · exact False.elim
+      (i_three_caseI_central_branch_false hnone hn hj hn_gt hj_pos h2n h3n hcentral)
+  · omega
+
+theorem i_three_caseI_exists_joint_large_part_factor_le_from_row_bound
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hjn : 2 * j ≤ n) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        primePowerPartGE 5 (n - 2) ∣ g * (X - 2 * t) ∧
+          primePowerPartGE 5 (n - 2) ≤ g * (X - 2 * t) :=
+  i_three_caseI_exists_joint_large_part_factor_le
+    hnone hn hj hn_gt hj_pos hj_two h2n h3n
+    (x_sub_two_t_pos_of_row_bound hnone hn hj hn_gt hj_pos h2n h3n hjn)
+
+theorem i_three_caseI_exists_joint_large_part_gap_bound_from_row_bound
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hjn : 2 * j ≤ n) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        primePowerPartGE 5 (n - 2) ∣ g * (X - 2 * t) ∧
+          primePowerPartGE 5 (n - 2) ≤ g * (X - 2 * t) ∧
+            4 * ((n - 1) * primePowerPartGE 5 (n - 2)) ≤
+              X * X * (X - 2 * t) :=
+  i_three_caseI_exists_joint_large_part_gap_bound
+    hnone hn hj hn_gt hj_pos hj_two h2n h3n
+    (x_sub_two_t_pos_of_row_bound hnone hn hj hn_gt hj_pos h2n h3n hjn)
+
+theorem i_three_caseI_exists_joint_large_part_cube_bound_from_row_bound
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hjn : 2 * j ≤ n) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        primePowerPartGE 5 (n - 2) ∣ g * (X - 2 * t) ∧
+          primePowerPartGE 5 (n - 2) ≤ g * (X - 2 * t) ∧
+            4 * ((n - 1) * primePowerPartGE 5 (n - 2)) ≤ X * X * X :=
+  i_three_caseI_exists_joint_large_part_cube_bound
+    hnone hn hj hn_gt hj_pos hj_two h2n h3n
+    (x_sub_two_t_pos_of_row_bound hnone hn hj hn_gt hj_pos h2n h3n hjn)
+
+theorem i_three_caseI_exists_joint_half_large_part_cube_from_row_bound
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hjn : 2 * j ≤ n) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        primePowerPartGE 5 (n / 2 - 1) ∣ g * (X - 2 * t) ∧
+          primePowerPartGE 5 (n / 2 - 1) ≤ g * (X - 2 * t) ∧
+            4 * ((n - 1) * primePowerPartGE 5 (n / 2 - 1)) ≤ X * X * X :=
+  i_three_caseI_exists_joint_half_sub_one_large_part_cube_bound
+    hnone hn hj hn_gt hj_pos hj_two h2n h3n
+    (x_sub_two_t_pos_of_row_bound hnone hn hj hn_gt hj_pos h2n h3n hjn)
+
+theorem i_three_caseI_half_large_part_cube_from_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hjn : 2 * j ≤ n) :
+    4 * ((n - 1) * primePowerPartGE 5 (n / 2 - 1)) ≤ X * X * X := by
+  rcases i_three_caseI_exists_joint_half_large_part_cube_from_row_bound
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n hjn with
+    ⟨_g, _hrow1, _hdvd, _hle, hcube⟩
+  exact hcube
+
 theorem i_three_caseI_factor_sq_squeeze_of_half_bound_from_row_bound {n F X j t : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
