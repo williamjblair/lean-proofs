@@ -41,4 +41,11 @@
   `Erdos699.i_three_window_two_digit_forcing`: under a no-common-prime
   hypothesis, primes `p ≥ 5` dividing `n - 1` force `j % p ≤ 1`, and primes
   `p ≥ 5` dividing `n - 2` force `j % p ≤ 2`. Full T4/T5 remain open.
+- [R] Proved product-forcing support lemmas
+  `Erdos699.dvd_mul_sub_one_of_mod_le_one`,
+  `Erdos699.dvd_mul_sub_one_sub_two_of_mod_le_two`,
+  `Erdos699.i_three_window_one_product_forcing`, and
+  `Erdos699.i_three_window_two_product_forcing`. These turn the existing
+  `i = 3` residue bounds into divisibility by `j * (j - 1)` and
+  `j * (j - 1) * (j - 2)`. Full T4/T5 remain open.
 - [OPEN] T4 and all later rungs remain unclaimed in this branch.

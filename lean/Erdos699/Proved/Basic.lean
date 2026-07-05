@@ -293,6 +293,47 @@ theorem i_three_window_two_digit_forcing {n j p : ℕ}
   have hdigitsj := (dominated_iff_forall_digits hp.two_le).mp hdomj 0
   simpa [digit, hn_mod] using hdigitsj
 
+private theorem dvd_sub_of_mod_eq {j p r : ℕ} (hmod : j % p = r) : p ∣ j - r := by
+  refine ⟨j / p, ?_⟩
+  have h := Nat.div_add_mod j p
+  rw [hmod] at h
+  omega
+
+theorem dvd_mul_sub_one_of_mod_le_one {j p : ℕ} (hmod : j % p ≤ 1) :
+    p ∣ j * (j - 1) := by
+  have hcase : j % p = 0 ∨ j % p = 1 := by omega
+  rcases hcase with hzero | hone
+  · have hj : p ∣ j := Nat.dvd_iff_mod_eq_zero.mpr hzero
+    exact dvd_mul_of_dvd_left hj (j - 1)
+  · have hj1 : p ∣ j - 1 := dvd_sub_of_mod_eq hone
+    exact dvd_mul_of_dvd_right hj1 j
+
+theorem dvd_mul_sub_one_sub_two_of_mod_le_two {j p : ℕ} (hmod : j % p ≤ 2) :
+    p ∣ j * (j - 1) * (j - 2) := by
+  have hcase : j % p = 0 ∨ j % p = 1 ∨ j % p = 2 := by omega
+  rcases hcase with hzero | hone | htwo
+  · have hj : p ∣ j := Nat.dvd_iff_mod_eq_zero.mpr hzero
+    exact dvd_mul_of_dvd_left (dvd_mul_of_dvd_left hj (j - 1)) (j - 2)
+  · have hj1 : p ∣ j - 1 := dvd_sub_of_mod_eq hone
+    have hprod : p ∣ j * (j - 1) := dvd_mul_of_dvd_right hj1 j
+    exact dvd_mul_of_dvd_left hprod (j - 2)
+  · have hj2 : p ∣ j - 2 := dvd_sub_of_mod_eq htwo
+    exact dvd_mul_of_dvd_right hj2 (j * (j - 1))
+
+theorem i_three_window_one_product_forcing {n j p : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hp : p.Prime) (hp5 : 5 ≤ p) (hn : 1 < n) (hpdvd : p ∣ n - 1) :
+    p ∣ j * (j - 1) :=
+  dvd_mul_sub_one_of_mod_le_one
+    (i_three_window_one_digit_forcing hnone hp hp5 hn hpdvd)
+
+theorem i_three_window_two_product_forcing {n j p : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hp : p.Prime) (hp5 : 5 ≤ p) (hn : 2 < n) (hpdvd : p ∣ n - 2) :
+    p ∣ j * (j - 1) * (j - 2) :=
+  dvd_mul_sub_one_sub_two_of_mod_le_two
+    (i_three_window_two_digit_forcing hnone hp hp5 hn hpdvd)
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :
