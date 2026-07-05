@@ -304,5 +304,14 @@
   `python3 -m compute.kernel --n1 15 --n2 14 --bound 120`; it reports
   `4` row-one CRT classes, `17` row-one candidates, and `8` survivors. This
   is an exact C2 enumerator, not a proof that the kernel is empty.
+- [E] Extended the exact kernel enumerator with the problem lower bound and
+  the `n = 3 * 2^A` Case-I family wrapper. Reproduce the lower-bound sample
+  with `python3 -m compute.kernel --n1 15 --n2 14 --bound 120 --min-t 4`;
+  it reports `15` row-one candidates and `6` survivors after excluding
+  `t < 4`. Reproduce the small Case-I family scan with
+  `python3 -m compute.kernel --case-i-power-two --max-exponent 12`; it checks
+  exponents `2..12`, reports `5` total row-one candidates, and `0` kernel
+  survivors. This is exact finite evidence for the C2 lane, not a kernel
+  emptiness proof.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

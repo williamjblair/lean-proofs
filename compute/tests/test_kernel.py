@@ -6,6 +6,7 @@ from compute.kernel import (
     consecutive_kernel_holds,
     kernel_survivors_bruteforce,
     prime_power_factorization,
+    scan_case_i_power_two_kernel,
     scan_kernel_crt,
 )
 
@@ -42,6 +43,16 @@ def test_crt_scan_reports_row_one_classes_before_filtering() -> None:
     assert result["survivors"] == kernel_survivors_bruteforce(15, 14, 120)
 
 
+def test_crt_scan_can_apply_problem_lower_bound() -> None:
+    result = scan_kernel_crt(15, 14, 120, min_t=4)
+    assert result["min_t"] == 4
+    assert result["row_one_candidate_count"] == 15
+    assert result["survivor_count"] == 6
+    assert result["survivors"] == [15, 16, 21, 30, 36, 51]
+    assert result["survivors"] == kernel_survivors_bruteforce(15, 14, 120, min_t=4)
+    assert not consecutive_kernel_holds(15, 14, 120, 1, min_t=4)
+
+
 def test_kernel_cli_emits_json() -> None:
     completed = subprocess.run(
         [
@@ -62,3 +73,39 @@ def test_kernel_cli_emits_json() -> None:
     payload = json.loads(completed.stdout)
     assert payload["mode"] == "kernel_crt"
     assert payload["survivors"] == kernel_survivors_bruteforce(15, 14, 120)
+
+
+def test_case_i_power_two_family_scan_matches_scalar_scans() -> None:
+    result = scan_case_i_power_two_kernel(5)
+    assert result["mode"] == "case_i_power_two_kernel"
+    assert result["min_exponent"] == 2
+    assert result["max_exponent"] == 5
+    assert result["min_t"] == 4
+    assert result["instance_count"] == 4
+    expected = []
+    for exponent in range(2, 6):
+        n = 3 * (2**exponent)
+        scan = scan_kernel_crt(n - 1, n // 2 - 1, n, min_t=4)
+        expected.append({"exponent": exponent, "n": n, **scan})
+    assert result["instances"] == expected
+    assert result["survivor_count"] == sum(item["survivor_count"] for item in expected)
+
+
+def test_kernel_cli_can_scan_case_i_power_two_family() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--case-i-power-two",
+            "--max-exponent",
+            "5",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["mode"] == "case_i_power_two_kernel"
+    assert payload["max_exponent"] == 5
+    assert payload["instances"] == scan_case_i_power_two_kernel(5)["instances"]
