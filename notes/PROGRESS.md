@@ -369,6 +369,17 @@
   formal equivalence between positive row-one split records and the canonical
   gcd/div split class, still without proving any row-two incompatibility or
   kernel emptiness.
+- [R] Proved the exact row-two gcd filter used by the C2 enumerator:
+  `Erdos699.rowTwo_dvd_iff_gcd_eq_right` identifies
+  `N2 ∣ t * (t - 1) * (t - 2)` with
+  `gcd (t * (t - 1) * (t - 2)) N2 = N2`; the wrappers
+  `Erdos699.consecutiveDivisorKernel_iff_row_two_gcd_eq_of_row_one`,
+  `Erdos699.rowOneDivisorSplit_consecutiveDivisorKernel_iff_row_two_gcd_eq`,
+  and
+  `Erdos699.rowOneDivisorSplit_consecutiveDivisorKernelBelow_iff_bound_and_row_two_gcd_eq`
+  package this under row-one divisibility, a split, and the half-row bound.
+  This formalizes the scanner's row-two survivor predicate, not a proof that
+  no survivors exist.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters

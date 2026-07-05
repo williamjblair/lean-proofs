@@ -358,6 +358,46 @@ theorem rowOneDivisorSplit_kernel_iff_row_two {N1 N2 zeroPart onePart t : ℕ}
   · intro hrowTwo
     exact ⟨rowOneDivisorSplit_dvd_mul_sub_one hsplit, hrowTwo⟩
 
+theorem rowTwo_dvd_iff_gcd_eq_right {N2 t : ℕ} :
+    N2 ∣ t * (t - 1) * (t - 2) ↔
+      Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 := by
+  constructor
+  · intro hrowTwo
+    exact Nat.gcd_eq_right hrowTwo
+  · intro hgcd
+    simpa [hgcd] using Nat.gcd_dvd_left (t * (t - 1) * (t - 2)) N2
+
+theorem consecutiveDivisorKernel_iff_row_two_gcd_eq_of_row_one {N1 N2 t : ℕ}
+    (hrowOne : N1 ∣ t * (t - 1)) :
+    consecutiveDivisorKernel N1 N2 t ↔
+      Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 := by
+  constructor
+  · intro hkernel
+    exact rowTwo_dvd_iff_gcd_eq_right.mp hkernel.2
+  · intro hgcd
+    exact ⟨hrowOne, rowTwo_dvd_iff_gcd_eq_right.mpr hgcd⟩
+
+theorem rowOneDivisorSplit_consecutiveDivisorKernel_iff_row_two_gcd_eq
+    {N1 N2 zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
+    consecutiveDivisorKernel N1 N2 t ↔
+      Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 :=
+  consecutiveDivisorKernel_iff_row_two_gcd_eq_of_row_one
+    (rowOneDivisorSplit_dvd_mul_sub_one hsplit)
+
+theorem rowOneDivisorSplit_consecutiveDivisorKernelBelow_iff_bound_and_row_two_gcd_eq
+    {N1 N2 bound zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
+    consecutiveDivisorKernelBelow N1 N2 bound t ↔
+      2 * t ≤ bound ∧ Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 := by
+  constructor
+  · intro hkernel
+    exact ⟨hkernel.1,
+      (rowOneDivisorSplit_consecutiveDivisorKernel_iff_row_two_gcd_eq hsplit).mp hkernel.2⟩
+  · intro h
+    exact ⟨h.1,
+      (rowOneDivisorSplit_consecutiveDivisorKernel_iff_row_two_gcd_eq hsplit).mpr h.2⟩
+
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
     ¬ consecutiveDivisorKernel N1 N2 t := by
