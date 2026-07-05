@@ -792,6 +792,26 @@ theorem rowOneDivisorSplit_rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd
   rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd
     hN1 hN2 hcop hodd ht (rowOneDivisorSplit_dvd_mul_sub_one hsplit) hH
 
+theorem not_exists_kernelBelow_of_forall_bound_quotient_gap_gcd_mul_lt_odd
+    {N1 N2 bound : ℕ} (hN1 : 0 < N1) (hN2 : 0 < N2)
+    (hcop : N1.Coprime N2) (hodd : Odd N2)
+    (hge2 :
+      ∀ t : ℕ,
+        2 * t ≤ bound →
+          rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t →
+            2 ≤ t)
+    (hfail :
+      ∀ t : ℕ,
+        2 * t ≤ bound →
+          rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t →
+            Nat.gcd ((t * (t - 1)) / N1) N2 * Nat.gcd (t - 2) N2 < N2) :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelBelow N1 N2 bound t :=
+  not_exists_consecutiveDivisorKernelBelow_of_forall_bound_gcdDiv_split_row_two_gcd_lt
+    hN1 fun t hbound hsplit =>
+      rowOneDivisorSplit_rowTwo_gcd_lt_of_rowOneQuotient_gap_gcd_mul_lt_of_odd
+        hN1 hN2 hcop hodd (hge2 t hbound hsplit) hsplit
+        (hfail t hbound hsplit)
+
 theorem not_exists_kernelBelow_iff_forall_mem_quotient_gap_gcd_mul_lt_of_list_exact_odd
     {N1 N2 bound : ℕ} {candidates : List ℕ} (hN1 : 0 < N1) (hN2 : 0 < N2)
     (hcop : N1.Coprime N2) (hodd : Odd N2)

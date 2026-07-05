@@ -30,6 +30,25 @@ def test_i_three_does_not_constrain_two() -> None:
     assert counterexample_candidate(n, i, j) is False
 
 
+def test_gpt_pro_pure_c2_survivor_fails_row_three_digit_constraints() -> None:
+    n = 54_734_052
+    i = 3
+    j = 8_748_251
+    row_n_primes = [541, 8_431]
+
+    assert 1 <= i < j <= n // 2
+    assert n == 2**2 * 3 * 541 * 8_431
+    for p in row_n_primes:
+        assert i <= p
+        assert n % p == 0
+        assert j % p != 0
+        assert dominated(i, n, p) is False
+        assert dominated(j, n, p) is False
+
+    assert criterion_obstruction_primes(n, i, j, primes=row_n_primes) == row_n_primes
+    assert counterexample_candidate(n, i, j, primes=row_n_primes) is False
+
+
 def test_lucas_digit_predicate_matches_binomial_mod_prime_for_small_values() -> None:
     for p in primes_upto(13):
         for n in range(0, 60):

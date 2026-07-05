@@ -456,6 +456,14 @@
   candidate. This composes the finite-list certificate contract with the
   odd quotient-gap factorization; it is still conditional on list cover,
   list soundness, and `2 ≤ t` for listed candidates.
+- [R] Added the universal quotient-gap C2 obstruction wrapper:
+  `Erdos699.not_exists_kernelBelow_of_forall_bound_quotient_gap_gcd_mul_lt_odd`
+  shows that if every bounded canonical row-one split candidate has
+  `2 ≤ t` and satisfies
+  `gcd ((t * (t - 1)) / N1) N2 * gcd (t - 2) N2 < N2`, then the bounded
+  consecutive-divisor kernel is empty for odd `N2` coprime to `N1`. This is
+  a conditional consumer of the quotient-gap inequality, not a proof that the
+  inequality holds in pure C2.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
@@ -517,5 +525,17 @@
   `quotient_gap_gcd_product = 1 < N2` for every listed candidate. This is
   exact finite evidence aligned to the quotient-gap certificate interface,
   not a proof that the kernel is empty.
+- [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
+  product inequality is false under C2 shape hypotheses alone:
+  `n = 54,734,052`, `N1 = n - 1`, `N2 = n / 2 - 1`, and
+  `t = 8,748,251` satisfy `3 ∣ n`, `4 ∣ n`, `Odd N2`, `N1.Coprime N2`,
+  `2 * t ≤ n`, `N1 ∣ t * (t - 1)`, and
+  `N2 ∣ t * (t - 1) * (t - 2)`. Exact tests also verify
+  `(t * (t - 1) / N1) = 1,398,250`,
+  `gcd ((t * (t - 1)) / N1) N2 = 2,975`,
+  `gcd (t - 2) N2 = 9,199`, and the product is exactly `N2`. The same tests
+  verify this is not a row-3 obstruction candidate because primes `541` and
+  `8431` divide `n` and violate Lucas digit domination for `j = t`. Reproduce
+  with `python3 -m pytest compute/tests/test_kernel.py compute/tests/test_criterion.py -q`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

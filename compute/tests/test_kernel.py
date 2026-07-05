@@ -1,4 +1,5 @@
 import json
+import math
 import subprocess
 import sys
 
@@ -206,6 +207,33 @@ def test_crt_split_diagnostics_match_quotient_gap_factorization_when_odd() -> No
     assert all(
         item["quotient_gap_gcd_product"] == item["row_two_gcd"] for item in splits
     )
+
+
+def test_gpt_pro_shape_counterexample_is_pure_c2_survivor() -> None:
+    n = 54_734_052
+    n1 = n - 1
+    n2 = n // 2 - 1
+    t = 8_748_251
+
+    assert n % 4 == 0
+    assert n % 3 == 0
+    assert n2 % 2 == 1
+    assert n1 == 2 * n2 + 1
+    assert math.gcd(n1, n2) == 1
+    assert 2 * t <= n
+    assert consecutive_kernel_holds(n1, n2, n, t, min_t=4)
+
+    row_one_product = t * (t - 1)
+    row_one_quotient, remainder = divmod(row_one_product, n1)
+    assert remainder == 0
+    assert row_one_quotient == 1_398_250
+
+    row_one_quotient_gcd = math.gcd(row_one_quotient, n2)
+    gap_gcd = math.gcd(t - 2, n2)
+    assert row_one_quotient_gcd == 2_975
+    assert gap_gcd == 9_199
+    assert row_one_quotient_gcd * gap_gcd == n2
+    assert math.gcd(row_one_product * (t - 2), n2) == n2
 
 
 def test_crt_scan_can_include_row_one_split_summary_on_request() -> None:
