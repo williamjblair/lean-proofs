@@ -42,6 +42,8 @@ namespace Erdos699
 #check not_dvd_mul_of_reduced_divisor_gt
 #check powerTwoSplitSubtractive_not_gcd_dvd_of_reduced_divisor_gap
 #check powerTwoSplitGcdObstruction_of_reduced_divisor_gap
+#check powerTwoQuotientKernel.not_of_reduced_divisor_gap
+#check not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap
 #check dvd_div_gcd_of_dvd_mul
 #check powerTwoQuotientKernel.row_one_split_right_dvd
 #check powerTwoQuotientKernel.exists_row_one_split

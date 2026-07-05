@@ -4825,6 +4825,60 @@ theorem powerTwoQuotientKernel.not_of_splitGcdObstruction {A B v h : ℕ}
       hobs hApow hA4 hBodd hBge hrpos hspos hlpos hmpos hD hsum hgap
       rfl rfl rfl) hrowtwo_gcd
 
+/-- Direct conditional kernel kill from the reduced-divisor gap inequality.
+This is the composed current endpoint of the split/gcd reductions: proving
+the stated inequality for all admissible positive splits would eliminate the
+pure power-two quotient kernel for the fixed `A, B`. -/
+theorem powerTwoQuotientKernel.not_of_reduced_divisor_gap {A B v h : ℕ}
+    (hgapAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  l * m <
+                                    (B * (A / 2) - 1) /
+                                      Nat.gcd (Nat.gcd alpha beta)
+                                        (B * (A / 2) - 1)) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_splitGcdObstruction
+    (powerTwoSplitGcdObstruction_of_reduced_divisor_gap hgapAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_reduced_divisor_gap`. -/
+theorem not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap {A B : ℕ}
+    (hgapAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  l * m <
+                                    (B * (A / 2) - 1) /
+                                      Nat.gcd (Nat.gcd alpha beta)
+                                        (B * (A / 2) - 1)) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact powerTwoQuotientKernel.not_of_reduced_divisor_gap hgapAll hkernel
+
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure
 power-of-two quotient kernel: once `X = A * H`, `u = H * v`, `g = H^2 * h`,

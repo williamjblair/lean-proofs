@@ -260,6 +260,13 @@
   a universal reduced-divisor gap inequality for all admissible positive
   splits implies `powerTwoSplitGcdObstruction A B`. This is a conditional
   reduction to an inequality target, not a proof of that inequality.
+- [R] Added the direct pure-kernel consumers for the inequality target:
+  `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
+  compose the reduced-divisor gap criterion all the way to
+  `¬ powerTwoQuotientKernel A B v h` and
+  `¬ ∃ v h, powerTwoQuotientKernel A B v h`, making the remaining Task A
+  proof obligation exactly the universal reduced-divisor gap inequality.
 - [E] Extended the power-two quotient scanner with exact reduced-divisor gap
   diagnostics. Reproduce the existing perimeter plus the new gap summary with
   `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(50,2001); print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"], r["reduced_divisor_gap_summary"])'`.
