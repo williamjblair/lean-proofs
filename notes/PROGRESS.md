@@ -98,5 +98,11 @@
   case-I divisor `n - 1 ∣ j * (j - 1)` into the normalized form
   `n - 1 ∣ t * (X - t)` whenever `n = F * X`, `j = F * t`, and `t ≤ X`.
   Full T6/T7 remain open.
+- [R] Proved the T6 row-two algebra bridge:
+  `Erdos699.i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t`
+  turns the full-multiplicity large-prime part of the `n - 2` row into the
+  normalized divisor `primePowerPartGE 5 (n - 2) ∣ t * (X - t) * (X - 2 * t)`.
+  The theorem explicitly cancels only an odd divisor, so the row-3-free
+  2-adic part remains outside the statement. Full T6/T7 remain open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

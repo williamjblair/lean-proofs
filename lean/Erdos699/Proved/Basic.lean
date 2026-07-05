@@ -1041,6 +1041,42 @@ theorem primePowerPartGE_eq_self_of_forall_prime_ge {lo m : ℕ}
   simpa [Nat.prod_factorization_eq_prod_primeFactors] using
     Nat.prod_factorization_pow_eq_self hm
 
+theorem primePowerPartGE_dvd_self {lo m : ℕ} (hm : m ≠ 0) :
+    primePowerPartGE lo m ∣ m := by
+  apply primePowerPartGE_dvd_of_forall_prime_power_dvd
+  intro p hp _hlo _hpdvd
+  exact (hp.pow_dvd_iff_le_factorization hm).mpr le_rfl
+
+theorem finset_prod_prime_powers_coprime_four_of_ge_five {s : Finset ℕ}
+    {f : ℕ → ℕ} (hge : ∀ p ∈ s, 5 ≤ p) (hprime : ∀ p ∈ s, p.Prime) :
+    (∏ p ∈ s, p ^ f p).Coprime 4 := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+      simp
+  | insert a s ha ih =>
+      rw [Finset.prod_insert ha]
+      have ha_coprime_four : a.Coprime 4 := by
+        exact (hprime a (Finset.mem_insert_self a s)).coprime_iff_not_dvd.mpr (by
+          intro hdiv
+          have ha_le_four : a ≤ 4 := Nat.le_of_dvd (by norm_num : 0 < 4) hdiv
+          have ha_ge_five : 5 ≤ a := hge a (Finset.mem_insert_self a s)
+          omega)
+      have hpow : (a ^ f a).Coprime 4 := ha_coprime_four.pow_left (f a)
+      exact hpow.mul_left
+        (ih (fun p hp => hge p (Finset.mem_insert_of_mem hp))
+          (fun p hp => hprime p (Finset.mem_insert_of_mem hp)))
+
+theorem primePowerPartGE_five_coprime_four (m : ℕ) :
+    (primePowerPartGE 5 m).Coprime 4 := by
+  classical
+  unfold primePowerPartGE
+  apply finset_prod_prime_powers_coprime_four_of_ge_five
+  · intro p hp_mem
+    exact (Finset.mem_filter.mp hp_mem).2
+  · intro p hp_mem
+    exact (Nat.mem_primeFactors.mp (Finset.mem_filter.mp hp_mem).1).1
+
 theorem i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd {n j : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : 1 < n) (h2n : 2 ∣ n) (h3n : 3 ∣ n) :
@@ -1138,6 +1174,104 @@ theorem i_three_caseI_row_one_sub_one_dvd_t_mul_X_sub_t {n F X j t : ℕ}
   sub_one_dvd_t_mul_X_sub_t_of_factor_dvd_mul_sub_one hn hj hn_gt hj_pos htX
     (i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd
       hnone (by omega : 1 < n) h2n h3n)
+
+theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
+    {d n F X j t : ℕ} (hdn : d ∣ n - 2) (hcop4 : d.Coprime 4)
+    (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hj_two : 2 ≤ j)
+    (htX : t ≤ X) (h2tX : 2 * t ≤ X)
+    (hdvd : d ∣ j * (j - 1) * (j - 2)) :
+    d ∣ t * (X - t) * (X - 2 * t) := by
+  let target := t * (X - t) * (X - 2 * t)
+  have hn_mod_int : (n : ℤ) ≡ 2 [ZMOD (d : ℤ)] := by
+    rcases hdn with ⟨a, ha⟩
+    have hsub_cast : ((n - 2 : ℕ) : ℤ) = (n : ℤ) - 2 := Nat.cast_sub hn_ge_two
+    have hdiff : (2 : ℤ) - (n : ℤ) = (d : ℤ) * (-(a : ℤ)) := by
+      rw [← neg_sub]
+      calc
+        -((n : ℤ) - 2) = -((n - 2 : ℕ) : ℤ) := by rw [hsub_cast]
+        _ = -((d * a : ℕ) : ℤ) := by rw [ha]
+        _ = (d : ℤ) * (-(a : ℤ)) := by rw [Nat.cast_mul]; ring
+    exact Int.modEq_iff_dvd.mpr ⟨-(a : ℤ), hdiff⟩
+  have hFX_int : (F : ℤ) * (X : ℤ) ≡ 2 [ZMOD (d : ℤ)] := by
+    have hn_int : (n : ℤ) = (F : ℤ) * (X : ℤ) := by exact_mod_cast hn
+    simpa [hn_int] using hn_mod_int
+  have hzero_nat : j * (j - 1) * (j - 2) ≡ 0 [MOD d] :=
+    Nat.modEq_zero_iff_dvd.mpr hdvd
+  have hzero_int :
+      (j : ℤ) * ((j : ℤ) - 1) * ((j : ℤ) - 2) ≡ 0 [ZMOD (d : ℤ)] := by
+    have hj_one : 1 ≤ j := by omega
+    have hcast :
+        ((j * (j - 1) * (j - 2) : ℕ) : ℤ) =
+          (j : ℤ) * ((j : ℤ) - 1) * ((j : ℤ) - 2) := by
+      rw [Nat.cast_mul, Nat.cast_mul, Nat.cast_sub hj_one, Nat.cast_sub hj_two]
+      norm_num
+    simpa [hcast] using (Int.natCast_modEq_iff.mpr hzero_nat)
+  have hj_int : (j : ℤ) = (F : ℤ) * (t : ℤ) := by exact_mod_cast hj
+  have hzero_Ft :
+      ((F : ℤ) * (t : ℤ)) * (((F : ℤ) * (t : ℤ)) - 1) *
+          (((F : ℤ) * (t : ℤ)) - 2) ≡ 0 [ZMOD (d : ℤ)] := by
+    simpa [hj_int] using hzero_int
+  have hfirst :
+      (X : ℤ) * ((F : ℤ) * (t : ℤ)) ≡ 2 * (t : ℤ) [ZMOD (d : ℤ)] := by
+    have h := hFX_int.mul_right (t : ℤ)
+    simpa [mul_assoc, mul_comm, mul_left_comm] using h
+  have hsecond :
+      (X : ℤ) * (((F : ℤ) * (t : ℤ)) - 1) ≡
+        2 * (t : ℤ) - (X : ℤ) [ZMOD (d : ℤ)] := by
+    have h := hfirst.sub (Int.ModEq.refl (a := (X : ℤ)) (n := (d : ℤ)))
+    simpa [mul_sub] using h
+  have hthird :
+      (X : ℤ) * (((F : ℤ) * (t : ℤ)) - 2) ≡
+        2 * (t : ℤ) - 2 * (X : ℤ) [ZMOD (d : ℤ)] := by
+    have h := hfirst.sub (Int.ModEq.refl (a := (2 : ℤ) * (X : ℤ)) (n := (d : ℤ)))
+    simpa [mul_sub, two_mul, mul_assoc, mul_comm, mul_left_comm] using h
+  have hprod_raw := (hfirst.mul hsecond).mul hthird
+  have hprod :
+      ((X : ℤ) ^ 3) *
+          (((F : ℤ) * (t : ℤ)) * (((F : ℤ) * (t : ℤ)) - 1) *
+            (((F : ℤ) * (t : ℤ)) - 2)) ≡
+        4 * ((t : ℤ) * ((X : ℤ) - (t : ℤ)) * ((X : ℤ) - 2 * (t : ℤ)))
+          [ZMOD (d : ℤ)] := by
+    convert hprod_raw using 1 <;> ring
+  have hscaled_zero :
+      ((X : ℤ) ^ 3) *
+          (((F : ℤ) * (t : ℤ)) * (((F : ℤ) * (t : ℤ)) - 1) *
+            (((F : ℤ) * (t : ℤ)) - 2)) ≡ 0 [ZMOD (d : ℤ)] := by
+    simpa using hzero_Ft.mul_left ((X : ℤ) ^ 3)
+  have hfour_target_zero :
+      4 * ((t : ℤ) * ((X : ℤ) - (t : ℤ)) * ((X : ℤ) - 2 * (t : ℤ))) ≡
+        0 [ZMOD (d : ℤ)] :=
+    hprod.symm.trans hscaled_zero
+  have htarget_cast :
+      ((target : ℕ) : ℤ) =
+        (t : ℤ) * ((X : ℤ) - (t : ℤ)) * ((X : ℤ) - 2 * (t : ℤ)) := by
+    have hcast_xt : ((X - t : ℕ) : ℤ) = (X : ℤ) - (t : ℤ) := Nat.cast_sub htX
+    have hcast_x2t : ((X - 2 * t : ℕ) : ℤ) = (X : ℤ) - (2 * t : ℕ) :=
+      Nat.cast_sub h2tX
+    dsimp [target]
+    rw [hcast_xt, hcast_x2t, Nat.cast_mul]
+    norm_num
+  have hfour_target_nat_int : (((4 * target : ℕ) : ℤ)) ≡ 0 [ZMOD (d : ℤ)] := by
+    have hcast :
+        (((4 * target : ℕ) : ℤ)) =
+          4 * ((t : ℤ) * ((X : ℤ) - (t : ℤ)) * ((X : ℤ) - 2 * (t : ℤ))) := by
+      rw [Nat.cast_mul, htarget_cast]
+      norm_num
+    simpa [hcast] using hfour_target_zero
+  have hdvd_four_int : (d : ℤ) ∣ ((4 * target : ℕ) : ℤ) :=
+    Int.modEq_zero_iff_dvd.mp hfour_target_nat_int
+  have hdvd_four_nat : d ∣ 4 * target := Int.natCast_dvd_natCast.mp hdvd_four_int
+  exact hcop4.dvd_of_dvd_mul_left hdvd_four_nat
+
+theorem i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hn_gt_two : 2 < n)
+    (hj_two : 2 ≤ j) (htX : t ≤ X) (h2tX : 2 * t ≤ X) :
+    primePowerPartGE 5 (n - 2) ∣ t * (X - t) * (X - 2 * t) :=
+  sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
+    (primePowerPartGE_dvd_self (by omega : n - 2 ≠ 0))
+    (primePowerPartGE_five_coprime_four (n - 2)) hn hj hn_ge_two hj_two htX h2tX
+    (i_three_window_two_primePowerPartGE_dvd hnone hn_gt_two)
 
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
