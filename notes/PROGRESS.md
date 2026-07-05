@@ -369,7 +369,12 @@
   `Erdos699.i_three_caseI_four_dvd_consecutive_kernel_below_from_no_common`
   shows that the `4 ∣ n` Case-I hypotheses force coprime factors
   `n - 1` and `n / 2 - 1` into this bounded kernel. This does not prove the
-  kernel empty.
+  kernel empty. The follow-up
+  `Erdos699.i_three_caseI_four_dvd_consecutive_kernel_in_range_from_no_common`
+  adds the original row lower bound `3 < j` and lands in
+  `Erdos699.consecutiveDivisorKernelInRange ... 4 n j`, matching the
+  lower-bounded certificate interface. This still does not prove the kernel
+  empty.
 - [R] Formalized the C2 row-one split interface:
   `Erdos699.rowOneDivisorSplit` records a factor split
   `zeroPart * onePart = N1` with `zeroPart ∣ t` and

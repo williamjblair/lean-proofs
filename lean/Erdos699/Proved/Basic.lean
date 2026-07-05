@@ -2371,6 +2371,17 @@ theorem i_three_caseI_four_dvd_consecutive_kernel_below_from_no_common {n j : �
   refine ⟨hcop, ?_⟩
   exact ⟨hjn, hrow1, hrow2⟩
 
+theorem i_three_caseI_four_dvd_consecutive_kernel_in_range_from_no_common {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn_gt : 2 < n) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ n) :
+    (n - 1).Coprime (n / 2 - 1) ∧
+      consecutiveDivisorKernelInRange (n - 1) (n / 2 - 1) 4 n j := by
+  rcases i_three_caseI_four_dvd_consecutive_kernel_below_from_no_common
+      hnone hn_gt h2n h3n h4n hjn with
+    ⟨hcop, hkernel⟩
+  exact ⟨hcop, by omega, hkernel.1, hkernel.2⟩
+
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
     {d n F X j t : ℕ} (hdn : d ∣ n - 2) (hcop4 : d.Coprime 4)
     (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hj_two : 2 ≤ j)
