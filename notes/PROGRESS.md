@@ -296,6 +296,20 @@
   shows that the `4 ∣ n` Case-I hypotheses force coprime factors
   `n - 1` and `n / 2 - 1` into this bounded kernel. This does not prove the
   kernel empty.
+- [R] Formalized the C2 row-one split interface:
+  `Erdos699.rowOneDivisorSplit` records a factor split
+  `zeroPart * onePart = N1` with `zeroPart ∣ t` and
+  `onePart ∣ t - 1`. Theorems
+  `Erdos699.rowOneDivisorSplit_dvd_mul_sub_one` and
+  `Erdos699.rowOneDivisorSplit_kernel_iff_row_two` connect this split to the
+  first row of `consecutiveDivisorKernel`. Theorems
+  `Erdos699.not_consecutiveDivisorKernel_of_row_two_gcd_lt`,
+  `Erdos699.rowOneDivisorSplit_not_consecutiveDivisorKernel_of_row_two_gcd_lt`,
+  `Erdos699.not_consecutiveDivisorKernelBelow_of_row_two_gcd_lt`, and
+  `Erdos699.rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_of_row_two_gcd_lt`
+  formalize the exact row-two gcd obstruction used by the C2 split
+  diagnostics. This is a conditional kernel tool, not a proof that the kernel
+  is empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters

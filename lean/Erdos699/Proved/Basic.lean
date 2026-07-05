@@ -162,6 +162,57 @@ def consecutiveDivisorKernel (N1 N2 t : ℕ) : Prop :=
 def consecutiveDivisorKernelBelow (N1 N2 bound t : ℕ) : Prop :=
   2 * t ≤ bound ∧ consecutiveDivisorKernel N1 N2 t
 
+/-- A row-one divisor split: one factor of `N1` is assigned to `t`, and the
+other to `t - 1`. This is the formal version of the `{0,1}` choices used by
+the CRT kernel scanner. -/
+def rowOneDivisorSplit (N1 zeroPart onePart t : ℕ) : Prop :=
+  zeroPart * onePart = N1 ∧ zeroPart ∣ t ∧ onePart ∣ t - 1
+
+theorem rowOneDivisorSplit_dvd_mul_sub_one {N1 zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
+    N1 ∣ t * (t - 1) := by
+  rcases hsplit with ⟨hprod, hzero, hone⟩
+  rw [← hprod]
+  exact Nat.mul_dvd_mul hzero hone
+
+theorem rowOneDivisorSplit_kernel_iff_row_two {N1 N2 zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t) :
+    consecutiveDivisorKernel N1 N2 t ↔ N2 ∣ t * (t - 1) * (t - 2) := by
+  constructor
+  · intro hkernel
+    exact hkernel.2
+  · intro hrowTwo
+    exact ⟨rowOneDivisorSplit_dvd_mul_sub_one hsplit, hrowTwo⟩
+
+theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
+    (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
+    ¬ consecutiveDivisorKernel N1 N2 t := by
+  intro hkernel
+  have hgcd_eq :
+      Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 :=
+    Nat.gcd_eq_right hkernel.2
+  omega
+
+theorem rowOneDivisorSplit_not_consecutiveDivisorKernel_of_row_two_gcd_lt
+    {N1 N2 zeroPart onePart t : ℕ}
+    (_hsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
+    ¬ consecutiveDivisorKernel N1 N2 t :=
+  not_consecutiveDivisorKernel_of_row_two_gcd_lt hgcd
+
+theorem not_consecutiveDivisorKernelBelow_of_row_two_gcd_lt {N1 N2 bound t : ℕ}
+    (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
+    ¬ consecutiveDivisorKernelBelow N1 N2 bound t := by
+  intro hkernel
+  exact not_consecutiveDivisorKernel_of_row_two_gcd_lt hgcd hkernel.2
+
+theorem rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_of_row_two_gcd_lt
+    {N1 N2 zeroPart onePart bound t : ℕ}
+    (_hsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
+    ¬ consecutiveDivisorKernelBelow N1 N2 bound t :=
+  not_consecutiveDivisorKernelBelow_of_row_two_gcd_lt hgcd
+
 theorem commonPrimeDivisor_of_prime_in_top_interval {n i j p : ℕ}
     (hp : p.Prime) (hij : i < j) (hjn : 2 * j ≤ n) (hleft : n - i < p)
     (hright : p ≤ n) :

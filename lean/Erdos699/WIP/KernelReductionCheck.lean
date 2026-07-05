@@ -4,6 +4,13 @@ namespace Erdos699
 
 #check consecutiveDivisorKernel
 #check consecutiveDivisorKernelBelow
+#check rowOneDivisorSplit
+#check rowOneDivisorSplit_dvd_mul_sub_one
+#check rowOneDivisorSplit_kernel_iff_row_two
+#check not_consecutiveDivisorKernel_of_row_two_gcd_lt
+#check rowOneDivisorSplit_not_consecutiveDivisorKernel_of_row_two_gcd_lt
+#check not_consecutiveDivisorKernelBelow_of_row_two_gcd_lt
+#check rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_of_row_two_gcd_lt
 #check i_three_caseI_four_dvd_consecutive_kernel_below_from_no_common
 
 end Erdos699
