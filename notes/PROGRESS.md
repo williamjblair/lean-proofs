@@ -156,5 +156,10 @@
   `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze` packages this for the
   case-I counterexample hypotheses, still assuming the explicit half-row
   lower bound and non-central branch. Full T7 remains open.
+- [R] Proved the T7 central branch kill:
+  `Erdos699.central_branch_false_of_sub_one_dvd_t_mul_X_sub_t` shows that
+  `2 * t = X` contradicts the row-one divisor `n - 1 ∣ t * (X - t)` when
+  `n = F * X` and `2 < n`; `Erdos699.i_three_caseI_central_branch_false`
+  packages this under the case-I row-one hypotheses. Full T7 remains open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

@@ -1184,6 +1184,41 @@ theorem i_three_caseI_row_one_exists_factor {n F X j t : ℕ}
       hnone hn hj hn_gt hj_pos h2n h3n htX with ⟨g, hg⟩
   exact ⟨g, by simpa [mul_comm] using hg⟩
 
+theorem central_branch_false_of_sub_one_dvd_t_mul_X_sub_t {n F X t : ℕ}
+    (hn : n = F * X) (hn_gt : 2 < n) (hcentral : 2 * t = X)
+    (hdvd : n - 1 ∣ t * (X - t)) : False := by
+  have hcop_n : (n - 1).Coprime n := by
+    have hsucc : n = (n - 1) + 1 := by omega
+    rw [hsucc]
+    exact Nat.coprime_self_add_right.mpr (by simp)
+  have hX_dvd_n : X ∣ n := by
+    rw [hn]
+    exact dvd_mul_left X F
+  have hcop_X : (n - 1).Coprime X :=
+    Nat.Coprime.coprime_dvd_right hX_dvd_n hcop_n
+  have ht_dvd_X : t ∣ X := by
+    refine ⟨2, ?_⟩
+    omega
+  have hcop_t : (n - 1).Coprime t :=
+    Nat.Coprime.coprime_dvd_right ht_dvd_X hcop_X
+  have hXt : X - t = t := by omega
+  have hdvd_tt : n - 1 ∣ t * t := by
+    simpa [hXt] using hdvd
+  have hdvd_t : n - 1 ∣ t := hcop_t.dvd_of_dvd_mul_left hdvd_tt
+  have hself : (n - 1).Coprime (n - 1) :=
+    Nat.Coprime.coprime_dvd_right hdvd_t hcop_t
+  have hnm1_eq_one : n - 1 = 1 := by
+    exact (Nat.coprime_self (n - 1)).mp hself
+  omega
+
+theorem i_three_caseI_central_branch_false {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hcentral : 2 * t = X) : False :=
+  central_branch_false_of_sub_one_dvd_t_mul_X_sub_t hn hn_gt hcentral
+    (i_three_caseI_row_one_sub_one_dvd_t_mul_X_sub_t
+      hnone hn hj hn_gt hj_pos h2n h3n (by omega : t ≤ X))
+
 theorem four_mul_t_mul_X_sub_t_le_sq {X t : ℕ} (h2tX : 2 * t ≤ X) :
     4 * (t * (X - t)) ≤ X * X := by
   have htX : t ≤ X := by omega
