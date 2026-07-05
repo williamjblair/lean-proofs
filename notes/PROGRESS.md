@@ -350,6 +350,28 @@
   `Erdos699.not_exists_powerTwoQuotientKernel_of_gcd_quotient_ineq` compose
   this normalized inequality target all the way to the pure quotient kernel.
   This is conditional; it does not prove the normalized quotient inequality.
+- [R] Canonicalized the normalized gcd-quotient target and recorded a Lean
+  warning against a false shortcut. The split identities
+  `Erdos699.powerTwoSplitSubtractive_gcd_quotient_product_identity`,
+  `Erdos699.powerTwoSplitSubtractive_gcd_quotient_A_identity`, and
+  `Erdos699.powerTwoSplitSubtractive_gcd_quotient_gap` prove, for
+  `alpha = c*x` and `beta = c*y`, the product identity
+  `c*c*(x*y)+1 = B*B*(l*m)`, the row-sum identity
+  `A = 2*B*(l*m) + c*(x*l + y*m)`, and the oriented quotient gap
+  `x*l < y*m`. The canonical consumers
+  `Erdos699.powerTwoSplitSubtractive_parity_product_gap_of_canonical_gcd_quotient_ineq`,
+  `Erdos699.powerTwoSplitGcdObstruction_of_canonical_gcd_quotient_ineq`,
+  `Erdos699.powerTwoQuotientKernel.not_of_canonical_gcd_quotient_ineq`, and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_canonical_gcd_quotient_ineq`
+  replace existential quotient witnesses by
+  `x = alpha / Nat.gcd alpha beta` and
+  `y = beta / Nat.gcd alpha beta`. Separately,
+  `Erdos699.gcdQuotientBareIdentity_counterexample_not_quotient_gap` proves
+  that the product identity plus `x*l < y*m` alone do not imply the odd-branch
+  quotient inequality: the exact counterexample is
+  `(B, c, x, y, l, m) = (3, 19, 1, 26, 149, 7)`. The power-two row-sum
+  constraint is still essential, and the universal quotient inequality
+  remains open.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
