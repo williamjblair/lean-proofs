@@ -22,5 +22,9 @@
 - [R] Proved `Erdos699.no_commonPrimeDivisor_iff_obstructionCriterion`, the
   formal corrected counterexample criterion. The predicate quantifies over
   `relevantPrime i p`, so primes `p < i` impose no digit-domination condition.
+- [R] Proved `Erdos699.t2_collapse_of_no_common`: under the no-common-prime
+  assumption for row `i = 2`, `2 < j`, and `2 * j ≤ n`, the obstruction
+  collapses to `n = 2 * j` with `j` odd. The final T2 forced-digit kill is
+  still open.
 - [OPEN] T2, full T3 confinement beyond the top-range lemma, and all later
   rungs remain unclaimed in this branch.

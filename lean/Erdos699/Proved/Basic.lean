@@ -167,6 +167,128 @@ theorem commonPrimeDivisor_of_prime_in_top_interval {n i j p : ℕ}
       prime_dvd_choose_of_units_digit_lt hp hright hn_lt_2p hlow_i hi_lt_p,
       prime_dvd_choose_of_units_digit_lt hp hright hn_lt_2p hlow_j hj_lt_p⟩
 
+theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
+    n ∣ j * Nat.choose n j := by
+  have hidentity :
+      n * Nat.choose (n - 1) (j - 1) = Nat.choose n j * j := by
+    have h := Nat.add_one_mul_choose_eq (n - 1) (j - 1)
+    have hn_sub : n - 1 + 1 = n := Nat.sub_add_cancel hn
+    have hj_sub : j - 1 + 1 = j := Nat.sub_add_cancel hj
+    simpa [hn_sub, hj_sub] using h
+  rw [mul_comm j (Nat.choose n j), ← hidentity]
+  exact dvd_mul_right n _
+
+theorem prime_dvd_choose_two_of_odd_prime_dvd {n p : ℕ} (hp : p.Prime)
+    (hp_ne_two : p ≠ 2) (hpn : p ∣ n) :
+    p ∣ Nat.choose n 2 := by
+  apply prime_dvd_choose_of_not_dominated hp
+  intro hdom
+  have hdigits := (dominated_iff_forall_digits hp.two_le).mp hdom 0
+  have hp_two_le : 2 ≤ p := hp.two_le
+  have hp_gt_two : 2 < p := by omega
+  have hn_mod : n % p = 0 := Nat.dvd_iff_mod_eq_zero.mp hpn
+  have htwo_mod : 2 % p = 2 := Nat.mod_eq_of_lt hp_gt_two
+  simp [digit, hn_mod, htwo_mod] at hdigits
+
+theorem two_dvd_choose_two_of_four_dvd {n : ℕ} (h4 : 4 ∣ n) :
+    2 ∣ Nat.choose n 2 := by
+  apply prime_dvd_choose_of_not_dominated (by decide : Nat.Prime 2)
+  intro hdom
+  have hdigits := (dominated_iff_forall_digits (by decide : 2 ≤ 2)).mp hdom 1
+  rcases h4 with ⟨a, rfl⟩
+  have hlevel : (4 * a / 2) % 2 = 0 := by
+    have hdiv : 4 * a / 2 = 2 * a := by
+      rw [show 4 * a = 2 * (2 * a) by omega]
+      exact Nat.mul_div_cancel_left (2 * a) (by decide : 0 < 2)
+    rw [hdiv]
+    exact Nat.dvd_iff_mod_eq_zero.mp (dvd_mul_right 2 a)
+  simp [digit, hlevel] at hdigits
+
+theorem dvd_j_of_no_common_i_two {d n j : ℕ}
+    (hnone : ∀ p : ℕ, ¬ commonPrimeDivisor n 2 j p) (hn : 0 < n) (hj : 0 < j)
+    (hdn : d ∣ n) (hdchoose : ∀ p : ℕ, p.Prime → p ∣ d → p ∣ Nat.choose n 2) :
+    d ∣ j := by
+  have hcop : d.Coprime (Nat.choose n j) := by
+    apply Nat.coprime_of_dvd
+    intro p hp hpd hpchoose
+    exact hnone p ⟨hp, hp.two_le, hdchoose p hp hpd, hpchoose⟩
+  have hn_dvd : n ∣ j * Nat.choose n j := n_dvd_mul_choose_self hn hj
+  have hdprod : d ∣ j * Nat.choose n j := Nat.dvd_trans hdn hn_dvd
+  exact (hcop.dvd_mul_right).mp hdprod
+
+theorem t2_collapse_of_no_common {n j : ℕ}
+    (hnone : ∀ p : ℕ, ¬ commonPrimeDivisor n 2 j p)
+    (hj : 2 < j) (hjn : 2 * j ≤ n) :
+    n = 2 * j ∧ Odd j := by
+  have hj_pos : 0 < j := by omega
+  have hn_pos : 0 < n := by omega
+  by_cases hnodd : Odd n
+  · have hdchoose : ∀ p : ℕ, p.Prime → p ∣ n → p ∣ Nat.choose n 2 := by
+      intro p hp hpn
+      have hp_ne_two : p ≠ 2 := by
+        intro hp_eq
+        subst p
+        have hmod0 : n % 2 = 0 := Nat.dvd_iff_mod_eq_zero.mp hpn
+        have hmod1 : n % 2 = 1 := Nat.odd_iff.mp hnodd
+        omega
+      exact prime_dvd_choose_two_of_odd_prime_dvd hp hp_ne_two hpn
+    have hn_dvd_j : n ∣ j :=
+      dvd_j_of_no_common_i_two hnone hn_pos hj_pos dvd_rfl hdchoose
+    have hn_le_j : n ≤ j := Nat.le_of_dvd hj_pos hn_dvd_j
+    omega
+  · by_cases h4 : 4 ∣ n
+    · have hdchoose : ∀ p : ℕ, p.Prime → p ∣ n → p ∣ Nat.choose n 2 := by
+        intro p hp hpn
+        by_cases hp_eq_two : p = 2
+        · subst p
+          exact two_dvd_choose_two_of_four_dvd h4
+        · exact prime_dvd_choose_two_of_odd_prime_dvd hp hp_eq_two hpn
+      have hn_dvd_j : n ∣ j :=
+        dvd_j_of_no_common_i_two hnone hn_pos hj_pos dvd_rfl hdchoose
+      have hn_le_j : n ≤ j := Nat.le_of_dvd hj_pos hn_dvd_j
+      omega
+    · let m := n / 2
+      have hneven : Even n := Nat.not_odd_iff_even.mp hnodd
+      have h2n : 2 ∣ n := even_iff_two_dvd.mp hneven
+      have hn_eq_two_m : n = 2 * m := by
+        dsimp [m]
+        exact (Nat.mul_div_cancel' h2n).symm
+      have hmdvdn : m ∣ n := by
+        refine ⟨2, ?_⟩
+        rw [hn_eq_two_m, mul_comm]
+      have hdchoose : ∀ p : ℕ, p.Prime → p ∣ m → p ∣ Nat.choose n 2 := by
+        intro p hp hpm
+        have hp_ne_two : p ≠ 2 := by
+          intro hp_eq
+          subst p
+          apply h4
+          rcases hpm with ⟨a, ha⟩
+          refine ⟨a, ?_⟩
+          rw [hn_eq_two_m, ha]
+          omega
+        have hpn : p ∣ n := Nat.dvd_trans hpm hmdvdn
+        exact prime_dvd_choose_two_of_odd_prime_dvd hp hp_ne_two hpn
+      have hm_dvd_j : m ∣ j :=
+        dvd_j_of_no_common_i_two hnone hn_pos hj_pos hmdvdn hdchoose
+      have hm_le_j : m ≤ j := Nat.le_of_dvd hj_pos hm_dvd_j
+      have hj_le_m : j ≤ m := by
+        dsimp [m]
+        rw [Nat.le_div_iff_mul_le (by decide : 0 < 2)]
+        simpa [mul_comm] using hjn
+      have hm_eq_j : m = j := le_antisymm hm_le_j hj_le_m
+      have hn_eq : n = 2 * j := by
+        rw [hn_eq_two_m, hm_eq_j]
+      have hj_odd : Odd j := by
+        apply Nat.not_even_iff_odd.mp
+        intro hjeven
+        apply h4
+        have h2j : 2 ∣ j := even_iff_two_dvd.mp hjeven
+        rcases h2j with ⟨a, ha⟩
+        refine ⟨a, ?_⟩
+        rw [hn_eq, ha]
+        omega
+      exact ⟨hn_eq, hj_odd⟩
+
 theorem t1_i_eq_one {n j : ℕ} (hj : 2 ≤ j) (hjn : 2 * j ≤ n) :
     ∃ p : ℕ, commonPrimeDivisor n 1 j p := by
   by_contra hnone
