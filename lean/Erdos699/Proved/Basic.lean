@@ -930,6 +930,32 @@ theorem not_exists_kernelInRange_95_47_4_96 :
         subst t
         norm_num [Nat.gcd])
 
+theorem not_exists_kernelInRange_767_383_4_768 :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 767 383 4 768 t := by
+  exact
+    not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
+      (N1 := 767) (N2 := 383) (minT := 4) (bound := 768) (candidates := [118])
+      (by norm_num)
+      (by norm_num)
+      (by
+        rw [Nat.coprime_iff_gcd_eq_one]
+        norm_num [Nat.gcd])
+      (by exact ⟨191, by norm_num⟩)
+      (by
+        intro t hmin hbound hsplit
+        have ht_le : t ≤ 384 := by omega
+        interval_cases t <;> simp [rowOneDivisorSplit, Nat.gcd] at hsplit ⊢)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num)
+      (by
+        intro t htmem
+        simp at htmem
+        subst t
+        norm_num [Nat.gcd])
+
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
     ¬ consecutiveDivisorKernel N1 N2 t := by
@@ -2382,27 +2408,68 @@ theorem i_three_caseI_four_dvd_consecutive_kernel_in_range_from_no_common {n j :
     ⟨hcop, hkernel⟩
   exact ⟨hcop, by omega, hkernel.1, hkernel.2⟩
 
+theorem i_three_caseI_not_no_common_from_kernelInRange_empty {n j : ℕ}
+    (hnoKernel :
+      ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange (n - 1) (n / 2 - 1) 4 n t)
+    (hn_gt : 2 < n) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ n) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q := by
+  intro hnone
+  exact
+    hnoKernel
+      ⟨j,
+        (i_three_caseI_four_dvd_consecutive_kernel_in_range_from_no_common
+          hnone hn_gt h2n h3n h4n hj_gt hjn).2⟩
+
+theorem i_three_caseI_exists_common_from_kernelInRange_empty {n j : ℕ}
+    (hnoKernel :
+      ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange (n - 1) (n / 2 - 1) 4 n t)
+    (hn_gt : 2 < n) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ n) :
+    ∃ q : ℕ, commonPrimeDivisor n 3 j q := by
+  by_contra hnone_exists
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty hnoKernel
+      hn_gt h2n h3n h4n hj_gt hjn
+      (by
+        intro q hq
+        exact hnone_exists ⟨q, hq⟩)
+
 theorem i_three_caseI_96_not_no_common_from_row_bounds {j : ℕ}
     (hj_gt : 3 < j) (hjn : 2 * j ≤ 96) :
     ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 96 3 j q := by
-  intro hnone
-  have hkernel :
-      consecutiveDivisorKernelInRange (96 - 1) (96 / 2 - 1) 4 96 j :=
-    (i_three_caseI_four_dvd_consecutive_kernel_in_range_from_no_common
-      hnone (by norm_num) (by norm_num) (by norm_num) (by norm_num)
-      hj_gt hjn).2
-  norm_num at hkernel
-  exact not_exists_kernelInRange_95_47_4_96 ⟨j, hkernel⟩
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 96) (j := j)
+      (by simpa using not_exists_kernelInRange_95_47_4_96)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
 
 theorem i_three_caseI_96_exists_common_from_row_bounds {j : ℕ}
     (hj_gt : 3 < j) (hjn : 2 * j ≤ 96) :
     ∃ q : ℕ, commonPrimeDivisor 96 3 j q := by
-  by_contra hnone_exists
   exact
-    i_three_caseI_96_not_no_common_from_row_bounds hj_gt hjn
-      (by
-        intro q hq
-        exact hnone_exists ⟨q, hq⟩)
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 96) (j := j)
+      (by simpa using not_exists_kernelInRange_95_47_4_96)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_768_not_no_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 768) :
+    ¬ ∀ q : ℕ, ¬ commonPrimeDivisor 768 3 j q := by
+  exact
+    i_three_caseI_not_no_common_from_kernelInRange_empty
+      (n := 768) (j := j)
+      (by simpa using not_exists_kernelInRange_767_383_4_768)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
+
+theorem i_three_caseI_768_exists_common_from_row_bounds {j : ℕ}
+    (hj_gt : 3 < j) (hjn : 2 * j ≤ 768) :
+    ∃ q : ℕ, commonPrimeDivisor 768 3 j q := by
+  exact
+    i_three_caseI_exists_common_from_kernelInRange_empty
+      (n := 768) (j := j)
+      (by simpa using not_exists_kernelInRange_767_383_4_768)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) hj_gt hjn
 
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
     {d n F X j t : ℕ} (hdn : d ∣ n - 2) (hcop4 : d.Coprime 4)

@@ -639,14 +639,27 @@
   reports `row_one_candidates = [20]`, `survivor_count = 0`, and
   `all_strict_lt_n2 = True`. This is a small Lean-certified finite
   certificate bridge, not a proof of the general kernel.
-- [R] Connected that finite lower-bounded certificate back to the original
-  problem surface for the first nontrivial `n = 3 * 2^5` Case-I member:
+- [R] Added the reusable problem-surface consumer for lower-bounded Case-I
+  kernel certificates:
+  `Erdos699.i_three_caseI_not_no_common_from_kernelInRange_empty` and
+  `Erdos699.i_three_caseI_exists_common_from_kernelInRange_empty` turn
+  `¬ ∃ t, consecutiveDivisorKernelInRange (n - 1) (n / 2 - 1) 4 n t` plus
+  the explicit `3 ∣ n`, `4 ∣ n`, `3 < j`, `2 * j ≤ n` hypotheses into the
+  original common-prime conclusion. This is a certificate consumer, not a
+  proof that the kernel is empty.
+- [R] Connected finite lower-bounded certificates back to the original
+  problem surface for two `n = 3 * 2^A` Case-I members. For `A = 5`,
   `Erdos699.i_three_caseI_96_not_no_common_from_row_bounds` rules out the
   no-common-prime counterexample criterion for every `j` with `3 < j` and
   `2 * j ≤ 96`, and
   `Erdos699.i_three_caseI_96_exists_common_from_row_bounds` gives the
-  corresponding witness statement `∃ q, commonPrimeDivisor 96 3 j q`. This is
-  an end-to-end Lean-certified finite instance, not a general Case-I theorem.
+  corresponding witness statement `∃ q, commonPrimeDivisor 96 3 j q`. For
+  `A = 8`, `Erdos699.not_exists_kernelInRange_767_383_4_768` proves the
+  exact lower-bounded kernel certificate with row-one list `[118]`, and
+  `Erdos699.i_three_caseI_768_exists_common_from_row_bounds` gives the
+  analogous common-prime witness statement for every `j` with `3 < j` and
+  `2 * j ≤ 768`. These are end-to-end Lean-certified finite instances, not a
+  general Case-I theorem.
 - [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
   product inequality is false under C2 shape hypotheses alone:
   `n = 54,734,052`, `N1 = n - 1`, `N2 = n / 2 - 1`, and
