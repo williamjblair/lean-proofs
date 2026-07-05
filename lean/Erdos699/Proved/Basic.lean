@@ -4547,6 +4547,49 @@ theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
     (Nat.mul_pos hlpos hmpos)
     hgap
 
+/-- If every admissible positive split satisfies the parity-branch gap
+inequality, then the split/gcd obstruction holds. This is a weaker-looking
+but often easier target than the exact reduced-divisor gap, because the
+half-row modulus is odd. -/
+theorem powerTwoSplitGcdObstruction_of_parity_reduced_divisor_gap {A B : ℕ}
+    (hgapAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  (Odd c ∧ l * m < M / c) ∨
+                                    (Even c ∧ l * m < M / (c / 2))) :
+    powerTwoSplitGcdObstruction A B := by
+  intro hApow hA4 hBodd hBge r s l m alpha beta c hrpos hspos hlpos hmpos
+    hD hA hsplitgap halpha hbeta hc
+  have hApos : 0 < A := by
+    rcases hApow with ⟨a, rfl⟩
+    exact Nat.pow_pos (by decide : 0 < 2)
+  have hsplit_lt := powerTwoSplitSubtractive_lt (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) hBge hrpos hspos hlpos hmpos hD hA
+  have halpha_pos : 0 < alpha := by
+    rw [halpha]
+    exact Nat.sub_pos_of_lt hsplit_lt.1
+  have hcpos : 0 < Nat.gcd alpha beta :=
+    Nat.gcd_pos_of_pos_left beta halpha_pos
+  rw [hc]
+  exact powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
+    hA4 hBodd hBge hApos hlpos hmpos hcpos
+    (hgapAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+      hmpos hD hA hsplitgap halpha hbeta)
+
 /-- Split-level reduced-divisor gap certificate: if
 `l*m < M / gcd (gcd alpha beta) M`, then the split/gcd row-two divisibility
 fails. -/
@@ -4967,6 +5010,58 @@ theorem not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap {A B : ℕ}
     ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
   rintro ⟨v, h, hkernel⟩
   exact powerTwoQuotientKernel.not_of_reduced_divisor_gap hgapAll hkernel
+
+/-- Direct conditional kernel kill from the parity-branch gap inequality. -/
+theorem powerTwoQuotientKernel.not_of_parity_reduced_divisor_gap {A B v h : ℕ}
+    (hgapAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  (Odd c ∧ l * m < M / c) ∨
+                                    (Even c ∧ l * m < M / (c / 2))) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_splitGcdObstruction
+    (powerTwoSplitGcdObstruction_of_parity_reduced_divisor_gap hgapAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_parity_reduced_divisor_gap`. -/
+theorem not_exists_powerTwoQuotientKernel_of_parity_reduced_divisor_gap
+    {A B : ℕ}
+    (hgapAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  (Odd c ∧ l * m < M / c) ∨
+                                    (Even c ∧ l * m < M / (c / 2))) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact powerTwoQuotientKernel.not_of_parity_reduced_divisor_gap hgapAll hkernel
 
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure

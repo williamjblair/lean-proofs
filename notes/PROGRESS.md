@@ -270,6 +270,15 @@
   prove the branch certificate: for odd `c`, `l*m < M/c` suffices, while for
   even `c`, `l*m < M/(c/2)` suffices. This is still conditional; it does not
   prove the branch inequalities.
+- [R] Added the direct consumers for the parity-branch target. The theorem
+  `Erdos699.powerTwoSplitGcdObstruction_of_parity_reduced_divisor_gap` turns
+  a universal parity branch inequality over all admissible positive splits
+  into `powerTwoSplitGcdObstruction A B`, deriving
+  `0 < Nat.gcd alpha beta` internally from the subtractive split inequalities.
+  The theorems `Erdos699.powerTwoQuotientKernel.not_of_parity_reduced_divisor_gap`
+  and `Erdos699.not_exists_powerTwoQuotientKernel_of_parity_reduced_divisor_gap`
+  compose this all the way to the pure quotient kernel. This changes the
+  formal target surface only; it is not a proof of the universal parity gap.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
