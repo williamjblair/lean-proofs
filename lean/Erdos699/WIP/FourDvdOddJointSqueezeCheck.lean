@@ -9,6 +9,9 @@ namespace Erdos699
 #check rowNDigitPowerConstraintExact
 #check rowNDigitPowerConstraintExact_of_rowNDigitPowerConstraint
 #check powerTwoQuotientKernel
+#check powerTwoSplitGcdObstruction
+#check powerTwoSplitGcdObstruction.not_dvd
+#check powerTwoSplitAdditive_alpha_beta_mul
 #check powerTwoQuotientKernel_of_squeezedNormalized_decomposition
 #check exists_powerTwoQuotientKernel_of_squeezedNormalized_decomposition
 #check coprime_left_mul_right_sub_one

@@ -3816,6 +3816,68 @@ def powerTwoQuotientKernel (A B v h : ℕ) : Prop :=
               v * (A - v) = h * (B * A - 1) ∧
                 B * (A / 2) - 1 ∣ h * (A - 2 * v)
 
+/-- The isolated split/gcd obstruction for the pure power-of-two quotient
+kernel. This is a hypothesis surface for the remaining C2 work, not a proved
+theorem: proving this predicate for all admissible `A, B` is exactly the
+missing split/gcd obstruction. -/
+def powerTwoSplitGcdObstruction (A B : ℕ) : Prop :=
+  (∃ a : ℕ, A = 2 ^ a) →
+    4 ∣ A →
+      Odd B →
+        3 ≤ B →
+          ∀ r s l m alpha beta c : ℕ,
+            0 < r →
+              0 < s →
+                0 < l →
+                  0 < m →
+                    r * s = B * A - 1 →
+                      r * l + s * m = A →
+                        r * l < s * m →
+                          alpha = r - B * m →
+                            beta = s - B * l →
+                              c = Nat.gcd alpha beta →
+                                ¬ B * (A / 2) - 1 ∣ c * (l * m)
+
+/-- Direct consumer for a stated `powerTwoSplitGcdObstruction`. -/
+theorem powerTwoSplitGcdObstruction.not_dvd {A B r s l m alpha beta c : ℕ}
+    (hobs : powerTwoSplitGcdObstruction A B)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (hgap : r * l < s * m)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hc : c = Nat.gcd alpha beta) :
+    ¬ B * (A / 2) - 1 ∣ c * (l * m) :=
+  hobs hApow hA4 hBodd hBge r s l m alpha beta c hrpos hspos hlpos hmpos
+    hD hA hgap halpha hbeta hc
+
+/-- Additive alpha/beta form of the split algebra. The statement deliberately
+uses `r = B * m + alpha` and `s = B * l + beta`; this avoids deriving facts
+from truncated natural subtraction in the still-open split/gcd obstruction. -/
+theorem powerTwoSplitAdditive_alpha_beta_mul {A B r s l m alpha beta : ℕ}
+    (hBpos : 0 < B)
+    (hApos : 0 < A)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : r = B * m + alpha)
+    (hbeta : s = B * l + beta) :
+    alpha * beta + 1 = B * B * (l * m) := by
+  have hDadd : r * s + 1 = B * A := by
+    have hBApos : 0 < B * A := Nat.mul_pos hBpos hApos
+    omega
+  subst r
+  subst s
+  rw [← hA] at hDadd
+  nlinarith
+
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure
 power-of-two quotient kernel: once `X = A * H`, `u = H * v`, `g = H^2 * h`,

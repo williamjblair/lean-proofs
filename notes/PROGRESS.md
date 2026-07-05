@@ -128,6 +128,18 @@
   kernel point plus `rowNDigitPowerConstraint X u`, `X = A * H`, `4 ∣ A`,
   `A = 2 ^ a`, and odd `H`. This is the unguarded/all-forced branch; the
   globally guarded row-`n` reduction still needs its branch condition.
+- [R] Formalized the current split/gcd obstruction target without claiming it.
+  `Erdos699.powerTwoSplitGcdObstruction A B` is the hypothesis surface saying
+  that, for `A = 2 ^ a`, `4 ∣ A`, odd `B ≥ 3`, and any positive split
+  `r * s = B * A - 1` with `r * l + s * m = A` and `r * l < s * m`, the
+  half-row divisor does not divide
+  `Nat.gcd (r - B * m) (s - B * l) * (l * m)`.
+  `Erdos699.powerTwoSplitGcdObstruction.not_dvd` is only the direct consumer
+  of that hypothesis. Separately,
+  `Erdos699.powerTwoSplitAdditive_alpha_beta_mul` proves the exact additive
+  split identity `alpha * beta + 1 = B * B * (l * m)` from
+  `r * s = B * A - 1`, `r * l + s * m = A`, `r = B * m + alpha`, and
+  `s = B * l + beta`. The global obstruction theorem remains open.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under
