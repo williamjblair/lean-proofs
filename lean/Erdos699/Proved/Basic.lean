@@ -4593,6 +4593,47 @@ theorem product_gap_of_factor_bound_by_B_sq {M B l m alpha beta b : ℕ}
     nlinarith
   exact Nat.le_of_mul_le_mul_left htwice (by decide : 0 < 2)
 
+/-- Quotient form of the parity product gap. If `alpha = c*x` and
+`beta = c*y`, the half-row identity rewrites the target denominator as
+`2*c*x*y + B*(x*l + y*m)`: the odd branch needs twice `L+1`, while the even
+branch needs only `L+1`. -/
+theorem parity_product_gap_of_gcd_quotient_ineq {M B l m c x y L : ℕ}
+    (hhalf :
+      2 * M =
+        2 * ((c * x) * (c * y)) + B * ((c * x) * l + (c * y) * m))
+    (hgap :
+      (Odd c ∧ 2 * (L + 1) ≤ 2 * c * (x * y) + B * (x * l + y * m)) ∨
+        (Even c ∧ L + 1 ≤ 2 * c * (x * y) + B * (x * l + y * m))) :
+    (Odd c ∧ c * (L + 1) ≤ M) ∨
+      (Even c ∧ (c / 2) * (L + 1) ≤ M) := by
+  let T := 2 * c * (x * y) + B * (x * l + y * m)
+  have hfactor : c * T = 2 * M := by
+    calc
+      c * T =
+          2 * ((c * x) * (c * y)) + B * ((c * x) * l + (c * y) * m) := by
+        dsimp [T]
+        ring
+      _ = 2 * M := hhalf.symm
+  rcases hgap with ⟨hcodd, hineq⟩ | ⟨hceven, hineq⟩
+  · have htwice : 2 * (c * (L + 1)) ≤ 2 * M := by
+      calc
+        2 * (c * (L + 1)) = c * (2 * (L + 1)) := by ring
+        _ ≤ c * T := Nat.mul_le_mul_left c hineq
+        _ = 2 * M := hfactor
+    exact Or.inl ⟨hcodd,
+      Nat.le_of_mul_le_mul_left htwice (by decide : 0 < 2)⟩
+  · rcases hceven with ⟨q, hcq⟩
+    have hcdiv : c / 2 = q := by omega
+    have htwice : 2 * ((c / 2) * (L + 1)) ≤ 2 * M := by
+      calc
+        2 * ((c / 2) * (L + 1)) = c * (L + 1) := by
+          rw [hcdiv, hcq]
+          ring
+        _ ≤ c * T := Nat.mul_le_mul_left c hineq
+        _ = 2 * M := hfactor
+    exact Or.inr ⟨⟨q, hcq⟩,
+      Nat.le_of_mul_le_mul_left htwice (by decide : 0 < 2)⟩
+
 /-- Product-form parity certificate. For odd `c`, it is enough to prove
 `c * (L + 1) ≤ M`; for even `c`, it is enough to prove
 `(c / 2) * (L + 1) ≤ M`. -/
@@ -4961,6 +5002,54 @@ theorem powerTwoSplitSubtractive_parity_product_gap_of_large_denominator_product
         (Or.inl ⟨hcodd, hsmall⟩)
     · exact Or.inl ⟨hcodd, hlargeOdd hcodd hlarge⟩
 
+/-- Split specialization of the quotient form of the parity product gap. This
+replaces the product target by normalized gcd quotients `alpha = c*x` and
+`beta = c*y`. -/
+theorem powerTwoSplitSubtractive_parity_product_gap_of_gcd_quotient_ineq
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hquot :
+      let c := Nat.gcd alpha beta
+      ∃ x y : ℕ,
+        alpha = c * x ∧
+          beta = c * y ∧
+            ((Odd c ∧
+                2 * (l * m + 1) ≤ 2 * c * (x * y) + B * (x * l + y * m)) ∨
+              (Even c ∧
+                l * m + 1 ≤ 2 * c * (x * y) + B * (x * l + y * m)))) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    (Odd c ∧ c * (l * m + 1) ≤ M) ∨
+      (Even c ∧ (c / 2) * (l * m + 1) ≤ M) := by
+  dsimp at hquot ⊢
+  rcases hquot with ⟨x, y, halpha_c, hbeta_c, hgap⟩
+  let c := Nat.gcd alpha beta
+  have halpha_c' : alpha = c * x := halpha_c
+  have hbeta_c' : beta = c * y := hbeta_c
+  have hA2 : 2 ∣ A := dvd_trans (by decide : 2 ∣ 4) hA4
+  have hhalf :
+      2 * (B * (A / 2) - 1) =
+        2 * (alpha * beta) + B * (alpha * l + beta * m) :=
+    powerTwoSplitSubtractive_half_row_alpha_beta_identity hA2 hBge hrpos hspos
+      hlpos hmpos hD hA halpha hbeta
+  have hhalf_quot :
+      2 * (B * (A / 2) - 1) =
+        2 * ((c * x) * (c * y)) +
+          B * ((c * x) * l + (c * y) * m) := by
+    have hhalf' := hhalf
+    rw [halpha_c', hbeta_c'] at hhalf'
+    exact hhalf'
+  exact parity_product_gap_of_gcd_quotient_ineq hhalf_quot hgap
+
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
     {A B l m alpha beta : ℕ}
@@ -5127,6 +5216,46 @@ theorem powerTwoSplitGcdObstruction_of_large_parity_denominator_product_gap
     hspos hlpos hmpos hD hA hsplitgap halpha hbeta
   exact powerTwoSplitSubtractive_parity_product_gap_of_large_denominator_product_gap
     hA4 hBge hrpos hspos hlpos hmpos hD hA halpha hbeta hlarge.1 hlarge.2
+
+/-- If every admissible positive split satisfies the normalized gcd-quotient
+inequality, then the split/gcd obstruction holds. -/
+theorem powerTwoSplitGcdObstruction_of_gcd_quotient_ineq
+    {A B : ℕ}
+    (hquotAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  ∃ x y : ℕ,
+                                    alpha = c * x ∧
+                                      beta = c * y ∧
+                                        ((Odd c ∧
+                                            2 * (l * m + 1) ≤
+                                              2 * c * (x * y) +
+                                                B * (x * l + y * m)) ∨
+                                          (Even c ∧
+                                            l * m + 1 ≤
+                                              2 * c * (x * y) +
+                                                B * (x * l + y * m)))) :
+    powerTwoSplitGcdObstruction A B := by
+  refine powerTwoSplitGcdObstruction_of_parity_product_gap ?_
+  intro hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos hmpos
+    hD hA hsplitgap halpha hbeta
+  exact powerTwoSplitSubtractive_parity_product_gap_of_gcd_quotient_ineq
+    hA4 hBge hrpos hspos hlpos hmpos hD hA halpha hbeta
+    (hquotAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+      hmpos hD hA hsplitgap halpha hbeta)
 
 /-- Split-level reduced-divisor gap certificate: if
 `l*m < M / gcd (gcd alpha beta) M`, then the split/gcd row-two divisibility
@@ -5714,6 +5843,76 @@ theorem not_exists_powerTwoQuotientKernel_of_large_parity_denominator_product_ga
   exact
     powerTwoQuotientKernel.not_of_large_parity_denominator_product_gap
       hlargeAll hkernel
+
+/-- Direct conditional kernel kill from the normalized gcd-quotient
+inequality. -/
+theorem powerTwoQuotientKernel.not_of_gcd_quotient_ineq
+    {A B v h : ℕ}
+    (hquotAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  ∃ x y : ℕ,
+                                    alpha = c * x ∧
+                                      beta = c * y ∧
+                                        ((Odd c ∧
+                                            2 * (l * m + 1) ≤
+                                              2 * c * (x * y) +
+                                                B * (x * l + y * m)) ∨
+                                          (Even c ∧
+                                            l * m + 1 ≤
+                                              2 * c * (x * y) +
+                                                B * (x * l + y * m)))) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_splitGcdObstruction
+    (powerTwoSplitGcdObstruction_of_gcd_quotient_ineq hquotAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_gcd_quotient_ineq`. -/
+theorem not_exists_powerTwoQuotientKernel_of_gcd_quotient_ineq
+    {A B : ℕ}
+    (hquotAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  ∃ x y : ℕ,
+                                    alpha = c * x ∧
+                                      beta = c * y ∧
+                                        ((Odd c ∧
+                                            2 * (l * m + 1) ≤
+                                              2 * c * (x * y) +
+                                                B * (x * l + y * m)) ∨
+                                          (Even c ∧
+                                            l * m + 1 ≤
+                                              2 * c * (x * y) +
+                                                B * (x * l + y * m)))) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact powerTwoQuotientKernel.not_of_gcd_quotient_ineq hquotAll hkernel
 
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure

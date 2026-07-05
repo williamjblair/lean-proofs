@@ -338,6 +338,18 @@
   compose this restricted target all the way to the pure quotient kernel.
   This is a conditional reduction, not a proof of the large-denominator
   branches.
+- [R] Added the normalized gcd-quotient form of the parity product target.
+  `Erdos699.parity_product_gap_of_gcd_quotient_ineq` proves that after
+  writing `alpha = c*x` and `beta = c*y`, the half-row identity reduces the
+  odd branch to
+  `2 * (l*m + 1) ≤ 2*c*(x*y) + B*(x*l + y*m)` and the even branch to
+  `l*m + 1 ≤ 2*c*(x*y) + B*(x*l + y*m)`. The split and kernel consumers
+  `Erdos699.powerTwoSplitSubtractive_parity_product_gap_of_gcd_quotient_ineq`,
+  `Erdos699.powerTwoSplitGcdObstruction_of_gcd_quotient_ineq`,
+  `Erdos699.powerTwoQuotientKernel.not_of_gcd_quotient_ineq`, and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_gcd_quotient_ineq` compose
+  this normalized inequality target all the way to the pure quotient kernel.
+  This is conditional; it does not prove the normalized quotient inequality.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
@@ -394,6 +406,18 @@
   exceptional denominator is the known `A = 2^52`, `B = 5`, `c/2 = 39` case,
   which still satisfies the product gap in the diagnostic. This is exact
   bounded evidence and a branch split, not a proof of the exceptional branch.
+- [E] Added exact diagnostics for the normalized gcd-quotient target. For
+  each row-one split the scanner now records `x = alpha / c`,
+  `y = beta / c`, the branch-required left side, the quotient right side
+  `2*c*(x*y) + B*(x*l + y*m)`, and the exact margin. Reproduce over the
+  enlarged power-two quotient perimeter with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; q=p["min_quotient_gap_candidate"]; e=p["max_parity_denominator_over_B_sq_candidate"]; print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"], p["quotient_gap_holds_count"], p["quotient_gap_failure_count"], p["min_quotient_gap_margin"], q["exponent"], q["B"], q["c_parity"], q["quotient_gap_rhs"], q["quotient_gap_required"], e["exponent"], e["B"], e["gcd_quotient_x"], e["gcd_quotient_y"], e["quotient_gap_margin"])'`.
+  It reports `69000 880 0 880 0 725 9 3 even 767 42 52 5 87669208098 7
+  139346034426695`. Thus the normalized quotient inequality holds for all
+  880 bounded row-one candidates in this perimeter; the known large
+  denominator exception has quotient variables `x = 87669208098`, `y = 7`
+  and a positive quotient margin. This is exact bounded evidence, not a
+  proof of the universal quotient inequality.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` leaves an
   uncertified prime factor at least `2^64`, the scan raises. With
