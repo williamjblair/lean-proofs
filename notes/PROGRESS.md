@@ -6,12 +6,11 @@
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.
 - [E] Added and optimized a reproducible exact full-sweep scanner
-  `python3 -m compute.scan --limit 800`. The scan uses the corrected
-  Lucas obstruction criterion with short-circuit obstruction search, checks
-  all triples `1 ≤ i < j ≤ n / 2` for `n ≤ 800`, and returned
-  `candidate_count = 0` over `21,253,400` triples. This is a local
-  reproduction artifact only; it does not claim the historical `n ≤ 8000`
-  perimeter.
+  `python3 -m compute.scan --limit 2000`. The scan uses the corrected
+  Lucas obstruction criterion with bitset domination masks, checks all triples
+  `1 ≤ i < j ≤ n / 2` for `n ≤ 2000`, and returned `candidate_count = 0`
+  over `332,833,500` triples. This is a local reproduction artifact only; it
+  does not claim the historical `n ≤ 8000` perimeter.
 - [R] Added Lean definitions `Erdos699.digit`, `Erdos699.dominated`, and
   `Erdos699.relevantPrime`, plus theorem
   `Erdos699.relevantPrime_ignores_small`. Reproduce with:
