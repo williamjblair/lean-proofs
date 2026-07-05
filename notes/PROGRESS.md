@@ -599,6 +599,22 @@
   `quotient_gap_gcd_product = 1 < N2` for every listed candidate. This is
   exact finite evidence aligned to the quotient-gap certificate interface,
   not a proof that the kernel is empty.
+- [E] Added compact opt-in quotient-gap aggregate summaries via
+  `--include-quotient-gap-summary`, so finite scans can report exactly whether
+  the Lean-facing inequality
+  `gcd ((t * (t - 1)) / N1) N2 * gcd (t - 2) N2 < N2` holds for every
+  enumerated row-one CRT candidate without emitting every split row. The
+  command
+  `python3 -c 'from compute.kernel import scan_case_i_power_two_kernel as s; r=s(62, include_quotient_gap_summary=True); print(r["instance_count"], r["total_row_one_candidate_count"], r["survivor_count"]); print(r["quotient_gap_summary"])'`
+  reports `61` instances, `130` row-one candidates, `0` survivors,
+  `strict_lt_n2_count = 130`, and `all_strict_lt_n2 = True`. The quotient-gap
+  product histogram is `{1: 108, 5: 15, 11: 2, 23: 2, 29: 1, 101: 1,
+  115: 1}`, with max product `115`; the max relative product is the exponent
+  `5` candidate `t = 20`, where the product is `1 < 47`. As a sanity contrast,
+  `python3 -m compute.kernel --n1 15 --n2 14 --bound 120 --min-t 4 --include-quotient-gap-summary`
+  reports `15` row-one candidates, `6` row-two survivors, and
+  `all_strict_lt_n2 = False`. This is exact finite evidence for the
+  quotient-gap certificate lane, not a proof that the kernel is empty.
 - [E] Verified the GPT Pro pure-C2 survivor showing that the quotient-gap
   product inequality is false under C2 shape hypotheses alone:
   `n = 54,734,052`, `N1 = n - 1`, `N2 = n / 2 - 1`, and

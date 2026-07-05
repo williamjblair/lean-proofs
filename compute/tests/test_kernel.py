@@ -256,6 +256,33 @@ def test_crt_scan_can_include_row_one_split_summary_on_request() -> None:
     }
 
 
+def test_crt_scan_can_include_quotient_gap_summary_on_request() -> None:
+    default_result = scan_kernel_crt(15, 14, 120, min_t=4)
+    result = scan_kernel_crt(
+        15, 14, 120, min_t=4, include_quotient_gap_summary=True
+    )
+    assert "quotient_gap_summary" not in default_result
+    assert "row_one_candidate_splits" not in result
+    assert result["quotient_gap_summary"] == {
+        "candidate_count": 15,
+        "strict_lt_n2_count": 9,
+        "non_strict_lt_n2_count": 6,
+        "all_strict_lt_n2": False,
+        "max_quotient_gap_gcd_product": 28,
+        "quotient_gap_gcd_product_histogram": [
+            {"quotient_gap_gcd_product": 2, "count": 4},
+            {"quotient_gap_gcd_product": 4, "count": 5},
+            {"quotient_gap_gcd_product": 14, "count": 3},
+            {"quotient_gap_gcd_product": 28, "count": 3},
+        ],
+        "max_relative_product": {
+            "t": 16,
+            "n2": 14,
+            "quotient_gap_gcd_product": 28,
+        },
+    }
+
+
 def test_kernel_cli_emits_json() -> None:
     completed = subprocess.run(
         [
@@ -388,6 +415,33 @@ def test_kernel_cli_can_include_row_one_split_summary() -> None:
     }
 
 
+def test_kernel_cli_can_include_quotient_gap_summary() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--case-i-power-two",
+            "--max-exponent",
+            "5",
+            "--include-quotient-gap-summary",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["quotient_gap_summary"]["all_strict_lt_n2"] is True
+    assert payload["quotient_gap_summary"]["candidate_count"] == 1
+    assert payload["quotient_gap_summary"]["max_relative_product"] == {
+        "exponent": 5,
+        "n": 96,
+        "t": 20,
+        "n2": 47,
+        "quotient_gap_gcd_product": 1,
+    }
+
+
 def test_case_i_power_two_family_scan_matches_scalar_scans() -> None:
     result = scan_case_i_power_two_kernel(5)
     assert result["mode"] == "case_i_power_two_kernel"
@@ -468,6 +522,51 @@ def test_case_i_power_two_family_scan_can_include_split_summary() -> None:
         "surviving_split_count": 0,
         "failed_split_count": 1,
         "row_two_gcd_histogram": [{"row_two_gcd": 1, "count": 1}],
+    }
+
+
+def test_case_i_power_two_family_scan_can_include_quotient_gap_summary() -> None:
+    result = scan_case_i_power_two_kernel(62, include_quotient_gap_summary=True)
+    assert "row_one_candidate_splits" not in result["instances"][3]
+    assert result["quotient_gap_summary"] == {
+        "candidate_count": 130,
+        "strict_lt_n2_count": 130,
+        "non_strict_lt_n2_count": 0,
+        "all_strict_lt_n2": True,
+        "max_quotient_gap_gcd_product": 115,
+        "quotient_gap_gcd_product_histogram": [
+            {"quotient_gap_gcd_product": 1, "count": 108},
+            {"quotient_gap_gcd_product": 5, "count": 15},
+            {"quotient_gap_gcd_product": 11, "count": 2},
+            {"quotient_gap_gcd_product": 23, "count": 2},
+            {"quotient_gap_gcd_product": 29, "count": 1},
+            {"quotient_gap_gcd_product": 101, "count": 1},
+            {"quotient_gap_gcd_product": 115, "count": 1},
+        ],
+        "max_relative_product": {
+            "exponent": 5,
+            "n": 96,
+            "t": 20,
+            "n2": 47,
+            "quotient_gap_gcd_product": 1,
+        },
+    }
+    assert result["instances"][3]["quotient_gap_summary"] == {
+        "candidate_count": 1,
+        "strict_lt_n2_count": 1,
+        "non_strict_lt_n2_count": 0,
+        "all_strict_lt_n2": True,
+        "max_quotient_gap_gcd_product": 1,
+        "quotient_gap_gcd_product_histogram": [
+            {"quotient_gap_gcd_product": 1, "count": 1}
+        ],
+        "max_relative_product": {
+            "exponent": 5,
+            "n": 96,
+            "t": 20,
+            "n2": 47,
+            "quotient_gap_gcd_product": 1,
+        },
     }
 
 

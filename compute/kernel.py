@@ -376,6 +376,106 @@ def _merge_row_one_split_summaries(summaries: list[dict[str, Any]]) -> dict[str,
     }
 
 
+def _relative_product_is_larger(
+    candidate: dict[str, int], current: dict[str, int]
+) -> bool:
+    candidate_product = candidate["quotient_gap_gcd_product"]
+    current_product = current["quotient_gap_gcd_product"]
+    left = candidate_product * current["n2"]
+    right = current_product * candidate["n2"]
+    return left > right
+
+
+def _quotient_gap_summary(
+    splits: list[dict[str, Any]], n2: int
+) -> dict[str, Any]:
+    product_counts: dict[int, int] = {}
+    strict_lt_n2_count = 0
+    max_quotient_gap_gcd_product = 0
+    max_relative_product: dict[str, int] | None = None
+    for split in splits:
+        product = split["quotient_gap_gcd_product"]
+        product_counts[product] = product_counts.get(product, 0) + 1
+        if product < n2:
+            strict_lt_n2_count += 1
+        if product > max_quotient_gap_gcd_product:
+            max_quotient_gap_gcd_product = product
+        relative_product = {
+            "t": split["t"],
+            "n2": n2,
+            "quotient_gap_gcd_product": product,
+        }
+        if max_relative_product is None or _relative_product_is_larger(
+            relative_product, max_relative_product
+        ):
+            max_relative_product = relative_product
+    candidate_count = len(splits)
+    non_strict_lt_n2_count = candidate_count - strict_lt_n2_count
+    return {
+        "candidate_count": candidate_count,
+        "strict_lt_n2_count": strict_lt_n2_count,
+        "non_strict_lt_n2_count": non_strict_lt_n2_count,
+        "all_strict_lt_n2": non_strict_lt_n2_count == 0,
+        "max_quotient_gap_gcd_product": max_quotient_gap_gcd_product,
+        "quotient_gap_gcd_product_histogram": [
+            {"quotient_gap_gcd_product": product, "count": product_counts[product]}
+            for product in sorted(product_counts)
+        ],
+        "max_relative_product": max_relative_product,
+    }
+
+
+def _add_quotient_gap_summary_context(
+    summary: dict[str, Any], context: dict[str, int]
+) -> dict[str, Any]:
+    max_relative_product = summary["max_relative_product"]
+    if max_relative_product is None:
+        return dict(summary)
+    return {
+        **summary,
+        "max_relative_product": {**context, **max_relative_product},
+    }
+
+
+def _merge_quotient_gap_summaries(summaries: list[dict[str, Any]]) -> dict[str, Any]:
+    product_counts: dict[int, int] = {}
+    candidate_count = 0
+    strict_lt_n2_count = 0
+    non_strict_lt_n2_count = 0
+    max_quotient_gap_gcd_product = 0
+    max_relative_product: dict[str, int] | None = None
+    for summary in summaries:
+        candidate_count += summary["candidate_count"]
+        strict_lt_n2_count += summary["strict_lt_n2_count"]
+        non_strict_lt_n2_count += summary["non_strict_lt_n2_count"]
+        max_quotient_gap_gcd_product = max(
+            max_quotient_gap_gcd_product,
+            summary["max_quotient_gap_gcd_product"],
+        )
+        for row in summary["quotient_gap_gcd_product_histogram"]:
+            product = row["quotient_gap_gcd_product"]
+            product_counts[product] = product_counts.get(product, 0) + row["count"]
+        candidate_relative_product = summary["max_relative_product"]
+        if candidate_relative_product is None:
+            continue
+        if max_relative_product is None or _relative_product_is_larger(
+            candidate_relative_product, max_relative_product
+        ):
+            max_relative_product = candidate_relative_product
+    return {
+        "candidate_count": candidate_count,
+        "strict_lt_n2_count": strict_lt_n2_count,
+        "non_strict_lt_n2_count": non_strict_lt_n2_count,
+        "all_strict_lt_n2": non_strict_lt_n2_count == 0,
+        "max_quotient_gap_gcd_product": max_quotient_gap_gcd_product,
+        "quotient_gap_gcd_product_histogram": [
+            {"quotient_gap_gcd_product": product, "count": product_counts[product]}
+            for product in sorted(product_counts)
+        ],
+        "max_relative_product": max_relative_product,
+    }
+
+
 def scan_kernel_crt(
     n1: int,
     n2: int,
@@ -384,6 +484,7 @@ def scan_kernel_crt(
     include_row_one_candidates: bool = False,
     include_row_one_splits: bool = False,
     include_row_one_split_summary: bool = False,
+    include_quotient_gap_summary: bool = False,
 ) -> dict[str, Any]:
     if n1 < 1 or n2 < 1:
         raise ValueError("n1 and n2 must be positive")
@@ -418,7 +519,11 @@ def scan_kernel_crt(
     }
     if include_row_one_candidates:
         result["row_one_candidates"] = row_one_candidates
-    if include_row_one_splits or include_row_one_split_summary:
+    if (
+        include_row_one_splits
+        or include_row_one_split_summary
+        or include_quotient_gap_summary
+    ):
         factors = prime_power_factorization(n1)
         row_one_candidate_splits = [
             _row_one_split_diagnostic(factors, n1, n2, t)
@@ -430,6 +535,10 @@ def scan_kernel_crt(
             result["row_one_split_summary"] = _row_one_split_summary(
                 row_one_candidate_splits
             )
+        if include_quotient_gap_summary:
+            result["quotient_gap_summary"] = _quotient_gap_summary(
+                row_one_candidate_splits, n2
+            )
     return result
 
 
@@ -440,6 +549,7 @@ def scan_case_i_power_two_kernel(
     include_row_one_candidates: bool = False,
     include_row_one_splits: bool = False,
     include_row_one_split_summary: bool = False,
+    include_quotient_gap_summary: bool = False,
 ) -> dict[str, Any]:
     if min_exponent < 0 or max_exponent < min_exponent:
         raise ValueError("require 0 <= min_exponent <= max_exponent")
@@ -456,7 +566,13 @@ def scan_case_i_power_two_kernel(
             include_row_one_candidates=include_row_one_candidates,
             include_row_one_splits=include_row_one_splits,
             include_row_one_split_summary=include_row_one_split_summary,
+            include_quotient_gap_summary=include_quotient_gap_summary,
         )
+        if include_quotient_gap_summary:
+            scan["quotient_gap_summary"] = _add_quotient_gap_summary_context(
+                scan["quotient_gap_summary"],
+                {"exponent": exponent, "n": n},
+            )
         instances.append({"exponent": exponent, "n": n, **scan})
     result: dict[str, Any] = {
         "mode": "case_i_power_two_kernel",
@@ -474,6 +590,10 @@ def scan_case_i_power_two_kernel(
     if include_row_one_split_summary:
         result["row_one_split_summary"] = _merge_row_one_split_summaries(
             [item["row_one_split_summary"] for item in instances]
+        )
+    if include_quotient_gap_summary:
+        result["quotient_gap_summary"] = _merge_quotient_gap_summaries(
+            [item["quotient_gap_summary"] for item in instances]
         )
     return result
 
@@ -498,6 +618,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--include-row-one-candidates", action="store_true")
     parser.add_argument("--include-row-one-splits", action="store_true")
     parser.add_argument("--include-row-one-split-summary", action="store_true")
+    parser.add_argument("--include-quotient-gap-summary", action="store_true")
     args = parser.parse_args(argv)
     if args.case_i_power_two:
         if args.max_exponent is None:
@@ -510,6 +631,7 @@ def main(argv: list[str] | None = None) -> int:
             include_row_one_candidates=args.include_row_one_candidates,
             include_row_one_splits=args.include_row_one_splits,
             include_row_one_split_summary=args.include_row_one_split_summary,
+            include_quotient_gap_summary=args.include_quotient_gap_summary,
         )
     elif args.squeezed_normalized_case_i:
         if args.max_f is None or args.max_x is None:
@@ -533,6 +655,7 @@ def main(argv: list[str] | None = None) -> int:
             include_row_one_candidates=args.include_row_one_candidates,
             include_row_one_splits=args.include_row_one_splits,
             include_row_one_split_summary=args.include_row_one_split_summary,
+            include_quotient_gap_summary=args.include_quotient_gap_summary,
         )
     print(json.dumps(result, sort_keys=True))
     return 0
