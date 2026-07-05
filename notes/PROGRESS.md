@@ -315,6 +315,15 @@
   `Erdos699.squeezedNormalizedRowOneCandidate_not_caseIKernel_of_halfRow_gcd_lt`
   packages the strict gcd obstruction used by the compute diagnostics. This
   is a filter bridge, not an emptiness proof.
+- [R] Lifted the squeezed half-row gcd filter to finite-list certificates:
+  `Erdos699.exists_squeezedNormalizedCaseIKernel_iff_exists_mem_rowOneCandidate_halfRow_gcd_eq_of_list_exact`
+  says that for an exact finite list of row-one squeezed candidates, existence
+  of a full squeezed kernel is equivalent to a listed pair whose half-row gcd
+  is the full half-row modulus. The wrapper
+  `Erdos699.not_exists_squeezedNormalizedCaseIKernel_of_list_covers_rowOneCandidate_halfRow_gcd_lt`
+  proves emptiness from a list cover and strict half-row gcd failure for every
+  listed candidate. This is the Lean consumer for finite certificates; it does
+  not prove the list cover or the candidate inequalities by itself.
 - [E] Added an exact bounded scanner for the squeezed normalized Case-I kernel:
   `compute.kernel.scan_squeezed_normalized_case_i_kernel` enumerates odd
   `F ≥ 3`, `4 ∣ X`, `4 * F ≤ X`, `2 * F^2 ≤ X`, row-one factor candidates

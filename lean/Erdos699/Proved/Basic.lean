@@ -3270,6 +3270,42 @@ theorem squeezedNormalizedRowOneCandidate_not_caseIKernel_of_halfRow_gcd_lt
     (squeezedNormalizedCaseIKernel_iff_rowOneCandidate_and_halfRow_gcd_eq.mp hkernel).2
   omega
 
+theorem
+  exists_squeezedNormalizedCaseIKernel_iff_exists_mem_rowOneCandidate_halfRow_gcd_eq_of_list_exact
+    {F X : ℕ} {candidates : List (ℕ × ℕ)}
+    (hcover : ∀ t g : ℕ,
+      squeezedNormalizedRowOneCandidate F X t g → (t, g) ∈ candidates)
+    (hsound : ∀ tg ∈ candidates,
+      squeezedNormalizedRowOneCandidate F X tg.1 tg.2) :
+    (∃ t g : ℕ, squeezedNormalizedCaseIKernel F X t g) ↔
+      ∃ tg ∈ candidates,
+        Nat.gcd (tg.2 * (X - 2 * tg.1)) (F * X / 2 - 1) = F * X / 2 - 1 := by
+  constructor
+  · rintro ⟨t, g, hkernel⟩
+    have hsplit :=
+      squeezedNormalizedCaseIKernel_iff_rowOneCandidate_and_halfRow_gcd_eq.mp hkernel
+    exact ⟨(t, g), hcover t g hsplit.1, hsplit.2⟩
+  · rintro ⟨tg, hmem, hgcd⟩
+    rcases tg with ⟨t, g⟩
+    exact ⟨t, g,
+      (squeezedNormalizedCaseIKernel_iff_rowOneCandidate_and_halfRow_gcd_eq).mpr
+        ⟨hsound (t, g) hmem, hgcd⟩⟩
+
+theorem not_exists_squeezedNormalizedCaseIKernel_of_list_covers_rowOneCandidate_halfRow_gcd_lt
+    {F X : ℕ} {candidates : List (ℕ × ℕ)}
+    (hcover : ∀ t g : ℕ,
+      squeezedNormalizedRowOneCandidate F X t g → (t, g) ∈ candidates)
+    (hfail : ∀ tg ∈ candidates,
+      Nat.gcd (tg.2 * (X - 2 * tg.1)) (F * X / 2 - 1) < F * X / 2 - 1) :
+    ¬ ∃ t g : ℕ, squeezedNormalizedCaseIKernel F X t g := by
+  rintro ⟨t, g, hkernel⟩
+  have hsplit :=
+    squeezedNormalizedCaseIKernel_iff_rowOneCandidate_and_halfRow_gcd_eq.mp hkernel
+  have hmem : (t, g) ∈ candidates := hcover t g hsplit.1
+  have hlt := hfail (t, g) hmem
+  rw [hsplit.2] at hlt
+  omega
+
 theorem squeezedNormalized_gap_pos {F X t g : ℕ}
     (h : squeezedNormalizedCaseIKernel F X t g) :
     0 < X - 2 * t := by
