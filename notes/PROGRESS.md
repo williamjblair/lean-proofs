@@ -104,5 +104,10 @@
   normalized divisor `primePowerPartGE 5 (n - 2) ∣ t * (X - t) * (X - 2 * t)`.
   The theorem explicitly cancels only an odd divisor, so the row-3-free
   2-adic part remains outside the statement. Full T6/T7 remain open.
+- [R] Proved the T6 row-one size squeeze:
+  `Erdos699.i_three_caseI_row_one_four_mul_sub_one_le_X_sq` turns the
+  normalized case-I divisor into `4 * (n - 1) ≤ X * X` under `2 * t ≤ X`.
+  This is the exact-integer version of the `n - 1 ≤ X^2/4` bound. Full T6/T7
+  remain open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

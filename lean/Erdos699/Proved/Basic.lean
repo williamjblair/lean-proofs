@@ -1175,6 +1175,49 @@ theorem i_three_caseI_row_one_sub_one_dvd_t_mul_X_sub_t {n F X j t : ℕ}
     (i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd
       hnone (by omega : 1 < n) h2n h3n)
 
+theorem four_mul_t_mul_X_sub_t_le_sq {X t : ℕ} (h2tX : 2 * t ≤ X) :
+    4 * (t * (X - t)) ≤ X * X := by
+  have htX : t ≤ X := by omega
+  have hcast_sub : ((X - t : ℕ) : ℤ) = (X : ℤ) - (t : ℤ) := Nat.cast_sub htX
+  have hcalc :
+      (4 : ℤ) * ((t : ℤ) * ((X : ℤ) - (t : ℤ))) ≤ (X : ℤ) * (X : ℤ) := by
+    nlinarith [sq_nonneg ((X : ℤ) - 2 * (t : ℤ))]
+  have h_int : ((4 * (t * (X - t)) : ℕ) : ℤ) ≤ ((X * X : ℕ) : ℤ) := by
+    simpa [hcast_sub] using hcalc
+  exact_mod_cast h_int
+
+theorem four_mul_d_le_sq_of_dvd_t_mul_X_sub_t {d X t : ℕ}
+    (ht_pos : 0 < t) (h2tX : 2 * t ≤ X) (hdvd : d ∣ t * (X - t)) :
+    4 * d ≤ X * X := by
+  have htX : t ≤ X := by omega
+  have hXt_pos : 0 < X - t := by omega
+  have hprod_pos : 0 < t * (X - t) := Nat.mul_pos ht_pos hXt_pos
+  have hd_le : d ≤ t * (X - t) := Nat.le_of_dvd hprod_pos hdvd
+  exact (Nat.mul_le_mul_left 4 hd_le).trans (four_mul_t_mul_X_sub_t_le_sq h2tX)
+
+theorem four_mul_sub_one_le_sq_of_factor_dvd_mul_sub_one {n F X j t : ℕ}
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2tX : 2 * t ≤ X) (hdvd : n - 1 ∣ j * (j - 1)) :
+    4 * (n - 1) ≤ X * X := by
+  have ht_pos : 0 < t := by
+    by_cases ht0 : t = 0
+    · subst t
+      simp at hj
+      omega
+    · exact Nat.pos_of_ne_zero ht0
+  exact four_mul_d_le_sq_of_dvd_t_mul_X_sub_t ht_pos h2tX
+    (sub_one_dvd_t_mul_X_sub_t_of_factor_dvd_mul_sub_one
+      hn hj hn_gt hj_pos (by omega : t ≤ X) hdvd)
+
+theorem i_three_caseI_row_one_four_mul_sub_one_le_X_sq {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h2tX : 2 * t ≤ X) :
+    4 * (n - 1) ≤ X * X :=
+  four_mul_sub_one_le_sq_of_factor_dvd_mul_sub_one hn hj hn_gt hj_pos h2tX
+    (i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd
+      hnone (by omega : 1 < n) h2n h3n)
+
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
     {d n F X j t : ℕ} (hdn : d ∣ n - 2) (hcop4 : d.Coprime 4)
     (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hj_two : 2 ≤ j)
