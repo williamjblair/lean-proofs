@@ -398,6 +398,17 @@
   `Erdos699.consecutiveDivisorKernelBelow_iff_bound_gcdDiv_split_and_row_two_gcd_eq`
   adds the half-row bound. This packages the exact logical contract of the C2
   CRT scanner; it is not a proof that the kernel is empty.
+- [R] Lifted the C2 canonical characterization to whole-kernel certificate
+  form:
+  `Erdos699.exists_consecutiveDivisorKernelBelow_iff_exists_bound_gcdDiv_split_and_row_two_gcd_eq`
+  rewrites bounded kernel nonemptiness as the existence of a bounded canonical
+  row-one gcd/div split passing the row-two gcd equality. The no-survivor
+  wrappers
+  `Erdos699.not_exists_consecutiveDivisorKernelBelow_of_forall_bound_gcdDiv_split_row_two_gcd_ne`
+  and
+  `Erdos699.not_exists_consecutiveDivisorKernelBelow_of_forall_bound_gcdDiv_split_row_two_gcd_lt`
+  turn a per-candidate row-two failure certificate into kernel emptiness. This
+  is a conditional certificate interface, not a proof that the kernel is empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
