@@ -188,6 +188,37 @@
   2 * (B * (A / 2) - 1)`. This closes the earlier gap in using the
   additive identity and banks the congruence arithmetic needed for row two,
   but still does not prove the row-two-to-gcd equivalence or Task A.
+- [R] Proved the first exact row-two divisibility cancellation, reducing the
+  split delta divisor to the alpha divisor. The generic lemma
+  `Erdos699.rowTwoDeltaDvd_iff_alphaDvd_of_identity` proves that if
+  `B * delta + 2 * s * alpha = 2 * M`, `M.Coprime B`, and
+  `M.Coprime (2 * s)`, then
+  `M ∣ (l * m) * delta ↔ M ∣ (l * m) * alpha`. The supporting lemmas
+  `Erdos699.coprime_of_dvd_two_mul_add_one`,
+  `Erdos699.powerTwoSplit_s_dvd_two_half_row_add_one`,
+  `Erdos699.powerTwoSplit_s_coprime_half_row`,
+  `Erdos699.powerTwoSplit_half_row_coprime_B`,
+  `Erdos699.powerTwoSplit_half_row_coprime_two_of_four_dvd`, and
+  `Erdos699.powerTwoSplit_half_row_coprime_two_mul_s` discharge the needed
+  coprimality conditions for the half-row modulus. Consequently,
+  `Erdos699.powerTwoSplit_row_two_delta_dvd_iff_alpha_dvd` and
+  `Erdos699.powerTwoSplitSubtractive_row_two_delta_dvd_iff_alpha_dvd` prove
+  the concrete bridge
+  `B * (A / 2) - 1 ∣ (l * m) * (s * m - r * l) ↔
+  B * (A / 2) - 1 ∣ (l * m) * alpha`. The remaining unproved step is the
+  alpha-to-`Nat.gcd alpha beta` reduction, and then the final obstruction.
+- [R] Refuted the proposed auxiliary bound
+  `Nat.gcd (Nat.gcd alpha beta) M ≤ B * B` as a possible final obstruction.
+  `Erdos699.powerTwoSplit_gcd_bound_counterexample_not_row_two_survival`
+  gives an exact power-of-two split with
+  `A = 2 ^ 52`, `B = 5`, `r = 32587551572869`, `s = 691`, `l = 29`,
+  and `m = 5149870668245`, for which
+  `d = Nat.gcd (Nat.gcd alpha beta) M = 39 > 25 = B * B`. The same Lean
+  theorem proves this is not row-two survival:
+  `M ∤ Nat.gcd alpha beta * (l * m)` and `l * m < M / d`. The surviving
+  exact obstruction is therefore the reduced-divisor condition
+  `M / d ∤ l * m`, equivalently `M ∤ Nat.gcd alpha beta * (l * m)` once the
+  alpha-to-gcd reduction is proved.
 - [OPEN] Task A/pure `powerTwoQuotientKernel` is not proved. The current
   sharp target from the split analysis is the obstruction
   `B * (A / 2) - 1 ∤ Nat.gcd (r - B * m) (s - B * l) * (l * m)` under

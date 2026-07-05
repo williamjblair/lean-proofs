@@ -4126,6 +4126,241 @@ theorem powerTwoSplitSubtractive_row_two_alpha_identity
   exact powerTwoSplitRowTwo_alpha_identity hA2 hBpos hrpos hspos hlpos hmpos
     hgap hD hA halpha_add
 
+/-- If `s ∣ 2*M + 1`, then `s` is coprime to `M`. This packages the
+coprimality step used when `s` is a row-one split factor of `2M + 1`. -/
+theorem coprime_of_dvd_two_mul_add_one {s M : ℕ}
+    (hs : s ∣ 2 * M + 1) :
+    s.Coprime M := by
+  rw [Nat.coprime_iff_gcd_eq_one]
+  apply Nat.eq_one_of_dvd_one
+  have hg_s : Nat.gcd s M ∣ s := Nat.gcd_dvd_left s M
+  have hg_M : Nat.gcd s M ∣ M := Nat.gcd_dvd_right s M
+  have hg_twoM : Nat.gcd s M ∣ 2 * M := dvd_mul_of_dvd_right hg_M 2
+  have hg_twoM1 : Nat.gcd s M ∣ 2 * M + 1 := Nat.dvd_trans hg_s hs
+  have hone : Nat.gcd s M ∣ (2 * M + 1) - 2 * M :=
+    Nat.dvd_sub hg_twoM1 hg_twoM
+  simpa using hone
+
+/-- In the split setting, the right split factor `s` divides `2M + 1`, where
+`M = B * (A / 2) - 1`. -/
+theorem powerTwoSplit_s_dvd_two_half_row_add_one {A B r s : ℕ}
+    (hA2 : 2 ∣ A)
+    (hBpos : 0 < B)
+    (hApos : 0 < A)
+    (hD : r * s = B * A - 1) :
+    s ∣ 2 * (B * (A / 2) - 1) + 1 := by
+  have hAeq : A = 2 * (A / 2) := (Nat.mul_div_cancel' hA2).symm
+  have hAhalf_pos : 0 < A / 2 := by omega
+  have hMpos : 0 < B * (A / 2) := Nat.mul_pos hBpos hAhalf_pos
+  have hBAeq : B * A = 2 * (B * (A / 2)) := by
+    calc
+      B * A = B * (2 * (A / 2)) :=
+        congrArg (fun x : ℕ => B * x) hAeq
+      _ = 2 * (B * (A / 2)) := by ring
+  have hM_eq : 2 * (B * (A / 2) - 1) + 1 = B * A - 1 := by
+    rw [hBAeq]
+    omega
+  rw [hM_eq, ← hD]
+  exact Nat.dvd_mul_left s r
+
+/-- The split factor `s` is coprime to the half-row divisor
+`B * (A / 2) - 1`. -/
+theorem powerTwoSplit_s_coprime_half_row {A B r s : ℕ}
+    (hA2 : 2 ∣ A)
+    (hBpos : 0 < B)
+    (hApos : 0 < A)
+    (hD : r * s = B * A - 1) :
+    s.Coprime (B * (A / 2) - 1) :=
+  coprime_of_dvd_two_mul_add_one
+    (powerTwoSplit_s_dvd_two_half_row_add_one hA2 hBpos hApos hD)
+
+/-- General cancellation lemma for the row-two congruence. If
+`B*delta + 2*s*alpha = 2*M`, `B` is invertible modulo `M`, and `2*s` is
+invertible modulo `M`, then divisibility by `delta` is equivalent to
+divisibility by `alpha` after multiplying by the same `l*m` factor. -/
+theorem rowTwoDeltaDvd_iff_alphaDvd_of_identity
+    {M B s l m delta alpha : ℕ}
+    (hidentity : B * delta + 2 * s * alpha = 2 * M)
+    (hcopB : M.Coprime B)
+    (hcop2s : M.Coprime (2 * s)) :
+    M ∣ (l * m) * delta ↔ M ∣ (l * m) * alpha := by
+  constructor
+  · intro hrow
+    have hBdiv0 : M ∣ B * ((l * m) * delta) :=
+      dvd_mul_of_dvd_right hrow B
+    have hBdiv : M ∣ (l * m) * (B * delta) := by
+      convert hBdiv0 using 1
+      ring
+    have hsum : M ∣ (l * m) * (B * delta + 2 * s * alpha) := by
+      rw [hidentity]
+      refine dvd_mul_of_dvd_right ?_ (l * m)
+      exact Nat.dvd_mul_left M 2
+    have hsum' :
+        M ∣ (l * m) * (B * delta) + (l * m) * (2 * s * alpha) := by
+      convert hsum using 1
+      ring
+    have hterm : M ∣ (l * m) * (2 * s * alpha) :=
+      (Nat.dvd_add_iff_right hBdiv).mpr hsum'
+    have hterm' : M ∣ (2 * s) * ((l * m) * alpha) := by
+      convert hterm using 1
+      ring
+    exact hcop2s.dvd_of_dvd_mul_left hterm'
+  · intro halpha
+    have h2sdiv0 : M ∣ (2 * s) * ((l * m) * alpha) :=
+      dvd_mul_of_dvd_right halpha (2 * s)
+    have h2sdiv : M ∣ (l * m) * (2 * s * alpha) := by
+      convert h2sdiv0 using 1
+      ring
+    have hsum : M ∣ (l * m) * (B * delta + 2 * s * alpha) := by
+      rw [hidentity]
+      refine dvd_mul_of_dvd_right ?_ (l * m)
+      exact Nat.dvd_mul_left M 2
+    have hsum' :
+        M ∣ (l * m) * (B * delta) + (l * m) * (2 * s * alpha) := by
+      convert hsum using 1
+      ring
+    have hBdiv : M ∣ (l * m) * (B * delta) :=
+      (Nat.dvd_add_iff_left h2sdiv).mpr hsum'
+    have hBdiv' : M ∣ B * ((l * m) * delta) := by
+      convert hBdiv using 1
+      ring
+    exact hcopB.dvd_of_dvd_mul_left hBdiv'
+
+/-- The half-row divisor `B * (A / 2) - 1` is coprime to `B`. -/
+theorem powerTwoSplit_half_row_coprime_B {A B : ℕ}
+    (hBpos : 0 < B)
+    (hAhalf_pos : 0 < A / 2) :
+    (B * (A / 2) - 1).Coprime B := by
+  rw [Nat.coprime_iff_gcd_eq_one]
+  let g := Nat.gcd (B * (A / 2) - 1) B
+  have hgM : g ∣ B * (A / 2) - 1 := Nat.gcd_dvd_left _ _
+  have hgB : g ∣ B := Nat.gcd_dvd_right _ _
+  have hgprod : g ∣ B * (A / 2) := dvd_mul_of_dvd_left hgB (A / 2)
+  have hprod_pos : 0 < B * (A / 2) := Nat.mul_pos hBpos hAhalf_pos
+  have hone : g ∣ B * (A / 2) - (B * (A / 2) - 1) :=
+    Nat.dvd_sub hgprod hgM
+  have hone' : g ∣ 1 := by
+    convert hone using 1
+    omega
+  exact Nat.eq_one_of_dvd_one hone'
+
+/-- If `4 ∣ A`, then `B * (A / 2) - 1` is odd, hence coprime to `2`. -/
+theorem powerTwoSplit_half_row_coprime_two_of_four_dvd {A B : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBpos : 0 < B)
+    (hApos : 0 < A) :
+    (B * (A / 2) - 1).Coprime 2 := by
+  rw [Nat.coprime_two_right]
+  rcases hA4 with ⟨q, hAeq4⟩
+  have hqpos : 0 < q := by omega
+  have hBqpos : 0 < B * q := Nat.mul_pos hBpos hqpos
+  have hhalf : A / 2 = 2 * q := by
+    rw [hAeq4]
+    omega
+  refine ⟨B * q - 1, ?_⟩
+  rw [hhalf]
+  ring_nf
+  omega
+
+/-- In a row-one split with `4 ∣ A`, the half-row divisor is coprime to
+`2 * s`. -/
+theorem powerTwoSplit_half_row_coprime_two_mul_s {A B r s : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBpos : 0 < B)
+    (hApos : 0 < A)
+    (hD : r * s = B * A - 1) :
+    (B * (A / 2) - 1).Coprime (2 * s) := by
+  have hA2 : 2 ∣ A := dvd_trans (by decide : 2 ∣ 4) hA4
+  have hcop2 : (B * (A / 2) - 1).Coprime 2 :=
+    powerTwoSplit_half_row_coprime_two_of_four_dvd hA4 hBpos hApos
+  have hcops : (B * (A / 2) - 1).Coprime s :=
+    (powerTwoSplit_s_coprime_half_row hA2 hBpos hApos hD).symm
+  exact hcop2.mul_right hcops
+
+/-- Concrete row-two bridge from the split delta form to the alpha form:
+under the power-of-two half-row hypotheses, divisibility by
+`s*m - r*l` is equivalent to divisibility by `alpha`. -/
+theorem powerTwoSplit_row_two_delta_dvd_iff_alpha_dvd
+    {A B r s l m alpha : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hgap : r * l < s * m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : r = B * m + alpha) :
+    B * (A / 2) - 1 ∣ (l * m) * (s * m - r * l) ↔
+      B * (A / 2) - 1 ∣ (l * m) * alpha := by
+  have hBpos : 0 < B := by omega
+  have hApos : 0 < A := by
+    rw [← hA]
+    positivity
+  have hA2 : 2 ∣ A := dvd_trans (by decide : 2 ∣ 4) hA4
+  have hAhalf_pos : 0 < A / 2 := by omega
+  have hcopB : (B * (A / 2) - 1).Coprime B :=
+    powerTwoSplit_half_row_coprime_B hBpos hAhalf_pos
+  have hcop2s : (B * (A / 2) - 1).Coprime (2 * s) :=
+    powerTwoSplit_half_row_coprime_two_mul_s hA4 hBpos hApos hD
+  have hidentity := powerTwoSplitRowTwo_alpha_identity hA2 hBpos hrpos hspos
+    hlpos hmpos hgap hD hA halpha
+  exact rowTwoDeltaDvd_iff_alphaDvd_of_identity hidentity hcopB hcop2s
+
+/-- Subtractive version of `powerTwoSplit_row_two_delta_dvd_iff_alpha_dvd`,
+matching the split/gcd obstruction's natural-subtraction definition of
+`alpha`. -/
+theorem powerTwoSplitSubtractive_row_two_delta_dvd_iff_alpha_dvd
+    {A B r s l m alpha : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hgap : r * l < s * m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m) :
+    B * (A / 2) - 1 ∣ (l * m) * (s * m - r * l) ↔
+      B * (A / 2) - 1 ∣ (l * m) * alpha := by
+  rcases powerTwoSplitSubtractive_to_additive (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) (alpha := alpha) (beta := s - B * l)
+    hBge hrpos hspos hlpos hmpos hD hA halpha rfl with
+    ⟨halpha_add, _hbeta_add⟩
+  exact powerTwoSplit_row_two_delta_dvd_iff_alpha_dvd hA4 hBge hrpos hspos
+    hlpos hmpos hgap hD hA halpha_add
+
+/-- Exact counterexample to the proposed auxiliary bound
+`gcd (gcd alpha beta) M ≤ B^2` under the power-of-two split hypotheses. It
+does not satisfy row-two survival: the same certificate proves
+`M ∤ c * (l * m)` and `l * m < M / d`. -/
+theorem powerTwoSplit_gcd_bound_counterexample_not_row_two_survival :
+    ∃ A B r s l m : ℕ,
+      A = 2 ^ 52 ∧
+      4 ∣ A ∧
+      Odd B ∧
+      3 ≤ B ∧
+      0 < r ∧ 0 < s ∧ 0 < l ∧ 0 < m ∧
+      r * s = B * A - 1 ∧
+      r * l + s * m = A ∧
+      r * l < s * m ∧
+      let alpha := r - B * m
+      let beta := s - B * l
+      let c := Nat.gcd alpha beta
+      let M := B * (A / 2) - 1
+      let d := Nat.gcd c M
+      B * B < d ∧ ¬ M ∣ c * (l * m) ∧ l * m < M / d := by
+  refine ⟨4503599627370496, 5, 32587551572869, 691, 29, 5149870668245, ?_⟩
+  constructor
+  · norm_num
+  constructor
+  · norm_num
+  constructor
+  · exact ⟨2, by norm_num⟩
+  norm_num [Nat.gcd]
+
 /-- If `D` divides a product, the cofactor of the part of `D` already present
 in the left factor divides the right factor. This is the arithmetic split
 lemma used to move from a row-one product divisibility to the canonical
