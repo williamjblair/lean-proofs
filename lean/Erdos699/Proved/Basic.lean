@@ -4515,6 +4515,44 @@ theorem lt_div_of_mul_succ_le {M b L : ℕ}
     exact (Nat.le_div_iff_mul_le hbpos).mpr (by simpa [mul_comm] using hbound)
   omega
 
+/-- Floor-free product form is equivalent to `L < M / b`. -/
+theorem lt_div_iff_mul_succ_le {M b L : ℕ}
+    (hbpos : 0 < b) :
+    L < M / b ↔ b * (L + 1) ≤ M := by
+  constructor
+  · intro hlt
+    have hsucc_le : L + 1 ≤ M / b := by omega
+    have hmul : (L + 1) * b ≤ M :=
+      (Nat.le_div_iff_mul_le hbpos).mp hsucc_le
+    simpa [mul_comm] using hmul
+  · exact lt_div_of_mul_succ_le hbpos
+
+/-- Product-form parity gap is exactly the same as the corresponding
+division-form parity gap. -/
+theorem parity_product_gap_iff_parity_reduced_divisor_gap {M c L : ℕ}
+    (hcpos : 0 < c) :
+    ((Odd c ∧ c * (L + 1) ≤ M) ∨
+        (Even c ∧ (c / 2) * (L + 1) ≤ M)) ↔
+      ((Odd c ∧ L < M / c) ∨
+        (Even c ∧ L < M / (c / 2))) := by
+  constructor
+  · rintro (⟨hcodd, hbound⟩ | ⟨hceven, hbound⟩)
+    · exact Or.inl ⟨hcodd, (lt_div_iff_mul_succ_le hcpos).mpr hbound⟩
+    · have hc2pos : 0 < c / 2 := by
+        rcases hceven with ⟨k, hk⟩
+        have hkpos : 0 < k := by omega
+        have hcdiv : c / 2 = k := by omega
+        simpa [hcdiv] using hkpos
+      exact Or.inr ⟨hceven, (lt_div_iff_mul_succ_le hc2pos).mpr hbound⟩
+  · rintro (⟨hcodd, hgap⟩ | ⟨hceven, hgap⟩)
+    · exact Or.inl ⟨hcodd, (lt_div_iff_mul_succ_le hcpos).mp hgap⟩
+    · have hc2pos : 0 < c / 2 := by
+        rcases hceven with ⟨k, hk⟩
+        have hkpos : 0 < k := by omega
+        have hcdiv : c / 2 = k := by omega
+        simpa [hcdiv] using hkpos
+      exact Or.inr ⟨hceven, (lt_div_iff_mul_succ_le hc2pos).mp hgap⟩
+
 /-- Product-form parity certificate. For odd `c`, it is enough to prove
 `c * (L + 1) ≤ M`; for even `c`, it is enough to prove
 `(c / 2) * (L + 1) ≤ M`. -/
@@ -4750,6 +4788,33 @@ theorem powerTwoSplitSubtractive_reduced_divisor_gap_iff_parity_gap
     (M := B * (A / 2) - 1) (B := B) (l := l) (m := m)
     (alpha := alpha) (beta := beta) (c := c) (L := l * m)
     hc hhalf (powerTwoSplit_half_row_odd hA4 hApos hBodd) hcpos
+
+/-- In an admissible power-two split, the floor-free parity product target is
+equivalent to the exact reduced-divisor gap. -/
+theorem powerTwoSplitSubtractive_reduced_divisor_gap_iff_parity_product_gap
+    {A B r s l m alpha beta c : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hc : c = Nat.gcd alpha beta)
+    (hcpos : 0 < c) :
+    let M := B * (A / 2) - 1
+    l * m < M / Nat.gcd c M ↔
+      (Odd c ∧ c * (l * m + 1) ≤ M) ∨
+        (Even c ∧ (c / 2) * (l * m + 1) ≤ M) := by
+  dsimp
+  exact (powerTwoSplitSubtractive_reduced_divisor_gap_iff_parity_gap
+    hA4 hBodd hBge hrpos hspos hlpos hmpos hD hA halpha hbeta hc hcpos).trans
+    (parity_product_gap_iff_parity_reduced_divisor_gap
+      (M := B * (A / 2) - 1) (c := c) (L := l * m) hcpos).symm
 
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap

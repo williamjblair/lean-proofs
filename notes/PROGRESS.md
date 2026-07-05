@@ -304,6 +304,17 @@
   `Erdos699.not_exists_powerTwoQuotientKernel_of_parity_product_gap` compose
   this target all the way to the pure quotient kernel. This is still a
   conditional target, not a proof of the product inequality.
+- [R] Proved that the floor-free product form is an exact reformulation of
+  the parity/reduced-divisor gap, not just a sufficient certificate. The
+  generic theorem `Erdos699.lt_div_iff_mul_succ_le` proves
+  `L < M / b ↔ b * (L + 1) ≤ M` for `0 < b`; the generic theorem
+  `Erdos699.parity_product_gap_iff_parity_reduced_divisor_gap` lifts this to
+  the odd/even parity split; and
+  `Erdos699.powerTwoSplitSubtractive_reduced_divisor_gap_iff_parity_product_gap`
+  composes it with the split half-row denominator theorem. Thus the current
+  product target is equivalent to the reduced-divisor gap under the
+  admissible power-two split hypotheses. This still does not prove the
+  universal product inequality or the kernel.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
