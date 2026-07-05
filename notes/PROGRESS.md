@@ -288,5 +288,13 @@
   `Erdos699.i_three_caseI_four_dvd_odd_factor_joint_squeeze_from_row_bound`
   returns `4 * F ≤ X ∧ 2 * (F * F) ≤ X`. This is a branch package, not full
   T7.
+- [R] Formalized the consecutive-divisor kernel target:
+  `Erdos699.consecutiveDivisorKernel` and
+  `Erdos699.consecutiveDivisorKernelBelow` name the two-row kernel and the
+  half-row-bounded version. The reduction
+  `Erdos699.i_three_caseI_four_dvd_consecutive_kernel_below_from_no_common`
+  shows that the `4 ∣ n` Case-I hypotheses force coprime factors
+  `n - 1` and `n / 2 - 1` into this bounded kernel. This does not prove the
+  kernel empty.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

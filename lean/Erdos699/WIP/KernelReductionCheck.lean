@@ -1,0 +1,9 @@
+import Erdos699.Proved.Basic
+
+namespace Erdos699
+
+#check consecutiveDivisorKernel
+#check consecutiveDivisorKernelBelow
+#check i_three_caseI_four_dvd_consecutive_kernel_below_from_no_common
+
+end Erdos699

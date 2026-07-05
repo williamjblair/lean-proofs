@@ -153,6 +153,15 @@ theorem prime_dvd_choose_of_units_digit_lt {n k p : ℕ} (hp : p.Prime)
 def commonPrimeDivisor (n i j p : ℕ) : Prop :=
   p.Prime ∧ i ≤ p ∧ p ∣ Nat.choose n i ∧ p ∣ Nat.choose n j
 
+/-- The consecutive-divisor kernel: two fixed divisors packed into products of
+one, then two, consecutive gaps from `t`. -/
+def consecutiveDivisorKernel (N1 N2 t : ℕ) : Prop :=
+  N1 ∣ t * (t - 1) ∧ N2 ∣ t * (t - 1) * (t - 2)
+
+/-- The same kernel with the problem's half-row bound. -/
+def consecutiveDivisorKernelBelow (N1 N2 bound t : ℕ) : Prop :=
+  2 * t ≤ bound ∧ consecutiveDivisorKernel N1 N2 t
+
 theorem commonPrimeDivisor_of_prime_in_top_interval {n i j p : ℕ}
     (hp : p.Prime) (hij : i < j) (hjn : 2 * j ≤ n) (hleft : n - i < p)
     (hright : p ≤ n) :
@@ -1526,6 +1535,23 @@ theorem i_three_caseI_half_sub_one_dvd_row_two_product {n j : ℕ}
     (half_sub_one_dvd_sub_two_of_even h2n)
     (half_sub_one_prime_ge_five_of_even_three_dvd_coprime_four h2n h3n hn hcop4)
     hn
+
+theorem i_three_caseI_four_dvd_consecutive_kernel_below_from_no_common {n j : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn_gt : 2 < n) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hjn : 2 * j ≤ n) :
+    (n - 1).Coprime (n / 2 - 1) ∧
+      consecutiveDivisorKernelBelow (n - 1) (n / 2 - 1) n j := by
+  have hcop : (n - 1).Coprime (n / 2 - 1) :=
+    (half_sub_one_coprime_sub_one_of_even h2n hn_gt).symm
+  have hrow1 : n - 1 ∣ j * (j - 1) :=
+    i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd
+      hnone (by omega : 1 < n) h2n h3n
+  have hrow2 : n / 2 - 1 ∣ j * (j - 1) * (j - 2) :=
+    i_three_caseI_half_sub_one_dvd_row_two_product hnone h2n h3n hn_gt
+      (half_sub_one_coprime_four_of_four_dvd h4n hn_gt)
+  refine ⟨hcop, ?_⟩
+  exact ⟨hjn, hrow1, hrow2⟩
 
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
     {d n F X j t : ℕ} (hdn : d ∣ n - 2) (hcop4 : d.Coprime 4)
