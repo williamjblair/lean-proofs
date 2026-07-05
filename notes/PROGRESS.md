@@ -16,10 +16,16 @@
   this exact positive-row survivor of `Erdos699.squeezedNormalizedCaseIKernel`;
   Python regression
   `test_squeezed_normalized_predicate_has_positive_row_counterexample` verifies
-  the same integer equalities. This does not retract a banked theorem: the
-  finite-list/gcd filters remain correct, but global emptiness of
-  `squeezedNormalizedCaseIKernel` is false and must not be used as a kernel
-  attack target.
+  the same integer equalities. The corresponding original row-3 point has
+  `n = 1296552043932`, `j = 560862500991`, and is killed by prime `5`;
+  `Erdos699.squeezedNormalizedCounterexample_commonPrimeDivisor_five` proves
+  `commonPrimeDivisor n 3 j 5`, while Python regression
+  `test_normalized_positive_survivor_fails_original_row_three_digit_constraints`
+  verifies the corrected Lucas obstruction criterion. This does not retract a
+  banked theorem: the finite-list/gcd filters remain correct, but global
+  emptiness of `squeezedNormalizedCaseIKernel` is false and must not be used
+  as a kernel attack target without additional original-problem digit
+  constraints.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.

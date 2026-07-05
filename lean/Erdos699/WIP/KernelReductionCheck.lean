@@ -78,5 +78,7 @@ namespace Erdos699
 #check row_one_factor_gap_sq_eq_sq
 #check squeezedNormalizedCaseIKernel_counterexample_positive_t
 #check exists_squeezedNormalizedCaseIKernel_counterexample_positive_t
+#check squeezedNormalizedCounterexample_commonPrimeDivisor_five
+#check squeezedNormalizedCounterexample_exists_commonPrimeDivisor
 
 end Erdos699

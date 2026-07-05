@@ -3575,6 +3575,22 @@ theorem exists_squeezedNormalizedCaseIKernel_counterexample_positive_t :
   ⟨3, 432184014644, 186954166997, 35360510289,
     squeezedNormalizedCaseIKernel_counterexample_positive_t⟩
 
+theorem squeezedNormalizedCounterexample_commonPrimeDivisor_five :
+    commonPrimeDivisor 1296552043932 3 560862500991 5 := by
+  refine ⟨by decide, by norm_num, ?_, ?_⟩
+  · apply prime_dvd_choose_of_not_dominated (by decide : Nat.Prime 5)
+    intro hdom
+    have hdigits := (dominated_iff_forall_digits (by norm_num : 2 ≤ 5)).mp hdom 0
+    norm_num [digit] at hdigits
+  · apply prime_dvd_choose_of_not_dominated (by decide : Nat.Prime 5)
+    intro hdom
+    have hdigits := (dominated_iff_forall_digits (by norm_num : 2 ≤ 5)).mp hdom 1
+    norm_num [digit] at hdigits
+
+theorem squeezedNormalizedCounterexample_exists_commonPrimeDivisor :
+    ∃ p : ℕ, commonPrimeDivisor 1296552043932 3 560862500991 p :=
+  ⟨5, squeezedNormalizedCounterexample_commonPrimeDivisor_five⟩
+
 theorem squeezedNormalizedRowOneCandidate_half_row_pos {F X t g : ℕ}
     (h : squeezedNormalizedRowOneCandidate F X t g) :
     0 < F * X / 2 - 1 := by

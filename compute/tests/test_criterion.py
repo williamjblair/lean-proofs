@@ -49,6 +49,24 @@ def test_gpt_pro_pure_c2_survivor_fails_row_three_digit_constraints() -> None:
     assert counterexample_candidate(n, i, j, primes=row_n_primes) is False
 
 
+def test_normalized_positive_survivor_fails_original_row_three_digit_constraints() -> None:
+    F = 3
+    X = 432_184_014_644
+    u = 186_954_166_997
+    n = F * X
+    i = 3
+    j = F * u
+    p = 5
+
+    assert n == 1_296_552_043_932
+    assert j == 560_862_500_991
+    assert 1 <= i < j <= n // 2
+    assert dominated(i, n, p) is False
+    assert dominated(j, n, p) is False
+    assert criterion_obstruction_primes(n, i, j, primes=[p]) == [p]
+    assert counterexample_candidate(n, i, j, primes=[p]) is False
+
+
 def test_lucas_digit_predicate_matches_binomial_mod_prime_for_small_values() -> None:
     for p in primes_upto(13):
         for n in range(0, 60):
