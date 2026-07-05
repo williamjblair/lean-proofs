@@ -19,5 +19,8 @@
   `Erdos699.commonPrimeDivisor_of_prime_in_top_interval`: if `p` is prime,
   `n - i < p ≤ n`, `i < j`, and `2 * j ≤ n`, then `p` is a relevant common
   prime divisor of `C(n,i)` and `C(n,j)`.
+- [R] Proved `Erdos699.no_commonPrimeDivisor_iff_obstructionCriterion`, the
+  formal corrected counterexample criterion. The predicate quantifies over
+  `relevantPrime i p`, so primes `p < i` impose no digit-domination condition.
 - [OPEN] T2, full T3 confinement beyond the top-range lemma, and all later
   rungs remain unclaimed in this branch.

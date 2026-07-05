@@ -202,4 +202,28 @@ theorem relevantPrime_ignores_small {i p : ℕ} (hp : p < i) :
   intro h
   exact Nat.not_le_of_gt hp h.2
 
+/-- The corrected obstruction criterion: only primes `p ≥ i` are constrained. -/
+def obstructionCriterion (n i j : ℕ) : Prop :=
+  ∀ p : ℕ, relevantPrime i p → dominated i n p ∨ dominated j n p
+
+theorem no_commonPrimeDivisor_iff_obstructionCriterion (n i j : ℕ) :
+    (∀ p : ℕ, ¬ commonPrimeDivisor n i j p) ↔ obstructionCriterion n i j := by
+  classical
+  constructor
+  · intro hnone p hrel
+    by_cases hi : dominated i n p
+    · exact Or.inl hi
+    · right
+      by_contra hj
+      exact hnone p
+        ⟨hrel.1, hrel.2, prime_dvd_choose_of_not_dominated hrel.1 hi,
+          prime_dvd_choose_of_not_dominated hrel.1 hj⟩
+  · intro hcrit p hcommon
+    rcases hcommon with ⟨hp, hge, hpi, hpj⟩
+    rcases hcrit p ⟨hp, hge⟩ with hdom_i | hdom_j
+    · have hnonzero := (lucas_nonzero_mod_prime_iff_dominated hp).mpr hdom_i
+      exact hnonzero (Nat.dvd_iff_mod_eq_zero.mp hpi)
+    · have hnonzero := (lucas_nonzero_mod_prime_iff_dominated hp).mpr hdom_j
+      exact hnonzero (Nat.dvd_iff_mod_eq_zero.mp hpj)
+
 end Erdos699
