@@ -150,5 +150,11 @@
   `Erdos699.i_three_caseI_noncentral_half_sub_one_cube_bound` projects the
   inequality alone. The required lower bound
   `n / 2 - 1 ≤ primePowerPartGE 5 (n - 2)` remains an explicit open input.
+- [R] Proved the T7 non-central factor-square squeeze:
+  `Erdos699.two_mul_factor_sq_le_of_even_half_cube_bound` converts the half-row
+  cube inequality into `2 * (F * F) ≤ X` when `n = F * X` and `X` is even.
+  `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze` packages this for the
+  case-I counterexample hypotheses, still assuming the explicit half-row
+  lower bound and non-central branch. Full T7 remains open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
