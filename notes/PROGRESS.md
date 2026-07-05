@@ -380,6 +380,16 @@
   package this under row-one divisibility, a split, and the half-row bound.
   This formalizes the scanner's row-two survivor predicate, not a proof that
   no survivors exist.
+- [R] Proved bounded-candidate survivor/non-survivor forms for C2:
+  `Erdos699.rowOneDivisorSplit_consecutiveDivisorKernelBelow_iff_row_two_gcd_eq_of_bound`
+  reduces kernel survival to the row-two gcd equality once a row-one split and
+  half-row bound are already known. The negated forms
+  `Erdos699.rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_iff_row_two_gcd_ne_of_bound`
+  and
+  `Erdos699.rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_iff_row_two_gcd_lt_of_bound`
+  identify non-survival with `gcd ≠ N2`, and with `gcd < N2` when `0 < N2`.
+  This is the exact per-candidate pass/fail predicate used by the C2 scanner,
+  not a proof that all candidates fail.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters

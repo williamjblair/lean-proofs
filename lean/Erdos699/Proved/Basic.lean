@@ -398,6 +398,47 @@ theorem rowOneDivisorSplit_consecutiveDivisorKernelBelow_iff_bound_and_row_two_g
     exact ⟨h.1,
       (rowOneDivisorSplit_consecutiveDivisorKernel_iff_row_two_gcd_eq hsplit).mpr h.2⟩
 
+theorem rowOneDivisorSplit_consecutiveDivisorKernelBelow_iff_row_two_gcd_eq_of_bound
+    {N1 N2 bound zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (hbound : 2 * t ≤ bound) :
+    consecutiveDivisorKernelBelow N1 N2 bound t ↔
+      Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 := by
+  constructor
+  · intro hkernel
+    exact
+      ((rowOneDivisorSplit_consecutiveDivisorKernelBelow_iff_bound_and_row_two_gcd_eq
+        hsplit).mp hkernel).2
+  · intro hgcd
+    exact
+      (rowOneDivisorSplit_consecutiveDivisorKernelBelow_iff_bound_and_row_two_gcd_eq
+        hsplit).mpr ⟨hbound, hgcd⟩
+
+theorem rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_iff_row_two_gcd_ne_of_bound
+    {N1 N2 bound zeroPart onePart t : ℕ}
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (hbound : 2 * t ≤ bound) :
+    ¬ consecutiveDivisorKernelBelow N1 N2 bound t ↔
+      Nat.gcd (t * (t - 1) * (t - 2)) N2 ≠ N2 := by
+  rw [rowOneDivisorSplit_consecutiveDivisorKernelBelow_iff_row_two_gcd_eq_of_bound
+    hsplit hbound]
+
+theorem rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_iff_row_two_gcd_lt_of_bound
+    {N1 N2 bound zeroPart onePart t : ℕ} (hN2 : 0 < N2)
+    (hsplit : rowOneDivisorSplit N1 zeroPart onePart t)
+    (hbound : 2 * t ≤ bound) :
+    ¬ consecutiveDivisorKernelBelow N1 N2 bound t ↔
+      Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2 := by
+  have hle : Nat.gcd (t * (t - 1) * (t - 2)) N2 ≤ N2 :=
+    Nat.gcd_le_right _ hN2
+  rw [rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_iff_row_two_gcd_ne_of_bound
+    hsplit hbound]
+  constructor
+  · intro hne
+    exact lt_of_le_of_ne hle hne
+  · intro hlt
+    exact ne_of_lt hlt
+
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
     ¬ consecutiveDivisorKernel N1 N2 t := by
