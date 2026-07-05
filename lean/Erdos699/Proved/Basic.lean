@@ -1268,6 +1268,30 @@ theorem i_three_caseI_row_one_four_mul_factor_le_X {n F X j t : ℕ}
     (i_three_caseI_row_one_four_mul_sub_one_le_X_sq
       hnone hn hj hn_gt hj_pos h2n h3n h2tX)
 
+theorem dvd_factor_mul_of_eq_mul_and_coprime {d e a b g : ℕ}
+    (ha : a = g * d) (hcop : e.Coprime d) (hedvd : e ∣ a * b) :
+    e ∣ g * b := by
+  have hdiv : e ∣ (g * b) * d := by
+    simpa [ha, mul_assoc, mul_comm, mul_left_comm] using hedvd
+  exact hcop.dvd_of_dvd_mul_right hdiv
+
+theorem exists_factor_dvd_factor_mul_of_dvd_and_coprime {d e a b : ℕ}
+    (hda : d ∣ a) (hcop : e.Coprime d) (hedvd : e ∣ a * b) :
+    ∃ g : ℕ, a = g * d ∧ e ∣ g * b := by
+  rcases hda with ⟨g, hg⟩
+  refine ⟨g, ?_, ?_⟩
+  · simpa [mul_comm] using hg
+  · exact dvd_factor_mul_of_eq_mul_and_coprime (by simpa [mul_comm] using hg) hcop hedvd
+
+theorem primePowerPartGE_five_sub_two_coprime_sub_one {n : ℕ} (hn : 2 < n) :
+    (primePowerPartGE 5 (n - 2)).Coprime (n - 1) := by
+  have hbase : (n - 2).Coprime (n - 1) := by
+    have hsucc : n - 1 = (n - 2) + 1 := by omega
+    rw [hsucc]
+    exact Nat.coprime_self_add_right.mpr (by simp)
+  exact Nat.Coprime.coprime_dvd_left
+    (primePowerPartGE_dvd_self (by omega : n - 2 ≠ 0)) hbase
+
 theorem sub_two_divisor_dvd_t_mul_X_sub_t_mul_X_sub_two_t_of_factor_dvd_triple
     {d n F X j t : ℕ} (hdn : d ∣ n - 2) (hcop4 : d.Coprime 4)
     (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hj_two : 2 ≤ j)
@@ -1365,6 +1389,17 @@ theorem i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t
     (primePowerPartGE_dvd_self (by omega : n - 2 ≠ 0))
     (primePowerPartGE_five_coprime_four (n - 2)) hn hj hn_ge_two hj_two htX h2tX
     (i_three_window_two_primePowerPartGE_dvd hnone hn_gt_two)
+
+theorem i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t {n F X j t g : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_ge_two : 2 ≤ n) (hn_gt_two : 2 < n)
+    (hj_two : 2 ≤ j) (htX : t ≤ X) (h2tX : 2 * t ≤ X)
+    (hrow1 : t * (X - t) = g * (n - 1)) :
+    primePowerPartGE 5 (n - 2) ∣ g * (X - 2 * t) :=
+  dvd_factor_mul_of_eq_mul_and_coprime hrow1
+    (primePowerPartGE_five_sub_two_coprime_sub_one hn_gt_two)
+    (i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t
+      hnone hn hj hn_ge_two hn_gt_two hj_two htX h2tX)
 
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by

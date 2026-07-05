@@ -114,5 +114,10 @@
   square bound into `4 * F ≤ X` when `n = F * X`, `2 ∣ X`, and `4 ≤ X`.
   This is the exact cofactor form of the first-row thin-family constraint.
   Full T6/T7 remain open.
+- [R] Proved the T7 joint-row large-part cancellation:
+  `Erdos699.i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t` shows
+  that if `t * (X - t) = g * (n - 1)`, then the row-two large-prime part
+  divides `g * (X - 2 * t)`. This banks the coprime cancellation core of the
+  joint-row squeeze; full T7 remains open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
