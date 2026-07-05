@@ -448,6 +448,14 @@
   turn the quotient-gap product inequality into the existing C2 row-two gcd
   obstruction. This is a conditional obstruction interface, not a proof that
   the kernel is empty.
+- [R] Added the exact-list quotient-gap C2 certificate:
+  `Erdos699.not_exists_kernelBelow_iff_forall_mem_quotient_gap_gcd_mul_lt_of_list_exact_odd`
+  rewrites bounded kernel emptiness, for an exact finite canonical row-one
+  candidate list and odd coprime `N2`, as the finite inequality
+  `gcd ((t * (t - 1)) / N1) N2 * gcd (t - 2) N2 < N2` for every listed
+  candidate. This composes the finite-list certificate contract with the
+  odd quotient-gap factorization; it is still conditional on list cover,
+  list soundness, and `2 ≤ t` for listed candidates.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters
