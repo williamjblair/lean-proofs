@@ -390,6 +390,14 @@
   identify non-survival with `gcd ≠ N2`, and with `gcd < N2` when `0 < N2`.
   This is the exact per-candidate pass/fail predicate used by the C2 scanner,
   not a proof that all candidates fail.
+- [R] Proved the combined canonical kernel characterization for C2:
+  `Erdos699.consecutiveDivisorKernel_iff_gcdDiv_split_and_row_two_gcd_eq`
+  states that, for `0 < N1`, the two-row kernel is equivalent to the
+  canonical row-one gcd/div split plus the row-two gcd equality. The bounded
+  wrapper
+  `Erdos699.consecutiveDivisorKernelBelow_iff_bound_gcdDiv_split_and_row_two_gcd_eq`
+  adds the half-row bound. This packages the exact logical contract of the C2
+  CRT scanner; it is not a proof that the kernel is empty.
 - [E] Added an exact CRT enumerator for the consecutive-divisor kernel:
   `compute.kernel.scan_kernel_crt` factors `N1`, enumerates the `{0,1}`
   residue choices for `N1 ∣ t(t-1)`, then filters

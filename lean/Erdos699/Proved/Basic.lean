@@ -439,6 +439,36 @@ theorem rowOneDivisorSplit_not_consecutiveDivisorKernelBelow_iff_row_two_gcd_lt_
   · intro hlt
     exact ne_of_lt hlt
 
+theorem consecutiveDivisorKernel_iff_gcdDiv_split_and_row_two_gcd_eq
+    {N1 N2 t : ℕ} (hN1 : 0 < N1) :
+    consecutiveDivisorKernel N1 N2 t ↔
+      rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t ∧
+        Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 := by
+  constructor
+  · intro hkernel
+    exact
+      ⟨rowOneDivisorSplit_gcdDiv_of_consecutiveDivisorKernel hN1 hkernel,
+        rowTwo_dvd_iff_gcd_eq_right.mp hkernel.2⟩
+  · intro h
+    exact (rowOneDivisorSplit_consecutiveDivisorKernel_iff_row_two_gcd_eq h.1).mpr h.2
+
+theorem consecutiveDivisorKernelBelow_iff_bound_gcdDiv_split_and_row_two_gcd_eq
+    {N1 N2 bound t : ℕ} (hN1 : 0 < N1) :
+    consecutiveDivisorKernelBelow N1 N2 bound t ↔
+      2 * t ≤ bound ∧
+        rowOneDivisorSplit N1 (Nat.gcd N1 t) (N1 / Nat.gcd N1 t) t ∧
+          Nat.gcd (t * (t - 1) * (t - 2)) N2 = N2 := by
+  constructor
+  · intro hkernel
+    exact
+      ⟨hkernel.1,
+        ⟨rowOneDivisorSplit_gcdDiv_of_consecutiveDivisorKernelBelow hN1 hkernel,
+          rowTwo_dvd_iff_gcd_eq_right.mp hkernel.2.2⟩⟩
+  · intro h
+    exact
+      ⟨h.1,
+        (rowOneDivisorSplit_consecutiveDivisorKernel_iff_row_two_gcd_eq h.2.1).mpr h.2.2⟩
+
 theorem not_consecutiveDivisorKernel_of_row_two_gcd_lt {N1 N2 t : ℕ}
     (hgcd : Nat.gcd (t * (t - 1) * (t - 2)) N2 < N2) :
     ¬ consecutiveDivisorKernel N1 N2 t := by
