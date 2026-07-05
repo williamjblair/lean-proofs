@@ -2053,6 +2053,49 @@ theorem two_mul_t_le_X_of_factorized_half_bound {n F X j t : ℕ}
     simpa [mul_assoc, mul_comm, mul_left_comm] using hjn
   exact Nat.le_of_mul_le_mul_left hmul hF_pos
 
+theorem t_le_X_of_factorized_half_bound {n F X j t : ℕ}
+    (hn : n = F * X) (hj : j = F * t) (hj_pos : 0 < j) (hjn : 2 * j ≤ n) :
+    t ≤ X := by
+  have h2tX := two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn
+  omega
+
+theorem i_three_caseI_row_one_sub_one_dvd_t_mul_X_sub_t_from_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hjn : 2 * j ≤ n) :
+    n - 1 ∣ t * (X - t) :=
+  i_three_caseI_row_one_sub_one_dvd_t_mul_X_sub_t
+    hnone hn hj hn_gt hj_pos h2n h3n
+    (t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+
+theorem i_three_caseI_row_one_exists_factor_from_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hjn : 2 * j ≤ n) :
+    ∃ g : ℕ, t * (X - t) = g * (n - 1) :=
+  i_three_caseI_row_one_exists_factor
+    hnone hn hj hn_gt hj_pos h2n h3n
+    (t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+
+theorem i_three_caseI_row_one_four_mul_sub_one_le_X_sq_from_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hjn : 2 * j ≤ n) :
+    4 * (n - 1) ≤ X * X :=
+  i_three_caseI_row_one_four_mul_sub_one_le_X_sq
+    hnone hn hj hn_gt hj_pos h2n h3n
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+
+theorem i_three_caseI_row_one_four_mul_factor_le_X_from_row_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hX_even : 2 ∣ X) (hX_four : 4 ≤ X)
+    (hjn : 2 * j ≤ n) :
+    4 * F ≤ X :=
+  i_three_caseI_row_one_four_mul_factor_le_X
+    hnone hn hj hn_gt hj_pos h2n h3n hX_even hX_four
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+
 theorem i_three_caseI_factor_sq_squeeze_of_half_bound_from_row_bound {n F X j t : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
