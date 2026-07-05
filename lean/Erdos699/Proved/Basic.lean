@@ -1967,6 +1967,19 @@ theorem i_three_caseI_noncentral_factor_sq_squeeze {n F X j t : ℕ}
     (i_three_caseI_noncentral_half_sub_one_cube_bound
       hnone hn hj hn_gt hj_pos hj_two h2n h3n hbranch hhalf)
 
+theorem i_three_caseI_factor_sq_squeeze_of_half_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hX_even : 2 ∣ X)
+    (h2tX : 2 * t ≤ X) (hhalf : n / 2 - 1 ≤ primePowerPartGE 5 (n - 2)) :
+    2 * (F * F) ≤ X := by
+  by_cases hcentral : 2 * t = X
+  · exact False.elim
+      (i_three_caseI_central_branch_false hnone hn hj hn_gt hj_pos h2n h3n hcentral)
+  · have hbranch : 0 < X - 2 * t := by omega
+    exact i_three_caseI_noncentral_factor_sq_squeeze
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n hX_even hbranch hhalf
+
 theorem i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four {n F X j t : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
@@ -2011,6 +2024,19 @@ theorem i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four {n F X j
     exact hgap.trans (by
       simpa [mul_assoc] using Nat.mul_le_mul_left (X * X) (Nat.sub_le X (2 * t)))
   exact two_mul_factor_sq_le_of_even_half_cube_bound hn hn_gt hX_even hcube
+
+theorem i_three_caseI_factor_sq_squeeze_of_half_coprime_four {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hX_even : 2 ∣ X)
+    (h2tX : 2 * t ≤ X) (hcop4 : (n / 2 - 1).Coprime 4) :
+    2 * (F * F) ≤ X := by
+  by_cases hcentral : 2 * t = X
+  · exact False.elim
+      (i_three_caseI_central_branch_false hnone hn hj hn_gt hj_pos h2n h3n hcentral)
+  · have hbranch : 0 < X - 2 * t := by omega
+    exact i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n hX_even hbranch hcop4
 
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by

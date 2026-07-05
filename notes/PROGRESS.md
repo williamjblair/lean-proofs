@@ -156,6 +156,13 @@
   `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze` packages this for the
   case-I counterexample hypotheses, still assuming the explicit half-row
   lower bound and non-central branch. Full T7 remains open.
+- [R] Proved branch-free T7 factor-square wrappers:
+  `Erdos699.i_three_caseI_factor_sq_squeeze_of_half_bound` combines the central
+  branch contradiction with `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze`
+  under `2 * t ≤ X`, removing the explicit `0 < X - 2 * t` input while still
+  assuming `n / 2 - 1 ≤ primePowerPartGE 5 (n - 2)`. The coprime-to-4 version
+  `Erdos699.i_three_caseI_factor_sq_squeeze_of_half_coprime_four` does the same
+  for `(n / 2 - 1).Coprime 4`. Full T7 remains open.
 - [R] Proved the direct coprime-to-4 half-row squeeze:
   `Erdos699.i_three_caseI_noncentral_factor_sq_squeeze_of_half_coprime_four`
   replaces the explicit lower-bound input
