@@ -72,4 +72,10 @@
   `Erdos699.t5_i_eq_three_odd_three_exactly_once`: for row `i = 3`,
   `n` odd, `3 ∣ n`, `¬ 9 ∣ n`, `3 < j`, and `2 * j ≤ n`, a relevant common
   prime divisor exists.
-- [OPEN] T4 and all later rungs remain unclaimed in this branch.
+- [R] Proved first T6 digit-layer support for the `n - 1` row:
+  `Erdos699.digit_zero_eq_one_of_pow_dvd_sub_one`,
+  `Erdos699.digit_eq_zero_of_pow_dvd_sub_one`, and row-3 transfer lemmas
+  forcing `j`'s units digit to be at most `1` and levels `1..e-1` to vanish
+  when `p^e ∣ n - 1`. Full T6 remains open.
+- [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
+  this branch.
