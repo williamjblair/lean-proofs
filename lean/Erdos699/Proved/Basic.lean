@@ -167,6 +167,40 @@ theorem commonPrimeDivisor_of_prime_in_top_interval {n i j p : ℕ}
       prime_dvd_choose_of_units_digit_lt hp hright hn_lt_2p hlow_i hi_lt_p,
       prime_dvd_choose_of_units_digit_lt hp hright hn_lt_2p hlow_j hj_lt_p⟩
 
+/-- The numerator window `n(n-1)...(n-i+1)` for `C(n,i)`. -/
+def fallingWindowProduct (n i : ℕ) : ℕ :=
+  ∏ r ∈ Finset.range i, (n - r)
+
+theorem t3_top_interval_prime_free_of_no_common {n i j p : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n i j q)
+    (hij : i < j) (hjn : 2 * j ≤ n) (hp : p.Prime) :
+    ¬ (n - i < p ∧ p ≤ n) := by
+  intro hinterval
+  exact hnone p
+    (commonPrimeDivisor_of_prime_in_top_interval hp hij hjn hinterval.1 hinterval.2)
+
+theorem t3_no_large_prime_dvd_fallingWindowProduct_of_no_common {n i j p : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n i j q)
+    (hij : i < j) (hjn : 2 * j ≤ n) (hp : p.Prime) (hp_large : n < 2 * p) :
+    ¬ p ∣ fallingWindowProduct n i := by
+  intro hprod
+  have hexists : ∃ r ∈ Finset.range i, p ∣ n - r := by
+    by_contra hnone_factor
+    rw [not_exists] at hnone_factor
+    have hno_factor : ∀ r ∈ Finset.range i, ¬ p ∣ n - r := by
+      intro r hr hdiv
+      exact hnone_factor r ⟨hr, hdiv⟩
+    exact (prime_not_dvd_finset_prod hp hno_factor) hprod
+  obtain ⟨r, hr, hpdiv⟩ := hexists
+  have hrlt : r < i := by simpa [Finset.mem_range] using hr
+  have hrn : r < n := by omega
+  have hfactor_ne_zero : n - r ≠ 0 := by omega
+  have hfactor_lt : n - r < 2 * p := by omega
+  have hfactor_eq : n - r = p := Nat.eq_of_dvd_of_lt_two_mul hfactor_ne_zero hpdiv hfactor_lt
+  have hinterval : n - i < p ∧ p ≤ n := by
+    constructor <;> omega
+  exact (t3_top_interval_prime_free_of_no_common hnone hij hjn hp) hinterval
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :

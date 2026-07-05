@@ -19,6 +19,12 @@
   `Erdos699.commonPrimeDivisor_of_prime_in_top_interval`: if `p` is prime,
   `n - i < p ≤ n`, `i < j`, and `2 * j ≤ n`, then `p` is a relevant common
   prime divisor of `C(n,i)` and `C(n,j)`.
+- [R] Proved T3 confinement consequences
+  `Erdos699.t3_top_interval_prime_free_of_no_common` and
+  `Erdos699.t3_no_large_prime_dvd_fallingWindowProduct_of_no_common`: under a
+  no-common-prime hypothesis, `(n - i, n]` is prime-free and no prime
+  satisfying `n < 2 * p` divides the numerator window
+  `Erdos699.fallingWindowProduct n i`.
 - [R] Proved `Erdos699.no_commonPrimeDivisor_iff_obstructionCriterion`, the
   formal corrected counterexample criterion. The predicate quantifies over
   `relevantPrime i p`, so primes `p < i` impose no digit-domination condition.
@@ -27,5 +33,4 @@
   collapses to `n = 2 * j` with `j` odd.
 - [R] Proved full T2 as `Erdos699.t2_i_eq_two`: for `2 < j` and
   `2 * j ≤ n`, there is a prime `p ≥ 2` dividing both `C(n,2)` and `C(n,j)`.
-- [OPEN] Full T3 confinement beyond the top-range lemma, and all later rungs
-  remain unclaimed in this branch.
+- [OPEN] T4 and all later rungs remain unclaimed in this branch.
