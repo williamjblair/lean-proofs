@@ -516,6 +516,119 @@ def test_squeezed_normalized_scan_records_empty_ranges() -> None:
     assert result["survivors"] == []
 
 
+def test_squeezed_normalized_scan_can_include_candidate_diagnostics() -> None:
+    default_result = scan_squeezed_normalized_case_i_kernel(max_f=9, max_x=120)
+    result = scan_squeezed_normalized_case_i_kernel(
+        max_f=9,
+        max_x=120,
+        include_candidate_diagnostics=True,
+    )
+    assert "candidate_diagnostics" not in default_result
+    assert result["candidate_diagnostics"] == [
+        {
+            "F": 3,
+            "X": 48,
+            "t": 22,
+            "g": 4,
+            "half_row": 71,
+            "gap": 4,
+            "half_row_value": 16,
+            "half_row_remainder": 16,
+            "half_row_gcd": 1,
+            "survives_half_row": False,
+        },
+        {
+            "F": 3,
+            "X": 96,
+            "t": 14,
+            "g": 4,
+            "half_row": 143,
+            "gap": 68,
+            "half_row_value": 272,
+            "half_row_remainder": 129,
+            "half_row_gcd": 1,
+            "survives_half_row": False,
+        },
+        {
+            "F": 3,
+            "X": 108,
+            "t": 51,
+            "g": 9,
+            "half_row": 161,
+            "gap": 6,
+            "half_row_value": 54,
+            "half_row_remainder": 54,
+            "half_row_gcd": 1,
+            "survives_half_row": False,
+        },
+        {
+            "F": 3,
+            "X": 112,
+            "t": 45,
+            "g": 9,
+            "half_row": 167,
+            "gap": 22,
+            "half_row_value": 198,
+            "half_row_remainder": 31,
+            "half_row_gcd": 1,
+            "survives_half_row": False,
+        },
+        {
+            "F": 5,
+            "X": 80,
+            "t": 38,
+            "g": 4,
+            "half_row": 199,
+            "gap": 4,
+            "half_row_value": 16,
+            "half_row_remainder": 16,
+            "half_row_gcd": 1,
+            "survives_half_row": False,
+        },
+        {
+            "F": 5,
+            "X": 112,
+            "t": 26,
+            "g": 4,
+            "half_row": 279,
+            "gap": 60,
+            "half_row_value": 240,
+            "half_row_remainder": 240,
+            "half_row_gcd": 3,
+            "survives_half_row": False,
+        },
+        {
+            "F": 7,
+            "X": 112,
+            "t": 54,
+            "g": 4,
+            "half_row": 391,
+            "gap": 4,
+            "half_row_value": 16,
+            "half_row_remainder": 16,
+            "half_row_gcd": 1,
+            "survives_half_row": False,
+        },
+    ]
+
+
+def test_squeezed_normalized_scan_can_include_half_row_summary() -> None:
+    result = scan_squeezed_normalized_case_i_kernel(
+        max_f=9,
+        max_x=120,
+        include_candidate_summary=True,
+    )
+    assert result["candidate_summary"] == {
+        "candidate_count": 7,
+        "surviving_half_row_count": 0,
+        "failed_half_row_count": 7,
+        "half_row_gcd_histogram": [
+            {"half_row_gcd": 1, "count": 6},
+            {"half_row_gcd": 3, "count": 1},
+        ],
+    }
+
+
 def test_kernel_cli_can_scan_squeezed_normalized_case_i_kernel() -> None:
     completed = subprocess.run(
         [
@@ -536,3 +649,27 @@ def test_kernel_cli_can_scan_squeezed_normalized_case_i_kernel() -> None:
     assert payload["mode"] == "squeezed_normalized_case_i_kernel"
     assert payload["candidate_count"] == 7
     assert payload["survivors"] == []
+
+
+def test_kernel_cli_can_include_squeezed_candidate_summary() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--squeezed-normalized-case-i",
+            "--max-f",
+            "9",
+            "--max-x",
+            "120",
+            "--include-candidate-summary",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["candidate_summary"]["half_row_gcd_histogram"] == [
+        {"half_row_gcd": 1, "count": 6},
+        {"half_row_gcd": 3, "count": 1},
+    ]

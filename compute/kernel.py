@@ -146,10 +146,54 @@ def squeezed_normalized_case_i_kernel_holds(F: int, X: int, t: int, g: int) -> b
     )
 
 
+def _squeezed_candidate_diagnostic(candidate: dict[str, int]) -> dict[str, Any]:
+    F = candidate["F"]
+    X = candidate["X"]
+    t = candidate["t"]
+    g = candidate["g"]
+    half_row = F * X // 2 - 1
+    gap = X - 2 * t
+    half_row_value = g * gap
+    half_row_remainder = half_row_value % half_row
+    return {
+        **candidate,
+        "half_row": half_row,
+        "gap": gap,
+        "half_row_value": half_row_value,
+        "half_row_remainder": half_row_remainder,
+        "half_row_gcd": math.gcd(half_row_value, half_row),
+        "survives_half_row": half_row_remainder == 0,
+    }
+
+
+def _squeezed_candidate_summary(
+    candidate_diagnostics: list[dict[str, Any]],
+) -> dict[str, Any]:
+    gcd_counts: dict[int, int] = {}
+    surviving_half_row_count = 0
+    for candidate in candidate_diagnostics:
+        half_row_gcd = candidate["half_row_gcd"]
+        gcd_counts[half_row_gcd] = gcd_counts.get(half_row_gcd, 0) + 1
+        if candidate["survives_half_row"]:
+            surviving_half_row_count += 1
+    candidate_count = len(candidate_diagnostics)
+    return {
+        "candidate_count": candidate_count,
+        "surviving_half_row_count": surviving_half_row_count,
+        "failed_half_row_count": candidate_count - surviving_half_row_count,
+        "half_row_gcd_histogram": [
+            {"half_row_gcd": half_row_gcd, "count": gcd_counts[half_row_gcd]}
+            for half_row_gcd in sorted(gcd_counts)
+        ],
+    }
+
+
 def scan_squeezed_normalized_case_i_kernel(
     max_f: int,
     max_x: int,
     include_candidates: bool = False,
+    include_candidate_diagnostics: bool = False,
+    include_candidate_summary: bool = False,
 ) -> dict[str, Any]:
     if max_f < 0 or max_x < 0:
         raise ValueError("max_f and max_x must be nonnegative")
@@ -181,6 +225,16 @@ def scan_squeezed_normalized_case_i_kernel(
     }
     if include_candidates:
         result["candidates"] = candidates
+    if include_candidate_diagnostics or include_candidate_summary:
+        candidate_diagnostics = [
+            _squeezed_candidate_diagnostic(candidate) for candidate in candidates
+        ]
+        if include_candidate_diagnostics:
+            result["candidate_diagnostics"] = candidate_diagnostics
+        if include_candidate_summary:
+            result["candidate_summary"] = _squeezed_candidate_summary(
+                candidate_diagnostics
+            )
     return result
 
 
@@ -416,6 +470,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--min-exponent", type=int, default=2)
     parser.add_argument("--max-exponent", type=int)
     parser.add_argument("--include-candidates", action="store_true")
+    parser.add_argument("--include-candidate-diagnostics", action="store_true")
+    parser.add_argument("--include-candidate-summary", action="store_true")
     parser.add_argument("--include-row-one-candidates", action="store_true")
     parser.add_argument("--include-row-one-splits", action="store_true")
     parser.add_argument("--include-row-one-split-summary", action="store_true")
@@ -439,6 +495,8 @@ def main(argv: list[str] | None = None) -> int:
             args.max_f,
             args.max_x,
             include_candidates=args.include_candidates,
+            include_candidate_diagnostics=args.include_candidate_diagnostics,
+            include_candidate_summary=args.include_candidate_summary,
         )
     else:
         if args.n1 is None or args.n2 is None or args.bound is None:

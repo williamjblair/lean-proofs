@@ -305,8 +305,11 @@
   the half-row divisor `F * X / 2 - 1 ∣ g * (X - 2 * t)`. Reproduce with
   `python3 -m compute.kernel --squeezed-normalized-case-i --max-f 99 --max-x 5000`;
   it reports `1564` row-one factor candidates and `0` full squeezed survivors.
-  This is exact finite evidence for the named squeezed-kernel target, not an
-  emptiness proof.
+  With `--include-candidate-summary`, the same run reports
+  `surviving_half_row_count = 0`; its half-row gcd histogram begins with
+  `1191` candidates at gcd `1`, `179` at gcd `3`, `72` at gcd `5`, and `45`
+  at gcd `7`. This is exact finite evidence for the named squeezed-kernel
+  target, not an emptiness proof.
 - [R] Formalized the consecutive-divisor kernel target:
   `Erdos699.consecutiveDivisorKernel` and
   `Erdos699.consecutiveDivisorKernelBelow` name the two-row kernel and the
