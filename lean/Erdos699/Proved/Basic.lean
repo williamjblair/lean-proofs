@@ -2384,6 +2384,45 @@ theorem i_three_caseI_factor_sq_squeeze_of_four_dvd_odd_factor_from_row_bound
   exact i_three_caseI_factor_sq_squeeze_of_four_dvd_from_row_bound
     hnone hn hj hn_gt hj_pos hj_two h2n h3n h4n hX_even hjn
 
+theorem i_three_caseI_four_dvd_odd_factor_joint_package_from_row_bound
+    {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hFodd : Odd F) (hjn : 2 * j ≤ n) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        n / 2 - 1 ∣ g * (X - 2 * t) ∧
+          n / 2 - 1 ≤ g * (X - 2 * t) ∧
+            4 * ((n - 1) * (n / 2 - 1)) ≤ X * X * X ∧
+              4 * F ≤ X ∧
+                2 * (F * F) ≤ X := by
+  rcases i_three_caseI_exists_joint_half_sub_one_cube_from_four_dvd_row_bound
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n h4n hjn with
+    ⟨g, hrow1, hdvd, hle, hcube⟩
+  have hrow :
+      4 * F ≤ X :=
+    i_three_caseI_row_one_four_mul_factor_le_X_of_four_dvd_odd_factor_from_row_bound
+      hnone hn hj hn_gt hj_pos h2n h3n h4n hFodd hjn
+  have hsq :
+      2 * (F * F) ≤ X :=
+    i_three_caseI_factor_sq_squeeze_of_four_dvd_odd_factor_from_row_bound
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n h4n hFodd hjn
+  exact ⟨g, hrow1, hdvd, hle, hcube, hrow, hsq⟩
+
+theorem i_three_caseI_four_dvd_odd_factor_joint_squeeze_from_row_bound
+    {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (h4n : 4 ∣ n)
+    (hFodd : Odd F) (hjn : 2 * j ≤ n) :
+    4 * F ≤ X ∧ 2 * (F * F) ≤ X := by
+  rcases
+      i_three_caseI_four_dvd_odd_factor_joint_package_from_row_bound
+        hnone hn hj hn_gt hj_pos hj_two h2n h3n h4n hFodd hjn with
+    ⟨_g, _hrow1, _hdvd, _hle, _hcube, hrow, hsq⟩
+  exact ⟨hrow, hsq⟩
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :

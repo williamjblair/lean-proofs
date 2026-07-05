@@ -280,5 +280,13 @@
   remove the explicit `X` parity inputs from the row-one cofactor and
   factor-square squeezes under the odd-cofactor normalization. Full T7 remains
   open.
+- [R] Bundled the normalized `4 ∣ n`, odd-cofactor Case-I T7 branch:
+  `Erdos699.i_three_caseI_four_dvd_odd_factor_joint_package_from_row_bound`
+  packages the row-one factor, the half-row divisor/size condition, the
+  half-row cube inequality, and both normalized squeeze inequalities. The
+  projection
+  `Erdos699.i_three_caseI_four_dvd_odd_factor_joint_squeeze_from_row_bound`
+  returns `4 * F ≤ X ∧ 2 * (F * F) ≤ X`. This is a branch package, not full
+  T7.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

@@ -1,0 +1,8 @@
+import Erdos699.Proved.Basic
+
+namespace Erdos699
+
+#check i_three_caseI_four_dvd_odd_factor_joint_package_from_row_bound
+#check i_three_caseI_four_dvd_odd_factor_joint_squeeze_from_row_bound
+
+end Erdos699
