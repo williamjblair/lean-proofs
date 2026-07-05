@@ -702,6 +702,18 @@
   the explicit `3 ∣ n`, `4 ∣ n`, `3 < j`, `2 * j ≤ n` hypotheses into the
   original common-prime conclusion. This is a certificate consumer, not a
   proof that the kernel is empty.
+- [R]/[E] Added the prime row-one short-interval kernel consumer:
+  `Erdos699.not_exists_kernelInRange_of_prime_row_one_short` proves that if
+  `N1` is prime, `2 ≤ minT`, and `bound < 2 * (N1 - 1)`, then the
+  lower-bounded kernel `consecutiveDivisorKernelInRange N1 N2 minT bound` is
+  empty. The conditional instance
+  `Erdos699.not_exists_kernelInRange_6143_3071_4_6144_of_prime` applies this
+  to the `A = 11`, `n = 3 * 2^11` Case-I numbers, under the explicit
+  hypothesis `Nat.Prime 6143`. The exact compute command
+  `python3 -m compute.kernel --n1 6143 --n2 3071 --bound 6144 --min-t 4 --include-row-one-candidates --include-row-one-splits --include-quotient-gap-summary`
+  reports `row_one_candidates = []`, `survivor_count = 0`, and
+  `all_strict_lt_n2 = True`. This banks the short-prime-modulus logic but
+  does not yet bank a Lean primality certificate for `6143`.
 - [R]/[E] Connected finite lower-bounded certificates back to the original
   problem surface for five `n = 3 * 2^A` Case-I members. For `A = 5`,
   `Erdos699.i_three_caseI_96_not_no_common_from_row_bounds` rules out the

@@ -922,6 +922,26 @@ theorem not_exists_kernelInRange_of_list_covers_quotient_gap_gcd_mul_lt_odd
       hN1 hN2 hcop hodd (hge2 t hmem) hsplit (hfail t hmem)
   omega
 
+theorem not_exists_kernelInRange_of_prime_row_one_short {N1 N2 minT bound : ℕ}
+    (hp : N1.Prime) (hminT : 2 ≤ minT) (hshort : bound < 2 * (N1 - 1)) :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange N1 N2 minT bound t := by
+  rintro ⟨t, hmin, hbound, hrow, _hrowTwo⟩
+  have ht_ge_two : 2 ≤ t := hminT.trans hmin
+  have ht_pos : 0 < t := by omega
+  have htm1_pos : 0 < t - 1 := by omega
+  have ht_lt_N1 : t < N1 := by omega
+  have htm1_lt_N1 : t - 1 < N1 := by omega
+  rcases hp.dvd_mul.mp hrow with ht_dvd | htm1_dvd
+  · have hN1_le_t : N1 ≤ t := Nat.le_of_dvd ht_pos ht_dvd
+    omega
+  · have hN1_le_tm1 : N1 ≤ t - 1 := Nat.le_of_dvd htm1_pos htm1_dvd
+    omega
+
+theorem not_exists_kernelInRange_6143_3071_4_6144_of_prime
+    (hp : Nat.Prime 6143) :
+    ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 6143 3071 4 6144 t :=
+  not_exists_kernelInRange_of_prime_row_one_short hp (by norm_num) (by norm_num)
+
 theorem not_exists_kernelInRange_95_47_4_96 :
     ¬ ∃ t : ℕ, consecutiveDivisorKernelInRange 95 47 4 96 t := by
   exact
