@@ -2096,6 +2096,71 @@ theorem i_three_caseI_row_one_four_mul_factor_le_X_from_row_bound {n F X j t : �
     hnone hn hj hn_gt hj_pos h2n h3n hX_even hX_four
     (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
 
+theorem i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t_from_row_bound
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (hjn : 2 * j ≤ n) :
+    primePowerPartGE 5 (n - 2) ∣ t * (X - t) * (X - 2 * t) :=
+  i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t
+    hnone hn hj (by omega : 2 ≤ n) hn_gt hj_two
+    (t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+
+theorem i_three_caseI_row_two_half_sub_one_dvd_t_mul_X_sub_t_mul_X_sub_two_t_from_row_bound
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n)
+    (hcop4 : (n / 2 - 1).Coprime 4) (hjn : 2 * j ≤ n) :
+    n / 2 - 1 ∣ t * (X - t) * (X - 2 * t) :=
+  i_three_caseI_row_two_half_sub_one_dvd_t_mul_X_sub_t_mul_X_sub_two_t
+    hnone hn hj hn_gt hj_two h2n h3n hcop4
+    (t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+
+theorem i_three_caseI_row_two_half_large_part_dvd_triple_from_row_bound
+    {n F X j t : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (hjn : 2 * j ≤ n) :
+    primePowerPartGE 5 (n / 2 - 1) ∣ t * (X - t) * (X - 2 * t) :=
+  i_three_caseI_row_two_half_sub_one_large_part_dvd_t_mul_X_sub_t_mul_X_sub_two_t
+    hnone hn hj hn_gt hj_two h2n
+    (t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+
+theorem i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t_from_row_bound
+    {n F X j t g : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (hjn : 2 * j ≤ n)
+    (hrow1 : t * (X - t) = g * (n - 1)) :
+    primePowerPartGE 5 (n - 2) ∣ g * (X - 2 * t) :=
+  i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t
+    hnone hn hj (by omega : 2 ≤ n) hn_gt hj_two
+    (t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn) hrow1
+
+theorem i_three_caseI_joint_half_sub_one_dvd_factor_mul_X_sub_two_t_from_row_bound
+    {n F X j t g : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n)
+    (hcop4 : (n / 2 - 1).Coprime 4) (hjn : 2 * j ≤ n)
+    (hrow1 : t * (X - t) = g * (n - 1)) :
+    n / 2 - 1 ∣ g * (X - 2 * t) :=
+  i_three_caseI_joint_half_sub_one_dvd_factor_mul_X_sub_two_t
+    hnone hn hj hn_gt hj_two h2n h3n hcop4
+    (t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn) hrow1
+
+theorem i_three_caseI_joint_half_sub_one_large_part_dvd_factor_mul_X_sub_two_t_from_row_bound
+    {n F X j t g : ℕ} (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (hjn : 2 * j ≤ n)
+    (hrow1 : t * (X - t) = g * (n - 1)) :
+    primePowerPartGE 5 (n / 2 - 1) ∣ g * (X - 2 * t) :=
+  i_three_caseI_joint_half_sub_one_large_part_dvd_factor_mul_X_sub_two_t
+    hnone hn hj hn_gt hj_two h2n
+    (t_le_X_of_factorized_half_bound hn hj hj_pos hjn)
+    (two_mul_t_le_X_of_factorized_half_bound hn hj hj_pos hjn) hrow1
+
 theorem i_three_caseI_factor_sq_squeeze_of_half_bound_from_row_bound {n F X j t : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)

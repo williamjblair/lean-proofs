@@ -123,6 +123,16 @@
   package the existing first-row divisibility, factor, square-bound, and
   cofactor-bound results under the original row condition `2 * j ≤ n`.
   Full T6/T7 remain open.
+- [R] Proved row-bound T6/T7 row-two wrappers:
+  `Erdos699.i_three_caseI_row_two_primePowerPartGE_dvd_t_mul_X_sub_t_mul_X_sub_two_t_from_row_bound`,
+  `Erdos699.i_three_caseI_row_two_half_sub_one_dvd_t_mul_X_sub_t_mul_X_sub_two_t_from_row_bound`,
+  `Erdos699.i_three_caseI_row_two_half_large_part_dvd_triple_from_row_bound`,
+  `Erdos699.i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t_from_row_bound`,
+  `Erdos699.i_three_caseI_joint_half_sub_one_dvd_factor_mul_X_sub_two_t_from_row_bound`,
+  and `Erdos699.i_three_caseI_joint_half_sub_one_large_part_dvd_factor_mul_X_sub_two_t_from_row_bound`
+  package the existing row-two divisibility and joint cancellation bridges
+  under the original row condition `2 * j ≤ n`. The joint wrappers still keep
+  the explicit row-one factor `t * (X - t) = g * (n - 1)`. Full T7 remains open.
 - [R] Proved the T7 joint-row large-part cancellation:
   `Erdos699.i_three_caseI_joint_large_part_dvd_factor_mul_X_sub_two_t` shows
   that if `t * (X - t) = g * (n - 1)`, then the row-two large-prime part
