@@ -491,6 +491,8 @@ def _power_two_reduced_divisor_gap_diagnostic(
         raise AssertionError("positive split diagnostic must have positive gcd bound")
     parity_reduced_divisor_lower_bound = half_row_modulus // parity_gcd_bound
     parity_gap_margin = parity_reduced_divisor_lower_bound - l_times_m
+    parity_product_bound = parity_gcd_bound * (l_times_m + 1)
+    parity_product_margin = half_row_modulus - parity_product_bound
     return {
         "exponent": candidate["exponent"],
         "A": A,
@@ -514,6 +516,9 @@ def _power_two_reduced_divisor_gap_diagnostic(
         "parity_reduced_divisor_lower_bound": parity_reduced_divisor_lower_bound,
         "parity_gap_margin": parity_gap_margin,
         "parity_gap_holds": l_times_m < parity_reduced_divisor_lower_bound,
+        "parity_product_bound": parity_product_bound,
+        "parity_product_margin": parity_product_margin,
+        "parity_product_gap_holds": parity_product_bound <= half_row_modulus,
     }
 
 
@@ -523,9 +528,17 @@ def _power_two_parity_branch_gap_summary(
     parity_gap_holds_count = sum(
         1 for item in diagnostics if item["parity_gap_holds"]
     )
+    parity_product_gap_holds_count = sum(
+        1 for item in diagnostics if item["parity_product_gap_holds"]
+    )
     min_parity_gap_candidate = min(
         diagnostics,
         key=lambda item: int(item["parity_gap_margin"]),
+        default=None,
+    )
+    min_parity_product_candidate = min(
+        diagnostics,
+        key=lambda item: int(item["parity_product_margin"]),
         default=None,
     )
     return {
@@ -539,7 +552,17 @@ def _power_two_parity_branch_gap_summary(
             if min_parity_gap_candidate is None
             else min_parity_gap_candidate["parity_gap_margin"]
         ),
+        "parity_product_gap_holds_count": parity_product_gap_holds_count,
+        "parity_product_gap_failure_count": (
+            len(diagnostics) - parity_product_gap_holds_count
+        ),
+        "min_parity_product_margin": (
+            None
+            if min_parity_product_candidate is None
+            else min_parity_product_candidate["parity_product_margin"]
+        ),
         "min_parity_gap_candidate": min_parity_gap_candidate,
+        "min_parity_product_candidate": min_parity_product_candidate,
     }
 
 

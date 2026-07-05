@@ -4505,6 +4505,37 @@ theorem not_dvd_mul_of_parity_reduced_divisor_gt {M c L : ℕ}
       Nat.div_le_div_left hgcd_le_half hgcdpos
     exact lt_of_lt_of_le hgapc hdiv_le
 
+/-- Floor-free way to prove `L < M / b`: it suffices to show
+`b * (L + 1) ≤ M`. -/
+theorem lt_div_of_mul_succ_le {M b L : ℕ}
+    (hbpos : 0 < b)
+    (hbound : b * (L + 1) ≤ M) :
+    L < M / b := by
+  have hsucc_le : L + 1 ≤ M / b := by
+    exact (Nat.le_div_iff_mul_le hbpos).mpr (by simpa [mul_comm] using hbound)
+  omega
+
+/-- Product-form parity certificate. For odd `c`, it is enough to prove
+`c * (L + 1) ≤ M`; for even `c`, it is enough to prove
+`(c / 2) * (L + 1) ≤ M`. -/
+theorem not_dvd_mul_of_parity_product_gap {M c L : ℕ}
+    (hMpos : 0 < M)
+    (hModd : Odd M)
+    (hcpos : 0 < c)
+    (hLpos : 0 < L)
+    (hgap : (Odd c ∧ c * (L + 1) ≤ M) ∨
+      (Even c ∧ (c / 2) * (L + 1) ≤ M)) :
+    ¬ M ∣ c * L := by
+  refine not_dvd_mul_of_parity_reduced_divisor_gt hMpos hModd hcpos hLpos ?_
+  rcases hgap with ⟨hcodd, hbound⟩ | ⟨hceven, hbound⟩
+  · exact Or.inl ⟨hcodd, lt_div_of_mul_succ_le hcpos hbound⟩
+  · have hc2pos : 0 < c / 2 := by
+      rcases hceven with ⟨k, hk⟩
+      have hkpos : 0 < k := by omega
+      have hcdiv : c / 2 = k := by omega
+      simpa [hcdiv] using hkpos
+    exact Or.inr ⟨hceven, lt_div_of_mul_succ_le hc2pos hbound⟩
+
 /-- The half-row modulus is odd for the power-of-two split setting. -/
 theorem powerTwoSplit_half_row_odd {A B : ℕ}
     (hA4 : 4 ∣ A)
@@ -4541,6 +4572,30 @@ theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
     ¬ B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m) := by
   dsimp at hgap
   exact not_dvd_mul_of_parity_reduced_divisor_gt
+    (powerTwoSplit_half_row_pos hA4 hBge hApos)
+    (powerTwoSplit_half_row_odd hA4 hApos hBodd)
+    hcpos
+    (Nat.mul_pos hlpos hmpos)
+    hgap
+
+/-- Split-level product-form parity certificate. -/
+theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_product_gap
+    {A B l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hApos : 0 < A)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hcpos : 0 < Nat.gcd alpha beta)
+    (hgap :
+      let c := Nat.gcd alpha beta
+      let M := B * (A / 2) - 1
+      (Odd c ∧ c * (l * m + 1) ≤ M) ∨
+        (Even c ∧ (c / 2) * (l * m + 1) ≤ M)) :
+    ¬ B * (A / 2) - 1 ∣ Nat.gcd alpha beta * (l * m) := by
+  dsimp at hgap
+  exact not_dvd_mul_of_parity_product_gap
     (powerTwoSplit_half_row_pos hA4 hBge hApos)
     (powerTwoSplit_half_row_odd hA4 hApos hBodd)
     hcpos
@@ -4586,6 +4641,47 @@ theorem powerTwoSplitGcdObstruction_of_parity_reduced_divisor_gap {A B : ℕ}
     Nat.gcd_pos_of_pos_left beta halpha_pos
   rw [hc]
   exact powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
+    hA4 hBodd hBge hApos hlpos hmpos hcpos
+    (hgapAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+      hmpos hD hA hsplitgap halpha hbeta)
+
+/-- If every admissible positive split satisfies the product-form parity gap,
+then the split/gcd obstruction holds. -/
+theorem powerTwoSplitGcdObstruction_of_parity_product_gap {A B : ℕ}
+    (hgapAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  (Odd c ∧ c * (l * m + 1) ≤ M) ∨
+                                    (Even c ∧ (c / 2) * (l * m + 1) ≤ M)) :
+    powerTwoSplitGcdObstruction A B := by
+  intro hApow hA4 hBodd hBge r s l m alpha beta c hrpos hspos hlpos hmpos
+    hD hA hsplitgap halpha hbeta hc
+  have hApos : 0 < A := by
+    rcases hApow with ⟨a, rfl⟩
+    exact Nat.pow_pos (by decide : 0 < 2)
+  have hsplit_lt := powerTwoSplitSubtractive_lt (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) hBge hrpos hspos hlpos hmpos hD hA
+  have halpha_pos : 0 < alpha := by
+    rw [halpha]
+    exact Nat.sub_pos_of_lt hsplit_lt.1
+  have hcpos : 0 < Nat.gcd alpha beta :=
+    Nat.gcd_pos_of_pos_left beta halpha_pos
+  rw [hc]
+  exact powerTwoSplitSubtractive_not_gcd_dvd_of_parity_product_gap
     hA4 hBodd hBge hApos hlpos hmpos hcpos
     (hgapAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
       hmpos hD hA hsplitgap halpha hbeta)
@@ -5062,6 +5158,58 @@ theorem not_exists_powerTwoQuotientKernel_of_parity_reduced_divisor_gap
     ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
   rintro ⟨v, h, hkernel⟩
   exact powerTwoQuotientKernel.not_of_parity_reduced_divisor_gap hgapAll hkernel
+
+/-- Direct conditional kernel kill from the product-form parity gap. -/
+theorem powerTwoQuotientKernel.not_of_parity_product_gap {A B v h : ℕ}
+    (hgapAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  (Odd c ∧ c * (l * m + 1) ≤ M) ∨
+                                    (Even c ∧ (c / 2) * (l * m + 1) ≤ M)) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_splitGcdObstruction
+    (powerTwoSplitGcdObstruction_of_parity_product_gap hgapAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_parity_product_gap`. -/
+theorem not_exists_powerTwoQuotientKernel_of_parity_product_gap
+    {A B : ℕ}
+    (hgapAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  (Odd c ∧ c * (l * m + 1) ≤ M) ∨
+                                    (Even c ∧ (c / 2) * (l * m + 1) ≤ M)) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact powerTwoQuotientKernel.not_of_parity_product_gap hgapAll hkernel
 
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure

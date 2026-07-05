@@ -279,6 +279,19 @@
   and `Erdos699.not_exists_powerTwoQuotientKernel_of_parity_reduced_divisor_gap`
   compose this all the way to the pure quotient kernel. This changes the
   formal target surface only; it is not a proof of the universal parity gap.
+- [R] Added the floor-free product form of the parity target. The helper
+  `Erdos699.lt_div_of_mul_succ_le` proves that
+  `b * (L + 1) ≤ M` implies `L < M / b`; the generic theorem
+  `Erdos699.not_dvd_mul_of_parity_product_gap` then proves row-two failure
+  from the product branch
+  `(Odd c ∧ c * (L + 1) ≤ M) ∨ (Even c ∧ (c / 2) * (L + 1) ≤ M)`. The split
+  and quotient consumers
+  `Erdos699.powerTwoSplitSubtractive_not_gcd_dvd_of_parity_product_gap`,
+  `Erdos699.powerTwoSplitGcdObstruction_of_parity_product_gap`,
+  `Erdos699.powerTwoQuotientKernel.not_of_parity_product_gap`, and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_parity_product_gap` compose
+  this target all the way to the pure quotient kernel. This is still a
+  conditional target, not a proof of the product inequality.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
@@ -306,6 +319,15 @@
   minimum parity margin `726` at the same `(a, B, v, h) = (9, 3, 205, 41)`
   candidate. This is bounded exact evidence for the parity branch target, not
   a global proof.
+- [E] Added product-margin diagnostics for the floor-free parity target.
+  Reproduce with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(50,2001); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"], {k:p[k] for k in ["candidate_count","odd_c_count","even_c_count","parity_product_gap_holds_count","parity_product_gap_failure_count","min_parity_product_margin"]})'`.
+  It reports `49000` instances, `404` row-one candidates, `0` row-two
+  survivors, and product summary
+  `candidate_count = 404`, `odd_c_count = 179`, `even_c_count = 225`,
+  `parity_product_gap_holds_count = 404`,
+  `parity_product_gap_failure_count = 0`, and minimum product margin `725`.
+  This is bounded exact evidence for the product target, not a global proof.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` is outside
   the current deterministic 64-bit factorizer, the scan raises. With
