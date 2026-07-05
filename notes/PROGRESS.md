@@ -176,6 +176,13 @@
   2-adic-free half-row factor through the row-two congruence bridge and the
   row-one cancellation. This intentionally does not claim the missing power of
   `2`; full T7 remains open.
+- [R] Proved the packaged T7 half-row large-prime-part cube bound:
+  `Erdos699.i_three_caseI_exists_joint_half_sub_one_large_part_cube_bound`
+  introduces the row-one factor `g` and packages divisibility, size, and cube
+  bounds for `primePowerPartGE 5 (n / 2 - 1)`. The projection theorem
+  `Erdos699.i_three_caseI_noncentral_half_sub_one_large_part_cube_bound`
+  returns the cube inequality alone on the non-central branch. This remains a
+  2-adic-free half-row factor theorem, not full T7.
 - [R] Proved the T7 central branch kill:
   `Erdos699.central_branch_false_of_sub_one_dvd_t_mul_X_sub_t` shows that
   `2 * t = X` contradicts the row-one divisor `n - 1 ∣ t * (X - t)` when

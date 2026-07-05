@@ -1744,6 +1744,36 @@ theorem i_three_caseI_joint_half_sub_one_large_part_cube_bound {n F X j t g : �
   exact hgap.trans (by
     simpa [mul_assoc] using Nat.mul_le_mul_left (X * X) hgap_le)
 
+theorem i_three_caseI_exists_joint_half_sub_one_large_part_cube_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hbranch : 0 < X - 2 * t) :
+    ∃ g : ℕ,
+      t * (X - t) = g * (n - 1) ∧
+        primePowerPartGE 5 (n / 2 - 1) ∣ g * (X - 2 * t) ∧
+          primePowerPartGE 5 (n / 2 - 1) ≤ g * (X - 2 * t) ∧
+            4 * ((n - 1) * primePowerPartGE 5 (n / 2 - 1)) ≤ X * X * X := by
+  rcases i_three_caseI_row_one_exists_factor
+      hnone hn hj hn_gt hj_pos h2n h3n (by omega : t ≤ X) with ⟨g, hrow1⟩
+  exact ⟨g, hrow1,
+    i_three_caseI_joint_half_sub_one_large_part_dvd_factor_mul_X_sub_two_t
+      hnone hn hj hn_gt hj_two h2n (by omega : t ≤ X) (by omega : 2 * t ≤ X)
+      hrow1,
+    i_three_caseI_joint_half_sub_one_large_part_le_factor_mul_X_sub_two_t
+      hnone hn hj hn_gt hj_two h2n hrow1 hbranch,
+    i_three_caseI_joint_half_sub_one_large_part_cube_bound
+      hnone hn hj hn_gt hj_two h2n hrow1 hbranch⟩
+
+theorem i_three_caseI_noncentral_half_sub_one_large_part_cube_bound {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (hj_two : 2 ≤ j) (h2n : 2 ∣ n) (h3n : 3 ∣ n) (hbranch : 0 < X - 2 * t) :
+    4 * ((n - 1) * primePowerPartGE 5 (n / 2 - 1)) ≤ X * X * X := by
+  rcases i_three_caseI_exists_joint_half_sub_one_large_part_cube_bound
+      hnone hn hj hn_gt hj_pos hj_two h2n h3n hbranch with
+    ⟨_g, _hrow1, _hdvd, _hle, hcube⟩
+  exact hcube
+
 theorem i_three_caseI_exists_joint_large_part_factor {n F X j t : ℕ}
     (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
     (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
