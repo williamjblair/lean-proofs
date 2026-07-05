@@ -440,6 +440,23 @@
   denominator exception has quotient variables `x = 87669208098`, `y = 7`
   and a positive quotient margin. This is exact bounded evidence, not a
   proof of the universal quotient inequality.
+- [R]/[E] Split out a stronger linear subtarget for the canonical quotient
+  inequality. The Lean theorem
+  `Erdos699.parity_product_gap_of_gcd_linear_ineq` proves that it is enough
+  to prove the same branch-required left side against only
+  `B * (x*l + y*m)`, discarding the nonnegative `2*c*x*y` term. The split and
+  kernel consumers
+  `Erdos699.powerTwoSplitSubtractive_parity_product_gap_of_canonical_gcd_linear_ineq`,
+  `Erdos699.powerTwoSplitGcdObstruction_of_canonical_gcd_linear_ineq`,
+  `Erdos699.powerTwoQuotientKernel.not_of_canonical_gcd_linear_ineq`, and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_canonical_gcd_linear_ineq`
+  compose this stronger linear target all the way to the pure quotient
+  kernel. The scanner now records `linear_gap_rhs`, `linear_gap_required`,
+  and `linear_gap_margin`. Reproduce the enlarged perimeter with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; q=p["min_linear_gap_candidate"]; print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"], p["linear_gap_holds_count"], p["linear_gap_failure_count"], p["min_linear_gap_margin"], q["exponent"], q["B"], q["c_parity"], q["linear_gap_rhs"], q["linear_gap_required"])'`.
+  It reports `69000 880 0 880 0 357 9 3 even 399 42`. This is a
+  conditional formal target plus exact bounded evidence; it does not prove
+  the universal linear inequality.
 - [E] Added opt-in skip/reporting for factorization-limited power-two quotient
   scans. The default remains strict: if factoring `B * 2^a - 1` leaves an
   uncertified prime factor at least `2^64`, the scan raises. With

@@ -606,6 +606,9 @@ def _power_two_reduced_divisor_gap_diagnostic(
         l_times_m + 1 if c_is_even else 2 * (l_times_m + 1)
     )
     quotient_gap_margin = quotient_gap_rhs - quotient_gap_required
+    linear_gap_rhs = B * (gcd_quotient_x * l + gcd_quotient_y * m)
+    linear_gap_required = quotient_gap_required
+    linear_gap_margin = linear_gap_rhs - linear_gap_required
     return {
         "exponent": candidate["exponent"],
         "A": A,
@@ -638,6 +641,10 @@ def _power_two_reduced_divisor_gap_diagnostic(
         "quotient_gap_required": quotient_gap_required,
         "quotient_gap_margin": quotient_gap_margin,
         "quotient_gap_holds": quotient_gap_required <= quotient_gap_rhs,
+        "linear_gap_rhs": linear_gap_rhs,
+        "linear_gap_required": linear_gap_required,
+        "linear_gap_margin": linear_gap_margin,
+        "linear_gap_holds": linear_gap_required <= linear_gap_rhs,
     }
 
 
@@ -653,6 +660,9 @@ def _power_two_parity_branch_gap_summary(
     quotient_gap_holds_count = sum(
         1 for item in diagnostics if item["quotient_gap_holds"]
     )
+    linear_gap_holds_count = sum(
+        1 for item in diagnostics if item["linear_gap_holds"]
+    )
     min_parity_gap_candidate = min(
         diagnostics,
         key=lambda item: int(item["parity_gap_margin"]),
@@ -666,6 +676,11 @@ def _power_two_parity_branch_gap_summary(
     min_quotient_gap_candidate = min(
         diagnostics,
         key=lambda item: int(item["quotient_gap_margin"]),
+        default=None,
+    )
+    min_linear_gap_candidate = min(
+        diagnostics,
+        key=lambda item: int(item["linear_gap_margin"]),
         default=None,
     )
     denominator_le_B_sq_count = sum(
@@ -716,6 +731,13 @@ def _power_two_parity_branch_gap_summary(
             if min_quotient_gap_candidate is None
             else min_quotient_gap_candidate["quotient_gap_margin"]
         ),
+        "linear_gap_holds_count": linear_gap_holds_count,
+        "linear_gap_failure_count": len(diagnostics) - linear_gap_holds_count,
+        "min_linear_gap_margin": (
+            None
+            if min_linear_gap_candidate is None
+            else min_linear_gap_candidate["linear_gap_margin"]
+        ),
         "parity_denominator_le_B_sq_count": denominator_le_B_sq_count,
         "parity_denominator_gt_B_sq_count": (
             len(diagnostics) - denominator_le_B_sq_count
@@ -726,6 +748,7 @@ def _power_two_parity_branch_gap_summary(
         "min_parity_gap_candidate": min_parity_gap_candidate,
         "min_parity_product_candidate": min_parity_product_candidate,
         "min_quotient_gap_candidate": min_quotient_gap_candidate,
+        "min_linear_gap_candidate": min_linear_gap_candidate,
     }
 
 
