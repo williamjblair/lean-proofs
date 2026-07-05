@@ -6869,6 +6869,74 @@ theorem powerTwoSplitSubtractive_reduced_divisor_gap_iff_canonical_gcd_quotient_
       (c := c) (x := alpha / c) (y := beta / c) (L := l * m)
       hcpos hhalf_quot)
 
+/-- Universal form of the exact canonical quotient target. For fixed `A, B`,
+the universal reduced-divisor gap hypothesis used by the kernel consumers is
+equivalent to the universal canonical normalized gcd-quotient inequality. -/
+theorem powerTwoSplit_all_reduced_divisor_gap_iff_canonical_gcd_quotient_ineq
+    {A B : ℕ} :
+    (((∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  l * m <
+                                    (B * (A / 2) - 1) /
+                                      Nat.gcd (Nat.gcd alpha beta)
+                                        (B * (A / 2) - 1)) ↔
+      ((∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      2 * (l * m + 1) ≤
+                                        2 * c * (x * y) +
+                                          B * (x * l + y * m)) ∨
+                                    (Even c ∧
+                                      l * m + 1 ≤
+                                        2 * c * (x * y) +
+                                          B * (x * l + y * m)))) := by
+  constructor
+  · intro hgapAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos
+      hlpos hmpos hD hA hsplitgap halpha hbeta
+    exact
+      (powerTwoSplitSubtractive_reduced_divisor_gap_iff_canonical_gcd_quotient_ineq
+        (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+        (alpha := alpha) (beta := beta) hA4 hBodd hBge hrpos hspos
+        hlpos hmpos hD hA hsplitgap halpha hbeta).mp
+        (hgapAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos
+          hlpos hmpos hD hA hsplitgap halpha hbeta)
+  · intro hquotAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos
+      hlpos hmpos hD hA hsplitgap halpha hbeta
+    exact
+      (powerTwoSplitSubtractive_reduced_divisor_gap_iff_canonical_gcd_quotient_ineq
+        (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+        (alpha := alpha) (beta := beta) hA4 hBodd hBge hrpos hspos
+        hlpos hmpos hD hA hsplitgap halpha hbeta).mpr
+        (hquotAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos
+          hlpos hmpos hD hA hsplitgap halpha hbeta)
+
 /-- Canonical-division interface for the stronger linear normalized
 gcd-quotient inequality. The linear target discards the nonnegative
 `2*c*x*y` term from the quotient target. -/

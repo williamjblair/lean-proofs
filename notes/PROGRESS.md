@@ -368,6 +368,14 @@
   `x = alpha / c`, and `y = beta / c`. This removes the remaining
   existential witness layer from the exact equivalence itself; proving the
   universal canonical quotient inequality remains open.
+- [R] Lifted the canonical quotient equivalence to the universal hypothesis
+  level used by the kernel consumers. The theorem
+  `Erdos699.powerTwoSplit_all_reduced_divisor_gap_iff_canonical_gcd_quotient_ineq`
+  proves that, for fixed `A, B`, the universal reduced-divisor gap hypothesis
+  and the universal canonical normalized gcd-quotient inequality are
+  equivalent. This aligns the remaining C2 proof obligation with the
+  canonical quotient diagnostics, but it still does not prove that universal
+  hypothesis.
 - [R] Canonicalized the normalized gcd-quotient target and recorded a Lean
   warning against a false shortcut. The split identities
   `Erdos699.powerTwoSplitSubtractive_gcd_quotient_product_identity`,
