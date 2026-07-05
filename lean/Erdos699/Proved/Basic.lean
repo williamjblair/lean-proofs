@@ -1068,6 +1068,77 @@ theorem i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd {n j : ℕ}
   rw [← hlarge]
   exact i_three_window_one_primePowerPartGE_dvd hnone hn
 
+theorem sub_one_dvd_t_mul_X_sub_t_of_factor_dvd_mul_sub_one {n F X j t : ℕ}
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (htX : t ≤ X) (hdvd : n - 1 ∣ j * (j - 1)) :
+    n - 1 ∣ t * (X - t) := by
+  let d := n - 1
+  have hd_gt_one : 1 < d := by
+    dsimp [d]
+    omega
+  have hn_mod_nat : n ≡ 1 [MOD d] := by
+    have hn_eq : n = d * 1 + 1 := by
+      dsimp [d]
+      omega
+    rw [hn_eq, Nat.ModEq]
+    simp [Nat.mod_eq_of_lt hd_gt_one]
+  have hFX_nat : F * X ≡ 1 [MOD d] := by
+    simpa [d, hn] using hn_mod_nat
+  have hFX_int : (F : ℤ) * (X : ℤ) ≡ 1 [ZMOD (d : ℤ)] := by
+    exact_mod_cast hFX_nat
+  have hzero_nat : j * (j - 1) ≡ 0 [MOD d] :=
+    Nat.modEq_zero_iff_dvd.mpr (by simpa [d] using hdvd)
+  have hzero_int : (j : ℤ) * ((j : ℤ) - 1) ≡ 0 [ZMOD (d : ℤ)] := by
+    have hcast :
+        ((j * (j - 1) : ℕ) : ℤ) = (j : ℤ) * ((j : ℤ) - 1) := by
+      rw [Nat.cast_mul, Nat.cast_sub (Nat.succ_le_of_lt hj_pos)]
+      norm_num
+    simpa [hcast] using (Int.natCast_modEq_iff.mpr hzero_nat)
+  have hj_int : (j : ℤ) = (F : ℤ) * (t : ℤ) := by
+    exact_mod_cast hj
+  have hzero_Ft : ((F : ℤ) * (t : ℤ)) * (((F : ℤ) * (t : ℤ)) - 1) ≡
+      0 [ZMOD (d : ℤ)] := by
+    simpa [hj_int] using hzero_int
+  have hfirst : (X : ℤ) * ((F : ℤ) * (t : ℤ)) ≡ (t : ℤ) [ZMOD (d : ℤ)] := by
+    have h := hFX_int.mul_right (t : ℤ)
+    simpa [mul_assoc, mul_comm, mul_left_comm] using h
+  have hsecond : (X : ℤ) * (((F : ℤ) * (t : ℤ)) - 1) ≡
+      (t : ℤ) - (X : ℤ) [ZMOD (d : ℤ)] := by
+    have h := hfirst.sub (Int.ModEq.refl (a := (X : ℤ)) (n := (d : ℤ)))
+    simpa [mul_sub] using h
+  have hprod : ((X : ℤ) ^ 2) *
+        (((F : ℤ) * (t : ℤ)) * (((F : ℤ) * (t : ℤ)) - 1)) ≡
+      (t : ℤ) * ((t : ℤ) - (X : ℤ)) [ZMOD (d : ℤ)] := by
+    have h := hfirst.mul hsecond
+    simpa [pow_two, mul_assoc, mul_comm, mul_left_comm] using h
+  have hscaled_zero : ((X : ℤ) ^ 2) *
+        (((F : ℤ) * (t : ℤ)) * (((F : ℤ) * (t : ℤ)) - 1)) ≡
+      0 [ZMOD (d : ℤ)] := by
+    simpa using hzero_Ft.mul_left ((X : ℤ) ^ 2)
+  have htx_zero : (t : ℤ) * ((t : ℤ) - (X : ℤ)) ≡ 0 [ZMOD (d : ℤ)] :=
+    hprod.symm.trans hscaled_zero
+  have htarget_int : ((t * (X - t) : ℕ) : ℤ) ≡ 0 [ZMOD (d : ℤ)] := by
+    have hcast_sub : ((X - t : ℕ) : ℤ) = (X : ℤ) - (t : ℤ) :=
+      Nat.cast_sub htX
+    have hcast :
+        ((t * (X - t) : ℕ) : ℤ) =
+          -((t : ℤ) * ((t : ℤ) - (X : ℤ))) := by
+      rw [Nat.cast_mul, hcast_sub]
+      ring
+    simpa [hcast] using htx_zero.neg
+  have hdvd_int : (d : ℤ) ∣ ((t * (X - t) : ℕ) : ℤ) :=
+    Int.modEq_zero_iff_dvd.mp htarget_int
+  exact Int.natCast_dvd_natCast.mp hdvd_int
+
+theorem i_three_caseI_row_one_sub_one_dvd_t_mul_X_sub_t {n F X j t : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * t) (hn_gt : 2 < n) (hj_pos : 0 < j)
+    (h2n : 2 ∣ n) (h3n : 3 ∣ n) (htX : t ≤ X) :
+    n - 1 ∣ t * (X - t) :=
+  sub_one_dvd_t_mul_X_sub_t_of_factor_dvd_mul_sub_one hn hj hn_gt hj_pos htX
+    (i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd
+      hnone (by omega : 1 < n) h2n h3n)
+
 theorem n_dvd_mul_choose_self {n j : ℕ} (hn : 0 < n) (hj : 0 < j) :
     n ∣ j * Nat.choose n j := by
   have hidentity :

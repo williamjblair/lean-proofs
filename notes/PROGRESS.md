@@ -93,5 +93,10 @@
   Also proved the case-I row-one bridge
   `Erdos699.i_three_window_one_sub_one_dvd_mul_sub_one_of_even_three_dvd`.
   Full T6/T7 remain open.
+- [R] Proved the T6 row-one algebra bridge:
+  `Erdos699.i_three_caseI_row_one_sub_one_dvd_t_mul_X_sub_t` turns the
+  case-I divisor `n - 1 ∣ j * (j - 1)` into the normalized form
+  `n - 1 ∣ t * (X - t)` whenever `n = F * X`, `j = F * t`, and `t ≤ X`.
+  Full T6/T7 remain open.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
