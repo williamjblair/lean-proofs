@@ -3912,6 +3912,59 @@ theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_decomposition
     powerTwoQuotientKernel_of_squeezedNormalized_decomposition
       hkernel' hX hu hg hA4 hApow hHodd hcopHalf⟩
 
+/-- A positive factor is coprime to one less than a positive multiple of it. -/
+theorem coprime_left_mul_right_sub_one {H K : ℕ} (hH : 0 < H) (hK : 0 < K) :
+    Nat.Coprime H (K * H - 1) := by
+  rw [Nat.coprime_iff_gcd_eq_one]
+  apply Nat.eq_one_of_dvd_one
+  let d := Nat.gcd H (K * H - 1)
+  have hdH : d ∣ H := Nat.gcd_dvd_left H (K * H - 1)
+  have hdM : d ∣ K * H - 1 := Nat.gcd_dvd_right H (K * H - 1)
+  have hdKH : d ∣ K * H := Nat.dvd_mul_left_of_dvd hdH K
+  have hsub : K * H - (K * H - 1) = 1 := by
+    have hKH : 0 < K * H := Nat.mul_pos hK hH
+    omega
+  have hdsub : d ∣ K * H - (K * H - 1) := Nat.dvd_sub hdKH hdM
+  simpa [d, hsub] using hdsub
+
+/-- Version of the quotient reduction with the natural digit-factor output
+`H ∣ u`. The coprimality hypotheses in
+`exists_powerTwoQuotientKernel_of_squeezedNormalized_decomposition` are
+automatic because both row moduli are one less than positive multiples of
+`H`. -/
+theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_factor_dvd
+    {F X u g A H : ℕ}
+    (hkernel : squeezedNormalizedCaseIKernel F X u g)
+    (hX : X = A * H)
+    (hHu : H ∣ u)
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H) :
+    ∃ v h : ℕ, powerTwoQuotientKernel A (F * H) v h := by
+  rcases hHu with ⟨v, hu⟩
+  have hFpos : 0 < F := hkernel.1
+  have hHpos : 0 < H := hHodd.pos
+  have hApos : 0 < A := by
+    rcases hApow with ⟨a, rfl⟩
+    exact Nat.pow_pos (by decide : 0 < 2)
+  have hAhalfpos : 0 < A / 2 := by
+    have hAge4 : 4 ≤ A := Nat.le_of_dvd hApos hA4
+    exact Nat.div_pos (by omega : 2 ≤ A) (by decide : 0 < 2)
+  have hcopRow : Nat.Coprime H (F * H * A - 1) := by
+    have hKpos : 0 < F * A := Nat.mul_pos hFpos hApos
+    have hcop :=
+      coprime_left_mul_right_sub_one (H := H) (K := F * A) hHpos hKpos
+    simpa [mul_assoc, mul_comm, mul_left_comm] using hcop
+  have hcopHalf : Nat.Coprime H (F * H * (A / 2) - 1) := by
+    have hKpos : 0 < F * (A / 2) := Nat.mul_pos hFpos hAhalfpos
+    have hcop :=
+      coprime_left_mul_right_sub_one (H := H) (K := F * (A / 2)) hHpos hKpos
+    simpa [mul_assoc, mul_comm, mul_left_comm] using hcop
+  rcases exists_powerTwoQuotientKernel_of_squeezedNormalized_decomposition
+      hkernel hX hu hA4 hApow hHodd hcopRow hcopHalf with
+    ⟨h, hq⟩
+  exact ⟨v, h, hq⟩
+
 theorem squeezedNormalizedCaseIKernel_zero_t_false {F X g : ℕ} :
     ¬ squeezedNormalizedCaseIKernel F X 0 g := by
   intro h

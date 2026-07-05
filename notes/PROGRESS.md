@@ -107,6 +107,15 @@
   `H * H ∣ g`. This banks the algebraic quotient step only; the extraction of
   the odd digit-forced factor `H` from `rowNDigitPowerConstraint`, and the
   empty-kernel theorem for `powerTwoQuotientKernel`, remain open.
+- [R] Removed the manual coprimality assumptions from the natural quotient
+  interface. `Erdos699.coprime_left_mul_right_sub_one` proves that a positive
+  `H` is coprime to `K * H - 1` for positive `K`, and
+  `Erdos699.exists_powerTwoQuotientKernel_of_squeezedNormalized_factor_dvd`
+  shows that a squeezed normalized kernel point plus `X = A * H`, `H ∣ u`,
+  `4 ∣ A`, `A = 2 ^ a`, and odd `H` already yields
+  `∃ v h, powerTwoQuotientKernel A (F * H) v h`. The remaining digit-work is
+  now narrowed to constructing such an odd factor `H` from
+  `rowNDigitPowerConstraint X u` and the power-of-two quotient of `X`.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.
