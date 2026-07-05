@@ -76,5 +76,7 @@ namespace Erdos699
 #check i_three_caseI_four_dvd_consecutive_kernel_in_range_from_no_common
 #check four_mul_t_mul_X_sub_t_add_gap_sq_eq_sq
 #check row_one_factor_gap_sq_eq_sq
+#check squeezedNormalizedCaseIKernel_counterexample_positive_t
+#check exists_squeezedNormalizedCaseIKernel_counterexample_positive_t
 
 end Erdos699

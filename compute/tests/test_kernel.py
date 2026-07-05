@@ -604,6 +604,17 @@ def test_squeezed_normalized_predicate_excludes_zero_row_degeneracy() -> None:
     assert not squeezed_normalized_case_i_kernel_holds(F, X, u, g)
 
 
+def test_squeezed_normalized_predicate_has_positive_row_counterexample() -> None:
+    F, X, u, g = 3, 432184014644, 186954166997, 35360510289
+    gap = X - 2 * u
+    half_row = F * (X // 2) - 1
+    assert gap == 58275680650
+    assert half_row == 648276021965
+    assert u * (X - u) == g * (F * X - 1)
+    assert g * gap == half_row * 3178673490
+    assert squeezed_normalized_case_i_kernel_holds(F, X, u, g)
+
+
 def test_squeezed_discriminant_generator_finds_row_one_candidates() -> None:
     assert squeezed_row_one_candidates_discriminant(3, 48) == [
         {"F": 3, "X": 48, "t": 22, "g": 4}

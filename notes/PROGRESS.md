@@ -2,21 +2,24 @@
 
 ## 2026-07-05
 
-- [R]/[E] Corrected a normalized-branch trap: the weakened all-quantified
-  kill lemma with hypotheses `Odd F`, `3 ≤ F`, `4 ∣ X`, `0 < X - 2 * u`,
-  `4 * F ≤ X`, `2 * F^2 ≤ X`, row one
+- [R]/[E] Corrected the normalized-branch trap record. The weakened
+  all-quantified kill lemma with hypotheses `Odd F`, `3 ≤ F`, `4 ∣ X`,
+  `0 < X - 2 * u`, `4 * F ≤ X`, `2 * F^2 ≤ X`, row one
   `u * (X - u) = g * (F * X - 1)`, and half-row divisibility is false without
-  `0 < u`. Exact counterexample: `(F, X, u, g) = (3, 20, 0, 0)`. Verified
-  by direct integer arithmetic, by the Python regression
-  `test_squeezed_normalized_predicate_excludes_zero_row_degeneracy`, and by a
-  Lean stdin counterexample to the weakened statement. This does not retract a
-  banked theorem: `Erdos699.squeezedNormalizedCaseIKernel` and
-  `Erdos699.squeezedNormalizedRowOneCandidate` already include `0 < t`. New
-  Lean guard lemmas
-  `Erdos699.squeezedNormalizedCaseIKernel_zero_t_false` and
-  `Erdos699.squeezedNormalizedRowOneCandidate_zero_t_false` make the exclusion
-  explicit. Any future normalized kill statement must keep `0 < u` or derive
-  it from the original `0 < j` factorization hypotheses.
+  `0 < u`; exact zero-row counterexample:
+  `(F, X, u, g) = (3, 20, 0, 0)`. More importantly, adding `0 < u` still does
+  not make the global normalized kill true:
+  `(F, X, u, g) = (3, 432184014644, 186954166997, 35360510289)` satisfies the
+  row-one equation and half-row divisibility with `0 < u` and
+  `0 < X - 2 * u`. Lean theorem
+  `Erdos699.squeezedNormalizedCaseIKernel_counterexample_positive_t` proves
+  this exact positive-row survivor of `Erdos699.squeezedNormalizedCaseIKernel`;
+  Python regression
+  `test_squeezed_normalized_predicate_has_positive_row_counterexample` verifies
+  the same integer equalities. This does not retract a banked theorem: the
+  finite-list/gcd filters remain correct, but global emptiness of
+  `squeezedNormalizedCaseIKernel` is false and must not be used as a kernel
+  attack target.
 - [E] Added exact Python tests for the corrected counterexample criterion. The
   tests explicitly check that primes below `i` are free in the obstruction set.
   Reproduce with: `python3 -m pytest compute/tests/test_criterion.py -q`.
@@ -311,8 +314,10 @@
   `Erdos699.i_three_caseI_four_dvd_odd_factor_squeezedNormalized_from_row_bound`
   extracts this predicate from the existing row-bound hypotheses, and
   `Erdos699.i_three_caseI_four_dvd_odd_factor_false_of_no_squeezedNormalized`
-  is the conditional kill wrapper if the squeezed kernel is proved empty.
-  This names the missing lemma target; it is not an emptiness proof.
+  is a conditional kill wrapper under an explicit no-squeezed hypothesis.
+  The global no-squeezed hypothesis is now known false by
+  `Erdos699.squeezedNormalizedCaseIKernel_counterexample_positive_t`; any
+  usable theorem must add further original-problem digit constraints.
 - [R] Proved the squeezed normalized Pell/discriminant package:
   `Erdos699.squeezedNormalized_gap_pos` extracts `0 < X - 2 * t` from the
   strict noncentral branch, `Erdos699.squeezedNormalized_gap_sq_eq_sq`
@@ -349,8 +354,8 @@
   With `--include-candidate-summary`, the same run reports
   `surviving_half_row_count = 0`; its half-row gcd histogram begins with
   `1191` candidates at gcd `1`, `179` at gcd `3`, `72` at gcd `5`, and `45`
-  at gcd `7`. This is exact finite evidence for the named squeezed-kernel
-  target, not an emptiness proof.
+  at gcd `7`. This is exact bounded finite evidence for the normalized scan,
+  not an emptiness proof; the global normalized predicate is known nonempty.
 - [E] Replaced the squeezed scanner's row-one stage with the exact
   discriminant formulation `X^2 - 4 * g * (F * X - 1) = (X - 2 * t)^2`,
   matching the Lean theorem `Erdos699.squeezedNormalized_discriminant_eq_gap_sq`.
@@ -360,8 +365,8 @@
   reports `68076` row-one discriminant candidates and `0` full squeezed
   survivors; the half-row gcd histogram begins with `49283` candidates at
   gcd `1`, `7815` at gcd `3`, `3423` at gcd `5`, and `1924` at gcd `7`.
-  This is exact finite evidence for the discriminant/Pell lane, not an
-  emptiness proof.
+  This is exact bounded finite evidence for the discriminant/Pell lane, not an
+  emptiness proof; the global normalized predicate is known nonempty.
 - [R] Formalized the consecutive-divisor kernel target:
   `Erdos699.consecutiveDivisorKernel` and
   `Erdos699.consecutiveDivisorKernelBelow` name the two-row kernel and the

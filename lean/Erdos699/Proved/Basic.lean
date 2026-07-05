@@ -3553,6 +3553,28 @@ theorem squeezedNormalizedRowOneCandidate_zero_t_false {F X g : ℕ} :
   intro h
   exact Nat.lt_irrefl 0 h.2.2.1
 
+/-- The normalized squeezed kernel is not globally empty, even with `0 < t`. -/
+theorem squeezedNormalizedCaseIKernel_counterexample_positive_t :
+    squeezedNormalizedCaseIKernel 3 432184014644 186954166997 35360510289 := by
+  unfold squeezedNormalizedCaseIKernel
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · norm_num
+  · norm_num
+  · norm_num
+  · exact ⟨1, by norm_num⟩
+  · norm_num
+  · norm_num
+  · norm_num
+  · norm_num
+  · norm_num
+  · norm_num
+  · norm_num
+
+theorem exists_squeezedNormalizedCaseIKernel_counterexample_positive_t :
+    ∃ F X t g : ℕ, squeezedNormalizedCaseIKernel F X t g :=
+  ⟨3, 432184014644, 186954166997, 35360510289,
+    squeezedNormalizedCaseIKernel_counterexample_positive_t⟩
+
 theorem squeezedNormalizedRowOneCandidate_half_row_pos {F X t g : ℕ}
     (h : squeezedNormalizedRowOneCandidate F X t g) :
     0 < F * X / 2 - 1 := by
