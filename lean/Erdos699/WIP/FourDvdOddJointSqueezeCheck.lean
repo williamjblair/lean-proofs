@@ -164,6 +164,8 @@ namespace Erdos699
 #check odd_prime_divisor_ge_three
 #check rowNDigitPowerConstraint.dvd_of_factor_dvd
 #check rowNDigitPowerConstraintExact.dvd_of_factor_dvd
+#check factor_dvd_mul_of_no_common_i_three
+#check factor_div_gcd_dvd_of_no_common_i_three
 #check factor_dvd_of_no_common_i_three
 #check coprime_pow_of_dvd_of_coprime_left
 #check factor_dvd_of_no_common_i_three_of_coprime_factor

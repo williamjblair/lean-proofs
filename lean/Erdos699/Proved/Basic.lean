@@ -11030,6 +11030,66 @@ theorem rowNDigitPowerConstraintExact_of_no_common_i_three
     simpa [hj] using hpowJ
   exact (hcopF hp hp3 hnotdom hpowX).dvd_of_dvd_mul_left hpowFu
 
+/-- Local product extraction from the corrected no-common-prime criterion. If
+the prime powers in `H` all sit inside `X` and are guarded by the row-`3`
+Lucas failure, then the full factor `H` divides `F*u`. This is the exact
+statement available before any cancellation against the normalized factor
+`F`. -/
+theorem factor_dvd_mul_of_no_common_i_three
+    {n F X j u H : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * u)
+    (hHX : H ∣ X)
+    (hH0 : H ≠ 0)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H → 3 ≤ p ∧ ¬ dominated 3 n p) :
+    H ∣ F * u := by
+  by_cases hFu0 : F * u = 0
+  · rw [hFu0]
+    exact dvd_zero H
+  · rw [← Nat.factorization_prime_le_iff_dvd hH0 hFu0]
+    intro p hp
+    by_cases hHp0 : H.factorization p = 0
+    · simp [hHp0]
+    · have hp_dvd_H : p ∣ H := by
+        rw [hp.dvd_iff_one_le_factorization hH0]
+        omega
+      rcases hprime p hp hp_dvd_H with ⟨hp3, hnotdom⟩
+      have hcrit : obstructionCriterion n 3 j :=
+        (no_commonPrimeDivisor_iff_obstructionCriterion n 3 j).mp hnone
+      have hdomj : dominated j n p := by
+        rcases hcrit p ⟨hp, hp3⟩ with hdom3 | hdomj
+        · exact False.elim (hnotdom hdom3)
+        · exact hdomj
+      have hpowH : p ^ H.factorization p ∣ H := by
+        rw [hp.pow_dvd_iff_le_factorization hH0]
+      have hpowX : p ^ H.factorization p ∣ X := Nat.dvd_trans hpowH hHX
+      have hpowN : p ^ H.factorization p ∣ n := by
+        rw [hn]
+        exact dvd_mul_of_dvd_right hpowX F
+      have hpowJ : p ^ H.factorization p ∣ j :=
+        pow_dvd_of_dominated_and_pow_dvd hp hdomj hpowN
+      have hpowFu : p ^ H.factorization p ∣ F * u := by
+        simpa [hj] using hpowJ
+      exact (hp.pow_dvd_iff_le_factorization hFu0).mp hpowFu
+
+/-- Reduced extraction in the non-coprime case. Without a coprimality
+hypothesis between `H` and `F`, the corrected no-common-prime criterion still
+forces the quotient of `H` by the part already present in `F` to divide `u`. -/
+theorem factor_div_gcd_dvd_of_no_common_i_three
+    {n F X j u H : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * u)
+    (hHX : H ∣ X)
+    (hH0 : H ≠ 0)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H → 3 ≤ p ∧ ¬ dominated 3 n p) :
+    H / Nat.gcd H F ∣ u := by
+  have hHpos : 0 < H := Nat.pos_of_ne_zero hH0
+  have hH_dvd_Fu : H ∣ F * u :=
+    factor_dvd_mul_of_no_common_i_three hnone hn hj hHX hH0 hprime
+  exact dvd_div_gcd_of_dvd_mul hHpos hH_dvd_Fu
+
 /-- Local factor extraction from the corrected no-common-prime criterion. This
 is sharper than first proving `rowNDigitPowerConstraintExact F X u`: it only
 requires cancellation for prime powers that actually occur in the factor `H`

@@ -1633,5 +1633,15 @@
   remain conditional on the `H` Lucas guard and the C2 hypotheses. Reproduce
   with `lake build Erdos699.Proved.Basic` and
   `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
+- [R] Formalized the exact non-coprime fallback for the same no-common-prime
+  extraction. `Erdos699.factor_dvd_mul_of_no_common_i_three` proves that the
+  guarded factor `H` always divides `F*u` before any cancellation. Using the
+  existing gcd-cancellation lemma `Erdos699.dvd_div_gcd_of_dvd_mul`,
+  `Erdos699.factor_div_gcd_dvd_of_no_common_i_three` then proves the precise
+  reduced divisor statement `H / gcd(H,F) | u` with no coprimality hypothesis
+  between `H` and `F`. This is not a replacement for the quotient bridge by
+  all of `H`; it records the exact loss when `H` and `F` share prime powers.
+  Reproduce with `lake build Erdos699.Proved.Basic` and
+  `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
