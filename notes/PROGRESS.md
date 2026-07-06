@@ -1513,5 +1513,15 @@
   `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as scan; r = scan(72, 1001, skip_factorization_failures=True); s = r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"]); print(s["branch_scaled_deficit_coverage_failure_count"], s["max_branch_scaled_deficit_min_q"], s["min_branch_scaled_deficit_margin"])'`.
   A larger attempted `max_exponent = 80`, `max_b = 2001` run was interrupted
   inside Pollard-rho factoring and is not banked evidence.
+- [R] Added universal exact-gap consumers for the canonical C2 branch:
+  `Erdos699.powerTwoSplit_all_reduced_divisor_gap_of_canonical_gcd_linear_ineq`
+  and
+  `Erdos699.powerTwoSplit_all_reduced_divisor_gap_of_canonical_gcd_ceil_scaled_deficit_coverage`.
+  These turn the per-split canonical linear/ceil-scaled hypotheses directly
+  into the universal reduced-divisor gap hypothesis consumed by
+  `Erdos699.powerTwoSplitGcdObstruction_of_reduced_divisor_gap`, keeping the
+  proof target aligned with the exact condition `M / gcd(c, M) ∤ l*m`. This
+  is still a conditional C2 theorem schema, not a proof that all admissible
+  splits satisfy the condition.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

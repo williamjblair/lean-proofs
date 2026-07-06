@@ -7772,6 +7772,117 @@ theorem powerTwoSplitSubtractive_reduced_divisor_gap_of_canonical_gcd_ceil_scale
     powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_ceil_scaled_deficit_coverage
       hBge hrpos hspos hlpos hmpos hD hA halpha hbeta hcover
 
+/-- Universal exact reduced-divisor gap from the canonical linear inequality.
+This exposes the direct target consumed by
+`powerTwoSplitGcdObstruction_of_reduced_divisor_gap`, without routing through
+the parity-product sufficient condition. -/
+theorem powerTwoSplit_all_reduced_divisor_gap_of_canonical_gcd_linear_ineq
+    {A B : ℕ}
+    (hlinAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      2 * (l * m + 1) ≤
+                                        B * (x * l + y * m)) ∨
+                                    (Even c ∧
+                                      l * m + 1 ≤
+                                        B * (x * l + y * m))) :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  l * m < M / Nat.gcd c M := by
+  intro hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos hmpos hD
+    hA hgap halpha hbeta
+  exact
+    powerTwoSplitSubtractive_reduced_divisor_gap_of_canonical_gcd_linear_ineq
+      hA4 hBodd hBge hrpos hspos hlpos hmpos hD hA hgap halpha hbeta
+      (hlinAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+        hmpos hD hA hgap halpha hbeta)
+
+/-- Universal exact reduced-divisor gap from the canonical ceiling-scaled
+branch. This is the direct exact-gap version of the current computable C2
+condition. -/
+theorem powerTwoSplit_all_reduced_divisor_gap_of_canonical_gcd_ceil_scaled_deficit_coverage
+    {A B : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (2 * l - B * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (l - B * y) < l))) :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  l * m < M / Nat.gcd c M := by
+  intro hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos hmpos hD
+    hA hgap halpha hbeta
+  exact
+    powerTwoSplitSubtractive_reduced_divisor_gap_of_canonical_gcd_ceil_scaled_deficit_coverage
+      hA4 hBodd hBge hrpos hspos hlpos hmpos hD hA hgap halpha hbeta
+      (hcoverAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+        hmpos hD hA hgap halpha hbeta)
+
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
     {A B l m alpha beta : ℕ}
