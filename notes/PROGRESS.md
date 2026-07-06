@@ -442,6 +442,25 @@
   `(B, c, x, y, l, m) = (3, 19, 1, 26, 149, 7)`. The power-two row-sum
   constraint is still essential, and the universal quotient inequality
   remains open.
+- [R] Rewrote the canonical linear target as an exact deficit-compensation
+  condition. The generic equivalences
+  `Erdos699.linear_even_iff_x_compensates_y_deficit` and
+  `Erdos699.linear_odd_iff_x_compensates_y_deficit` prove that the even
+  branch
+  `l*m + 1 ≤ B*(x*l + y*m)` is equivalent to
+  `m*(l - B*y) + 1 ≤ B*x*l`, while the odd branch
+  `2*(l*m + 1) ≤ B*(x*l + y*m)` is equivalent to
+  `m*(2*l - B*y) + 2 ≤ B*x*l`, assuming the necessary positive lower bound
+  on `B*x*l`. The split theorem
+  `Erdos699.powerTwoSplitSubtractive_canonical_gcd_linear_ineq_iff_deficit_ineq`
+  proves this equivalence for the canonical variables
+  `c = gcd alpha beta`, `x = alpha / c`, `y = beta / c`; the consumers
+  `Erdos699.powerTwoSplitGcdObstruction_of_canonical_gcd_deficit_ineq`,
+  `Erdos699.powerTwoQuotientKernel.not_of_canonical_gcd_deficit_ineq`, and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_canonical_gcd_deficit_ineq`
+  compose a universal deficit hypothesis to the pure quotient kernel. This
+  is a formal target normalization only; the universal deficit inequality is
+  still open.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These

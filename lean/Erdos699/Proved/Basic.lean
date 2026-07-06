@@ -6266,6 +6266,136 @@ theorem parity_product_gap_of_gcd_linear_ineq {M B l m c x y L : ℕ}
   · exact Or.inr ⟨hceven,
       hineq.trans (Nat.le_add_left (B * (x * l + y * m)) (2 * c * (x * y)))⟩
 
+/-- Even-branch linear target as a deficit condition. The term
+`m * (l - B*y)` is the amount left after the `B*y*m` part tries to cover
+`l*m`; the `B*x*l` part must cover that deficit plus one. -/
+theorem linear_even_iff_x_compensates_y_deficit {B x y l m : ℕ}
+    (hpos : 1 ≤ B * x * l) :
+    l * m + 1 ≤ B * (x * l + y * m) ↔
+      m * (l - B * y) + 1 ≤ B * x * l := by
+  constructor
+  · intro hlin
+    rcases le_or_gt l (B * y) with hle | hlt
+    · have hsub : l - B * y = 0 := Nat.sub_eq_zero_of_le hle
+      simpa [hsub] using hpos
+    · have hleBy : B * y ≤ l := Nat.le_of_lt hlt
+      have hdecomp : l * m = B * y * m + (l - B * y) * m := by
+        nlinarith [Nat.sub_add_cancel hleBy]
+      have hlin' :
+          B * y * m + ((l - B * y) * m + 1) ≤
+            B * y * m + B * x * l := by
+        calc
+          B * y * m + ((l - B * y) * m + 1) = l * m + 1 := by
+            rw [hdecomp]
+            ring
+          _ ≤ B * (x * l + y * m) := hlin
+          _ = B * y * m + B * x * l := by ring
+      have hlin'' :
+          B * y * m + (m * (l - B * y) + 1) ≤
+            B * y * m + B * x * l := by
+        simpa [mul_comm, mul_left_comm, mul_assoc] using hlin'
+      exact Nat.add_le_add_iff_left.mp hlin''
+  · intro hdef
+    rcases le_or_gt l (B * y) with hle | hlt
+    · have hBym : l * m ≤ B * y * m := Nat.mul_le_mul_right m hle
+      calc
+        l * m + 1 ≤ B * y * m + B * x * l := Nat.add_le_add hBym hpos
+        _ = B * (x * l + y * m) := by ring
+    · have hleBy : B * y ≤ l := Nat.le_of_lt hlt
+      have hdecomp : l * m = B * y * m + (l - B * y) * m := by
+        nlinarith [Nat.sub_add_cancel hleBy]
+      calc
+        l * m + 1 = B * y * m + ((l - B * y) * m + 1) := by
+          rw [hdecomp]
+          ring
+        _ = B * y * m + (m * (l - B * y) + 1) := by ring
+        _ ≤ B * y * m + B * x * l := Nat.add_le_add_left hdef (B * y * m)
+        _ = B * (x * l + y * m) := by ring
+
+/-- Odd-branch linear target as a deficit condition. Compared with the even
+branch, the `B*y*m` term tries to cover `2*l*m`, and the `B*x*l` term must
+cover the remaining deficit plus two. -/
+theorem linear_odd_iff_x_compensates_y_deficit {B x y l m : ℕ}
+    (hpos : 2 ≤ B * x * l) :
+    2 * (l * m + 1) ≤ B * (x * l + y * m) ↔
+      m * (2 * l - B * y) + 2 ≤ B * x * l := by
+  constructor
+  · intro hlin
+    rcases le_or_gt (2 * l) (B * y) with hle | hlt
+    · have hsub : 2 * l - B * y = 0 := Nat.sub_eq_zero_of_le hle
+      simpa [hsub] using hpos
+    · have hleBy : B * y ≤ 2 * l := Nat.le_of_lt hlt
+      have hdecomp :
+          2 * (l * m) = B * y * m + (2 * l - B * y) * m := by
+        nlinarith [Nat.sub_add_cancel hleBy]
+      have heq_left :
+          B * y * m + ((2 * l - B * y) * m + 2) =
+            2 * (l * m + 1) := by
+        calc
+          B * y * m + ((2 * l - B * y) * m + 2) =
+              2 * (l * m) + 2 := by
+            rw [hdecomp]
+            ring
+          _ = 2 * (l * m + 1) := by ring
+      have hlin' :
+          B * y * m + ((2 * l - B * y) * m + 2) ≤
+            B * y * m + B * x * l := by
+        calc
+          B * y * m + ((2 * l - B * y) * m + 2) =
+              2 * (l * m + 1) := heq_left
+          _ ≤ B * (x * l + y * m) := hlin
+          _ = B * y * m + B * x * l := by ring
+      have hlin'' :
+          B * y * m + (m * (2 * l - B * y) + 2) ≤
+            B * y * m + B * x * l := by
+        simpa [mul_comm, mul_left_comm, mul_assoc] using hlin'
+      exact Nat.add_le_add_iff_left.mp hlin''
+  · intro hdef
+    rcases le_or_gt (2 * l) (B * y) with hle | hlt
+    · have hBym : 2 * (l * m) ≤ B * y * m := by
+        calc
+          2 * (l * m) = (2 * l) * m := by ring
+          _ ≤ (B * y) * m := Nat.mul_le_mul_right m hle
+          _ = B * y * m := by ring
+      calc
+        2 * (l * m + 1) = 2 * (l * m) + 2 := by ring
+        _ ≤ B * y * m + B * x * l := Nat.add_le_add hBym hpos
+        _ = B * (x * l + y * m) := by ring
+    · have hleBy : B * y ≤ 2 * l := Nat.le_of_lt hlt
+      have hdecomp :
+          2 * (l * m) = B * y * m + (2 * l - B * y) * m := by
+        nlinarith [Nat.sub_add_cancel hleBy]
+      calc
+        2 * (l * m + 1) = 2 * (l * m) + 2 := by ring
+        _ = B * y * m + ((2 * l - B * y) * m + 2) := by
+          rw [hdecomp]
+          ring
+        _ = B * y * m + (m * (2 * l - B * y) + 2) := by ring
+        _ ≤ B * y * m + B * x * l := Nat.add_le_add_left hdef (B * y * m)
+        _ = B * (x * l + y * m) := by ring
+
+/-- Parity-branch linear target rewritten as the exact deficit-compensation
+condition for the `B*x*l` term. -/
+theorem parity_linear_ineq_iff_deficit_ineq {B c x y l m : ℕ}
+    (hpos : 2 ≤ B * x * l) :
+    ((Odd c ∧ 2 * (l * m + 1) ≤ B * (x * l + y * m)) ∨
+        (Even c ∧ l * m + 1 ≤ B * (x * l + y * m))) ↔
+      ((Odd c ∧ m * (2 * l - B * y) + 2 ≤ B * x * l) ∨
+        (Even c ∧ m * (l - B * y) + 1 ≤ B * x * l)) := by
+  constructor
+  · rintro (⟨hcodd, hlin⟩ | ⟨hceven, hlin⟩)
+    · exact Or.inl ⟨hcodd,
+        (linear_odd_iff_x_compensates_y_deficit hpos).mp hlin⟩
+    · have hpos1 : 1 ≤ B * x * l := by omega
+      exact Or.inr ⟨hceven,
+        (linear_even_iff_x_compensates_y_deficit hpos1).mp hlin⟩
+  · rintro (⟨hcodd, hdef⟩ | ⟨hceven, hdef⟩)
+    · exact Or.inl ⟨hcodd,
+        (linear_odd_iff_x_compensates_y_deficit hpos).mpr hdef⟩
+    · have hpos1 : 1 ≤ B * x * l := by omega
+      exact Or.inr ⟨hceven,
+        (linear_even_iff_x_compensates_y_deficit hpos1).mpr hdef⟩
+
 /-- Product-form parity certificate. For odd `c`, it is enough to prove
 `c * (L + 1) ≤ M`; for even `c`, it is enough to prove
 `(c / 2) * (L + 1) ≤ M`. -/
@@ -7020,6 +7150,57 @@ theorem powerTwoSplitSubtractive_parity_product_gap_of_canonical_gcd_linear_ineq
         (2 * Nat.gcd alpha beta *
           (alpha / Nat.gcd alpha beta * (beta / Nat.gcd alpha beta))))⟩
 
+/-- Canonical normalized linear target as a deficit-compensation condition.
+This is an exact reformulation: after setting
+`x = alpha / gcd alpha beta` and `y = beta / gcd alpha beta`, the odd branch
+asks `B*x*l` to cover `m*(2*l - B*y)+2`, while the even branch asks it to
+cover `m*(l - B*y)+1`. -/
+theorem powerTwoSplitSubtractive_canonical_gcd_linear_ineq_iff_deficit_ineq
+    {A B r s l m alpha beta : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (_hbeta : beta = s - B * l) :
+    let c := Nat.gcd alpha beta
+    let x := alpha / c
+    let y := beta / c
+    ((Odd c ∧ 2 * (l * m + 1) ≤ B * (x * l + y * m)) ∨
+        (Even c ∧ l * m + 1 ≤ B * (x * l + y * m))) ↔
+      ((Odd c ∧ m * (2 * l - B * y) + 2 ≤ B * x * l) ∨
+        (Even c ∧ m * (l - B * y) + 1 ≤ B * x * l)) := by
+  dsimp
+  let c := Nat.gcd alpha beta
+  have hsplit_lt := powerTwoSplitSubtractive_lt (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) hBge hrpos hspos hlpos hmpos hD hA
+  have halpha_pos : 0 < alpha := by
+    rw [halpha]
+    exact Nat.sub_pos_of_lt hsplit_lt.1
+  have hcpos : 0 < c := Nat.gcd_pos_of_pos_left beta halpha_pos
+  have hcalpha : c ∣ alpha := Nat.gcd_dvd_left alpha beta
+  have halpha_div : alpha = c * (alpha / c) := by
+    have h := Nat.div_mul_cancel hcalpha
+    simpa [mul_comm] using h.symm
+  have hxpos : 0 < alpha / c := by
+    by_contra hxnot
+    have hx0 : alpha / c = 0 := Nat.eq_zero_of_not_pos hxnot
+    have : alpha = 0 := by
+      rw [halpha_div, hx0, mul_zero]
+    omega
+  have hpos : 2 ≤ B * (alpha / c) * l := by
+    have hx1 : 1 ≤ alpha / c := hxpos
+    have hl1 : 1 ≤ l := hlpos
+    calc
+      2 ≤ 3 * 1 * 1 := by norm_num
+      _ ≤ B * (alpha / c) * l := Nat.mul_le_mul (Nat.mul_le_mul hBge hx1) hl1
+  exact parity_linear_ineq_iff_deficit_ineq
+    (B := B) (c := c) (x := alpha / c) (y := beta / c) (l := l)
+    (m := m) hpos
+
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
     {A B l m alpha beta : ℕ}
@@ -7303,6 +7484,48 @@ theorem powerTwoSplitGcdObstruction_of_canonical_gcd_linear_ineq
     powerTwoSplitSubtractive_parity_product_gap_of_canonical_gcd_linear_ineq
       hA4 hBge hrpos hspos hlpos hmpos hD hA halpha hbeta
       (hlinAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+        hmpos hD hA hsplitgap halpha hbeta)
+
+/-- Deficit-compensation version of
+`powerTwoSplitGcdObstruction_of_canonical_gcd_linear_ineq`. This keeps the
+same proof strength while exposing exactly what the `B*x*l` term must cover
+after the `B*y*m` term is subtracted. -/
+theorem powerTwoSplitGcdObstruction_of_canonical_gcd_deficit_ineq
+    {A B : ℕ}
+    (hdefAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      m * (2 * l - B * y) + 2 ≤
+                                        B * x * l) ∨
+                                    (Even c ∧
+                                      m * (l - B * y) + 1 ≤
+                                        B * x * l)) :
+    powerTwoSplitGcdObstruction A B := by
+  refine powerTwoSplitGcdObstruction_of_canonical_gcd_linear_ineq ?_
+  intro hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos hmpos
+    hD hA hsplitgap halpha hbeta
+  exact
+    (powerTwoSplitSubtractive_canonical_gcd_linear_ineq_iff_deficit_ineq
+      (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+      (alpha := alpha) (beta := beta) hBge hrpos hspos hlpos hmpos hD hA
+      halpha hbeta).mpr
+      (hdefAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
         hmpos hD hA hsplitgap halpha hbeta)
 
 /-- Split-level reduced-divisor gap certificate: if
@@ -8388,6 +8611,70 @@ theorem not_exists_powerTwoQuotientKernel_of_canonical_gcd_linear_ineq
     ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
   rintro ⟨v, h, hkernel⟩
   exact powerTwoQuotientKernel.not_of_canonical_gcd_linear_ineq hlinAll hkernel
+
+/-- Direct conditional kernel kill from the canonical deficit-compensation
+target equivalent to the stronger canonical linear inequality. -/
+theorem powerTwoQuotientKernel.not_of_canonical_gcd_deficit_ineq
+    {A B v h : ℕ}
+    (hdefAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      m * (2 * l - B * y) + 2 ≤
+                                        B * x * l) ∨
+                                    (Even c ∧
+                                      m * (l - B * y) + 1 ≤
+                                        B * x * l)) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_splitGcdObstruction
+    (powerTwoSplitGcdObstruction_of_canonical_gcd_deficit_ineq hdefAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_canonical_gcd_deficit_ineq`. -/
+theorem not_exists_powerTwoQuotientKernel_of_canonical_gcd_deficit_ineq
+    {A B : ℕ}
+    (hdefAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      m * (2 * l - B * y) + 2 ≤
+                                        B * x * l) ∨
+                                    (Even c ∧
+                                      m * (l - B * y) + 1 ≤
+                                        B * x * l)) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact powerTwoQuotientKernel.not_of_canonical_gcd_deficit_ineq hdefAll hkernel
 
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure
