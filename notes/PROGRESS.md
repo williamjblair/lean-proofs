@@ -495,6 +495,23 @@
   compose a universal y-or-x hypothesis to the pure quotient kernel. This
   is a conditional automatic branch theorem; bounded diagnostics still leave
   one even y-deficit/x-deficit exception in the enlarged perimeter.
+- [R] Split off a scaled y-deficit x-compensation branch of the canonical
+  linear target. The generic theorems
+  `Erdos699.linear_even_of_scaled_deficit` and
+  `Erdos699.linear_odd_of_scaled_deficit` prove that a witness `q` suffices
+  when `m <= q*(B*x)` and the scaled branch deficit is still `< l`
+  (`q*(l - B*y) < l` in the even branch, `q*(2*l - B*y) < l` in the odd
+  branch). The combiner
+  `Erdos699.parity_linear_ineq_of_scaled_deficit_coverage`, split wrapper
+  `Erdos699.powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_scaled_deficit_coverage`,
+  and consumers
+  `Erdos699.powerTwoSplitGcdObstruction_of_canonical_gcd_scaled_deficit_coverage`,
+  `Erdos699.powerTwoQuotientKernel.not_of_canonical_gcd_scaled_deficit_coverage`,
+  and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_canonical_gcd_scaled_deficit_coverage`
+  compose a universal scaled-deficit hypothesis to the pure quotient kernel.
+  This is still conditional: the universal scaled-deficit condition itself
+  remains a research target.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
@@ -572,6 +589,17 @@
   3378199447519121, 169, 5, 462394539254642)`. Its linear margin is still
   positive, `94334013970679271`, so this identifies a residual branch where
   the automatic y-or-x sufficient condition fails, not a row-two survivor.
+- [E] Added exact diagnostics for the scaled-deficit coverage branch of the
+  canonical linear target. Reproduce on the enlarged power-two quotient
+  perimeter with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"]); print({k:p[k] for k in ["branch_scaled_deficit_coverage_holds_count","branch_scaled_deficit_coverage_failure_count","odd_branch_scaled_deficit_coverage_failure_count","even_branch_scaled_deficit_coverage_failure_count","max_branch_scaled_deficit_min_q"]}); c=p["max_branch_scaled_deficit_min_q_candidate"]; print(c["exponent"], c["B"], c["c_parity"], c["v"], c["h"], c["l"], c["m"], c["gcd_quotient_x"], c["gcd_quotient_y"], c["linear_gap_margin"])'`.
+  It reports `69000 880 0`, with `880` scaled-deficit coverage cases and
+  no coverage failures. The largest positive scale required in this bounded
+  perimeter is `q = 5`, occurring at the former even y-or-x exception
+  `(A, B) = (2^64, 7)` with
+  `(v, h, l, m, x, y) = (5854419642550636693, 570915706630731449,
+  3378199447519121, 169, 5, 462394539254642)`. This is exact bounded
+  evidence for the scaled branch, not a proof of the universal hypothesis.
 - [E] Added exact diagnostics for the normalized gcd-quotient target. For
   each row-one split the scanner now records `x = alpha / c`,
   `y = beta / c`, the branch-required left side, the quotient right side

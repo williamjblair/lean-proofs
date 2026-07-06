@@ -6498,6 +6498,92 @@ theorem parity_linear_ineq_of_y_or_x_coverage {B c x y l m : ℕ}
       exact Or.inr ⟨hceven, linear_even_of_y_covers_l hpos1 hycover⟩
     · exact Or.inr ⟨hceven, linear_even_of_m_le_B_mul_x hbonus hm⟩
 
+/-- Even-branch scaled-deficit case. If `m` is at most `q` copies of `B*x`
+and the same scale still leaves the y-deficit below `l`, then the slack in
+`B*x*l` supplies the missing `+1`. -/
+theorem linear_even_of_scaled_deficit {B x y l m q : ℕ}
+    (hBxpos : 0 < B * x)
+    (hm : m ≤ q * (B * x))
+    (hdef : q * (l - B * y) < l) :
+    l * m + 1 ≤ B * (x * l + y * m) := by
+  have hlpos : 0 < l := by omega
+  have hpos : 1 ≤ B * x * l := Nat.mul_pos hBxpos hlpos
+  refine (linear_even_iff_x_compensates_y_deficit hpos).mpr ?_
+  let d := l - B * y
+  have hqdlt : q * d < l := by simpa [d] using hdef
+  have hqdle : q * d ≤ l := Nat.le_of_lt hqdlt
+  have hmul : m * d ≤ B * x * (q * d) := by
+    have h := Nat.mul_le_mul_right d hm
+    calc
+      m * d ≤ q * (B * x) * d := h
+      _ = B * x * (q * d) := by ring
+  have hldiff : 0 < l - q * d := Nat.sub_pos_of_lt hqdlt
+  have hslack : 1 ≤ B * x * (l - q * d) := Nat.mul_pos hBxpos hldiff
+  have hsum : m * d + 1 ≤ B * x * (q * d) + B * x * (l - q * d) :=
+    Nat.add_le_add hmul hslack
+  have hright : B * x * (q * d) + B * x * (l - q * d) = B * x * l := by
+    have hcancel : q * d + (l - q * d) = l := Nat.add_sub_of_le hqdle
+    nlinarith
+  calc
+    m * d + 1 ≤ B * x * (q * d) + B * x * (l - q * d) := hsum
+    _ = B * x * l := hright
+
+/-- Odd-branch scaled-deficit case. This is the same scaled slack mechanism
+as `linear_even_of_scaled_deficit`, with the odd branch's `2*l - B*y`
+deficit and the extra `+2`. -/
+theorem linear_odd_of_scaled_deficit {B x y l m q : ℕ}
+    (hBx : 2 ≤ B * x)
+    (hm : m ≤ q * (B * x))
+    (hdef : q * (2 * l - B * y) < l) :
+    2 * (l * m + 1) ≤ B * (x * l + y * m) := by
+  have hlpos : 0 < l := by omega
+  have hpos : 2 ≤ B * x * l := by nlinarith
+  refine (linear_odd_iff_x_compensates_y_deficit hpos).mpr ?_
+  let d := 2 * l - B * y
+  have hqdlt : q * d < l := by simpa [d] using hdef
+  have hqdle : q * d ≤ l := Nat.le_of_lt hqdlt
+  have hmul : m * d ≤ B * x * (q * d) := by
+    have h := Nat.mul_le_mul_right d hm
+    calc
+      m * d ≤ q * (B * x) * d := h
+      _ = B * x * (q * d) := by ring
+  have hldiff : 0 < l - q * d := Nat.sub_pos_of_lt hqdlt
+  have hslack : 2 ≤ B * x * (l - q * d) := by nlinarith
+  have hsum : m * d + 2 ≤ B * x * (q * d) + B * x * (l - q * d) :=
+    Nat.add_le_add hmul hslack
+  have hright : B * x * (q * d) + B * x * (l - q * d) = B * x * l := by
+    have hcancel : q * d + (l - q * d) = l := Nat.add_sub_of_le hqdle
+    nlinarith
+  calc
+    m * d + 2 ≤ B * x * (q * d) + B * x * (l - q * d) := hsum
+    _ = B * x * l := hright
+
+/-- Parity-branch target after allowing a scaled x-compensation witness for
+the y-deficit. The witness `q` bounds `m` by `q*(B*x)` while keeping the
+scaled branch deficit below `l`. -/
+theorem parity_linear_ineq_of_scaled_deficit_coverage {B c x y l m : ℕ}
+    (hlpos : 0 < l)
+    (hBx : 2 ≤ B * x)
+    (hcover :
+      (Odd c ∧
+          (2 * l ≤ B * y ∨
+            ∃ q : ℕ, m ≤ q * (B * x) ∧ q * (2 * l - B * y) < l)) ∨
+        (Even c ∧
+          (l ≤ B * y ∨
+            ∃ q : ℕ, m ≤ q * (B * x) ∧ q * (l - B * y) < l))) :
+    ((Odd c ∧ 2 * (l * m + 1) ≤ B * (x * l + y * m)) ∨
+        (Even c ∧ l * m + 1 ≤ B * (x * l + y * m))) := by
+  have hpos : 2 ≤ B * x * l := by nlinarith
+  have hBxpos : 0 < B * x := by omega
+  rcases hcover with ⟨hcodd, hbranch⟩ | ⟨hceven, hbranch⟩
+  · rcases hbranch with hycover | ⟨q, hm, hdef⟩
+    · exact Or.inl ⟨hcodd, linear_odd_of_y_covers_two_l hpos hycover⟩
+    · exact Or.inl ⟨hcodd, linear_odd_of_scaled_deficit hBx hm hdef⟩
+  · rcases hbranch with hycover | ⟨q, hm, hdef⟩
+    · have hpos1 : 1 ≤ B * x * l := by omega
+      exact Or.inr ⟨hceven, linear_even_of_y_covers_l hpos1 hycover⟩
+    · exact Or.inr ⟨hceven, linear_even_of_scaled_deficit hBxpos hm hdef⟩
+
 /-- Product-form parity certificate. For odd `c`, it is enough to prove
 `c * (L + 1) ≤ M`; for even `c`, it is enough to prove
 `(c / 2) * (L + 1) ≤ M`. -/
@@ -7420,6 +7506,61 @@ theorem powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_y_or_x_coverage
     (B := B) (c := c) (x := alpha / c) (y := beta / c) (l := l)
     (m := m) hlpos hBx hbonus hcover
 
+/-- Split specialization of the scaled y-deficit x-compensation branch. It
+packages the same canonical variables as the y-or-x branch, but lets the
+residual deficit be covered by a scale witness `q`. -/
+theorem powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_scaled_deficit_coverage
+    {A B r s l m alpha beta : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (_hbeta : beta = s - B * l)
+    (hcover :
+      let c := Nat.gcd alpha beta
+      let x := alpha / c
+      let y := beta / c
+      (Odd c ∧
+          (2 * l ≤ B * y ∨
+            ∃ q : ℕ, m ≤ q * (B * x) ∧ q * (2 * l - B * y) < l)) ∨
+        (Even c ∧
+          (l ≤ B * y ∨
+            ∃ q : ℕ, m ≤ q * (B * x) ∧ q * (l - B * y) < l))) :
+    let c := Nat.gcd alpha beta
+    let x := alpha / c
+    let y := beta / c
+    (Odd c ∧ 2 * (l * m + 1) ≤ B * (x * l + y * m)) ∨
+      (Even c ∧ l * m + 1 ≤ B * (x * l + y * m)) := by
+  dsimp at hcover ⊢
+  let c := Nat.gcd alpha beta
+  have hsplit_lt := powerTwoSplitSubtractive_lt (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) hBge hrpos hspos hlpos hmpos hD hA
+  have halpha_pos : 0 < alpha := by
+    rw [halpha]
+    exact Nat.sub_pos_of_lt hsplit_lt.1
+  have hcalpha : c ∣ alpha := Nat.gcd_dvd_left alpha beta
+  have halpha_div : alpha = c * (alpha / c) := by
+    have h := Nat.div_mul_cancel hcalpha
+    simpa [mul_comm] using h.symm
+  have hxpos : 0 < alpha / c := by
+    by_contra hxnot
+    have hx0 : alpha / c = 0 := Nat.eq_zero_of_not_pos hxnot
+    have : alpha = 0 := by
+      rw [halpha_div, hx0, mul_zero]
+    omega
+  have hBx : 2 ≤ B * (alpha / c) := by
+    have hx1 : 1 ≤ alpha / c := hxpos
+    calc
+      2 ≤ 3 * 1 := by norm_num
+      _ ≤ B * (alpha / c) := Nat.mul_le_mul hBge hx1
+  exact parity_linear_ineq_of_scaled_deficit_coverage
+    (B := B) (c := c) (x := alpha / c) (y := beta / c) (l := l)
+    (m := m) hlpos hBx hcover
+
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
     {A B l m alpha beta : ℕ}
@@ -7817,6 +7958,51 @@ theorem powerTwoSplitGcdObstruction_of_canonical_gcd_y_or_x_coverage
     hD hA hsplitgap halpha hbeta
   exact
     powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_y_or_x_coverage
+      (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+      (alpha := alpha) (beta := beta) hBge hrpos hspos hlpos hmpos hD hA
+      halpha hbeta
+      (hcoverAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+        hmpos hD hA hsplitgap halpha hbeta)
+
+/-- Scaled-deficit version of the canonical linear target. If every
+admissible split satisfies the scaled y-deficit coverage condition, then the
+split/gcd obstruction follows. -/
+theorem powerTwoSplitGcdObstruction_of_canonical_gcd_scaled_deficit_coverage
+    {A B : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ B * y ∨
+                                        ∃ q : ℕ,
+                                          m ≤ q * (B * x) ∧
+                                            q * (2 * l - B * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ B * y ∨
+                                        ∃ q : ℕ,
+                                          m ≤ q * (B * x) ∧
+                                            q * (l - B * y) < l))) :
+    powerTwoSplitGcdObstruction A B := by
+  refine powerTwoSplitGcdObstruction_of_canonical_gcd_linear_ineq ?_
+  intro hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos hmpos
+    hD hA hsplitgap halpha hbeta
+  exact
+    powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_scaled_deficit_coverage
       (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
       (alpha := alpha) (beta := beta) hBge hrpos hspos hlpos hmpos hD hA
       halpha hbeta
@@ -9086,6 +9272,79 @@ theorem not_exists_powerTwoQuotientKernel_of_canonical_gcd_y_or_x_coverage
   rintro ⟨v, h, hkernel⟩
   exact powerTwoQuotientKernel.not_of_canonical_gcd_y_or_x_coverage hcoverAll
     hkernel
+
+/-- Direct conditional kernel kill from the canonical scaled-deficit branch. -/
+theorem powerTwoQuotientKernel.not_of_canonical_gcd_scaled_deficit_coverage
+    {A B v h : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ B * y ∨
+                                        ∃ q : ℕ,
+                                          m ≤ q * (B * x) ∧
+                                            q * (2 * l - B * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ B * y ∨
+                                        ∃ q : ℕ,
+                                          m ≤ q * (B * x) ∧
+                                            q * (l - B * y) < l))) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_splitGcdObstruction
+    (powerTwoSplitGcdObstruction_of_canonical_gcd_scaled_deficit_coverage
+      hcoverAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_canonical_gcd_scaled_deficit_coverage`. -/
+theorem not_exists_powerTwoQuotientKernel_of_canonical_gcd_scaled_deficit_coverage
+    {A B : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ B * y ∨
+                                        ∃ q : ℕ,
+                                          m ≤ q * (B * x) ∧
+                                            q * (2 * l - B * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ B * y ∨
+                                        ∃ q : ℕ,
+                                          m ≤ q * (B * x) ∧
+                                            q * (l - B * y) < l))) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact powerTwoQuotientKernel.not_of_canonical_gcd_scaled_deficit_coverage
+    hcoverAll hkernel
 
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure

@@ -667,6 +667,27 @@ def _power_two_parity_branch_gap_summary(
             return 2 * l <= B * y or (l < B * y and m <= B * x)
         return l <= B * y or m <= B * x
 
+    def branch_scaled_deficit_min_q(
+        item: dict[str, int | str | bool],
+    ) -> int | None:
+        B = int(item["B"])
+        x = int(item["gcd_quotient_x"])
+        y = int(item["gcd_quotient_y"])
+        l = int(item["l"])
+        m = int(item["m"])
+        threshold = 2 * l if item["c_parity"] == "odd" else l
+        y_cover = B * y
+        if threshold <= y_cover:
+            return 0
+        deficit = threshold - y_cover
+        x_cover = B * x
+        if x_cover <= 0:
+            return None
+        q = (m + x_cover - 1) // x_cover
+        if q * deficit < l:
+            return q
+        return None
+
     parity_gap_holds_count = sum(
         1 for item in diagnostics if item["parity_gap_holds"]
     )
@@ -731,6 +752,28 @@ def _power_two_parity_branch_gap_summary(
     min_y_or_x_failure_candidate = min(
         y_or_x_coverage_failures,
         key=lambda item: int(item["linear_gap_margin"]),
+        default=None,
+    )
+    scaled_deficit_records = [
+        (q, item)
+        for item in diagnostics
+        if (q := branch_scaled_deficit_min_q(item)) is not None
+    ]
+    positive_scaled_deficit_records = [
+        (q, item) for q, item in scaled_deficit_records if q > 0
+    ]
+    scaled_deficit_failures = [
+        item for item in diagnostics if branch_scaled_deficit_min_q(item) is None
+    ]
+    odd_scaled_deficit_failures = [
+        item for item in scaled_deficit_failures if item["c_parity"] == "odd"
+    ]
+    even_scaled_deficit_failures = [
+        item for item in scaled_deficit_failures if item["c_parity"] == "even"
+    ]
+    max_scaled_deficit_record = max(
+        positive_scaled_deficit_records,
+        key=lambda record: record[0],
         default=None,
     )
     denominator_le_B_sq_count = sum(
@@ -816,6 +859,24 @@ def _power_two_parity_branch_gap_summary(
             else min_y_or_x_failure_candidate["linear_gap_margin"]
         ),
         "min_branch_y_or_x_failure_candidate": min_y_or_x_failure_candidate,
+        "branch_scaled_deficit_coverage_holds_count": len(
+            scaled_deficit_records
+        ),
+        "branch_scaled_deficit_coverage_failure_count": (
+            len(diagnostics) - len(scaled_deficit_records)
+        ),
+        "odd_branch_scaled_deficit_coverage_failure_count": len(
+            odd_scaled_deficit_failures
+        ),
+        "even_branch_scaled_deficit_coverage_failure_count": len(
+            even_scaled_deficit_failures
+        ),
+        "max_branch_scaled_deficit_min_q": (
+            None if max_scaled_deficit_record is None else max_scaled_deficit_record[0]
+        ),
+        "max_branch_scaled_deficit_min_q_candidate": (
+            None if max_scaled_deficit_record is None else max_scaled_deficit_record[1]
+        ),
         "parity_denominator_le_B_sq_count": denominator_le_B_sq_count,
         "parity_denominator_gt_B_sq_count": (
             len(diagnostics) - denominator_le_B_sq_count
