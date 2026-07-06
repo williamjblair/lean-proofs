@@ -1523,5 +1523,15 @@
   proof target aligned with the exact condition `M / gcd(c, M) ∤ l*m`. This
   is still a conditional C2 theorem schema, not a proof that all admissible
   splits satisfy the condition.
+- [R] Added exact-gap-routed quotient-kernel wrappers for the same canonical
+  C2 hypotheses:
+  `Erdos699.powerTwoQuotientKernel.not_of_canonical_linear_via_reduced_gap`,
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_canonical_linear_via_reduced_gap`,
+  `Erdos699.powerTwoQuotientKernel.not_of_canonical_ceil_scaled_via_reduced_gap`,
+  and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_canonical_ceil_scaled_via_reduced_gap`.
+  These are compositional Lean theorems: canonical linear/ceil-scaled
+  hypotheses imply the universal exact reduced-divisor gap, which then kills
+  the power-two quotient kernel. They do not prove the universal hypotheses.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

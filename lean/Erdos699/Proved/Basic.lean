@@ -9090,6 +9090,147 @@ theorem not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap {A B : ℕ}
   rintro ⟨v, h, hkernel⟩
   exact powerTwoQuotientKernel.not_of_reduced_divisor_gap hgapAll hkernel
 
+/-- Direct conditional kernel kill from the canonical linear inequality, routed
+through the exact reduced-divisor gap. This is propositionally the same
+endpoint as `powerTwoQuotientKernel.not_of_canonical_gcd_linear_ineq`, but it
+keeps the proof path aligned with the sharp condition
+`l*m < M / gcd(c,M)`. -/
+theorem powerTwoQuotientKernel.not_of_canonical_linear_via_reduced_gap
+    {A B v h : ℕ}
+    (hlinAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      2 * (l * m + 1) ≤
+                                        B * (x * l + y * m)) ∨
+                                    (Even c ∧
+                                      l * m + 1 ≤
+                                        B * (x * l + y * m))) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_reduced_divisor_gap
+    (powerTwoSplit_all_reduced_divisor_gap_of_canonical_gcd_linear_ineq hlinAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_canonical_linear_via_reduced_gap`. -/
+theorem not_exists_powerTwoQuotientKernel_of_canonical_linear_via_reduced_gap
+    {A B : ℕ}
+    (hlinAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      2 * (l * m + 1) ≤
+                                        B * (x * l + y * m)) ∨
+                                    (Even c ∧
+                                      l * m + 1 ≤
+                                        B * (x * l + y * m))) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact
+    powerTwoQuotientKernel.not_of_canonical_linear_via_reduced_gap
+      hlinAll hkernel
+
+/-- Direct conditional kernel kill from the canonical ceiling-scaled
+deficit branch, routed through the exact reduced-divisor gap. This exposes the
+current computable C2 condition at the sharp row-two obstruction. -/
+theorem powerTwoQuotientKernel.not_of_canonical_ceil_scaled_via_reduced_gap
+    {A B v h : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (2 * l - B * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (l - B * y) < l))) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_reduced_divisor_gap
+    (powerTwoSplit_all_reduced_divisor_gap_of_canonical_gcd_ceil_scaled_deficit_coverage
+      hcoverAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_canonical_ceil_scaled_via_reduced_gap`. -/
+theorem not_exists_powerTwoQuotientKernel_of_canonical_ceil_scaled_via_reduced_gap
+    {A B : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (2 * l - B * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (l - B * y) < l))) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact
+    powerTwoQuotientKernel.not_of_canonical_ceil_scaled_via_reduced_gap
+      hcoverAll hkernel
+
 /-- Direct conditional kernel kill from the parity-branch gap inequality. -/
 theorem powerTwoQuotientKernel.not_of_parity_reduced_divisor_gap {A B v h : ℕ}
     (hgapAll :
