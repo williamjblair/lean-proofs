@@ -1567,5 +1567,19 @@
   `¬ dominated 3 (F*(A*H)) p`; primes outside that Lucas guard remain free.
   This is the corrected digit-factor surface for the normalized bridge, still
   conditional on the same universal canonical split hypotheses.
+- [R] Added the exact no-common-prime source for the guarded row-digit
+  transfer. `Erdos699.digit_eq_zero_of_pow_dvd` proves that if `p^e | n`,
+  all base-`p` digits of `n` below level `e` vanish, and
+  `Erdos699.pow_dvd_of_dominated_and_pow_dvd` turns Lucas domination
+  `j ⪯_p n` plus `p^e | n` into `p^e | j`. The theorem
+  `Erdos699.rowNDigitPowerConstraintExact_of_no_common_i_three` then derives
+  `rowNDigitPowerConstraintExact F X u` from the corrected obstruction
+  criterion for rows `3` and `j`, assuming explicitly the coprimality needed
+  to cancel the normalized factor `F`: `(p^e).Coprime F` for the guarded
+  prime power under consideration. This theorem constrains only primes
+  `p ≥ 3` with `¬ dominated 3 (F*X) p`; primes below row `3` and primes where
+  row `3` is dominated remain free. Reproduce with
+  `lake build Erdos699.Proved.Basic` and
+  `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

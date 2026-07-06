@@ -8,6 +8,9 @@ namespace Erdos699
 #check rowNDigitPowerConstraint
 #check rowNDigitPowerConstraintExact
 #check rowNDigitPowerConstraintExact_of_rowNDigitPowerConstraint
+#check digit_eq_zero_of_pow_dvd
+#check pow_dvd_of_dominated_and_pow_dvd
+#check rowNDigitPowerConstraintExact_of_no_common_i_three
 #check powerTwoQuotientKernel
 #check powerTwoSplitGcdObstruction
 #check powerTwoSplitGcdObstruction.not_dvd

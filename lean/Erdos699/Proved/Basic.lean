@@ -2658,6 +2658,25 @@ theorem prime_dvd_of_pow_dvd {p e m : ℕ} (he : 0 < e) (h : p ^ e ∣ m) :
   rw [ha, hc, pow_succ']
   ac_rfl
 
+/-- If `p^e` divides `n`, then all base-`p` digits of `n` below level `e`
+are zero. -/
+theorem digit_eq_zero_of_pow_dvd {n p e r : ℕ}
+    (hp_pos : 0 < p) (hr_lt : r < e) (hpdvd : p ^ e ∣ n) :
+    digit n p r = 0 := by
+  have hle : r + 1 ≤ e := Nat.succ_le_of_lt hr_lt
+  have hsucc_dvd : p ^ (r + 1) ∣ n :=
+    Nat.dvd_trans (pow_dvd_pow p hle) hpdvd
+  rcases hsucc_dvd with ⟨a, ha⟩
+  have hpowr_pos : 0 < p ^ r := pow_pos hp_pos r
+  have hpow_succ_mul : p ^ (r + 1) * a = p ^ r * (p * a) := by
+    rw [pow_succ']
+    ring
+  have hdiv : n / p ^ r = p * a := by
+    rw [ha, hpow_succ_mul]
+    exact Nat.mul_div_cancel_left (p * a) hpowr_pos
+  rw [digit, hdiv]
+  exact Nat.dvd_iff_mod_eq_zero.mp ⟨a, rfl⟩
+
 theorem digit_zero_eq_one_of_pow_dvd_sub_one {n p e : ℕ}
     (hp : p.Prime) (hn_pos : 0 < n) (he_pos : 0 < e) (hpdvd : p ^ e ∣ n - 1) :
     digit n p 0 = 1 := by
@@ -2768,6 +2787,21 @@ theorem pow_dvd_of_forall_digit_eq_zero {j p e : ℕ}
       refine ⟨b, ?_⟩
       rw [ha, hb, pow_succ']
       ac_rfl
+
+/-- Digit domination transfers a prime-power divisor of `n` to the dominated
+number. -/
+theorem pow_dvd_of_dominated_and_pow_dvd {j n p e : ℕ}
+    (hp : Nat.Prime p) (hdom : dominated j n p) (hpdvd : p ^ e ∣ n) :
+    p ^ e ∣ j := by
+  refine pow_dvd_of_forall_digit_eq_zero hp.pos ?_
+  intro r hr
+  have hj_le_n : digit j p r ≤ digit n p r :=
+    (dominated_iff_forall_digits hp.two_le).mp hdom r
+  have hn_zero : digit n p r = 0 :=
+    digit_eq_zero_of_pow_dvd hp.pos hr hpdvd
+  have hj_le_zero : digit j p r ≤ 0 := by
+    simpa [hn_zero] using hj_le_n
+  omega
 
 theorem pow_dvd_sub_one_of_unit_digit_one_high_zero {j p e : ℕ}
     (hp : p.Prime) (hunit : digit j p 0 = 1)
@@ -10964,5 +10998,36 @@ theorem no_commonPrimeDivisor_iff_obstructionCriterion (n i j : ℕ) :
       exact hnonzero (Nat.dvd_iff_mod_eq_zero.mp hpi)
     · have hnonzero := (lucas_nonzero_mod_prime_iff_dominated hp).mpr hdom_j
       exact hnonzero (Nat.dvd_iff_mod_eq_zero.mp hpj)
+
+/-- If there is no common prime divisor for rows `3` and `j`, the corrected
+Lucas obstruction transfers exactly the guarded prime-power part of `X` to
+`u`, after the explicit coprimality needed to cancel the normalized factor
+`F`. Primes below row `3`, and primes for which row `3` is already dominated,
+remain unconstrained. -/
+theorem rowNDigitPowerConstraintExact_of_no_common_i_three
+    {n F X j u : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * u)
+    (hcopF :
+      ∀ ⦃p e : ℕ⦄, Nat.Prime p → 3 ≤ p → ¬ dominated 3 (F * X) p →
+        p ^ e ∣ X → (p ^ e).Coprime F) :
+    rowNDigitPowerConstraintExact F X u := by
+  intro p e hp hp3 hnotdom hpowX
+  have hcrit : obstructionCriterion n 3 j :=
+    (no_commonPrimeDivisor_iff_obstructionCriterion n 3 j).mp hnone
+  have hnotdom_n : ¬ dominated 3 n p := by
+    simpa [hn] using hnotdom
+  have hdomj : dominated j n p := by
+    rcases hcrit p ⟨hp, hp3⟩ with hdom3 | hdomj
+    · exact False.elim (hnotdom_n hdom3)
+    · exact hdomj
+  have hpowN : p ^ e ∣ n := by
+    rw [hn]
+    exact dvd_mul_of_dvd_right hpowX F
+  have hpowJ : p ^ e ∣ j :=
+    pow_dvd_of_dominated_and_pow_dvd hp hdomj hpowN
+  have hpowFu : p ^ e ∣ F * u := by
+    simpa [hj] using hpowJ
+  exact (hcopF hp hp3 hnotdom hpowX).dvd_of_dvd_mul_left hpowFu
 
 end Erdos699
