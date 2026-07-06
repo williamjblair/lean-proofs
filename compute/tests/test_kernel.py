@@ -2,6 +2,7 @@ import json
 import math
 import subprocess
 import sys
+from typing import Any
 
 import pytest
 
@@ -29,6 +30,54 @@ def _factorization_product(factors: list[tuple[int, int]]) -> int:
     for _prime, prime_power in factors:
         product *= prime_power
     return product
+
+
+def _with_scaled_deficit_fields(item: dict[str, Any]) -> dict[str, Any]:
+    result = dict(item)
+    B = int(result["B"])
+    l = int(result["l"])
+    m = int(result["m"])
+    x = int(result["gcd_quotient_x"])
+    y = int(result["gcd_quotient_y"])
+    threshold = 2 * l if result["c_parity"] == "odd" else l
+    y_cover = B * y
+    deficit = max(0, threshold - y_cover)
+    x_cover = B * x
+    q = 0 if deficit == 0 else (m + x_cover - 1) // x_cover
+    result.update(
+        {
+            "scaled_deficit_threshold": threshold,
+            "scaled_deficit_y_cover": y_cover,
+            "scaled_deficit_deficit": deficit,
+            "scaled_deficit_x_cover": x_cover,
+            "scaled_deficit_min_q": q,
+            "scaled_deficit_margin": l - q * deficit,
+            "scaled_deficit_holds": q * deficit < l,
+        }
+    )
+    return result
+
+
+def _with_scaled_deficit_fields_recursive(value: Any) -> Any:
+    if isinstance(value, dict):
+        converted = {
+            key: _with_scaled_deficit_fields_recursive(item)
+            for key, item in value.items()
+        }
+        required = {
+            "B",
+            "l",
+            "m",
+            "c_parity",
+            "gcd_quotient_x",
+            "gcd_quotient_y",
+        }
+        if required <= converted.keys() and "scaled_deficit_threshold" not in converted:
+            return _with_scaled_deficit_fields(converted)
+        return converted
+    if isinstance(value, list):
+        return [_with_scaled_deficit_fields_recursive(item) for item in value]
+    return value
 
 
 def test_prime_power_factorization_exact() -> None:
@@ -772,7 +821,7 @@ def test_power_two_quotient_scan_matches_bruteforce() -> None:
     assert result["survivor_count"] == len(brute_survivors) == 0
     assert result["row_one_candidates"] == brute_row_one
     assert result["survivors"] == []
-    assert result["reduced_divisor_gap_summary"] == {
+    expected_summary = _with_scaled_deficit_fields_recursive({
         "candidate_count": 2,
         "gap_holds_count": 2,
         "gap_failure_count": 0,
@@ -1038,7 +1087,13 @@ def test_power_two_quotient_scan_matches_bruteforce() -> None:
                 "linear_gap_holds": True,
             },
         },
-    }
+    })
+    parity_summary = expected_summary["parity_branch_gap_summary"]
+    parity_summary["min_branch_scaled_deficit_margin"] = 3
+    parity_summary["min_branch_scaled_deficit_margin_candidate"] = parity_summary[
+        "min_branch_y_coverage_candidate"
+    ]
+    assert result["reduced_divisor_gap_summary"] == expected_summary
 
 
 def test_power_two_quotient_gap_summary_counts_B_sq_denominator_exceptions() -> None:
@@ -1059,7 +1114,8 @@ def test_power_two_quotient_gap_summary_counts_B_sq_denominator_exceptions() -> 
     assert parity_summary["parity_denominator_gt_B_sq_count"] == 1
     assert parity_summary["odd_parity_denominator_gt_B_sq_count"] == 0
     assert parity_summary["even_parity_denominator_gt_B_sq_count"] == 1
-    assert parity_summary["max_parity_denominator_over_B_sq_candidate"] == {
+    assert parity_summary["max_parity_denominator_over_B_sq_candidate"] == (
+        _with_scaled_deficit_fields({
         "exponent": 52,
         "A": 2**52,
         "B": 5,
@@ -1095,7 +1151,8 @@ def test_power_two_quotient_gap_summary_counts_B_sq_denominator_exceptions() -> 
         "linear_gap_required": 149_346_249_379_106,
         "linear_gap_margin": 43_611_259_183_679,
         "linear_gap_holds": True,
-    }
+        })
+    )
 
 
 def test_power_two_quotient_gap_summary_counts_y_coverage_exceptions() -> None:
@@ -1210,6 +1267,29 @@ def test_power_two_quotient_gap_summary_counts_scaled_deficit_coverage() -> None
     assert parity_summary["max_branch_scaled_deficit_min_q"] == 5
     assert parity_summary["max_branch_scaled_deficit_min_q_candidate"]["exponent"] == 64
     assert parity_summary["max_branch_scaled_deficit_min_q_candidate"]["B"] == 7
+    assert parity_summary["min_branch_scaled_deficit_margin"] == 29
+    assert parity_summary["min_branch_scaled_deficit_margin_candidate"]["exponent"] == 52
+    assert parity_summary["min_branch_scaled_deficit_margin_candidate"]["B"] == 5
+
+
+def test_power_two_quotient_diagnostic_reports_canonical_scaled_deficit() -> None:
+    diagnostic = _power_two_reduced_divisor_gap_diagnostic(
+        {
+            "exponent": 64,
+            "A": 2**64,
+            "B": 7,
+            "v": 5_854_419_642_550_636_693,
+            "h": 570_915_706_630_731_449,
+        }
+    )
+
+    assert diagnostic["scaled_deficit_threshold"] == 3_378_199_447_519_121
+    assert diagnostic["scaled_deficit_y_cover"] == 3_236_761_774_782_494
+    assert diagnostic["scaled_deficit_deficit"] == 141_437_672_736_627
+    assert diagnostic["scaled_deficit_x_cover"] == 35
+    assert diagnostic["scaled_deficit_min_q"] == 5
+    assert diagnostic["scaled_deficit_margin"] == 2_671_011_083_835_986
+    assert diagnostic["scaled_deficit_holds"] is True
 
 
 def test_power_two_quotient_diagnostic_reports_linear_gap_target() -> None:
@@ -1255,7 +1335,7 @@ def test_power_two_quotient_scan_certifies_large_prime_modulus() -> None:
     assert result["survivor_count"] == 0
     assert result["reduced_divisor_gap_summary"]["candidate_count"] == 3
     assert result["reduced_divisor_gap_summary"]["gap_failure_count"] == 0
-    assert result["reduced_divisor_gap_summary"]["parity_branch_gap_summary"] == {
+    expected_parity_summary = _with_scaled_deficit_fields_recursive({
         "candidate_count": 3,
         "odd_c_count": 2,
         "even_c_count": 1,
@@ -1478,7 +1558,15 @@ def test_power_two_quotient_scan_certifies_large_prime_modulus() -> None:
             "linear_gap_margin": 977379170661725573,
             "linear_gap_holds": True,
         },
-    }
+    })
+    expected_parity_summary["min_branch_scaled_deficit_margin"] = 2
+    expected_parity_summary["min_branch_scaled_deficit_margin_candidate"] = (
+        expected_parity_summary["min_branch_y_coverage_candidate"]
+    )
+    assert (
+        result["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]
+        == expected_parity_summary
+    )
 
 
 def test_power_two_quotient_scan_factors_large_composite_modulus() -> None:

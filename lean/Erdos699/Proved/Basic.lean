@@ -6584,6 +6584,71 @@ theorem parity_linear_ineq_of_scaled_deficit_coverage {B c x y l m : ℕ}
       exact Or.inr ⟨hceven, linear_even_of_y_covers_l hpos1 hycover⟩
     · exact Or.inr ⟨hceven, linear_even_of_scaled_deficit hBxpos hm hdef⟩
 
+/-- Canonical ceiling-scale bound used by the quotient diagnostics. For
+positive `d`, the fixed witness `((m - 1) / d) + 1` supplies enough copies of
+`d` to cover `m`. -/
+theorem le_ceilSubOneDiv_succ_mul {d m : ℕ} (hd : 0 < d) :
+    m ≤ ((m - 1) / d + 1) * d := by
+  by_cases hm0 : m = 0
+  · simp [hm0]
+  · have hmpos : 0 < m := Nat.pos_of_ne_zero hm0
+    have hlt : m - 1 < d * ((m - 1) / d + 1) :=
+      Nat.lt_mul_div_succ (m - 1) hd
+    have hsucc : (m - 1).succ ≤ d * ((m - 1) / d + 1) :=
+      Nat.succ_le_iff.mpr hlt
+    have hm_succ : (m - 1).succ = m := Nat.succ_pred_eq_of_pos hmpos
+    rw [hm_succ] at hsucc
+    simpa [mul_comm, mul_left_comm, mul_assoc] using hsucc
+
+/-- Even-branch canonical scaled-deficit case. The scale is fixed to the
+ceiling witness `((m - 1)/(B*x))+1`, removing the arbitrary existential `q`
+from `linear_even_of_scaled_deficit`. -/
+theorem linear_even_of_ceil_scaled_deficit {B x y l m : ℕ}
+    (hBxpos : 0 < B * x)
+    (hdef : (((m - 1) / (B * x) + 1) * (l - B * y) < l)) :
+    l * m + 1 ≤ B * (x * l + y * m) := by
+  exact linear_even_of_scaled_deficit hBxpos
+    (le_ceilSubOneDiv_succ_mul hBxpos) hdef
+
+/-- Odd-branch canonical scaled-deficit case. The fixed ceiling witness
+`((m - 1)/(B*x))+1` covers `m`, and the scaled odd y-deficit remains below
+`l`. -/
+theorem linear_odd_of_ceil_scaled_deficit {B x y l m : ℕ}
+    (hBx : 2 ≤ B * x)
+    (hdef : (((m - 1) / (B * x) + 1) * (2 * l - B * y) < l)) :
+    2 * (l * m + 1) ≤ B * (x * l + y * m) := by
+  have hBxpos : 0 < B * x := by omega
+  exact linear_odd_of_scaled_deficit hBx
+    (le_ceilSubOneDiv_succ_mul hBxpos) hdef
+
+/-- Parity-branch target from the canonical ceiling-scaled y-deficit
+condition. This is the machine form of the current C2 target: either y already
+covers the branch threshold, or the fixed ceiling number of `B*x` blocks makes
+the remaining deficit fit inside `l`. -/
+theorem parity_linear_ineq_of_ceil_scaled_deficit_coverage {B c x y l m : ℕ}
+    (hlpos : 0 < l)
+    (hBx : 2 ≤ B * x)
+    (hcover :
+      (Odd c ∧
+          (2 * l ≤ B * y ∨
+            ((m - 1) / (B * x) + 1) * (2 * l - B * y) < l)) ∨
+        (Even c ∧
+          (l ≤ B * y ∨
+            ((m - 1) / (B * x) + 1) * (l - B * y) < l))) :
+    ((Odd c ∧ 2 * (l * m + 1) ≤ B * (x * l + y * m)) ∨
+        (Even c ∧ l * m + 1 ≤ B * (x * l + y * m))) := by
+  have hpos : 2 ≤ B * x * l := by nlinarith
+  have hBxpos : 0 < B * x := by omega
+  rcases hcover with ⟨hcodd, hbranch⟩ | ⟨hceven, hbranch⟩
+  · rcases hbranch with hycover | hdef
+    · exact Or.inl ⟨hcodd, linear_odd_of_y_covers_two_l hpos hycover⟩
+    · exact Or.inl ⟨hcodd, linear_odd_of_ceil_scaled_deficit hBx hdef⟩
+  · rcases hbranch with hycover | hdef
+    · have hpos1 : 1 ≤ B * x * l := by omega
+      exact Or.inr ⟨hceven, linear_even_of_y_covers_l hpos1 hycover⟩
+    · exact Or.inr ⟨hceven,
+        linear_even_of_ceil_scaled_deficit hBxpos hdef⟩
+
 /-- Product-form parity certificate. For odd `c`, it is enough to prove
 `c * (L + 1) ≤ M`; for even `c`, it is enough to prove
 `(c / 2) * (L + 1) ≤ M`. -/
@@ -7561,6 +7626,61 @@ theorem powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_scaled_deficit_cov
     (B := B) (c := c) (x := alpha / c) (y := beta / c) (l := l)
     (m := m) hlpos hBx hcover
 
+/-- Split specialization of the canonical ceiling-scaled y-deficit branch.
+This packages the computable scale `((m - 1)/(B*x))+1` in the canonical
+gcd-quotient variables. -/
+theorem powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_ceil_scaled_deficit_coverage
+    {A B r s l m alpha beta : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (_hbeta : beta = s - B * l)
+    (hcover :
+      let c := Nat.gcd alpha beta
+      let x := alpha / c
+      let y := beta / c
+      (Odd c ∧
+          (2 * l ≤ B * y ∨
+            ((m - 1) / (B * x) + 1) * (2 * l - B * y) < l)) ∨
+        (Even c ∧
+          (l ≤ B * y ∨
+            ((m - 1) / (B * x) + 1) * (l - B * y) < l))) :
+    let c := Nat.gcd alpha beta
+    let x := alpha / c
+    let y := beta / c
+    (Odd c ∧ 2 * (l * m + 1) ≤ B * (x * l + y * m)) ∨
+      (Even c ∧ l * m + 1 ≤ B * (x * l + y * m)) := by
+  dsimp at hcover ⊢
+  let c := Nat.gcd alpha beta
+  have hsplit_lt := powerTwoSplitSubtractive_lt (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) hBge hrpos hspos hlpos hmpos hD hA
+  have halpha_pos : 0 < alpha := by
+    rw [halpha]
+    exact Nat.sub_pos_of_lt hsplit_lt.1
+  have hcalpha : c ∣ alpha := Nat.gcd_dvd_left alpha beta
+  have halpha_div : alpha = c * (alpha / c) := by
+    have h := Nat.div_mul_cancel hcalpha
+    simpa [mul_comm] using h.symm
+  have hxpos : 0 < alpha / c := by
+    by_contra hxnot
+    have hx0 : alpha / c = 0 := Nat.eq_zero_of_not_pos hxnot
+    have : alpha = 0 := by
+      rw [halpha_div, hx0, mul_zero]
+    omega
+  have hBx : 2 ≤ B * (alpha / c) := by
+    have hx1 : 1 ≤ alpha / c := hxpos
+    calc
+      2 ≤ 3 * 1 := by norm_num
+      _ ≤ B * (alpha / c) := Nat.mul_le_mul hBge hx1
+  exact parity_linear_ineq_of_ceil_scaled_deficit_coverage
+    (B := B) (c := c) (x := alpha / c) (y := beta / c) (l := l)
+    (m := m) hlpos hBx hcover
+
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
     {A B l m alpha beta : ℕ}
@@ -8003,6 +8123,50 @@ theorem powerTwoSplitGcdObstruction_of_canonical_gcd_scaled_deficit_coverage
     hD hA hsplitgap halpha hbeta
   exact
     powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_scaled_deficit_coverage
+      (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+      (alpha := alpha) (beta := beta) hBge hrpos hspos hlpos hmpos hD hA
+      halpha hbeta
+      (hcoverAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+        hmpos hD hA hsplitgap halpha hbeta)
+
+/-- Canonical ceiling-scaled version of
+`powerTwoSplitGcdObstruction_of_canonical_gcd_scaled_deficit_coverage`.
+The arbitrary scale witness is fixed to `((m - 1)/(B*x))+1`, matching the
+exact compute diagnostic. -/
+theorem powerTwoSplitGcdObstruction_of_canonical_gcd_ceil_scaled_deficit_coverage
+    {A B : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (2 * l - B * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (l - B * y) < l))) :
+    powerTwoSplitGcdObstruction A B := by
+  refine powerTwoSplitGcdObstruction_of_canonical_gcd_linear_ineq ?_
+  intro hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos hmpos
+    hD hA hsplitgap halpha hbeta
+  exact
+    powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_ceil_scaled_deficit_coverage
       (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
       (alpha := alpha) (beta := beta) hBge hrpos hspos hlpos hmpos hD hA
       halpha hbeta
@@ -9344,6 +9508,76 @@ theorem not_exists_powerTwoQuotientKernel_of_canonical_gcd_scaled_deficit_covera
     ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
   rintro ⟨v, h, hkernel⟩
   exact powerTwoQuotientKernel.not_of_canonical_gcd_scaled_deficit_coverage
+    hcoverAll hkernel
+
+/-- Direct conditional kernel kill from the canonical ceiling-scaled
+gcd-deficit branch. -/
+theorem powerTwoQuotientKernel.not_of_canonical_gcd_ceil_scaled_deficit_coverage
+    {A B v h : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (2 * l - B * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (l - B * y) < l))) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_splitGcdObstruction
+    (powerTwoSplitGcdObstruction_of_canonical_gcd_ceil_scaled_deficit_coverage
+      hcoverAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_canonical_gcd_ceil_scaled_deficit_coverage`. -/
+theorem not_exists_powerTwoQuotientKernel_of_canonical_gcd_ceil_scaled_deficit_coverage
+    {A B : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (2 * l - B * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ B * y ∨
+                                        ((m - 1) / (B * x) + 1) *
+                                            (l - B * y) < l))) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact powerTwoQuotientKernel.not_of_canonical_gcd_ceil_scaled_deficit_coverage
     hcoverAll hkernel
 
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced

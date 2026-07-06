@@ -1461,5 +1461,40 @@
   `Erdos699.row_one_factor_gap_sq_eq_sq` specializes it to the row-one factor
   equation `t * (X - t) = g * (n - 1)`. This banks the exact algebra used by
   the squeezed normalized/Pell-style C2 lane; it is not a kernel contradiction.
+- [R]/[E] Retired the proposed blanket denominator bound `d ≤ B^2` as a
+  proof lane. The Lean theorem
+  `Erdos699.powerTwoSplit_gcd_bound_counterexample_not_row_two_survival`
+  certifies the exact split
+  `A = 2^52`, `B = 5`, `r = 32587551572869`, `s = 691`, `l = 29`,
+  `m = 5149870668245`, with `d = gcd (gcd alpha beta) (B * (A / 2) - 1) = 39`
+  and `B^2 = 25`, while also certifying that this split does not satisfy
+  row-two survival and that `l * m < M / d`. Thus the sharp target remains the
+  exact reduced-divisor obstruction, already formalized by
+  `Erdos699.powerTwoSplit_row_two_survival_iff_reduced_divisor` and
+  `Erdos699.powerTwoSplit_row_two_obstruction_iff_reduced_divisor`, not a
+  global `d ≤ B^2` claim. Reproduce the compute-side check with
+  `python3 -m pytest compute/tests/test_kernel.py::test_power_two_quotient_gap_summary_counts_B_sq_denominator_exceptions -q`.
+- [R]/[E] Added the canonical ceiling-scaled C2 conditional branch. The
+  compute diagnostic now records
+  `scaled_deficit_threshold`, `scaled_deficit_y_cover`,
+  `scaled_deficit_deficit`, `scaled_deficit_x_cover`,
+  `scaled_deficit_min_q`, `scaled_deficit_margin`, and
+  `scaled_deficit_holds`; the hard bounded witness at `A = 2^64`, `B = 7`
+  has `scaled_deficit_min_q = 5` and positive margin
+  `2671011083835986`. Lean proves the fixed-ceiling witness and its full
+  conditional stack:
+  `Erdos699.le_ceilSubOneDiv_succ_mul`,
+  `Erdos699.linear_even_of_ceil_scaled_deficit`,
+  `Erdos699.linear_odd_of_ceil_scaled_deficit`,
+  `Erdos699.parity_linear_ineq_of_ceil_scaled_deficit_coverage`,
+  `Erdos699.powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_ceil_scaled_deficit_coverage`,
+  `Erdos699.powerTwoSplitGcdObstruction_of_canonical_gcd_ceil_scaled_deficit_coverage`,
+  `Erdos699.powerTwoQuotientKernel.not_of_canonical_gcd_ceil_scaled_deficit_coverage`,
+  and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_canonical_gcd_ceil_scaled_deficit_coverage`.
+  This is a conditional theorem schema, not an unconditional kernel proof.
+  Reproduce with
+  `python3 -m pytest compute/tests/test_kernel.py::test_power_two_quotient_diagnostic_reports_canonical_scaled_deficit compute/tests/test_kernel.py::test_power_two_quotient_gap_summary_counts_scaled_deficit_coverage -q`
+  and `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

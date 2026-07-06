@@ -609,6 +609,20 @@ def _power_two_reduced_divisor_gap_diagnostic(
     linear_gap_rhs = B * (gcd_quotient_x * l + gcd_quotient_y * m)
     linear_gap_required = quotient_gap_required
     linear_gap_margin = linear_gap_rhs - linear_gap_required
+    scaled_deficit_threshold = 2 * l if not c_is_even else l
+    scaled_deficit_y_cover = B * gcd_quotient_y
+    scaled_deficit_deficit = max(
+        0, scaled_deficit_threshold - scaled_deficit_y_cover
+    )
+    scaled_deficit_x_cover = B * gcd_quotient_x
+    if scaled_deficit_x_cover <= 0:
+        raise AssertionError("positive split diagnostic must have positive x-cover")
+    scaled_deficit_min_q = (
+        0
+        if scaled_deficit_deficit == 0
+        else (m + scaled_deficit_x_cover - 1) // scaled_deficit_x_cover
+    )
+    scaled_deficit_margin = l - scaled_deficit_min_q * scaled_deficit_deficit
     return {
         "exponent": candidate["exponent"],
         "A": A,
@@ -645,6 +659,13 @@ def _power_two_reduced_divisor_gap_diagnostic(
         "linear_gap_required": linear_gap_required,
         "linear_gap_margin": linear_gap_margin,
         "linear_gap_holds": linear_gap_required <= linear_gap_rhs,
+        "scaled_deficit_threshold": scaled_deficit_threshold,
+        "scaled_deficit_y_cover": scaled_deficit_y_cover,
+        "scaled_deficit_deficit": scaled_deficit_deficit,
+        "scaled_deficit_x_cover": scaled_deficit_x_cover,
+        "scaled_deficit_min_q": scaled_deficit_min_q,
+        "scaled_deficit_margin": scaled_deficit_margin,
+        "scaled_deficit_holds": 0 < scaled_deficit_margin,
     }
 
 
@@ -670,22 +691,8 @@ def _power_two_parity_branch_gap_summary(
     def branch_scaled_deficit_min_q(
         item: dict[str, int | str | bool],
     ) -> int | None:
-        B = int(item["B"])
-        x = int(item["gcd_quotient_x"])
-        y = int(item["gcd_quotient_y"])
-        l = int(item["l"])
-        m = int(item["m"])
-        threshold = 2 * l if item["c_parity"] == "odd" else l
-        y_cover = B * y
-        if threshold <= y_cover:
-            return 0
-        deficit = threshold - y_cover
-        x_cover = B * x
-        if x_cover <= 0:
-            return None
-        q = (m + x_cover - 1) // x_cover
-        if q * deficit < l:
-            return q
+        if item["scaled_deficit_holds"]:
+            return int(item["scaled_deficit_min_q"])
         return None
 
     parity_gap_holds_count = sum(
@@ -774,6 +781,11 @@ def _power_two_parity_branch_gap_summary(
     max_scaled_deficit_record = max(
         positive_scaled_deficit_records,
         key=lambda record: record[0],
+        default=None,
+    )
+    min_scaled_deficit_margin_candidate = min(
+        diagnostics,
+        key=lambda item: int(item["scaled_deficit_margin"]),
         default=None,
     )
     denominator_le_B_sq_count = sum(
@@ -876,6 +888,14 @@ def _power_two_parity_branch_gap_summary(
         ),
         "max_branch_scaled_deficit_min_q_candidate": (
             None if max_scaled_deficit_record is None else max_scaled_deficit_record[1]
+        ),
+        "min_branch_scaled_deficit_margin": (
+            None
+            if min_scaled_deficit_margin_candidate is None
+            else min_scaled_deficit_margin_candidate["scaled_deficit_margin"]
+        ),
+        "min_branch_scaled_deficit_margin_candidate": (
+            min_scaled_deficit_margin_candidate
         ),
         "parity_denominator_le_B_sq_count": denominator_le_B_sq_count,
         "parity_denominator_gt_B_sq_count": (
