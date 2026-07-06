@@ -1556,5 +1556,16 @@
   hypotheses would eliminate squeezed normalized points satisfying
   `rowNDigitPowerConstraint (A*H) u`; they do not prove those universal
   canonical hypotheses.
+- [R] Added the corrected Lucas-guarded version of the same bridge:
+  `Erdos699.rowNDigitPowerConstraintExact.dvd_of_factor_dvd`,
+  `Erdos699.exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigitExact_factor`,
+  `Erdos699.not_exists_squeezedNormalized_rowNDigitExact_factor_of_no_powerTwoQuotientKernel`,
+  `Erdos699.not_exists_squeezedNormalized_rowNDigitExact_factor_of_canonical_linear`,
+  and
+  `Erdos699.not_exists_squeezedNormalized_rowNDigitExact_factor_of_canonical_ceil_scaled`.
+  These transfer only prime powers whose prime satisfies
+  `¬ dominated 3 (F*(A*H)) p`; primes outside that Lucas guard remain free.
+  This is the corrected digit-factor surface for the normalized bridge, still
+  conditional on the same universal canonical split hypotheses.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

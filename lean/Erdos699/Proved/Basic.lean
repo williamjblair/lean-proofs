@@ -5323,6 +5323,34 @@ theorem rowNDigitPowerConstraint.dvd_of_factor_dvd
       have hpowu : p ^ H.factorization p ∣ u := hrow hp hp3 hpowX
       exact (hp.pow_dvd_iff_le_factorization hu0).mp hpowu
 
+/-- Guarded divisor extraction for the exact row-`n` digit-power condition.
+Only prime powers whose prime also satisfies the Lucas guard
+`¬ dominated 3 (F*X) p` are transferred to `u`; primes outside that guard
+remain free. -/
+theorem rowNDigitPowerConstraintExact.dvd_of_factor_dvd
+    {F X u H : ℕ} (hrow : rowNDigitPowerConstraintExact F X u) (hHX : H ∣ X)
+    (hH0 : H ≠ 0)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H → 3 ≤ p ∧ ¬ dominated 3 (F * X) p) :
+    H ∣ u := by
+  by_cases hu0 : u = 0
+  · subst u
+    exact dvd_zero H
+  · rw [← Nat.factorization_prime_le_iff_dvd hH0 hu0]
+    intro p hp
+    by_cases hHp0 : H.factorization p = 0
+    · simp [hHp0]
+    · have hp_dvd_H : p ∣ H := by
+        rw [hp.dvd_iff_one_le_factorization hH0]
+        omega
+      rcases hprime p hp hp_dvd_H with ⟨hp3, hnotdom⟩
+      have hpowH : p ^ H.factorization p ∣ H := by
+        rw [hp.pow_dvd_iff_le_factorization hH0]
+      have hpowX : p ^ H.factorization p ∣ X := Nat.dvd_trans hpowH hHX
+      have hpowu : p ^ H.factorization p ∣ u :=
+        hrow hp hp3 hnotdom hpowX
+      exact (hp.pow_dvd_iff_le_factorization hu0).mp hpowu
+
 /-- The pure power-of-two quotient kernel isolated after imposing the
 normalized row-`n` digit-power constraint. The conjectural next lemma is that
 this predicate is empty. -/
@@ -10129,6 +10157,30 @@ theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigit_factor
   exact exists_powerTwoQuotientKernel_of_squeezedNormalized_factor_dvd
     hkernel hX hHu hA4 hApow hHodd
 
+/-- Exact guarded version of
+`exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigit_factor`. The
+factor `H` is extracted only when each prime divisor of `H` is relevant for
+row `3`, i.e. satisfies `¬ dominated 3 (F*X) p`. -/
+theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigitExact_factor
+    {F X u g A H : ℕ}
+    (hkernel : squeezedNormalizedCaseIKernel F X u g)
+    (hrow : rowNDigitPowerConstraintExact F X u)
+    (hX : X = A * H)
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H → 3 ≤ p ∧ ¬ dominated 3 (F * X) p) :
+    ∃ v h : ℕ, powerTwoQuotientKernel A (F * H) v h := by
+  have hH0 : H ≠ 0 := ne_of_gt hHodd.pos
+  have hHX : H ∣ X := by
+    refine ⟨A, ?_⟩
+    rw [hX, mul_comm]
+  have hHu : H ∣ u :=
+    hrow.dvd_of_factor_dvd hHX hH0 hprime
+  exact exists_powerTwoQuotientKernel_of_squeezedNormalized_factor_dvd
+    hkernel hX hHu hA4 hApow hHodd
+
 /-- Contrapositive bridge from the quotient kernel back to the squeezed
 normalized kernel. If the pure power-two quotient kernel is empty for
 `A, F*H`, then no squeezed normalized point with the row-`n` digit-power
@@ -10146,6 +10198,27 @@ theorem not_exists_squeezedNormalized_rowNDigit_factor_of_no_powerTwoQuotientKer
   exact hno
     (exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigit_factor
       hkernel hrow rfl hA4 hApow hHodd)
+
+/-- Exact guarded contrapositive bridge from the quotient kernel back to the
+squeezed normalized kernel. The only digit-transfer hypothesis is the guarded
+`rowNDigitPowerConstraintExact`, so primes below the row or dominated by row
+`3` remain unconstrained. -/
+theorem not_exists_squeezedNormalized_rowNDigitExact_factor_of_no_powerTwoQuotientKernel
+    {F A H : ℕ}
+    (hno : ¬ ∃ v h : ℕ, powerTwoQuotientKernel A (F * H) v h)
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H →
+        3 ≤ p ∧ ¬ dominated 3 (F * (A * H)) p) :
+    ¬ ∃ u g : ℕ,
+      rowNDigitPowerConstraintExact F (A * H) u ∧
+        squeezedNormalizedCaseIKernel F (A * H) u g := by
+  rintro ⟨u, g, hrow, hkernel⟩
+  exact hno
+    (exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigitExact_factor
+      hkernel hrow rfl hA4 hApow hHodd hprime)
 
 /-- Squeezed normalized no-kernel bridge from the canonical linear C2
 hypothesis, routed through the exact reduced-divisor quotient-kernel kill. -/
@@ -10228,6 +10301,96 @@ theorem not_exists_squeezedNormalized_rowNDigit_factor_of_canonical_ceil_scaled
       (not_exists_powerTwoQuotientKernel_of_canonical_ceil_scaled_via_reduced_gap
         (A := A) (B := F * H) hcoverAll)
       hA4 hApow hHodd
+
+/-- Exact guarded squeezed-normalized no-kernel bridge from the canonical
+linear C2 hypothesis. This is the sharp version with the Lucas guard in the
+digit-factor hypothesis. -/
+theorem not_exists_squeezedNormalized_rowNDigitExact_factor_of_canonical_linear
+    {F A H : ℕ}
+    (hlinAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd (F * H) →
+            3 ≤ F * H →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = F * H * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - F * H * m →
+                                beta = s - F * H * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      2 * (l * m + 1) ≤
+                                        F * H * (x * l + y * m)) ∨
+                                    (Even c ∧
+                                      l * m + 1 ≤
+                                        F * H * (x * l + y * m)))
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H →
+        3 ≤ p ∧ ¬ dominated 3 (F * (A * H)) p) :
+    ¬ ∃ u g : ℕ,
+      rowNDigitPowerConstraintExact F (A * H) u ∧
+        squeezedNormalizedCaseIKernel F (A * H) u g := by
+  exact
+    not_exists_squeezedNormalized_rowNDigitExact_factor_of_no_powerTwoQuotientKernel
+      (not_exists_powerTwoQuotientKernel_of_canonical_linear_via_reduced_gap
+        (A := A) (B := F * H) hlinAll)
+      hA4 hApow hHodd hprime
+
+/-- Exact guarded squeezed-normalized no-kernel bridge from the canonical
+ceiling-scaled C2 hypothesis. This keeps the formal target aligned with the
+correct Lucas guard and the exact reduced-divisor quotient obstruction. -/
+theorem not_exists_squeezedNormalized_rowNDigitExact_factor_of_canonical_ceil_scaled
+    {F A H : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd (F * H) →
+            3 ≤ F * H →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = F * H * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - F * H * m →
+                                beta = s - F * H * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ F * H * y ∨
+                                        ((m - 1) / (F * H * x) + 1) *
+                                            (2 * l - F * H * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ F * H * y ∨
+                                        ((m - 1) / (F * H * x) + 1) *
+                                            (l - F * H * y) < l)))
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H →
+        3 ≤ p ∧ ¬ dominated 3 (F * (A * H)) p) :
+    ¬ ∃ u g : ℕ,
+      rowNDigitPowerConstraintExact F (A * H) u ∧
+        squeezedNormalizedCaseIKernel F (A * H) u g := by
+  exact
+    not_exists_squeezedNormalized_rowNDigitExact_factor_of_no_powerTwoQuotientKernel
+      (not_exists_powerTwoQuotientKernel_of_canonical_ceil_scaled_via_reduced_gap
+        (A := A) (B := F * H) hcoverAll)
+      hA4 hApow hHodd hprime
 
 theorem squeezedNormalizedCaseIKernel_zero_t_false {F X g : ℕ} :
     ¬ squeezedNormalizedCaseIKernel F X 0 g := by
