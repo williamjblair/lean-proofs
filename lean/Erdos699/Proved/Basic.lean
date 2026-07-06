@@ -6115,6 +6115,54 @@ theorem powerTwoSplit_row_two_obstruction_iff_reduced_divisor
   exact not_dvd_mul_iff_not_div_gcd_dvd
     (powerTwoSplit_half_row_pos hA4 hBge hApos)
 
+/-- Any gcd taken from the left side of a coprime pair remains coprime to the
+right side. -/
+theorem coprime_gcd_right_of_coprime_left {a b L : ℕ}
+    (hcop : a.Coprime L) :
+    (Nat.gcd a b).Coprime L :=
+  Nat.Coprime.coprime_dvd_left (Nat.gcd_dvd_left a b) hcop
+
+/-- If `c` is coprime to `L` and the reduced divisor `M / gcd c M` survives
+by dividing `L`, then the captured gcd part is coprime to the remaining
+cofactor of `M`. In other words, survival forces `gcd c M` to be a unitary
+part of `M`. -/
+theorem reduced_divisor_survival_coprime_forces_unitary_gcd {M c L : ℕ}
+    (hcop : c.Coprime L)
+    (hred : M / Nat.gcd c M ∣ L) :
+    (Nat.gcd c M).Coprime (M / Nat.gcd c M) := by
+  have hgcd_cop_L : (Nat.gcd c M).Coprime L :=
+    coprime_gcd_right_of_coprime_left hcop
+  exact Nat.Coprime.coprime_dvd_right hred hgcd_cop_L
+
+/-- Split-level unitary consequence of reduced-divisor survival. In every
+positive subtractive split, row-two survival can only happen when the captured
+gcd part of the half-row modulus is coprime to the remaining reduced divisor. -/
+theorem powerTwoSplitSubtractive_reduced_divisor_survival_forces_unitary_gcd
+    {A B r s l m alpha beta : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hred :
+      let c := Nat.gcd alpha beta
+      let M := B * (A / 2) - 1
+      let d := Nat.gcd c M
+      M / d ∣ l * m) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    let d := Nat.gcd c M
+    d.Coprime (M / d) := by
+  dsimp at hred ⊢
+  have hcop : (Nat.gcd alpha beta).Coprime (l * m) :=
+    powerTwoSplitSubtractive_gcd_alpha_beta_coprime_l_mul_m hBge hrpos
+      hspos hlpos hmpos hD hA halpha hbeta
+  exact reduced_divisor_survival_coprime_forces_unitary_gcd hcop hred
+
 /-- A size certificate for failure of row-two divisibility after reducing by
 the gcd part of the modulus. If the reduced divisor is strictly larger than
 the positive right factor, then `M` cannot divide `c * L`. -/

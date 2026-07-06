@@ -1669,5 +1669,17 @@
   This strengthens the C2 interface but does not prove the reduced-divisor
   obstruction. Reproduce with `lake build Erdos699.Proved.Basic` and
   `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
+- [R] Added the unitary-divisor consequence of reduced-divisor survival.
+  `Erdos699.coprime_gcd_right_of_coprime_left` and
+  `Erdos699.reduced_divisor_survival_coprime_forces_unitary_gcd` prove that
+  if `c` is coprime to `L` and `M / gcd(c,M) | L`, then
+  `gcd(c,M)` is coprime to `M / gcd(c,M)`. The split-level theorem
+  `Erdos699.powerTwoSplitSubtractive_reduced_divisor_survival_forces_unitary_gcd`
+  applies this to the C2 row-one split, using the newly formalized
+  `gcd(alpha,beta) ⟂ l*m` fact. Thus every surviving reduced-divisor split
+  must capture a unitary part of the half-row modulus. This is a necessary
+  condition for survival, not an unconditional obstruction. Reproduce with
+  `lake build Erdos699.Proved.Basic` and
+  `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
