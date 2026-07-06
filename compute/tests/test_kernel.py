@@ -1314,6 +1314,38 @@ def test_power_two_quotient_scan_rejects_inverted_exponent_range() -> None:
         scan_power_two_quotient_kernel(max_exponent=4, max_b=101, min_exponent=5)
 
 
+def test_power_two_quotient_scan_logs_pollard_rho_work_limit_skips() -> None:
+    result = scan_power_two_quotient_kernel(
+        max_exponent=60,
+        max_b=3,
+        min_exponent=60,
+        skip_factorization_failures=True,
+        max_pollard_rho_steps=0,
+    )
+
+    assert result["instance_count"] == 1
+    assert result["factorized_instance_count"] == 0
+    assert result["skipped_instance_count"] == 1
+    assert result["row_one_candidate_count"] == 0
+    assert result["survivor_count"] == 0
+    assert result["skipped_instances"] == [
+        {
+            "exponent": 60,
+            "A": 2**60,
+            "B": 3,
+            "row_one_modulus": 3 * 2**60 - 1,
+            "reason": "pollard rho step limit exceeded",
+        }
+    ]
+    assert result["factorization_certification_summary"] == {
+        "deterministic_prime_count": 0,
+        "pocklington_prime_count": 0,
+        "largest_deterministic_prime": None,
+        "largest_pocklington_prime": None,
+    }
+    assert result["reduced_divisor_gap_summary"]["candidate_count"] == 0
+
+
 def test_power_two_quotient_scan_certifies_large_prime_modulus() -> None:
     result = scan_power_two_quotient_kernel(
         max_exponent=60,
@@ -1792,6 +1824,34 @@ def test_kernel_cli_can_scan_power_two_quotient_kernel() -> None:
     assert payload["survivor_count"] == 0
     assert payload["reduced_divisor_gap_summary"]["gap_failure_count"] == 0
     assert payload["reduced_divisor_gap_summary"]["min_gap_margin"] == 726
+
+
+def test_kernel_cli_can_bound_pollard_rho_work() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "compute.kernel",
+            "--power-two-quotient-kernel",
+            "--min-exponent",
+            "60",
+            "--max-exponent",
+            "60",
+            "--max-b",
+            "3",
+            "--skip-factorization-failures",
+            "--max-pollard-rho-steps",
+            "0",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["instance_count"] == 1
+    assert payload["factorized_instance_count"] == 0
+    assert payload["skipped_instance_count"] == 1
+    assert payload["skipped_instances"][0]["reason"] == "pollard rho step limit exceeded"
 
 
 def test_kernel_cli_can_certify_large_prime_power_two_modulus() -> None:

@@ -28,6 +28,7 @@ _CERTIFIED_PRIME_LIMIT = 2**64
 _UNCERTIFIED_PRIME_FACTOR_REASON = (
     "prime_power_factorization cannot certify primality for factor >= 2^64"
 )
+_POLLARD_RHO_LIMIT_REASON = "pollard rho step limit exceeded"
 _POCKLINGTON_WITNESS_LIMIT = 256
 
 
@@ -117,15 +118,21 @@ def _pocklington_witness_for_prime_factor(n: int, q: int) -> int | None:
 
 
 def _is_pocklington_certified_prime(
-    n: int, summary: dict[str, int | None]
+    n: int,
+    summary: dict[str, int | None],
+    max_pollard_rho_steps: int | None = None,
 ) -> bool:
     if n < 2:
         return False
     if n < _CERTIFIED_PRIME_LIMIT:
         return _is_certified_prime(n)
     try:
-        factors = _prime_power_factorization_with_summary(n - 1, summary)
-    except ValueError:
+        factors = _prime_power_factorization_with_summary(
+            n - 1, summary, max_pollard_rho_steps=max_pollard_rho_steps
+        )
+    except ValueError as exc:
+        if str(exc) == _POLLARD_RHO_LIMIT_REASON:
+            raise
         return False
     factor_product = 1
     for _prime, prime_power in factors:
@@ -138,17 +145,23 @@ def _is_pocklington_certified_prime(
     )
 
 
-def _pollard_rho_factor(n: int) -> int:
+def _pollard_rho_factor(n: int, max_steps: int | None = None) -> int:
     if n % 2 == 0:
         return 2
     if n % 3 == 0:
         return 3
+    if max_steps is not None and max_steps < 0:
+        raise ValueError("max_steps must be nonnegative")
+    steps = 0
     c = 1
     while True:
         x = 2
         y = 2
         d = 1
         while d == 1:
+            if max_steps is not None and steps >= max_steps:
+                raise ValueError(_POLLARD_RHO_LIMIT_REASON)
+            steps += 1
             x = (x * x + c) % n
             y = (y * y + c) % n
             y = (y * y + c) % n
@@ -159,7 +172,10 @@ def _pollard_rho_factor(n: int) -> int:
 
 
 def _collect_prime_factors(
-    n: int, factors: list[int], summary: dict[str, int | None]
+    n: int,
+    factors: list[int],
+    summary: dict[str, int | None],
+    max_pollard_rho_steps: int | None = None,
 ) -> None:
     if n == 1:
         return
@@ -168,23 +184,35 @@ def _collect_prime_factors(
         _record_certified_prime(summary, n, "deterministic")
         return
     if n >= _CERTIFIED_PRIME_LIMIT and _passes_miller_rabin_bases(n):
-        if _is_pocklington_certified_prime(n, summary):
+        if _is_pocklington_certified_prime(
+            n, summary, max_pollard_rho_steps=max_pollard_rho_steps
+        ):
             factors.append(n)
             _record_certified_prime(summary, n, "pocklington")
             return
         raise ValueError(_UNCERTIFIED_PRIME_FACTOR_REASON)
-    factor = _pollard_rho_factor(n)
-    _collect_prime_factors(factor, factors, summary)
-    _collect_prime_factors(n // factor, factors, summary)
+    factor = _pollard_rho_factor(n, max_steps=max_pollard_rho_steps)
+    _collect_prime_factors(
+        factor, factors, summary, max_pollard_rho_steps=max_pollard_rho_steps
+    )
+    _collect_prime_factors(
+        n // factor, factors, summary, max_pollard_rho_steps=max_pollard_rho_steps
+    )
 
 
 def _prime_power_factorization_with_summary(
-    n: int, summary: dict[str, int | None]
+    n: int,
+    summary: dict[str, int | None],
+    max_pollard_rho_steps: int | None = None,
 ) -> list[tuple[int, int]]:
     if n < 1:
         raise ValueError("n must be positive")
+    if max_pollard_rho_steps is not None and max_pollard_rho_steps < 0:
+        raise ValueError("max_pollard_rho_steps must be nonnegative")
     prime_factors: list[int] = []
-    _collect_prime_factors(n, prime_factors, summary)
+    _collect_prime_factors(
+        n, prime_factors, summary, max_pollard_rho_steps=max_pollard_rho_steps
+    )
     prime_factors.sort()
     factors: list[tuple[int, int]] = []
     i = 0
@@ -198,9 +226,13 @@ def _prime_power_factorization_with_summary(
     return factors
 
 
-def prime_power_factorization(n: int) -> list[tuple[int, int]]:
+def prime_power_factorization(
+    n: int, max_pollard_rho_steps: int | None = None
+) -> list[tuple[int, int]]:
     summary = _empty_factorization_certification_summary()
-    return _prime_power_factorization_with_summary(n, summary)
+    return _prime_power_factorization_with_summary(
+        n, summary, max_pollard_rho_steps=max_pollard_rho_steps
+    )
 
 
 def _is_power_of_two(n: int) -> bool:
@@ -528,14 +560,19 @@ def _power_two_quotient_residue(zero_part: int, one_part: int, A: int) -> int:
 
 
 def _power_two_quotient_row_one_candidates(
-    exponent: int, A: int, B: int
+    exponent: int,
+    A: int,
+    B: int,
+    max_pollard_rho_steps: int | None = None,
 ) -> tuple[list[dict[str, int]], dict[str, int | None]]:
     row_one_modulus = B * A - 1
     certification_summary = _empty_factorization_certification_summary()
     prime_powers = [
         prime_power
         for _p, prime_power in _prime_power_factorization_with_summary(
-            row_one_modulus, certification_summary
+            row_one_modulus,
+            certification_summary,
+            max_pollard_rho_steps=max_pollard_rho_steps,
         )
     ]
     candidates: dict[int, dict[str, int]] = {}
@@ -941,9 +978,12 @@ def scan_power_two_quotient_kernel(
     max_b: int,
     min_exponent: int = 2,
     skip_factorization_failures: bool = False,
+    max_pollard_rho_steps: int | None = None,
 ) -> dict[str, Any]:
     if min_exponent < 0 or max_exponent < min_exponent or max_b < 0:
         raise ValueError("require 0 <= min_exponent <= max_exponent and 0 <= max_b")
+    if max_pollard_rho_steps is not None and max_pollard_rho_steps < 0:
+        raise ValueError("max_pollard_rho_steps must be nonnegative")
     row_one_candidates: list[dict[str, int]] = []
     survivors: list[dict[str, int]] = []
     skipped_instances: list[dict[str, int | str]] = []
@@ -958,7 +998,12 @@ def scan_power_two_quotient_kernel(
             instance_count += 1
             try:
                 candidates, certification_summary = (
-                    _power_two_quotient_row_one_candidates(exponent, A, B)
+                    _power_two_quotient_row_one_candidates(
+                        exponent,
+                        A,
+                        B,
+                        max_pollard_rho_steps=max_pollard_rho_steps,
+                    )
                 )
             except ValueError as exc:
                 if not skip_factorization_failures:
@@ -1372,6 +1417,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--original-obstruction-prime-limit", type=int)
     parser.add_argument("--include-original-obstruction-witnesses", action="store_true")
     parser.add_argument("--skip-factorization-failures", action="store_true")
+    parser.add_argument("--max-pollard-rho-steps", type=int)
     args = parser.parse_args(argv)
     if args.diagnose_squeezed_candidate:
         if (
@@ -1426,6 +1472,7 @@ def main(argv: list[str] | None = None) -> int:
             args.max_b,
             min_exponent=args.min_exponent,
             skip_factorization_failures=args.skip_factorization_failures,
+            max_pollard_rho_steps=args.max_pollard_rho_steps,
         )
     else:
         if args.n1 is None or args.n2 is None or args.bound is None:

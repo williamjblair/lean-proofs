@@ -1533,5 +1533,17 @@
   These are compositional Lean theorems: canonical linear/ceil-scaled
   hypotheses imply the universal exact reduced-divisor gap, which then kills
   the power-two quotient kernel. They do not prove the universal hypotheses.
+- [E] Added a deterministic Pollard-rho work limit to the power-two quotient
+  scanner, exposed as `max_pollard_rho_steps` and CLI flag
+  `--max-pollard-rho-steps`. This keeps exact arithmetic only: if the bounded
+  factorization path exhausts its rho budget, the instance is logged in
+  `skipped_instances` and contributes no candidate/survivor evidence. With
+  `max_pollard_rho_steps = 20000`, the extension slice `73 <= exponent <= 80`,
+  odd `3 <= B <= 1001` has 4,000 instances, 3,287 fully factored instances,
+  713 explicitly skipped instances, 220 row-one candidates, zero row-two
+  survivors, zero exact reduced-divisor gap failures, and zero canonical
+  scaled-deficit failures among the factored instances; minimum scaled-deficit
+  margin is `1`. Reproduce with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as scan; r = scan(80, 1001, min_exponent=73, skip_factorization_failures=True, max_pollard_rho_steps=20000); s = r["reduced_divisor_gap_summary"]; p = s["parity_branch_gap_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"]); print(s["gap_failure_count"], p["branch_scaled_deficit_coverage_failure_count"], p["max_branch_scaled_deficit_min_q"], p["min_branch_scaled_deficit_margin"])'`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
