@@ -1581,5 +1581,23 @@
   row `3` is dominated remain free. Reproduce with
   `lake build Erdos699.Proved.Basic` and
   `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
+- [R] Composed the corrected no-common-prime criterion directly into the
+  squeezed-normalized quotient-kernel bridge. The forward theorem
+  `Erdos699.exists_powerTwoQuotientKernel_of_squeezedNormalized_noCommon_i_three_factor`
+  proves that a squeezed normalized point at `X = A*H`, with no common prime
+  divisor for rows `3` and `F*u`, yields a
+  `powerTwoQuotientKernel A (F*H)` point, provided the prime divisors of `H`
+  satisfy the exact Lucas guard and each guarded prime power of `X` is
+  coprime to the normalized factor `F`. The contrapositive theorem
+  `Erdos699.not_exists_squeezedNormalized_noCommon_i_three_factor_of_no_powerTwoQuotientKernel`
+  removes the intermediate `rowNDigitPowerConstraintExact` hypothesis from
+  the normalized layer. The canonical consumers
+  `Erdos699.not_exists_squeezedNormalized_noCommon_i_three_factor_of_canonical_linear`
+  and
+  `Erdos699.not_exists_squeezedNormalized_noCommon_i_three_factor_of_canonical_ceil_scaled`
+  route this through the existing exact reduced-divisor C2 conditions. These
+  remain conditional bridge theorems; they do not prove the universal C2
+  hypotheses or the kernel. Reproduce with `lake build Erdos699.Proved.Basic`
+  and `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
