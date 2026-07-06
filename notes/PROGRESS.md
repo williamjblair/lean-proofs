@@ -1616,5 +1616,22 @@
   the `H` Lucas guard and the C2 hypotheses. Reproduce with
   `lake build Erdos699.Proved.Basic` and
   `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
+- [R] Simplified the local-cancellation bridge to a single factor-level
+  coprimality hypothesis. `Erdos699.coprime_pow_of_dvd_of_coprime_left`
+  proves that every prime power dividing `H` is coprime to `F` when
+  `H.Coprime F`, and
+  `Erdos699.factor_dvd_of_no_common_i_three_of_coprime_factor` packages the
+  direct no-common-prime extraction as `H | u` under that single hypothesis.
+  The quotient bridge
+  `Erdos699.exists_powerTwoQuotientKernel_of_squeezedNormalized_noCommon_i_three_factor_coprime`
+  and the consumers
+  `Erdos699.not_exists_squeezedNormalized_noCommon_i_three_factor_coprime_of_no_powerTwoQuotientKernel`,
+  `Erdos699.not_exists_squeezedNormalized_noCommon_i_three_factor_coprime_of_canonical_linear`,
+  and
+  `Erdos699.not_exists_squeezedNormalized_noCommon_i_three_factor_coprime_of_canonical_ceil_scaled`
+  are the preferred cleaned-up interfaces when `H` and `F` are coprime. These
+  remain conditional on the `H` Lucas guard and the C2 hypotheses. Reproduce
+  with `lake build Erdos699.Proved.Basic` and
+  `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

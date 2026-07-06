@@ -11077,6 +11077,27 @@ theorem factor_dvd_of_no_common_i_three
           hpowFu
       exact (hp.pow_dvd_iff_le_factorization hu0).mp hpowu
 
+/-- Any divisor of a factor coprime to `F` is itself coprime to `F`. -/
+theorem coprime_pow_of_dvd_of_coprime_left {H F p e : ℕ}
+    (hHF : H.Coprime F) (hpowH : p ^ e ∣ H) :
+    (p ^ e).Coprime F :=
+  Nat.Coprime.coprime_dvd_left hpowH hHF
+
+/-- Local factor extraction from no-common-prime data with a single
+factor-level coprimality hypothesis `H.Coprime F`. -/
+theorem factor_dvd_of_no_common_i_three_of_coprime_factor
+    {n F X j u H : ℕ}
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor n 3 j q)
+    (hn : n = F * X) (hj : j = F * u)
+    (hHX : H ∣ X)
+    (hH0 : H ≠ 0)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H → 3 ≤ p ∧ ¬ dominated 3 n p)
+    (hHF : H.Coprime F) :
+    H ∣ u :=
+  factor_dvd_of_no_common_i_three hnone hn hj hHX hH0 hprime
+    (fun {_p _e} _hp hpowH => coprime_pow_of_dvd_of_coprime_left hHF hpowH)
+
 /-- Forward bridge from the corrected no-common-prime criterion to the
 quotient-kernel obstruction. A squeezed normalized point at `X = A*H` yields a
 pure power-two quotient-kernel point once the row-`3` no-common condition
@@ -11132,6 +11153,25 @@ theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_noCommon_i_three_fac
       hnone rfl rfl hHX hH0 hprime hcopF
   exact exists_powerTwoQuotientKernel_of_squeezedNormalized_factor_dvd
     hkernel hX hHu hA4 hApow hHodd
+
+/-- Single-coprimality version of the no-common-prime quotient bridge. The
+per-prime-power cancellation required by the local bridge follows from
+`H.Coprime F`. -/
+theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_noCommon_i_three_factor_coprime
+    {F X u g A H : ℕ}
+    (hkernel : squeezedNormalizedCaseIKernel F X u g)
+    (hnone : ∀ q : ℕ, ¬ commonPrimeDivisor (F * X) 3 (F * u) q)
+    (hX : X = A * H)
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H → 3 ≤ p ∧ ¬ dominated 3 (F * X) p)
+    (hHF : H.Coprime F) :
+    ∃ v h : ℕ, powerTwoQuotientKernel A (F * H) v h :=
+  exists_powerTwoQuotientKernel_of_squeezedNormalized_noCommon_i_three_factor_local
+    hkernel hnone hX hA4 hApow hHodd hprime
+    (fun {_p _e} _hp hpowH => coprime_pow_of_dvd_of_coprime_left hHF hpowH)
 
 /-- Contrapositive local-cancellation bridge. Compared with
 `not_exists_squeezedNormalized_noCommon_i_three_factor_of_no_powerTwoQuotientKernel`,
@@ -11247,6 +11287,111 @@ theorem not_exists_squeezedNormalized_noCommon_i_three_factor_local_of_canonical
       (not_exists_powerTwoQuotientKernel_of_canonical_ceil_scaled_via_reduced_gap
         (A := A) (B := F * H) hcoverAll)
       hA4 hApow hHodd hprime hcopF
+
+/-- Contrapositive bridge with the single factor-level coprimality hypothesis
+`H.Coprime F`. -/
+theorem not_exists_squeezedNormalized_noCommon_i_three_factor_coprime_of_no_powerTwoQuotientKernel
+    {F A H : ℕ}
+    (hno : ¬ ∃ v h : ℕ, powerTwoQuotientKernel A (F * H) v h)
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H →
+        3 ≤ p ∧ ¬ dominated 3 (F * (A * H)) p)
+    (hHF : H.Coprime F) :
+    ¬ ∃ u g : ℕ,
+      (∀ q : ℕ, ¬ commonPrimeDivisor (F * (A * H)) 3 (F * u) q) ∧
+        squeezedNormalizedCaseIKernel F (A * H) u g :=
+  not_exists_squeezedNormalized_noCommon_i_three_factor_local_of_no_powerTwoQuotientKernel
+    hno hA4 hApow hHodd hprime
+    (fun {_p _e} _hp hpowH => coprime_pow_of_dvd_of_coprime_left hHF hpowH)
+
+/-- Canonical-linear no-kernel bridge with factor-level coprimality
+`H.Coprime F`. -/
+theorem not_exists_squeezedNormalized_noCommon_i_three_factor_coprime_of_canonical_linear
+    {F A H : ℕ}
+    (hlinAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd (F * H) →
+            3 ≤ F * H →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = F * H * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - F * H * m →
+                                beta = s - F * H * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      2 * (l * m + 1) ≤
+                                        F * H * (x * l + y * m)) ∨
+                                    (Even c ∧
+                                      l * m + 1 ≤
+                                        F * H * (x * l + y * m)))
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H →
+        3 ≤ p ∧ ¬ dominated 3 (F * (A * H)) p)
+    (hHF : H.Coprime F) :
+    ¬ ∃ u g : ℕ,
+      (∀ q : ℕ, ¬ commonPrimeDivisor (F * (A * H)) 3 (F * u) q) ∧
+        squeezedNormalizedCaseIKernel F (A * H) u g :=
+  not_exists_squeezedNormalized_noCommon_i_three_factor_local_of_canonical_linear
+    hlinAll hA4 hApow hHodd hprime
+    (fun {_p _e} _hp hpowH => coprime_pow_of_dvd_of_coprime_left hHF hpowH)
+
+/-- Canonical ceiling-scaled no-kernel bridge with factor-level coprimality
+`H.Coprime F`. -/
+theorem not_exists_squeezedNormalized_noCommon_i_three_factor_coprime_of_canonical_ceil_scaled
+    {F A H : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd (F * H) →
+            3 ≤ F * H →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = F * H * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - F * H * m →
+                                beta = s - F * H * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ F * H * y ∨
+                                        ((m - 1) / (F * H * x) + 1) *
+                                            (2 * l - F * H * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ F * H * y ∨
+                                        ((m - 1) / (F * H * x) + 1) *
+                                            (l - F * H * y) < l)))
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H)
+    (hprime :
+      ∀ p : ℕ, Nat.Prime p → p ∣ H →
+        3 ≤ p ∧ ¬ dominated 3 (F * (A * H)) p)
+    (hHF : H.Coprime F) :
+    ¬ ∃ u g : ℕ,
+      (∀ q : ℕ, ¬ commonPrimeDivisor (F * (A * H)) 3 (F * u) q) ∧
+        squeezedNormalizedCaseIKernel F (A * H) u g :=
+  not_exists_squeezedNormalized_noCommon_i_three_factor_local_of_canonical_ceil_scaled
+    hcoverAll hA4 hApow hHodd hprime
+    (fun {_p _e} _hp hpowH => coprime_pow_of_dvd_of_coprime_left hHF hpowH)
 
 /-- Contrapositive version of
 `exists_powerTwoQuotientKernel_of_squeezedNormalized_noCommon_i_three_factor`.
