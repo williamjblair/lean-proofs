@@ -657,6 +657,16 @@ def _power_two_parity_branch_gap_summary(
             threshold *= 2
         return int(item["B"]) * int(item["gcd_quotient_y"]) - threshold
 
+    def branch_y_or_x_coverage_holds(item: dict[str, int | str | bool]) -> bool:
+        B = int(item["B"])
+        x = int(item["gcd_quotient_x"])
+        y = int(item["gcd_quotient_y"])
+        l = int(item["l"])
+        m = int(item["m"])
+        if item["c_parity"] == "odd":
+            return 2 * l <= B * y or (l < B * y and m <= B * x)
+        return l <= B * y or m <= B * x
+
     parity_gap_holds_count = sum(
         1 for item in diagnostics if item["parity_gap_holds"]
     )
@@ -704,6 +714,23 @@ def _power_two_parity_branch_gap_summary(
     min_y_coverage_candidate = min(
         diagnostics,
         key=branch_y_coverage_margin,
+        default=None,
+    )
+    y_or_x_coverage_holds_count = sum(
+        1 for item in diagnostics if branch_y_or_x_coverage_holds(item)
+    )
+    y_or_x_coverage_failures = [
+        item for item in diagnostics if not branch_y_or_x_coverage_holds(item)
+    ]
+    odd_y_or_x_coverage_failures = [
+        item for item in y_or_x_coverage_failures if item["c_parity"] == "odd"
+    ]
+    even_y_or_x_coverage_failures = [
+        item for item in y_or_x_coverage_failures if item["c_parity"] == "even"
+    ]
+    min_y_or_x_failure_candidate = min(
+        y_or_x_coverage_failures,
+        key=lambda item: int(item["linear_gap_margin"]),
         default=None,
     )
     denominator_le_B_sq_count = sum(
@@ -773,6 +800,22 @@ def _power_two_parity_branch_gap_summary(
             else branch_y_coverage_margin(min_y_coverage_candidate)
         ),
         "min_branch_y_coverage_candidate": min_y_coverage_candidate,
+        "branch_y_or_x_coverage_holds_count": y_or_x_coverage_holds_count,
+        "branch_y_or_x_coverage_failure_count": (
+            len(diagnostics) - y_or_x_coverage_holds_count
+        ),
+        "odd_branch_y_or_x_coverage_failure_count": len(
+            odd_y_or_x_coverage_failures
+        ),
+        "even_branch_y_or_x_coverage_failure_count": len(
+            even_y_or_x_coverage_failures
+        ),
+        "min_branch_y_or_x_failure_linear_margin": (
+            None
+            if min_y_or_x_failure_candidate is None
+            else min_y_or_x_failure_candidate["linear_gap_margin"]
+        ),
+        "min_branch_y_or_x_failure_candidate": min_y_or_x_failure_candidate,
         "parity_denominator_le_B_sq_count": denominator_le_B_sq_count,
         "parity_denominator_gt_B_sq_count": (
             len(diagnostics) - denominator_le_B_sq_count

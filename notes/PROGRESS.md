@@ -477,6 +477,24 @@
   only proves an automatic branch; the two-sided universal y-coverage
   condition itself is false in bounded diagnostics, so the remaining branch is
   the y-deficit case.
+- [R] Split off the first y-deficit x-compensation branch of the canonical
+  linear target. The generic theorem
+  `Erdos699.linear_even_of_m_le_B_mul_x` proves that the even branch is
+  automatic from `m <= B*x` once the positive `B*y*m` term supplies the
+  extra one. The theorem
+  `Erdos699.linear_odd_of_middle_y_and_m_le_B_mul_x` proves the corresponding
+  odd middle band: if `l < B*y` and `m <= B*x`, then the slack in `B*x*l`
+  covers the remaining deficit after y-coverage. The branch combiner
+  `Erdos699.parity_linear_ineq_of_y_or_x_coverage`, split wrapper
+  `Erdos699.powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_y_or_x_coverage`,
+  and consumers
+  `Erdos699.powerTwoSplitGcdObstruction_of_canonical_gcd_y_or_x_coverage`,
+  `Erdos699.powerTwoQuotientKernel.not_of_canonical_gcd_y_or_x_coverage`,
+  and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_canonical_gcd_y_or_x_coverage`
+  compose a universal y-or-x hypothesis to the pure quotient kernel. This
+  is a conditional automatic branch theorem; bounded diagnostics still leave
+  one even y-deficit/x-deficit exception in the enlarged perimeter.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
@@ -544,6 +562,16 @@
   3378199447519121, 169, 5, 462394539254642)`. This is exact bounded
   evidence identifying the remaining y-deficit branch, not a proof that the
   branch is empty.
+- [E] Added exact diagnostics for the y-or-x coverage branch of the canonical
+  linear target. Reproduce on the enlarged power-two quotient perimeter with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"]); print({k:p[k] for k in ["branch_y_or_x_coverage_holds_count","branch_y_or_x_coverage_failure_count","odd_branch_y_or_x_coverage_failure_count","even_branch_y_or_x_coverage_failure_count","min_branch_y_or_x_failure_linear_margin"]}); c=p["min_branch_y_or_x_failure_candidate"]; print(c["exponent"], c["B"], c["c_parity"], c["v"], c["h"], c["l"], c["m"], c["gcd_quotient_x"], c["gcd_quotient_y"], c["linear_gap_margin"])'`.
+  It reports `69000 880 0`, with `879` y-or-x coverage cases and `1`
+  y-or-x coverage failure. The remaining failure is even, with
+  `(A, B) = (2^64, 7)` and
+  `(v, h, l, m, x, y) = (5854419642550636693, 570915706630731449,
+  3378199447519121, 169, 5, 462394539254642)`. Its linear margin is still
+  positive, `94334013970679271`, so this identifies a residual branch where
+  the automatic y-or-x sufficient condition fails, not a row-two survivor.
 - [E] Added exact diagnostics for the normalized gcd-quotient target. For
   each row-one split the scanner now records `x = alpha / c`,
   `y = beta / c`, the branch-required left side, the quotient right side
