@@ -10129,6 +10129,106 @@ theorem exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigit_factor
   exact exists_powerTwoQuotientKernel_of_squeezedNormalized_factor_dvd
     hkernel hX hHu hA4 hApow hHodd
 
+/-- Contrapositive bridge from the quotient kernel back to the squeezed
+normalized kernel. If the pure power-two quotient kernel is empty for
+`A, F*H`, then no squeezed normalized point with the row-`n` digit-power
+factor condition exists at `X = A*H`. -/
+theorem not_exists_squeezedNormalized_rowNDigit_factor_of_no_powerTwoQuotientKernel
+    {F A H : ℕ}
+    (hno : ¬ ∃ v h : ℕ, powerTwoQuotientKernel A (F * H) v h)
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H) :
+    ¬ ∃ u g : ℕ,
+      rowNDigitPowerConstraint (A * H) u ∧
+        squeezedNormalizedCaseIKernel F (A * H) u g := by
+  rintro ⟨u, g, hrow, hkernel⟩
+  exact hno
+    (exists_powerTwoQuotientKernel_of_squeezedNormalized_rowNDigit_factor
+      hkernel hrow rfl hA4 hApow hHodd)
+
+/-- Squeezed normalized no-kernel bridge from the canonical linear C2
+hypothesis, routed through the exact reduced-divisor quotient-kernel kill. -/
+theorem not_exists_squeezedNormalized_rowNDigit_factor_of_canonical_linear
+    {F A H : ℕ}
+    (hlinAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd (F * H) →
+            3 ≤ F * H →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = F * H * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - F * H * m →
+                                beta = s - F * H * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      2 * (l * m + 1) ≤
+                                        F * H * (x * l + y * m)) ∨
+                                    (Even c ∧
+                                      l * m + 1 ≤
+                                        F * H * (x * l + y * m)))
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H) :
+    ¬ ∃ u g : ℕ,
+      rowNDigitPowerConstraint (A * H) u ∧
+        squeezedNormalizedCaseIKernel F (A * H) u g := by
+  exact
+    not_exists_squeezedNormalized_rowNDigit_factor_of_no_powerTwoQuotientKernel
+      (not_exists_powerTwoQuotientKernel_of_canonical_linear_via_reduced_gap
+        (A := A) (B := F * H) hlinAll)
+      hA4 hApow hHodd
+
+/-- Squeezed normalized no-kernel bridge from the canonical ceiling-scaled C2
+hypothesis, routed through the exact reduced-divisor quotient-kernel kill. -/
+theorem not_exists_squeezedNormalized_rowNDigit_factor_of_canonical_ceil_scaled
+    {F A H : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd (F * H) →
+            3 ≤ F * H →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = F * H * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - F * H * m →
+                                beta = s - F * H * l →
+                                  let c := Nat.gcd alpha beta
+                                  let x := alpha / c
+                                  let y := beta / c
+                                  (Odd c ∧
+                                      (2 * l ≤ F * H * y ∨
+                                        ((m - 1) / (F * H * x) + 1) *
+                                            (2 * l - F * H * y) < l)) ∨
+                                    (Even c ∧
+                                      (l ≤ F * H * y ∨
+                                        ((m - 1) / (F * H * x) + 1) *
+                                            (l - F * H * y) < l)))
+    (hA4 : 4 ∣ A)
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hHodd : Odd H) :
+    ¬ ∃ u g : ℕ,
+      rowNDigitPowerConstraint (A * H) u ∧
+        squeezedNormalizedCaseIKernel F (A * H) u g := by
+  exact
+    not_exists_squeezedNormalized_rowNDigit_factor_of_no_powerTwoQuotientKernel
+      (not_exists_powerTwoQuotientKernel_of_canonical_ceil_scaled_via_reduced_gap
+        (A := A) (B := F * H) hcoverAll)
+      hA4 hApow hHodd
+
 theorem squeezedNormalizedCaseIKernel_zero_t_false {F X g : ℕ} :
     ¬ squeezedNormalizedCaseIKernel F X 0 g := by
   intro h

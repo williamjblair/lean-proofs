@@ -1545,5 +1545,16 @@
   scaled-deficit failures among the factored instances; minimum scaled-deficit
   margin is `1`. Reproduce with
   `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as scan; r = scan(80, 1001, min_exponent=73, skip_factorization_failures=True, max_pollard_rho_steps=20000); s = r["reduced_divisor_gap_summary"]; p = s["parity_branch_gap_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"]); print(s["gap_failure_count"], p["branch_scaled_deficit_coverage_failure_count"], p["max_branch_scaled_deficit_min_q"], p["min_branch_scaled_deficit_margin"])'`.
+- [R] Lifted the exact quotient-kernel obstruction back to the squeezed
+  normalized layer under the row-`n` digit-power factor hypothesis:
+  `Erdos699.not_exists_squeezedNormalized_rowNDigit_factor_of_no_powerTwoQuotientKernel`.
+  Also added exact-gap-routed canonical consumers
+  `Erdos699.not_exists_squeezedNormalized_rowNDigit_factor_of_canonical_linear`
+  and
+  `Erdos699.not_exists_squeezedNormalized_rowNDigit_factor_of_canonical_ceil_scaled`.
+  These prove that the canonical linear/ceil-scaled universal split
+  hypotheses would eliminate squeezed normalized points satisfying
+  `rowNDigitPowerConstraint (A*H) u`; they do not prove those universal
+  canonical hypotheses.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
