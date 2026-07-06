@@ -6163,6 +6163,45 @@ theorem powerTwoSplitSubtractive_reduced_divisor_survival_forces_unitary_gcd
       hspos hlpos hmpos hD hA halpha hbeta
   exact reduced_divisor_survival_coprime_forces_unitary_gcd hcop hred
 
+/-- Contrapositive of `reduced_divisor_survival_coprime_forces_unitary_gcd`:
+if the captured gcd part is not unitary, the reduced divisor cannot survive
+against a coprime right factor. -/
+theorem not_reduced_divisor_survival_of_not_unitary_gcd {M c L : ℕ}
+    (hcop : c.Coprime L)
+    (hnunit : ¬ (Nat.gcd c M).Coprime (M / Nat.gcd c M)) :
+    ¬ M / Nat.gcd c M ∣ L := by
+  intro hred
+  exact hnunit (reduced_divisor_survival_coprime_forces_unitary_gcd hcop hred)
+
+/-- Split-level nonunitary obstruction: if the gcd part captured from the
+half-row modulus is not coprime to the remaining reduced divisor, then the
+row-two reduced-divisor survival condition is impossible. -/
+theorem powerTwoSplitSubtractive_not_reduced_divisor_survival_of_not_unitary_gcd
+    {A B r s l m alpha beta : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hnunit :
+      let c := Nat.gcd alpha beta
+      let M := B * (A / 2) - 1
+      let d := Nat.gcd c M
+      ¬ d.Coprime (M / d)) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    let d := Nat.gcd c M
+    ¬ M / d ∣ l * m := by
+  dsimp at hnunit ⊢
+  have hcop : (Nat.gcd alpha beta).Coprime (l * m) :=
+    powerTwoSplitSubtractive_gcd_alpha_beta_coprime_l_mul_m hBge hrpos
+      hspos hlpos hmpos hD hA halpha hbeta
+  exact not_reduced_divisor_survival_of_not_unitary_gcd hcop hnunit
+
 /-- A size certificate for failure of row-two divisibility after reducing by
 the gcd part of the modulus. If the reduced divisor is strictly larger than
 the positive right factor, then `M` cannot divide `c * L`. -/
@@ -9069,6 +9108,68 @@ theorem not_exists_powerTwoQuotientKernel_of_no_reduced_divisor_survival_split
   exact
     powerTwoQuotientKernel.not_of_no_reduced_divisor_survival_split
       hnoSurvivor hkernel
+
+/-- Nonunitary reduced-gcd consumer: if every admissible split captures a
+nonunitary part of the half-row modulus, then the quotient kernel is empty at
+the pointwise level. -/
+theorem powerTwoQuotientKernel.not_of_nonunitary_reduced_gcd_split
+    {A B v h : ℕ}
+    (hnonunitary :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  let d := Nat.gcd c M
+                                  ¬ d.Coprime (M / d)) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_no_reduced_divisor_survival_split
+    (fun hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos hmpos
+        hD hsum hgap halpha hbeta =>
+      powerTwoSplitSubtractive_not_reduced_divisor_survival_of_not_unitary_gcd
+        hBge hrpos hspos hlpos hmpos hD hsum halpha hbeta
+        (hnonunitary hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos
+          hlpos hmpos hD hsum hgap halpha hbeta))
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_nonunitary_reduced_gcd_split`. -/
+theorem not_exists_powerTwoQuotientKernel_of_nonunitary_reduced_gcd_split
+    {A B : ℕ}
+    (hnonunitary :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let M := B * (A / 2) - 1
+                                  let d := Nat.gcd c M
+                                  ¬ d.Coprime (M / d)) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact
+    powerTwoQuotientKernel.not_of_nonunitary_reduced_gcd_split
+      hnonunitary hkernel
 
 /-- Converse reduced-divisor constructor: an admissible positive split whose
 reduced divisor survives row two gives an actual pure power-two quotient-kernel

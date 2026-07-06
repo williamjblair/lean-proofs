@@ -1681,5 +1681,18 @@
   condition for survival, not an unconditional obstruction. Reproduce with
   `lake build Erdos699.Proved.Basic` and
   `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
+- [R] Added the contrapositive no-survivor bridge for the unitary condition.
+  `Erdos699.not_reduced_divisor_survival_of_not_unitary_gcd` proves that if
+  `c` is coprime to `L` but `gcd(c,M)` is not coprime to `M / gcd(c,M)`,
+  then `M / gcd(c,M) ∤ L`. The split-level theorem
+  `Erdos699.powerTwoSplitSubtractive_not_reduced_divisor_survival_of_not_unitary_gcd`
+  applies this to C2 row-one splits, and the consumers
+  `Erdos699.powerTwoQuotientKernel.not_of_nonunitary_reduced_gcd_split` and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_nonunitary_reduced_gcd_split`
+  show that a universal nonunitary captured-gcd condition would eliminate the
+  pure quotient kernel. This is a conditional obstruction surface, not a
+  proof that all splits are nonunitary. Reproduce with
+  `lake build Erdos699.Proved.Basic` and
+  `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
