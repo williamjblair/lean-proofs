@@ -5460,6 +5460,32 @@ theorem powerTwoSplitAdditive_alpha_beta_mul {A B r s l m alpha beta : ℕ}
   rw [← hA] at hDadd
   nlinarith
 
+/-- Product identity coprimality: if `alpha * beta + 1` is a multiple of
+`l * m`, then the common divisor of `alpha` and `beta` is coprime to
+`l * m`. -/
+theorem gcd_alpha_beta_coprime_l_mul_m_of_product_identity
+    {K l m alpha beta c : ℕ}
+    (hc : c = Nat.gcd alpha beta)
+    (hab : alpha * beta + 1 = K * (l * m)) :
+    c.Coprime (l * m) := by
+  rw [Nat.coprime_iff_gcd_eq_one]
+  let e := Nat.gcd c (l * m)
+  apply Nat.eq_one_of_dvd_one
+  have hec : e ∣ c := Nat.gcd_dvd_left c (l * m)
+  have heLm : e ∣ l * m := Nat.gcd_dvd_right c (l * m)
+  have hc_alpha : c ∣ alpha := by
+    rw [hc]
+    exact Nat.gcd_dvd_left alpha beta
+  have healpha : e ∣ alpha := Nat.dvd_trans hec hc_alpha
+  have healphabeta : e ∣ alpha * beta := dvd_mul_of_dvd_left healpha beta
+  have heRhs : e ∣ K * (l * m) := dvd_mul_of_dvd_right heLm K
+  have heSucc : e ∣ alpha * beta + 1 := by
+    rw [hab]
+    exact heRhs
+  have hone : e ∣ (alpha * beta + 1) - alpha * beta :=
+    Nat.dvd_sub heSucc healphabeta
+  simpa using hone
+
 /-- Integer form of the first subtractive split identity. It is the algebraic
 reason the natural subtraction `r - B * m` is non-truncated in every positive
 row-one split with `B ≥ 3`. -/
@@ -5587,6 +5613,28 @@ theorem powerTwoSplitSubtractive_alpha_beta_mul {A B r s l m alpha beta : ℕ}
     ⟨halpha_add, hbeta_add⟩
   exact powerTwoSplitAdditive_alpha_beta_mul hBpos hApos hD hA halpha_add
     hbeta_add
+
+/-- In every positive subtractive split, the common divisor of `alpha` and
+`beta` is coprime to the row-one quotient factor `l * m`. -/
+theorem powerTwoSplitSubtractive_gcd_alpha_beta_coprime_l_mul_m
+    {A B r s l m alpha beta : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l) :
+    (Nat.gcd alpha beta).Coprime (l * m) := by
+  have hab : alpha * beta + 1 = B * B * (l * m) :=
+    powerTwoSplitSubtractive_alpha_beta_mul hBge hrpos hspos hlpos hmpos hD
+      hA halpha hbeta
+  exact
+    gcd_alpha_beta_coprime_l_mul_m_of_product_identity
+      (K := B * B) (l := l) (m := m) (alpha := alpha) (beta := beta)
+      (c := Nat.gcd alpha beta) rfl hab
 
 /-- Additive half-row identity used by the row-two-to-gcd reduction:
 `2M = 2 alpha beta + B(alpha*l + beta*m)`, where
@@ -9065,6 +9113,49 @@ theorem exists_powerTwoQuotientKernel_iff_exists_reduced_divisor_survival_split
         powerTwoQuotientKernel_of_reduced_divisor_survival_split
           hApow hA4 hBodd hBge hrpos hspos hlpos hmpos hD hsum hgap
           halpha hbeta hred⟩
+
+/-- Coprime-refined existence-level C2 bridge. The extra coprimality condition
+is automatic from the split product identity, but recording it here matches
+the exact reduced-divisor obstruction used in the C2 analysis. -/
+theorem exists_powerTwoQuotientKernel_iff_exists_reduced_divisor_survival_coprime_split
+    {A B : ℕ}
+    (hApow : ∃ a : ℕ, A = 2 ^ a)
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B) :
+    (∃ v h : ℕ, powerTwoQuotientKernel A B v h) ↔
+      ∃ r s l m alpha beta : ℕ,
+        0 < r ∧ 0 < s ∧ 0 < l ∧ 0 < m ∧
+          r * s = B * A - 1 ∧
+            r * l + s * m = A ∧
+              r * l < s * m ∧
+                alpha = r - B * m ∧
+                  beta = s - B * l ∧
+                    (Nat.gcd alpha beta).Coprime (l * m) ∧
+                      let c := Nat.gcd alpha beta
+                      let M := B * (A / 2) - 1
+                      let d := Nat.gcd c M
+                      M / d ∣ l * m := by
+  constructor
+  · intro hkernel_exists
+    rcases
+      (exists_powerTwoQuotientKernel_iff_exists_reduced_divisor_survival_split
+        hApow hA4 hBodd hBge).mp hkernel_exists with
+      ⟨r, s, l, m, alpha, beta, hrpos, hspos, hlpos, hmpos, hD, hsum, hgap,
+        halpha, hbeta, hred⟩
+    have hcop : (Nat.gcd alpha beta).Coprime (l * m) :=
+      powerTwoSplitSubtractive_gcd_alpha_beta_coprime_l_mul_m hBge hrpos
+        hspos hlpos hmpos hD hsum halpha hbeta
+    exact ⟨r, s, l, m, alpha, beta, hrpos, hspos, hlpos, hmpos, hD, hsum,
+      hgap, halpha, hbeta, hcop, hred⟩
+  · rintro
+      ⟨r, s, l, m, alpha, beta, hrpos, hspos, hlpos, hmpos, hD, hsum, hgap,
+        halpha, hbeta, _hcop, hred⟩
+    exact
+      (exists_powerTwoQuotientKernel_iff_exists_reduced_divisor_survival_split
+        hApow hA4 hBodd hBge).mpr
+        ⟨r, s, l, m, alpha, beta, hrpos, hspos, hlpos, hmpos, hD, hsum, hgap,
+          halpha, hbeta, hred⟩
 
 /-- Conditional consumer for the split/gcd obstruction: once
 `powerTwoSplitGcdObstruction A B` is supplied, the pure power-two quotient

@@ -1657,5 +1657,17 @@
   exact but genuinely weaker. Reproduce with
   `lake build Erdos699.Proved.Basic` and
   `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
+- [R] Formalized the split-product coprimality used by the reduced-divisor
+  C2 obstruction. `Erdos699.gcd_alpha_beta_coprime_l_mul_m_of_product_identity`
+  proves from `alpha * beta + 1 = K * (l * m)` that any declared
+  `c = gcd(alpha,beta)` is coprime to `l * m`, and
+  `Erdos699.powerTwoSplitSubtractive_gcd_alpha_beta_coprime_l_mul_m` applies
+  this to every positive subtractive row-one split. The refined bridge
+  `Erdos699.exists_powerTwoQuotientKernel_iff_exists_reduced_divisor_survival_coprime_split`
+  records that pure quotient-kernel points are equivalent to surviving
+  positive reduced-divisor splits with this coprimality condition included.
+  This strengthens the C2 interface but does not prove the reduced-divisor
+  obstruction. Reproduce with `lake build Erdos699.Proved.Basic` and
+  `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
