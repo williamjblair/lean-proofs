@@ -11090,6 +11090,47 @@ theorem factor_div_gcd_dvd_of_no_common_i_three
     factor_dvd_mul_of_no_common_i_three hnone hn hj hHX hH0 hprime
   exact dvd_div_gcd_of_dvd_mul hHpos hH_dvd_Fu
 
+/-- An odd natural divisor of a power of two is trivial. This small parity
+fact is the obstruction to absorbing an odd shared factor into a residual
+power-of-two quotient. -/
+theorem odd_dvd_two_pow_eq_one {d b : ℕ}
+    (hdodd : Odd d) (hdvd : d ∣ 2 ^ b) :
+    d = 1 := by
+  induction b with
+  | zero =>
+      exact Nat.dvd_one.mp (by simpa using hdvd)
+  | succ b ih =>
+      have hcop : d.Coprime 2 := Nat.coprime_two_right.mpr hdodd
+      have hdvd' : d ∣ 2 * 2 ^ b := by
+        simpa [pow_succ, mul_comm, mul_left_comm, mul_assoc] using hdvd
+      exact ih (hcop.dvd_of_dvd_mul_left hdvd')
+
+/-- If an odd factor can be multiplied by some natural number and still be a
+pure power of two, then that factor is already `1`. -/
+theorem odd_factor_eq_one_of_mul_eq_two_pow {A d b : ℕ}
+    (hdodd : Odd d) (hpow : A * d = 2 ^ b) :
+    d = 1 := by
+  have hdvd : d ∣ 2 ^ b := ⟨A, by simpa [mul_comm] using hpow.symm⟩
+  exact odd_dvd_two_pow_eq_one hdodd hdvd
+
+/-- If reducing a factor extraction by `gcd H F` leaves residual
+`A * gcd H F`, and `H` is odd, that residual can be a power of two only in the
+coprime case `gcd H F = 1`. -/
+theorem gcd_eq_one_of_odd_left_of_mul_gcd_eq_two_pow {A H F b : ℕ}
+    (hHodd : Odd H) (hpow : A * Nat.gcd H F = 2 ^ b) :
+    Nat.gcd H F = 1 := by
+  have hgodd : Odd (Nat.gcd H F) :=
+    hHodd.of_dvd_nat (Nat.gcd_dvd_left H F)
+  exact odd_factor_eq_one_of_mul_eq_two_pow hgodd hpow
+
+/-- Existential-power wrapper for
+`gcd_eq_one_of_odd_left_of_mul_gcd_eq_two_pow`. -/
+theorem gcd_eq_one_of_odd_left_of_mul_gcd_is_power_two {A H F : ℕ}
+    (hHodd : Odd H) (hpow : ∃ b : ℕ, A * Nat.gcd H F = 2 ^ b) :
+    Nat.gcd H F = 1 := by
+  rcases hpow with ⟨b, hb⟩
+  exact gcd_eq_one_of_odd_left_of_mul_gcd_eq_two_pow hHodd hb
+
 /-- Local factor extraction from the corrected no-common-prime criterion. This
 is sharper than first proving `rowNDigitPowerConstraintExact F X u`: it only
 requires cancellation for prime powers that actually occur in the factor `H`

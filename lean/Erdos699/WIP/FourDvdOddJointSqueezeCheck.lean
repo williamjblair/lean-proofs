@@ -166,6 +166,10 @@ namespace Erdos699
 #check rowNDigitPowerConstraintExact.dvd_of_factor_dvd
 #check factor_dvd_mul_of_no_common_i_three
 #check factor_div_gcd_dvd_of_no_common_i_three
+#check odd_dvd_two_pow_eq_one
+#check odd_factor_eq_one_of_mul_eq_two_pow
+#check gcd_eq_one_of_odd_left_of_mul_gcd_eq_two_pow
+#check gcd_eq_one_of_odd_left_of_mul_gcd_is_power_two
 #check factor_dvd_of_no_common_i_three
 #check coprime_pow_of_dvd_of_coprime_left
 #check factor_dvd_of_no_common_i_three_of_coprime_factor

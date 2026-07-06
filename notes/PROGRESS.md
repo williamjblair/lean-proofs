@@ -1643,5 +1643,19 @@
   all of `H`; it records the exact loss when `H` and `F` share prime powers.
   Reproduce with `lake build Erdos699.Proved.Basic` and
   `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
+- [R] Formalized the power-of-two residual obstruction explaining why the
+  reduced non-coprime fallback cannot feed the existing pure
+  `powerTwoQuotientKernel` bridge unless the shared odd factor is trivial.
+  `Erdos699.odd_dvd_two_pow_eq_one` proves that an odd divisor of `2^b` is
+  `1`; `Erdos699.odd_factor_eq_one_of_mul_eq_two_pow` packages the
+  corresponding product form; and
+  `Erdos699.gcd_eq_one_of_odd_left_of_mul_gcd_eq_two_pow` plus
+  `Erdos699.gcd_eq_one_of_odd_left_of_mul_gcd_is_power_two` prove that if
+  `H` is odd and a residual of the form `A * gcd(H,F)` is still a power of
+  two, then `gcd(H,F) = 1`. Thus quotienting only by `H / gcd(H,F)` leaves a
+  power-of-two residual only in the coprime case; the non-coprime fallback is
+  exact but genuinely weaker. Reproduce with
+  `lake build Erdos699.Proved.Basic` and
+  `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
