@@ -830,6 +830,48 @@ def test_power_two_quotient_scan_matches_bruteforce() -> None:
             "linear_gap_holds_count": 2,
             "linear_gap_failure_count": 0,
             "min_linear_gap_margin": 357,
+            "branch_y_coverage_holds_count": 2,
+            "branch_y_coverage_failure_count": 0,
+            "odd_branch_y_coverage_failure_count": 0,
+            "even_branch_y_coverage_failure_count": 0,
+            "min_branch_y_coverage_margin": 108,
+            "min_branch_y_coverage_candidate": {
+                "exponent": 10,
+                "A": 1024,
+                "B": 3,
+                "v": 111,
+                "h": 33,
+                "r": 37,
+                "s": 83,
+                "l": 3,
+                "m": 11,
+                "alpha": 4,
+                "beta": 74,
+                "c": 2,
+                "gcd_quotient_x": 2,
+                "gcd_quotient_y": 37,
+                "d": 1,
+                "reduced_divisor": 1535,
+                "l_times_m": 33,
+                "gap_margin": 1502,
+                "gap_holds": True,
+                "c_parity": "even",
+                "parity_gcd_bound": 1,
+                "parity_reduced_divisor_lower_bound": 1535,
+                "parity_gap_margin": 1502,
+                "parity_gap_holds": True,
+                "parity_product_bound": 34,
+                "parity_product_margin": 1501,
+                "parity_product_gap_holds": True,
+                "quotient_gap_rhs": 1535,
+                "quotient_gap_required": 34,
+                "quotient_gap_margin": 1501,
+                "quotient_gap_holds": True,
+                "linear_gap_rhs": 1239,
+                "linear_gap_required": 34,
+                "linear_gap_margin": 1205,
+                "linear_gap_holds": True,
+            },
             "parity_denominator_le_B_sq_count": 2,
             "parity_denominator_gt_B_sq_count": 0,
             "odd_parity_denominator_gt_B_sq_count": 0,
@@ -1044,6 +1086,43 @@ def test_power_two_quotient_gap_summary_counts_B_sq_denominator_exceptions() -> 
     }
 
 
+def test_power_two_quotient_gap_summary_counts_y_coverage_exceptions() -> None:
+    summary = _power_two_reduced_divisor_gap_summary(
+        [
+            {
+                "exponent": 52,
+                "A": 2**52,
+                "B": 5,
+                "v": 945_038_995_613_201,
+                "h": 149_346_249_379_105,
+            },
+            {
+                "exponent": 54,
+                "A": 2**54,
+                "B": 3,
+                "v": 8_880_337_293_406_612,
+                "h": 1_500_902_077_758_864,
+            },
+            {
+                "exponent": 64,
+                "A": 2**64,
+                "B": 7,
+                "v": 5_854_419_642_550_636_693,
+                "h": 570_915_706_630_731_449,
+            },
+        ]
+    )
+
+    parity_summary = summary["parity_branch_gap_summary"]
+    assert parity_summary["branch_y_coverage_holds_count"] == 1
+    assert parity_summary["branch_y_coverage_failure_count"] == 2
+    assert parity_summary["odd_branch_y_coverage_failure_count"] == 1
+    assert parity_summary["even_branch_y_coverage_failure_count"] == 1
+    assert parity_summary["min_branch_y_coverage_margin"] == -141_437_672_736_627
+    assert parity_summary["min_branch_y_coverage_candidate"]["exponent"] == 64
+    assert parity_summary["min_branch_y_coverage_candidate"]["B"] == 7
+
+
 def test_power_two_quotient_diagnostic_reports_linear_gap_target() -> None:
     diagnostic = _power_two_reduced_divisor_gap_diagnostic(
         {
@@ -1103,6 +1182,48 @@ def test_power_two_quotient_scan_certifies_large_prime_modulus() -> None:
         "linear_gap_holds_count": 3,
         "linear_gap_failure_count": 0,
         "min_linear_gap_margin": 977379170661725573,
+        "branch_y_coverage_holds_count": 3,
+        "branch_y_coverage_failure_count": 0,
+        "odd_branch_y_coverage_failure_count": 0,
+        "even_branch_y_coverage_failure_count": 0,
+        "min_branch_y_coverage_margin": 799,
+        "min_branch_y_coverage_candidate": {
+            "exponent": 60,
+            "A": 2**60,
+            "B": 11,
+            "v": 266992348435269826,
+            "h": 18651140129927940,
+            "r": 133496174217634913,
+            "s": 95,
+            "l": 2,
+            "m": 9325570064963970,
+            "alpha": 30914903503031243,
+            "beta": 73,
+            "c": 1,
+            "gcd_quotient_x": 30914903503031243,
+            "gcd_quotient_y": 73,
+            "d": 1,
+            "reduced_divisor": 6341068275337658367,
+            "l_times_m": 18651140129927940,
+            "gap_margin": 6322417135207730427,
+            "gap_holds": True,
+            "c_parity": "odd",
+            "parity_gcd_bound": 1,
+            "parity_reduced_divisor_lower_bound": 6341068275337658367,
+            "parity_gap_margin": 6322417135207730427,
+            "parity_gap_holds": True,
+            "parity_product_bound": 18651140129927941,
+            "parity_product_margin": 6322417135207730426,
+            "parity_product_gap_holds": True,
+            "quotient_gap_rhs": 12682136550675316734,
+            "quotient_gap_required": 37302280259855882,
+            "quotient_gap_margin": 12644834270415460852,
+            "quotient_gap_holds": True,
+            "linear_gap_rhs": 8168560639232755256,
+            "linear_gap_required": 37302280259855882,
+            "linear_gap_margin": 8131258358972899374,
+            "linear_gap_holds": True,
+        },
         "parity_denominator_le_B_sq_count": 3,
         "parity_denominator_gt_B_sq_count": 0,
         "odd_parity_denominator_gt_B_sq_count": 0,

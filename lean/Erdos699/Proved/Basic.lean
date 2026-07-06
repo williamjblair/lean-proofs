@@ -6396,6 +6396,41 @@ theorem parity_linear_ineq_iff_deficit_ineq {B c x y l m : ℕ}
       exact Or.inr ⟨hceven,
         (linear_even_iff_x_compensates_y_deficit hpos1).mpr hdef⟩
 
+/-- Even-branch automatic case: if `B*y` already covers `l`, then
+`B*y*m` covers the `l*m` term and the positive `B*x*l` term supplies the
+extra one. -/
+theorem linear_even_of_y_covers_l {B x y l m : ℕ}
+    (hpos : 1 ≤ B * x * l)
+    (hcover : l ≤ B * y) :
+    l * m + 1 ≤ B * (x * l + y * m) := by
+  refine (linear_even_iff_x_compensates_y_deficit hpos).mpr ?_
+  have hsub : l - B * y = 0 := Nat.sub_eq_zero_of_le hcover
+  simpa [hsub] using hpos
+
+/-- Odd-branch automatic case: if `B*y` already covers `2*l`, then
+`B*y*m` covers the `2*l*m` term and the positive `B*x*l` term supplies the
+extra two. -/
+theorem linear_odd_of_y_covers_two_l {B x y l m : ℕ}
+    (hpos : 2 ≤ B * x * l)
+    (hcover : 2 * l ≤ B * y) :
+    2 * (l * m + 1) ≤ B * (x * l + y * m) := by
+  refine (linear_odd_iff_x_compensates_y_deficit hpos).mpr ?_
+  have hsub : 2 * l - B * y = 0 := Nat.sub_eq_zero_of_le hcover
+  simpa [hsub] using hpos
+
+/-- Parity-branch automatic y-coverage case for the canonical linear target.
+The odd branch needs `B*y` to cover `2*l`; the even branch needs it to cover
+`l`. -/
+theorem parity_linear_ineq_of_y_coverage {B c x y l m : ℕ}
+    (hpos : 2 ≤ B * x * l)
+    (hcover : (Odd c ∧ 2 * l ≤ B * y) ∨ (Even c ∧ l ≤ B * y)) :
+    ((Odd c ∧ 2 * (l * m + 1) ≤ B * (x * l + y * m)) ∨
+        (Even c ∧ l * m + 1 ≤ B * (x * l + y * m))) := by
+  rcases hcover with ⟨hcodd, hcover⟩ | ⟨hceven, hcover⟩
+  · exact Or.inl ⟨hcodd, linear_odd_of_y_covers_two_l hpos hcover⟩
+  · have hpos1 : 1 ≤ B * x * l := by omega
+    exact Or.inr ⟨hceven, linear_even_of_y_covers_l hpos1 hcover⟩
+
 /-- Product-form parity certificate. For odd `c`, it is enough to prove
 `c * (L + 1) ≤ M`; for even `c`, it is enough to prove
 `(c / 2) * (L + 1) ≤ M`. -/
@@ -7180,7 +7215,6 @@ theorem powerTwoSplitSubtractive_canonical_gcd_linear_ineq_iff_deficit_ineq
   have halpha_pos : 0 < alpha := by
     rw [halpha]
     exact Nat.sub_pos_of_lt hsplit_lt.1
-  have hcpos : 0 < c := Nat.gcd_pos_of_pos_left beta halpha_pos
   have hcalpha : c ∣ alpha := Nat.gcd_dvd_left alpha beta
   have halpha_div : alpha = c * (alpha / c) := by
     have h := Nat.div_mul_cancel hcalpha
@@ -7200,6 +7234,57 @@ theorem powerTwoSplitSubtractive_canonical_gcd_linear_ineq_iff_deficit_ineq
   exact parity_linear_ineq_iff_deficit_ineq
     (B := B) (c := c) (x := alpha / c) (y := beta / c) (l := l)
     (m := m) hpos
+
+/-- Split specialization of the automatic y-coverage branch for the canonical
+linear target. In canonical variables, the odd branch is automatic from
+`2*l ≤ B*y`, and the even branch is automatic from `l ≤ B*y`. -/
+theorem powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_y_coverage
+    {A B r s l m alpha beta : ℕ}
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (halpha : alpha = r - B * m)
+    (_hbeta : beta = s - B * l)
+    (hcover :
+      let c := Nat.gcd alpha beta
+      let y := beta / c
+      (Odd c ∧ 2 * l ≤ B * y) ∨ (Even c ∧ l ≤ B * y)) :
+    let c := Nat.gcd alpha beta
+    let x := alpha / c
+    let y := beta / c
+    (Odd c ∧ 2 * (l * m + 1) ≤ B * (x * l + y * m)) ∨
+      (Even c ∧ l * m + 1 ≤ B * (x * l + y * m)) := by
+  dsimp at hcover ⊢
+  let c := Nat.gcd alpha beta
+  have hsplit_lt := powerTwoSplitSubtractive_lt (A := A) (B := B) (r := r)
+    (s := s) (l := l) (m := m) hBge hrpos hspos hlpos hmpos hD hA
+  have halpha_pos : 0 < alpha := by
+    rw [halpha]
+    exact Nat.sub_pos_of_lt hsplit_lt.1
+  have hcpos : 0 < c := Nat.gcd_pos_of_pos_left beta halpha_pos
+  have hcalpha : c ∣ alpha := Nat.gcd_dvd_left alpha beta
+  have halpha_div : alpha = c * (alpha / c) := by
+    have h := Nat.div_mul_cancel hcalpha
+    simpa [mul_comm] using h.symm
+  have hxpos : 0 < alpha / c := by
+    by_contra hxnot
+    have hx0 : alpha / c = 0 := Nat.eq_zero_of_not_pos hxnot
+    have : alpha = 0 := by
+      rw [halpha_div, hx0, mul_zero]
+    omega
+  have hpos : 2 ≤ B * (alpha / c) * l := by
+    have hx1 : 1 ≤ alpha / c := hxpos
+    have hl1 : 1 ≤ l := hlpos
+    calc
+      2 ≤ 3 * 1 * 1 := by norm_num
+      _ ≤ B * (alpha / c) * l := Nat.mul_le_mul (Nat.mul_le_mul hBge hx1) hl1
+  exact parity_linear_ineq_of_y_coverage
+    (B := B) (c := c) (x := alpha / c) (y := beta / c) (l := l)
+    (m := m) hpos hcover
 
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
@@ -7526,6 +7611,42 @@ theorem powerTwoSplitGcdObstruction_of_canonical_gcd_deficit_ineq
       (alpha := alpha) (beta := beta) hBge hrpos hspos hlpos hmpos hD hA
       halpha hbeta).mpr
       (hdefAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
+        hmpos hD hA hsplitgap halpha hbeta)
+
+/-- Automatic y-coverage version of the canonical linear target. If every
+admissible split satisfies the branch condition `2*l ≤ B*y` in the odd case
+and `l ≤ B*y` in the even case, then the split/gcd obstruction follows. -/
+theorem powerTwoSplitGcdObstruction_of_canonical_gcd_y_coverage
+    {A B : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let y := beta / c
+                                  (Odd c ∧ 2 * l ≤ B * y) ∨
+                                    (Even c ∧ l ≤ B * y)) :
+    powerTwoSplitGcdObstruction A B := by
+  refine powerTwoSplitGcdObstruction_of_canonical_gcd_linear_ineq ?_
+  intro hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos hmpos
+    hD hA hsplitgap halpha hbeta
+  exact
+    powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_y_coverage
+      (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+      (alpha := alpha) (beta := beta) hBge hrpos hspos hlpos hmpos hD hA
+      halpha hbeta
+      (hcoverAll hApow hA4 hBodd hBge r s l m alpha beta hrpos hspos hlpos
         hmpos hD hA hsplitgap halpha hbeta)
 
 /-- Split-level reduced-divisor gap certificate: if
@@ -8675,6 +8796,60 @@ theorem not_exists_powerTwoQuotientKernel_of_canonical_gcd_deficit_ineq
     ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
   rintro ⟨v, h, hkernel⟩
   exact powerTwoQuotientKernel.not_of_canonical_gcd_deficit_ineq hdefAll hkernel
+
+/-- Direct conditional kernel kill from the automatic canonical y-coverage
+branch. -/
+theorem powerTwoQuotientKernel.not_of_canonical_gcd_y_coverage
+    {A B v h : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let y := beta / c
+                                  (Odd c ∧ 2 * l ≤ B * y) ∨
+                                    (Even c ∧ l ≤ B * y)) :
+    ¬ powerTwoQuotientKernel A B v h :=
+  powerTwoQuotientKernel.not_of_splitGcdObstruction
+    (powerTwoSplitGcdObstruction_of_canonical_gcd_y_coverage hcoverAll)
+
+/-- Existence-free version of
+`powerTwoQuotientKernel.not_of_canonical_gcd_y_coverage`. -/
+theorem not_exists_powerTwoQuotientKernel_of_canonical_gcd_y_coverage
+    {A B : ℕ}
+    (hcoverAll :
+      (∃ a : ℕ, A = 2 ^ a) →
+        4 ∣ A →
+          Odd B →
+            3 ≤ B →
+              ∀ r s l m alpha beta : ℕ,
+                0 < r →
+                  0 < s →
+                    0 < l →
+                      0 < m →
+                        r * s = B * A - 1 →
+                          r * l + s * m = A →
+                            r * l < s * m →
+                              alpha = r - B * m →
+                                beta = s - B * l →
+                                  let c := Nat.gcd alpha beta
+                                  let y := beta / c
+                                  (Odd c ∧ 2 * l ≤ B * y) ∨
+                                    (Even c ∧ l ≤ B * y)) :
+    ¬ ∃ v h : ℕ, powerTwoQuotientKernel A B v h := by
+  rintro ⟨v, h, hkernel⟩
+  exact powerTwoQuotientKernel.not_of_canonical_gcd_y_coverage hcoverAll hkernel
 
 /-- Quotient the corrected squeezed normalized kernel by an odd digit-forced
 factor `H`. This formalizes the algebraic part of the reduction to the pure

@@ -461,6 +461,22 @@
   compose a universal deficit hypothesis to the pure quotient kernel. This
   is a formal target normalization only; the universal deficit inequality is
   still open.
+- [R] Split off the automatic y-coverage branch of the canonical linear
+  target. The generic theorems
+  `Erdos699.linear_even_of_y_covers_l` and
+  `Erdos699.linear_odd_of_y_covers_two_l` prove that the even branch is
+  automatic from `l ≤ B*y`, while the odd branch is automatic from
+  `2*l ≤ B*y`, given the same positive lower bound on `B*x*l`. The split
+  wrapper
+  `Erdos699.powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_y_coverage`
+  applies this to canonical variables, and
+  `Erdos699.powerTwoSplitGcdObstruction_of_canonical_gcd_y_coverage`,
+  `Erdos699.powerTwoQuotientKernel.not_of_canonical_gcd_y_coverage`, and
+  `Erdos699.not_exists_powerTwoQuotientKernel_of_canonical_gcd_y_coverage`
+  compose a universal y-coverage hypothesis to the pure quotient kernel. This
+  only proves an automatic branch; the two-sided universal y-coverage
+  condition itself is false in bounded diagnostics, so the remaining branch is
+  the y-deficit case.
 - [R] Added the direct pure-kernel consumers for the inequality target:
   `Erdos699.powerTwoQuotientKernel.not_of_reduced_divisor_gap` and
   `Erdos699.not_exists_powerTwoQuotientKernel_of_reduced_divisor_gap`. These
@@ -517,6 +533,17 @@
   exceptional denominator is the known `A = 2^52`, `B = 5`, `c/2 = 39` case,
   which still satisfies the product gap in the diagnostic. This is exact
   bounded evidence and a branch split, not a proof of the exceptional branch.
+- [E] Added exact diagnostics for the automatic y-coverage branch of the
+  canonical linear target. Reproduce on the enlarged power-two quotient
+  perimeter with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as s; r=s(70,2001,skip_factorization_failures=True); p=r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["row_one_candidate_count"], r["survivor_count"]); print({k:p[k] for k in ["branch_y_coverage_holds_count","branch_y_coverage_failure_count","odd_branch_y_coverage_failure_count","even_branch_y_coverage_failure_count","min_branch_y_coverage_margin"]}); c=p["min_branch_y_coverage_candidate"]; print(c["exponent"], c["B"], c["c_parity"], c["v"], c["h"], c["l"], c["m"], c["gcd_quotient_x"], c["gcd_quotient_y"])'`.
+  It reports `69000 880 0`, with `878` automatic y-coverage cases and `2`
+  y-coverage failures: one odd branch and one even branch. The worst margin
+  is `-141437672736627` at `(A, B) = (2^64, 7)`, with
+  `(v, h, l, m, x, y) = (5854419642550636693, 570915706630731449,
+  3378199447519121, 169, 5, 462394539254642)`. This is exact bounded
+  evidence identifying the remaining y-deficit branch, not a proof that the
+  branch is empty.
 - [E] Added exact diagnostics for the normalized gcd-quotient target. For
   each row-one split the scanner now records `x = alpha / c`,
   `y = beta / c`, the branch-required left side, the quotient right side

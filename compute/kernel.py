@@ -651,6 +651,12 @@ def _power_two_reduced_divisor_gap_diagnostic(
 def _power_two_parity_branch_gap_summary(
     diagnostics: list[dict[str, int | str | bool]],
 ) -> dict[str, Any]:
+    def branch_y_coverage_margin(item: dict[str, int | str | bool]) -> int:
+        threshold = int(item["l"])
+        if item["c_parity"] == "odd":
+            threshold *= 2
+        return int(item["B"]) * int(item["gcd_quotient_y"]) - threshold
+
     parity_gap_holds_count = sum(
         1 for item in diagnostics if item["parity_gap_holds"]
     )
@@ -681,6 +687,23 @@ def _power_two_parity_branch_gap_summary(
     min_linear_gap_candidate = min(
         diagnostics,
         key=lambda item: int(item["linear_gap_margin"]),
+        default=None,
+    )
+    y_coverage_holds_count = sum(
+        1 for item in diagnostics if branch_y_coverage_margin(item) >= 0
+    )
+    y_coverage_failures = [
+        item for item in diagnostics if branch_y_coverage_margin(item) < 0
+    ]
+    odd_y_coverage_failures = [
+        item for item in y_coverage_failures if item["c_parity"] == "odd"
+    ]
+    even_y_coverage_failures = [
+        item for item in y_coverage_failures if item["c_parity"] == "even"
+    ]
+    min_y_coverage_candidate = min(
+        diagnostics,
+        key=branch_y_coverage_margin,
         default=None,
     )
     denominator_le_B_sq_count = sum(
@@ -738,6 +761,18 @@ def _power_two_parity_branch_gap_summary(
             if min_linear_gap_candidate is None
             else min_linear_gap_candidate["linear_gap_margin"]
         ),
+        "branch_y_coverage_holds_count": y_coverage_holds_count,
+        "branch_y_coverage_failure_count": (
+            len(diagnostics) - y_coverage_holds_count
+        ),
+        "odd_branch_y_coverage_failure_count": len(odd_y_coverage_failures),
+        "even_branch_y_coverage_failure_count": len(even_y_coverage_failures),
+        "min_branch_y_coverage_margin": (
+            None
+            if min_y_coverage_candidate is None
+            else branch_y_coverage_margin(min_y_coverage_candidate)
+        ),
+        "min_branch_y_coverage_candidate": min_y_coverage_candidate,
         "parity_denominator_le_B_sq_count": denominator_le_B_sq_count,
         "parity_denominator_gt_B_sq_count": (
             len(diagnostics) - denominator_le_B_sq_count
