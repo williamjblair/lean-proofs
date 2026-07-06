@@ -1599,5 +1599,22 @@
   remain conditional bridge theorems; they do not prove the universal C2
   hypotheses or the kernel. Reproduce with `lake build Erdos699.Proved.Basic`
   and `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
+- [R] Sharpened the no-common-prime factor extraction to the exact quotient
+  factor. `Erdos699.factor_dvd_of_no_common_i_three` proves `H | u` directly
+  from the corrected obstruction criterion, assuming only that each prime
+  divisor of `H` is row-`3` relevant and not digit-dominated, and only that
+  the prime powers occurring in `H` are coprime to the normalized factor `F`.
+  This avoids requiring cancellation for every guarded prime power of the
+  full `X`. The local quotient bridge
+  `Erdos699.exists_powerTwoQuotientKernel_of_squeezedNormalized_noCommon_i_three_factor_local`
+  and its no-kernel/canonical consumers
+  `Erdos699.not_exists_squeezedNormalized_noCommon_i_three_factor_local_of_no_powerTwoQuotientKernel`,
+  `Erdos699.not_exists_squeezedNormalized_noCommon_i_three_factor_local_of_canonical_linear`,
+  and
+  `Erdos699.not_exists_squeezedNormalized_noCommon_i_three_factor_local_of_canonical_ceil_scaled`
+  are the preferred local-cancellation interfaces. They remain conditional on
+  the `H` Lucas guard and the C2 hypotheses. Reproduce with
+  `lake build Erdos699.Proved.Basic` and
+  `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.
