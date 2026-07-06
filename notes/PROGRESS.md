@@ -1496,5 +1496,22 @@
   Reproduce with
   `python3 -m pytest compute/tests/test_kernel.py::test_power_two_quotient_diagnostic_reports_canonical_scaled_deficit compute/tests/test_kernel.py::test_power_two_quotient_gap_summary_counts_scaled_deficit_coverage -q`
   and `lake env lean lean/Erdos699/WIP/FourDvdOddJointSqueezeCheck.lean`.
+- [R]/[E] Strengthened the canonical ceiling-scaled branch so it now lands
+  directly on the exact reduced-divisor gap. The theorem
+  `Erdos699.powerTwoSplitSubtractive_reduced_divisor_gap_of_canonical_gcd_linear_ineq`
+  proves that the canonical linear inequality implies
+  `l * m < M / gcd(c, M)`, and
+  `Erdos699.powerTwoSplitSubtractive_reduced_divisor_gap_of_canonical_gcd_ceil_scaled_deficit_coverage`
+  packages the fixed-ceiling branch as a direct sufficient condition for the
+  same exact gap. This is still conditional; it does not prove the universal
+  kernel. Exact bounded measurement over the power-two quotient family through
+  exponents `2..72` and odd `3 ≤ B ≤ 1001` factored all `35,500` instances,
+  found `833` row-one candidates, `0` row-two survivors, and `0`
+  canonical scaled-deficit failures; the minimum scaled margin was `1`, and
+  the largest required canonical scale was still `5` at the known
+  `A = 2^64`, `B = 7` candidate. Reproduce with
+  `python3 -c 'from compute.kernel import scan_power_two_quotient_kernel as scan; r = scan(72, 1001, skip_factorization_failures=True); s = r["reduced_divisor_gap_summary"]["parity_branch_gap_summary"]; print(r["instance_count"], r["factorized_instance_count"], r["skipped_instance_count"], r["row_one_candidate_count"], r["survivor_count"]); print(s["branch_scaled_deficit_coverage_failure_count"], s["max_branch_scaled_deficit_min_q"], s["min_branch_scaled_deficit_margin"])'`.
+  A larger attempted `max_exponent = 80`, `max_b = 2001` run was interrupted
+  inside Pollard-rho factoring and is not banked evidence.
 - [OPEN] T4, full T6/T7, the kernel, and all later rungs remain unclaimed in
   this branch.

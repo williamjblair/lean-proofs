@@ -7681,6 +7681,97 @@ theorem powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_ceil_scaled_defici
     (B := B) (c := c) (x := alpha / c) (y := beta / c) (l := l)
     (m := m) hlpos hBx hcover
 
+/-- The canonical linear inequality is strong enough to prove the exact
+reduced-divisor gap, because the exact quotient target has the additional
+nonnegative `2*c*x*y` term. -/
+theorem powerTwoSplitSubtractive_reduced_divisor_gap_of_canonical_gcd_linear_ineq
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (hgap : r * l < s * m)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hlin :
+      let c := Nat.gcd alpha beta
+      let x := alpha / c
+      let y := beta / c
+      (Odd c ∧ 2 * (l * m + 1) ≤ B * (x * l + y * m)) ∨
+        (Even c ∧ l * m + 1 ≤ B * (x * l + y * m))) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    l * m < M / Nat.gcd c M := by
+  dsimp at hlin ⊢
+  let c := Nat.gcd alpha beta
+  have hquot :
+      (Odd c ∧
+          2 * (l * m + 1) ≤
+            2 * c * ((alpha / c) * (beta / c)) +
+              B * ((alpha / c) * l + (beta / c) * m)) ∨
+        (Even c ∧
+          l * m + 1 ≤
+            2 * c * ((alpha / c) * (beta / c)) +
+              B * ((alpha / c) * l + (beta / c) * m)) := by
+    rcases hlin with ⟨hcodd, hineq⟩ | ⟨hceven, hineq⟩
+    · exact Or.inl ⟨hcodd,
+        hineq.trans (Nat.le_add_left
+          (B * ((alpha / c) * l + (beta / c) * m))
+          (2 * c * ((alpha / c) * (beta / c))))⟩
+    · exact Or.inr ⟨hceven,
+        hineq.trans (Nat.le_add_left
+          (B * ((alpha / c) * l + (beta / c) * m))
+          (2 * c * ((alpha / c) * (beta / c))))⟩
+  exact
+    (powerTwoSplitSubtractive_reduced_divisor_gap_iff_canonical_gcd_quotient_ineq
+      (A := A) (B := B) (r := r) (s := s) (l := l) (m := m)
+      (alpha := alpha) (beta := beta)
+      hA4 hBodd hBge hrpos hspos hlpos hmpos hD hA hgap halpha
+      hbeta).mpr hquot
+
+/-- Exact reduced-divisor gap from the canonical ceiling-scaled y-deficit
+condition. This records the current C2 branch as a direct sufficient
+condition for `M / gcd(c, M) > l*m`, not merely for a later no-divisibility
+consumer. -/
+theorem powerTwoSplitSubtractive_reduced_divisor_gap_of_canonical_gcd_ceil_scaled_deficit_coverage
+    {A B r s l m alpha beta : ℕ}
+    (hA4 : 4 ∣ A)
+    (hBodd : Odd B)
+    (hBge : 3 ≤ B)
+    (hrpos : 0 < r)
+    (hspos : 0 < s)
+    (hlpos : 0 < l)
+    (hmpos : 0 < m)
+    (hD : r * s = B * A - 1)
+    (hA : r * l + s * m = A)
+    (hgap : r * l < s * m)
+    (halpha : alpha = r - B * m)
+    (hbeta : beta = s - B * l)
+    (hcover :
+      let c := Nat.gcd alpha beta
+      let x := alpha / c
+      let y := beta / c
+      (Odd c ∧
+          (2 * l ≤ B * y ∨
+            ((m - 1) / (B * x) + 1) * (2 * l - B * y) < l)) ∨
+        (Even c ∧
+          (l ≤ B * y ∨
+            ((m - 1) / (B * x) + 1) * (l - B * y) < l))) :
+    let c := Nat.gcd alpha beta
+    let M := B * (A / 2) - 1
+    l * m < M / Nat.gcd c M := by
+  refine
+    powerTwoSplitSubtractive_reduced_divisor_gap_of_canonical_gcd_linear_ineq
+      hA4 hBodd hBge hrpos hspos hlpos hmpos hD hA hgap halpha hbeta ?_
+  exact
+    powerTwoSplitSubtractive_canonical_gcd_linear_ineq_of_ceil_scaled_deficit_coverage
+      hBge hrpos hspos hlpos hmpos hD hA halpha hbeta hcover
+
 /-- Split-level parity-branch certificate for the reduced divisor target. -/
 theorem powerTwoSplitSubtractive_not_gcd_dvd_of_parity_reduced_divisor_gap
     {A B l m alpha beta : ℕ}
