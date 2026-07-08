@@ -1465,6 +1465,123 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_44291
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 44291; the proof
+      adds the exact reduced certificate slice 5500 <= s < 5750.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_42365
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 42365; the proof
+      adds the exact reduced certificate slice 5250 <= s < 5500.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_40440
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 40440; the proof
+      adds the exact reduced certificate slice 5000 <= s < 5250.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_38514
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 38514; the proof
+      adds the exact reduced certificate slice 4750 <= s < 5000.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_36588
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 36588; the proof
+      adds the exact reduced certificate slice 4500 <= s < 4750.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_34663
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 34663; the proof
+      adds the exact reduced certificate slice 4250 <= s < 4500.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_32737
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 32737; the proof
+      adds the exact reduced certificate slice 4000 <= s < 4250.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_30811
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 30811; the proof
+      adds the exact reduced certificate slice 3750 <= s < 4000.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_28886
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 28886; the proof
+      adds the exact reduced certificate slice 3500 <= s < 3750.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_26960
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 26960; the proof
+      adds the exact reduced certificate slice 3250 <= s < 3500.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_25034
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 25034; the proof
+      adds the exact reduced certificate slice 3000 <= s < 3250.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_23109
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 23109; the proof
+      adds the exact reduced certificate slice 2750 <= s < 3000.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_21183
+    statement: >-
+      There is no N=4, k=5 quotient solution with gap m-n < 21183; the proof
+      adds the exact reduced certificate slice 2500 <= s < 2750.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
     theorem: Erdos686.Erdos686Variant.no_solution_four_five_gap_lt_9584
     statement: >-
       There is no N=4, k=5 quotient solution with gap m-n < 9584; the proof
@@ -1479,6 +1596,204 @@ proofs:
       There is no N=4, k=5 quotient solution with gap m-n < 7703; the proof
       combines the exact linearized first-two-row reduction with a
       kernel-checked s<1000 certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_44291_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<44291 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_42365_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<42365 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_40440_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<40440 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_38514_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<38514 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_36588_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<36588 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_34663_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<34663 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_32737_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<32737 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_30811_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<30811 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_28886_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<28886 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_26960_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<26960 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_25034_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<25034 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_23109_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<23109 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_21183_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<21183 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_19257_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<19257 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_17332_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<17332 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_15406_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<15406 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_13480_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<13480 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_11555_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<11555 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_9584_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<9584 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_five_gap_lt_7703_divisor_skeleton_escape
+    statement: >-
+      Direct row-escape form of the verified k=5, d<7703 slice: every
+      ratio-window candidate has a failed localized divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_six_ratio_window_linear_bounds
+    statement: >-
+      Exact linear bounds for the k=6, N=4 ratio window using rational brackets
+      for 4^(1/6).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.k_seven_ratio_window_linear_bounds
+    statement: >-
+      Exact linear bounds for the k=7, N=4 ratio window using rational brackets
+      for 4^(1/7).
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
@@ -2032,6 +2347,250 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_escape_of_large_prime_in_n_add
+    statement: >-
+      Local row obstruction: a prime divisor of n+j larger than every factor in
+      the shifted row product forces the row divisibility to fail.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_dvd_prime_le_row_cap
+    statement: >-
+      Row-survival prime support: if n+j divides its shifted row product, every
+      prime divisor of n+j is at most d+k-j.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_dvd_smooth_up_to_row_cap
+    statement: >-
+      Row-survival smoothness: a surviving row makes n+j smooth up to the
+      row-specific cap d+k-j.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_prefix_sixteen_escape_of_large_prime_in_prefix
+    statement: >-
+      Prefix version: a large prime divisor in one of the first sixteen lower
+      terms gives row-prefix-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_prefix_sixteen_survivor_smooth
+    statement: >-
+      If rows j=1,...,16 all survive, then the corresponding lower terms are
+      smooth under their row-specific caps.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_smooth_of_four_gap_solution
+    statement: >-
+      Any hypothetical cleared N=4 gap-form solution forces row-specific
+      smoothness for every lower-block term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.skeletonQuotient_succ_relation_of_row_divisibilities
+    statement: >-
+      Adjacent-row recurrence: if two consecutive rows divide, their localized
+      skeleton quotients satisfy the exact transition identity.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.transitionDenom_dvd_skeletonQuotient_of_adjacent_rows
+    statement: >-
+      Transition denominator, forward direction: two surviving adjacent rows
+      force the transition denominator to divide the current row quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_succ_dvd_of_transitionDenom_dvd_skeletonQuotient
+    statement: >-
+      Transition denominator, reverse direction: if the current row divides and
+      absorbs the transition denominator, then the next row divides.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.transitionDenom_dvd_skeletonQuotient_iff_row_succ_dvd
+    statement: >-
+      Local iff: under current-row divisibility, transition-denominator
+      divisibility is equivalent to next-row divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.transitionDenom_not_dvd_skeletonQuotient_of_large_prime_next
+    statement: >-
+      Transition-prime obstruction: a large uncanceled prime in the next lower
+      term forces failure of the transition denominator at the current row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen
+    statement: >-
+      Boundary prime form: after rows 1,...,15 divide, a large uncanceled prime
+      in n+16 forces row-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen_uncanceled_edge
+    statement: >-
+      Sharper boundary prime form: the previous-term nondivisibility is
+      automatic, so only edge cancellation by d-15 remains.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen_large
+    statement: >-
+      Largest-prime boundary form: after rows 1,...,15 divide, any prime
+      divisor of n+16 above the row-15 cap forces row-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_sixteen_escape_after_rows_fifteen_of_n_add_sixteen_not_smooth
+    statement: >-
+      Smoothness boundary form: after rows 1,...,15 divide, nonsmoothness of
+      n+16 above d+k-15 forces row-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_prefix_sixteen_escape_of_large_prime_boundary_and_small_k_escape
+    statement: >-
+      Conditional bridge: the large-uncanceled-prime boundary target plus the
+      5<=k<=15 full-row theorem imply row-prefix-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_prefix_sixteen_escape_of_large_prime_boundary_edge_and_small_k_escape
+    statement: >-
+      Sharper conditional bridge: a large prime in n+16 not canceled by d-15,
+      plus the small-k theorem, implies row-prefix-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_prefix_sixteen_escape_of_large_prime_boundary_large_and_small_k_escape
+    statement: >-
+      Sharpest conditional bridge: a prime divisor of n+16 above d+k-15, plus
+      the small-k theorem, implies row-prefix-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_prefix_sixteen_escape_of_n_add_sixteen_not_smooth_boundary_and_small_k_escape
+    statement: >-
+      Smoothness conditional bridge: nonsmoothness of n+16 above d+k-15, plus
+      the small-k theorem, implies row-prefix-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_prefix_sixteen_escape_of_transition_denominator_escape
+    statement: >-
+      Conditional bridge: a transition-denominator escape theorem implies the
+      row-prefix-sixteen escape target.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_prefix_sixteen_escape_of_boundary_and_small_k_escape
+    statement: >-
+      Conditional bridge: the k>=16 row-sixteen boundary theorem plus the
+      5<=k<=15 full-row theorem imply row-prefix-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_sixteen_escape_after_rows_fifteen_iff_transition_fifteen_escape
+    statement: >-
+      Boundary iff: after rows 1,...,15 divide, row-sixteen escape is equivalent
+      to failure of the transition denominator at j=15.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.row_prefix_sixteen_escape_of_transition_fifteen_and_small_k_escape
+    statement: >-
+      Conditional bridge: the j=15 transition-denominator defect plus the
+      5<=k<=15 full-row theorem imply row-prefix-sixteen escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_of_row_prefix_sixteen_escape
+    statement: >-
+      Conditional bridge: if the N=4 ratio window always forces a failed row
+      divisibility among j=1,...,16, then N=4 has no quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_of_row_prefix_sixteen_smooth_or_row_escape
+    statement: >-
+      Conditional two-filter bridge: nonsmoothness under row caps or failed row
+      divisibility among j=1,...,16 rules out N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_row_prefix_sixteen_escape
+    statement: >-
+      Global bridge: row-prefix-sixteen escape throughout the N=4 ratio window
+      would refute the universal Erdos 686 representation statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_row_prefix_sixteen_smooth_or_row_escape
+    statement: >-
+      Global two-filter bridge: row-cap nonsmoothness or failed first-sixteen
+      row divisibility throughout the ratio window refutes the universal
+      statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
     theorem: Erdos686.Erdos686Variant.erdos686_false_of_lower_lcm_centered_escape
     statement: >-
       Conditional bridge: if the ratio window always prevents the lower-block
@@ -2053,11 +2612,139 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_of_polynomial_prefix_eight_escape
+    statement: >-
+      Conditional bridge: if the N=4 ratio window always forces some polynomial
+      congruence at a=0,1,...,8 to fail, then N=4 has no quotient
+      representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_of_polynomial_prefix_escape
+    statement: >-
+      Generic finite-prefix bridge: if some fixed bound B always contains a
+      failed polynomial congruence throughout the N=4 ratio window, then N=4 has
+      no quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_of_polynomial_prefix_fifteen_escape
+    statement: >-
+      Conditional bridge for the current repaired candidate: if the N=4 ratio
+      window always forces some polynomial congruence at a=0,1,...,15 to fail,
+      then N=4 has no quotient representation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.polynomial_prefix_sixteen_escape_of_row_prefix_sixteen_escape
+    statement: >-
+      Row-to-polynomial bridge: a failed row divisibility among j=1,...,16
+      implies a failed polynomial congruence among a=0,1,...,16.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.polynomial_prefix_sixteen_escape_in_ratio_window_of_row_prefix_sixteen_escape
+    statement: >-
+      Conditional bridge: row-prefix-sixteen escape throughout the ratio window
+      implies polynomial-prefix-sixteen escape throughout the ratio window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.polynomial_prefix_eight_escape_of_large_prime_in_n_add_eight
+    statement: >-
+      Local support lemma: if a prime larger than every factor in the a=8 row
+      product divides n+8, then the a=8 polynomial congruence fails.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.polynomial_prefix_eight_escape_of_prefix_seven_failure_or_large_prime
+    statement: >-
+      Local reduction: if the bounded prefix already fails at a=0,...,7, or if
+      a prime larger than every a=8 row factor divides n+8, then the bounded
+      prefix escape holds at a=0,...,8.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.polynomial_prefix_eight_escape_in_ratio_window_of_prefix_seven_large_prime
+    statement: >-
+      Conditional k>=8 reduction: if the prefix-seven large-prime theorem holds
+      throughout the N=4 ratio window, then the bounded polynomial-prefix
+      escape holds for all k>=8.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
     theorem: Erdos686.Erdos686Variant.erdos686_false_of_polynomial_congruence_escape
     statement: >-
       Conditional bridge: if the N=4 ratio window always forces some
       polynomial congruence at a=0,1,...,k+1 to fail, then N=4 is a
       counterexample to the full Erdős 686 universal representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_polynomial_prefix_eight_escape
+    statement: >-
+      Conditional bridge: if the bounded polynomial-prefix escape at a=0,1,...,8
+      holds throughout the N=4 ratio window, then N=4 refutes the universal
+      Erdos 686 representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_polynomial_prefix_escape
+    statement: >-
+      Generic global bridge: any fixed finite polynomial-prefix escape
+      throughout the N=4 ratio window would refute the universal Erdos 686
+      representation statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_polynomial_prefix_fifteen_escape
+    statement: >-
+      Global bridge for the current repaired candidate: polynomial-prefix
+      escape at a=0,1,...,15 throughout the N=4 ratio window would refute the
+      universal statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_small_prefix_escape_and_prefix_seven_large_prime
+    statement: >-
+      Final conditional reduction: direct bounded-prefix escape for 5<=k<=7,
+      plus the prefix-seven large-prime theorem for k>=8, would refute the
+      universal Erdos 686 representation statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_small_prefix_three_escape_and_prefix_seven_large_prime
+    statement: >-
+      Sharper final conditional reduction: direct polynomial-prefix escape by
+      a=0,1,2,3 for 5<=k<=7, plus the prefix-seven large-prime theorem for
+      k>=8, would refute the universal Erdos 686 representation statement via
+      N=4.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686

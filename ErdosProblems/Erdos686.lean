@@ -5043,6 +5043,11 @@ def upperBlockEssentialLcm (k n d : ℕ) : ℕ :=
 def skeletonQuotient (k n d j : ℕ) : ℕ :=
   shiftedDiffProductAt k d j / (n + j)
 
+def transitionDenom (k n d j : ℕ) : ℕ :=
+  ((n + j + 1) * (d + k - j)) /
+    Nat.gcd ((n + j + 1) * (d + k - j))
+      ((n + j) * (d - j))
+
 def SmoothUpTo (B a : ℕ) : Prop :=
   ∀ p, p.Prime → p ∣ a → p ≤ B
 
@@ -6515,6 +6520,52 @@ private lemma div_gcd_dvd_of_dvd_mul {a c b : ℕ} (ha : 0 < a) (h : a ∣ c * b
     simpa [g] using Nat.coprime_div_gcd_div_gcd (m := a) (n := c) hgpos
   exact hcop.dvd_of_dvd_mul_left hdiv
 
+private lemma dvd_mul_of_div_gcd_dvd {a c b : ℕ}
+    (h : a / Nat.gcd a c ∣ b) : a ∣ c * b := by
+  let g := Nat.gcd a c
+  have hgdvda : g ∣ a := Nat.gcd_dvd_left a c
+  have hgdvdc : g ∣ c := Nat.gcd_dvd_right a c
+  obtain ⟨t, ht⟩ := h
+  obtain ⟨u, hu⟩ := hgdvdc
+  refine ⟨u * t, ?_⟩
+  have ha_rewrite : g * (a / g) = a := by
+    rw [mul_comm]
+    exact Nat.div_mul_cancel hgdvda
+  calc
+    c * b = (g * u) * ((a / g) * t) := by rw [hu, ht]
+    _ = (g * (a / g)) * (u * t) := by ring
+    _ = a * (u * t) := by rw [ha_rewrite]
+
+private lemma prime_dvd_div_gcd_of_dvd_left_not_dvd_right {a b p : ℕ}
+    (hp : p.Prime) (hpa : p ∣ a) (hpb : ¬ p ∣ b) :
+    p ∣ a / Nat.gcd a b := by
+  let g := Nat.gcd a b
+  have hg_dvd_a : g ∣ a := Nat.gcd_dvd_left a b
+  have hg_dvd_b : g ∣ b := Nat.gcd_dvd_right a b
+  have hnot_pg : ¬ p ∣ g := by
+    intro hpg
+    exact hpb (dvd_trans hpg hg_dvd_b)
+  have hmul : p ∣ g * (a / g) := by
+    rw [Nat.mul_div_cancel' hg_dvd_a]
+    exact hpa
+  exact (Nat.Prime.dvd_mul hp).mp hmul |>.resolve_left hnot_pg
+
+private lemma prime_not_dvd_of_dvd_succ {a p : ℕ}
+    (hp : p.Prime) (hpsucc : p ∣ a + 1) :
+    ¬ p ∣ a := by
+  intro hpa
+  have hp1 : p ∣ 1 := by
+    have hsub : (a + 1) - a = 1 := by omega
+    rw [← hsub]
+    exact Nat.dvd_sub hpsucc hpa
+  exact hp.not_dvd_one hp1
+
+private lemma not_dvd_of_pos_lt {a p : ℕ} (ha0 : 0 < a) (hap : a < p) :
+    ¬ p ∣ a := by
+  intro hpa
+  have hle : p ≤ a := Nat.le_of_dvd ha0 hpa
+  omega
+
 private lemma missing_lcm_cofactor_dvd_overlap_of_dvd_mul {a c b : ℕ}
     (ha : 0 < a) (h : a ∣ c * b) :
     a / Nat.lcm (Nat.gcd a c) (Nat.gcd a b) ∣
@@ -6834,6 +6885,252 @@ theorem skeletonQuotient_succ_relation_four {k n d j : ℕ}
     _ = shiftedDiffProductAt k d j * (d - j) := hrow
     _ = (shiftedDiffProductAt k d j / (n + j) * (n + j)) * (d - j) := by
           rw [hcancelj]
+
+/--
+Row-only version of the consecutive quotient relation.  It needs only the two
+adjacent row divisibilities, not the full `N=4` block equality.
+-/
+theorem skeletonQuotient_succ_relation_of_row_divisibilities {k n d j : ℕ}
+    (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 (k - 1))
+    (hdivj : n + j ∣ shiftedDiffProductAt k d j)
+    (hdivj1 : n + (j + 1) ∣ shiftedDiffProductAt k d (j + 1)) :
+    skeletonQuotient k n d (j + 1) * (n + j + 1) * (d + k - j) =
+      skeletonQuotient k n d j * (n + j) * (d - j) := by
+  have hrow := shiftedDiffProductAt_succ_mul (k := k) (d := d) (j := j) hd hj
+  unfold skeletonQuotient
+  have hcancelj : shiftedDiffProductAt k d j / (n + j) * (n + j) =
+      shiftedDiffProductAt k d j :=
+    Nat.div_mul_cancel hdivj
+  have hcancelj1 : shiftedDiffProductAt k d (j + 1) / (n + (j + 1)) * (n + (j + 1)) =
+      shiftedDiffProductAt k d (j + 1) :=
+    Nat.div_mul_cancel hdivj1
+  calc
+    (shiftedDiffProductAt k d (j + 1) / (n + (j + 1)) * (n + j + 1)) *
+        (d + k - j)
+        = shiftedDiffProductAt k d (j + 1) * (d + k - j) := by
+          rw [show n + j + 1 = n + (j + 1) by omega, hcancelj1]
+    _ = shiftedDiffProductAt k d j * (d - j) := hrow
+    _ = (shiftedDiffProductAt k d j / (n + j) * (n + j)) * (d - j) := by
+          rw [hcancelj]
+
+/--
+Adjacent surviving rows force the transition denominator to divide the current
+row quotient.
+-/
+theorem transitionDenom_dvd_skeletonQuotient_of_adjacent_rows {k n d j : ℕ}
+    (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 (k - 1))
+    (hdivj : n + j ∣ shiftedDiffProductAt k d j)
+    (hdivj1 : n + (j + 1) ∣ shiftedDiffProductAt k d (j + 1)) :
+    transitionDenom k n d j ∣ skeletonQuotient k n d j := by
+  let A := (n + j + 1) * (d + k - j)
+  let B := (n + j) * (d - j)
+  have hrel :=
+    skeletonQuotient_succ_relation_of_row_divisibilities
+      (k := k) (n := n) (d := d) (j := j) hd hj hdivj hdivj1
+  have hApos : 0 < A := by
+    have hj_bounds := Finset.mem_Icc.mp hj
+    have hright : 0 < d + k - j := by
+      have hj_lt_k : j < k := by omega
+      exact Nat.sub_pos_of_lt (lt_of_lt_of_le hj_lt_k (Nat.le_add_left k d))
+    have hleft : 0 < n + j + 1 := by
+      exact Nat.succ_pos (n + j)
+    dsimp [A]
+    exact Nat.mul_pos hleft hright
+  have hA_dvd : A ∣ B * skeletonQuotient k n d j := by
+    refine ⟨skeletonQuotient k n d (j + 1), ?_⟩
+    dsimp [A, B]
+    simpa [mul_assoc, mul_comm, mul_left_comm] using hrel.symm
+  have hden := div_gcd_dvd_of_dvd_mul (a := A) (c := B)
+    (b := skeletonQuotient k n d j) hApos hA_dvd
+  simpa [transitionDenom, A, B, Nat.add_assoc] using hden
+
+/--
+If the current row divides, transition-denominator divisibility forces the next
+row to divide.  Thus the transition denominator is exactly the next-row
+obstruction.
+-/
+theorem row_succ_dvd_of_transitionDenom_dvd_skeletonQuotient {k n d j : ℕ}
+    (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 (k - 1))
+    (hdivj : n + j ∣ shiftedDiffProductAt k d j)
+    (htrans : transitionDenom k n d j ∣ skeletonQuotient k n d j) :
+    n + (j + 1) ∣ shiftedDiffProductAt k d (j + 1) := by
+  let A := (n + j + 1) * (d + k - j)
+  let B := (n + j) * (d - j)
+  let C := d + k - j
+  have hrow := shiftedDiffProductAt_succ_mul (k := k) (d := d) (j := j) hd hj
+  have hcancelj : skeletonQuotient k n d j * (n + j) =
+      shiftedDiffProductAt k d j := by
+    unfold skeletonQuotient
+    exact Nat.div_mul_cancel hdivj
+  have hCpos : 0 < C := by
+    have hj_bounds := Finset.mem_Icc.mp hj
+    have hj_lt_k : j < k := by omega
+    dsimp [C]
+    exact Nat.sub_pos_of_lt (lt_of_lt_of_le hj_lt_k (Nat.le_add_left k d))
+  have hA_dvd_QB : A ∣ B * skeletonQuotient k n d j := by
+    have h := dvd_mul_of_div_gcd_dvd (a := A) (c := B)
+      (b := skeletonQuotient k n d j) ?_
+    · simpa [transitionDenom, A, B, Nat.add_assoc] using h
+    · simpa [transitionDenom, A, B, Nat.add_assoc] using htrans
+  have hrowQ : shiftedDiffProductAt k d (j + 1) * C =
+      skeletonQuotient k n d j * B := by
+    dsimp [B, C]
+    calc
+      shiftedDiffProductAt k d (j + 1) * (d + k - j)
+          = shiftedDiffProductAt k d j * (d - j) := hrow
+      _ = (skeletonQuotient k n d j * (n + j)) * (d - j) := by
+            rw [← hcancelj]
+      _ = skeletonQuotient k n d j * ((n + j) * (d - j)) := by ring
+  have hA_dvd_row : (n + j + 1) * C ∣
+      shiftedDiffProductAt k d (j + 1) * C := by
+    rw [hrowQ]
+    simpa [A, B, mul_comm, mul_left_comm, mul_assoc] using hA_dvd_QB
+  have hnext : n + j + 1 ∣ shiftedDiffProductAt k d (j + 1) := by
+    exact Nat.dvd_of_mul_dvd_mul_right hCpos hA_dvd_row
+  simpa [Nat.add_assoc] using hnext
+
+theorem transitionDenom_dvd_skeletonQuotient_iff_row_succ_dvd {k n d j : ℕ}
+    (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 (k - 1))
+    (hdivj : n + j ∣ shiftedDiffProductAt k d j) :
+    transitionDenom k n d j ∣ skeletonQuotient k n d j ↔
+      n + (j + 1) ∣ shiftedDiffProductAt k d (j + 1) := by
+  constructor
+  · exact row_succ_dvd_of_transitionDenom_dvd_skeletonQuotient hd hj hdivj
+  · intro hdivj1
+    exact transitionDenom_dvd_skeletonQuotient_of_adjacent_rows hd hj hdivj hdivj1
+
+/--
+A transition-denominator escape theorem implies the row-prefix-sixteen escape
+target. If one of rows `1,...,min 15 k` already fails, we are done; otherwise
+the transition escape converts, by the local iff, into failure of the next row.
+-/
+theorem row_prefix_sixteen_escape_of_transition_denominator_escape
+    (htrans : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      (∀ j, j ∈ Finset.Icc 1 (min 15 k) →
+        n + j ∣ shiftedDiffProductAt k d j) →
+      ∃ j, j ∈ Finset.Icc 1 (min 15 (k - 1)) ∧
+        ¬ transitionDenom k n d j ∣ skeletonQuotient k n d j) :
+    ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ n + j ∣ shiftedDiffProductAt k d j := by
+  intro k n d hk hd hup hlo
+  classical
+  by_cases hrows15 : ∀ j, j ∈ Finset.Icc 1 (min 15 k) →
+      n + j ∣ shiftedDiffProductAt k d j
+  · obtain ⟨j, hj, hnottrans⟩ := htrans k n d hk hd hup hlo hrows15
+    have hj_bounds := Finset.mem_Icc.mp hj
+    have hj_le_15 : j ≤ 15 := le_trans hj_bounds.2 (Nat.min_le_left 15 (k - 1))
+    have hj_le_km1 : j ≤ k - 1 := le_trans hj_bounds.2 (Nat.min_le_right 15 (k - 1))
+    have hj_prefix : j ∈ Finset.Icc 1 (min 15 k) := by
+      exact Finset.mem_Icc.mpr ⟨hj_bounds.1, le_min hj_le_15 (by omega)⟩
+    have hj_row : j ∈ Finset.Icc 1 (k - 1) := by
+      exact Finset.mem_Icc.mpr ⟨hj_bounds.1, hj_le_km1⟩
+    have hdivj : n + j ∣ shiftedDiffProductAt k d j := hrows15 j hj_prefix
+    have hfail_next : ¬ n + (j + 1) ∣ shiftedDiffProductAt k d (j + 1) := by
+      intro hnext
+      have htdvd : transitionDenom k n d j ∣ skeletonQuotient k n d j :=
+        (transitionDenom_dvd_skeletonQuotient_iff_row_succ_dvd hd hj_row hdivj).mpr hnext
+      exact hnottrans htdvd
+    refine ⟨j + 1, ?_, ?_, ?_⟩
+    · exact Finset.mem_Icc.mpr ⟨by omega, by omega⟩
+    · omega
+    · simpa [Nat.add_assoc] using hfail_next
+  · simp only [not_forall] at hrows15
+    obtain ⟨j, hj, hfail⟩ := hrows15
+    have hj_bounds := Finset.mem_Icc.mp hj
+    refine ⟨j, ?_, ?_, hfail⟩
+    · exact Finset.mem_Icc.mpr ⟨hj_bounds.1, le_trans hj_bounds.2 (Nat.min_le_right 15 k)⟩
+    · have hj_le_15 : j ≤ 15 := le_trans hj_bounds.2 (Nat.min_le_left 15 k)
+      omega
+
+/--
+Splits the row-prefix-sixteen target into the two remaining mathematical
+obligations: the boundary row-sixteen failure after rows `1,...,15` for
+`k >= 16`, and full-row escape for the finite range `5 <= k <= 15`.
+-/
+theorem row_prefix_sixteen_escape_of_boundary_and_small_k_escape
+    (hboundary : ∀ k n d : ℕ, 16 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      (∀ j, j ∈ Finset.Icc 1 15 → n + j ∣ shiftedDiffProductAt k d j) →
+      ¬ n + 16 ∣ shiftedDiffProductAt k d 16)
+    (hsmall : ∀ k n d : ℕ, 5 ≤ k → k ≤ 15 → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j) :
+    ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ n + j ∣ shiftedDiffProductAt k d j := by
+  intro k n d hk hd hup hlo
+  by_cases hk16 : 16 ≤ k
+  · by_cases hrows15 : ∀ j, j ∈ Finset.Icc 1 15 →
+        n + j ∣ shiftedDiffProductAt k d j
+    · refine ⟨16, ?_, le_rfl, ?_⟩
+      · exact Finset.mem_Icc.mpr ⟨by norm_num, hk16⟩
+      · exact hboundary k n d hk16 hd hup hlo hrows15
+    · classical
+      simp only [not_forall] at hrows15
+      obtain ⟨j, hj, hfail⟩ := hrows15
+      have hj_bounds := Finset.mem_Icc.mp hj
+      refine ⟨j, ?_, ?_, hfail⟩
+      · exact Finset.mem_Icc.mpr ⟨hj_bounds.1, by omega⟩
+      · omega
+  · have hk15 : k ≤ 15 := by omega
+    obtain ⟨j, hj, hfail⟩ := hsmall k n d hk hk15 hd hup hlo
+    have hj_bounds := Finset.mem_Icc.mp hj
+    refine ⟨j, hj, ?_, hfail⟩
+    omega
+
+/--
+For the `k >= 16` boundary, once rows `1,...,15` divide, row-sixteen escape is
+equivalent to failure of the single transition denominator at `j=15`.
+-/
+theorem row_sixteen_escape_after_rows_fifteen_iff_transition_fifteen_escape
+    {k n d : ℕ} (hk : 16 ≤ k) (hd : k ≤ d)
+    (hrows15 : ∀ j, j ∈ Finset.Icc 1 15 →
+      n + j ∣ shiftedDiffProductAt k d j) :
+    (¬ transitionDenom k n d 15 ∣ skeletonQuotient k n d 15) ↔
+      ¬ n + 16 ∣ shiftedDiffProductAt k d 16 := by
+  have hj : 15 ∈ Finset.Icc 1 (k - 1) := by
+    exact Finset.mem_Icc.mpr ⟨by norm_num, by omega⟩
+  have hdiv15 : n + 15 ∣ shiftedDiffProductAt k d 15 := by
+    exact hrows15 15 (by norm_num)
+  have hiff := transitionDenom_dvd_skeletonQuotient_iff_row_succ_dvd
+    (k := k) (n := n) (d := d) (j := 15) hd hj hdiv15
+  simpa [Nat.add_assoc] using not_congr hiff
+
+/--
+The row-prefix-sixteen target follows from the exact boundary valuation-defect
+form at `j=15`, plus the separate full-row escape theorem for `5 <= k <= 15`.
+-/
+theorem row_prefix_sixteen_escape_of_transition_fifteen_and_small_k_escape
+    (hboundary : ∀ k n d : ℕ, 16 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      (∀ j, j ∈ Finset.Icc 1 15 →
+        n + j ∣ shiftedDiffProductAt k d j) →
+      ¬ transitionDenom k n d 15 ∣ skeletonQuotient k n d 15)
+    (hsmall : ∀ k n d : ℕ, 5 ≤ k → k ≤ 15 → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j) :
+    ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ n + j ∣ shiftedDiffProductAt k d j := by
+  apply row_prefix_sixteen_escape_of_boundary_and_small_k_escape
+  · intro k n d hk hd hup hlo hrows15
+    exact (row_sixteen_escape_after_rows_fifteen_iff_transition_fifteen_escape
+      (k := k) (n := n) (d := d) hk hd hrows15).mp
+      (hboundary k n d hk hd hup hlo hrows15)
+  · exact hsmall
 
 theorem skeletonQuotient_pos_four {k n d j : ℕ}
     (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 k)
@@ -7964,6 +8261,46 @@ lemma k_five_ratio_window_linear_bounds {n d : ℕ}
     omega
   · have h := k_five_ratio_window_upper_linear hup
     omega
+
+/--
+Compact integer bounds for `n` in the `k=6`, `N=4` ratio window, using the
+exact rational brackets `5/4 < 4^(1/6) < 63/50`.
+-/
+lemma k_six_ratio_window_linear_bounds {n d : ℕ}
+    (hlo : (n + d + 6) ^ 6 ≤ 4 * (n + 6) ^ 6)
+    (hup : 4 * (n + 1) ^ 6 ≤ (n + d + 1) ^ 6) :
+    50 * d < 13 * (n + 6) ∧ n + 1 < 4 * d := by
+  constructor
+  · have hgap :=
+      ratio_window_gap_bound_of_pow_bracket
+        (N := 4) (A := 63) (B := 50) (k := 6) (n := n) (d := d)
+        (by norm_num) (by norm_num) (by norm_num) hlo
+    simpa using hgap
+  · have hgap :=
+      ratio_window_upper_gap_bound_of_pow_bracket
+        (N := 4) (A := 5) (B := 4) (k := 6) (n := n) (d := d)
+        (by norm_num) (by norm_num) (by norm_num) hup
+    simpa using hgap
+
+/--
+Compact integer bounds for `n` in the `k=7`, `N=4` ratio window, using the
+exact rational brackets `39/32 < 4^(1/7) < 50/41`.
+-/
+lemma k_seven_ratio_window_linear_bounds {n d : ℕ}
+    (hlo : (n + d + 7) ^ 7 ≤ 4 * (n + 7) ^ 7)
+    (hup : 4 * (n + 1) ^ 7 ≤ (n + d + 1) ^ 7) :
+    41 * d < 9 * (n + 7) ∧ 7 * (n + 1) < 32 * d := by
+  constructor
+  · have hgap :=
+      ratio_window_gap_bound_of_pow_bracket
+        (N := 4) (A := 50) (B := 41) (k := 7) (n := n) (d := d)
+        (by norm_num) (by norm_num) (by norm_num) hlo
+    simpa using hgap
+  · have hgap :=
+      ratio_window_upper_gap_bound_of_pow_bracket
+        (N := 4) (A := 39) (B := 32) (k := 7) (n := n) (d := d)
+        (by norm_num) (by norm_num) (by norm_num) hup
+    simpa using hgap
 
 /--
 Uniform `k=5` ratio-window bound used by the finite gap certificates: if
@@ -10374,6 +10711,630 @@ theorem k_five_exact_reduced_s_lt_2500_contradiction {s t : ℕ}
     exact k_five_exact_reduced_s_2250_2500_contradiction
       hs2250_le hs2500 ht371 hlower hupper hdiv3 hrow1 hrow2
 
+set_option maxRecDepth 460000 in
+set_option maxHeartbeats 30000000 in
+-- Exhaustive kernel-checked certificate over `2500≤s<2750` and `0≤t<398`.
+private theorem k_five_exact_reduced_s_2500_2750_cert :
+    ∀ (r : Fin 250) (t : Fin 398),
+      let s := 2500 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_2500_2750_contradiction {s t : ℕ}
+    (hs2500 : 2500 ≤ s) (hs2750 : s < 2750) (ht398 : t < 398)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 2500 < 250 := by omega
+  have hs_eq : 2500 + (s - 2500) = s := by omega
+  exact k_five_exact_reduced_s_2500_2750_cert
+    ⟨s - 2500, hr250⟩ ⟨t, ht398⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_2750_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs2750 : s < 2750) (ht398 : t < 398)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs2500 : s < 2500
+  · have ht371 : t < 371 := by omega
+    exact k_five_exact_reduced_s_lt_2500_contradiction
+      hs13 hs2500 ht371 hlower hupper hdiv3 hrow1 hrow2
+  · have hs2500_le : 2500 ≤ s := by omega
+    exact k_five_exact_reduced_s_2500_2750_contradiction
+      hs2500_le hs2750 ht398 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 500000 in
+set_option maxHeartbeats 34000000 in
+-- Exhaustive kernel-checked certificate over `2750≤s<3000` and `0≤t<426`.
+private theorem k_five_exact_reduced_s_2750_3000_cert :
+    ∀ (r : Fin 250) (t : Fin 426),
+      let s := 2750 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_2750_3000_contradiction {s t : ℕ}
+    (hs2750 : 2750 ≤ s) (hs3000 : s < 3000) (ht426 : t < 426)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 2750 < 250 := by omega
+  have hs_eq : 2750 + (s - 2750) = s := by omega
+  exact k_five_exact_reduced_s_2750_3000_cert
+    ⟨s - 2750, hr250⟩ ⟨t, ht426⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_3000_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs3000 : s < 3000) (ht426 : t < 426)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs2750 : s < 2750
+  · have ht398 : t < 398 := by omega
+    exact k_five_exact_reduced_s_lt_2750_contradiction
+      hs13 hs2750 ht398 hlower hupper hdiv3 hrow1 hrow2
+  · have hs2750_le : 2750 ≤ s := by omega
+    exact k_five_exact_reduced_s_2750_3000_contradiction
+      hs2750_le hs3000 ht426 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 540000 in
+set_option maxHeartbeats 36000000 in
+-- Exhaustive kernel-checked certificate over `3000≤s<3250` and `0≤t<454`.
+private theorem k_five_exact_reduced_s_3000_3250_cert :
+    ∀ (r : Fin 250) (t : Fin 454),
+      let s := 3000 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_3000_3250_contradiction {s t : ℕ}
+    (hs3000 : 3000 ≤ s) (hs3250 : s < 3250) (ht454 : t < 454)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 3000 < 250 := by omega
+  have hs_eq : 3000 + (s - 3000) = s := by omega
+  exact k_five_exact_reduced_s_3000_3250_cert
+    ⟨s - 3000, hr250⟩ ⟨t, ht454⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_3250_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs3250 : s < 3250) (ht454 : t < 454)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs3000 : s < 3000
+  · have ht426 : t < 426 := by omega
+    exact k_five_exact_reduced_s_lt_3000_contradiction
+      hs13 hs3000 ht426 hlower hupper hdiv3 hrow1 hrow2
+  · have hs3000_le : 3000 ≤ s := by omega
+    exact k_five_exact_reduced_s_3000_3250_contradiction
+      hs3000_le hs3250 ht454 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 580000 in
+set_option maxHeartbeats 39000000 in
+-- Exhaustive kernel-checked certificate over `3250≤s<3500` and `0≤t<482`.
+private theorem k_five_exact_reduced_s_3250_3500_cert :
+    ∀ (r : Fin 250) (t : Fin 482),
+      let s := 3250 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_3250_3500_contradiction {s t : ℕ}
+    (hs3250 : 3250 ≤ s) (hs3500 : s < 3500) (ht482 : t < 482)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 3250 < 250 := by omega
+  have hs_eq : 3250 + (s - 3250) = s := by omega
+  exact k_five_exact_reduced_s_3250_3500_cert
+    ⟨s - 3250, hr250⟩ ⟨t, ht482⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_3500_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs3500 : s < 3500) (ht482 : t < 482)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs3250 : s < 3250
+  · have ht454 : t < 454 := by omega
+    exact k_five_exact_reduced_s_lt_3250_contradiction
+      hs13 hs3250 ht454 hlower hupper hdiv3 hrow1 hrow2
+  · have hs3250_le : 3250 ≤ s := by omega
+    exact k_five_exact_reduced_s_3250_3500_contradiction
+      hs3250_le hs3500 ht482 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 620000 in
+set_option maxHeartbeats 42000000 in
+-- Exhaustive kernel-checked certificate over `3500≤s<3750` and `0≤t<510`.
+private theorem k_five_exact_reduced_s_3500_3750_cert :
+    ∀ (r : Fin 250) (t : Fin 510),
+      let s := 3500 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_3500_3750_contradiction {s t : ℕ}
+    (hs3500 : 3500 ≤ s) (hs3750 : s < 3750) (ht510 : t < 510)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 3500 < 250 := by omega
+  have hs_eq : 3500 + (s - 3500) = s := by omega
+  exact k_five_exact_reduced_s_3500_3750_cert
+    ⟨s - 3500, hr250⟩ ⟨t, ht510⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_3750_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs3750 : s < 3750) (ht510 : t < 510)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs3500 : s < 3500
+  · have ht482 : t < 482 := by omega
+    exact k_five_exact_reduced_s_lt_3500_contradiction
+      hs13 hs3500 ht482 hlower hupper hdiv3 hrow1 hrow2
+  · have hs3500_le : 3500 ≤ s := by omega
+    exact k_five_exact_reduced_s_3500_3750_contradiction
+      hs3500_le hs3750 ht510 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 660000 in
+set_option maxHeartbeats 45000000 in
+-- Exhaustive kernel-checked certificate over `3750≤s<4000` and `0≤t<537`.
+private theorem k_five_exact_reduced_s_3750_4000_cert :
+    ∀ (r : Fin 250) (t : Fin 537),
+      let s := 3750 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_3750_4000_contradiction {s t : ℕ}
+    (hs3750 : 3750 ≤ s) (hs4000 : s < 4000) (ht537 : t < 537)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 3750 < 250 := by omega
+  have hs_eq : 3750 + (s - 3750) = s := by omega
+  exact k_five_exact_reduced_s_3750_4000_cert
+    ⟨s - 3750, hr250⟩ ⟨t, ht537⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_4000_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs4000 : s < 4000) (ht537 : t < 537)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs3750 : s < 3750
+  · have ht510 : t < 510 := by omega
+    exact k_five_exact_reduced_s_lt_3750_contradiction
+      hs13 hs3750 ht510 hlower hupper hdiv3 hrow1 hrow2
+  · have hs3750_le : 3750 ≤ s := by omega
+    exact k_five_exact_reduced_s_3750_4000_contradiction
+      hs3750_le hs4000 ht537 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 700000 in
+set_option maxHeartbeats 48000000 in
+-- Exhaustive kernel-checked certificate over `4000≤s<4250` and `0≤t<565`.
+private theorem k_five_exact_reduced_s_4000_4250_cert :
+    ∀ (r : Fin 250) (t : Fin 565),
+      let s := 4000 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_4000_4250_contradiction {s t : ℕ}
+    (hs4000 : 4000 ≤ s) (hs4250 : s < 4250) (ht565 : t < 565)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 4000 < 250 := by omega
+  have hs_eq : 4000 + (s - 4000) = s := by omega
+  exact k_five_exact_reduced_s_4000_4250_cert
+    ⟨s - 4000, hr250⟩ ⟨t, ht565⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_4250_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs4250 : s < 4250) (ht565 : t < 565)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs4000 : s < 4000
+  · have ht537 : t < 537 := by omega
+    exact k_five_exact_reduced_s_lt_4000_contradiction
+      hs13 hs4000 ht537 hlower hupper hdiv3 hrow1 hrow2
+  · have hs4000_le : 4000 ≤ s := by omega
+    exact k_five_exact_reduced_s_4000_4250_contradiction
+      hs4000_le hs4250 ht565 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 740000 in
+set_option maxHeartbeats 51000000 in
+-- Exhaustive kernel-checked certificate over `4250≤s<4500` and `0≤t<593`.
+private theorem k_five_exact_reduced_s_4250_4500_cert :
+    ∀ (r : Fin 250) (t : Fin 593),
+      let s := 4250 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_4250_4500_contradiction {s t : ℕ}
+    (hs4250 : 4250 ≤ s) (hs4500 : s < 4500) (ht593 : t < 593)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 4250 < 250 := by omega
+  have hs_eq : 4250 + (s - 4250) = s := by omega
+  exact k_five_exact_reduced_s_4250_4500_cert
+    ⟨s - 4250, hr250⟩ ⟨t, ht593⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_4500_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs4500 : s < 4500) (ht593 : t < 593)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs4250 : s < 4250
+  · have ht565 : t < 565 := by omega
+    exact k_five_exact_reduced_s_lt_4250_contradiction
+      hs13 hs4250 ht565 hlower hupper hdiv3 hrow1 hrow2
+  · have hs4250_le : 4250 ≤ s := by omega
+    exact k_five_exact_reduced_s_4250_4500_contradiction
+      hs4250_le hs4500 ht593 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 780000 in
+set_option maxHeartbeats 54000000 in
+-- Exhaustive kernel-checked certificate over `4500≤s<4750` and `0≤t<621`.
+private theorem k_five_exact_reduced_s_4500_4750_cert :
+    ∀ (r : Fin 250) (t : Fin 621),
+      let s := 4500 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_4500_4750_contradiction {s t : ℕ}
+    (hs4500 : 4500 ≤ s) (hs4750 : s < 4750) (ht621 : t < 621)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 4500 < 250 := by omega
+  have hs_eq : 4500 + (s - 4500) = s := by omega
+  exact k_five_exact_reduced_s_4500_4750_cert
+    ⟨s - 4500, hr250⟩ ⟨t, ht621⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_4750_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs4750 : s < 4750) (ht621 : t < 621)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs4500 : s < 4500
+  · have ht593 : t < 593 := by omega
+    exact k_five_exact_reduced_s_lt_4500_contradiction
+      hs13 hs4500 ht593 hlower hupper hdiv3 hrow1 hrow2
+  · have hs4500_le : 4500 ≤ s := by omega
+    exact k_five_exact_reduced_s_4500_4750_contradiction
+      hs4500_le hs4750 ht621 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 820000 in
+set_option maxHeartbeats 57000000 in
+-- Exhaustive kernel-checked certificate over `4750≤s<5000` and `0≤t<648`.
+private theorem k_five_exact_reduced_s_4750_5000_cert :
+    ∀ (r : Fin 250) (t : Fin 648),
+      let s := 4750 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_4750_5000_contradiction {s t : ℕ}
+    (hs4750 : 4750 ≤ s) (hs5000 : s < 5000) (ht648 : t < 648)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 4750 < 250 := by omega
+  have hs_eq : 4750 + (s - 4750) = s := by omega
+  exact k_five_exact_reduced_s_4750_5000_cert
+    ⟨s - 4750, hr250⟩ ⟨t, ht648⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_5000_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs5000 : s < 5000) (ht648 : t < 648)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs4750 : s < 4750
+  · have ht621 : t < 621 := by omega
+    exact k_five_exact_reduced_s_lt_4750_contradiction
+      hs13 hs4750 ht621 hlower hupper hdiv3 hrow1 hrow2
+  · have hs4750_le : 4750 ≤ s := by omega
+    exact k_five_exact_reduced_s_4750_5000_contradiction
+      hs4750_le hs5000 ht648 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 870000 in
+set_option maxHeartbeats 61000000 in
+-- Exhaustive kernel-checked certificate over `5000≤s<5250` and `0≤t<676`.
+private theorem k_five_exact_reduced_s_5000_5250_cert :
+    ∀ (r : Fin 250) (t : Fin 676),
+      let s := 5000 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_5000_5250_contradiction {s t : ℕ}
+    (hs5000 : 5000 ≤ s) (hs5250 : s < 5250) (ht676 : t < 676)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 5000 < 250 := by omega
+  have hs_eq : 5000 + (s - 5000) = s := by omega
+  exact k_five_exact_reduced_s_5000_5250_cert
+    ⟨s - 5000, hr250⟩ ⟨t, ht676⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_5250_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs5250 : s < 5250) (ht676 : t < 676)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs5000 : s < 5000
+  · have ht648 : t < 648 := by omega
+    exact k_five_exact_reduced_s_lt_5000_contradiction
+      hs13 hs5000 ht648 hlower hupper hdiv3 hrow1 hrow2
+  · have hs5000_le : 5000 ≤ s := by omega
+    exact k_five_exact_reduced_s_5000_5250_contradiction
+      hs5000_le hs5250 ht676 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 920000 in
+set_option maxHeartbeats 65000000 in
+-- Exhaustive kernel-checked certificate over `5250≤s<5500` and `0≤t<704`.
+private theorem k_five_exact_reduced_s_5250_5500_cert :
+    ∀ (r : Fin 250) (t : Fin 704),
+      let s := 5250 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_5250_5500_contradiction {s t : ℕ}
+    (hs5250 : 5250 ≤ s) (hs5500 : s < 5500) (ht704 : t < 704)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 5250 < 250 := by omega
+  have hs_eq : 5250 + (s - 5250) = s := by omega
+  exact k_five_exact_reduced_s_5250_5500_cert
+    ⟨s - 5250, hr250⟩ ⟨t, ht704⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_5500_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs5500 : s < 5500) (ht704 : t < 704)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs5250 : s < 5250
+  · have ht676 : t < 676 := by omega
+    exact k_five_exact_reduced_s_lt_5250_contradiction
+      hs13 hs5250 ht676 hlower hupper hdiv3 hrow1 hrow2
+  · have hs5250_le : 5250 ≤ s := by omega
+    exact k_five_exact_reduced_s_5250_5500_contradiction
+      hs5250_le hs5500 ht704 hlower hupper hdiv3 hrow1 hrow2
+
+set_option maxRecDepth 970000 in
+set_option maxHeartbeats 70000000 in
+-- Exhaustive kernel-checked certificate over `5500≤s<5750` and `0≤t<732`.
+private theorem k_five_exact_reduced_s_5500_5750_cert :
+    ∀ (r : Fin 250) (t : Fin 732),
+      let s := 5500 + (r : ℕ)
+      4 * s < 37 * (t : ℕ) →
+      9 * (t : ℕ) < s + 832 →
+      3 ∣ 23 * s + (t : ℕ) →
+      24 * s + (t : ℕ) ∣ kFiveExactRowOneST s (t : ℕ) →
+      24 * s + (t : ℕ) + 1 ∣ kFiveExactRowTwoST s (t : ℕ) →
+      False := by
+  decide
+
+theorem k_five_exact_reduced_s_5500_5750_contradiction {s t : ℕ}
+    (hs5500 : 5500 ≤ s) (hs5750 : s < 5750) (ht732 : t < 732)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  have hr250 : s - 5500 < 250 := by omega
+  have hs_eq : 5500 + (s - 5500) = s := by omega
+  exact k_five_exact_reduced_s_5500_5750_cert
+    ⟨s - 5500, hr250⟩ ⟨t, ht732⟩
+    (by simpa [hs_eq] using hlower)
+    (by simpa [hs_eq] using hupper)
+    (by simpa [hs_eq] using hdiv3)
+    (by simpa [hs_eq] using hrow1)
+    (by simpa [hs_eq] using hrow2)
+
+theorem k_five_exact_reduced_s_lt_5750_contradiction {s t : ℕ}
+    (hs13 : 13 ≤ s) (hs5750 : s < 5750) (ht732 : t < 732)
+    (hlower : 4 * s < 37 * t)
+    (hupper : 9 * t < s + 832)
+    (hdiv3 : 3 ∣ 23 * s + t)
+    (hrow1 : 24 * s + t ∣ kFiveExactRowOneST s t)
+    (hrow2 : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t) :
+    False := by
+  by_cases hs5500 : s < 5500
+  · have ht704 : t < 704 := by omega
+    exact k_five_exact_reduced_s_lt_5500_contradiction
+      hs13 hs5500 ht704 hlower hupper hdiv3 hrow1 hrow2
+  · have hs5500_le : 5500 ≤ s := by omega
+    exact k_five_exact_reduced_s_5500_5750_contradiction
+      hs5500_le hs5750 ht732 hlower hupper hdiv3 hrow1 hrow2
+
 /--
 Bridge to the combined `t`-product target.  To finish the remaining `k=5`,
 `N=4` case it is enough to prove that no `s,t` in the exact linearized window
@@ -10429,6 +11390,68 @@ theorem no_solution_four_five_gap_lt_7703 :
       individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
     have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
       individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction hd125 hlin_lower hlin_upper hrow1 hrow2
+    have hs1000 : s < 1000 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht204 : t < 204 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_1000_contradiction
+      hs13 hs1000 ht204 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<7703` slice.  This exposes
+the same finite certificate as a local divisor-skeleton obstruction, which is
+the shape needed by the small-`k` branch of the row-prefix-sixteen strategy.
+-/
+theorem k_five_gap_lt_7703_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd7703 : d < 7703)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd125_lt : d < 125
+  · exact k_five_gap_lt_125_divisor_skeleton_escape hd5 hd125_lt hlo hup
+  · have hd125 : 125 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
     obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
       k_five_first_two_rows_linear_reduction hd125 hlin_lower hlin_upper hrow1 hrow2
     have hs1000 : s < 1000 := by
@@ -10539,6 +11562,80 @@ theorem no_solution_four_five_gap_lt_9584 :
         hs1000_le hs1250 ht232 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
 
 /--
+Direct row-escape form of the verified `k=5`, `d<9584` slice.  This extends
+the `d<7703` local divisor-skeleton obstruction by adding the next exact
+reduced `s,t` certificate slice.
+-/
+theorem k_five_gap_lt_9584_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd9584 : d < 9584)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd7703 : d < 7703
+  · exact k_five_gap_lt_7703_divisor_skeleton_escape hd5 hd7703 hlo hup
+  · have hd7703_le : 7703 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs1250 : s < 1250 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht232 : t < 232 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have ht204_of_s1000 : s < 1000 → t < 204 := by
+      intro hs1000
+      have hupper' : 9 * t < s + 832 := by
+        have hupper'' : 27 * (24 * s + t) < 651 * s + 2496 := by
+          simpa [ht_eq] using hA_upper
+        omega
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    by_cases hs1000 : s < 1000
+    · exact k_five_exact_reduced_s_lt_1000_contradiction
+        hs13 hs1000 (ht204_of_s1000 hs1000) hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+    · have hs1000_le : 1000 ≤ s := by omega
+      exact k_five_exact_reduced_s_1000_1250_contradiction
+        hs1000_le hs1250 ht232 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
 Using the first three exact reduced `s,t` certificate slices, the verified
 `k=5`, `N=4` exclusion extends to gap `<11555`.
 -/
@@ -10598,6 +11695,69 @@ theorem no_solution_four_five_gap_lt_11555 :
     simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
   exact k_five_exact_reduced_s_lt_1500_contradiction
     hs13 hs1500 ht259 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<11555` slice.  This extends
+the local divisor-skeleton obstruction through the first three exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_11555_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd11555 : d < 11555)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd9584 : d < 9584
+  · exact k_five_gap_lt_9584_divisor_skeleton_escape hd5 hd9584 hlo hup
+  · have hd9584_le : 9584 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs1500 : s < 1500 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht259 : t < 259 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_1500_contradiction
+      hs13 hs1500 ht259 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
 
 /--
 Using the first four exact reduced `s,t` certificate slices, the verified
@@ -10661,6 +11821,69 @@ theorem no_solution_four_five_gap_lt_13480 :
     hs13 hs1750 ht287 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
 
 /--
+Direct row-escape form of the verified `k=5`, `d<13480` slice.  This extends
+the local divisor-skeleton obstruction through the first four exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_13480_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd13480 : d < 13480)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd11555 : d < 11555
+  · exact k_five_gap_lt_11555_divisor_skeleton_escape hd5 hd11555 hlo hup
+  · have hd11555_le : 11555 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs1750 : s < 1750 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht287 : t < 287 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_1750_contradiction
+      hs13 hs1750 ht287 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
 Using the first five exact reduced `s,t` certificate slices, the verified
 `k=5`, `N=4` exclusion extends to gap `<15406`.
 -/
@@ -10719,6 +11942,69 @@ theorem no_solution_four_five_gap_lt_15406 :
     simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
   exact k_five_exact_reduced_s_lt_2000_contradiction
     hs13 hs2000 ht315 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<15406` slice.  This extends
+the local divisor-skeleton obstruction through the first five exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_15406_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd15406 : d < 15406)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd13480 : d < 13480
+  · exact k_five_gap_lt_13480_divisor_skeleton_escape hd5 hd13480 hlo hup
+  · have hd13480_le : 13480 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs2000 : s < 2000 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht315 : t < 315 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_2000_contradiction
+      hs13 hs2000 ht315 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
 
 /--
 Using the first six exact reduced `s,t` certificate slices, the verified
@@ -10781,6 +12067,69 @@ theorem no_solution_four_five_gap_lt_17332 :
     hs13 hs2250 ht343 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
 
 /--
+Direct row-escape form of the verified `k=5`, `d<17332` slice.  This extends
+the local divisor-skeleton obstruction through the first six exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_17332_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd17332 : d < 17332)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd15406 : d < 15406
+  · exact k_five_gap_lt_15406_divisor_skeleton_escape hd5 hd15406 hlo hup
+  · have hd15406_le : 15406 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs2250 : s < 2250 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht343 : t < 343 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_2250_contradiction
+      hs13 hs2250 ht343 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
 Using the first seven exact reduced `s,t` certificate slices, the verified
 `k=5`, `N=4` exclusion extends to gap `<19257`.
 -/
@@ -10839,6 +12188,1668 @@ theorem no_solution_four_five_gap_lt_19257 :
     simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
   exact k_five_exact_reduced_s_lt_2500_contradiction
     hs13 hs2500 ht371 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<19257` slice.  This extends
+the local divisor-skeleton obstruction through the first seven exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_19257_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd19257 : d < 19257)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd17332 : d < 17332
+  · exact k_five_gap_lt_17332_divisor_skeleton_escape hd5 hd17332 hlo hup
+  · have hd17332_le : 17332 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs2500 : s < 2500 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht371 : t < 371 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_2500_contradiction
+      hs13 hs2500 ht371 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first eight exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<21183`.
+-/
+theorem no_solution_four_five_gap_lt_21183 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 21183 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap19257 : m < n + 19257
+  · exact no_solution_four_five_gap_lt_19257 ⟨n, m, hm, hgap19257, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd21183 : d < 21183 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs2750 : s < 2750 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht398 : t < 398 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_2750_contradiction
+    hs13 hs2750 ht398 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<21183` slice.  This extends
+the local divisor-skeleton obstruction through the first eight exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_21183_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd21183 : d < 21183)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd19257 : d < 19257
+  · exact k_five_gap_lt_19257_divisor_skeleton_escape hd5 hd19257 hlo hup
+  · have hd19257_le : 19257 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs2750 : s < 2750 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht398 : t < 398 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_2750_contradiction
+      hs13 hs2750 ht398 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first nine exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<23109`.
+-/
+theorem no_solution_four_five_gap_lt_23109 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 23109 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap21183 : m < n + 21183
+  · exact no_solution_four_five_gap_lt_21183 ⟨n, m, hm, hgap21183, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd23109 : d < 23109 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs3000 : s < 3000 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht426 : t < 426 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_3000_contradiction
+    hs13 hs3000 ht426 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<23109` slice.  This extends
+the local divisor-skeleton obstruction through the first nine exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_23109_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd23109 : d < 23109)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd21183 : d < 21183
+  · exact k_five_gap_lt_21183_divisor_skeleton_escape hd5 hd21183 hlo hup
+  · have hd21183_le : 21183 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs3000 : s < 3000 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht426 : t < 426 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_3000_contradiction
+      hs13 hs3000 ht426 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first ten exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<25034`.
+-/
+theorem no_solution_four_five_gap_lt_25034 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 25034 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap23109 : m < n + 23109
+  · exact no_solution_four_five_gap_lt_23109 ⟨n, m, hm, hgap23109, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd25034 : d < 25034 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs3250 : s < 3250 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht454 : t < 454 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_3250_contradiction
+    hs13 hs3250 ht454 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<25034` slice.  This extends
+the local divisor-skeleton obstruction through the first ten exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_25034_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd25034 : d < 25034)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd23109 : d < 23109
+  · exact k_five_gap_lt_23109_divisor_skeleton_escape hd5 hd23109 hlo hup
+  · have hd23109_le : 23109 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs3250 : s < 3250 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht454 : t < 454 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_3250_contradiction
+      hs13 hs3250 ht454 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first eleven exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<26960`.
+-/
+theorem no_solution_four_five_gap_lt_26960 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 26960 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap25034 : m < n + 25034
+  · exact no_solution_four_five_gap_lt_25034 ⟨n, m, hm, hgap25034, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd26960 : d < 26960 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs3500 : s < 3500 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht482 : t < 482 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_3500_contradiction
+    hs13 hs3500 ht482 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<26960` slice.  This extends
+the local divisor-skeleton obstruction through the first eleven exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_26960_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd26960 : d < 26960)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd25034 : d < 25034
+  · exact k_five_gap_lt_25034_divisor_skeleton_escape hd5 hd25034 hlo hup
+  · have hd25034_le : 25034 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs3500 : s < 3500 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht482 : t < 482 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_3500_contradiction
+      hs13 hs3500 ht482 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first twelve exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<28886`.
+-/
+theorem no_solution_four_five_gap_lt_28886 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 28886 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap26960 : m < n + 26960
+  · exact no_solution_four_five_gap_lt_26960 ⟨n, m, hm, hgap26960, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd28886 : d < 28886 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs3750 : s < 3750 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht510 : t < 510 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_3750_contradiction
+    hs13 hs3750 ht510 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<28886` slice.  This extends
+the local divisor-skeleton obstruction through the first twelve exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_28886_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd28886 : d < 28886)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd26960 : d < 26960
+  · exact k_five_gap_lt_26960_divisor_skeleton_escape hd5 hd26960 hlo hup
+  · have hd26960_le : 26960 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs3750 : s < 3750 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht510 : t < 510 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_3750_contradiction
+      hs13 hs3750 ht510 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first thirteen exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<30811`.
+-/
+theorem no_solution_four_five_gap_lt_30811 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 30811 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap28886 : m < n + 28886
+  · exact no_solution_four_five_gap_lt_28886 ⟨n, m, hm, hgap28886, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd30811 : d < 30811 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs4000 : s < 4000 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht537 : t < 537 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_4000_contradiction
+    hs13 hs4000 ht537 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<30811` slice.  This extends
+the local divisor-skeleton obstruction through the first thirteen exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_30811_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd30811 : d < 30811)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd28886 : d < 28886
+  · exact k_five_gap_lt_28886_divisor_skeleton_escape hd5 hd28886 hlo hup
+  · have hd28886_le : 28886 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs4000 : s < 4000 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht537 : t < 537 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_4000_contradiction
+      hs13 hs4000 ht537 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first fourteen exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<32737`.
+-/
+theorem no_solution_four_five_gap_lt_32737 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 32737 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap30811 : m < n + 30811
+  · exact no_solution_four_five_gap_lt_30811 ⟨n, m, hm, hgap30811, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd32737 : d < 32737 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs4250 : s < 4250 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht565 : t < 565 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_4250_contradiction
+    hs13 hs4250 ht565 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<32737` slice.  This extends
+the local divisor-skeleton obstruction through the first fourteen exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_32737_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd32737 : d < 32737)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd30811 : d < 30811
+  · exact k_five_gap_lt_30811_divisor_skeleton_escape hd5 hd30811 hlo hup
+  · have hd30811_le : 30811 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs4250 : s < 4250 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht565 : t < 565 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_4250_contradiction
+      hs13 hs4250 ht565 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first fifteen exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<34663`.
+-/
+theorem no_solution_four_five_gap_lt_34663 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 34663 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap32737 : m < n + 32737
+  · exact no_solution_four_five_gap_lt_32737 ⟨n, m, hm, hgap32737, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd34663 : d < 34663 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs4500 : s < 4500 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht593 : t < 593 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_4500_contradiction
+    hs13 hs4500 ht593 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<34663` slice.  This extends
+the local divisor-skeleton obstruction through the first fifteen exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_34663_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd34663 : d < 34663)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd32737 : d < 32737
+  · exact k_five_gap_lt_32737_divisor_skeleton_escape hd5 hd32737 hlo hup
+  · have hd32737_le : 32737 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs4500 : s < 4500 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht593 : t < 593 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_4500_contradiction
+      hs13 hs4500 ht593 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first sixteen exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<36588`.
+-/
+theorem no_solution_four_five_gap_lt_36588 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 36588 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap34663 : m < n + 34663
+  · exact no_solution_four_five_gap_lt_34663 ⟨n, m, hm, hgap34663, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd36588 : d < 36588 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs4750 : s < 4750 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht621 : t < 621 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_4750_contradiction
+    hs13 hs4750 ht621 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<36588` slice.  This extends
+the local divisor-skeleton obstruction through the first sixteen exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_36588_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd36588 : d < 36588)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd34663 : d < 34663
+  · exact k_five_gap_lt_34663_divisor_skeleton_escape hd5 hd34663 hlo hup
+  · have hd34663_le : 34663 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs4750 : s < 4750 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht621 : t < 621 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_4750_contradiction
+      hs13 hs4750 ht621 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first seventeen exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<38514`.
+-/
+theorem no_solution_four_five_gap_lt_38514 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 38514 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap36588 : m < n + 36588
+  · exact no_solution_four_five_gap_lt_36588 ⟨n, m, hm, hgap36588, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd38514 : d < 38514 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs5000 : s < 5000 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht648 : t < 648 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_5000_contradiction
+    hs13 hs5000 ht648 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<38514` slice.  This extends
+the local divisor-skeleton obstruction through the first seventeen exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_38514_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd38514 : d < 38514)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd36588 : d < 36588
+  · exact k_five_gap_lt_36588_divisor_skeleton_escape hd5 hd36588 hlo hup
+  · have hd36588_le : 36588 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs5000 : s < 5000 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht648 : t < 648 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_5000_contradiction
+      hs13 hs5000 ht648 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first eighteen exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<40440`.
+-/
+theorem no_solution_four_five_gap_lt_40440 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 40440 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap38514 : m < n + 38514
+  · exact no_solution_four_five_gap_lt_38514 ⟨n, m, hm, hgap38514, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd40440 : d < 40440 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs5250 : s < 5250 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht676 : t < 676 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_5250_contradiction
+    hs13 hs5250 ht676 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<40440` slice.  This extends
+the local divisor-skeleton obstruction through the first eighteen exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_40440_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd40440 : d < 40440)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd38514 : d < 38514
+  · exact k_five_gap_lt_38514_divisor_skeleton_escape hd5 hd38514 hlo hup
+  · have hd38514_le : 38514 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs5250 : s < 5250 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht676 : t < 676 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_5250_contradiction
+      hs13 hs5250 ht676 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first nineteen exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<42365`.
+-/
+theorem no_solution_four_five_gap_lt_42365 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 42365 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap40440 : m < n + 40440
+  · exact no_solution_four_five_gap_lt_40440 ⟨n, m, hm, hgap40440, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd42365 : d < 42365 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs5500 : s < 5500 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht704 : t < 704 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_5500_contradiction
+    hs13 hs5500 ht704 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<42365` slice.  This extends
+the local divisor-skeleton obstruction through the first nineteen exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_42365_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd42365 : d < 42365)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd40440 : d < 40440
+  · exact k_five_gap_lt_40440_divisor_skeleton_escape hd5 hd40440 hlo hup
+  · have hd40440_le : 40440 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs5500 : s < 5500 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht704 : t < 704 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_5500_contradiction
+      hs13 hs5500 ht704 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Using the first twenty exact reduced `s,t` certificate slices, the verified
+`k=5`, `N=4` exclusion extends to gap `<44291`.
+-/
+theorem no_solution_four_five_gap_lt_44291 :
+    ¬ ∃ n m : ℕ,
+      m ≥ n + 5 ∧ m < n + 44291 ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 5, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 5, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨n, m, hm, hgap_lt, hq⟩
+  by_cases hgap42365 : m < n + 42365
+  · exact no_solution_four_five_gap_lt_42365 ⟨n, m, hm, hgap42365, hq⟩
+  obtain ⟨d, hd, hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+  have hd44291 : d < 44291 := by omega
+  obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+  obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+  have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+    individual_divisor_skeleton_four hd (by norm_num : 1 ∈ Finset.Icc 1 5) heq
+  have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+    individual_divisor_skeleton_four hd (by norm_num : 2 ∈ Finset.Icc 1 5) heq
+  obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+    k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+      hlin_lower hlin_upper hrow1 hrow2
+  have hs5750 : s < 5750 := by
+    have hupper' : 285 * (3 * d + s) < 892 * d := by
+      simpa [hA] using hlin_upper
+    omega
+  let t := n + 1 - 24 * s
+  have ht_eq : n + 1 = 24 * s + t := by
+    dsimp [t]
+    have h24 : 24 * s < n + 1 := by omega
+    omega
+  have ht732 : t < 732 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hlower_t : 4 * s < 37 * t := by
+    have hlower' : 892 * s < 37 * (24 * s + t) := by
+      simpa [ht_eq] using hA_lower
+    omega
+  have hupper_t : 9 * t < s + 832 := by
+    have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+      simpa [ht_eq] using hA_upper
+    omega
+  have hdt : 23 * s + t = 3 * d := by omega
+  have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+  have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+    have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+      simpa [ht_eq] using hrow1
+    simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+  have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+    have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+      have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        simpa [Nat.add_assoc] using hrow2
+      simpa [ht_eq, Nat.add_assoc] using hrow2'
+    simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+  exact k_five_exact_reduced_s_lt_5750_contradiction
+    hs13 hs5750 ht732 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
+
+/--
+Direct row-escape form of the verified `k=5`, `d<44291` slice.  This extends
+the local divisor-skeleton obstruction through the first twenty exact reduced
+`s,t` certificate slices.
+-/
+theorem k_five_gap_lt_44291_divisor_skeleton_escape
+    {n d : ℕ} (hd5 : 5 ≤ d) (hd44291 : d < 44291)
+    (hlo : (n + d + 5) ^ 5 ≤ 4 * (n + 5) ^ 5)
+    (hup : 4 * (n + 1) ^ 5 ≤ (n + d + 1) ^ 5) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧ ¬ n + j ∣ shiftedDiffProductAt 5 d j := by
+  by_cases hd42365 : d < 42365
+  · exact k_five_gap_lt_42365_divisor_skeleton_escape hd5 hd42365 hlo hup
+  · have hd42365_le : 42365 ≤ d := by omega
+    by_contra hno_escape
+    have hall : ∀ j, j ∈ Finset.Icc 1 5 →
+        n + j ∣ shiftedDiffProductAt 5 d j := by
+      intro j hj
+      by_contra hnot
+      exact hno_escape ⟨j, hj, hnot⟩
+    obtain ⟨hlin_lower, hlin_upper⟩ := k_five_ratio_window_linear_bounds hlo hup
+    have hrow1 : n + 1 ∣ shiftedDiffProductAt 5 d 1 :=
+      hall 1 (by norm_num)
+    have hrow2 : n + 2 ∣ shiftedDiffProductAt 5 d 2 :=
+      hall 2 (by norm_num)
+    obtain ⟨s, hs13, hA, hA_lower, hA_upper, _hrow1_red, _hrow2_red⟩ :=
+      k_five_first_two_rows_linear_reduction (by omega : 125 ≤ d)
+        hlin_lower hlin_upper hrow1 hrow2
+    have hs5750 : s < 5750 := by
+      have hupper' : 285 * (3 * d + s) < 892 * d := by
+        simpa [hA] using hlin_upper
+      omega
+    let t := n + 1 - 24 * s
+    have ht_eq : n + 1 = 24 * s + t := by
+      dsimp [t]
+      have h24 : 24 * s < n + 1 := by omega
+      omega
+    have ht732 : t < 732 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hlower_t : 4 * s < 37 * t := by
+      have hlower' : 892 * s < 37 * (24 * s + t) := by
+        simpa [ht_eq] using hA_lower
+      omega
+    have hupper_t : 9 * t < s + 832 := by
+      have hupper' : 27 * (24 * s + t) < 651 * s + 2496 := by
+        simpa [ht_eq] using hA_upper
+      omega
+    have hdt : 23 * s + t = 3 * d := by omega
+    have hdiv3 : 3 ∣ 23 * s + t := ⟨d, by omega⟩
+    have hrow1_exact : 24 * s + t ∣ kFiveExactRowOneST s t := by
+      have hrow : 24 * s + t ∣ shiftedDiffProductAt 5 d 1 := by
+        simpa [ht_eq] using hrow1
+      simpa [kFiveExactRowOneST_eq_shifted hdt] using hrow
+    have hrow2_exact : 24 * s + t + 1 ∣ kFiveExactRowTwoST s t := by
+      have hrow : 24 * s + t + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+        have hrow2' : (n + 1) + 1 ∣ shiftedDiffProductAt 5 d 2 := by
+          simpa [Nat.add_assoc] using hrow2
+        simpa [ht_eq, Nat.add_assoc] using hrow2'
+      simpa [kFiveExactRowTwoST_eq_shifted hdt (by omega : 1 ≤ d)] using hrow
+    exact k_five_exact_reduced_s_lt_5750_contradiction
+      hs13 hs5750 ht732 hlower_t hupper_t hdiv3 hrow1_exact hrow2_exact
 
 /--
 Focused bridge for the remaining `k=5` case.  If the first two localized
@@ -14093,6 +17104,469 @@ theorem no_solution_four_of_divisor_skeleton_escape
     exact hnot (individual_divisor_skeleton_four hd hj heq)
 
 /--
+Large-prime row escape: if a prime divisor of `n+j` is larger than every factor
+in the shifted row product for row `j`, then the row divisibility fails.
+-/
+theorem row_escape_of_large_prime_in_n_add
+    {k n d j p : ℕ}
+    (hp : p.Prime) (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 k)
+    (hlarge : d + k - j < p) (hpdiv : p ∣ n + j) :
+    ¬ (n + j ∣ shiftedDiffProductAt k d j) := by
+  intro hrow
+  have hp_prod : p ∣ shiftedDiffProductAt k d j :=
+    dvd_trans hpdiv hrow
+  have hp_prod' :
+      p ∣ ∏ i ∈ Finset.Icc 1 k, (d + i - j) := by
+    simpa [shiftedDiffProductAt] using hp_prod
+  obtain ⟨i, hi, hpi⟩ := prime_dvd_finset_prod_exists hp hp_prod'
+  have hi_pos : 1 ≤ i := (Finset.mem_Icc.mp hi).1
+  have hi_le : i ≤ k := (Finset.mem_Icc.mp hi).2
+  have hj_le : j ≤ k := (Finset.mem_Icc.mp hj).2
+  have hpos : 0 < d + i - j := by omega
+  have hp_le : p ≤ d + i - j := Nat.le_of_dvd hpos hpi
+  have hfactor_le : d + i - j ≤ d + k - j := by omega
+  omega
+
+/--
+Surviving row divisibility forces every prime divisor of the lower term to
+appear below the row-specific cap `d+k-j`.
+-/
+theorem row_dvd_prime_le_row_cap
+    {k n d j p : ℕ}
+    (hp : p.Prime) (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 k)
+    (hrow : n + j ∣ shiftedDiffProductAt k d j) (hpdiv : p ∣ n + j) :
+    p ≤ d + k - j := by
+  have hp_prod : p ∣ shiftedDiffProductAt k d j :=
+    dvd_trans hpdiv hrow
+  have hp_prod' :
+      p ∣ ∏ i ∈ Finset.Icc 1 k, (d + i - j) := by
+    simpa [shiftedDiffProductAt] using hp_prod
+  obtain ⟨i, hi, hpi⟩ := prime_dvd_finset_prod_exists hp hp_prod'
+  have hi_pos : 1 ≤ i := (Finset.mem_Icc.mp hi).1
+  have hi_le : i ≤ k := (Finset.mem_Icc.mp hi).2
+  have hj_le : j ≤ k := (Finset.mem_Icc.mp hj).2
+  have hpos : 0 < d + i - j := by omega
+  have hp_le : p ≤ d + i - j := Nat.le_of_dvd hpos hpi
+  have hfactor_le : d + i - j ≤ d + k - j := by omega
+  omega
+
+private lemma prime_not_dvd_shiftedDiffProductAt_of_large
+    {k d j p : ℕ}
+    (hp : p.Prime) (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 k)
+    (hlarge : d + k - j < p) :
+    ¬ p ∣ shiftedDiffProductAt k d j := by
+  intro hp_prod
+  have hp_prod' :
+      p ∣ ∏ i ∈ Finset.Icc 1 k, (d + i - j) := by
+    simpa [shiftedDiffProductAt] using hp_prod
+  obtain ⟨i, hi, hpi⟩ := prime_dvd_finset_prod_exists hp hp_prod'
+  have hi_pos : 1 ≤ i := (Finset.mem_Icc.mp hi).1
+  have hi_le : i ≤ k := (Finset.mem_Icc.mp hi).2
+  have hj_le : j ≤ k := (Finset.mem_Icc.mp hj).2
+  have hpos : 0 < d + i - j := by omega
+  have hp_le : p ≤ d + i - j := Nat.le_of_dvd hpos hpi
+  have hfactor_le : d + i - j ≤ d + k - j := by omega
+  omega
+
+private lemma prime_not_dvd_skeletonQuotient_of_large
+    {k n d j p : ℕ}
+    (hp : p.Prime) (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 k)
+    (hrow : n + j ∣ shiftedDiffProductAt k d j)
+    (hlarge : d + k - j < p) :
+    ¬ p ∣ skeletonQuotient k n d j := by
+  intro hpq
+  have hcancel : skeletonQuotient k n d j * (n + j) =
+      shiftedDiffProductAt k d j := by
+    unfold skeletonQuotient
+    exact Nat.div_mul_cancel hrow
+  have hp_prod : p ∣ shiftedDiffProductAt k d j := by
+    have hmul : p ∣ skeletonQuotient k n d j * (n + j) :=
+      dvd_mul_of_dvd_left hpq (n + j)
+    simpa [hcancel] using hmul
+  exact prime_not_dvd_shiftedDiffProductAt_of_large hp hd hj hlarge hp_prod
+
+/--
+Transition-prime obstruction.  If a prime factor of the next lower term
+`n+j+1` is too large to occur in the current shifted row product and is not
+canceled by the transition overlap `(n+j)(d-j)`, then the transition
+denominator cannot divide the current skeleton quotient.
+
+For the remaining `N=4` boundary target this is intended at `j = 15`: it turns
+the observed `1427 | n+16` pattern into a clean local proof obligation.
+-/
+theorem transitionDenom_not_dvd_skeletonQuotient_of_large_prime_next
+    {k n d j p : ℕ}
+    (hp : p.Prime) (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 (k - 1))
+    (hrow : n + j ∣ shiftedDiffProductAt k d j)
+    (hpnext : p ∣ n + j + 1)
+    (hp_not_prev : ¬ p ∣ n + j)
+    (hp_not_edge : ¬ p ∣ d - j)
+    (hlarge : d + k - j < p) :
+    ¬ transitionDenom k n d j ∣ skeletonQuotient k n d j := by
+  have hjk : j ∈ Finset.Icc 1 k := by
+    exact Finset.mem_Icc.mpr
+      ⟨(Finset.mem_Icc.mp hj).1,
+        le_trans (Finset.mem_Icc.mp hj).2 (Nat.sub_le k 1)⟩
+  have hq_not : ¬ p ∣ skeletonQuotient k n d j :=
+    prime_not_dvd_skeletonQuotient_of_large hp hd hjk hrow hlarge
+  have hA : p ∣ (n + j + 1) * (d + k - j) :=
+    dvd_mul_of_dvd_left hpnext (d + k - j)
+  have hB_not : ¬ p ∣ (n + j) * (d - j) := by
+    intro hpB
+    rcases (Nat.Prime.dvd_mul hp).mp hpB with hp_prev | hp_edge
+    · exact hp_not_prev hp_prev
+    · exact hp_not_edge hp_edge
+  have hp_denom : p ∣ transitionDenom k n d j := by
+    simpa [transitionDenom, Nat.add_assoc] using
+      (prime_dvd_div_gcd_of_dvd_left_not_dvd_right
+        (a := (n + j + 1) * (d + k - j))
+        (b := (n + j) * (d - j)) hp hA hB_not)
+  intro htrans
+  exact hq_not (dvd_trans hp_denom htrans)
+
+/--
+Specialized `j = 15` boundary form.  After rows `1,...,15` divide, a large
+uncanceled prime in `n+16` proves row-sixteen escape.
+-/
+theorem row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen
+    {k n d p : ℕ} (hk : 16 ≤ k) (hd : k ≤ d)
+    (hrows15 : ∀ j, j ∈ Finset.Icc 1 15 →
+      n + j ∣ shiftedDiffProductAt k d j)
+    (hp : p.Prime)
+    (hpnext : p ∣ n + 16)
+    (hp_not_prev : ¬ p ∣ n + 15)
+    (hp_not_edge : ¬ p ∣ d - 15)
+    (hlarge : d + k - 15 < p) :
+    ¬ n + 16 ∣ shiftedDiffProductAt k d 16 := by
+  have hj : 15 ∈ Finset.Icc 1 (k - 1) := by
+    exact Finset.mem_Icc.mpr ⟨by norm_num, by omega⟩
+  have hrow15 : n + 15 ∣ shiftedDiffProductAt k d 15 :=
+    hrows15 15 (by norm_num)
+  have htrans :
+      ¬ transitionDenom k n d 15 ∣ skeletonQuotient k n d 15 := by
+    apply transitionDenom_not_dvd_skeletonQuotient_of_large_prime_next
+      (k := k) (n := n) (d := d) (j := 15) (p := p)
+    · exact hp
+    · exact hd
+    · exact hj
+    · exact hrow15
+    · simpa [Nat.add_assoc] using hpnext
+    · exact hp_not_prev
+    · exact hp_not_edge
+    · exact hlarge
+  exact (row_sixteen_escape_after_rows_fifteen_iff_transition_fifteen_escape
+    (k := k) (n := n) (d := d) hk hd hrows15).mp htrans
+
+/--
+Same boundary-prime form, with the previous-term nondivisibility discharged
+automatically from `p ∣ n+16`.
+-/
+theorem row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen_uncanceled_edge
+    {k n d p : ℕ} (hk : 16 ≤ k) (hd : k ≤ d)
+    (hrows15 : ∀ j, j ∈ Finset.Icc 1 15 →
+      n + j ∣ shiftedDiffProductAt k d j)
+    (hp : p.Prime)
+    (hpnext : p ∣ n + 16)
+    (hp_not_edge : ¬ p ∣ d - 15)
+    (hlarge : d + k - 15 < p) :
+    ¬ n + 16 ∣ shiftedDiffProductAt k d 16 := by
+  have hp_not_prev : ¬ p ∣ n + 15 := by
+    apply prime_not_dvd_of_dvd_succ (a := n + 15) hp
+    simpa [Nat.add_assoc] using hpnext
+  exact row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen
+    (k := k) (n := n) (d := d) (p := p) hk hd hrows15
+    hp hpnext hp_not_prev hp_not_edge hlarge
+
+/--
+Boundary-prime form with no explicit cancellation hypotheses: if a prime
+divides `n+16` and is larger than the row-15 cap `d+k-15`, then row `16`
+fails after rows `1,...,15` divide.
+-/
+theorem row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen_large
+    {k n d p : ℕ} (hk : 16 ≤ k) (hd : k ≤ d)
+    (hrows15 : ∀ j, j ∈ Finset.Icc 1 15 →
+      n + j ∣ shiftedDiffProductAt k d j)
+    (hp : p.Prime)
+    (hpnext : p ∣ n + 16)
+    (hlarge : d + k - 15 < p) :
+    ¬ n + 16 ∣ shiftedDiffProductAt k d 16 := by
+  have hp_not_edge : ¬ p ∣ d - 15 := by
+    apply not_dvd_of_pos_lt
+    · omega
+    · omega
+  exact row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen_uncanceled_edge
+    (k := k) (n := n) (d := d) (p := p) hk hd hrows15
+    hp hpnext hp_not_edge hlarge
+
+/--
+Smoothness boundary form: after rows `1,...,15` divide, nonsmoothness of
+`n+16` above the row-15 cap `d+k-15` forces row-sixteen escape.
+-/
+theorem row_sixteen_escape_after_rows_fifteen_of_n_add_sixteen_not_smooth
+    {k n d : ℕ} (hk : 16 ≤ k) (hd : k ≤ d)
+    (hrows15 : ∀ j, j ∈ Finset.Icc 1 15 →
+      n + j ∣ shiftedDiffProductAt k d j)
+    (hnotSmooth : ¬ SmoothUpTo (d + k - 15) (n + 16)) :
+    ¬ n + 16 ∣ shiftedDiffProductAt k d 16 := by
+  rw [SmoothUpTo] at hnotSmooth
+  push Not at hnotSmooth
+  obtain ⟨p, hp, hpdiv, hpgt⟩ := hnotSmooth
+  exact row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen_large
+    (k := k) (n := n) (d := d) (p := p) hk hd hrows15
+    hp hpdiv (by omega)
+
+/--
+Prime-existence version of the remaining split.  To prove row-prefix-sixteen
+escape, it is enough to prove that every `k >= 16` row-prefix-fifteen survivor
+has a large uncanceled prime in `n+16`, and separately prove full-row escape for
+the finite range `5 <= k <= 15`.
+-/
+theorem row_prefix_sixteen_escape_of_large_prime_boundary_and_small_k_escape
+    (hboundary : ∀ k n d : ℕ, 16 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      (∀ j, j ∈ Finset.Icc 1 15 →
+        n + j ∣ shiftedDiffProductAt k d j) →
+      ∃ p, p.Prime ∧ p ∣ n + 16 ∧ ¬ p ∣ n + 15 ∧
+        ¬ p ∣ d - 15 ∧ d + k - 15 < p)
+    (hsmall : ∀ k n d : ℕ, 5 ≤ k → k ≤ 15 → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j) :
+    ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ n + j ∣ shiftedDiffProductAt k d j := by
+  apply row_prefix_sixteen_escape_of_boundary_and_small_k_escape
+  · intro k n d hk hd hupper hlower hrows15
+    obtain ⟨p, hp, hpnext, hp_not_prev, hp_not_edge, hlarge⟩ :=
+      hboundary k n d hk hd hupper hlower hrows15
+    exact row_sixteen_escape_after_rows_fifteen_of_large_prime_n_add_sixteen
+      (k := k) (n := n) (d := d) (p := p) hk hd hrows15
+      hp hpnext hp_not_prev hp_not_edge hlarge
+  · exact hsmall
+
+/--
+Sharper prime-existence split: the previous-term condition is automatic, so the
+boundary target only needs a large prime in `n+16` that is not canceled by
+`d-15`.
+-/
+theorem row_prefix_sixteen_escape_of_large_prime_boundary_edge_and_small_k_escape
+    (hboundary : ∀ k n d : ℕ, 16 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      (∀ j, j ∈ Finset.Icc 1 15 →
+        n + j ∣ shiftedDiffProductAt k d j) →
+      ∃ p, p.Prime ∧ p ∣ n + 16 ∧ ¬ p ∣ d - 15 ∧
+        d + k - 15 < p)
+    (hsmall : ∀ k n d : ℕ, 5 ≤ k → k ≤ 15 → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j) :
+    ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ n + j ∣ shiftedDiffProductAt k d j := by
+  apply row_prefix_sixteen_escape_of_large_prime_boundary_and_small_k_escape
+  · intro k n d hk hd hupper hlower hrows15
+    obtain ⟨p, hp, hpnext, hp_not_edge, hlarge⟩ :=
+      hboundary k n d hk hd hupper hlower hrows15
+    have hp_not_prev : ¬ p ∣ n + 15 := by
+      apply prime_not_dvd_of_dvd_succ (a := n + 15) hp
+      simpa [Nat.add_assoc] using hpnext
+    exact ⟨p, hp, hpnext, hp_not_prev, hp_not_edge, hlarge⟩
+  · exact hsmall
+
+/--
+Largest-prime version of the remaining split: for the `k >= 16` branch, it is
+enough to find a prime divisor of `n+16` above the row-15 cap `d+k-15`.
+-/
+theorem row_prefix_sixteen_escape_of_large_prime_boundary_large_and_small_k_escape
+    (hboundary : ∀ k n d : ℕ, 16 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      (∀ j, j ∈ Finset.Icc 1 15 →
+        n + j ∣ shiftedDiffProductAt k d j) →
+      ∃ p, p.Prime ∧ p ∣ n + 16 ∧ d + k - 15 < p)
+    (hsmall : ∀ k n d : ℕ, 5 ≤ k → k ≤ 15 → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j) :
+    ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ n + j ∣ shiftedDiffProductAt k d j := by
+  apply row_prefix_sixteen_escape_of_large_prime_boundary_edge_and_small_k_escape
+  · intro k n d hk hd hupper hlower hrows15
+    obtain ⟨p, hp, hpnext, hlarge⟩ :=
+      hboundary k n d hk hd hupper hlower hrows15
+    have hp_not_edge : ¬ p ∣ d - 15 := by
+      apply not_dvd_of_pos_lt
+      · omega
+      · omega
+    exact ⟨p, hp, hpnext, hp_not_edge, hlarge⟩
+  · exact hsmall
+
+/--
+Smoothness version of the remaining split: for the `k >= 16` branch, it is
+enough to prove that every row-prefix-fifteen survivor has `n+16` nonsmooth
+above the row-15 cap `d+k-15`.
+-/
+theorem row_prefix_sixteen_escape_of_n_add_sixteen_not_smooth_boundary_and_small_k_escape
+    (hboundary : ∀ k n d : ℕ, 16 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      (∀ j, j ∈ Finset.Icc 1 15 →
+        n + j ∣ shiftedDiffProductAt k d j) →
+      ¬ SmoothUpTo (d + k - 15) (n + 16))
+    (hsmall : ∀ k n d : ℕ, 5 ≤ k → k ≤ 15 → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j) :
+    ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k)^k →
+      4 * (n + 1)^k ≤ (n + d + 1)^k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ n + j ∣ shiftedDiffProductAt k d j := by
+  apply row_prefix_sixteen_escape_of_large_prime_boundary_large_and_small_k_escape
+  · intro k n d hk hd hupper hlower hrows15
+    have hnotSmooth := hboundary k n d hk hd hupper hlower hrows15
+    rw [SmoothUpTo] at hnotSmooth
+    push Not at hnotSmooth
+    obtain ⟨p, hp, hpdiv, hpgt⟩ := hnotSmooth
+    exact ⟨p, hp, hpdiv, by omega⟩
+  · exact hsmall
+
+/--
+Row-survival smoothness form: if row `j` survives, then `n+j` is smooth up to
+the row-specific cap `d+k-j`.
+-/
+theorem row_dvd_smooth_up_to_row_cap
+    {k n d j : ℕ} (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 k)
+    (hrow : n + j ∣ shiftedDiffProductAt k d j) :
+    SmoothUpTo (d + k - j) (n + j) := by
+  intro p hp hpdiv
+  exact row_dvd_prime_le_row_cap hp hd hj hrow hpdiv
+
+/--
+Prefix form of the large-prime row escape: a large prime in one of the first
+sixteen lower terms gives the row-prefix-sixteen escape.
+-/
+theorem row_prefix_sixteen_escape_of_large_prime_in_prefix
+    {k n d : ℕ} (hd : k ≤ d)
+    (hlarge : ∃ j p, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧ p.Prime ∧
+      d + k - j < p ∧ p ∣ n + j) :
+    ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+      ¬ (n + j ∣ shiftedDiffProductAt k d j) := by
+  obtain ⟨j, p, hj, hj16, hp, hpgt, hpdiv⟩ := hlarge
+  exact ⟨j, hj, hj16,
+    row_escape_of_large_prime_in_n_add hp hd hj hpgt hpdiv⟩
+
+/--
+If the first sixteen rows all survive, the corresponding lower terms are smooth
+with their row-specific caps.  This is the contrapositive shape of the
+large-prime row escape.
+-/
+theorem row_prefix_sixteen_survivor_smooth
+    {k n d : ℕ} (hd : k ≤ d)
+    (hsurvive : ∀ j, j ∈ Finset.Icc 1 k → j ≤ 16 →
+      n + j ∣ shiftedDiffProductAt k d j) :
+    ∀ j, j ∈ Finset.Icc 1 k → j ≤ 16 →
+      SmoothUpTo (d + k - j) (n + j) := by
+  intro j hj hj16
+  exact row_dvd_smooth_up_to_row_cap hd hj (hsurvive j hj hj16)
+
+/--
+Any hypothetical cleared `N=4` gap-form solution forces row-specific smoothness
+for every lower-block term.
+-/
+theorem row_smooth_of_four_gap_solution
+    {k n d j : ℕ} (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 k)
+    (heq : blockProduct k (n + d) = 4 * blockProduct k n) :
+    SmoothUpTo (d + k - j) (n + j) := by
+  exact row_dvd_smooth_up_to_row_cap hd hj
+    (individual_divisor_skeleton_four hd hj heq)
+
+/--
+Bounded row-prefix version of the divisor-skeleton escape bridge.  It is enough
+to find a failed row divisibility among `j=1,...,16` throughout the remaining
+`N=4` ratio window.
+-/
+theorem no_solution_four_of_row_prefix_sixteen_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ (n + j ∣ shiftedDiffProductAt k d j)) :
+    ¬ ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  apply no_solution_four_of_divisor_skeleton_escape
+  intro k n d hk hd hupper hlower
+  obtain ⟨j, hj, _hj16, hnot⟩ := hescape k n d hk hd hupper hlower
+  exact ⟨j, hj, hnot⟩
+
+/--
+Two-filter row-prefix bridge.  It is enough to show that every ratio-window
+candidate either has a nonsmooth lower term among `j=1,...,16` under the
+row-specific cap, or has an actual failed row divisibility among those rows.
+-/
+theorem no_solution_four_of_row_prefix_sixteen_smooth_or_row_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      (∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+          ¬ SmoothUpTo (d + k - j) (n + j)) ∨
+        (∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+          ¬ (n + j ∣ shiftedDiffProductAt k d j))) :
+    ¬ ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨k, n, m, hk2, hm, hq⟩
+  by_cases hk4 : k ≤ 4
+  · exact no_solution_four_le_four ⟨k, n, m, hk2, hk4, hm, hq⟩
+  · have hk5 : 5 ≤ k := by omega
+    obtain ⟨d, hd, _hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+    obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+    rcases hescape k n d hk5 hd hlo hup with hnotSmooth | hnotRow
+    · obtain ⟨j, hj, _hj16, hnot⟩ := hnotSmooth
+      exact hnot (row_smooth_of_four_gap_solution hd hj heq)
+    · obtain ⟨j, hj, _hj16, hnot⟩ := hnotRow
+      exact hnot (individual_divisor_skeleton_four hd hj heq)
+
+/--
+Sharper two-filter bridge matching the current exact evidence: after
+row-specific smoothness for the first sixteen rows, it would be enough to force
+a failed row among `j=1,...,4`.
+-/
+theorem no_solution_four_of_row_prefix_sixteen_smooth_or_row_four_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      (∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+          ¬ SmoothUpTo (d + k - j) (n + j)) ∨
+        (∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 4 ∧
+          ¬ (n + j ∣ shiftedDiffProductAt k d j))) :
+    ¬ ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  apply no_solution_four_of_row_prefix_sixteen_smooth_or_row_escape
+  intro k n d hk hd hupper hlower
+  rcases hescape k n d hk hd hupper hlower with hnotSmooth | hnotRow
+  · exact Or.inl hnotSmooth
+  · obtain ⟨j, hj, hj4, hnot⟩ := hnotRow
+    exact Or.inr ⟨j, hj, by omega, hnot⟩
+
+/--
 If the stronger polynomial-congruence escape theorem is proved under the
 `N=4` ratio window, then `N=4` is a full counterexample.  This packages the
 congruences at `a=0,1,...,k+1`, including the divisor skeleton as the middle
@@ -14118,6 +17592,216 @@ theorem no_solution_four_of_polynomial_congruence_escape
     obtain ⟨a, _ha, hnot⟩ := hescape k n d hk5 hd hlo hup
     exact hnot (polynomial_congruence_family_four
       (k := k) (n := n) (d := d) (a := a) heq)
+
+/--
+Bounded-prefix version of the polynomial-congruence escape.  It is enough to
+find a failed congruence among `a=0,1,...,8` throughout the remaining `N=4`
+ratio window.
+-/
+theorem no_solution_four_of_polynomial_prefix_eight_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ a, a ∈ Finset.Icc 0 8 ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) :
+    ¬ ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨k, n, m, hk2, hm, hq⟩
+  by_cases hk4 : k ≤ 4
+  · exact no_solution_four_le_four ⟨k, n, m, hk2, hk4, hm, hq⟩
+  · have hk5 : 5 ≤ k := by omega
+    obtain ⟨d, hd, _hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+    obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+    obtain ⟨a, _ha, hnot⟩ := hescape k n d hk5 hd hlo hup
+    exact hnot (polynomial_congruence_family_four
+      (k := k) (n := n) (d := d) (a := a) heq)
+
+/--
+General finite-prefix version of the polynomial-congruence escape bridge.
+Any fixed finite prefix that always contains a failed congruence throughout
+the remaining `N=4` ratio window would make `N=4` a counterexample.
+-/
+theorem no_solution_four_of_polynomial_prefix_escape
+    (B : ℕ)
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ a, a ∈ Finset.Icc 0 B ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) :
+    ¬ ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨k, n, m, hk2, hm, hq⟩
+  by_cases hk4 : k ≤ 4
+  · exact no_solution_four_le_four ⟨k, n, m, hk2, hk4, hm, hq⟩
+  · have hk5 : 5 ≤ k := by omega
+    obtain ⟨d, hd, _hmd, heq⟩ := four_solution_with_gap_of_solution hm hq
+    obtain ⟨hlo, hup⟩ := ratio_window_four_nat heq
+    obtain ⟨a, _ha, hnot⟩ := hescape k n d hk5 hd hlo hup
+    exact hnot (polynomial_congruence_family_four
+      (k := k) (n := n) (d := d) (a := a) heq)
+
+/--
+Current repaired bounded-prefix bridge candidate.  Prefix `a=0,...,8` is
+refuted by exact search, but prefix `a=0,...,15` is the smallest currently
+unrefuted finite-prefix target recorded in `PROGRESS_Erdos686.md`.
+-/
+theorem no_solution_four_of_polynomial_prefix_fifteen_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ a, a ∈ Finset.Icc 0 15 ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) :
+    ¬ ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  exact no_solution_four_of_polynomial_prefix_escape 15 hescape
+
+/--
+Row-prefix escape implies the corresponding polynomial-prefix escape.  This
+uses only the row identity for `fourCongruencePolynomial` at indices
+`j ∈ {1,...,k}`.
+-/
+theorem polynomial_prefix_sixteen_escape_of_row_prefix_sixteen_escape
+    {k n d : ℕ} (hd : k ≤ d)
+    (hrow : ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+      ¬ (n + j ∣ shiftedDiffProductAt k d j)) :
+    ∃ a, a ∈ Finset.Icc 0 16 ∧
+      ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a := by
+  obtain ⟨j, hj, hj16, hnot⟩ := hrow
+  refine ⟨j, ?_, ?_⟩
+  · exact Finset.mem_Icc.mpr ⟨by omega, hj16⟩
+  · intro hcong
+    have hpoly :
+        fourCongruencePolynomial k d j =
+          (shiftedDiffProductAt k d j : ℤ) :=
+      fourCongruencePolynomial_eq_shiftedDiffProductAt hd hj
+    have hrowInt :
+        ((n + j : ℕ) : ℤ) ∣
+          ((shiftedDiffProductAt k d j : ℕ) : ℤ) := by
+      simpa [← hpoly] using hcong
+    have hrowNat : n + j ∣ shiftedDiffProductAt k d j := by
+      exact_mod_cast hrowInt
+    exact hnot hrowNat
+
+/--
+Ratio-window corollary: a row-prefix-sixteen escape theorem implies the
+polynomial-prefix-sixteen escape theorem.
+-/
+theorem polynomial_prefix_sixteen_escape_in_ratio_window_of_row_prefix_sixteen_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ (n + j ∣ shiftedDiffProductAt k d j))
+    {k n d : ℕ} (hk : 5 ≤ k) (hd : k ≤ d)
+    (hupper : (n + d + k) ^ k ≤ 4 * (n + k) ^ k)
+    (hlower : 4 * (n + 1) ^ k ≤ (n + d + 1) ^ k) :
+    ∃ a, a ∈ Finset.Icc 0 16 ∧
+      ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a := by
+  exact polynomial_prefix_sixteen_escape_of_row_prefix_sixteen_escape hd
+    (hescape k n d hk hd hupper hlower)
+
+/--
+Local `a=8` support lemma for the bounded-prefix strategy.  If a prime larger
+than every factor in the row product `H_{k,d}(8)` divides `n+8`, then the
+`a=8` congruence cannot hold.
+-/
+theorem polynomial_prefix_eight_escape_of_large_prime_in_n_add_eight
+    {k n d p : ℕ}
+    (hp : p.Prime) (hd : k ≤ d) (hk8 : 8 ≤ k)
+    (hlarge : d + k - 8 < p) (hpdiv : p ∣ n + 8) :
+    ∃ a, a ∈ Finset.Icc 0 8 ∧
+      ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a := by
+  refine ⟨8, by norm_num, ?_⟩
+  intro hcong
+  have h8mem : 8 ∈ Finset.Icc 1 k := by
+    simp [hk8]
+  have hpoly :
+      fourCongruencePolynomial k d (8 : ℕ) =
+        (shiftedDiffProductAt k d 8 : ℤ) :=
+    fourCongruencePolynomial_eq_shiftedDiffProductAt hd h8mem
+  have hrowInt :
+      ((n + 8 : ℕ) : ℤ) ∣ ((shiftedDiffProductAt k d 8 : ℕ) : ℤ) := by
+    simpa [← hpoly] using hcong
+  have hrow : n + 8 ∣ shiftedDiffProductAt k d 8 := by
+    exact_mod_cast hrowInt
+  have hp_prod : p ∣ shiftedDiffProductAt k d 8 :=
+    dvd_trans hpdiv hrow
+  have hp_prod' :
+      p ∣ ∏ i ∈ Finset.Icc 1 k, (d + i - 8) := by
+    simpa [shiftedDiffProductAt] using hp_prod
+  obtain ⟨i, hi, hpi⟩ := prime_dvd_finset_prod_exists hp hp_prod'
+  have hi_le : i ≤ k := (Finset.mem_Icc.mp hi).2
+  have hpos : 0 < d + i - 8 := by
+    have hi_pos : 1 ≤ i := (Finset.mem_Icc.mp hi).1
+    omega
+  have hp_le : p ≤ d + i - 8 := Nat.le_of_dvd hpos hpi
+  have hfactor_le : d + i - 8 ≤ d + k - 8 := by
+    omega
+  omega
+
+/--
+Wrapper for the next finite-prime reduction: to prove the bounded
+`a=0,...,8` escape it is enough either to find an earlier prefix failure
+among `a=0,...,7`, or to force a prime `p > d+k-8` dividing `n+8`.
+-/
+theorem polynomial_prefix_eight_escape_of_prefix_seven_failure_or_large_prime
+    {k n d : ℕ}
+    (hd : k ≤ d) (hk8 : 8 ≤ k)
+    (h :
+      (∃ a, a ∈ Finset.Icc 0 7 ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) ∨
+      ∃ p, p.Prime ∧ d + k - 8 < p ∧ p ∣ n + 8) :
+    ∃ a, a ∈ Finset.Icc 0 8 ∧
+      ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a := by
+  rcases h with hprefix | hlarge
+  · obtain ⟨a, ha7, hnot⟩ := hprefix
+    refine ⟨a, ?_, hnot⟩
+    exact Finset.mem_Icc.mpr
+      ⟨(Finset.mem_Icc.mp ha7).1,
+        le_trans (Finset.mem_Icc.mp ha7).2 (by norm_num)⟩
+  · obtain ⟨p, hp, hgt, hpdiv⟩ := hlarge
+    exact polynomial_prefix_eight_escape_of_large_prime_in_n_add_eight
+      (k := k) (n := n) (d := d) (p := p) hp hd hk8 hgt hpdiv
+
+/--
+Conditional `k≥8` form of the bounded-prefix strategy.  Once the prefix-seven
+large-prime theorem is available, the corrected `a=0,...,8` escape follows
+throughout the ratio window for every `k≥8`.
+-/
+theorem polynomial_prefix_eight_escape_in_ratio_window_of_prefix_seven_large_prime
+    (hforce : ∀ k n d : ℕ, 8 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      (∀ a, a ∈ Finset.Icc 0 7 →
+        ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) →
+      ∃ p, p.Prime ∧ d + k - 8 < p ∧ p ∣ n + 8)
+    {k n d : ℕ} (hk8 : 8 ≤ k) (hd : k ≤ d)
+    (hupper : (n + d + k) ^ k ≤ 4 * (n + k) ^ k)
+    (hlower : 4 * (n + 1) ^ k ≤ (n + d + 1) ^ k) :
+    ∃ a, a ∈ Finset.Icc 0 8 ∧
+      ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a := by
+  by_cases hprefix :
+      ∃ a, a ∈ Finset.Icc 0 7 ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a
+  · exact polynomial_prefix_eight_escape_of_prefix_seven_failure_or_large_prime
+      (k := k) (n := n) (d := d) hd hk8 (Or.inl hprefix)
+  · have hall : ∀ a, a ∈ Finset.Icc 0 7 →
+        ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a := by
+      intro a ha
+      by_contra hnot
+      exact hprefix ⟨a, ha, hnot⟩
+    exact polynomial_prefix_eight_escape_of_prefix_seven_failure_or_large_prime
+      (k := k) (n := n) (d := d) hd hk8
+      (Or.inr (hforce k n d hk8 hd hupper hlower hall))
 
 /--
 Finite-difference escape bridge: if the `N=4` ratio window always makes the
@@ -14252,6 +17936,72 @@ theorem erdos686_false_of_divisor_skeleton_escape
   exact no_solution_four_of_divisor_skeleton_escape hescape (hall 4 (by norm_num))
 
 /--
+Global bridge for the row-prefix-sixteen target: a failed row among
+`j=1,...,16` throughout the remaining `N=4` ratio window refutes the universal
+Erdős 686 representation statement via `N=4`.
+-/
+theorem erdos686_false_of_row_prefix_sixteen_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+        ¬ (n + j ∣ shiftedDiffProductAt k d j)) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  intro hall
+  exact no_solution_four_of_row_prefix_sixteen_escape
+    hescape (hall 4 (by norm_num))
+
+/--
+Global two-filter row-prefix bridge: a proof that every `N=4` ratio-window
+candidate either has a nonsmooth first-sixteen lower term or a failed
+first-sixteen row divisibility refutes the universal Erdős 686 statement via
+`N=4`.
+-/
+theorem erdos686_false_of_row_prefix_sixteen_smooth_or_row_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      (∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+          ¬ SmoothUpTo (d + k - j) (n + j)) ∨
+        (∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+          ¬ (n + j ∣ shiftedDiffProductAt k d j))) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  intro hall
+  exact no_solution_four_of_row_prefix_sixteen_smooth_or_row_escape
+    hescape (hall 4 (by norm_num))
+
+/--
+Global row-four version of the two-filter bridge: row-cap nonsmoothness in the
+first sixteen rows, or failed row divisibility among the first four rows,
+throughout the `N=4` ratio window would refute the universal statement via
+`N=4`.
+-/
+theorem erdos686_false_of_row_prefix_sixteen_smooth_or_row_four_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      (∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 16 ∧
+          ¬ SmoothUpTo (d + k - j) (n + j)) ∨
+        (∃ j, j ∈ Finset.Icc 1 k ∧ j ≤ 4 ∧
+          ¬ (n + j ∣ shiftedDiffProductAt k d j))) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  intro hall
+  exact no_solution_four_of_row_prefix_sixteen_smooth_or_row_four_escape
+    hescape (hall 4 (by norm_num))
+
+/--
 The exact formal target for a negative solution of Erdős 686, conditional on
 the polynomial-congruence escape theorem.
 -/
@@ -14268,6 +18018,124 @@ theorem erdos686_false_of_polynomial_congruence_escape
           (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
   intro hall
   exact no_solution_four_of_polynomial_congruence_escape hescape (hall 4 (by norm_num))
+
+/--
+The exact formal target for a negative solution of Erdős 686, conditional on
+the bounded polynomial-prefix escape theorem for `a=0,1,...,8`.
+-/
+theorem erdos686_false_of_polynomial_prefix_eight_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ a, a ∈ Finset.Icc 0 8 ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  intro hall
+  exact no_solution_four_of_polynomial_prefix_eight_escape
+    hescape (hall 4 (by norm_num))
+
+/--
+General finite-prefix global bridge: any fixed finite polynomial-prefix escape
+throughout the remaining `N=4` ratio window refutes the universal Erdős 686
+representation statement via `N=4`.
+-/
+theorem erdos686_false_of_polynomial_prefix_escape
+    (B : ℕ)
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ a, a ∈ Finset.Icc 0 B ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  intro hall
+  exact no_solution_four_of_polynomial_prefix_escape
+    B hescape (hall 4 (by norm_num))
+
+/--
+Global bridge for the current repaired finite-prefix candidate `a=0,...,15`.
+-/
+theorem erdos686_false_of_polynomial_prefix_fifteen_escape
+    (hescape : ∀ k n d : ℕ, 5 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ a, a ∈ Finset.Icc 0 15 ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  exact erdos686_false_of_polynomial_prefix_escape 15 hescape
+
+/--
+Two-obligation final reduction for the current `N=4` strategy.  It is enough
+to prove the bounded-prefix escape directly for the small cases `5≤k≤7`, and
+to prove the prefix-seven large-prime theorem for all `k≥8`.
+-/
+theorem erdos686_false_of_small_prefix_escape_and_prefix_seven_large_prime
+    (hsmall : ∀ k n d : ℕ, 5 ≤ k → k ≤ 7 → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ a, a ∈ Finset.Icc 0 8 ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a)
+    (hforce : ∀ k n d : ℕ, 8 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      (∀ a, a ∈ Finset.Icc 0 7 →
+        ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) →
+      ∃ p, p.Prime ∧ d + k - 8 < p ∧ p ∣ n + 8) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  apply erdos686_false_of_polynomial_prefix_eight_escape
+  intro k n d hk5 hd hupper hlower
+  by_cases hk8 : 8 ≤ k
+  · exact polynomial_prefix_eight_escape_in_ratio_window_of_prefix_seven_large_prime
+      hforce hk8 hd hupper hlower
+  · have hk7 : k ≤ 7 := by omega
+    exact hsmall k n d hk5 hk7 hd hupper hlower
+
+/--
+Sharper small-case variant of the two-obligation reduction.  The exact
+small-`k` searches suggest that for `5≤k≤7` a failed congruence should already
+occur among `a=0,1,2,3`; this theorem packages that sharper obligation with
+the same `k≥8` prefix-seven large-prime target.
+-/
+theorem erdos686_false_of_small_prefix_three_escape_and_prefix_seven_large_prime
+    (hsmall : ∀ k n d : ℕ, 5 ≤ k → k ≤ 7 → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ a, a ∈ Finset.Icc 0 3 ∧
+        ¬ ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a)
+    (hforce : ∀ k n d : ℕ, 8 ≤ k → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      (∀ a, a ∈ Finset.Icc 0 7 →
+        ((n + a : ℕ) : ℤ) ∣ fourCongruencePolynomial k d a) →
+      ∃ p, p.Prime ∧ d + k - 8 < p ∧ p ∣ n + 8) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  apply erdos686_false_of_small_prefix_escape_and_prefix_seven_large_prime
+  · intro k n d hk5 hk7 hd hupper hlower
+    obtain ⟨a, ha3, hnot⟩ := hsmall k n d hk5 hk7 hd hupper hlower
+    refine ⟨a, ?_, hnot⟩
+    exact Finset.mem_Icc.mpr
+      ⟨(Finset.mem_Icc.mp ha3).1,
+        le_trans (Finset.mem_Icc.mp ha3).2 (by norm_num)⟩
+  · exact hforce
 
 /--
 The exact formal target for a negative solution of Erdős 686, conditional on
