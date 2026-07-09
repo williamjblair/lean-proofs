@@ -5,3 +5,4 @@ import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686ConstantQuotient
 import ErdosProblems.Erdos686QuotientConfinement
 import ErdosProblems.Erdos686ExceptionalNine
+import ErdosProblems.Erdos686SmallCore
