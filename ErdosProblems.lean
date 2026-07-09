@@ -3,3 +3,5 @@ import ErdosProblems.Erdos154
 import ErdosProblems.Erdos154Sumset
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686ConstantQuotient
+import ErdosProblems.Erdos686QuotientConfinement
+import ErdosProblems.Erdos686ExceptionalNine
