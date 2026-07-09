@@ -9,6 +9,7 @@ a matching entry in `proofs.yaml`.
 -/
 import ErdosProblems.Erdos154Sumset
 import ErdosProblems.Erdos686
+import ErdosProblems.Erdos686SmallBranch
 
 #print axioms Erdos154.erdos_154_sumset
 #print axioms Erdos686.Erdos686Variant.nonsquare_representable
@@ -308,3 +309,16 @@ import ErdosProblems.Erdos686
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_small_prefix_escape_and_prefix_seven_large_prime
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_small_prefix_three_escape_and_prefix_seven_large_prime
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_finite_difference_nonzero
+#print axioms Erdos686.Erdos686Variant.row_full_escape_small_k_d_le_220
+#print axioms Erdos686.Erdos686Variant.row_base_quotient_confined_of_window
+#print axioms Erdos686.Erdos686Variant.k_nine_quotient_five_row_escape
+#print axioms Erdos686.Erdos686Variant.constant_bounded_prefix_three_survivor_mem
+#print axioms Erdos686.Erdos686Variant.constant_prefix_three_survivors_row4_escape
+#print axioms Erdos686.Erdos686Variant.constant_u_eq_d_no_prefix_three
+#print axioms Erdos686.Erdos686Variant.residual_dvd_of_row_dvd
+#print axioms Erdos686.Erdos686Variant.constant_residual_dvd_iff_lifted_affine_dvd
+#print axioms Erdos686.Erdos686Variant.lifted_affine_dvd_iff_saturation_and_explicit_correction
+#print axioms Erdos686.Erdos686Variant.residual_not_dvd_of_affine_saturation_prime_witness
+#print axioms Erdos686.Erdos686Variant.row_full_escape_small_k_in_ratio_window_of_constant_bound
+#print axioms Erdos686.Erdos686Variant.erdos686_false_of_constant_bound_and_boundary
+#print axioms Erdos686.Erdos686Variant.no_solution_four_of_constant_bound_and_boundary

@@ -7,3 +7,4 @@ import ErdosProblems.Erdos686QuotientConfinement
 import ErdosProblems.Erdos686ExceptionalNine
 import ErdosProblems.Erdos686SmallCore
 import ErdosProblems.Erdos686ConstantSurvivors
+import ErdosProblems.Erdos686SmallBranch

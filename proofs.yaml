@@ -2758,3 +2758,131 @@ proofs:
       686 universal representation statement.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SmallCore.lean
+    theorem: Erdos686.Erdos686Variant.row_full_escape_small_k_d_le_220
+    statement: >-
+      Finite core of the small-k branch: for 5<=k<=15, k<=d<=220, every point
+      of the exact N=4 ratio window fails a divisor-skeleton row j<=5.
+      Banded kernel decide certificates over 23,730 grid points.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686QuotientConfinement.lean
+    theorem: Erdos686.Erdos686Variant.row_base_quotient_confined_of_window
+    statement: >-
+      Quotient confinement: for 5<=k<=15 and d>=221 the exact N=4 ratio
+      window forces the row-1 base quotient (n+1)/d to the tabulated constant
+      value, except k=9 which also admits quotient 5.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ExceptionalNine.lean
+    theorem: Erdos686.Erdos686Variant.k_nine_quotient_five_row_escape
+    statement: >-
+      The k=9 exceptional branch with row-1 base quotient 5 is closed: exact
+      box bounds u in [1,6], d<=1421 from window linearization plus a kernel
+      decide certificate give a failing divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ConstantSurvivors.lean
+    theorem: Erdos686.Erdos686Variant.constant_bounded_prefix_three_survivor_mem
+    statement: >-
+      Bounded membership certificate: any constant-quotient point with
+      221<=d<=constantPrefixThreeBound k q satisfying the exact ratio window
+      and the residual divisibilities of rows 1-3 is one of the 51 listed
+      band survivors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ConstantSurvivors.lean
+    theorem: Erdos686.Erdos686Variant.constant_prefix_three_survivors_row4_escape
+    statement: >-
+      Every listed prefix-three survivor fails the row-four residual
+      divisibility (kernel decide over the 45-point list).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ConstantSurvivors.lean
+    theorem: Erdos686.Erdos686Variant.constant_u_eq_d_no_prefix_three
+    statement: >-
+      The u=d top edge of the constant-quotient parametrization is impossible
+      inside the ratio window: window contradiction for ten pairs, kernel
+      certificate on rows 2-3 divisor coincidences for (9,6) up to d=1615.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ConstantQuotient.lean
+    theorem: Erdos686.Erdos686Variant.residual_dvd_of_row_dvd
+    statement: >-
+      Row-to-residual reduction: with n+1 = (q+1)d-u, row t+1 of the divisor
+      skeleton forces (n+1+t) | residualRowPoly k q (d-u+(q+1)t), via the
+      exact factor identity q(d+(1+s)-(t+1)) - M = qs - R_t.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ConstantQuotient.lean
+    theorem: Erdos686.Erdos686Variant.constant_residual_dvd_iff_lifted_affine_dvd
+    statement: >-
+      Residual divisibility is equivalent to lifted affine divisibility with
+      the (q+1)^k saturation factor, via the exact lifted identity.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ConstantQuotient.lean
+    theorem: Erdos686.Erdos686Variant.lifted_affine_dvd_iff_saturation_and_explicit_correction
+    statement: >-
+      Primitive affine criterion: lifted divisibility decomposes exactly into
+      affine saturation plus the fixed (q+1)^k correction divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ConstantQuotient.lean
+    theorem: Erdos686.Erdos686Variant.residual_not_dvd_of_affine_saturation_prime_witness
+    statement: >-
+      Prime-power witness in the q^k-reduced part of A+t exceeding the p-adic
+      valuation of the affine polynomial refutes the residual row
+      divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SmallBranch.lean
+    theorem: Erdos686.Erdos686Variant.row_full_escape_small_k_in_ratio_window_of_constant_bound
+    statement: >-
+      Small-k branch assembly: conditional on the constant-quotient
+      prefix-three bound, every 5<=k<=15 point of the exact N=4 ratio window
+      fails a divisor-skeleton row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SmallBranch.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_constant_bound_and_boundary
+    statement: >-
+      Complete conditional reduction: the constant-quotient prefix-three
+      bound plus the k>=16 row-sixteen boundary refute the universal Erdos
+      686 representation statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SmallBranch.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_of_constant_bound_and_boundary
+    statement: >-
+      Conditional N=4 exclusion: the constant-quotient prefix-three bound
+      plus the k>=16 row-sixteen boundary imply N=4 has no representation as
+      a ratio of products of k consecutive integers.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
