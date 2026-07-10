@@ -16,6 +16,9 @@ import ErdosProblems.Erdos686Reduction
 import ErdosProblems.Erdos686WindowPin
 import ErdosProblems.Erdos686LargeEscape
 import ErdosProblems.Erdos686PrimeObstruction
+import ErdosProblems.Erdos686ReflectionCompression
+import ErdosProblems.Erdos686LargeKWedge
+import ErdosProblems.Erdos686PadicLift
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686FinalReduction
 import ErdosProblems.Erdos617
@@ -368,10 +371,24 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_small_k_below
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_thue_tails_and_smooth
 #print axioms Erdos686.Erdos686Variant.no_solution_four_of_thue_tails_and_smooth
+#print axioms Erdos686.Erdos686Variant.reflection_compression
+#print axioms Erdos686.Erdos686Variant.nine_mul_gap_lt_n_of_four_solution
+#print axioms Erdos686.Erdos686Variant.lower_block_composite_of_four_solution
+#print axioms Erdos686.Erdos686Variant.gap_dvd_three_blockProduct
+#print axioms Erdos686.Erdos686Variant.gap_primePower_existsUnique_local_sq_lift
+#print axioms Erdos686.Erdos686Variant.center_factorial_sq_mul_three_factor_sub_gap_dvd_cube
+#print axioms Erdos686.Erdos686Variant.gap_primePower_existsUnique_odd_local_bounds
+#print axioms Erdos686.Erdos686Variant.gap_primePower_k5_local_bounds
+#print axioms Erdos686.Erdos686Variant.gap_primePower_k7_local_bounds
+#print axioms Erdos686.Erdos686Variant.gap_primePower_k9_local_bounds
+#print axioms Erdos686.Erdos686Variant.gap_primePower_k11_local_bounds
+#print axioms Erdos686.Erdos686Variant.gap_primePower_k13_local_bounds
+#print axioms Erdos686.Erdos686Variant.gap_primePower_k15_local_bounds
 #print axioms Erdos617.Balanced.no_monochromatic_clique
 #print axioms Erdos617.Balanced.sum_le_sq
 #print axioms Erdos617.statement_five_of_extension_demand
 -- Conditional research surfaces; not listed in `proofs.yaml`.
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_large_k_near_diagonal_of_prime442
 #print axioms Erdos727.erdosAt_iff_window_sq_dvd_centralBinom
 #print axioms Erdos727.erdosAt2_iff_window_sq_dvd_centralBinom
 #print axioms Erdos727.tail_dvd_centralBinom_of_prime_budget

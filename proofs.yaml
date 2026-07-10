@@ -3212,6 +3212,121 @@ proofs:
       Terminal N=4 exclusion under the six Thue tails and double smoothness.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ReflectionCompression.lean
+    theorem: Erdos686.Erdos686Variant.reflection_compression
+    statement: >-
+      Every hypothetical N=4 gap solution satisfies the uniform reflection
+      compression divisibility: its reflection center divides the parity
+      coefficient times the explicit reflected gap product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeKWedge.lean
+    theorem: Erdos686.Erdos686Variant.nine_mul_gap_lt_n_of_four_solution
+    statement: >-
+      Unconditional exact ratio-window consequence: every N=4 solution with
+      k at least 16 and d at least k has n greater than nine times d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeKWedge.lean
+    theorem: Erdos686.Erdos686Variant.lower_block_composite_of_four_solution
+    statement: >-
+      Every term in the lower block of a remaining N=4 gap solution is
+      composite, by the banked smoothness cap and the strict size gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_dvd_three_blockProduct
+    statement: >-
+      An exact N=4 shifted-block identity forces the gap to divide three
+      times the lower block product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_primePower_existsUnique_local_sq_lift
+    statement: >-
+      A positive prime power p^e dividing the gap, with p at least the block
+      length and k at least four, localizes to a unique lower factor and its
+      square divides the exact linear residual 3(n+i)-d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.center_factorial_sq_mul_three_factor_sub_gap_dvd_cube
+    statement: >-
+      At the middle factor of an odd block, the paired centered expansion
+      upgrades the local quadratic lift to an exact cubic divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_primePower_existsUnique_odd_local_bounds
+    statement: >-
+      Quantified odd-block package: a large prime power in the gap has a
+      unique localized square bound and, at the center, a cubic bound, from
+      any explicit ratio-window base constant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_primePower_k5_local_bounds
+    statement: >-
+      For k=5, every gap prime power with prime at least five has localized
+      square bound p^(2e)<14d and center cubic bound p^(3e)<14d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_primePower_k7_local_bounds
+    statement: >-
+      The corresponding exact k=7 localized bounds have constant 17.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_primePower_k9_local_bounds
+    statement: >-
+      The corresponding exact k=9 localized bounds have constant 23.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_primePower_k11_local_bounds
+    statement: >-
+      The corresponding exact k=11 localized bounds have constant 26.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_primePower_k13_local_bounds
+    statement: >-
+      The corresponding exact k=13 localized bounds have constant 29.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_primePower_k15_local_bounds
+    statement: >-
+      The corresponding exact k=15 localized bounds have constant 35.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 617
     source: erdosproblems
     file: ErdosProblems/Erdos617.lean
