@@ -8,6 +8,7 @@ When you add a proof, add its module import and a `#print axioms` line here and
 a matching entry in `proofs.yaml`.
 -/
 import ErdosProblems.Erdos154Sumset
+import ErdosProblems.Erdos617
 
 #print axioms Erdos154.erdos_154_sumset
 #print axioms Erdos617.Balanced.no_monochromatic_clique
