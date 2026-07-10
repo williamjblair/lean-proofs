@@ -148,6 +148,79 @@ theorem erdos686_false_of_constant_bound_and_boundary
   exact row_prefix_sixteen_escape_of_boundary_and_small_k_escape hboundary
     (row_full_escape_small_k_in_ratio_window_of_constant_bound hbound)
 
+/-!
+## Falsification of the row-sixteen boundary, and the repaired reduction
+
+The fixed-prefix boundary statement `RowSixteenBoundaryHypothesis` is
+**false**: the point `(k, n, d) = (984, 3177026, 4480)` lies in the
+exact ratio window with `16 ≤ k ≤ d`, its divisor-skeleton rows `1..16`
+all divide, and only row `17` fails (because
+`n + 17 = 439 · 7237` and the prime `7237` exceeds the row-17 interval
+maximum `d + k - 17 = 5447`).  Deep survivor clusters can evidently
+pass arbitrarily long fixed prefixes, so the boundary hypothesis is
+repaired to the unrestricted escape `LargeKEscapeHypothesis`, which is
+all the banked skeleton bridge actually needs.
+-/
+
+/-- **The repaired open large-`k` hypothesis**: for `k ≥ 16` in the
+exact ratio window, some divisor-skeleton row `j ≤ k` fails. -/
+def LargeKEscapeHypothesis : Prop :=
+  ∀ k n d : ℕ, 16 ≤ k → k ≤ d →
+    (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+    4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+    ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j
+
+set_option maxRecDepth 4000 in
+-- The witness verification kernel-reduces sixteen 984-factor products
+-- and two exponent-984 window inequalities, far beyond the default
+-- heartbeat budget.
+set_option maxHeartbeats 4000000 in
+set_option exponentiation.threshold 1000 in
+/-- The row-sixteen boundary hypothesis is refuted by the exact-window
+point `(984, 3177026, 4480)`, whose rows `1..16` all divide. -/
+theorem row_sixteen_boundary_hypothesis_false :
+    ¬ RowSixteenBoundaryHypothesis := by
+  intro h
+  refine h 984 3177026 4480 (by norm_num) (by norm_num)
+    (by decide) (by decide) (fun j hj => ?_) (by decide)
+  obtain ⟨hj1, hj2⟩ := Finset.mem_Icc.mp hj
+  interval_cases j <;> decide
+
+/-- **The repaired complete conditional reduction of Erdős 686.**
+The constant-quotient prefix-three bound together with the
+unrestricted large-`k` row escape refutes the universal positive
+statement. -/
+theorem erdos686_false_of_constant_bound_and_large_escape
+    (hbound : ConstantCaseBoundHypothesis)
+    (hlarge : LargeKEscapeHypothesis) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  apply erdos686_false_of_divisor_skeleton_escape
+  intro k n d hk5 hkd hup hlo
+  rcases Nat.lt_or_ge k 16 with hk16 | hk16
+  · exact row_full_escape_small_k_in_ratio_window_of_constant_bound
+      hbound k n d hk5 (by omega) hkd hup hlo
+  · exact hlarge k n d hk16 hkd hup hlo
+
+/-- The repaired conditional `N = 4` exclusion. -/
+theorem no_solution_four_of_constant_bound_and_large_escape
+    (hbound : ConstantCaseBoundHypothesis)
+    (hlarge : LargeKEscapeHypothesis) :
+    ¬ ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  apply no_solution_four_of_divisor_skeleton_escape
+  intro k n d hk5 hkd hup hlo
+  rcases Nat.lt_or_ge k 16 with hk16 | hk16
+  · exact row_full_escape_small_k_in_ratio_window_of_constant_bound
+      hbound k n d hk5 (by omega) hkd hup hlo
+  · exact hlarge k n d hk16 hkd hup hlo
+
 /-- The `N = 4` no-solution statement, conditional on the same two
 open hypotheses. -/
 theorem no_solution_four_of_constant_bound_and_boundary
