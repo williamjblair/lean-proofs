@@ -333,3 +333,5 @@ import ErdosProblems.Erdos686Reduction
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_fourteen_of_large_gap
 #print axioms Erdos686.Erdos686Variant.no_solution_four_of_odd14_bound_and_large_escape
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd14_bound_and_large_escape
+#print axioms Erdos686.Erdos686Variant.ratio_window_pin
+#print axioms Erdos686.Erdos686Variant.window_band_width

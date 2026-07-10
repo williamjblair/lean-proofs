@@ -10,3 +10,4 @@ import ErdosProblems.Erdos686ConstantSurvivors
 import ErdosProblems.Erdos686SmallBranch
 import ErdosProblems.Erdos686EvenK
 import ErdosProblems.Erdos686Reduction
+import ErdosProblems.Erdos686WindowPin

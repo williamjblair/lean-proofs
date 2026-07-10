@@ -2983,3 +2983,22 @@ proofs:
       refute the universal representation statement via N=4.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686WindowPin.lean
+    theorem: Erdos686.Erdos686Variant.ratio_window_pin
+    statement: >-
+      Exact ratio-window pinning: the lower-window shape at A and the
+      upper-window shape at B force A <= B + (k-1); elementary
+      cross-multiplication, no reals.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686WindowPin.lean
+    theorem: Erdos686.Erdos686Variant.window_band_width
+    statement: >-
+      Any two window-compatible values of n+1 at the same gap d differ by
+      at most k-1: the exact window band width is k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

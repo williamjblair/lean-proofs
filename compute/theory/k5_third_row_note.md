@@ -8,7 +8,7 @@ mathematical risk),* **HEURISTIC** *(probabilistic reasoning, not a proof),*
 **OPEN** *(genuinely open).*
 
 Scripts:
-- `k5_third_row_derivation.py` — 40 exact checks: (s,t) re-derivation, rows 3–5, identities, resultants, constants.
+- `k5_third_row_derivation.py` — 39 exact checks: (s,t) re-derivation, rows 3–5, identities, resultants, constants.
 - `k5_bracket_constants.py` — exact rational brackets for c, σ, α (Sturm-verified unique roots).
 - `k5_tight_scan.c` / `k5_tight_scan_check.py` — tight-window scanner (validated against exact Python brute force) + results in `scan_out/`.
 - `k5_cone_scan.c` — scanner for the banked (loose-cone) reduced problem.
@@ -491,6 +491,11 @@ explicit sparse family).
 
 ---
 
-*Scan totals for `5 ≤ d < 10^11` (12-way parallel, `scan_out/`): L1 = <TOTAL_L1>,
-L2 = 16 (last at d=117), L3 = 2 (d=9, 18), L4 = L5 = 0.  Runtime ≈ 25 min
-wall on M-series (12 P-cores).*
+*Scan totals for `5 ≤ d < 10^11` (12-way parallel, `scan_out/`): L1 = 11 598,
+L2 = 16 (last at d = 117), L3 = 2 (d = 9, 18), L4 = L5 = 0.  Runtime ≈ 45 min
+wall on M-series.  Per-chunk logs preserved in `scan_out/chunk_*.log`.*
+
+*Lemma B is not just ROUTINE-claimed: `compute/theory/K5WindowPin.lean`
+compiles clean against this repo's Mathlib (checked via `lake env lean`),
+proving `k_five_window_pin` and `k_five_window_width` with `omega`/`nlinarith`
+only.  It is kept outside the build graph pending banking.*
