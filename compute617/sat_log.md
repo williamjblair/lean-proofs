@@ -345,3 +345,4 @@ supports lookahead cubing (--assignment-cutoff) and LRAT output
 14:58 SMS trio relaunched from persistent session (agent-spawned ones were mass-TERMed at agent exit; logs were empty): pids 66331/66332/66333, logs runs/sms_{k26,sum,sfloor}_main.log
 14:59 CORRECTION: SMS trio never died - monitor kill -0 is sandbox-blocked (false exits); duplicates culled; switching liveness checks to ps -p
 15:03 culled 3 baseline legs; cores to SMS trio + swarm
+15:10 VERDICT: sms_silent_floor75 UNSAT (Result 20, 769.8s) => THEOREM: silent class needs >= 76 edges => s=2 cube CLOSED (2*76 + 3*50 = 302 > 300). Remaining: s=0 (edges_loud+floor_loud), s=1 (sum_silent, SMS running).
