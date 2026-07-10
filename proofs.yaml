@@ -23,3 +23,32 @@ proofs:
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/154.lean
     fc_pr: https://github.com/google-deepmind/formal-conjectures/pull/4340
+  - problem: 617
+    source: erdosproblems
+    file: ErdosProblems/Erdos617.lean
+    theorem: Erdos617.Balanced.no_monochromatic_clique
+    statement: >-
+      In any balanced r-coloring (r >= 2) no r+1 vertices induce a
+      monochromatic clique: a mono K_{r+1} misses every other color.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/617.lean
+  - problem: 617
+    source: erdosproblems
+    file: ErdosProblems/Erdos617.lean
+    theorem: Erdos617.Balanced.sum_le_sq
+    statement: >-
+      Vertex-deletion counting interface: in a balanced coloring of
+      K_{r^2+1}, per-color hitting-set lower bounds for the attachment
+      sets at any vertex sum to at most r^2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/617.lean
+  - problem: 617
+    source: erdosproblems
+    file: ErdosProblems/Erdos617.lean
+    theorem: Erdos617.statement_five_of_extension_demand
+    statement: >-
+      Conditional reduction of the r=5 case: if every balanced coloring
+      of K_26 has extension demand exceeding 25 at some vertex, the
+      Erdos-Gyarfas conjecture holds for r=5.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/617.lean

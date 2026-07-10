@@ -10,3 +10,6 @@ a matching entry in `proofs.yaml`.
 import ErdosProblems.Erdos154Sumset
 
 #print axioms Erdos154.erdos_154_sumset
+#print axioms Erdos617.Balanced.no_monochromatic_clique
+#print axioms Erdos617.Balanced.sum_le_sq
+#print axioms Erdos617.statement_five_of_extension_demand
