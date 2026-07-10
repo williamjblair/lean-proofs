@@ -188,7 +188,75 @@ contain a full line = forbidden 5-clique ⇒ **h_c = ∞**. AG true vector:
   kissat (`brew install kissat` or build), then
   `kissat --no-binary runs/e7_general.cnf runs/e7_general.drat`.
 
-## Status / read
+## Session 2026-07-10 ~12:30 — P0 affine residual, silence semantics, bounds, proof logging
+
+### P0 — E9 affine residual model: FAMILY EMPTY (exact SAT, all 6 choices)
+`e9_affine_residual.py` (+ selftest: 6 direction classes x 50 edges, each 5
+disjoint K_5s). V = F_5^2 ∪ {∞}; omit one direction, fix the other 5 as the
+colors (bijection WLOG by color symmetry), SAT the 75 free edges (omitted 50
++ ∞ 25) against full (6-set, color) coverage. **All 6 omitted-direction
+completions UNSAT in ~0.1 s each** (`e9_affine.log`). Structural fact: after
+fixing, exactly 5^6 = 15,625 coverage clauses survive — within-plane 6-sets
+are auto-covered for every kept color (pigeonhole on 5 parallel lines), so
+the ONLY binding constraints are S = {∞} ∪ (transversal of the 5 c-lines),
+5^5 per color; 75 free edges cannot hit them all. This machine-confirms the
+E5 hand proof (omit = vertical) and extends it to all 6 directions
+(consistent with AGL(2,5) transitivity on P^1(F_5); identical clause counts
+across all 6 instances corroborate).
+
+### P1 — silence semantics (Lemma-B repair)
+A class can be SILENT (alpha <= 4): zero independent 5-sets ⟹ H = ∅ is
+admissible ⟹ h = 0. So `lemma_variants.py floor 1` (still running) asks
+"silent class OR loud class with h<=1" — its SAT verdict would be
+uninformative without an autopsy; only UNSAT is directly usable (and even
+then the loud-conditioned form is the right lemma). The corrected,
+loudness-conditioned instances (`lemma_loud.py`, launched 12:22) are the
+trusted line: `floor_loud 1` (loud ⟹ h >= 2), `silent` (is s >= 1
+inhabited?), `double_silent` (danger cube s=2, where 0+0+3·8 = 24 <= 25
+defeats the counting certificate), plus `silent_floor.py 75` (isolated
+probe: silent floor >= 76 ⟹ s <= 1 by 2·76 + 3·50 > 300). Cube arithmetic
+uses the hand bounds: silent ⟹ >= 67 edges (66 forces complement =
+T(25,4) = K_{7,6,6,6} by Turán uniqueness ⟹ G = K_7+3K_6 ⊇ K_6, dead);
+loud floor 50; 3·67 + 2·50 = 301 > 300 ⟹ s <= 2.
+
+### P3 — new cardinality bounds (n=26 ONLY; do not port to K_25 — AG has
+six edge-disjoint 5-clique covers, so the pigeonhole fails on 25 pts)
+(i) every class >= 56 (55-edge extremum is the {6,5,5,5,5} clique partition
+⊇ K_6); (ii) at most one class has a 5-clique cover (E4 pigeonhole), the
+rest have non-5-partite K_6-free complements ⟹ <= 266 edges (Brouwer 1981:
+ex(26,5) − ⌊26/5⌋ + 1) ⟹ class >= 59; so >= 4 classes >= 59, aggregate
+>= 4·59 + 56 = 292, slack <= 33; (iii) every class <= 92. Encoded in
+`e7_bounded.py`: base E7 + per-class atleast-56/atmost-92 + selectors a_c
+(pairwise a∨a = at-least-4) with conditionalized atleast-59 networks.
+**Encoder property-tested 5/5** (SAT/UNSAT flips exactly at floor 56, cap
+92, and two-classes-below-59). Dumped `runs/e7_bounded.cnf` (263,120 vars,
+1,675,281 clauses); standalone kissat running (`runs/e7_bounded_kissat.log`).
+UNSAT here = theorem modulo side lemmas (i)–(iii); the unbounded E7 stays
+as the assumption-free line. TODO: port bounds into `w1_encode.py` before
+any w1 restart (running w1 still has the old 55..105).
+
+### P4 — proof-logging toolchain
+Built from source in `tools/`: **kissat 4.0.4** (`tools/kissat/build/kissat`)
+and **drat-trim**. Calibration COMPLETE on the r=3 K_10 anchor: `runs/r3_k10.cnf` dumped
+(same encoding as `smallcase_sat.py`, 135 vars / 811 clauses), standalone
+kissat UNSAT in ~110 s CPU (pysat baseline 222.5 s), DRAT proof 141 MB,
+**drat-trim: s VERIFIED** (781/811 clauses in core, 2.17M of 2.88M lemmas,
+57.8M resolution steps, 297 s). The certification pipeline is proven
+end-to-end. NOTE the proof-size scaling: 141 MB for an 811-clause instance;
+an E7-scale proof will be O(100 GB); disk has only 38 GiB free. Endgame
+plan: verdict first without logging, then a dedicated DRAT rerun with disk
+cleared, or stream kissat straight into a checker via a FIFO.
+
+### Harvest / culls (~12:30, box was at load 68 on 16 cores)
+- CULLED: sls p3/p4 (plateau 781/808 for hours, autopsy long done) and
+  `general_cadical.py` (E7 second opinion; Kissat404 `fixing_sat` identity
+  stays primary; bounded E7 is now the second line). Logged, freed 3 cores.
+- Still running, no verdicts yet: E7 general (kissat, ~2 h), w1 full n=26,
+  fixing 2^13 & 2^12-1-1, e3 (5^5·1 cycling), r=4 K_17 general,
+  lemma_variants edges/floor/sum (~1 h), lemma_loud x3 + silent_floor
+  (~10 min), hclimb_a, m* edge-floor probe (block-buffered, output at exit).
+
+## Status / read (updated 2026-07-10 ~12:50)
 
 - No witness. All claimed results verified against `core.py` where applicable.
 - Read: **strongly leaning UNSAT.** Every seed family funnels to the same
@@ -196,8 +264,18 @@ contain a full line = forbidden 5-clique ⇒ **h_c = ∞**. AG true vector:
   completion around the defect (up to 53% of edges freed) is UNSAT in seconds;
   every valid K_25 examined (79 pairwise non-isomorphic + the 2-member
   complete translation-invariant classification + >2200 walk steps) is
-  non-extendable, Σ h_c ≥ 37 ≫ 25.
-- Calibration anchors now in place: r=3 general UNSAT (known theorem
-  reproduced), n=25 SAT (pipeline finds the affine solution's space).
-- Open jugular: E7 general UNSAT run; then rerun with DRAT proof logging
-  for the certification artifact.
+  non-extendable, Σ h_c ≥ 37 ≫ 25; and the most structured family (E9
+  affine residual, all 6 omitted directions) is exactly-UNSAT in 0.1 s each.
+- Calibration anchors: r=3 general UNSAT reproduced twice (pysat 222.5 s;
+  standalone kissat 4.0.4 ~2 min with 141 MB DRAT emitted), n=25 SAT.
+- Cube tree (K_25 lemma route): LEMMA-SUM is the cube-free jugular (covers
+  silent classes via H = ∅). Decomposed legs: s=2 killed by any of
+  {double_silent UNSAT, silent_floor >= 76, silent UNSAT}; s=0 needs
+  edges_loud(5,75) UNSAT + floor_loud ladder; s=1 needs silent UNSAT or
+  the joint `sum_silent` instance (coded, not launched — fire it if
+  `silent` returns SAT). All in flight.
+- Jugular stack (independent routes to the theorem): (1) LEMMA-SUM UNSAT;
+  (2) cube legs above; (3) E7 general UNSAT (unbounded, assumption-free);
+  (4) E7-bounded UNSAT (fastest expected, modulo side lemmas (i)-(iii));
+  (5) m* >= 66 by the edge-floor probe. Then a DRAT rerun for certification
+  (disk: only 38 GiB free — plan the proof-logging rerun deliberately).

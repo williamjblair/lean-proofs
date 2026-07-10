@@ -105,6 +105,14 @@ def encode(n, with_card=True, with_vertex_lex=True):
         from pysat.card import CardEnc, EncType
         mn = turan_min_edges(n)
         mx = n * (n - 1) // 2 - 4 * mn
+        if n == 26:
+            # n=26 refinements (see sat_log.md 2026-07-10 P3; NOT valid for
+            # n=25): (i) floor 56 — the 55-edge extremum is the {6,5,5,5,5}
+            # clique partition, contains K_6, dead; (ii) at most one class
+            # has a 5-clique cover (pigeonhole), others have non-5-partite
+            # K_6-free complement <= 266 edges (Brouwer 1981) => >= 59, so
+            # >= 4 classes >= 59; (iii) cap 325-(3*59+56) = 92.
+            mn, mx = 56, 92
         for c in range(R):
             lits = [x(k, c) for k in range(ne)]
             enc = CardEnc.atleast(lits=lits, bound=mn, top_id=top,
@@ -115,6 +123,21 @@ def encode(n, with_card=True, with_vertex_lex=True):
                                  encoding=EncType.seqcounter)
             clauses.extend(enc.clauses)
             top = max(top, enc.nv)
+        if n == 26:
+            # selectors a_c: at least 4 classes with >= 59 edges
+            avars = []
+            for c in range(R):
+                top += 1
+                avars.append(top)
+            for c in range(R):
+                lits = [x(k, c) for k in range(ne)]
+                enc = CardEnc.atleast(lits=lits, bound=59, top_id=top,
+                                      encoding=EncType.seqcounter)
+                clauses.extend([cl + [-avars[c]] for cl in enc.clauses])
+                top = max(top, enc.nv)
+            for c1 in range(R):
+                for c2 in range(c1 + 1, R):
+                    clauses.append([avars[c1], avars[c2]])
 
     return top, clauses
 

@@ -55,6 +55,21 @@ Ansatz: 25 pts = F_5^2 + ∞; color non-vertical edge by slope; vertical (50) an
     impossible for 4 classes at once), place the other 3 line-indices as
     singletons in the remaining 3 columns.  VERDICT: family empty.
 
+## E9 — affine residual completion (generalizes E5 to all omitted directions) — EMPTY (exact SAT)
+V = F_5^2 ∪ {∞}; the 300 plane edges = 6 direction classes of 50 (each 5
+disjoint K_5s).  Omit one direction, fix the other five AS the colors
+(bijection WLOG by color symmetry); SAT the 75 residual edges (omitted 50 +
+∞ 25) exactly against full (6-set,color) coverage.  `e9_affine_residual.py`
+(selftest: class structure verified), log `e9_affine.log`.
+**All 6 omitted-direction instances UNSAT, ~0.1 s each.**  Structure: only
+5^6 coverage clauses survive the fixing — within-plane 6-sets are auto-
+covered for every kept color (pigeonhole over 5 parallel lines), so the
+binding 6-sets are exactly {∞} ∪ (transversal of the 5 c-lines), 5^5 per
+color.  Confirms the E5 hand proof by machine and closes the whole
+AGL(2,5)-orbit of the ansatz (omitted-direction choice is WLOG under
+(x,y)->(y,x) and (x,y)->(x,x+y); the 6 runs are belt-and-braces).
+VERDICT: family empty — the most structured candidate family is dead.
+
 ## E6 — Z_25-cycling colorings (translation +1 cycles the colors)
 color({x,x+d}) = c_d + x mod 5 (d = 1..12 canonical diff), color({∞,x}) = c_∞ + x.
 Consistency under translation forces exactly this 13-parameter form (c ∈ Z_5^13).
