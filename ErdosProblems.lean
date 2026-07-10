@@ -8,3 +8,5 @@ import ErdosProblems.Erdos686ExceptionalNine
 import ErdosProblems.Erdos686SmallCore
 import ErdosProblems.Erdos686ConstantSurvivors
 import ErdosProblems.Erdos686SmallBranch
+import ErdosProblems.Erdos686EvenK
+import ErdosProblems.Erdos686Reduction

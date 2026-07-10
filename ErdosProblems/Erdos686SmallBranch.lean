@@ -66,16 +66,27 @@ private lemma constantQuotientPairMem_of_table {k : ℕ}
   interval_cases k <;>
     simp [constantQuotientPairMem, constantQuotientPairs, constantQuotientOf]
 
-/-- **Small-`k` row escape, conditional on the prefix-three bound.**
-For `5 ≤ k ≤ 15` and the exact `N = 4` ratio window, some row of the
-divisor skeleton fails. -/
-theorem row_full_escape_small_k_in_ratio_window_of_constant_bound
-    (hbound : ConstantCaseBoundHypothesis) :
-    ∀ k n d : ℕ, 5 ≤ k → k ≤ 15 → k ≤ d →
-      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
-      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
-      ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j := by
-  intro k n d hk5 hk15 hkd hup hlo
+/-- Core of the small-`k` escape.  The bound hypothesis is only ever
+invoked at the single pair `(k, constantQuotientOf k)`, so it is taken
+here in per-`k` form; the public wrappers instantiate it from the
+all-pairs or odd-pairs hypotheses. -/
+theorem row_full_escape_small_k_core
+    {k n d : ℕ} (hk5 : 5 ≤ k) (hk15 : k ≤ 15) (hkd : k ≤ d)
+    (hup : (n + d + k) ^ k ≤ 4 * (n + k) ^ k)
+    (hlo : 4 * (n + 1) ^ k ≤ (n + d + 1) ^ k)
+    (hbound_at : ∀ d' u A n' : ℕ,
+      221 ≤ d' → 1 ≤ u → u < d' →
+      A = (constantQuotientOf k + 1) * d' - u →
+      n' + 1 = A →
+      (n' + d' + k) ^ k ≤ 4 * (n' + k) ^ k →
+      4 * (n' + 1) ^ k ≤ (n' + d' + 1) ^ k →
+      ((A : ℤ) ∣ residualRowPoly k (constantQuotientOf k) (d' - u)) →
+      (((A + 1 : ℕ) : ℤ) ∣ residualRowPoly k (constantQuotientOf k)
+        (d' - u + (constantQuotientOf k + 1))) →
+      (((A + 2 : ℕ) : ℤ) ∣ residualRowPoly k (constantQuotientOf k)
+        (d' - u + 2 * (constantQuotientOf k + 1))) →
+      d' ≤ constantPrefixThreeBound k (constantQuotientOf k)) :
+    ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j := by
   by_cases hd220 : d ≤ 220
   · exact row_full_escape_small_k_d_le_220 hk5 hk15 hkd hd220 hup hlo
   by_contra hno
@@ -114,7 +125,7 @@ theorem row_full_escape_small_k_in_ratio_window_of_constant_bound
       simpa [mul_comm] using this
     rcases Nat.lt_or_ge u d with hult | hueq
     · -- interior u < d: bound, membership, row-four escape
-      have hd_le := hbound k (constantQuotientOf k) d u (n + 1) n hkq
+      have hd_le := hbound_at d u (n + 1) n
         (by omega) hu1 hult hA rfl hup hlo h0 h1 h2
       exact constant_case_row4_escape_of_prefix_three_bound hkq (by omega)
         hd_le hu1 hult hA rfl hup hlo h0 h1 h2 h3
@@ -132,6 +143,20 @@ theorem row_full_escape_small_k_in_ratio_window_of_constant_bound
     subst hk9
     obtain ⟨j, hj, hnd⟩ := k_nine_quotient_five_row_escape (by omega) hq5 hup hlo
     exact hnd (hall j hj)
+
+/-- **Small-`k` row escape, conditional on the prefix-three bound.**
+For `5 ≤ k ≤ 15` and the exact `N = 4` ratio window, some row of the
+divisor skeleton fails. -/
+theorem row_full_escape_small_k_in_ratio_window_of_constant_bound
+    (hbound : ConstantCaseBoundHypothesis) :
+    ∀ k n d : ℕ, 5 ≤ k → k ≤ 15 → k ≤ d →
+      (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+      4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+      ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j := by
+  intro k n d hk5 hk15 hkd hup hlo
+  exact row_full_escape_small_k_core hk5 hk15 hkd hup hlo
+    (fun d' u A n' => hbound k (constantQuotientOf k) d' u A n'
+      (constantQuotientPairMem_of_table hk5 hk15))
 
 /-- **The complete conditional reduction of Erdős 686.**  The two open
 hypotheses — the constant-quotient prefix-three bound and the `k ≥ 16`

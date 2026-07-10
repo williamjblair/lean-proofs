@@ -10,6 +10,7 @@ a matching entry in `proofs.yaml`.
 import ErdosProblems.Erdos154Sumset
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686SmallBranch
+import ErdosProblems.Erdos686Reduction
 
 #print axioms Erdos154.erdos_154_sumset
 #print axioms Erdos686.Erdos686Variant.nonsquare_representable
@@ -325,3 +326,10 @@ import ErdosProblems.Erdos686SmallBranch
 #print axioms Erdos686.Erdos686Variant.row_sixteen_boundary_hypothesis_false
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_constant_bound_and_large_escape
 #print axioms Erdos686.Erdos686Variant.no_solution_four_of_constant_bound_and_large_escape
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_six
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_eight
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_ten
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_twelve
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_fourteen_of_large_gap
+#print axioms Erdos686.Erdos686Variant.no_solution_four_of_odd14_bound_and_large_escape
+#print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd14_bound_and_large_escape

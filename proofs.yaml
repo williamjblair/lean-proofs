@@ -2918,3 +2918,68 @@ proofs:
       the unrestricted large-k row escape.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_six
+    statement: >-
+      The N=4 block-product equation is impossible for k=6, d>=221:
+      elementary Runge/half-integrality argument via the exact identity
+      m*X = D(w) - 4D(v) trapping the integer m in an empty window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_eight
+    statement: >-
+      The N=4 block-product equation is impossible for k=8, d>=221 (Runge).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_ten
+    statement: >-
+      The N=4 block-product equation is impossible for k=10, d>=221
+      (Runge window plus mod-5 and mod-11 kernel certificates).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_twelve
+    statement: >-
+      The N=4 block-product equation is impossible for k=12, d>=221 (Runge).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_fourteen_of_large_gap
+    statement: >-
+      The N=4 block-product equation is impossible for k=14, d>=663000
+      (Runge; the strip 221<=d<663000 remains with the constant-quotient
+      route).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686Reduction.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_of_odd14_bound_and_large_escape
+    statement: >-
+      Refined conditional N=4 exclusion: the seven-pair constant-quotient
+      bound (odd k plus (14,9)) and the unrestricted large-k escape suffice;
+      k in {6,8,10,12} is closed unconditionally.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686Reduction.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_odd14_bound_and_large_escape
+    statement: >-
+      Refined complete conditional reduction of Erdos 686: the seven-pair
+      constant-quotient bound plus the unrestricted large-k row escape
+      refute the universal representation statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
