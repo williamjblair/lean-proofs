@@ -244,3 +244,38 @@ fails some row j ≤ 17.
    (j ≤ k) has a prime power with no multiple in its row interval.
 4. Housekeeping: PR the conditional reduction toward formal-conjectures
    (`erdos_686.variants.four` is open there with `answer(sorry)`).
+
+---
+
+## 9. Terminal assessment: what blocks the full solve (2026-07-10)
+
+The two open hypotheses are research problems, not formalization gaps:
+
+**The six odd tails** (`OddThueTailHypothesis`, d ≥ 10^120).  Any
+concrete bound is cheap (each decade of d costs ~2 CF terms in the
+descent certificate; 10^1000 is minutes of work).  Unbounded closure
+needs one of:
+- an effective irrationality measure < k for `4^{1/k}` at odd
+  k ∈ {5..15} — none exists; the hypergeometric method structurally
+  fails at these k (verified);
+- Baker–Feldman — effective on paper but with bounds ~10^(10^500),
+  unreachable by certificate, and linear forms in logarithms have
+  never been formalized in any proof assistant;
+- structure in cf(4^{1/k}) — none known.
+Beukers–Shorey–Tijdeman prove the tails are finite via Siegel —
+fundamentally ineffective.  Watch the Calegari–Dimitrov–Tang holonomy
+program (arXiv:2510.04156), which announces effective measures for
+high-order roots: if explicit constants materialize for 4^{1/k}, the
+tails become finishable on paper and then formalizable.
+
+**Large-k double smoothness** (`LargeKSmoothHypothesis`).  A special
+case of the open conjecture behind Erdős #388 (uniform-in-k
+finiteness); needs Grimm-strength control of smooth numbers in sliding
+windows.  Census evidence: no candidate in 145+ billion window points
+(k ≤ 6500, n ≤ 3·10^7).
+
+**Standing.**  Unconditional k ≤ 15 to d < 10^120 exceeds the
+literature (community: k ≤ 4 plus a k = 6 sketch; k = 5 was open).
+Natural next steps: upstream PR toward formal-conjectures
+(`erdos_686.variants.four`), a note on the erdosproblems.com/686
+forum, and monitoring the holonomy program.
