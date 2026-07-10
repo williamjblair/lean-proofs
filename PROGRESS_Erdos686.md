@@ -1,6 +1,6 @@
 # PROGRESS.md - Erdős Problem #686
 
-Date: 2026-07-09 (full-solution campaign session)
+Date: 2026-07-10 (full-solution campaign, day 2)
 Formal lane: refute the universal positive statement by proving `N = 4` has no
 quotient representation. Previous plan archived in
 `PROGRESS_Erdos686_gptpro_archive.md`.
@@ -37,27 +37,49 @@ interval maximum 5447). Banked as `row_sixteen_boundary_hypothesis_false`
 row 16; n = 3177026 at row 17) show fixed-prefix caps cannot work; the
 repaired open target is the unrestricted escape.
 
-[C] The two open hypotheses (the entire remaining mathematical content):
+[R] **k = 14 closed entirely** (all d ≥ 221): the Runge trap confines
+`m = T₁₄(w) − 2T₁₄(v)` to 834 candidates, all killed by a 31-prime
+mod-p set cover (`Erdos686FourteenStrip.lean`).  All even
+`k ∈ {6, 8, 10, 12, 14}` are unconditional.
+
+[R] **Equation-level prime obstruction** (`Erdos686PrimeObstruction.lean`):
+a prime `q ≥ d + k` dividing any block element refutes the equation in
+five lines.  Hence any solution has both blocks entirely
+`(d+k)`-smooth; the large-`k` core is now `LargeKSmoothHypothesis`.
+
+[R] **The Thue route (odd k)**: centered variables `X = n+d+(k+1)/2`,
+`Y = n+(k+1)/2` turn the equation into `P_k(X) = 4·P_k(Y)` with `P_k`
+odd; the leading cancellation forces `|4^{1/k} − X/Y| ≤ C_k/Y²`
+(C₅ = 61/100, C₇ = 399/500, C₉ = 1031/1000, C₁₁ = 13/10, C₁₃ = 3/2,
+C₁₅ = 1729/1000 — all exact, proved chains).  A C-agnostic
+Stern–Brocot descent certificate (`Erdos686ConvergentMachinery.lean`,
+no reals, no Mathlib CF, kernel decide ~1s) confines and refutes every
+candidate.  **k = 5 is banked closed for 221 ≤ d < 10^120**
+(`Erdos686FiveThue.lean`) — the community had k = 5 open;
+k ∈ {7, 9, 11, 13, 15} modules are in flight on verified mathematics
+(bounds 10^98–10^119).  Telescope caveat: k = 9, 15 have d = 1
+polynomial identities (`P₉(8) = 4·P₉(7)`), excluded by the domain.
+
+[C] The open hypotheses (the entire remaining mathematical content):
 
 ```lean
-def ConstantCaseBoundHypothesis : Prop :=            -- small-k core
-  ∀ k q d u A n : ℕ, constantQuotientPairMem k q →
-    221 ≤ d → 1 ≤ u → u < d → A = (q+1)*d - u → n + 1 = A →
-    (n+d+k)^k ≤ 4*(n+k)^k → 4*(n+1)^k ≤ (n+d+1)^k →
-    ((A : ℤ) ∣ residualRowPoly k q (d-u)) →
-    (((A+1 : ℕ) : ℤ) ∣ residualRowPoly k q (d-u + (q+1))) →
-    (((A+2 : ℕ) : ℤ) ∣ residualRowPoly k q (d-u + 2*(q+1))) →
-    d ≤ constantPrefixThreeBound k q
+-- per odd k: no equation solution at astronomical heights
+def NoLargeGapSolutionFour (k B : ℕ) : Prop :=
+  ∀ n d : ℕ, B ≤ d → blockProduct k (n + d) ≠ 4 * blockProduct k n
+-- six tails: NoLargeGapSolutionFour k (10^120-ish), k ∈ {5,7,9,11,13,15}
 
-def LargeKEscapeHypothesis : Prop :=                 -- large-k core
+def LargeKSmoothHypothesis : Prop :=                 -- large-k core
   ∀ k n d : ℕ, 16 ≤ k → k ≤ d →
-    (n+d+k)^k ≤ 4*(n+k)^k → 4*(n+1)^k ≤ (n+d+1)^k →
-    ∃ j, j ∈ Finset.Icc 1 k ∧ ¬ n + j ∣ shiftedDiffProductAt k d j
+    blockProduct k (n + d) = 4 * blockProduct k n →
+    (∀ i, i ∈ Finset.Icc 1 k → ∀ q, q.Prime → q ∣ n + i → q < d + k) →
+    False
 ```
 
-[C] Even k ∈ {6,8,10,12,14} are expected to fall unconditionally to the
-Kovač/Runge square-root argument (in progress; mathematics verified, see §5).
-That would restrict the small-k open core to odd k ∈ {5,7,9,11,13,15}.
+Sharpest banked reduction so far:
+`erdos686_false_of_odd_bound_and_smooth` (constant-quotient form) —
+to be superseded by the tails form once the five remaining Thue
+modules land.  Every conditional reduction along the way remains
+banked and audited.
 
 ---
 
