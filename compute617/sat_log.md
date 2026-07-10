@@ -282,3 +282,66 @@ cleared, or stream kissat straight into a checker via a FIFO.
   (4) E7-bounded UNSAT (fastest expected, modulo side lemmas (i)-(iii));
   (5) m* >= 66 by the edge-floor probe. Then a DRAT rerun for certification
   (disk: only 38 GiB free — plan the proof-logging rerun deliberately).
+14:13 culled monolithic E7 x3, w1, original lemma trio (superseded/broken-semantics); cores now dedicated to: cube legs (silent, double_silent, floor_loud, edges_loud, silent_floor, sum_silent) + e7_bounded kissat
+14:16 culled hclimb; launching sub-cube splitting campaign
+
+## Session 2026-07-10 ~14:30 — cube-and-conquer sub-splitting + SMS
+
+### Sub-cube campaign (running)
+Machinery: `cube_common.py` (leg builders replicate the EXACT clause lists
+of the running baselines — counts asserted against the logged values),
+`graph_reps.py` (canonical reps of graphs on m vertices up to iso, counts
+verified against 1,2,4,11,34,156,1044,12346), `gen_cubes.py`,
+`cube_run.py` (work-queue driver: persistent Cadical195 per worker,
+formula loaded ONCE, cubes = assumption sets under conflict budgets
+100k -> 1M -> survivors.json; restart-safe results.tsv; SAT => in-worker
+exact verification: valid_k25, silence/H-admissibility, extension SAT,
+core.is_counterexample on any extension), `make_children.py` (deepen
+window {0..6} -> {0..7} by vertex-7 neighborhoods up to Aut(P) orbits),
+`kissat_cubes.py` (uncapped standalone-kissat stage; NOTE pysat Kissat404
+IGNORES assumptions — never conquer with it).
+
+Split: class-0 pattern on the 21 edges inside {0..6} — 1044 iso-reduced
+cubes = 2^21 raw-cube coverage. SOUNDNESS (hand argument, banked): every
+leg's constraint set is S_25-invariant (card networks are symmetric
+functions; seqcounter aux re-extendable), so any solution relabels by a
+permutation supported on {0..6} to one whose window pattern is the
+canonical representative; UNSAT of all 1044 cubes => leg UNSAT.
+Cube verdicts are therefore "UNSAT modulo this covering argument" —
+the running monolithic legs remain the assumption-free line.
+
+Selftest (13/13 OK, `selftest_cubes.py`): AG full-units SAT + decode ==
+AG + valid; K7-complete cube UNSAT instantly; AG-pattern cube SAT in 2 s
+with verified valid K_25; h=5 witness line admissible / singleton not.
+
+Launched 14:29: sum_silent (2 workers) + edges_loud (1 worker), niced,
+runs/cubes_{sum_silent,edges_loud}/. Early shape: dense patterns die by
+propagation (~150/min), first UNKNOWN band at 13 edges. Leg DIMACS dumped
+for reproduction: runs/leg_sum_silent.cnf (96M), runs/leg_edges_loud.cnf
+(75M).
+
+### SMS (sat-modulo-symmetries) — BUILT, CALIBRATED, PILOT RUNNING
+Built from source (tools/sat-modulo-symmetries, one fix: missing
+`#include <sstream>` in src/useful.h under current Xcode libc++);
+binary tools/sat-modulo-symmetries/build/src/smsg with cadical_sms.
+The compiled smsg has NO multi-graph mode (pysms targets a newer
+feature), so the K_26 encoding breaks S_26 through the CLASS-0 lens:
+SMS edge vars 1..325 = class 0, aux one-hot colors 1..4 + coverage
+(`sms_encode.py`); side constraints are vertex-invariant as a set, so
+restricting to lex-min class-0 representatives is exhaustive. On top:
+color-symmetry first-occurrence lex chain over colors 1..4 (sound
+composition: recoloring 1..4 fixes the class-0 graph).
+
+CALIBRATION BOMBSHELL: the r=3 K_10 anchor (222.5 s pysat, ~110 s
+standalone kissat) is UNSAT under smsg in **0.02 s** (runs/sms_r3_k10.log)
+— ~4 orders of magnitude from native vertex-symmetry handling. SAT-side
+control: n=9 r=3 (AG(2,3) parallel classes construction exists) returns
+a witness, exit 10, also with the color-lex chain on. Instances:
+runs/sms_r5_k26.cnf (plain), runs/sms_r5_k26_cb.cnf (color-lex; PILOT
+RUNNING since ~14:45, 1 niced core, runs/sms_r5_k26_cb.log). smsg also
+supports lookahead cubing (--assignment-cutoff) and LRAT output
+(--lrat-output) for certification — noted for the endgame.
+14:57 culled silent_floor.py + e3 (SMS supersedes)
+14:58 SMS trio relaunched from persistent session (agent-spawned ones were mass-TERMed at agent exit; logs were empty): pids 66331/66332/66333, logs runs/sms_{k26,sum,sfloor}_main.log
+14:59 CORRECTION: SMS trio never died - monitor kill -0 is sandbox-blocked (false exits); duplicates culled; switching liveness checks to ps -p
+15:03 culled 3 baseline legs; cores to SMS trio + swarm
