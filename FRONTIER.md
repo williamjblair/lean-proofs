@@ -31,13 +31,23 @@ are impossible.  Valuation concentration supplies the missing small-prime
 case: for every prime base, a whole gap `d=p^e≥10^120` is impossible in
 all six odd rows.  The exact loss is bounded by
 `14! * 35 * 13^30 < 10^120`.  Reflection compression is kernel-checked.
+The exact equation also has a global quadratic lift: with
+`X_i=3(n+i)-d`, coefficient cancellation in
+`prod(X_i+4d)=4 prod(X_i+d)` gives
+`d^2 | prod_i X_i` with no prime-base or localization exception.
 For a gap with exactly two distinct prime divisors, the concentrated
 components must land at distinct noncentral factors; if both prime bases
 are at least `k`, their residuals give
 `a*p^(2e)-b*q^(2f)=3(i-j)` with `ab<A_k^2`.  The finite-discriminant
 Pell/prime-power families remain open.
 For `k≥16`, the
-ratio window now gives `n>9d`, every lower term is composite, and the
+ratio window gives both `n>9d` and `kd<5n`.  Maximum-valuation owner
+matching across the exact lower and upper blocks compresses the whole lower
+block into `(k-1)!` times the lcm of
+`d-k+1,...,d+k-1`, including all small prime bases.  This forces two explicit
+lcm transition inequalities but does not close large `d`, because the host
+interval still has `2k-1` possible differences.  Every lower term is
+composite, and the
 published Nair-Shorey `4.42k` theorem closes the paper-level wedge
 `50(d+k-1)≤221k`; only the downstream implication is in Lean because
 the external theorem itself is not formalized.
@@ -56,7 +66,9 @@ OPEN CORE:
    (none exists; hypergeometric method structurally fails at these k)
    or new CF structure. Watch: Calegari–Dimitrov–Tang holonomy program.
    The pure-prime-power subcase is now excluded for every prime base;
-   the remaining gap has at least two distinct prime divisors.
+   the remaining gap has at least two distinct prime divisors.  The global
+   residual-product square lift is banked; its sharper concentration
+   consequences and the second local Taylor term are active.
 2. `LargeKSmoothHypothesis` — no k ≥ 16 solution with an entirely
    (d+k)-smooth lower block (prime obstruction banked; census: two
    clusters in 145+ billion window points, neither an equation solution).

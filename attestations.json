@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:e4fea264635717bbb194b53abdba415a5d0eaa8307828270f960b9b89ac9c228",
+  "verifier_output_hash": "sha256:b2c006b17d748bc4ec1f2c1c5b3b017f9d62c9dbc4dddd6c62df45f7a1f8ab11",
   "attestations": [
     {
       "problem": 154,
@@ -4387,6 +4387,114 @@
       "theorem": "Erdos686.Erdos686Variant.no_gap_solution_four_k15_of_gap_eq_primePower_of_ten_pow_120_le",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
       "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_mul_sq_dvd_eval_four_sub_four_eval_add_three_eval_zero",
+      "file": "ErdosProblems/Erdos686GlobalSquareLift.lean",
+      "proof_hash": "sha256:98dc46ac396f6ccb6b009e7d61a8b2a1ffbb8b286f9bc01ac2f05806219ec9a7",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.sq_dvd_eval_zero_of_eval_four_eq_four_eval",
+      "file": "ErdosProblems/Erdos686GlobalSquareLift.lean",
+      "proof_hash": "sha256:98dc46ac396f6ccb6b009e7d61a8b2a1ffbb8b286f9bc01ac2f05806219ec9a7",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.gap_sq_dvd_globalLocalResidual_product",
+      "file": "ErdosProblems/Erdos686GlobalSquareLift.lean",
+      "proof_hash": "sha256:98dc46ac396f6ccb6b009e7d61a8b2a1ffbb8b286f9bc01ac2f05806219ec9a7",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.gap_sq_dvd_globalLocalResidualNat_product",
+      "file": "ErdosProblems/Erdos686GlobalSquareLift.lean",
+      "proof_hash": "sha256:98dc46ac396f6ccb6b009e7d61a8b2a1ffbb8b286f9bc01ac2f05806219ec9a7",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.blockProduct_dvd_factorial_sq_mul_centeredDiffLcm_of_individual_skeleton",
+      "file": "ErdosProblems/Erdos686MatchingCompression.lean",
+      "proof_hash": "sha256:459fdaee5fb49b42b88a00c53833e3fec0a9258a57f693f95334c587d4dc4267",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.blockProduct_dvd_factorial_mul_centeredDiffLcm_four",
+      "file": "ErdosProblems/Erdos686MatchingCompression.lean",
+      "proof_hash": "sha256:459fdaee5fb49b42b88a00c53833e3fec0a9258a57f693f95334c587d4dc4267",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k_mul_gap_lt_five_mul_n_of_four_solution",
+      "file": "ErdosProblems/Erdos686MatchingCompression.lean",
+      "proof_hash": "sha256:459fdaee5fb49b42b88a00c53833e3fec0a9258a57f693f95334c587d4dc4267",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k_gap_pow_lt_five_pow_mul_factorial_mul_centeredDiffLcm_four",
+      "file": "ErdosProblems/Erdos686MatchingCompression.lean",
+      "proof_hash": "sha256:459fdaee5fb49b42b88a00c53833e3fec0a9258a57f693f95334c587d4dc4267",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.nine_gap_pow_lt_factorial_mul_centeredDiffLcm_four",
+      "file": "ErdosProblems/Erdos686MatchingCompression.lean",
+      "proof_hash": "sha256:459fdaee5fb49b42b88a00c53833e3fec0a9258a57f693f95334c587d4dc4267",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

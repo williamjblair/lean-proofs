@@ -3412,6 +3412,89 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalSquareLift.lean
+    theorem: Erdos686.Erdos686Variant.three_mul_sq_dvd_eval_four_sub_four_eval_add_three_eval_zero
+    statement: >-
+      For every integer polynomial, the four-to-one evaluation difference
+      after restoring its constant term is divisible by three times d squared.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalSquareLift.lean
+    theorem: Erdos686.Erdos686Variant.sq_dvd_eval_zero_of_eval_four_eq_four_eval
+    statement: >-
+      A polynomial satisfying P(4d)=4P(d) has constant term divisible by
+      d squared.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalSquareLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_sq_dvd_globalLocalResidual_product
+    statement: >-
+      Every exact multiplier-four block equation forces d squared to divide
+      the product of all signed residuals 3(n+i)-d, without localization or
+      prime-base assumptions.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalSquareLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_sq_dvd_globalLocalResidualNat_product
+    statement: >-
+      In the separated k-at-least-five range, the global gap-square
+      divisibility holds for the positive natural residual product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingCompression.lean
+    theorem: Erdos686.Erdos686Variant.blockProduct_dvd_factorial_sq_mul_centeredDiffLcm_of_individual_skeleton
+    statement: >-
+      The complete individual row skeleton compresses the lower block into
+      the centered-difference lcm with two explicit consecutive-block
+      factorial allowances.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingCompression.lean
+    theorem: Erdos686.Erdos686Variant.blockProduct_dvd_factorial_mul_centeredDiffLcm_four
+    statement: >-
+      Direct maximum-valuation owner matching across the exact multiplier-four
+      equation compresses the whole lower block with only one factorial loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingCompression.lean
+    theorem: Erdos686.Erdos686Variant.k_mul_gap_lt_five_mul_n_of_four_solution
+    statement: >-
+      Every large-k multiplier-four solution satisfies the exact scaled ratio
+      k times d less than 5 times n.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingCompression.lean
+    theorem: Erdos686.Erdos686Variant.k_gap_pow_lt_five_pow_mul_factorial_mul_centeredDiffLcm_four
+    statement: >-
+      The scaled ratio and one-factorial matching force the explicit
+      transition inequality (kd)^k below 5^k times the compressed lcm mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingCompression.lean
+    theorem: Erdos686.Erdos686Variant.nine_gap_pow_lt_factorial_mul_centeredDiffLcm_four
+    statement: >-
+      The earlier nine-gap ratio window gives a second exact lcm transition
+      inequality for every k at least sixteen.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686TwoPrimeGap.lean
     theorem: Erdos686.Erdos686Variant.primePower_component_exists_large_local_divisor
     statement: >-

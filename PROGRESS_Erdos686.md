@@ -25,7 +25,7 @@ theorem erdos686_false_of_constant_bound_and_large_escape
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 396 manifest-tracked theorems (370 for problem 686), axioms ⊆
+[R] CI gate: 405 manifest-tracked theorems (379 for problem 686), axioms ⊆
 `[propext, Classical.choice, Quot.sound]`, no `native_decide`, no `sorry`.
 
 [R] **All pure prime-power odd tails are closed.**  The p-adic lift module
@@ -37,6 +37,20 @@ now proves that for every prime `p`, exponent `e`, and
 `14! * 35 * 13^30 < 10^120`.  This removes the entire one-prime-support
 regime but does not close mixed-prime gaps.
 
+[R] **The whole gap square lands in one residual progression.**  Put
+`X_i=3(n+i)-d`.  The exact equation is
+
+```text
+product_i (X_i+4d) = 4 product_i (X_i+d).
+```
+
+The constant terms differ by three, the linear terms cancel, and every
+higher coefficient `4^r-4` is divisible by three.  Lean therefore proves
+unconditionally that `d^2 | product_i X_i`, plus a positive natural-number
+wrapper in the live range.  This removes the derivative-coefficient loss
+before any new primewise concentration; it is a proper consequence, not yet
+a mixed-prime closure.
+
 [R] **Two-prime gaps are forced into a finite-coefficient noncentral
 regime.**  For `d=p^e q^f≥10^120`, concentration losses are at most `4096`
 per base.  The two components cannot land at one factor, and neither can
@@ -45,6 +59,20 @@ cutoff.  If `p,q≥k`, the surviving data satisfy
 `a*p^(2e)-b*q^(2f)=3(i-j)` with `ab<A_k^2` and distinct noncentral `i,j`.
 This is a proper restriction, not a solution of the remaining Pell/prime-
 power families.
+
+[R] **Large-k maximum-valuation owners compress to one lcm.**  For every
+exact equation with `k>=1` and `d>=k`,
+
+```text
+B(k,n) | (k-1)! * lcm(d-k+1,...,d+k-1).
+```
+
+The row skeleton alone gives the same statement with two factorial
+allowances.  In the large branch the exact ratio also sharpens to `kd<5n`,
+forcing `(kd)^k < 5^k (k-1)! C(k,d)`.  Both named deep row-prefix fixtures
+and the `d=1` telescopes pass the hostile audit.  The result is a proper
+compression, not a closure: generic lcm mass still has `2k-1` possible hosts
+and grows with degree `2k-1` in `d`.
 
 [X] **The former large-branch target is falsified.** The fixed-prefix
 statement `RowSixteenBoundaryHypothesis` (rows 1..15 divide ⟹ row 16 fails)

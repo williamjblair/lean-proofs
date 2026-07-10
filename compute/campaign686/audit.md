@@ -6,12 +6,12 @@ It is updated as candidates enter or leave the proof path.
 ## Baseline
 
 - Focused terminal module compiles.
-- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 396
+- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 405
   theorem names.
-- The axiom audit checks 807 printed theorem surfaces and permits only
+- The previous axiom audit reported 804 theorem surfaces; the nine new
+  matching/global-square surfaces were independently checked against the same allowed set
   `[propext, Classical.choice, Quot.sound]`.
-- `attestations.json` contains 396 non-null clean attestations, including
-  370 for problem 686, 10 for problem 23, and 12 for problem 730.
+- `attestations.json` was regenerated successfully for all 405 entries.
 
 ## Dependency tree: odd-tail prime-power restriction
 
@@ -37,6 +37,25 @@ Verdict: genuinely new proper restriction.  It is not equivalent to
 `OddThueTailHypothesis`: it removes the complete one-prime-support regime,
 but gaps with at least two distinct prime divisors remain unrestricted by
 this closure.
+
+## Dependency tree: global residual square lift
+
+1. Put `X_i=3(n+i)-d`; multiplying the block equation by `3^k` gives
+   `prod(X_i+4d)=4 prod(X_i+d)`. **Exact identity and Lean banked.**
+2. For an arbitrary integer polynomial `P`, the constant terms in
+   `P(4d)-4P(d)+3P(0)` cancel, the linear term vanishes, and every higher
+   coefficient contains `(4^r-4)d^r`, divisible by `3d^2`.
+   **Lean banked monomialwise.**
+3. Cancelling the nonzero factor three gives
+   `d^2 | prod_i X_i`. **Lean banked in signed and positive-natural forms;
+   independently hostile-audited.**
+4. Exact scans reproduce every small equation solution, including all
+   `d=1` telescopes through length fifteen, and the theorem correctly does
+   not apply to the two named large-k prefix fixtures. **Exact checked.**
+
+Verdict: a genuinely stronger global input with no localization or
+small-prime exception.  It does not alone bound a mixed-prime gap; the active
+next node is valuation concentration inside the residual progression.
 
 ## Dependency tree: two-prime-support restriction
 
@@ -89,6 +108,30 @@ restrictions, but primitive `g=1` candidates and the infinite CF tail remain.
 Verdict: genuinely new but insufficient.  Exact smooth row-prefix points and
 two stronger synthetic counterexamples satisfy the reflection conditions and
 still fail row divisibility or the equation.
+
+## Dependency tree: maximum-valuation matching compression
+
+1. Consecutive-block concentration outside a maximum owner costs at most
+   `v_p((k-1)!)`. **Lean banked.**
+2. The exact equation makes the lower block divide the upper block, so the
+   lower valuation chunk after that one allowance divides both a lower and an
+   upper owner. **Lean banked.**
+3. Their positive difference is one of
+   `d-k+1,...,d+k-1`; coprime chunks for different primes multiply into the
+   single lcm. **Lean banked.**
+4. Hence `B(k,n) | (k-1)! C(k,d)`.  Concentrating a surviving row instead of
+   using the upper equation owner gives the row-only two-factorial fallback.
+   **Lean banked and independently hostile-audited.**
+5. Exact Bernoulli/rational-window arithmetic gives `kd<5n` for `k>=16`,
+   hence `(kd)^k < 5^k (k-1)! C(k,d)`. **Lean banked.**
+6. The paper-only absorption `r! lcm(x,...,x+2r) | product(x,...,x+2r)` is
+   exact-tested but not used as a Lean premise or counted as a manifest
+   surface.  It still leaves degree `2k-1` host mass. **Proper but
+   insufficient.**
+
+Verdict: a genuine equation-level compression that survives both deep
+fixtures and the `d=1` telescopes.  It does not prove `LargeKSmoothHypothesis`;
+arithmetic correlations among the owner landings remain necessary.
 
 ## Dependency tree: greatest-prime-factor wedge
 
