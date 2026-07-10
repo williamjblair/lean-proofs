@@ -16,7 +16,7 @@ It is updated as candidates enter or leave the proof path.
 ## Dependency tree: odd-tail prime-power restriction
 
 1. Exact block equation. **Banked premise.**
-2. `d | 3*B_k(n)`. **Proved on paper; Lean in progress.**
+2. `d | 3*B_k(n)`. **Proved on paper; Lean formalization in progress.**
 3. Unique localization of `p^e` for prime `p>=k`. **Proved on paper; Lean in progress.**
 4. Local square/cubic Taylor lift. **Proved on paper; exact coefficient tests pass; Lean in progress.**
 5. Explicit `C_k` power inequalities. **Exact arithmetic reproduced.**
@@ -30,8 +30,8 @@ the restriction vacuously.
 
 1. Reflection congruence `S | reflectionCoeff(k)*B_k(n)`. **Banked.**
 2. Per-factor `gcd(S,n+i) | d+k+1-2i`. **Banked.**
-3. Finite-product gcd compression. **Proved on paper; Lean in progress.**
-4. `S | reflectionCoeff(k)*reflectionProduct(k,d)`. **Paper consequence complete.**
+3. Finite-product gcd compression. **Lean banked.**
+4. `S | reflectionCoeff(k)*reflectionProduct(k,d)`. **Lean banked.**
 
 Verdict: genuinely new but insufficient.  Exact smooth row-prefix points and
 two stronger synthetic counterexamples satisfy the reflection conditions and
@@ -40,10 +40,10 @@ still fail row divisibility or the equation.
 ## Dependency tree: greatest-prime-factor wedge
 
 1. `d+k-1<n` and lower-block smoothness. **Banked.**
-2. `n>4d` for `k>=16`. **Elementary proof complete; Lean not yet banked.**
-3. Every lower term is composite. **Immediate from banked smoothness and size.**
+2. `n>9d` for `k>=16`. **Lean banked from the exact ratio window.**
+3. Every lower term is composite. **Lean banked from smoothness and size.**
 4. Nair-Shorey `P(product)>221k/50`. **Published theorem, externally verified; not formalized.**
-5. Contradiction for `k>=25` and `50(d+k-1)<=221k`. **Paper derivation complete.**
+5. Contradiction for `k>=16` and `50(d+k-1)<=221k`. **Lean banked downstream of the explicit external-theorem interface.**
 
 Verdict: rigorous paper-level unbounded wedge, but not accepted by the local
 kernel gate until dependency 4 is formalized.

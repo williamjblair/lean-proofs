@@ -142,3 +142,8 @@ def greatest_prime_factor_of_block(k: int, n: int) -> int:
 def near_diagonal_power_check(k: int) -> bool:
     """Exact inequality used to force n>4d."""
     return 4 * 5**k < 6**k
+
+
+def nine_gap_power_check(k: int) -> bool:
+    """Exact sharpened inequality used to force n>9d."""
+    return 4 * 10**k < 11**k

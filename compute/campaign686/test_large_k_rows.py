@@ -8,6 +8,7 @@ from .large_k_rows import (
     first_failed_row,
     greatest_prime_factor_of_block,
     near_diagonal_power_check,
+    nine_gap_power_check,
     ratio_window_holds,
     reflection_center,
     reflection_coefficient,
@@ -83,6 +84,13 @@ def test_near_diagonal_power_inequality_is_exact() -> None:
     assert 4 * 5**16 == 610_351_562_500
     assert near_diagonal_power_check(16)
     assert all(near_diagonal_power_check(k) for k in range(16, 80))
+
+
+def test_sharpened_nine_gap_power_inequality_is_exact() -> None:
+    assert 11**16 == 45_949_729_863_572_161
+    assert 4 * 10**16 == 40_000_000_000_000_000
+    assert nine_gap_power_check(16)
+    assert all(nine_gap_power_check(k) for k in range(16, 80))
 
 
 def test_even_synthetic_point_survives_reflection_but_not_rows_or_equation() -> None:

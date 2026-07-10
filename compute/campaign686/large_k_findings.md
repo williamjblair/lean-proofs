@@ -1,7 +1,8 @@
 # Large-k findings
 
-Status: exact witnesses reproduced; reflection compression proved on paper;
-Lean formalization in progress.  `LargeKSmoothHypothesis` remains open.
+Status: exact witnesses reproduced; reflection compression is Lean-banked; the
+large-`k` wedge is Lean-banked downstream of an explicit published-theorem
+interface.  `LargeKSmoothHypothesis` remains open.
 
 ## Stronger banked starting point
 
@@ -77,8 +78,8 @@ as Theorem 3.1 of the published survey, says that if `x>100` and
 `4.42k`, apart from exceptions only at `k=2,3`.
 
 For an equation solution with `k>=16`, `d>=k`, the exact factor ratios imply
-`n>4d`: if `n<=4d`, every ratio is at least `6/5`, and
-`(6/5)^16>4`.  Hence `n+1>100` for `k>=25`.  Banked smoothness also makes
+`n>9d`: if `n<=9d`, every ratio is at least `11/10`, and
+`(11/10)^16>4`.  Hence `n+1>100` throughout the range `k>=16`.  Banked smoothness also makes
 every lower term composite.  The cited theorem then contradicts smoothness
 whenever
 
@@ -89,7 +90,7 @@ whenever
 This closes the unbounded paper-level wedge
 
 ```text
-k>=25, k<=d, 50*(d+k-1)<=221*k.
+k>=16, k<=d, 50*(d+k-1)<=221*k.
 ```
 
 Source: S. G. Nair and T. N. Shorey, “Lower bounds for the greatest prime

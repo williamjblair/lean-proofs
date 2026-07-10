@@ -51,8 +51,8 @@ entry must name one quantified missing lemma.
 | T2-VAL | Sliding-window valuations | Compare the unique landing rows of every prime power `p^e > k` with the exponent budget from the exact equation. | active | Gross log-mass counting alone is known insufficient. |
 | T2-TRANS | Row-transition rigidity | Use changes between consecutive row windows to force an unsupported prime power at an unbounded row. | active | Fixed-prefix variants are refuted. |
 | T2-XFER | Transfer to centered equation | Combine double smoothness with the centered `P_k` identity to obtain structure absent from arbitrary smooth blocks. | active | Smoothness by itself is not a universal obstruction. |
-| T2-REFL | Reflection gcd compression | With `S=2n+d+k+1`, compress the banked reflection congruence to `S | reflectionCoeff(k)*reflectionProduct(k,d)`. | proved on paper; Lean in progress | Exact smooth row-prefix counterexamples satisfy this too, so full row constraints remain essential. |
-| T2-442 | Greatest-prime-factor wedge | Apply the published Nair-Shorey `P(x...(x+k-1)) > 4.42k` theorem after proving every lower term composite. | paper-rigorous; outside kernel gate | Would close the unbounded range `k >= 25`, `k <= d`, `50*(d+k-1) <= 221*k`; the Nair-Shorey theorem itself is not formalized here. |
+| T2-REFL | Reflection gcd compression | With `S=2n+d+k+1`, compress the banked reflection congruence to `S | reflectionCoeff(k)*reflectionProduct(k,d)`. | proved and Lean-banked | Exact smooth row-prefix counterexamples satisfy this too, so full row constraints remain essential. |
+| T2-442 | Greatest-prime-factor wedge | Apply the published Nair-Shorey `P(x...(x+k-1)) > 4.42k` theorem after proving every lower term composite. | paper-rigorous; Lean-checked downstream of explicit interface | Closes the unbounded range `k >= 16`, `k <= d`, `50*(d+k-1) <= 221*k`; the Nair-Shorey theorem itself is not formalized here. |
 
 ## Stronger banked Target 2 facts
 
