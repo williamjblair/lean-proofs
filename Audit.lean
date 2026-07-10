@@ -11,6 +11,7 @@ import ErdosProblems.Erdos154Sumset
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686SmallBranch
 import ErdosProblems.Erdos686Reduction
+import ErdosProblems.Erdos686WindowPin
 
 #print axioms Erdos154.erdos_154_sumset
 #print axioms Erdos686.Erdos686Variant.nonsquare_representable
