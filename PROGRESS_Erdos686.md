@@ -75,11 +75,20 @@ def LargeKSmoothHypothesis : Prop :=                 -- large-k core
     False
 ```
 
-Sharpest banked reduction so far:
-`erdos686_false_of_odd_bound_and_smooth` (constant-quotient form) —
-to be superseded by the tails form once the five remaining Thue
-modules land.  Every conditional reduction along the way remains
-banked and audited.
+[R] **The terminal reduction is banked**
+(`Erdos686FinalReduction.lean`, 346 audited theorems):
+
+```lean
+theorem erdos686_false_of_thue_tails_and_smooth
+    (htails : OddThueTailHypothesis)     -- six tails at d ≥ 10^120
+    (hsmooth : LargeKSmoothHypothesis) : -- k ≥ 16 double smoothness
+    ¬ (universal Erdős 686 statement)
+```
+
+with the UNCONDITIONAL `no_gap_solution_four_small_k_below`: for every
+`5 ≤ k ≤ 15` and `221 ≤ d < 10^120` the `N = 4` equation is
+impossible.  All five odd-k Thue modules reached full 10^120 depth.
+Every intermediate conditional reduction remains banked and audited.
 
 ---
 
