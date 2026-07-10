@@ -15,6 +15,7 @@ import ErdosProblems.Erdos686WindowPin
 import ErdosProblems.Erdos686LargeEscape
 import ErdosProblems.Erdos686PrimeObstruction
 import ErdosProblems.Erdos686FiveThue
+import ErdosProblems.Erdos686FinalReduction
 
 #print axioms Erdos154.erdos_154_sumset
 #print axioms Erdos686.Erdos686Variant.nonsquare_representable
@@ -354,3 +355,11 @@ import ErdosProblems.Erdos686FiveThue
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_five_below
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_five_below_ext
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_five_of_tail_ext
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_seven_below_ext
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_nine_below_ext
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_eleven_below_ext
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_thirteen_below_ext
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_fifteen_below_ext
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_small_k_below
+#print axioms Erdos686.Erdos686Variant.erdos686_false_of_thue_tails_and_smooth
+#print axioms Erdos686.Erdos686Variant.no_solution_four_of_thue_tails_and_smooth

@@ -3148,3 +3148,67 @@ proofs:
       (10^120): no equation solution with d >= 10^120.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SevenThue.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_seven_below_ext
+    statement: >-
+      k=7 closed for 221 <= d < 10^120 via the Farey-descent certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NineThue.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_nine_below_ext
+    statement: >-
+      k=9 closed for 221 <= d < 10^120 (d=1 telescope excluded by domain).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ElevenThue.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_eleven_below_ext
+    statement: >-
+      k=11 closed for 221 <= d < 10^120 via the Farey-descent certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThirteenThue.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_thirteen_below_ext
+    statement: >-
+      k=13 closed for 221 <= d < 10^120 via the Farey-descent certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifteenThue.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_fifteen_below_ext
+    statement: >-
+      k=15 closed for 221 <= d < 10^120 (d=1 telescope excluded by domain).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FinalReduction.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_small_k_below
+    statement: >-
+      Unconditional: for every 5 <= k <= 15 and 221 <= d < 10^120 the N=4 block-product equation is impossible.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FinalReduction.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_thue_tails_and_smooth
+    statement: >-
+      TERMINAL conditional reduction: six odd Thue tails (no equation solution with d >= 10^120) plus the large-k double-smoothness hypothesis refute the universal Erdos 686 statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FinalReduction.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_of_thue_tails_and_smooth
+    statement: >-
+      Terminal N=4 exclusion under the six Thue tails and double smoothness.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

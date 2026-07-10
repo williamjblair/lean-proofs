@@ -16,3 +16,9 @@ import ErdosProblems.Erdos686LargeEscape
 import ErdosProblems.Erdos686PrimeObstruction
 import ErdosProblems.Erdos686ConvergentMachinery
 import ErdosProblems.Erdos686FiveThue
+import ErdosProblems.Erdos686SevenThue
+import ErdosProblems.Erdos686NineThue
+import ErdosProblems.Erdos686ElevenThue
+import ErdosProblems.Erdos686ThirteenThue
+import ErdosProblems.Erdos686FifteenThue
+import ErdosProblems.Erdos686FinalReduction
