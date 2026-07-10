@@ -12,6 +12,7 @@ import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686SmallBranch
 import ErdosProblems.Erdos686Reduction
 import ErdosProblems.Erdos686WindowPin
+import ErdosProblems.Erdos686LargeEscape
 
 #print axioms Erdos154.erdos_154_sumset
 #print axioms Erdos686.Erdos686Variant.nonsquare_representable
@@ -336,3 +337,6 @@ import ErdosProblems.Erdos686WindowPin
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd14_bound_and_large_escape
 #print axioms Erdos686.Erdos686Variant.ratio_window_pin
 #print axioms Erdos686.Erdos686Variant.window_band_width
+#print axioms Erdos686.Erdos686Variant.row_escape_of_no_multiple_prime
+#print axioms Erdos686.Erdos686Variant.largeKEscape_of_noMultiplePrime
+#print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd14_bound_and_no_multiple_prime

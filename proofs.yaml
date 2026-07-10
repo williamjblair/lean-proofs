@@ -3002,3 +3002,32 @@ proofs:
       at most k-1: the exact window band width is k.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeEscape.lean
+    theorem: Erdos686.Erdos686Variant.row_escape_of_no_multiple_prime
+    statement: >-
+      A prime divisor of n+j dividing no element of the row-j interval
+      makes row j of the divisor skeleton fail.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeEscape.lean
+    theorem: Erdos686.Erdos686Variant.largeKEscape_of_noMultiplePrime
+    statement: >-
+      The anatomical no-multiple-prime hypothesis implies the unrestricted
+      large-k row escape.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeEscape.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_odd14_bound_and_no_multiple_prime
+    statement: >-
+      Conditional reduction in anatomical form: the seven-pair
+      constant-quotient bound plus the no-multiple-prime anatomy of k
+      consecutive integers against the sliding row intervals refute the
+      universal Erdos 686 statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
