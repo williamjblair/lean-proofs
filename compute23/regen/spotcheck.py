@@ -23,6 +23,7 @@ os.chdir(HERE)
 SEED = 20260710
 GENG = "/opt/homebrew/bin/geng"
 LABELG = "/opt/homebrew/bin/labelg"
+STAGE = sys.argv[1] if len(sys.argv) > 1 else "all"   # s1 | s2 | all
 t0 = time.time()
 def log(m): print(f"[{time.time()-t0:6.0f}s] {m}", flush=True)
 
@@ -92,30 +93,32 @@ for (lab, tt, sigma, flags, s, Pint) in moments:
         fk[key] = idx
     flagmaps[lab] = fk
 
-# [S1a] K0 block, ALL states
-lab, tt, sigma, flags, s, Pint = next(m for m in moments if m[0] == "K0")
-k, Asig = sigma
-bad = 0
-for hi, (n, A) in enumerate(states9):
-    M = my_P_matrix(n, A, k, Asig, s, flagmaps["K0"])
-    if any(int(Pint[hi][a][b]) != M[a][b] for a in range(tt) for b in range(tt)):
-        bad += 1
-log(f"[S1a] K0 full recount, all 1897 states: mismatching matrices = {bad}")
-ok_s1a = (bad == 0)
-
-# [S1b] seeded sample of 200 (label, state) pairs over K1/EDGE/NON
-rng = random.Random(SEED)
-pairs = [(lab, rng.randrange(1897)) for lab in ("K1", "EDGE", "NON") for _ in range(67)][:200]
-bad = 0
-for (lab, hi) in pairs:
-    _, tt, sigma, flags, s, Pint = next(m for m in moments if m[0] == lab)
+ok_s1a = ok_s1b = None
+if STAGE in ("s1", "all"):
+    # [S1a] K0 block, ALL states
+    lab, tt, sigma, flags, s, Pint = next(m for m in moments if m[0] == "K0")
     k, Asig = sigma
-    n, A = states9[hi]
-    M = my_P_matrix(n, A, k, Asig, s, flagmaps[lab])
-    if any(int(Pint[hi][a][b]) != M[a][b] for a in range(tt) for b in range(tt)):
-        bad += 1
-log(f"[S1b] sampled recount K1/EDGE/NON, {len(pairs)} (label,state) pairs: mismatches = {bad}")
-ok_s1b = (bad == 0)
+    bad = 0
+    for hi, (n, A) in enumerate(states9):
+        M = my_P_matrix(n, A, k, Asig, s, flagmaps["K0"])
+        if any(int(Pint[hi][a][b]) != M[a][b] for a in range(tt) for b in range(tt)):
+            bad += 1
+    log(f"[S1a] K0 full recount, all 1897 states: mismatching matrices = {bad}")
+    ok_s1a = (bad == 0)
+
+    # [S1b] seeded sample of 200 (label, state) pairs over K1/EDGE/NON
+    rng = random.Random(SEED)
+    pairs = [(lab, rng.randrange(1897)) for lab in ("K1", "EDGE", "NON") for _ in range(67)][:200]
+    bad = 0
+    for (lab, hi) in pairs:
+        _, tt, sigma, flags, s, Pint = next(m for m in moments if m[0] == lab)
+        k, Asig = sigma
+        n, A = states9[hi]
+        M = my_P_matrix(n, A, k, Asig, s, flagmaps[lab])
+        if any(int(Pint[hi][a][b]) != M[a][b] for a in range(tt) for b in range(tt)):
+            bad += 1
+    log(f"[S1b] sampled recount K1/EDGE/NON, {len(pairs)} (label,state) pairs: mismatches = {bad}")
+    ok_s1b = (bad == 0)
 
 # ---------------- [S2] D columns via labelg ----------------
 def decode_g6(line):
@@ -150,6 +153,14 @@ def labelg_batch(lines):
     r = subprocess.run([LABELG, "-q"], input="\n".join(lines) + "\n",
                        capture_output=True, text=True)
     return r.stdout.splitlines()
+
+ok_s2 = None
+if STAGE not in ("s2", "all"):
+    print()
+    allok = bool(ok_s1a) and bool(ok_s1b)
+    print(f">>> SPOTCHECK[{STAGE}]: {'ALL PASS' if allok else 'FAILURES PRESENT'} "
+          f"(S1a K0-all={ok_s1a}, S1b sample200={ok_s1b}) <<<", flush=True)
+    sys.exit(0 if allok else 1)
 
 # canonical T_9 map (labelg over geng output; independent of author's ordering logic)
 g6_9 = subprocess.run([GENG, "-q", "-t", "9"], capture_output=True, text=True).stdout.splitlines()
@@ -187,7 +198,8 @@ log(f"[S2] D columns, 500 seeded samples: mismatching columns = {bad}")
 ok_s2 = (bad == 0) and perm_ok
 
 print()
-allok = ok_s1a and ok_s1b and ok_s2
-print(f">>> SPOTCHECK: {'ALL PASS' if allok else 'FAILURES PRESENT'} "
+checks = [c for c in (ok_s1a, ok_s1b, ok_s2) if c is not None]
+allok = all(checks) and checks
+print(f">>> SPOTCHECK[{STAGE}]: {'ALL PASS' if allok else 'FAILURES PRESENT'} "
       f"(S1a K0-all={ok_s1a}, S1b sample200={ok_s1b}, S2 D500={ok_s2}) <<<", flush=True)
 sys.exit(0 if allok else 1)

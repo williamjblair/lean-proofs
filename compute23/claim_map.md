@@ -87,8 +87,16 @@ re-checked after the fix, but horn_dual.pkl alone is not the final dual.
    C₅ lift `c5lift_cache.npz`; envelope/cut tables `horn_cert_state_it16.pkl`)
    — NOT shipped ("exceed arXiv ancillary limits"); the generating modules
    `prove_cert.py`, `flag_exact.py` are also not in the package but exist in
-   the GitHub tree (`bridge/flagsdp/`, 563 files). Regenerating them re-runs
-   LP/flag machinery = certificate *generation*.
+   the GitHub tree (`bridge/flagsdp/`, 563 files). Provenance split
+   (established in the gate-1 addendum): `cache_n9.pkl` / `cp_cache.pkl` /
+   `c5lift_cache.npz` are DETERMINISTIC combinatorial tables (geng
+   enumeration, integer flag-product tensors `fs.P_sigma`, vertex-deletion
+   marginal D in `c5_lift_diag.build`) — regenerated here with no LP solve
+   and cross-checked; `horn_cert_state_it16.pkl` (the 6,359 envelope/Horn row
+   definitions + coefficients) is saved *inside* the LP cutting-plane loop
+   (`envelope_horn.py`) — certificate data from the solve, never committed to
+   git, in no release: unavailable and not deterministically regenerable (the
+   frozen cut set depends on solver history).
 2. **Rational dual** — floats in `horn_dual.pkl` rationalized at denominator
    ≤ 10⁸; same convention used in the producer check and the gate, so the
    rationalized values are the certificate.

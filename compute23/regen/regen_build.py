@@ -59,7 +59,7 @@ else:
         log(f"stage1: moment block {lab}: t={tt} s={s} built")
     pickle.dump((states9, dedge9, moments), open("my_moments_n9.pkl", "wb"), protocol=4)
     log("stage1: saved my_moments_n9.pkl")
-exp_dims = {"K0": 7, "K1": 34, "EDGE": 35, "NON": 57}
+exp_dims = {"K0": 7, "K1": 35, "EDGE": 34, "NON": 57}   # per shipped moment_gram_w.pkl atoms
 for (lab, tt, sigma, flags, s, Pint) in moments:
     assert tt == exp_dims[lab], (lab, tt)
 log(f"stage1 OK: flag dims match shipped atom dims {exp_dims}")
