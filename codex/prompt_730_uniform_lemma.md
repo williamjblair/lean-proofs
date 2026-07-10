@@ -28,13 +28,17 @@ in particular throughout `s <= (kappa_p-epsilon)r` for fixed
 `epsilon>0`.  See `compute730/campaign_uniform/uniformity_counterexample.md`.
 This falsifies the analytic lemma, **not Erdős #730**.
 
-**AUDITED REPAIR (Lean intake pending).**  With `C=2`, `eta=1/12`, and `r` chosen maximally from
+**AUDITED REPAIR (arithmetic spine kernel-banked).**  With `C=2`, `eta=1/12`, and `r` chosen maximally from
 the actual branch-class length, the whole near-affine band has normalized
 first-moment contribution below `1/100` for every `X>=2^57`.  The proof is
 in `compute730/campaign_uniform/repair/near_affine_payment_findings.md`; all
-finite constants are reproduced with exact integer/rational tests.  Its
-Lean/attestation step is not yet complete.  The maximal choice of `r` is
-load-bearing.
+finite constants are reproduced with exact integer/rational tests.  Lean
+checks the near-envelope exponent clearance, powered maximality threshold,
+finite reciprocal-tail ingredients, dyadic step certificates, and exact
+endpoint payment below `1/100`.  The infinite prime-power aggregation and
+positive-real root/floor monotonic transfer are still explicit intake gaps,
+so the full uniform near-payment theorem is not claimed.  The maximal choice
+of `r` is load-bearing.
 
 **CORRECTED LIVE TARGET (OPEN).**  Prove one explicit separated-range
 counting and short/top-range lemma with constants `B,delta>0`:

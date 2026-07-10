@@ -27,5 +27,6 @@ import ErdosProblems.Erdos686ElevenThue
 import ErdosProblems.Erdos686ThirteenThue
 import ErdosProblems.Erdos686FifteenThue
 import ErdosProblems.Erdos686FinalReduction
+import ErdosProblems.Erdos730NearAffinePayment
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727

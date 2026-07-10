@@ -3,10 +3,16 @@
 Date: 2026-07-10
 
 Verdict: **PAPER-PROVED and exact-arithmetic audited for the maximal-block
-choice of `r`, with explicit constants `C=2` and `eta=1/12`; Lean intake
-is pending.**  The normalized first-moment payment of
+choice of `r`, with explicit constants `C=2` and `eta=1/12`; its finite
+arithmetic spine is kernel-banked.**  The normalized first-moment payment of
 the whole near-affine band among classes admitting an analytic block
 `r>=1` is less than `1/100` for every family cutoff `X>=2^57`.
+
+`ErdosProblems/Erdos730NearAffinePayment.lean` checks the rational exponent
+clearance, powered threshold, finite tail lemmas, dyadic step certificates,
+and endpoint rational comparison.  It deliberately leaves the infinite
+prime-power aggregation and real root/floor monotonic transfer unformalized,
+so it does not by itself assert the uniform payment theorem.
 
 This result does not prove a far-range Fourier estimate, a top-range sieve
 bound, the combined budget, or Erdős #730.  Classes too short to admit even

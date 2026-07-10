@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:6ee970302436fe2462198b82b5b8fa8a6425e4df2391747f9c41a5e369646d88",
+  "verifier_output_hash": "sha256:e4fea264635717bbb194b53abdba415a5d0eaa8307828270f960b9b89ac9c228",
   "attestations": [
     {
       "problem": 154,
@@ -4543,6 +4543,149 @@
       "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
       "axiom_footprint": [
         "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.eight_mul_sq_le_succ_cube",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.nearEnvelope_forces_high_exponent",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.nearEnvelope_prime_power_clearance",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.powered_threshold_of_near_maximal",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.finite_prime_power_pair_count",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.finite_reciprocal_tail_from_root_envelopes",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.finite_geometric_prime_power_tail",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.finite_reciprocal_square_tail",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.dyadicThresholdBase_strictMono_step",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.endpoint_powered_threshold_certificate",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.endpoint_payment_identity",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.endpoint_payment_lt_one_percent",
+      "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
+      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
         "Quot.sound"
       ],
       "axioms_clean": true

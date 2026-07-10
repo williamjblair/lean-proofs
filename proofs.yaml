@@ -3532,6 +3532,113 @@ proofs:
       SE1 and SE2.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.eight_mul_sq_le_succ_cube
+    statement: >-
+      For every p at least five, the exact cubic inequality
+      8 p squared at most (p+1) cubed certifies the kappa envelope.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.nearEnvelope_forces_high_exponent
+    statement: >-
+      The rational near-affine envelope forces exponent a at least two and
+      the strict relation 19r less than 12a.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.nearEnvelope_prime_power_clearance
+    statement: >-
+      The near envelope gives the exact powered comparison between the next
+      analytic block scale and the valuation prime power.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.powered_threshold_of_near_maximal
+    statement: >-
+      Quantified residue-count maximality and the near envelope imply the
+      cleared 38-to-81 prime-power threshold over the rationals.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.finite_prime_power_pair_count
+    statement: >-
+      A finite exponent-bounded prime-power family obeys the explicit square-
+      and cube-root pair-count envelope.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.finite_reciprocal_tail_from_root_envelopes
+    statement: >-
+      Finite prime-power pair and threshold hypotheses give an exact rational
+      reciprocal-tail bound from certified root envelopes.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.finite_geometric_prime_power_tail
+    statement: >-
+      Every finite exponent tail from a base at least two is bounded by twice
+      its first reciprocal cube.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.finite_reciprocal_square_tail
+    statement: >-
+      Finite reciprocal-square tails satisfy the explicit telescoping upper
+      envelope used by the near-affine payment.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.dyadicThresholdBase_strictMono_step
+    statement: >-
+      The exact rational lower-threshold base increases from one dyadic range
+      to the next for every exponent at least 57.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.endpoint_powered_threshold_certificate
+    statement: >-
+      Exact rational powering certifies the 1210239 threshold at the initial
+      dyadic endpoint X equals 2 to the 57.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.endpoint_payment_identity
+    statement: >-
+      The endpoint tail and boundary envelopes assemble to the recorded exact
+      rational payment with no decimal arithmetic.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    theorem: Erdos730.endpoint_payment_lt_one_percent
+    statement: >-
+      The exact endpoint rational payment is strictly below one percent.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 617
     source: erdosproblems
     file: ErdosProblems/Erdos617.lean

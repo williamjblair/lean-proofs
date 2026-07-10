@@ -6,12 +6,12 @@ It is updated as candidates enter or leave the proof path.
 ## Baseline
 
 - Focused terminal module compiles.
-- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 384
+- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 396
   theorem names.
-- The axiom audit checks 795 printed theorem surfaces and permits only
+- The axiom audit checks 807 printed theorem surfaces and permits only
   `[propext, Classical.choice, Quot.sound]`.
-- `attestations.json` contains 384 non-null clean attestations, including
-  370 for problem 686 and 10 for problem 23.
+- `attestations.json` contains 396 non-null clean attestations, including
+  370 for problem 686, 10 for problem 23, and 12 for problem 730.
 
 ## Dependency tree: odd-tail prime-power restriction
 

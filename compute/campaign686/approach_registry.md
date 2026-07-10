@@ -70,8 +70,9 @@ These are premises for new attacks, not solutions of `LargeKSmoothHypothesis`.
 
 ## Pipeline audit
 
-The campaign baseline now has 384 manifest entries and 384 generated
-attestations, including 370 entries for problem 686 and 10 for problem 23.  The attestation emitter
+The campaign baseline now has 396 manifest entries and 396 generated
+attestations, including 370 entries for problem 686, 10 for problem 23, and
+12 arithmetic-spine entries for problem 730.  The attestation emitter
 parses wrapped and axiom-free reports, rejects missing theorem reports, and
 accepts any subset of `[propext, Classical.choice, Quot.sound]`.
 

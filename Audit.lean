@@ -23,6 +23,7 @@ import ErdosProblems.Erdos686PadicLift
 import ErdosProblems.Erdos686TwoPrimeGap
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686FinalReduction
+import ErdosProblems.Erdos730NearAffinePayment
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727
 
@@ -408,6 +409,18 @@ import ErdosProblems.Erdos727
 #print axioms Erdos23GapGA.LocalComponentCharge.charge
 #print axioms Erdos23GapGA.ComponentLedger.length_le_twice_slack
 #print axioms Erdos23GapGA.ComponentLedger.symmetric_bounds
+#print axioms Erdos730.eight_mul_sq_le_succ_cube
+#print axioms Erdos730.nearEnvelope_forces_high_exponent
+#print axioms Erdos730.nearEnvelope_prime_power_clearance
+#print axioms Erdos730.powered_threshold_of_near_maximal
+#print axioms Erdos730.finite_prime_power_pair_count
+#print axioms Erdos730.finite_reciprocal_tail_from_root_envelopes
+#print axioms Erdos730.finite_geometric_prime_power_tail
+#print axioms Erdos730.finite_reciprocal_square_tail
+#print axioms Erdos730.dyadicThresholdBase_strictMono_step
+#print axioms Erdos730.endpoint_powered_threshold_certificate
+#print axioms Erdos730.endpoint_payment_identity
+#print axioms Erdos730.endpoint_payment_lt_one_percent
 #print axioms Erdos617.Balanced.no_monochromatic_clique
 #print axioms Erdos617.Balanced.sum_le_sq
 #print axioms Erdos617.statement_five_of_extension_demand

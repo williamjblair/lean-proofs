@@ -124,7 +124,11 @@ the exact valuation.  The counterexample extends to the near-affine band
 `s=max(2r-a,0)` whenever `(p/H)^r p^(-s)/poly(r)` diverges.  This does
 not refute Erdős #730.  The corrected open gate is one explicit range-split
 lemma.  Its maximal-r near-affine payment is paper-proved and exact-audited
-below `0.01` for every `X>=2^57` (Lean intake pending); the remaining separated Fourier errors plus short/top
+below `0.01` for every `X>=2^57`.  Lean now checks the rational near envelope,
+powered maximality threshold, finite tail ingredients, dyadic step
+certificates, and exact endpoint payment.  The infinite reciprocal-tail
+aggregation and real root/floor monotonic transfer remain outside the kernel;
+the remaining separated Fourier errors plus short/top
 range must total below `0.99-delta`.  Exact sparse Gauss completion is
 audited, but its triangle majorant is exponentially insufficient for
 `p=5,7,11`; the live analytic node is one explicit signed bilinear Fourier

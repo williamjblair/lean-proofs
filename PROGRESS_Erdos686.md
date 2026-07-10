@@ -25,7 +25,7 @@ theorem erdos686_false_of_constant_bound_and_large_escape
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 384 manifest-tracked theorems, axioms ⊆
+[R] CI gate: 396 manifest-tracked theorems (370 for problem 686), axioms ⊆
 `[propext, Classical.choice, Quot.sound]`, no `native_decide`, no `sorry`.
 
 [R] **All pure prime-power odd tails are closed.**  The p-adic lift module

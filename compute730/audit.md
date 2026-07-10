@@ -223,6 +223,7 @@ N0  Consecutive pairs (n,n+1), infinitely many                    [OPEN — hing
  └─ N6  Restricted-digit counting on incomplete blocks +               *** THE GATE ***
         ├─ old interval-uniform lemma                                  FALSE
         ├─ maximal-r near-affine payment                               PAPER-PROVED/EXACT (<0.01)
+        │   └─ finite arithmetic spine and endpoint                    LEAN-BANKED
         └─ separated far + short/top first-moment budget               NOT ESTABLISHED
 ```
 
@@ -409,9 +410,13 @@ infinitude — infinitude is exactly N6.)
 different valuation split.
 
 The near-affine part of the corrected split is now proved on paper and
-exact-arithmetic audited, with Lean intake still pending.  With `C=2`,
-`eta=1/12`, and maximal admissible `r`, its normalized contribution is
-less than `1/100` for all `X>=2^57`; the exact rational certificate is
+exact-arithmetic audited.  Lean checks its rational near envelope, powered
+maximality threshold, finite tail ingredients, dyadic step certificates, and
+endpoint comparison.  The infinite prime-power aggregation and real
+root/floor monotonic transfer remain explicit kernel gaps, so no full Lean
+near-payment theorem is claimed.  With `C=2`, `eta=1/12`, and maximal
+admissible `r`, the paper proof gives normalized contribution below `1/100`
+for all `X>=2^57`; the exact rational endpoint certificate is
 
 ```text
 232437037423222418449 / 27831344977224191180800 < 1/100.
