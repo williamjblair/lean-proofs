@@ -3081,3 +3081,41 @@ proofs:
       refute Erdos 686 via N=4.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PrimeObstruction.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_of_large_prime_factor
+    statement: >-
+      Prime obstruction: a prime q >= d+k dividing any element of the lower
+      block refutes the N=4 block-product equation (it would divide a
+      positive difference smaller than itself).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PrimeObstruction.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_of_large_prime_factor_upper
+    statement: >-
+      Symmetric prime obstruction for the upper block.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PrimeObstruction.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_large_k_of_smooth
+    statement: >-
+      The double-smoothness hypothesis (no k>=16 equation solution with an
+      entirely (d+k)-smooth lower block) closes the large-k branch at the
+      equation level.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PrimeObstruction.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_odd_bound_and_smooth
+    statement: >-
+      Final conditional reduction, smoothness form: the six-pair odd
+      constant-quotient bound plus the large-k double-smoothness hypothesis
+      refute the universal Erdos 686 statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

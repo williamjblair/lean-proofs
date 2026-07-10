@@ -13,6 +13,7 @@ import ErdosProblems.Erdos686SmallBranch
 import ErdosProblems.Erdos686Reduction
 import ErdosProblems.Erdos686WindowPin
 import ErdosProblems.Erdos686LargeEscape
+import ErdosProblems.Erdos686PrimeObstruction
 
 #print axioms Erdos154.erdos_154_sumset
 #print axioms Erdos686.Erdos686Variant.nonsquare_representable
@@ -345,3 +346,7 @@ import ErdosProblems.Erdos686LargeEscape
 #print axioms Erdos686.Erdos686Variant.no_solution_four_of_odd_bound_and_large_escape
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd_bound_and_large_escape
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd_bound_and_no_multiple_prime
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_of_large_prime_factor
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_of_large_prime_factor_upper
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_large_k_of_smooth
+#print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd_bound_and_smooth
