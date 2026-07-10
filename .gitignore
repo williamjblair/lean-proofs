@@ -3,3 +3,4 @@
 /build/
 Audit.olean
 *.olean
+compute/artifacts/structure_hunt/t4_prefix_survivors.csv
