@@ -1,6 +1,6 @@
 /- leanprover/lean4:v4.29.1  mathlib v4.29.1 -/
 import ErdosProblems.Erdos686SmallBranch
-import ErdosProblems.Erdos686EvenK
+import ErdosProblems.Erdos686FourteenStrip
 
 /-!
 # Erdős Problem 686: refined conditional reduction
@@ -134,6 +134,98 @@ theorem erdos686_false_of_odd14_bound_and_large_escape
   exact no_solution_four_of_odd14_bound_and_large_escape hbound hlarge
     (hall 4 (by norm_num))
 
+
+/-- The six odd constant pairs — the final open small-`k` core now that
+every even `k ∈ {6, 8, 10, 12, 14}` is closed unconditionally. -/
+def constantQuotientPairMemOdd (k q : ℕ) : Prop :=
+  (k, q) ∈ ([(5, 3), (7, 4), (9, 6), (11, 7), (13, 8), (15, 10)] :
+    List (ℕ × ℕ))
+
+/-- **The final open constant-quotient bound**, demanded only for the
+six odd pairs. -/
+def ConstantCaseBoundHypothesisOdd : Prop :=
+  ∀ k q d u A n : ℕ,
+    constantQuotientPairMemOdd k q →
+    221 ≤ d → 1 ≤ u → u < d →
+    A = (q + 1) * d - u →
+    n + 1 = A →
+    (n + d + k) ^ k ≤ 4 * (n + k) ^ k →
+    4 * (n + 1) ^ k ≤ (n + d + 1) ^ k →
+    ((A : ℤ) ∣ residualRowPoly k q (d - u)) →
+    (((A + 1 : ℕ) : ℤ) ∣ residualRowPoly k q (d - u + (q + 1))) →
+    (((A + 2 : ℕ) : ℤ) ∣ residualRowPoly k q (d - u + 2 * (q + 1))) →
+    d ≤ constantPrefixThreeBound k q
+
+/-- For odd `k ∈ [5,15]`, the tabulated pair lies in the six-pair
+list. -/
+private lemma pairMemOdd_of_odd {k : ℕ}
+    (hk5 : 5 ≤ k) (hk15 : k ≤ 15)
+    (h6 : k ≠ 6) (h8 : k ≠ 8) (h10 : k ≠ 10) (h12 : k ≠ 12)
+    (h14 : k ≠ 14) :
+    constantQuotientPairMemOdd k (constantQuotientOf k) := by
+  interval_cases k <;>
+    simp_all [constantQuotientPairMemOdd, constantQuotientOf]
+
+/-- **The final conditional `N = 4` exclusion.**  Only the six-pair
+odd constant-quotient bound and the unrestricted large-`k` escape
+remain; every even `k ≤ 14` is closed unconditionally. -/
+theorem no_solution_four_of_odd_bound_and_large_escape
+    (hbound : ConstantCaseBoundHypothesisOdd)
+    (hlarge : LargeKEscapeHypothesis) :
+    ¬ ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (4 : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  rintro ⟨k, n, m, hk2, hm, hq⟩
+  rcases Nat.lt_or_ge k 5 with hk4 | hk5
+  · exact no_solution_four_le_four ⟨k, n, m, hk2, by omega, hm, hq⟩
+  obtain ⟨d, hkd, rfl, heq⟩ := four_solution_with_gap_of_solution hm hq
+  obtain ⟨hup, hlo⟩ := ratio_window_four_nat heq
+  have hrows : ∀ j, j ∈ Finset.Icc 1 k →
+      n + j ∣ shiftedDiffProductAt k d j :=
+    fun j hj => individual_divisor_skeleton_four hkd hj heq
+  have hclose : (∃ j, j ∈ Finset.Icc 1 k ∧
+      ¬ n + j ∣ shiftedDiffProductAt k d j) → False := by
+    rintro ⟨j, hj, hnot⟩
+    exact hnot (hrows j hj)
+  rcases Nat.lt_or_ge k 16 with hk16 | hk16
+  · by_cases heven : k ∈ ({6, 8, 10, 12, 14} : Finset ℕ)
+    · rcases Nat.lt_or_ge d 221 with hd | hd
+      · have hk15 : k ≤ 15 := by omega
+        exact hclose (row_full_escape_small_k_d_le_220 hk5 hk15 hkd
+          (by omega) hup hlo)
+      · exact no_gap_solution_four_even_k heven hd heq
+    · have hmem : k ≠ 6 ∧ k ≠ 8 ∧ k ≠ 10 ∧ k ≠ 12 ∧ k ≠ 14 := by
+        constructor
+        · intro h; exact heven (by simp [h])
+        constructor
+        · intro h; exact heven (by simp [h])
+        constructor
+        · intro h; exact heven (by simp [h])
+        constructor
+        · intro h; exact heven (by simp [h])
+        · intro h; exact heven (by simp [h])
+      obtain ⟨h6, h8, h10, h12, h14⟩ := hmem
+      exact hclose (row_full_escape_small_k_core hk5 (by omega) hkd hup hlo
+        (fun d' u A n' => hbound k (constantQuotientOf k) d' u A n'
+          (pairMemOdd_of_odd hk5 (by omega) h6 h8 h10 h12 h14)))
+  · exact hclose (hlarge k n d hk16 hkd hup hlo)
+
+/-- **The final complete conditional reduction of Erdős 686.** -/
+theorem erdos686_false_of_odd_bound_and_large_escape
+    (hbound : ConstantCaseBoundHypothesisOdd)
+    (hlarge : LargeKEscapeHypothesis) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) := by
+  intro hall
+  exact no_solution_four_of_odd_bound_and_large_escape hbound hlarge
+    (hall 4 (by norm_num))
+
 end Erdos686Variant
+
 
 end Erdos686

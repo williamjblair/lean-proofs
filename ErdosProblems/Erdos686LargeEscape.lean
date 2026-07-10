@@ -64,6 +64,20 @@ theorem erdos686_false_of_odd14_bound_and_no_multiple_prime
   erdos686_false_of_odd14_bound_and_large_escape hbound
     (largeKEscape_of_noMultiplePrime hanat)
 
+/-- **The final conditional reduction in anatomical form**: the six-pair
+odd constant-quotient bound and the no-multiple-prime anatomy refute
+the universal Erdős 686 statement. -/
+theorem erdos686_false_of_odd_bound_and_no_multiple_prime
+    (hbound : ConstantCaseBoundHypothesisOdd)
+    (hanat : NoMultiplePrimeHypothesis) :
+    ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ,
+      2 ≤ k ∧ m ≥ n + k ∧
+      (N : ℚ) =
+        (∏ i ∈ Finset.Icc 1 k, (((m + i : ℕ) : ℚ))) /
+          (∏ i ∈ Finset.Icc 1 k, (((n + i : ℕ) : ℚ))) :=
+  erdos686_false_of_odd_bound_and_large_escape hbound
+    (largeKEscape_of_noMultiplePrime hanat)
+
 end Erdos686Variant
 
 end Erdos686

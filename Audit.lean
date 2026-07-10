@@ -340,3 +340,8 @@ import ErdosProblems.Erdos686LargeEscape
 #print axioms Erdos686.Erdos686Variant.row_escape_of_no_multiple_prime
 #print axioms Erdos686.Erdos686Variant.largeKEscape_of_noMultiplePrime
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd14_bound_and_no_multiple_prime
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_fourteen
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_k
+#print axioms Erdos686.Erdos686Variant.no_solution_four_of_odd_bound_and_large_escape
+#print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd_bound_and_large_escape
+#print axioms Erdos686.Erdos686Variant.erdos686_false_of_odd_bound_and_no_multiple_prime

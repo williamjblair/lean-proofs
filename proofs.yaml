@@ -3031,3 +3031,53 @@ proofs:
       universal Erdos 686 statement via N=4.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FourteenStrip.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_fourteen
+    statement: >-
+      The N=4 block-product equation is impossible for k=14, d>=221: the
+      Runge trap confines m = T14(w)-2T14(v) to 834 candidates (odd
+      multiples of 7), all killed by a 31-prime mod-p set cover of kernel
+      certificates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FourteenStrip.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_k
+    statement: >-
+      Unified even-k exclusion: the N=4 block-product equation is
+      impossible for every k in {6,8,10,12,14} with d >= 221.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686Reduction.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_four_of_odd_bound_and_large_escape
+    statement: >-
+      Final conditional N=4 exclusion: the six-pair odd constant-quotient
+      bound and the unrestricted large-k escape suffice; all even k <= 14
+      are closed unconditionally.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686Reduction.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_odd_bound_and_large_escape
+    statement: >-
+      Final complete conditional reduction of Erdos 686: the six-pair odd
+      constant-quotient bound plus the unrestricted large-k row escape
+      refute the universal representation statement via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeEscape.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_odd_bound_and_no_multiple_prime
+    statement: >-
+      Final conditional reduction in anatomical form: six odd constant
+      pairs plus the no-multiple-prime anatomy of k consecutive integers
+      refute Erdos 686 via N=4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
