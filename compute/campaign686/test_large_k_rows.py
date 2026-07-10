@@ -2,12 +2,19 @@ from __future__ import annotations
 
 from .large_k_rows import (
     allowed_positions,
+    block_product,
     block_equation_holds,
     factor,
     first_failed_row,
+    greatest_prime_factor_of_block,
+    near_diagonal_power_check,
     ratio_window_holds,
+    reflection_center,
+    reflection_coefficient,
+    reflection_product,
     row_anatomy,
     row_passes,
+    row_product_mod,
     valuation_in_interval,
 )
 
@@ -69,3 +76,46 @@ def test_interval_valuation_matches_direct_small_products() -> None:
                     direct += 1
                     value //= prime
             assert valuation_in_interval(prime, lo, hi) == direct
+
+
+def test_near_diagonal_power_inequality_is_exact() -> None:
+    assert 6**16 == 2_821_109_907_456
+    assert 4 * 5**16 == 610_351_562_500
+    assert near_diagonal_power_check(16)
+    assert all(near_diagonal_power_check(k) for k in range(16, 80))
+
+
+def test_even_synthetic_point_survives_reflection_but_not_rows_or_equation() -> None:
+    k, n, d = 16, 582_087, 52_684
+    bound = d + k - 1
+    center = reflection_center(k, n, d)
+    coefficient = reflection_coefficient(k)
+
+    assert ratio_window_holds(k, n, d)
+    assert center == 1_216_875
+    assert factor(center) == [(3, 1), (5, 4), (11, 1), (59, 1)]
+    assert greatest_prime_factor_of_block(k, n) == 44_777 <= bound
+    assert greatest_prime_factor_of_block(k, n + d) == 45_341 <= bound
+    assert coefficient == 3
+    assert coefficient * block_product(k, n) % center == 0
+    assert coefficient * reflection_product(k, d) % center == 0
+    assert row_product_mod(k, n, d, 2) == 78_770
+    assert not block_equation_holds(k, n, d)
+
+
+def test_odd_synthetic_point_survives_reflection_but_not_rows_or_equation() -> None:
+    k, n, d = 17, 996_082, 84_632
+    bound = d + k - 1
+    center = reflection_center(k, n, d)
+    coefficient = reflection_coefficient(k)
+
+    assert ratio_window_holds(k, n, d)
+    assert center == 2_076_814
+    assert factor(center) == [(2, 1), (19, 1), (31, 1), (41, 1), (43, 1)]
+    assert greatest_prime_factor_of_block(k, n) == 33_203 <= bound
+    assert greatest_prime_factor_of_block(k, n + d) == 32_749 <= bound
+    assert coefficient == 5
+    assert coefficient * block_product(k, n) % center == 0
+    assert coefficient * reflection_product(k, d) % center == 0
+    assert row_product_mod(k, n, d, 1) == 915_321
+    assert not block_equation_holds(k, n, d)

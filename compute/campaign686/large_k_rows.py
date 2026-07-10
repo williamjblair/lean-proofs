@@ -117,3 +117,28 @@ def block_equation_holds(k: int, n: int, d: int) -> bool:
     lower = prod(n + i for i in range(1, k + 1))
     upper = prod(n + d + i for i in range(1, k + 1))
     return upper == 4 * lower
+
+
+def reflection_center(k: int, n: int, d: int) -> int:
+    return 2 * n + d + k + 1
+
+
+def reflection_coefficient(k: int) -> int:
+    return 3 if k % 2 == 0 else 5
+
+
+def reflection_product(k: int, d: int) -> int:
+    return prod(d + k + 1 - 2 * i for i in range(1, k + 1))
+
+
+def block_product(k: int, n: int) -> int:
+    return prod(n + i for i in range(1, k + 1))
+
+
+def greatest_prime_factor_of_block(k: int, n: int) -> int:
+    return max(prime for i in range(1, k + 1) for prime, _ in factor(n + i))
+
+
+def near_diagonal_power_check(k: int) -> bool:
+    """Exact inequality used to force n>4d."""
+    return 4 * 5**k < 6**k
