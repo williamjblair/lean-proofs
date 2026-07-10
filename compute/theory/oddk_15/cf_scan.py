@@ -153,6 +153,31 @@ for m in range(1, len(ps)):
 PASS(f"cf(4^(1/15)): first {NEED+1} terms verified EXACTLY "
      f"(alternating sign of p^15 - 4q^15 + determinant identity); "
      f"sandwich precision 10^-{NDIG}")
+
+# straddle certificates: every partial quotient a_{m+1} is pinned by TWO
+# integer sign checks against the minimal polynomial x^15 - 4, at the
+# semiconvergents s_a := (a p_m + p_{m-1}) / (a q_m + q_{m-1}):
+#   a = a_{m+1}   -> same side as p_{m-1} (this IS the (m+1)-convergent);
+#   a = a_{m+1}+1 -> crossed alpha (side of p_m).
+# s_a is a Moebius (hence monotone) function of a and x -> x^15 is strictly
+# increasing, so the single sign flip between a and a+1 certifies
+# a_{m+1} = a exactly.  (a_0 = 1 is the floor bracket 1^15 < 4 < 2^15.)
+assert 1 ** 15 < 4 < 2 ** 15
+n_straddle = 0
+pprev, qprev = 1, 0                 # (p_{-1}, q_{-1});  D_{-1} = 1 > 0
+for m in range(len(ps) - 1):
+    a = terms[m + 1]
+    u1, v1 = a * ps[m] + pprev, a * qs[m] + qprev
+    u2, v2 = u1 + ps[m], v1 + qs[m]
+    s1 = u1 ** 15 - 4 * v1 ** 15
+    s2 = u2 ** 15 - 4 * v2 ** 15
+    assert s1 != 0 and (s1 < 0) == ((m + 1) % 2 == 0)
+    assert s2 != 0 and (s2 < 0) == (m % 2 == 0)
+    n_straddle += 2
+    pprev, qprev = ps[m], qs[m]
+PASS(f"straddle certificates: all {len(ps)-1} partial quotients "
+     f"a_1..a_{len(ps)-1} pinned by {n_straddle} integer sign checks "
+     f"(semiconvergent straddles; no floating point)")
 print(f"        terms[:40] = {terms[:40]}")
 M100 = next(m for m in range(len(qs)) if qs[m] > 10 ** 100)
 amax = max(terms[:NEED + 1])
@@ -224,6 +249,28 @@ PASS(f"banked-region catalog d in [1,220] ({small_checked} exact window "
      f"(n,d)=(4,1) -- the telescoping identity 6*7*...*20 = 4*(5*6*...*19) "
      f"(overlapping blocks, ratio collapses to (n+16)/(n+1)=4); "
      f"NO solution with d in [2,220]")
+
+# ------------------------------------------------------------------ (2c)
+# unconditional exact sweep: ALL Y in [8, 10^6] (no approximation theory at
+# all -- monotone integer bisection on X; P is strictly increasing on
+# [8, oo), and any solution has X > Y >= 8).
+t2c = time.time()
+qf15 = 4.0 ** (1.0 / 15.0)
+sweep_sols = []
+for Y in range(8, 10 ** 6 + 1):          # domain: Y = n+8 >= 8 (n >= 0)
+    p4 = 4 * Pv(Y)
+    X = int(qf15 * Y)                    # float seed only; corrected exactly:
+    while Pv(X + 1) <= p4:
+        X += 1
+    while Pv(X) > p4:
+        X -= 1
+    if Pv(X) == p4 and X > Y:
+        sweep_sols.append((Y, X))
+assert sweep_sols == [(12, 13)], sweep_sols
+assert all(X - Y < 15 for (Y, X) in sweep_sols)
+PASS(f"unconditional sweep Y in [8, 10^6] ({time.time()-t2c:.1f}s of exact "
+     f"monotone bisection): the ONLY (Y, X) with P(X) = 4 P(Y) is the d=1 "
+     f"telescope (12, 13); NO disjoint-block (d >= 15) solution")
 
 # ======================================================================= (3)
 # full candidate family up to Y <= 10^100
@@ -314,13 +361,83 @@ if best:
           f"|P(X)-4P(Y)|/Y^13 = {float(best[0]):.4f} at Y ~ 10^"
           f"{len(str(best[1]))-1}  (a solution needs 0; generic scale ~94.5)")
 
+# ======================================================================= (3b)
+# SELF-CONTAINED confinement family (no Worley/Legendre/Fatou input).
+# Theorem (proved in note.md Section 3, elementary): alpha irrational with
+# convergents p_m/q_m, theta_m := |q_m alpha - p_m|.  If |alpha Y - X| <= C/Y
+# with q_m <= Y < q_{m+1}, expand (X, Y) = (r p_{m+1} + s p_m,
+# r q_{m+1} + s q_m) over ZZ (unimodular basis).  Then s != 0 and exactly one:
+#   (i)   r = 0:   Y = g q_m (g = s >= 1)  and  g^2 q_m < C (q_m + q_{m+1});
+#   (ii)  r >= 1:  s = -t <= -1, Y = r q_{m+1} - t q_m, 1 <= r <= t,
+#                                         and  t * Y < C (q_m + q_{m+1});
+#   (iii) r <= -1: s >= 2, Y = s q_m - |r| q_{m+1}, 1 <= |r| < s,
+#                                         and  s * Y < C (q_m + q_{m+1}).
+# Only inputs: the exact identity q_{m+1} theta_m + q_m theta_{m+1} = 1 and
+# the sign alternation of q_j alpha - p_j.  For fixed t (resp. s) the
+# interval [q_m, q_{m+1}) admits AT MOST ONE r, so the family is finite and
+# enumerable per index -- confining even C > 1 with no classical black box.
+# Enumerated with the margin constant C = CW = 9/5 >= C15 = 1729/1000.
+t3b = time.time()
+sc_family = {}
+for m in range(M100 + 1):
+    qm, qm1 = qs[m], qs[m + 1]
+    if qm1 <= qm:
+        continue
+    capn, capd = CW.numerator * (qm + qm1), CW.denominator
+    g = 1
+    while g * g * qm * capd < capn and g * qm < qm1:
+        if g * qm <= YMAX:
+            sc_family.setdefault(g * qm, (m, f"{g}*q_{m}"))
+        g += 1
+    t = 1
+    while t * qm * capd < capn:
+        r = -((-(1 + t) * qm) // qm1)          # ceil((1+t) q_m / q_{m+1})
+        Yc = r * qm1 - t * qm
+        if qm <= Yc < qm1 and t * Yc * capd < capn and Yc <= YMAX:
+            sc_family.setdefault(Yc, (m, f"{r}*q_{m+1}-{t}*q_{m}"))
+        t += 1
+    s = 2
+    while s * qm * capd < capn:
+        r = ((s - 1) * qm) // qm1
+        if r >= 1:
+            Yc = s * qm - r * qm1
+            if qm <= Yc < qm1 and s * Yc * capd < capn and Yc <= YMAX:
+                sc_family.setdefault(Yc, (m, f"{s}*q_{m}-{r}*q_{m+1}"))
+        s += 1
+sc_checked = 0
+sc_eq = []
+for Yc in sc_family:
+    if Yc < 8:
+        continue
+    X0 = iroot(4 * Yc ** 15, 15)
+    p4 = 4 * Pv(Yc)
+    for X in range(X0 - 2, X0 + 4):
+        if X > Yc:
+            sc_checked += 1
+            if Pv(X) == p4:
+                sc_eq.append((Yc, X))
+# a solution in the Thue regime (Y >= Y0 = 2131) satisfies the hypothesis
+# with C = C15 <= CW, hence MUST appear here; d < 15 telescopes need not
+# (but (12,13) does satisfy |alpha*12 - 13| = 0.162 < CW/12, so it appears).
+assert all(X - Yc < 15 for (Yc, X) in sc_eq), f"UNEXPECTED SOLUTION {sc_eq}"
+assert sc_eq in ([], [(12, 13)]), sc_eq
+missing = [Y for (Y, _) in brute if Y not in sc_family]
+assert missing == [], f"self-contained family misses {missing}"
+new_only = sum(1 for Y in sc_family if Y not in family)
+PASS(f"SELF-CONTAINED family (C = 9/5): {len(sc_family)} Y-values <= 10^100 "
+     f"({new_only} not already in the Worley-superset family), {sc_checked} "
+     f"exact equation checks: only hit is the d=1 telescope {sc_eq}; all "
+     f"{len(brute)} brute survivors covered ({time.time()-t3b:.1f}s) -- the "
+     f"Y <= 10^100 exclusion needs NO classical Worley/Fatou input")
+
 # ======================================================================= (4)
 # verified d-bound: any solution with Y > 10^100 has
 #   d = X - Y > (rho_lo - 1)*Y - 7*rho_lo > (rho_lo - 1)*10^100 - 7*rho_lo
 db = (rho_lo - 1) * 10 ** 100 - 7 * rho_lo
 D_BOUND = db.numerator // db.denominator
-PASS("conclusion (conditional only on derivation.py inequalities + "
-     "Legendre/Worley):")
+PASS("conclusion (conditional only on the derivation.py inequalities + the "
+     "elementary self-contained confinement of (3b); the classical "
+     "Legendre/Worley route of (3) independently gives the same):")
 print(f"        NO k=15, N=4 solution with Y = n+8 <= 10^100;  combined with")
 print(f"        the banked d <= 220 branch this verifies NO solution with")
 print(f"        d <= {D_BOUND}")

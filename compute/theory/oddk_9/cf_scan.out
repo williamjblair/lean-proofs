@@ -2,13 +2,51 @@
        terms[:40] = [1, 6, 201, 1, 2, 352, 1, 1, 5, 2, 1, 1, 199, 11, 2, 2, 1, 1, 1, 33, 1, 4, 1, 37, 2, 6, 1, 10, 2, 6, 1, 2, 17, 1, 34, 93, 1, 1, 1, 1]
 [PASS] all 320 convergents verified: sign(p^9 - 4q^9) alternates (exact minimal-polynomial test)
 [PASS] determinant identity p_m q_(m-1) - p_(m-1) q_m = (-1)^(m-1) for all m < 320  (=> gcd(p_m, q_m) = 1)
+[PASS] straddle certificates: all 319 partial quotients a_1..a_319 pinned by 638 integer sign checks (semiconvergent straddles; no floating point)
        max partial quotient a_max = 352 (at index 5); g-multiple bound g^2 <= C_9(a+2) needs g <= 20
        q_m exceeds 10^100 at m = 191 (q_m ~ 10^100); 320 terms reach q_m ~ 10^164
-[PASS] Worley family scan: 21838 Y-values, 131007 (X,Y) pairs, Y <= 10^100  (1.3s)
+[PASS] Worley family scan: 21839 Y-values, 131010 (X,Y) pairs, Y <= 10^100  (1.2s)
        exact Thue-filter passes among family: 239 (these are the even-index convergents & near variants; expected)
-       exact equation P9(X) = 4 P9(Y) passes: [(7, 8)]
-Traceback (most recent call last):
-  File "/Users/williamblair/personal/lean-proofs/compute/theory/oddk_9/cf_scan.py", line 177, in <module>
-    assert found == [], "UNEXPECTED SOLUTION"
-           ^^^^^^^^^^^
-AssertionError: UNEXPECTED SOLUTION
+       overlap telescopes with d = X-Y < 9 (outside problem domain): [(7, 8)]
+       exact equation passes with d >= 9: []
+[PASS] no solution with d >= 9 on the generous quasi-convergent family up to Y = 10^100
+[PASS] unconditional sweep: the only Y in [5, 10^6] admitting an integer X with P9(X) = 4 P9(Y) is the d=1 telescope (Y,X) = (7,8); NO disjoint-block (d >= 9) solution  (0.9s)
+       Thue-filter survivors with Y <= 2*10^5: 21
+         Y=1207     X0=1408     Y*(qY-X0)= 0.6648  family=yes  tag=q_2
+         Y=2420     X0=2823     Y*(qY-X0)= 0.6674  family=yes  tag=2*q_2+1*q_1
+         Y=3633     X0=4238     Y*(qY-X0)= 0.0028  family=yes  tag=2*q_3+1*q_2
+         Y=7266     X0=8476     Y*(qY-X0)= 0.0113  family=yes  tag=2*q_4 (a_5=352)
+         Y=10899    X0=12714    Y*(qY-X0)= 0.0255  family=yes  tag=3*q_4 (a_5=352)
+         Y=14532    X0=16952    Y*(qY-X0)= 0.0453  family=yes  tag=4*q_4 (a_5=352)
+         Y=18165    X0=21190    Y*(qY-X0)= 0.0708  family=yes  tag=5*q_4 (a_5=352)
+         Y=21798    X0=25428    Y*(qY-X0)= 0.1020  family=yes  tag=6*q_4 (a_5=352)
+         Y=25431    X0=29666    Y*(qY-X0)= 0.1389  family=yes  tag=7*q_4 (a_5=352)
+         Y=29064    X0=33904    Y*(qY-X0)= 0.1814  family=yes  tag=8*q_4 (a_5=352)
+         Y=32697    X0=38142    Y*(qY-X0)= 0.2295  family=yes  tag=9*q_4 (a_5=352)
+         Y=36330    X0=42380    Y*(qY-X0)= 0.2834  family=yes  tag=10*q_4 (a_5=352)
+         Y=39963    X0=46618    Y*(qY-X0)= 0.3429  family=yes  tag=11*q_4 (a_5=352)
+         Y=43596    X0=50856    Y*(qY-X0)= 0.4081  family=yes  tag=12*q_4 (a_5=352)
+         Y=47229    X0=55094    Y*(qY-X0)= 0.4789  family=yes  tag=13*q_4 (a_5=352)
+         Y=50862    X0=59332    Y*(qY-X0)= 0.5554  family=yes  tag=14*q_4 (a_5=352)
+         Y=54495    X0=63570    Y*(qY-X0)= 0.6376  family=yes  tag=15*q_4 (a_5=352)
+         Y=58128    X0=67808    Y*(qY-X0)= 0.7255  family=yes  tag=16*q_4 (a_5=352)
+         Y=61761    X0=72046    Y*(qY-X0)= 0.8190  family=yes  tag=17*q_4 (a_5=352)
+         Y=65394    X0=76284    Y*(qY-X0)= 0.9182  family=yes  tag=18*q_4 (a_5=352)
+         Y=69027    X0=80522    Y*(qY-X0)= 1.0230  family=yes  tag=19*q_4 (a_5=352)
+[PASS] every Thue-filter survivor (Y <= 2*10^5) lies in the Worley family with rs <= 2 / g^2 <= C_9(a+2)  (0.8s)
+[PASS] SELF-CONTAINED family: 575 Y-values <= 10^100 (2 not already in the Worley-superset family), 3429 exact equation checks: no solution with d >= 9 (hits: none); all 21 brute survivors covered  (0.0s)
+       => the Y <= 10^100 exclusion is conditional ONLY on the derivation.py chain + two elementary CF identities (no classical Worley/Fatou needed)
+
+========================================================================
+CONCLUSION (conditional only on the derivation.py chain + the
+elementary self-contained confinement of step 5; the classical
+Worley/Dujella route of steps 2-4 independently gives the same):
+  no k=9, N=4 solution with d >= 9 and Y = n+5 <= 10^100
+  (the only equation coincidence found anywhere is the d=1 telescope
+   (Y,X) = (7,8), outside the m >= n+k problem domain).
+  Any solution with d >= 221 has d > (rho2-1)*Y, i.e. Y < d/(rho2-1);
+  hence NO solution with 221 <= d <= 1.665283e+99
+  (exactly floor = 1665283000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)
+  and d <= 220 is closed by the banked Lean machinery:
+  => verified bound d <= 1.665283 * 10^99.
+========================================================================

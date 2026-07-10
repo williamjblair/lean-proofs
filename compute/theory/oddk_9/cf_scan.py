@@ -26,13 +26,21 @@ Confinement step (Worley 1981 / Dujella 2004, quasi-convergents):
 Scan (generous supersets of all of the above):
   Y in { g q_m : 1 <= g <= max(50, per-index bound) }
     u { g (r q_{m+1} +- s q_m) : rs <= 4, 1 <= g <= 8 }        for all m,
-  6 <= Y <= 10^100; for each Y test X in [floor(qY)-2, floor(qY)+3]
+  5 <= Y <= 10^100; for each Y test X in [floor(qY)-2, floor(qY)+3]
   against the exact equation P9(X) = 4 P9(Y).
 Plus:
   * unconditional exact sweep of ALL Y <= 10^6 (monotone bisection on X,
     no CF theory used);
   * empirical Worley validation: every Y <= 2*10^5 passing the exact Thue
     filter 0 < qY - floor(qY) <= C_9/Y is classified within the family.
+
+KNOWN EXACT COINCIDENCE (not a counterexample): (Y, X) = (7, 8), i.e.
+(n, d) = (2, 1): P9(8) = 4*P9(7) is the telescoping identity
+4*5*...*12 = 4*(3*4*...*11) with OVERLAPPING blocks (d = 1 < k = 9).
+The problem statement (ErdosProblems/Erdos686Reduction.lean) requires
+m >= n + k, i.e. d >= k = 9, so this pair is outside the problem domain;
+it is the banked "k = 9 exceptional branch".  Both the family scan and
+the unconditional sweep must find it -- and nothing else.
 """
 
 import json
@@ -127,6 +135,35 @@ for m in range(1, N_TERMS):
 print(f"[PASS] determinant identity p_m q_(m-1) - p_(m-1) q_m = (-1)^(m-1) "
       f"for all m < {N_TERMS}  (=> gcd(p_m, q_m) = 1)")
 
+# straddle certificates: every partial quotient a_{m+1} is pinned by TWO
+# integer sign checks against the minimal polynomial x^9 - 4, evaluated at
+# the semiconvergents  s_a := (a p_m + p_{m-1}) / (a q_m + q_{m-1}):
+#   a = a_{m+1}   : sign(u^9 - 4 v^9) = sign side of p_{m-1}  [far side]
+#   a = a_{m+1}+1 : sign flips                                 [crossed]
+# The map a -> s_a is a Moebius function of a, strictly monotone toward and
+# past alpha, and x -> x^9 is strictly increasing, so the single sign flip
+# between a and a+1 certifies a_{m+1} = a exactly.  (a_0 = 1 is certified by
+# the floor bracket 1^9 < 4 < 2^9.)
+assert 1**9 < 4 < 2**9
+n_straddle = 0
+pprev, qprev = 1, 0            # (p_{-1}, q_{-1});  D_{-1} = 1 > 0
+for m in range(N_TERMS - 1):
+    a = terms[m + 1]
+    u1, v1 = a * ps[m] + pprev, a * qs[m] + qprev
+    u2, v2 = u1 + ps[m], v1 + qs[m]
+    s1 = u1**9 - 4 * v1**9
+    s2 = u2**9 - 4 * v2**9
+    # side convention: index-j convergent has  D_j < 0  <=>  j even;
+    # s_a (a = a_{m+1}) IS the (m+1)-convergent, side (-1)^m of D_{m+1};
+    # s_{a+1} has crossed alpha, i.e. lies on the side of p_m.
+    assert s1 != 0 and (s1 < 0) == ((m + 1) % 2 == 0)
+    assert s2 != 0 and (s2 < 0) == (m % 2 == 0)
+    n_straddle += 2
+    pprev, qprev = ps[m], qs[m]
+print(f"[PASS] straddle certificates: all {N_TERMS - 1} partial quotients "
+      f"a_1..a_{N_TERMS-1} pinned by {n_straddle} integer sign checks "
+      f"(semiconvergent straddles; no floating point)")
+
 a_max = max(terms)
 g_needed = iroot(int(C9 * (a_max + 2)) + 1, 2) + 1
 print(f"       max partial quotient a_max = {a_max} (at index {terms.index(a_max)}); "
@@ -142,7 +179,8 @@ print(f"       q_m exceeds 10^100 at m = {m100} "
 t0 = time.time()
 seenY = set()
 thue_pass = []       # family members that pass the exact Thue filter
-found = []
+found = []           # equation hits with d = X - Y >= 9 (problem domain)
+trivial = []         # equation hits with d < 9 (overlapping telescopes)
 checked = 0
 for m in range(N_TERMS):
     dens = set()
@@ -155,7 +193,7 @@ for m in range(N_TERMS):
                     for g in range(1, G_QUASI + 1):
                         dens.add(g * base)
     for Y in dens:
-        if Y < 6 or Y > Y_LIMIT or Y in seenY:
+        if Y < 5 or Y > Y_LIMIT or Y in seenY:     # domain: Y = n+5 >= 5
             continue
         seenY.add(Y)
         X0 = iroot(4 * Y**9, 9)              # = floor(qY) since (qY)^9 = 4Y^9
@@ -194,7 +232,7 @@ assert all(c[2] for c in closest)
 t0 = time.time()
 qf = 4 ** (1 / 9)
 sweep_sols = []
-for Y in range(6, 10**6 + 1):
+for Y in range(5, 10**6 + 1):           # domain: Y = n+5 >= 5 (n >= 0)
     p4 = 4 * P9(Y)
     X = int(qf * Y)                     # float seed only; corrected exactly:
     while P9(X + 1) <= p4:
@@ -204,9 +242,13 @@ for Y in range(6, 10**6 + 1):
     # now P9(X) <= 4 P9(Y) < P9(X+1)  with P9 strictly increasing on [4,oo)
     if P9(X) == p4 and X > Y:
         sweep_sols.append((Y, X))
-assert sweep_sols == []
-print(f"[PASS] unconditional sweep: no Y in [6, 10^6] admits an integer X with "
-      f"P9(X) = 4 P9(Y)  ({time.time()-t0:.1f}s)")
+# the d = 1 telescope (n, d) = (2, 1) is the ONLY hit, and it is overlapping
+# (d = 1 < 9), hence outside the m >= n + k problem domain:
+assert sweep_sols == [(7, 8)], sweep_sols
+assert all(X - Y < 9 for (Y, X) in sweep_sols)
+print(f"[PASS] unconditional sweep: the only Y in [5, 10^6] admitting an "
+      f"integer X with P9(X) = 4 P9(Y) is the d=1 telescope (Y,X) = (7,8); "
+      f"NO disjoint-block (d >= 9) solution  ({time.time()-t0:.1f}s)")
 
 # ---------------------------------------------------------------- step 4
 # empirical Worley validation: every Thue-filter survivor Y <= 2*10^5 must be
@@ -235,7 +277,7 @@ def classify(Y):
 
 
 near = []
-for Y in range(6, 2 * 10**5 + 1):
+for Y in range(5, 2 * 10**5 + 1):
     X0 = iroot(4 * Y**9, 9)
     if (Fr(X0) + C9 / Y)**9 >= 4 * Y**9:
         near.append((Y, X0))
@@ -253,14 +295,95 @@ assert all_classified, "Worley classification violated empirically!"
 print(f"[PASS] every Thue-filter survivor (Y <= 2*10^5) lies in the Worley "
       f"family with rs <= 2 / g^2 <= C_9(a+2)  ({time.time()-t0:.1f}s)")
 
+# ---------------------------------------------------------------- step 5
+# SELF-CONTAINED confinement family (no Worley/Legendre/Fatou input).
+# Theorem (proved in note.md Section 3, elementary): alpha irrational with
+# convergents p_m/q_m, theta_m := |q_m alpha - p_m|.  If |alpha Y - X| <= C/Y
+# with q_m <= Y < q_{m+1}, expand (X, Y) = (r p_{m+1} + s p_m,
+# r q_{m+1} + s q_m) over ZZ (unimodular basis).  Then s != 0 and exactly one:
+#   (i)   r = 0:   Y = g q_m (g = s >= 1)  and  g^2 q_m < C (q_m + q_{m+1});
+#   (ii)  r >= 1:  s = -t <= -1, Y = r q_{m+1} - t q_m, 1 <= r <= t,
+#                                         and  t * Y < C (q_m + q_{m+1});
+#   (iii) r <= -1: s >= 2, Y = s q_m - |r| q_{m+1}, 1 <= |r| < s,
+#                                         and  s * Y < C (q_m + q_{m+1}).
+# Only inputs: the exact identity q_{m+1} theta_m + q_m theta_{m+1} = 1 and
+# the sign alternation of q_j alpha - p_j (both two-line CF facts).  For a
+# fixed t (resp. s) the interval [q_m, q_{m+1}) admits AT MOST ONE r, so the
+# family is finite and enumerable per index -- this confines even C > 1
+# (here C = C_9 = 1031/1000) with no classical black box.
+t0 = time.time()
+sc_family = {}                       # Y -> (m, tag)
+for m in range(m100 + 1):
+    qm, qm1 = qs[m], qs[m + 1]
+    if qm1 <= qm:                    # empty interval (cannot occur here)
+        continue
+    capn, capd = C9.numerator * (qm + qm1), C9.denominator   # cap = C(qm+qm1)
+    # class (i): multiples of q_m inside [q_m, q_{m+1})
+    g = 1
+    while g * g * qm * capd < capn and g * qm < qm1:
+        if g * qm <= Y_LIMIT:
+            sc_family.setdefault(g * qm, (m, f"{g}*q_{m}"))
+        g += 1
+    # class (ii): Y = r q_{m+1} - t q_m  (unique r per t)
+    t = 1
+    while t * qm * capd < capn:      # t*Y >= t*q_m must stay under the cap
+        r = -((-(1 + t) * qm) // qm1)          # ceil((1+t) q_m / q_{m+1})
+        Yc = r * qm1 - t * qm
+        if qm <= Yc < qm1 and t * Yc * capd < capn and Yc <= Y_LIMIT:
+            sc_family.setdefault(Yc, (m, f"{r}*q_{m+1}-{t}*q_{m}"))
+        t += 1
+    # class (iii): Y = s q_m - r q_{m+1}, r >= 1  (unique r per s)
+    s = 2
+    while s * qm * capd < capn:
+        r = ((s - 1) * qm) // qm1
+        if r >= 1:
+            Yc = s * qm - r * qm1
+            if qm <= Yc < qm1 and s * Yc * capd < capn and Yc <= Y_LIMIT:
+                sc_family.setdefault(Yc, (m, f"{s}*q_{m}-{r}*q_{m+1}"))
+        s += 1
+sc_checked = 0
+sc_eq = []
+for Yc in sc_family:
+    if Yc < 5:
+        continue
+    X0 = iroot(4 * Yc**9, 9)
+    p4 = 4 * P9(Yc)
+    for X in range(X0 - 2, X0 + 4):
+        if X > Yc:
+            sc_checked += 1
+            if P9(X) == p4:
+                sc_eq.append((Yc, X))
+# a solution of the equation in the Thue regime (Y >= 1330) satisfies the
+# hypothesis with C = C_9, hence MUST appear here; d < 9 telescopes need not.
+assert all(X - Yc < 9 for (Yc, X) in sc_eq), f"UNEXPECTED SOLUTION {sc_eq}"
+assert sc_eq in ([], [(7, 8)]), sc_eq
+# empirical completeness: every one-sided Thue survivor found by the brute
+# scan (step 4) must lie in the self-contained family
+missing = [Y for (Y, _) in near if Y not in sc_family]
+assert missing == [], f"self-contained family misses {missing}"
+new_only = sum(1 for Y in sc_family if Y not in seenY)
+print(f"[PASS] SELF-CONTAINED family: {len(sc_family)} Y-values <= 10^100 "
+      f"({new_only} not already in the Worley-superset family), {sc_checked} "
+      f"exact equation checks: no solution with d >= 9 "
+      f"(hits: {sc_eq if sc_eq else 'none'}); all {len(near)} brute survivors "
+      f"covered  ({time.time()-t0:.1f}s)")
+print(f"       => the Y <= 10^100 exclusion is conditional ONLY on the "
+      f"derivation.py chain + two elementary CF identities (no classical "
+      f"Worley/Fatou needed)")
+
 # ---------------------------------------------------------------- summary
 dmax = (RHO2 - 1) * Y_LIMIT
 print()
 print("=" * 72)
-print("CONCLUSION (conditional only on derivation.py chain + Worley step):")
-print(f"  no k=9, N=4 solution with Y = n+5 <= 10^100.")
-print(f"  Any solution with d >= 221 has Y < d/(rho2-1); hence NO solution with")
-print(f"  221 <= d <= {float(dmax):.6e}  (exactly floor = {int(dmax)})")
+print("CONCLUSION (conditional only on the derivation.py chain + the")
+print("elementary self-contained confinement of step 5; the classical")
+print("Worley/Dujella route of steps 2-4 independently gives the same):")
+print(f"  no k=9, N=4 solution with d >= 9 and Y = n+5 <= 10^100")
+print(f"  (the only equation coincidence found anywhere is the d=1 telescope")
+print(f"   (Y,X) = (7,8), outside the m >= n+k problem domain).")
+print(f"  Any solution with d >= 221 has d > (rho2-1)*Y, i.e. Y < d/(rho2-1);")
+print(f"  hence NO solution with 221 <= d <= {float(dmax):.6e}")
+print(f"  (exactly floor = {int(dmax)})")
 print(f"  and d <= 220 is closed by the banked Lean machinery:")
 print(f"  => verified bound d <= 1.665283 * 10^99.")
 print("=" * 72)
