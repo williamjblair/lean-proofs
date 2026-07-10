@@ -1,14 +1,14 @@
 # Prompt: the connected-case inequality for Erdős #23
 
 > **2026-07-10 campaign update.**  Gap G-A below now has a complete
-> component-ledger proof with a second hostile-audit PASS; see
-> `compute23/gate3/gap_ga_component_ledger.md` and `gap_ga_audit.md`.
-> Its bridge, metric, canonical-component, attachment-span, ridden-count,
-> and local-charge layers are kernel-checked in
-> `ErdosProblems/Erdos23GapGA.lean`.  The exact remaining G-A intake node is
-> `CanonicalChargeTheorem`, the simultaneous canonical ride/excursion
-> assignment.  The live mathematical target is otherwise RL* in the
-> remaining multi-edge regime.
+> component-ledger proof and an independent hostile-audit PASS; see
+> `compute23/gate3/gap_ga_lean_closure.md` and `gap_ga_audit.md`.
+> `ErdosProblems/Erdos23GapGACanonical.lean` kernel-checks the canonical
+> ride/excursion assignment, including the repaired exceptional tail, and
+> `ErdosProblems/Erdos23GapGAClosed.lean` proves both exact laws SE1 and SE2
+> by the forward and swapped ledgers.  Thus the prompt's allowed G-A target,
+> and hence the `|M|=1` case, is closed.  RL* in the remaining multi-edge
+> regime is still open.
 
 ## Current task statement
 

@@ -11,6 +11,8 @@ being advertised as solved proof targets.
 -/
 import ErdosProblems.Erdos154Sumset
 import ErdosProblems.Erdos23GapGA
+import ErdosProblems.Erdos23GapGACanonical
+import ErdosProblems.Erdos23GapGAClosed
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686SmallBranch
 import ErdosProblems.Erdos686Reduction
@@ -22,10 +24,13 @@ import ErdosProblems.Erdos686LargeKWedge
 import ErdosProblems.Erdos686PadicLift
 import ErdosProblems.Erdos686GlobalSquareLift
 import ErdosProblems.Erdos686MatchingCompression
+import ErdosProblems.Erdos686MomentLifts
 import ErdosProblems.Erdos686TwoPrimeGap
+import ErdosProblems.Erdos686TwoPrimeSecondLift
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686FinalReduction
 import ErdosProblems.Erdos730NearAffinePayment
+import ErdosProblems.Erdos730HalfBandPayment
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727
 
@@ -407,6 +412,26 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.k_mul_gap_lt_five_mul_n_of_four_solution
 #print axioms Erdos686.Erdos686Variant.k_gap_pow_lt_five_pow_mul_factorial_mul_centeredDiffLcm_four
 #print axioms Erdos686.Erdos686Variant.nine_gap_pow_lt_factorial_mul_centeredDiffLcm_four
+#print axioms Erdos686.Erdos686Variant.second_order_local_lift
+#print axioms Erdos686.Erdos686Variant.second_obstruction_divisibilities
+#print axioms Erdos686.Erdos686Variant.component_product_lt_cutoff_of_second_obstructions
+#print axioms Erdos686.Erdos686Variant.second_obstruction_certificate_5
+#print axioms Erdos686.Erdos686Variant.second_obstruction_certificate_7
+#print axioms Erdos686.Erdos686Variant.second_obstruction_certificate_9
+#print axioms Erdos686.Erdos686Variant.second_obstruction_certificate_11
+#print axioms Erdos686.Erdos686Variant.second_obstruction_certificate_13
+#print axioms Erdos686.Erdos686Variant.second_obstruction_certificate_15
+#print axioms Erdos686.Erdos686Variant.two_large_prime_support_below_cutoff_of_second_lift
+#print axioms Erdos686.Erdos686Variant.two_large_prime_support_k5_below_cutoff
+#print axioms Erdos686.Erdos686Variant.two_large_prime_support_k7_below_cutoff
+#print axioms Erdos686.Erdos686Variant.two_large_prime_support_k9_below_cutoff
+#print axioms Erdos686.Erdos686Variant.two_large_prime_support_k11_below_cutoff
+#print axioms Erdos686.Erdos686Variant.two_large_prime_support_k13_below_cutoff
+#print axioms Erdos686.Erdos686Variant.two_large_prime_support_k15_below_cutoff
+#print axioms Erdos686.Erdos686Variant.cube_dvd_low_moments_of_eval_two_eq_four_eval
+#print axioms Erdos686.Erdos686Variant.cube_dvd_reflected_low_moments_of_eval_two_eq_four_eval_neg
+#print axioms Erdos686.Erdos686Variant.gap_cube_dvd_lowerMoment_combination
+#print axioms Erdos686.Erdos686Variant.gap_cube_dvd_upperMoment_combination
 #print axioms Erdos686.Erdos686Variant.primePower_component_exists_large_local_divisor
 #print axioms Erdos686.Erdos686Variant.two_large_prime_support_bounded_pell
 #print axioms Erdos686.Erdos686Variant.two_prime_support_has_distinct_noncenter_concentrations
@@ -420,6 +445,14 @@ import ErdosProblems.Erdos727
 #print axioms Erdos23GapGA.LocalComponentCharge.charge
 #print axioms Erdos23GapGA.ComponentLedger.length_le_twice_slack
 #print axioms Erdos23GapGA.ComponentLedger.symmetric_bounds
+#print axioms Erdos23GapGA.IsGeodesic.exists_offCorridorComponent_coversIndex_of_not_isBridge
+#print axioms Erdos23GapGA.IsGeodesic.exists_excursionComponent_for_transition
+#print axioms Erdos23GapGA.corridorTransitionGapEdges_disjoint
+#print axioms Erdos23GapGA.canonical_assignedRidden_add_excursionGap_le_span
+#print axioms Erdos23GapGA.canonicalExceptionalTailBound
+#print axioms Erdos23GapGA.canonicalChargeTheorem
+#print axioms Erdos23GapGA.canonical_ledgerTheorem
+#print axioms Erdos23GapGA.gapGA_symmetric_bounds
 #print axioms Erdos730.eight_mul_sq_le_succ_cube
 #print axioms Erdos730.nearEnvelope_forces_high_exponent
 #print axioms Erdos730.nearEnvelope_prime_power_clearance
@@ -432,10 +465,33 @@ import ErdosProblems.Erdos727
 #print axioms Erdos730.endpoint_powered_threshold_certificate
 #print axioms Erdos730.endpoint_payment_identity
 #print axioms Erdos730.endpoint_payment_lt_one_percent
+#print axioms Erdos730.halfBandEnvelope_forces_high_exponent
+#print axioms Erdos730.halfBandEnvelope_prime_power_clearance
+#print axioms Erdos730.powered_threshold_of_halfBand_maximal
+#print axioms Erdos730.halfBand_endpoint_powered_threshold_certificate
+#print axioms Erdos730.halfBand_endpoint_payment_lt_one_percent
 #print axioms Erdos617.Balanced.no_monochromatic_clique
 #print axioms Erdos617.Balanced.sum_le_sq
 #print axioms Erdos617.statement_five_of_extension_demand
 -- Conditional research surfaces; not listed in `proofs.yaml`.
+#print axioms Erdos686.Erdos686Variant.sq_dvd_finset_affine_prod_sub_constant_sub_linear
+#print axioms Erdos686.Erdos686Variant.localOffsetCofactor_second_order
+#print axioms Erdos686.Erdos686Variant.second_order_local_algebra
+#print axioms Erdos686.Erdos686Variant.localSecondCoefficients_eq_table
+#print axioms Erdos686.Erdos686Variant.cube_dvd_eval_two_sub_four_eval_add_low_moments
+#print axioms Erdos686.Erdos686Variant.cube_dvd_eval_two_sub_four_eval_neg_add_low_moments
+#print axioms Erdos23GapGA.IsGeodesic.isBridge_of_forall_not_coversIndex
+#print axioms Erdos23GapGA.IsGeodesic.strictMono_or_strictAnti_corridorVisitIndexAt
+#print axioms Erdos23GapGA.excursionTransition_interior_mem_component
+#print axioms Erdos23GapGA.card_unitCorridorTransition_eq_ridden
+#print axioms Erdos23GapGA.canonicalExceptionalTailTheorem
+#print axioms Erdos23GapGA.canonical_length_le_twice_slack
+#print axioms Erdos730.halfBandEnvelope_exponent_clearance
+#print axioms Erdos730.halfBandDyadicThresholdBase_strictMono_step
+#print axioms Erdos730.halfBand_endpoint_sqrt_floor_certificate
+#print axioms Erdos730.halfBand_endpoint_cuberoot_floor_certificate
+#print axioms Erdos730.halfBand_endpoint_payment_identity
+#print axioms Erdos730.halfBand_endpoint_payment_margin
 #print axioms Erdos23GapGA.OffCorridorChargeDecomposition.length_le_twice_slack
 #print axioms Erdos23GapGA.length_le_twice_slack_of_canonicalChargeTheorem
 #print axioms Erdos23GapGA.ledgerTheorem_of_canonicalChargeTheorem

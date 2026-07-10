@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:b2c006b17d748bc4ec1f2c1c5b3b017f9d62c9dbc4dddd6c62df45f7a1f8ab11",
+  "verifier_output_hash": "sha256:99a02460c6981511bef66ca6e9964a8ec98a5d90fbaf8eeb98a49a12a4105118",
   "attestations": [
     {
       "problem": 154,
@@ -4791,6 +4791,401 @@
       "theorem": "Erdos730.endpoint_payment_lt_one_percent",
       "file": "ErdosProblems/Erdos730NearAffinePayment.lean",
       "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.second_order_local_lift",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.second_obstruction_divisibilities",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.component_product_lt_cutoff_of_second_obstructions",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.second_obstruction_certificate_5",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.second_obstruction_certificate_7",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.second_obstruction_certificate_9",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.second_obstruction_certificate_11",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.second_obstruction_certificate_13",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.second_obstruction_certificate_15",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_large_prime_support_below_cutoff_of_second_lift",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_large_prime_support_k5_below_cutoff",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_large_prime_support_k7_below_cutoff",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_large_prime_support_k9_below_cutoff",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_large_prime_support_k11_below_cutoff",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_large_prime_support_k13_below_cutoff",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_large_prime_support_k15_below_cutoff",
+      "file": "ErdosProblems/Erdos686TwoPrimeSecondLift.lean",
+      "proof_hash": "sha256:e4ec6011fa24122072aa35ddba80e12d8d7ab0f9cd37a290610a3b2e4d493dbd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.cube_dvd_low_moments_of_eval_two_eq_four_eval",
+      "file": "ErdosProblems/Erdos686MomentLifts.lean",
+      "proof_hash": "sha256:a07d23c5ee3934f16be0a8891d73a1335079d64a1c75685973560ae59775e8a8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.cube_dvd_reflected_low_moments_of_eval_two_eq_four_eval_neg",
+      "file": "ErdosProblems/Erdos686MomentLifts.lean",
+      "proof_hash": "sha256:a07d23c5ee3934f16be0a8891d73a1335079d64a1c75685973560ae59775e8a8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.gap_cube_dvd_lowerMoment_combination",
+      "file": "ErdosProblems/Erdos686MomentLifts.lean",
+      "proof_hash": "sha256:a07d23c5ee3934f16be0a8891d73a1335079d64a1c75685973560ae59775e8a8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.gap_cube_dvd_upperMoment_combination",
+      "file": "ErdosProblems/Erdos686MomentLifts.lean",
+      "proof_hash": "sha256:a07d23c5ee3934f16be0a8891d73a1335079d64a1c75685973560ae59775e8a8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.IsGeodesic.exists_offCorridorComponent_coversIndex_of_not_isBridge",
+      "file": "ErdosProblems/Erdos23GapGACanonical.lean",
+      "proof_hash": "sha256:5831a9b803637b61ac90977064cbc97d617f032acd4aa2a53bb0dced055d8b1f",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.IsGeodesic.exists_excursionComponent_for_transition",
+      "file": "ErdosProblems/Erdos23GapGACanonical.lean",
+      "proof_hash": "sha256:5831a9b803637b61ac90977064cbc97d617f032acd4aa2a53bb0dced055d8b1f",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.corridorTransitionGapEdges_disjoint",
+      "file": "ErdosProblems/Erdos23GapGACanonical.lean",
+      "proof_hash": "sha256:5831a9b803637b61ac90977064cbc97d617f032acd4aa2a53bb0dced055d8b1f",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.canonical_assignedRidden_add_excursionGap_le_span",
+      "file": "ErdosProblems/Erdos23GapGACanonical.lean",
+      "proof_hash": "sha256:5831a9b803637b61ac90977064cbc97d617f032acd4aa2a53bb0dced055d8b1f",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.canonicalExceptionalTailBound",
+      "file": "ErdosProblems/Erdos23GapGACanonical.lean",
+      "proof_hash": "sha256:5831a9b803637b61ac90977064cbc97d617f032acd4aa2a53bb0dced055d8b1f",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.canonicalChargeTheorem",
+      "file": "ErdosProblems/Erdos23GapGACanonical.lean",
+      "proof_hash": "sha256:5831a9b803637b61ac90977064cbc97d617f032acd4aa2a53bb0dced055d8b1f",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.canonical_ledgerTheorem",
+      "file": "ErdosProblems/Erdos23GapGAClosed.lean",
+      "proof_hash": "sha256:43ec7b961593d1a9fdeb047043fe936b7ee8be8109b23096f3afdd7adadd6ce1",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.gapGA_symmetric_bounds",
+      "file": "ErdosProblems/Erdos23GapGAClosed.lean",
+      "proof_hash": "sha256:43ec7b961593d1a9fdeb047043fe936b7ee8be8109b23096f3afdd7adadd6ce1",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.halfBandEnvelope_forces_high_exponent",
+      "file": "ErdosProblems/Erdos730HalfBandPayment.lean",
+      "proof_hash": "sha256:3c1b5c51b7c6705da676d1ecd1edb78d596c85f8453ebd5088db5d5c0b337823",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.halfBandEnvelope_prime_power_clearance",
+      "file": "ErdosProblems/Erdos730HalfBandPayment.lean",
+      "proof_hash": "sha256:3c1b5c51b7c6705da676d1ecd1edb78d596c85f8453ebd5088db5d5c0b337823",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.powered_threshold_of_halfBand_maximal",
+      "file": "ErdosProblems/Erdos730HalfBandPayment.lean",
+      "proof_hash": "sha256:3c1b5c51b7c6705da676d1ecd1edb78d596c85f8453ebd5088db5d5c0b337823",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.halfBand_endpoint_powered_threshold_certificate",
+      "file": "ErdosProblems/Erdos730HalfBandPayment.lean",
+      "proof_hash": "sha256:3c1b5c51b7c6705da676d1ecd1edb78d596c85f8453ebd5088db5d5c0b337823",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.halfBand_endpoint_payment_lt_one_percent",
+      "file": "ErdosProblems/Erdos730HalfBandPayment.lean",
+      "proof_hash": "sha256:3c1b5c51b7c6705da676d1ecd1edb78d596c85f8453ebd5088db5d5c0b337823",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

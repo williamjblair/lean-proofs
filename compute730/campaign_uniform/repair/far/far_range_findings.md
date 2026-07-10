@@ -3,15 +3,17 @@
 Date: 2026-07-10
 
 Verdict: **the exact Fourier reduction and sparse quadratic completion are
-proved, but their valuation-stratified triangle majorant does not prove the
-critical incomplete-block estimate.**  For each fixed `p=5,7,11`, that
-majorant is exponentially larger than the available target slack.  The
-remaining analytic node is one explicit signed bilinear Fourier inequality,
-stated in Section 6.
+proved, but the proposed signed bilinear inequality (20) is false.**  The
+valuation-stratified triangle majorant is exponentially over budget for each
+fixed `p=5,7,11`; more decisively, an exact translated-interval construction
+at `p=5,r=432,s=176,a=688` violates (20) by a factor greater than
+`1.164314`.  See `stronger_affine_counterexample_findings.md`.
 
 This file makes no far-range estimate, global first-moment closure, or
 Erdős #730 claim beyond the proved proper long-interval subrange in
-Section 7 and the finite exact hostile checks in Section 8.
+Section 7 and the finite exact hostile checks in Section 8.  The corrected
+analytic intake starts at `s>=r/2`; the complementary half-band `2s<r` is
+paid arithmetically in `../half_band_payment_findings.md`.
 
 ## 1. Exact-valued restricted output set
 
@@ -389,11 +391,12 @@ F0  Critical separated-range incomplete-block estimate              OPEN
  +-- F5  Per-frequency bound with constants (12)--(13)               PROVED
  +-- F6  Valuation-stratified triangle majorant (14)                 VALID BUT INSUFFICIENT
  |    `-- exponentially over budget for p=5,7,11                    PROVED
- +-- F7  Signed bilinear cancellation inequality (20)                OPEN
+ +-- F7  Signed bilinear cancellation inequality (20)                FALSE
+ |    `-- p=5,r=432,s=176,a=688 exact translated witness             EXACT-CHECKED
  +-- F8  Long intervals N>=(H-1)Q                                   PROVED
  `-- F9  Exact finite hostile grid, 104 rows                         EXACT-CHECKED
 
-G0  Near-affine payment <1/100 for X>=2^57               PAPER-PROVED/EXACT ELSEWHERE (Lean pending)
+G0  Full half-band 2s<r payment <1/100 for X>=2^57       LEAN-BANKED/EXACT-CHECKED
 G1  Short/top-range payment                                          NOT CLAIMED
 G2  Combined first-moment budget                                     NOT CLAIMED
 ```

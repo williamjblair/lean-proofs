@@ -2,6 +2,8 @@
 import ErdosProblems.Erdos154
 import ErdosProblems.Erdos154Sumset
 import ErdosProblems.Erdos23GapGA
+import ErdosProblems.Erdos23GapGACanonical
+import ErdosProblems.Erdos23GapGAClosed
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686ConstantQuotient
 import ErdosProblems.Erdos686QuotientConfinement
@@ -20,7 +22,9 @@ import ErdosProblems.Erdos686LargeKWedge
 import ErdosProblems.Erdos686PadicLift
 import ErdosProblems.Erdos686GlobalSquareLift
 import ErdosProblems.Erdos686MatchingCompression
+import ErdosProblems.Erdos686MomentLifts
 import ErdosProblems.Erdos686TwoPrimeGap
+import ErdosProblems.Erdos686TwoPrimeSecondLift
 import ErdosProblems.Erdos686ConvergentMachinery
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686SevenThue
@@ -30,5 +34,6 @@ import ErdosProblems.Erdos686ThirteenThue
 import ErdosProblems.Erdos686FifteenThue
 import ErdosProblems.Erdos686FinalReduction
 import ErdosProblems.Erdos730NearAffinePayment
+import ErdosProblems.Erdos730HalfBandPayment
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727

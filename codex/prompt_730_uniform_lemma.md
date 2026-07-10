@@ -28,10 +28,11 @@ in particular throughout `s <= (kappa_p-epsilon)r` for fixed
 `epsilon>0`.  See `compute730/campaign_uniform/uniformity_counterexample.md`.
 This falsifies the analytic lemma, **not Erdős #730**.
 
-**AUDITED REPAIR (arithmetic spine kernel-banked).**  With `C=2`, `eta=1/12`, and `r` chosen maximally from
-the actual branch-class length, the whole near-affine band has normalized
-first-moment contribution below `1/100` for every `X>=2^57`.  The proof is
-in `compute730/campaign_uniform/repair/near_affine_payment_findings.md`; all
+**AUDITED REPAIR (arithmetic spine kernel-banked).**  With `C=2` and `r`
+chosen maximally from the actual branch-class length, the whole half-band
+`2s<r` has normalized first-moment contribution below `1/100` for every
+`X>=2^57`.  The proof is in
+`compute730/campaign_uniform/repair/half_band_payment_findings.md`; all
 finite constants are reproduced with exact integer/rational tests.  Lean
 checks the near-envelope exponent clearance, powered maximality threshold,
 finite reciprocal-tail ingredients, dyadic step certificates, and exact
@@ -40,12 +41,17 @@ positive-real root/floor monotonic transfer are still explicit intake gaps,
 so the full uniform near-payment theorem is not claimed.  The maximal choice
 of `r` is load-bearing.
 
-**CORRECTED LIVE TARGET (OPEN).**  Prove one explicit separated-range
+The formerly proposed signed Fourier inequality (20) is also **FALSE**.
+The exact witness `p=5,r=432,s=176,a=688` lies outside the earlier
+near-affine band and exceeds its right-hand side by a factor greater than
+`1.164314`; see `repair/far/stronger_affine_counterexample_findings.md`.
+
+**CORRECTED LIVE TARGET (OPEN).**  Prove one explicit incomplete-block
 counting and short/top-range lemma with constants `B,delta>0`:
 
 1. For every relevant prime, admissible branch/root, `a,r`, and interval
-   `|I|>=p^r(log p^r)^2` in the separated range
-   `s >= (kappa_p+eta)r`, prove an explicit incomplete-block estimate
+   `|I|>=p^r(log p^r)^2` in the remaining range `s>=r/2`, prove an explicit
+   incomplete-block estimate
 
    ```text
    #bad(I) <= (H/p)^(2r)|I|(1+(log p^r)^(-1)) + E_far(p,a,r,I),
@@ -63,7 +69,7 @@ counting and short/top-range lemma with constants `B,delta>0`:
 The displayed inequality is the single remaining campaign gate.  No
 far-range estimate or closed budget satisfying it is currently claimed.
 
-The exact Fourier reduction is now audited in
+The exact Fourier reduction is audited in
 `compute730/campaign_uniform/repair/far/far_range_findings.md`.  If `E` is
 the restricted output set with the exact-valuation least digit removed,
 `F(h)=sum_(y in E)e(-hy/p^(2r))`, and
@@ -76,8 +82,10 @@ Re sum_(h!=0) F(h)S_I(h)
 
 Sparse Gauss completion is proved with exact constants, but applying the
 triangle inequality afterward is exponentially over this allowance for
-each fixed `p=5,7,11`.  A proof must preserve signed cross-frequency
-cancellation.  The proper long-interval subrange
+each fixed `p=5,7,11`, and the displayed signed bound itself has the exact
+witness above.  A replacement must introduce a payable error or different
+averaging mechanism rather than merely preserve signs.  The proper
+long-interval subrange
 `|I| >= (H-1)p^(2r)` is already proved but is noncritical.
 
 ## Verified context (all machine-checked; details and exact formulas

@@ -6,12 +6,11 @@ It is updated as candidates enter or leave the proof path.
 ## Baseline
 
 - Focused terminal module compiles.
-- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 405
+- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 438
   theorem names.
-- The previous axiom audit reported 804 theorem surfaces; the nine new
-  matching/global-square surfaces were independently checked against the same allowed set
-  `[propext, Classical.choice, Quot.sound]`.
-- `attestations.json` was regenerated successfully for all 405 entries.
+- The full axiom audit reports 864 theorem surfaces, all within the allowed
+  set `[propext, Classical.choice, Quot.sound]`.
+- `attestations.json` was regenerated successfully for all 438 entries.
 
 ## Dependency tree: odd-tail prime-power restriction
 
@@ -74,11 +73,34 @@ next node is valuation concentration inside the residual progression.
 6. In the clean `p,q>=k` slice, exact positive residual coefficients obey
    `ab<A_k^2` and
    `a*p^(2e)-b*q^(2f)=3(i-j)`. **Lean banked.**
+7. The second local Taylor congruences make each prime-power component
+   divide one of two explicit fixed obstruction integers. **Lean banked.**
+8. For each of the six target rows, exhaustive kernel-reduced certificates
+   show that the obstruction pair never vanishes simultaneously and that
+   both absolute values are below `10^20`. **Lean banked, exact-reproduced,
+   and independently hostile-audited.**
+9. The Pell ratio bounds then give
+   `d < 35 * 10^40 < 10^120`. **Lean banked.**
 
-Verdict: proper finite-coefficient reduction plus complete same-index and
-center closures.  The remaining generalized Pell/prime-power families are
-not asserted empty and are not equivalent to the full odd tail when small
-prime support or three or more prime divisors are allowed.
+Verdict: the complete clean two-prime slice `p,q>=k` is closed, not merely
+reduced to Pell families.  The exact remaining two-prime slice has
+`min(p,q)<k`; three-or-more-prime support is unaffected.
+
+## Dependency tree: global cubic moment lifts
+
+1. For a polynomial `P`, the identity `P(2d)=4P(d)` and `2^2=4` cancel
+   every term through degree two after explicit constant and linear
+   corrections. **Lean banked monomialwise.**
+2. Hence `d^3` divides the corrected low-moment combination. **Lean banked.**
+3. Applying the same calculation to the two residual progressions gives
+   lower and reflected upper companion divisibilities for every exact gap.
+   **Lean banked and independently hostile-audited.**
+4. The exact solution `(k,n,d)=(1,0,3)` has raw residual products `-2` and
+   `6`, neither divisible by `27`; only the corrected combinations vanish.
+   **Exact counterexample reproduced.**
+
+Verdict: a proper cubic global restriction intended for the
+three-or-more-bucket regime.  No raw-product cube divisibility is claimed.
 
 ## Dependency tree: primitive scale and discriminant routes
 

@@ -3722,6 +3722,297 @@ proofs:
       The exact endpoint rational payment is strictly below one percent.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.second_order_local_lift
+    statement: >-
+      The exact block equation and a square residual localization force the
+      second signed local Taylor congruence at the concentrated component.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.second_obstruction_divisibilities
+    statement: >-
+      In the clean two-component Pell regime, each prime-power component
+      divides its explicit fixed second-order obstruction integer.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.component_product_lt_cutoff_of_second_obstructions
+    statement: >-
+      A nonzero bounded second obstruction and the Pell ratio inequalities
+      give an explicit cutoff for the product of the two components.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.second_obstruction_certificate_5
+    statement: >-
+      The k equals 5 obstruction pair is never simultaneously zero and stays
+      below the common exact cutoff throughout its finite coefficient range.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.second_obstruction_certificate_7
+    statement: >-
+      The k equals 7 obstruction pair is never simultaneously zero and stays
+      below the common exact cutoff throughout its finite coefficient range.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.second_obstruction_certificate_9
+    statement: >-
+      The k equals 9 obstruction pair is never simultaneously zero and stays
+      below the common exact cutoff throughout its finite coefficient range.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.second_obstruction_certificate_11
+    statement: >-
+      The k equals 11 obstruction pair is never simultaneously zero and stays
+      below the common exact cutoff throughout its finite coefficient range.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.second_obstruction_certificate_13
+    statement: >-
+      The k equals 13 obstruction pair is never simultaneously zero and stays
+      below the common exact cutoff throughout its finite coefficient range.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.second_obstruction_certificate_15
+    statement: >-
+      The k equals 15 obstruction pair is never simultaneously zero and stays
+      below the common exact cutoff throughout its finite coefficient range.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.two_large_prime_support_below_cutoff_of_second_lift
+    statement: >-
+      Every exact target-row gap with exactly two prime-power components whose
+      bases are at least k is below ten to the 120.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.two_large_prime_support_k5_below_cutoff
+    statement: >-
+      The clean two-prime support regime is below the target cutoff for k=5.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.two_large_prime_support_k7_below_cutoff
+    statement: >-
+      The clean two-prime support regime is below the target cutoff for k=7.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.two_large_prime_support_k9_below_cutoff
+    statement: >-
+      The clean two-prime support regime is below the target cutoff for k=9.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.two_large_prime_support_k11_below_cutoff
+    statement: >-
+      The clean two-prime support regime is below the target cutoff for k=11.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.two_large_prime_support_k13_below_cutoff
+    statement: >-
+      The clean two-prime support regime is below the target cutoff for k=13.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeSecondLift.lean
+    theorem: Erdos686.Erdos686Variant.two_large_prime_support_k15_below_cutoff
+    statement: >-
+      The clean two-prime support regime is below the target cutoff for k=15.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentLifts.lean
+    theorem: Erdos686.Erdos686Variant.cube_dvd_low_moments_of_eval_two_eq_four_eval
+    statement: >-
+      A polynomial value ratio at d and 2d forces a cubic divisibility
+      combination of its constant and linear coefficients.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentLifts.lean
+    theorem: Erdos686.Erdos686Variant.cube_dvd_reflected_low_moments_of_eval_two_eq_four_eval_neg
+    statement: >-
+      The reflected value ratio at minus d and 2d forces the companion cubic
+      constant-and-linear coefficient combination.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentLifts.lean
+    theorem: Erdos686.Erdos686Variant.gap_cube_dvd_lowerMoment_combination
+    statement: >-
+      Every exact block equation forces the lower residual polynomial's
+      corrected constant-linear combination to be divisible by d cubed.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentLifts.lean
+    theorem: Erdos686.Erdos686Variant.gap_cube_dvd_upperMoment_combination
+    statement: >-
+      Every exact block equation forces the reflected upper residual
+      polynomial's corrected combination to be divisible by d cubed.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGACanonical.lean
+    theorem: Erdos23GapGA.IsGeodesic.exists_offCorridorComponent_coversIndex_of_not_isBridge
+    statement: >-
+      Every nonbridge corridor edge is covered by the attachment interval of
+      an actual component outside the geodesic corridor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGACanonical.lean
+    theorem: Erdos23GapGA.IsGeodesic.exists_excursionComponent_for_transition
+    statement: >-
+      Every nonunit common-visit transition selects the off-corridor component
+      actually traversed by all of its interior vertices.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGACanonical.lean
+    theorem: Erdos23GapGA.corridorTransitionGapEdges_disjoint
+    statement: >-
+      Distinct monotone common-visit transitions have disjoint corridor gap
+      edge intervals.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGACanonical.lean
+    theorem: Erdos23GapGA.canonical_assignedRidden_add_excursionGap_le_span
+    statement: >-
+      For every canonical component, assigned ridden edges plus full
+      excursion gaps pack inside its actual attachment span.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGACanonical.lean
+    theorem: Erdos23GapGA.canonicalExceptionalTailBound
+    statement: >-
+      In the repaired qexc equals r equals zero case, the canonical assigned
+      ridden fiber is at most the component's actual Q-vertex count.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGACanonical.lean
+    theorem: Erdos23GapGA.canonicalChargeTheorem
+    statement: >-
+      Every pair of finite geodesics admits the complete canonical
+      ride-excursion charge decomposition under the nonbridge condition.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGAClosed.lean
+    theorem: Erdos23GapGA.canonical_ledgerTheorem
+    statement: >-
+      The original symmetric two-demand cut condition now unconditionally
+      supplies the complete component ledger.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGAClosed.lean
+    theorem: Erdos23GapGA.gapGA_symmetric_bounds
+    statement: >-
+      Gap G-A is closed: forward and swapped canonical ledgers prove both
+      exact single-edge laws SE1 and SE2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    theorem: Erdos730.halfBandEnvelope_forces_high_exponent
+    statement: >-
+      The enlarged half-band condition forces a valuation exponent at least
+      two and the exact relation three r less than two a.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    theorem: Erdos730.halfBandEnvelope_prime_power_clearance
+    statement: >-
+      The half-band exponent relation gives the powered comparison needed to
+      clear p to the r plus one against p to the a.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    theorem: Erdos730.powered_threshold_of_halfBand_maximal
+    statement: >-
+      Maximal block length in the enlarged half band forces the exact powered
+      threshold X to the sixth below the q to the thirteenth envelope.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    theorem: Erdos730.halfBand_endpoint_powered_threshold_certificate
+    statement: >-
+      Exact rational powers certify the enlarged endpoint threshold floor
+      937824 at X equals two to the 57.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    theorem: Erdos730.halfBand_endpoint_payment_lt_one_percent
+    statement: >-
+      The enlarged half-band endpoint payment remains strictly below one
+      percent with a positive exact rational margin.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 617
     source: erdosproblems
     file: ErdosProblems/Erdos617.lean

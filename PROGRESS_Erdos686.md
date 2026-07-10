@@ -25,7 +25,7 @@ theorem erdos686_false_of_constant_bound_and_large_escape
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 405 manifest-tracked theorems (379 for problem 686), axioms ⊆
+[R] CI gate: 438 manifest-tracked theorems (399 for problem 686), axioms ⊆
 `[propext, Classical.choice, Quot.sound]`, no `native_decide`, no `sorry`.
 
 [R] **All pure prime-power odd tails are closed.**  The p-adic lift module
@@ -57,8 +57,18 @@ per base.  The two components cannot land at one factor, and neither can
 land at the odd center; both exclusions have explicit constants below the
 cutoff.  If `p,q≥k`, the surviving data satisfy
 `a*p^(2e)-b*q^(2f)=3(i-j)` with `ab<A_k^2` and distinct noncentral `i,j`.
-This is a proper restriction, not a solution of the remaining Pell/prime-
-power families.
+The second local Taylor coefficient turns the two component divisibilities
+into fixed obstruction integers.  Six kernel-checked finite certificates
+prove they never vanish simultaneously and are below `10^20`; the Pell
+ratio then forces `d<35*10^40<10^120`.  Thus this entire regime is closed.
+The remaining two-prime slice has `min(p,q)<k`.
+
+[R] **Two global cubic moment combinations.**  Expanding at the evaluation
+ratio `2^2=4` cancels every term through degree two after explicit constant
+and linear corrections.  Lean proves `d^3` divides the resulting
+combinations for both residual progressions `n+i-d` and `3(n+i)+d`.  The
+exact solution `(k,n,d)=(1,0,3)` shows why the correction is load-bearing:
+neither raw residual product is divisible by `27`.
 
 [R] **Large-k maximum-valuation owners compress to one lcm.**  For every
 exact equation with `k>=1` and `d>=k`,
