@@ -270,10 +270,13 @@ cleared, or stream kissat straight into a checker via a FIFO.
   standalone kissat 4.0.4 ~2 min with 141 MB DRAT emitted), n=25 SAT.
 - Cube tree (K_25 lemma route): LEMMA-SUM is the cube-free jugular (covers
   silent classes via H = ∅). Decomposed legs: s=2 killed by any of
-  {double_silent UNSAT, silent_floor >= 76, silent UNSAT}; s=0 needs
-  edges_loud(5,75) UNSAT + floor_loud ladder; s=1 needs silent UNSAT or
-  the joint `sum_silent` instance (coded, not launched — fire it if
-  `silent` returns SAT). All in flight.
+  {double_silent UNSAT, silent_floor >= 76, silent UNSAT}; s=0 closed by
+  edges_loud(5,75) UNSAT + floor_loud(1) UNSAT (<=1 cheap loud, cheap h>=2,
+  rest h>=6: 2+4·6 = 26 > 25). CAUTION s=1: counting can NEVER close it —
+  four louds at h>=6 give Σ = 24 <= 25 even if no cheap loud coexists with
+  the silent class; s=1 dies only via silent UNSAT or the joint
+  `sum_silent` instance (silent class 0 + Σ_{c>=1}|H_c| <= 25; launched
+  12:55). All legs in flight.
 - Jugular stack (independent routes to the theorem): (1) LEMMA-SUM UNSAT;
   (2) cube legs above; (3) E7 general UNSAT (unbounded, assumption-free);
   (4) E7-bounded UNSAT (fastest expected, modulo side lemmas (i)-(iii));
