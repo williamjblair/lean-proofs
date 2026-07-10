@@ -25,17 +25,30 @@ echo "$report"
 echo "$report" | grep -qiE '(^| )error' && fail "Audit.lean did not compile cleanly"
 echo "$report" | grep -q 'sorryAx'        && fail "a headline theorem depends on sorryAx"
 
-# Every "depends on axioms:" line must equal the allowed set exactly.
+# Every "depends on axioms:" report must be a subset of the allowed kernel set.
+# Lean may wrap the axiom list across several lines for long theorem names, so
+# collect continuation lines until the closing bracket appears.
 seen=0
 while IFS= read -r line; do
-  case "$line" in
-    *"depends on axioms:"*)
-      seen=$((seen+1))
-      axioms="${line#*depends on axioms: }"
-      [ "$axioms" = "$ALLOWED" ] || fail "unexpected axioms -> $line"
-      ;;
-  esac
+  if [[ "$line" == *"depends on axioms:"* ]]; then
+    seen=$((seen+1))
+    axioms="${line#*depends on axioms: }"
+    while [[ "$axioms" != *"]"* ]]; do
+      IFS= read -r continuation || fail "unterminated axiom report -> $line"
+      axioms+="$continuation"
+    done
+    compact="$(printf '%s' "$axioms" | tr -d '[][:space:]')"
+    if [ -n "$compact" ]; then
+      IFS=',' read -r -a axiom_names <<< "$compact"
+      for axiom in "${axiom_names[@]}"; do
+        case "$axiom" in
+          propext|Classical.choice|Quot.sound) ;;
+          *) fail "unexpected axiom '$axiom' -> $line" ;;
+        esac
+      done
+    fi
+  fi
 done <<< "$report"
 
 [ "$seen" -gt 0 ] || fail "no axiom report produced (is Audit.lean wired up?)"
-echo "PASS: $seen headline theorem(s) clean, axioms = $ALLOWED"
+echo "PASS: $seen headline theorem(s) clean, axioms subset of $ALLOWED"

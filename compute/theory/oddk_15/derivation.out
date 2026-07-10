@@ -1,0 +1,26 @@
+[PASS 01] centered identity: prod_{i=1..15}(x+i) = P(x+8), P(T) = T*prod_{j=1..7}(T^2-j^2)
+        P(T) = T^15 - 140 T^13 + 7462 T^11 - 191620 T^9 + 2475473 T^7 - 15291640 T^5 + 38402064 T^3 - 25401600 T
+[PASS 02] expansion coefficients e_1..e_7 = [140, 7462, 191620, 2475473, 15291640, 38402064, 25401600];  P(8) = 15!  (sanity)
+[PASS 03] brackets: rho_lo = 109682397/10^8 < 4^(1/15) < 109682598/10^8 = rho_hi   (15th-power sign checks)
+        q = 4^(1/15) = 1.09682497969462596068147177803 ;  q - rho_lo ~ 1.00e-06, rho_hi - q ~ 1.00e-06
+[PASS 04] d >= 221  ==>  Y >= Y0 = 2131   (exact: Y > 2130.856; crude bracket, no banked input needed)
+[PASS 05] P'(T) > 0 for T >= 8 (Sturm count on [8, CauchyBound] = 0, P'(8) > 0); P = product of 15 increasing positive factors on [8, oo)
+[PASS 06] R'(T) > 0 for T >= 8;  pairing thresholds 11e2/13e1, 7e4/9e3, 3e6/5e5 = ['451/10', '121177/12060', '14400774/9557275'] all < 64 = 8^2  (nlinarith-ready)
+[PASS 07] ratio bracket for Y >= 2131:  rho_lo*Y < X < rho_hi*Y  [4P(Y)-P(rho_lo Y) > 0 and P(rho_hi Y)-4P(Y) > 0 on [Y0,oo), each by shift Y = Y0+v & all-coefficients-nonnegative; then P monotone]
+[PASS 08] exact Thue inequality, every solution with Y >= Y0:
+          -C_A*Y^13 <= X^15 - 4Y^15 <= -C_B*Y^13
+          C_A = 140*(4 - rho_lo^13) + 1/100 = 472611744124214407772186109437035217691493069885909509237542511221937876461259928845383918711791741485861/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+              ~ 94.522349
+          C_B = 140*(4 - rho_hi^13) - 1/200 = 57675939475540190063309597684187091899124253572297108127104275890164986337402916063559912478902181707/610351562500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+              ~ 94.496259
+[PASS 09] factorization  a^15 - b^15 = (a-b) * sum_{i<15} a^i b^(14-i)  (symbolic)
+[PASS 10] |4^(1/15) - X/Y| <= C15/Y^2 for Y >= Y0, with exact rational
+          C15 = 1729/1000 = 1.729   [C_A/(15*rho_lo^14) = 1.727930158 <= 1.729, exact]
+          asymptotic optimum kappa = e1(4-q^13)/(15 q^14) = 1.727623250606485426743422528523359535909
+          2*C15 = 3.458 in (3,4]  ==>  Worley r*s <= 3;   C15/4 = 0.432250 < 1/2  ==>  g>=2 branch is Legendre
+[PASS 11] grid: all five certificates re-verified exactly at 13 values of Y in [2131, 10^15]
+[PASS 12] end-to-end: on 147 convergent-quality pairs (g*p_m, g*q_m), 65 satisfy the one-sided Thue hypothesis + bracket, and EVERY one satisfies |q - X/Y| <= C15/Y^2 (exact 10^-40 sandwich)
+[PASS 13] random probe: 2000 random Y in [Y0, 10^18], nearest-integer X: 0 equation hits; 0 landed in the Thue band (expected ~ 2000*(C_A-C_B)/(15 q^14) ~ 1.0)
+
+constants written to /Users/williamblair/personal/lean-proofs/compute/theory/oddk_15/constants.json
+ALL 13 CHECKS PASSED -- derivation.py
