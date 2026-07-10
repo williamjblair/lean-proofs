@@ -1,5 +1,14 @@
 # Prompt: the connected-case inequality for Erdős #23
 
+> **2026-07-10 campaign update.**  Gap G-A below now has a complete
+> component-ledger proof with a second hostile-audit PASS; see
+> `compute23/gate3/gap_ga_component_ledger.md` and `gap_ga_audit.md`.
+> Its numerical implication is kernel-checked in
+> `ErdosProblems/Erdos23GapGA.lean`; the graph-theoretic ledger construction
+> is not yet formalized.  The live mathematical target is therefore RL* in
+> the remaining multi-edge regime, while the live intake target for G-A is
+> Lean formalization.
+
 ## Current task statement
 
 Let G be a finite triangle-free graph on N vertices, χ a maximum cut,

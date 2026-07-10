@@ -64,12 +64,17 @@ PROVED HERE: the connected-B inequality Γ ≤ N² checked on 49.7M
 instances (N ≤ 13); equality cases are ALL balanced odd-cycle blow-ups
 C_{2k+1}[q] (infinite two-parameter family — the true reason all
 certificates self-tighten); sandwich theorem: universal Lemma RL is
-conjecture-strength; RL proved on trees, s ≤ 1, corridor case |M| = 1
-modulo gap G-A; corollary chain modulo RL.
+conjecture-strength; RL proved on trees, s ≤ 1, and now for every
+`|M|=1` instance.  The former gap G-A is closed by a symmetric
+two-demand component ledger (complete paper proof, two hostile audits,
+exact structural replay); its ledger arithmetic and theorem interfaces are
+kernel-checked in `ErdosProblems/Erdos23GapGA.lean`, while the component
+construction itself still awaits Lean formalization.
 
-OPEN CORE: gap G-A (one localized double-count in the off-corridor
-single-edge law — tractable); inductive RL*; the 2-connected core
-(conjecture-strength, quarantined).
+OPEN CORE: the multi-edge aggregation G-B / inductive RL* in the exact
+region `n ≥ 14`, `2 ≤ s < (d+1)²/(2p(d))`, `|M| ≥ 2`; the 2-connected
+core (conjecture-strength, quarantined); and kernel formalization of the
+already-audited G-A component construction.
 
 ## Erdős #699 — common prime factor p ≥ i of C(n,i), C(n,j)
 

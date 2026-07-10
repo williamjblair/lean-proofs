@@ -37,24 +37,24 @@ is exact integer arithmetic, ≤ 2 cores, `nice -19`, confined to
    * RL for **trees** (any |M|), with slack (§3.7).
    * The **charging lemma** (each off-corridor vertex absorbs at most two
      forced level-crossings, §4.4) — the engine of the single-edge laws.
-   * The single-edge laws **SE1 (D ≤ 2s)** and **SE2 (2D ≤ 2s + d)** —
-     per M-edge, for arbitrary |M| — whenever the edge's endpoints lie on
-     a stub geodesic, and SE2 whenever w, x₀ both lie on an M-geodesic
-     (§5).
-   * **SE1 ∧ SE2 ⟹ RL for |M| = 1** — pure algebra, ample slack (§6).
+   * The single-edge laws **SE1 (D ≤ 2s)** and **SE2 (2D ≤ 2s + d)**
+     for every valid one-stub instance with `|M|=1`.  The formerly open
+     off-corridor case is closed by the symmetric component-ledger theorem
+     (§5.3; complete proof and hostile audit in
+     `gap_ga_component_ledger.md` and `gap_ga_audit.md`).
+   * **RL for |M| = 1** outright: component ledger gives SE1 and SE2, and
+     their algebraic implication has ample slack (§6).
    * The **large-slack theorem**: RL holds whenever 2·s·p(d) ≥ (d+1)²,
      *given* Conjecture Γ on ≤ n vertices; unconditionally for n ≤ 13
      via gate 2's exhaustive verification (§7).
    * The full corollary chain from RL (or RL\*) to "no (minimal)
      counterexample has a cut vertex crossed by exactly one M-edge" (§9).
-3. **What remains (the honest gaps, §8).**
-   * **G-A**: SE1/SE2 for M-edges with an endpoint off every w–x₀
-     geodesic.  VERIFIED-BUT-UNPROVED (SE checked exhaustively for
-     n ≤ 8 with unbounded |M| and n ≤ 9 with |M| ≤ 3; RL itself for
-     n ≤ 9 all M, n ≤ 11 |M| ≤ 2, n ≤ 12 |M| = 1; thin-corridor
-     families to n = 16; ~1.1M random rooted instances to n = 16; zero
-     violations anywhere).  With G-A closed, RL for |M| = 1 is a theorem.
-   * **G-B**: the multi-edge aggregation of the charging argument in the
+3. **What remains (the honest gap, §8).**
+   * **G-A is PROVED.**  The component-span ledger closes every
+     off-corridor single-edge configuration; its first hostile audit found
+     a false intermediate subclaim, and the repaired bound passed a second
+     node-by-node audit plus 390,022 general two-demand checks.
+   * **G-B** remains: the multi-edge aggregation of the charging argument in the
      middle regime 2 ≤ s < (d+1)²/(2p(d)).  By Theorem 2.7 the
      unconditional form of this gap *contains the conjecture's hard
      quadratic content*; for small s it is strongly rigid (max Γ observed
@@ -65,7 +65,9 @@ is exact integer arithmetic, ≤ 2 cores, `nice -19`, confined to
    catalogue); all with n ≤ 9 and unbounded |M|; all 144.3M with n ≤ 12,
    |M| = 1; exhaustive thin-corridor families (s = 2, d ≤ 13; s = 3,
    d ≤ 11); ~1.1M random rooted instances at 12 ≤ n ≤ 16.  Every proof
-   step below is separately machine-checked (§12).
+   step below is separately machine-checked (§12).  The new G-A harness
+   additionally checked 29,050 geodesic pairs and 36,112 off-corridor
+   components, including 10,636 exceptional components.
 
 ---
 
@@ -557,20 +559,44 @@ so SE1 (D ≤ 2s = 2q + 2r, r := |F∖Q|) reduces to the **ledger**
 * When Q avoids the corridor entirely (t ≤ 1): ridden = E = 0 and (L)
   is trivial — the "horizontal" M-edges (e.g. the witness of signature
   (6,25,2)) are paid for by their own cycle vertices q.
-* The interaction case — Q dives to the corridor, rides, and returns —
-  needs the ride to be paid by off-Q F-vertices at rate 2 (as in the
-  charging lemma).  The level-charging from w pays only for the *level
-  window* of yz, and the level-charged F-vertices may coincide with Q's
-  own excursion vertices: the charge and the ledger's q-term can collide.
-  Eliminating this double count is the one missing combinatorial step.
+The interaction case is closed by the following theorem.
 
-**Status of SE1/SE2 in general (G-A): VERIFIED-BUT-UNPROVED** in the
-ranges listed above.  Precisely what is missing:
+**Theorem 5.3 (symmetric component ledger; PROVED; second hostile audit
+PASS).**  Let a connected finite graph satisfy the symmetric cut condition
 
-    (G-A)  For an M-edge (any |M|) with an endpoint outside some (equiv.
-    every) w–x₀ geodesic, prove the ledger (L); equivalently prove
-    SE1 and SE2 outright.  (For RL |M| = 1 only the |M| = 1 case is
-    needed.)
+    [T separates w,x₀] + [T separates y,z] ≤ e_B(δT)
+
+for every vertex set `T`.  For geodesics `P:w--x₀` and `Q:y--z`, the ledger
+`ridden+E≤q+2r` holds.  Consequently `D≤2s`; exchanging the two terminal
+pairs gives `d≤2(n-1-D)`, equivalently `2D≤2s+d`.
+
+*Proof summary.*  Delete `P` and consider each component `C` of the remaining
+graph.  If its extreme attachments to `P` are `l_C,h_C`, geodesicity and a
+simple path through the `|C|` vertices give `h_C-l_C≤|C|+1`.  Every corridor
+edge ridden by `Q` lies in some such attachment interval: otherwise it is a
+bridge, whose unit cut would separate both demand pairs and violate the cut
+condition.  Assign each ride to a covering component.  Excursion gap
+intervals through `C` are disjoint from rides, so
+
+    |R_C|+G_C ≤ h_C-l_C ≤ q_C+r_C+1.
+
+With `qexc_C=G_C-E_C`, this yields
+`|R_C|+E_C≤q_C+2r_C` unless `qexc_C=r_C=0`.  Such an exceptional component
+contains only an initial or final `Q` tail (it cannot contain both, or its
+connectivity shortens `Q`).  If it is the initial tail, with first/last
+corridor visits `a,c`, then
+
+    |R∩I_C| ≤ min(c,h_C)-a ≤ q_C.
+
+Indeed, failure forces `l_C=a` and `h_C-a=q_C+1`; a path inside `C` to an
+attachment at `h_C`, followed by `P[h_C,c]`, is then strictly shorter than
+the geodesic `Q[y,c]`.  The final-tail case is symmetric.  Summing the
+component bounds proves (L), and `D=q+E+ridden`, `s=q+r` give SE1.  The cut
+condition is symmetric, so applying the same argument after exchanging the
+pairs gives SE2.  The zero- and one-intersection cases are immediate from
+vertex counts.  The complete self-contained proof, the exact counterexample
+that killed the first exceptional-tail claim, and every audit node appear in
+`gap_ga_component_ledger.md` and `gap_ga_audit.md`.  ∎
 
 Two proved special cases beyond 5.1/5.2 corroborate (L):
 
@@ -616,14 +642,12 @@ The RL right-hand side is s² + 2sd + 2s + 2sp, so
 
 **Theorem 6.2 (status of RL for |M| = 1).**
 
-* **PROVED** when the M-edge's endpoints both lie on a w–x₀ geodesic
-  (Theorems 5.1 + 6.1), and when B is a tree (3.7), and when s ≤ 1
-  (3.5, 3.6 — vacuously), and for 2s·p(d) ≥ (d+1)² conditionally on
-  Γ(≤ n) (§7).
-* **VERIFIED-BUT-UNPROVED** in general: reduces exactly to gap G-A
-  (SE1/SE2 with off-corridor endpoints).  Zero violations of RL with
-  |M| = 1 across all exhaustive/targeted/random data (§12), including
-  the complete n ≤ 12, |M| = 1 enumeration.
+* **PROVED outright.**  Theorem 5.3 gives SE1 and SE2 for the unique
+  internal edge, and Theorem 6.1 gives RL.  The tree, corridor, and `s≤1`
+  results remain useful stronger local descriptions.
+* Exact verification still supplies independent falsification support:
+  zero violations across the complete `n≤12, |M|=1` enumeration and every
+  targeted/random family in §12.
 
 ---
 
@@ -647,7 +671,7 @@ the n ≤ 13 exhaustive data: **RL\*'s remaining open regime is exactly**
 
     n ≥ 14   and   2 ≤ s < (d+1)²/(2·p(d))     (so d ≥ 3),
 
-with |M| ≥ 2 or an off-corridor single edge (by §6).
+with |M| ≥ 2 (the single-edge case is now Theorem 6.2).
 
 *Proof.*  Direct from 7.1 and §§3, 6.  ∎
 
@@ -661,17 +685,12 @@ correct division of labour for a future full proof.
 
 ---
 
-## 8. The remaining gaps, exactly
+## 8. The remaining gap, exactly
 
-**G-A (single-edge, off-corridor).**  Prove, for |M| = 1 with an
-endpoint off the corridor: ridden + E ≤ q + 2r (ledger (L), §5.3) — or
-directly SE1: D ≤ 2s and SE2: 2D ≤ 2s + d.  Everything else in the
-|M| = 1 case is proved.  The obstruction is a potential double count
-between level-charged F-vertices and Q's own excursion vertices.  I
-searched for counterexamples to SE1/SE2 (which would also break this
-proof strategy, though not necessarily RL): none exist with n ≤ 8 (all
-M), n ≤ 9 (|M| ≤ 3), n ≤ 11 (|M| = 1, exhaustive frontier), thin
-corridors to n = 16, or in ~1.1M random rooted instances to n = 16.
+**G-A (single-edge, off-corridor): CLOSED.**  Theorem 5.3 proves the
+ledger and both single-edge laws.  The repaired proof is independently
+audited in `gap_ga_audit.md`; no unproved uniformity or computational
+extrapolation enters it.
 
 **G-B (multi-edge aggregation).**  For |M| ≥ 2 the charging lemma's
 per-vertex bound fails (shared F-endpoints of distinct crossing edges),
@@ -841,14 +860,12 @@ Scripts in `compute23/gate3/`; `common.py` utilities re-used from gate 2.
 | `rl_misc_checks.py` | C1 composite equivalence (65 witnesses); C2 RFC† (4,622 cases); C3 RHS identities; C4 Theorem 6.1 algebra (d,s ≤ 80) | as stated | (stdout) | 0 failures |
 | `rl_inspect.py` | witness decoder (θ-graph etc.) | ad hoc | — | — |
 
-**Bottom line.**  Lemma RL is *proved* on: trees; s ≤ 1; corridor
-M-edges with |M| = 1; and (given Γ on ≤ n vertices — unconditional for
+**Bottom line.**  Lemma RL is *proved* on: every `|M|=1` instance; trees;
+s ≤ 1; and (given Γ on ≤ n vertices — unconditional for
 n ≤ 13) the whole regime 2sp(d) ≥ (d+1)².  It is *machine-verified with
 zero violations* everywhere tested (~162M exhaustive + targeted +
-~1.1M random instances).  It is *not fully proved*: gap G-A (off-corridor
-single edge — a self-contained combinatorial statement, SE1/SE2, that
-looks genuinely tractable) and gap G-B (multi-edge aggregation — which
+~1.1M random instances).  It is *not fully proved*: gap G-B (multi-edge aggregation — which
 Theorem 2.7 shows contains the conjecture's open core up to O(N), so no
 elementary proof should be expected).  The correct bankable target
 going forward is RL\*, for which the open region is exactly
-n ≥ 14, 2 ≤ s < (d+1)²/(2p(d)), |M| ≥ 2 or off-corridor single edge.
+n ≥ 14, 2 ≤ s < (d+1)²/(2p(d)), |M| ≥ 2.
