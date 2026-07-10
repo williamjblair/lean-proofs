@@ -1,0 +1,8318 @@
+{
+ "scan_coverage": "k in [16,6500], N in [2, 3e7] (old t4: k<=3000,N<=1e7; new regions: rest); 10 ambiguous (k,N) pairs resolved exactly",
+ "ambiguous_resolution_log": [
+  {
+   "k": 4049,
+   "N": 14638015,
+   "d_window": [
+    5013,
+    5014
+   ],
+   "points_checked": 2,
+   "degenerate_below_k": 0,
+   "max_first_fail": 6
+  },
+  {
+   "k": 4049,
+   "N": 14642063,
+   "d_window": [
+    5015,
+    5015
+   ],
+   "points_checked": 1,
+   "degenerate_below_k": 0,
+   "max_first_fail": 1
+  },
+  {
+   "k": 3271,
+   "N": 21230338,
+   "d_window": [
+    9000,
+    9000
+   ],
+   "points_checked": 1,
+   "degenerate_below_k": 0,
+   "max_first_fail": 1
+  },
+  {
+   "k": 3271,
+   "N": 21233608,
+   "d_window": [
+    9001,
+    9002
+   ],
+   "points_checked": 2,
+   "degenerate_below_k": 0,
+   "max_first_fail": 1
+  },
+  {
+   "k": 4049,
+   "N": 21959047,
+   "d_window": [
+    7520,
+    7521
+   ],
+   "points_checked": 2,
+   "degenerate_below_k": 0,
+   "max_first_fail": 1
+  },
+  {
+   "k": 4049,
+   "N": 21963095,
+   "d_window": [
+    7522,
+    7522
+   ],
+   "points_checked": 1,
+   "degenerate_below_k": 0,
+   "max_first_fail": 1
+  },
+  {
+   "k": 262,
+   "N": 28337284,
+   "d_window": [
+    150336,
+    150337
+   ],
+   "points_checked": 2,
+   "degenerate_below_k": 0,
+   "max_first_fail": 1
+  },
+  {
+   "k": 262,
+   "N": 28337545,
+   "d_window": [
+    150338,
+    150338
+   ],
+   "points_checked": 1,
+   "degenerate_below_k": 0,
+   "max_first_fail": 1
+  },
+  {
+   "k": 4049,
+   "N": 29280079,
+   "d_window": [
+    10027,
+    10028
+   ],
+   "points_checked": 2,
+   "degenerate_below_k": 0,
+   "max_first_fail": 1
+  },
+  {
+   "k": 4049,
+   "N": 29284127,
+   "d_window": [
+    10029,
+    10029
+   ],
+   "points_checked": 1,
+   "degenerate_below_k": 0,
+   "max_first_fail": 1
+  }
+ ],
+ "n_census_points": 207,
+ "n_first_fail_single_prime_no_multiple": 207,
+ "n_first_fail_any_prime_no_multiple": 207,
+ "clusters": {
+  "48502": {
+   "N": 48502,
+   "n_points": 22,
+   "k_range": [
+    244,
+    260
+   ],
+   "d_range": [
+    260,
+    277
+   ],
+   "first_fail_hist": {
+    "16": 22
+   },
+   "mechanism_hist": {
+    "single_prime_no_multiple": 22
+   },
+   "a0_passes": 0,
+   "frac_rows_no_multiple_min": 0.6371,
+   "frac_rows_no_multiple_max": 0.6468,
+   "P_N_plus_j_1..18": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  "3177026": {
+   "N": 3177026,
+   "n_points": 92,
+   "k_range": [
+    984,
+    1050
+   ],
+   "d_range": [
+    4198,
+    4480
+   ],
+   "first_fail_hist": {
+    "17": 92
+   },
+   "mechanism_hist": {
+    "single_prime_no_multiple": 92
+   },
+   "a0_passes": 0,
+   "frac_rows_no_multiple_min": 0.6824,
+   "frac_rows_no_multiple_max": 0.6892,
+   "P_N_plus_j_1..18": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  "3177027": {
+   "N": 3177027,
+   "n_points": 93,
+   "k_range": [
+    984,
+    1051
+   ],
+   "d_range": [
+    4194,
+    4480
+   ],
+   "first_fail_hist": {
+    "16": 93
+   },
+   "mechanism_hist": {
+    "single_prime_no_multiple": 93
+   },
+   "a0_passes": 93,
+   "frac_rows_no_multiple_min": 0.6827,
+   "frac_rows_no_multiple_max": 0.6902,
+   "P_N_plus_j_1..18": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  }
+ },
+ "points": [
+  {
+   "k": 244,
+   "N": 48502,
+   "d": 277,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 156,
+   "n_rows_with_no_multiple_prime": 156,
+   "frac_rows_no_multiple": 0.6393,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 245,
+   "N": 48502,
+   "d": 276,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 157,
+   "n_rows_with_no_multiple_prime": 157,
+   "frac_rows_no_multiple": 0.6408,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 246,
+   "N": 48502,
+   "d": 275,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 158,
+   "n_rows_with_no_multiple_prime": 158,
+   "frac_rows_no_multiple": 0.6423,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 247,
+   "N": 48502,
+   "d": 273,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 159,
+   "n_rows_with_no_multiple_prime": 159,
+   "frac_rows_no_multiple": 0.6437,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 247,
+   "N": 48502,
+   "d": 274,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 158,
+   "n_rows_with_no_multiple_prime": 158,
+   "frac_rows_no_multiple": 0.6397,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 248,
+   "N": 48502,
+   "d": 272,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 159,
+   "n_rows_with_no_multiple_prime": 159,
+   "frac_rows_no_multiple": 0.6411,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 248,
+   "N": 48502,
+   "d": 273,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 158,
+   "n_rows_with_no_multiple_prime": 158,
+   "frac_rows_no_multiple": 0.6371,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 249,
+   "N": 48502,
+   "d": 271,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 160,
+   "n_rows_with_no_multiple_prime": 160,
+   "frac_rows_no_multiple": 0.6426,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 249,
+   "N": 48502,
+   "d": 272,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 159,
+   "n_rows_with_no_multiple_prime": 159,
+   "frac_rows_no_multiple": 0.6386,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 250,
+   "N": 48502,
+   "d": 270,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 161,
+   "n_rows_with_no_multiple_prime": 161,
+   "frac_rows_no_multiple": 0.644,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 250,
+   "N": 48502,
+   "d": 271,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 160,
+   "n_rows_with_no_multiple_prime": 160,
+   "frac_rows_no_multiple": 0.64,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 251,
+   "N": 48502,
+   "d": 269,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 162,
+   "n_rows_with_no_multiple_prime": 162,
+   "frac_rows_no_multiple": 0.6454,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 251,
+   "N": 48502,
+   "d": 270,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 161,
+   "n_rows_with_no_multiple_prime": 161,
+   "frac_rows_no_multiple": 0.6414,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 252,
+   "N": 48502,
+   "d": 268,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 163,
+   "n_rows_with_no_multiple_prime": 163,
+   "frac_rows_no_multiple": 0.6468,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 253,
+   "N": 48502,
+   "d": 267,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 163,
+   "n_rows_with_no_multiple_prime": 163,
+   "frac_rows_no_multiple": 0.6443,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 254,
+   "N": 48502,
+   "d": 266,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 163,
+   "n_rows_with_no_multiple_prime": 163,
+   "frac_rows_no_multiple": 0.6417,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 255,
+   "N": 48502,
+   "d": 265,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 164,
+   "n_rows_with_no_multiple_prime": 164,
+   "frac_rows_no_multiple": 0.6431,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 256,
+   "N": 48502,
+   "d": 264,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 165,
+   "n_rows_with_no_multiple_prime": 165,
+   "frac_rows_no_multiple": 0.6445,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 257,
+   "N": 48502,
+   "d": 263,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 166,
+   "n_rows_with_no_multiple_prime": 166,
+   "frac_rows_no_multiple": 0.6459,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 258,
+   "N": 48502,
+   "d": 262,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 166,
+   "n_rows_with_no_multiple_prime": 166,
+   "frac_rows_no_multiple": 0.6434,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 259,
+   "N": 48502,
+   "d": 261,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 167,
+   "n_rows_with_no_multiple_prime": 167,
+   "frac_rows_no_multiple": 0.6448,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 260,
+   "N": 48502,
+   "d": 260,
+   "a0_pass": false,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 1427,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 167,
+   "n_rows_with_no_multiple_prime": 167,
+   "frac_rows_no_multiple": 0.6423,
+   "P_N_plus_j": {
+    "1": 41,
+    "2": 47,
+    "3": 109,
+    "4": 307,
+    "5": 37,
+    "6": 181,
+    "7": 271,
+    "8": 11,
+    "9": 349,
+    "10": 379,
+    "11": 157,
+    "12": 191,
+    "13": 313,
+    "14": 311,
+    "15": 239,
+    "16": 1427,
+    "17": 599,
+    "18": 1213
+   }
+  },
+  {
+   "k": 984,
+   "N": 3177026,
+   "d": 4480,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 676,
+   "n_rows_with_no_multiple_prime": 676,
+   "frac_rows_no_multiple": 0.687,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 985,
+   "N": 3177026,
+   "d": 4475,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 676,
+   "n_rows_with_no_multiple_prime": 676,
+   "frac_rows_no_multiple": 0.6863,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 986,
+   "N": 3177026,
+   "d": 4470,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 677,
+   "n_rows_with_no_multiple_prime": 677,
+   "frac_rows_no_multiple": 0.6866,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 986,
+   "N": 3177026,
+   "d": 4471,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 677,
+   "n_rows_with_no_multiple_prime": 677,
+   "frac_rows_no_multiple": 0.6866,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 987,
+   "N": 3177026,
+   "d": 4466,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 677,
+   "n_rows_with_no_multiple_prime": 677,
+   "frac_rows_no_multiple": 0.6859,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 988,
+   "N": 3177026,
+   "d": 4461,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 677,
+   "n_rows_with_no_multiple_prime": 677,
+   "frac_rows_no_multiple": 0.6852,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 988,
+   "N": 3177026,
+   "d": 4462,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 677,
+   "n_rows_with_no_multiple_prime": 677,
+   "frac_rows_no_multiple": 0.6852,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 989,
+   "N": 3177026,
+   "d": 4457,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 678,
+   "n_rows_with_no_multiple_prime": 678,
+   "frac_rows_no_multiple": 0.6855,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 990,
+   "N": 3177026,
+   "d": 4452,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 679,
+   "n_rows_with_no_multiple_prime": 679,
+   "frac_rows_no_multiple": 0.6859,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 990,
+   "N": 3177026,
+   "d": 4453,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 679,
+   "n_rows_with_no_multiple_prime": 679,
+   "frac_rows_no_multiple": 0.6859,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 991,
+   "N": 3177026,
+   "d": 4448,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 679,
+   "n_rows_with_no_multiple_prime": 679,
+   "frac_rows_no_multiple": 0.6852,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 992,
+   "N": 3177026,
+   "d": 4443,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 679,
+   "n_rows_with_no_multiple_prime": 679,
+   "frac_rows_no_multiple": 0.6845,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 992,
+   "N": 3177026,
+   "d": 4444,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 679,
+   "n_rows_with_no_multiple_prime": 679,
+   "frac_rows_no_multiple": 0.6845,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 993,
+   "N": 3177026,
+   "d": 4439,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 679,
+   "n_rows_with_no_multiple_prime": 679,
+   "frac_rows_no_multiple": 0.6838,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 994,
+   "N": 3177026,
+   "d": 4434,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 683,
+   "n_rows_with_no_multiple_prime": 683,
+   "frac_rows_no_multiple": 0.6871,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 994,
+   "N": 3177026,
+   "d": 4435,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 682,
+   "n_rows_with_no_multiple_prime": 682,
+   "frac_rows_no_multiple": 0.6861,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 995,
+   "N": 3177026,
+   "d": 4430,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 684,
+   "n_rows_with_no_multiple_prime": 684,
+   "frac_rows_no_multiple": 0.6874,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 996,
+   "N": 3177026,
+   "d": 4426,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 685,
+   "n_rows_with_no_multiple_prime": 685,
+   "frac_rows_no_multiple": 0.6878,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 997,
+   "N": 3177026,
+   "d": 4421,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 685,
+   "n_rows_with_no_multiple_prime": 685,
+   "frac_rows_no_multiple": 0.6871,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 997,
+   "N": 3177026,
+   "d": 4422,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 685,
+   "n_rows_with_no_multiple_prime": 685,
+   "frac_rows_no_multiple": 0.6871,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 998,
+   "N": 3177026,
+   "d": 4417,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 686,
+   "n_rows_with_no_multiple_prime": 686,
+   "frac_rows_no_multiple": 0.6874,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 999,
+   "N": 3177026,
+   "d": 4412,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 687,
+   "n_rows_with_no_multiple_prime": 687,
+   "frac_rows_no_multiple": 0.6877,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 999,
+   "N": 3177026,
+   "d": 4413,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 687,
+   "n_rows_with_no_multiple_prime": 687,
+   "frac_rows_no_multiple": 0.6877,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1000,
+   "N": 3177026,
+   "d": 4408,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 687,
+   "n_rows_with_no_multiple_prime": 687,
+   "frac_rows_no_multiple": 0.687,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1001,
+   "N": 3177026,
+   "d": 4403,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 688,
+   "n_rows_with_no_multiple_prime": 688,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1001,
+   "N": 3177026,
+   "d": 4404,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 688,
+   "n_rows_with_no_multiple_prime": 688,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1002,
+   "N": 3177026,
+   "d": 4399,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 689,
+   "n_rows_with_no_multiple_prime": 689,
+   "frac_rows_no_multiple": 0.6876,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1003,
+   "N": 3177026,
+   "d": 4395,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 690,
+   "n_rows_with_no_multiple_prime": 690,
+   "frac_rows_no_multiple": 0.6879,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1004,
+   "N": 3177026,
+   "d": 4390,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 690,
+   "n_rows_with_no_multiple_prime": 690,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1004,
+   "N": 3177026,
+   "d": 4391,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 690,
+   "n_rows_with_no_multiple_prime": 690,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1005,
+   "N": 3177026,
+   "d": 4386,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 691,
+   "n_rows_with_no_multiple_prime": 691,
+   "frac_rows_no_multiple": 0.6876,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1006,
+   "N": 3177026,
+   "d": 4382,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 691,
+   "n_rows_with_no_multiple_prime": 691,
+   "frac_rows_no_multiple": 0.6869,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1007,
+   "N": 3177026,
+   "d": 4377,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 694,
+   "n_rows_with_no_multiple_prime": 694,
+   "frac_rows_no_multiple": 0.6892,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1007,
+   "N": 3177026,
+   "d": 4378,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 694,
+   "n_rows_with_no_multiple_prime": 694,
+   "frac_rows_no_multiple": 0.6892,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1008,
+   "N": 3177026,
+   "d": 4373,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 694,
+   "n_rows_with_no_multiple_prime": 694,
+   "frac_rows_no_multiple": 0.6885,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1009,
+   "N": 3177026,
+   "d": 4369,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 694,
+   "n_rows_with_no_multiple_prime": 694,
+   "frac_rows_no_multiple": 0.6878,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1010,
+   "N": 3177026,
+   "d": 4364,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 695,
+   "n_rows_with_no_multiple_prime": 695,
+   "frac_rows_no_multiple": 0.6881,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1010,
+   "N": 3177026,
+   "d": 4365,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 695,
+   "n_rows_with_no_multiple_prime": 695,
+   "frac_rows_no_multiple": 0.6881,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1011,
+   "N": 3177026,
+   "d": 4360,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 695,
+   "n_rows_with_no_multiple_prime": 695,
+   "frac_rows_no_multiple": 0.6874,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1012,
+   "N": 3177026,
+   "d": 4356,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 696,
+   "n_rows_with_no_multiple_prime": 696,
+   "frac_rows_no_multiple": 0.6877,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1013,
+   "N": 3177026,
+   "d": 4351,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 697,
+   "n_rows_with_no_multiple_prime": 697,
+   "frac_rows_no_multiple": 0.6881,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1013,
+   "N": 3177026,
+   "d": 4352,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 697,
+   "n_rows_with_no_multiple_prime": 697,
+   "frac_rows_no_multiple": 0.6881,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1014,
+   "N": 3177026,
+   "d": 4347,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 697,
+   "n_rows_with_no_multiple_prime": 697,
+   "frac_rows_no_multiple": 0.6874,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1015,
+   "N": 3177026,
+   "d": 4343,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 698,
+   "n_rows_with_no_multiple_prime": 698,
+   "frac_rows_no_multiple": 0.6877,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1016,
+   "N": 3177026,
+   "d": 4338,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.688,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1016,
+   "N": 3177026,
+   "d": 4339,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 698,
+   "n_rows_with_no_multiple_prime": 698,
+   "frac_rows_no_multiple": 0.687,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1017,
+   "N": 3177026,
+   "d": 4334,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1017,
+   "N": 3177026,
+   "d": 4335,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1018,
+   "N": 3177026,
+   "d": 4330,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 700,
+   "n_rows_with_no_multiple_prime": 700,
+   "frac_rows_no_multiple": 0.6876,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1019,
+   "N": 3177026,
+   "d": 4326,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.686,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1020,
+   "N": 3177026,
+   "d": 4321,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 700,
+   "n_rows_with_no_multiple_prime": 700,
+   "frac_rows_no_multiple": 0.6863,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1020,
+   "N": 3177026,
+   "d": 4322,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 700,
+   "n_rows_with_no_multiple_prime": 700,
+   "frac_rows_no_multiple": 0.6863,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1021,
+   "N": 3177026,
+   "d": 4317,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 700,
+   "n_rows_with_no_multiple_prime": 700,
+   "frac_rows_no_multiple": 0.6856,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1021,
+   "N": 3177026,
+   "d": 4318,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6866,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1022,
+   "N": 3177026,
+   "d": 4313,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 700,
+   "n_rows_with_no_multiple_prime": 700,
+   "frac_rows_no_multiple": 0.6849,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1023,
+   "N": 3177026,
+   "d": 4309,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6852,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1024,
+   "N": 3177026,
+   "d": 4304,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6846,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1024,
+   "N": 3177026,
+   "d": 4305,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6846,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1025,
+   "N": 3177026,
+   "d": 4300,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 702,
+   "n_rows_with_no_multiple_prime": 702,
+   "frac_rows_no_multiple": 0.6849,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1025,
+   "N": 3177026,
+   "d": 4301,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 702,
+   "n_rows_with_no_multiple_prime": 702,
+   "frac_rows_no_multiple": 0.6849,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1026,
+   "N": 3177026,
+   "d": 4296,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 702,
+   "n_rows_with_no_multiple_prime": 702,
+   "frac_rows_no_multiple": 0.6842,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1027,
+   "N": 3177026,
+   "d": 4292,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6826,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1028,
+   "N": 3177026,
+   "d": 4288,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 702,
+   "n_rows_with_no_multiple_prime": 702,
+   "frac_rows_no_multiple": 0.6829,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1029,
+   "N": 3177026,
+   "d": 4284,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 703,
+   "n_rows_with_no_multiple_prime": 703,
+   "frac_rows_no_multiple": 0.6832,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1030,
+   "N": 3177026,
+   "d": 4279,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 704,
+   "n_rows_with_no_multiple_prime": 704,
+   "frac_rows_no_multiple": 0.6835,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1030,
+   "N": 3177026,
+   "d": 4280,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 704,
+   "n_rows_with_no_multiple_prime": 704,
+   "frac_rows_no_multiple": 0.6835,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1031,
+   "N": 3177026,
+   "d": 4275,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 706,
+   "n_rows_with_no_multiple_prime": 706,
+   "frac_rows_no_multiple": 0.6848,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1031,
+   "N": 3177026,
+   "d": 4276,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 705,
+   "n_rows_with_no_multiple_prime": 705,
+   "frac_rows_no_multiple": 0.6838,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1032,
+   "N": 3177026,
+   "d": 4271,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 706,
+   "n_rows_with_no_multiple_prime": 706,
+   "frac_rows_no_multiple": 0.6841,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1033,
+   "N": 3177026,
+   "d": 4267,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 708,
+   "n_rows_with_no_multiple_prime": 708,
+   "frac_rows_no_multiple": 0.6854,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1034,
+   "N": 3177026,
+   "d": 4263,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 708,
+   "n_rows_with_no_multiple_prime": 708,
+   "frac_rows_no_multiple": 0.6847,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1035,
+   "N": 3177026,
+   "d": 4259,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 708,
+   "n_rows_with_no_multiple_prime": 708,
+   "frac_rows_no_multiple": 0.6841,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1036,
+   "N": 3177026,
+   "d": 4255,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 707,
+   "n_rows_with_no_multiple_prime": 707,
+   "frac_rows_no_multiple": 0.6824,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1037,
+   "N": 3177026,
+   "d": 4250,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 708,
+   "n_rows_with_no_multiple_prime": 708,
+   "frac_rows_no_multiple": 0.6827,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1037,
+   "N": 3177026,
+   "d": 4251,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.6837,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1038,
+   "N": 3177026,
+   "d": 4246,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.683,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1038,
+   "N": 3177026,
+   "d": 4247,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.683,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1039,
+   "N": 3177026,
+   "d": 4242,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.6824,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1039,
+   "N": 3177026,
+   "d": 4243,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.6824,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1040,
+   "N": 3177026,
+   "d": 4238,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 710,
+   "n_rows_with_no_multiple_prime": 710,
+   "frac_rows_no_multiple": 0.6827,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1040,
+   "N": 3177026,
+   "d": 4239,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 710,
+   "n_rows_with_no_multiple_prime": 710,
+   "frac_rows_no_multiple": 0.6827,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1041,
+   "N": 3177026,
+   "d": 4234,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 712,
+   "n_rows_with_no_multiple_prime": 712,
+   "frac_rows_no_multiple": 0.684,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1041,
+   "N": 3177026,
+   "d": 4235,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 712,
+   "n_rows_with_no_multiple_prime": 712,
+   "frac_rows_no_multiple": 0.684,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1042,
+   "N": 3177026,
+   "d": 4230,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 713,
+   "n_rows_with_no_multiple_prime": 713,
+   "frac_rows_no_multiple": 0.6843,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1043,
+   "N": 3177026,
+   "d": 4226,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 715,
+   "n_rows_with_no_multiple_prime": 715,
+   "frac_rows_no_multiple": 0.6855,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1044,
+   "N": 3177026,
+   "d": 4222,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 715,
+   "n_rows_with_no_multiple_prime": 715,
+   "frac_rows_no_multiple": 0.6849,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1045,
+   "N": 3177026,
+   "d": 4218,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 715,
+   "n_rows_with_no_multiple_prime": 715,
+   "frac_rows_no_multiple": 0.6842,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1046,
+   "N": 3177026,
+   "d": 4214,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 715,
+   "n_rows_with_no_multiple_prime": 715,
+   "frac_rows_no_multiple": 0.6836,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1047,
+   "N": 3177026,
+   "d": 4210,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 715,
+   "n_rows_with_no_multiple_prime": 715,
+   "frac_rows_no_multiple": 0.6829,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1048,
+   "N": 3177026,
+   "d": 4206,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 716,
+   "n_rows_with_no_multiple_prime": 716,
+   "frac_rows_no_multiple": 0.6832,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1049,
+   "N": 3177026,
+   "d": 4202,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 718,
+   "n_rows_with_no_multiple_prime": 718,
+   "frac_rows_no_multiple": 0.6845,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 1050,
+   "N": 3177026,
+   "d": 4198,
+   "a0_pass": false,
+   "first_fail": 17,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 719,
+   "n_rows_with_no_multiple_prime": 719,
+   "frac_rows_no_multiple": 0.6848,
+   "P_N_plus_j": {
+    "1": 239,
+    "2": 2459,
+    "3": 4481,
+    "4": 773,
+    "5": 1709,
+    "6": 127,
+    "7": 163,
+    "8": 883,
+    "9": 199,
+    "10": 1279,
+    "11": 1543,
+    "12": 2617,
+    "13": 1607,
+    "14": 263,
+    "15": 4679,
+    "16": 1301,
+    "17": 7237,
+    "18": 571
+   }
+  },
+  {
+   "k": 984,
+   "N": 3177027,
+   "d": 4480,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 676,
+   "n_rows_with_no_multiple_prime": 676,
+   "frac_rows_no_multiple": 0.687,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 985,
+   "N": 3177027,
+   "d": 4475,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 676,
+   "n_rows_with_no_multiple_prime": 676,
+   "frac_rows_no_multiple": 0.6863,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 986,
+   "N": 3177027,
+   "d": 4470,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 678,
+   "n_rows_with_no_multiple_prime": 678,
+   "frac_rows_no_multiple": 0.6876,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 986,
+   "N": 3177027,
+   "d": 4471,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 678,
+   "n_rows_with_no_multiple_prime": 678,
+   "frac_rows_no_multiple": 0.6876,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 987,
+   "N": 3177027,
+   "d": 4466,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 678,
+   "n_rows_with_no_multiple_prime": 678,
+   "frac_rows_no_multiple": 0.6869,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 988,
+   "N": 3177027,
+   "d": 4461,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 678,
+   "n_rows_with_no_multiple_prime": 678,
+   "frac_rows_no_multiple": 0.6862,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 988,
+   "N": 3177027,
+   "d": 4462,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 678,
+   "n_rows_with_no_multiple_prime": 678,
+   "frac_rows_no_multiple": 0.6862,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 989,
+   "N": 3177027,
+   "d": 4457,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 679,
+   "n_rows_with_no_multiple_prime": 679,
+   "frac_rows_no_multiple": 0.6866,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 990,
+   "N": 3177027,
+   "d": 4452,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 679,
+   "n_rows_with_no_multiple_prime": 679,
+   "frac_rows_no_multiple": 0.6859,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 990,
+   "N": 3177027,
+   "d": 4453,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 679,
+   "n_rows_with_no_multiple_prime": 679,
+   "frac_rows_no_multiple": 0.6859,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 991,
+   "N": 3177027,
+   "d": 4448,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 680,
+   "n_rows_with_no_multiple_prime": 680,
+   "frac_rows_no_multiple": 0.6862,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 992,
+   "N": 3177027,
+   "d": 4443,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 680,
+   "n_rows_with_no_multiple_prime": 680,
+   "frac_rows_no_multiple": 0.6855,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 992,
+   "N": 3177027,
+   "d": 4444,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 680,
+   "n_rows_with_no_multiple_prime": 680,
+   "frac_rows_no_multiple": 0.6855,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 993,
+   "N": 3177027,
+   "d": 4439,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 680,
+   "n_rows_with_no_multiple_prime": 680,
+   "frac_rows_no_multiple": 0.6848,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 994,
+   "N": 3177027,
+   "d": 4434,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 682,
+   "n_rows_with_no_multiple_prime": 682,
+   "frac_rows_no_multiple": 0.6861,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 994,
+   "N": 3177027,
+   "d": 4435,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 682,
+   "n_rows_with_no_multiple_prime": 682,
+   "frac_rows_no_multiple": 0.6861,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 995,
+   "N": 3177027,
+   "d": 4430,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 683,
+   "n_rows_with_no_multiple_prime": 683,
+   "frac_rows_no_multiple": 0.6864,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 996,
+   "N": 3177027,
+   "d": 4426,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 685,
+   "n_rows_with_no_multiple_prime": 685,
+   "frac_rows_no_multiple": 0.6878,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 997,
+   "N": 3177027,
+   "d": 4421,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 686,
+   "n_rows_with_no_multiple_prime": 686,
+   "frac_rows_no_multiple": 0.6881,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 997,
+   "N": 3177027,
+   "d": 4422,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 687,
+   "n_rows_with_no_multiple_prime": 687,
+   "frac_rows_no_multiple": 0.6891,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 998,
+   "N": 3177027,
+   "d": 4417,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 687,
+   "n_rows_with_no_multiple_prime": 687,
+   "frac_rows_no_multiple": 0.6884,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 999,
+   "N": 3177027,
+   "d": 4412,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 688,
+   "n_rows_with_no_multiple_prime": 688,
+   "frac_rows_no_multiple": 0.6887,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 999,
+   "N": 3177027,
+   "d": 4413,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 688,
+   "n_rows_with_no_multiple_prime": 688,
+   "frac_rows_no_multiple": 0.6887,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1000,
+   "N": 3177027,
+   "d": 4408,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 688,
+   "n_rows_with_no_multiple_prime": 688,
+   "frac_rows_no_multiple": 0.688,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1001,
+   "N": 3177027,
+   "d": 4403,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 689,
+   "n_rows_with_no_multiple_prime": 689,
+   "frac_rows_no_multiple": 0.6883,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1001,
+   "N": 3177027,
+   "d": 4404,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 689,
+   "n_rows_with_no_multiple_prime": 689,
+   "frac_rows_no_multiple": 0.6883,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1002,
+   "N": 3177027,
+   "d": 4399,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 690,
+   "n_rows_with_no_multiple_prime": 690,
+   "frac_rows_no_multiple": 0.6886,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1003,
+   "N": 3177027,
+   "d": 4395,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 691,
+   "n_rows_with_no_multiple_prime": 691,
+   "frac_rows_no_multiple": 0.6889,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1004,
+   "N": 3177027,
+   "d": 4390,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 691,
+   "n_rows_with_no_multiple_prime": 691,
+   "frac_rows_no_multiple": 0.6882,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1004,
+   "N": 3177027,
+   "d": 4391,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 692,
+   "n_rows_with_no_multiple_prime": 692,
+   "frac_rows_no_multiple": 0.6892,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1005,
+   "N": 3177027,
+   "d": 4386,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 691,
+   "n_rows_with_no_multiple_prime": 691,
+   "frac_rows_no_multiple": 0.6876,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1006,
+   "N": 3177027,
+   "d": 4382,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 692,
+   "n_rows_with_no_multiple_prime": 692,
+   "frac_rows_no_multiple": 0.6879,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1007,
+   "N": 3177027,
+   "d": 4377,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 695,
+   "n_rows_with_no_multiple_prime": 695,
+   "frac_rows_no_multiple": 0.6902,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1007,
+   "N": 3177027,
+   "d": 4378,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 694,
+   "n_rows_with_no_multiple_prime": 694,
+   "frac_rows_no_multiple": 0.6892,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1008,
+   "N": 3177027,
+   "d": 4373,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 694,
+   "n_rows_with_no_multiple_prime": 694,
+   "frac_rows_no_multiple": 0.6885,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1009,
+   "N": 3177027,
+   "d": 4369,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 695,
+   "n_rows_with_no_multiple_prime": 695,
+   "frac_rows_no_multiple": 0.6888,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1010,
+   "N": 3177027,
+   "d": 4364,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 696,
+   "n_rows_with_no_multiple_prime": 696,
+   "frac_rows_no_multiple": 0.6891,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1010,
+   "N": 3177027,
+   "d": 4365,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 696,
+   "n_rows_with_no_multiple_prime": 696,
+   "frac_rows_no_multiple": 0.6891,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1011,
+   "N": 3177027,
+   "d": 4360,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 696,
+   "n_rows_with_no_multiple_prime": 696,
+   "frac_rows_no_multiple": 0.6884,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1012,
+   "N": 3177027,
+   "d": 4356,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 696,
+   "n_rows_with_no_multiple_prime": 696,
+   "frac_rows_no_multiple": 0.6877,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1013,
+   "N": 3177027,
+   "d": 4351,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 698,
+   "n_rows_with_no_multiple_prime": 698,
+   "frac_rows_no_multiple": 0.689,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1013,
+   "N": 3177027,
+   "d": 4352,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 698,
+   "n_rows_with_no_multiple_prime": 698,
+   "frac_rows_no_multiple": 0.689,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1014,
+   "N": 3177027,
+   "d": 4347,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.6893,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1015,
+   "N": 3177027,
+   "d": 4343,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.6887,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1016,
+   "N": 3177027,
+   "d": 4338,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.688,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1016,
+   "N": 3177027,
+   "d": 4339,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.688,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1017,
+   "N": 3177027,
+   "d": 4334,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1017,
+   "N": 3177027,
+   "d": 4335,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 699,
+   "n_rows_with_no_multiple_prime": 699,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1018,
+   "N": 3177027,
+   "d": 4330,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 700,
+   "n_rows_with_no_multiple_prime": 700,
+   "frac_rows_no_multiple": 0.6876,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1019,
+   "N": 3177027,
+   "d": 4326,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 700,
+   "n_rows_with_no_multiple_prime": 700,
+   "frac_rows_no_multiple": 0.6869,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1020,
+   "N": 3177027,
+   "d": 4321,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1020,
+   "N": 3177027,
+   "d": 4322,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6873,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1021,
+   "N": 3177027,
+   "d": 4317,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6866,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1021,
+   "N": 3177027,
+   "d": 4318,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6866,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1022,
+   "N": 3177027,
+   "d": 4313,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 701,
+   "n_rows_with_no_multiple_prime": 701,
+   "frac_rows_no_multiple": 0.6859,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1023,
+   "N": 3177027,
+   "d": 4309,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 702,
+   "n_rows_with_no_multiple_prime": 702,
+   "frac_rows_no_multiple": 0.6862,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1024,
+   "N": 3177027,
+   "d": 4304,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 702,
+   "n_rows_with_no_multiple_prime": 702,
+   "frac_rows_no_multiple": 0.6855,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1024,
+   "N": 3177027,
+   "d": 4305,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 702,
+   "n_rows_with_no_multiple_prime": 702,
+   "frac_rows_no_multiple": 0.6855,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1025,
+   "N": 3177027,
+   "d": 4300,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 703,
+   "n_rows_with_no_multiple_prime": 703,
+   "frac_rows_no_multiple": 0.6859,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1025,
+   "N": 3177027,
+   "d": 4301,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 703,
+   "n_rows_with_no_multiple_prime": 703,
+   "frac_rows_no_multiple": 0.6859,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1026,
+   "N": 3177027,
+   "d": 4296,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 703,
+   "n_rows_with_no_multiple_prime": 703,
+   "frac_rows_no_multiple": 0.6852,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1027,
+   "N": 3177027,
+   "d": 4292,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 704,
+   "n_rows_with_no_multiple_prime": 704,
+   "frac_rows_no_multiple": 0.6855,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1028,
+   "N": 3177027,
+   "d": 4288,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 703,
+   "n_rows_with_no_multiple_prime": 703,
+   "frac_rows_no_multiple": 0.6839,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1029,
+   "N": 3177027,
+   "d": 4284,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 704,
+   "n_rows_with_no_multiple_prime": 704,
+   "frac_rows_no_multiple": 0.6842,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1030,
+   "N": 3177027,
+   "d": 4279,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 705,
+   "n_rows_with_no_multiple_prime": 705,
+   "frac_rows_no_multiple": 0.6845,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1030,
+   "N": 3177027,
+   "d": 4280,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 705,
+   "n_rows_with_no_multiple_prime": 705,
+   "frac_rows_no_multiple": 0.6845,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1031,
+   "N": 3177027,
+   "d": 4275,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 705,
+   "n_rows_with_no_multiple_prime": 705,
+   "frac_rows_no_multiple": 0.6838,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1031,
+   "N": 3177027,
+   "d": 4276,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 705,
+   "n_rows_with_no_multiple_prime": 705,
+   "frac_rows_no_multiple": 0.6838,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1032,
+   "N": 3177027,
+   "d": 4271,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 707,
+   "n_rows_with_no_multiple_prime": 707,
+   "frac_rows_no_multiple": 0.6851,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1033,
+   "N": 3177027,
+   "d": 4267,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 708,
+   "n_rows_with_no_multiple_prime": 708,
+   "frac_rows_no_multiple": 0.6854,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1034,
+   "N": 3177027,
+   "d": 4263,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.6857,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1035,
+   "N": 3177027,
+   "d": 4259,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 708,
+   "n_rows_with_no_multiple_prime": 708,
+   "frac_rows_no_multiple": 0.6841,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1036,
+   "N": 3177027,
+   "d": 4255,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.6844,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1037,
+   "N": 3177027,
+   "d": 4250,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.6837,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1037,
+   "N": 3177027,
+   "d": 4251,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 708,
+   "n_rows_with_no_multiple_prime": 708,
+   "frac_rows_no_multiple": 0.6827,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1038,
+   "N": 3177027,
+   "d": 4246,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.683,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1038,
+   "N": 3177027,
+   "d": 4247,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 709,
+   "n_rows_with_no_multiple_prime": 709,
+   "frac_rows_no_multiple": 0.683,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1039,
+   "N": 3177027,
+   "d": 4242,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 710,
+   "n_rows_with_no_multiple_prime": 710,
+   "frac_rows_no_multiple": 0.6833,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1039,
+   "N": 3177027,
+   "d": 4243,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 710,
+   "n_rows_with_no_multiple_prime": 710,
+   "frac_rows_no_multiple": 0.6833,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1040,
+   "N": 3177027,
+   "d": 4238,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 711,
+   "n_rows_with_no_multiple_prime": 711,
+   "frac_rows_no_multiple": 0.6837,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1040,
+   "N": 3177027,
+   "d": 4239,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 711,
+   "n_rows_with_no_multiple_prime": 711,
+   "frac_rows_no_multiple": 0.6837,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1041,
+   "N": 3177027,
+   "d": 4234,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 713,
+   "n_rows_with_no_multiple_prime": 713,
+   "frac_rows_no_multiple": 0.6849,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1041,
+   "N": 3177027,
+   "d": 4235,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 712,
+   "n_rows_with_no_multiple_prime": 712,
+   "frac_rows_no_multiple": 0.684,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1042,
+   "N": 3177027,
+   "d": 4230,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 714,
+   "n_rows_with_no_multiple_prime": 714,
+   "frac_rows_no_multiple": 0.6852,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1043,
+   "N": 3177027,
+   "d": 4226,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 715,
+   "n_rows_with_no_multiple_prime": 715,
+   "frac_rows_no_multiple": 0.6855,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1044,
+   "N": 3177027,
+   "d": 4222,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 715,
+   "n_rows_with_no_multiple_prime": 715,
+   "frac_rows_no_multiple": 0.6849,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1045,
+   "N": 3177027,
+   "d": 4218,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 716,
+   "n_rows_with_no_multiple_prime": 716,
+   "frac_rows_no_multiple": 0.6852,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1046,
+   "N": 3177027,
+   "d": 4214,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 717,
+   "n_rows_with_no_multiple_prime": 717,
+   "frac_rows_no_multiple": 0.6855,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1047,
+   "N": 3177027,
+   "d": 4210,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 715,
+   "n_rows_with_no_multiple_prime": 715,
+   "frac_rows_no_multiple": 0.6829,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1048,
+   "N": 3177027,
+   "d": 4206,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 717,
+   "n_rows_with_no_multiple_prime": 717,
+   "frac_rows_no_multiple": 0.6842,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1049,
+   "N": 3177027,
+   "d": 4202,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 719,
+   "n_rows_with_no_multiple_prime": 719,
+   "frac_rows_no_multiple": 0.6854,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1050,
+   "N": 3177027,
+   "d": 4198,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 720,
+   "n_rows_with_no_multiple_prime": 720,
+   "frac_rows_no_multiple": 0.6857,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  },
+  {
+   "k": 1051,
+   "N": 3177027,
+   "d": 4194,
+   "a0_pass": true,
+   "first_fail": 16,
+   "first_fail_primes": [
+    {
+     "p": 7237,
+     "e": 1,
+     "v_block": 0,
+     "no_multiple": true
+    }
+   ],
+   "mechanism": "single_prime_no_multiple",
+   "n_failing_rows_1..k": 719,
+   "n_rows_with_no_multiple_prime": 719,
+   "frac_rows_no_multiple": 0.6841,
+   "P_N_plus_j": {
+    "1": 2459,
+    "2": 4481,
+    "3": 773,
+    "4": 1709,
+    "5": 127,
+    "6": 163,
+    "7": 883,
+    "8": 199,
+    "9": 1279,
+    "10": 1543,
+    "11": 2617,
+    "12": 1607,
+    "13": 263,
+    "14": 4679,
+    "15": 1301,
+    "16": 7237,
+    "17": 571,
+    "18": 4153
+   }
+  }
+ ]
+}
