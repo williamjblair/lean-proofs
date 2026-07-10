@@ -3119,3 +3119,32 @@ proofs:
       refute the universal Erdos 686 statement via N=4.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FiveThue.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_five_below
+    statement: >-
+      k=5 closed for 221 <= d < 10^60: the centered Thue inequality confines
+      X/Y to a Stern-Brocot descent certificate; every candidate refuted by
+      the exact quintic equation. First unconditional k=5 result beyond
+      bounded certificates; community had k=5 open.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FiveThue.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_five_below_ext
+    statement: >-
+      k=5 closed for 221 <= d < 10^120 (extended Farey-descent certificate,
+      kernel decide 1.2s).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FiveThue.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_five_of_tail_ext
+    statement: >-
+      The k=5 branch reduces to the tail hypothesis NoLargeGapSolutionFour 5
+      (10^120): no equation solution with d >= 10^120.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

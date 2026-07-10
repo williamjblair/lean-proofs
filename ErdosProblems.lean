@@ -14,3 +14,5 @@ import ErdosProblems.Erdos686Reduction
 import ErdosProblems.Erdos686WindowPin
 import ErdosProblems.Erdos686LargeEscape
 import ErdosProblems.Erdos686PrimeObstruction
+import ErdosProblems.Erdos686ConvergentMachinery
+import ErdosProblems.Erdos686FiveThue
