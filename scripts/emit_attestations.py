@@ -51,6 +51,14 @@ def main() -> int:
         if m:
             axioms_by_theorem[m.group(1)] = [a.strip() for a in m.group(2).split(",") if a.strip()]
 
+    proofs = doc.get("proofs", [])
+    manifest_report = ""
+    for proof in proofs:
+        theorem = proof["theorem"]
+        footprint = axioms_by_theorem.get(theorem)
+        if footprint is not None:
+            manifest_report += f"'{theorem}' depends on axioms: [{', '.join(footprint)}]\n"
+
     out = {
         "schema": "lean-proofs.attestations.v0.1",
         "repo": doc.get("repo"),
@@ -59,10 +67,10 @@ def main() -> int:
         "verifier_method": "lean_kernel",
         "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
         "lake_manifest_hash": sha256_file(ROOT / "lake-manifest.json"),
-        "verifier_output_hash": sha256_text(report),
+        "verifier_output_hash": sha256_text(manifest_report),
         "attestations": [],
     }
-    for proof in doc.get("proofs", []):
+    for proof in proofs:
         theorem = proof["theorem"]
         footprint = axioms_by_theorem.get(theorem)
         out["attestations"].append(
