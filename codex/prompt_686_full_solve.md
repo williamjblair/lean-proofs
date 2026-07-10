@@ -25,7 +25,7 @@ counts as rigorous partial progress and should be reported as such at
 the end of budget — but do not return early for it.
 
 ## Verified context you may rely upon (all kernel-checked in
-willblair0708/lean-proofs, main; statements in FRONTIER.md)
+williamjblair/lean-proofs, main; statements in FRONTIER.md)
 
 - Any solution has k odd in [5,15] with d ≥ 10^120, or k ≥ 16: all
   other cases are unconditionally closed (even k ≤ 14 fully; odd

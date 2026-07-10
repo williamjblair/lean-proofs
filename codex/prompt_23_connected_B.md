@@ -15,7 +15,7 @@ outright the localized gap G-A below, which completes the |M| = 1 case
 unconditionally.
 
 GAP G-A (fully self-contained; see compute23/gate3/lemma_rl_proof.md
-in willblair0708/lean-proofs): in a valid rooted one-stub instance
+in williamjblair/lean-proofs): in a valid rooted one-stub instance
 where the M-endpoint lies OFF the stub corridor, prove the single-edge
 laws SE1 (D ≤ 2s) and SE2 (2D ≤ 2s + d). The on-corridor cases are
 proved; the obstruction is one double-count in a ledger argument

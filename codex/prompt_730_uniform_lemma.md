@@ -3,7 +3,7 @@
 ## Current task statement
 
 An audited proof skeleton (compute730/audit.md in
-willblair0708/lean-proofs) reduces "infinitely many consecutive pairs
+williamjblair/lean-proofs) reduces "infinitely many consecutive pairs
 (n, n+1) whose central binomial coefficients share prime support" to
 ONE missing analytic lemma plus bookkeeping. Prove:
 
