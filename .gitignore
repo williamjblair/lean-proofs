@@ -3,4 +3,14 @@
 /build/
 Audit.olean
 *.olean
+compute617/runs/
+compute617/runs25/
+compute617/anneal_*.out
+compute617/anneal_*.err
+compute617/*.log
+compute617/__pycache__/
+compute617/anneal617
+compute617/sls
+compute617/sls25
+compute617/tools/
 compute/artifacts/structure_hunt/t4_prefix_survivors.csv

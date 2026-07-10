@@ -3212,3 +3212,23 @@ proofs:
       Terminal N=4 exclusion under the six Thue tails and double smoothness.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 617
+    file: ErdosProblems/Erdos617.lean
+    theorem: Erdos617.Balanced.no_monochromatic_clique
+      In any balanced r-coloring (r >= 2) no r+1 vertices induce a
+      monochromatic clique: a mono K_{r+1} misses every other color.
+    fc_target: FormalConjectures/ErdosProblems/617.lean
+  - problem: 617
+    file: ErdosProblems/Erdos617.lean
+    theorem: Erdos617.Balanced.sum_le_sq
+      Vertex-deletion counting interface: in a balanced coloring of
+      K_{r^2+1}, per-color hitting-set lower bounds for the attachment
+      sets at any vertex sum to at most r^2.
+    fc_target: FormalConjectures/ErdosProblems/617.lean
+  - problem: 617
+    file: ErdosProblems/Erdos617.lean
+    theorem: Erdos617.statement_five_of_extension_demand
+      Conditional reduction of the r=5 case: if every balanced coloring
+      of K_26 has extension demand exceeding 25 at some vertex, the
+      Erdos-Gyarfas conjecture holds for r=5.
+    fc_target: FormalConjectures/ErdosProblems/617.lean
