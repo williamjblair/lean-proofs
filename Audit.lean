@@ -10,6 +10,7 @@ in `proofs.yaml`. Conditional research surfaces may be audited below without
 being advertised as solved proof targets.
 -/
 import ErdosProblems.Erdos154Sumset
+import ErdosProblems.Erdos23GapGA
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686SmallBranch
 import ErdosProblems.Erdos686Reduction
@@ -19,6 +20,7 @@ import ErdosProblems.Erdos686PrimeObstruction
 import ErdosProblems.Erdos686ReflectionCompression
 import ErdosProblems.Erdos686LargeKWedge
 import ErdosProblems.Erdos686PadicLift
+import ErdosProblems.Erdos686TwoPrimeGap
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686FinalReduction
 import ErdosProblems.Erdos617
@@ -375,6 +377,8 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.nine_mul_gap_lt_n_of_four_solution
 #print axioms Erdos686.Erdos686Variant.lower_block_composite_of_four_solution
 #print axioms Erdos686.Erdos686Variant.gap_dvd_three_blockProduct
+#print axioms Erdos686.Erdos686Variant.exists_blockProduct_factorization_concentration
+#print axioms Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
 #print axioms Erdos686.Erdos686Variant.gap_primePower_existsUnique_local_sq_lift
 #print axioms Erdos686.Erdos686Variant.center_factorial_sq_mul_three_factor_sub_gap_dvd_cube
 #print axioms Erdos686.Erdos686Variant.gap_primePower_existsUnique_odd_local_bounds
@@ -384,10 +388,33 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.gap_primePower_k11_local_bounds
 #print axioms Erdos686.Erdos686Variant.gap_primePower_k13_local_bounds
 #print axioms Erdos686.Erdos686Variant.gap_primePower_k15_local_bounds
+#print axioms Erdos686.Erdos686Variant.no_odd_gap_solution_of_primePower_gap_large
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_k5_of_gap_eq_primePower_of_ten_pow_120_le
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_k7_of_gap_eq_primePower_of_ten_pow_120_le
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_k9_of_gap_eq_primePower_of_ten_pow_120_le
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_k11_of_gap_eq_primePower_of_ten_pow_120_le
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_k13_of_gap_eq_primePower_of_ten_pow_120_le
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_k15_of_gap_eq_primePower_of_ten_pow_120_le
+#print axioms Erdos686.Erdos686Variant.primePower_component_exists_large_local_divisor
+#print axioms Erdos686.Erdos686Variant.two_large_prime_support_bounded_pell
+#print axioms Erdos686.Erdos686Variant.two_prime_support_has_distinct_noncenter_concentrations
+#print axioms Erdos23GapGA.TwoDemandCutCondition.common_edge_not_isBridge
+#print axioms Erdos23GapGA.corridor_index_between_of_Q_order
+#print axioms Erdos23GapGA.sum_offCorridorComponentQCount
+#print axioms Erdos23GapGA.sum_offCorridorComponentRCount
+#print axioms Erdos23GapGA.IsGeodesic.offCorridorComponentSpan_le_card_add_one
+#print axioms Erdos23GapGA.IsGeodesic.card_riddenCorridorEdgeIndices_le_commonVertices_sub_one
+#print axioms Erdos23GapGA.sum_assignedRiddenCount
+#print axioms Erdos23GapGA.LocalComponentCharge.charge
+#print axioms Erdos23GapGA.ComponentLedger.length_le_twice_slack
+#print axioms Erdos23GapGA.ComponentLedger.symmetric_bounds
 #print axioms Erdos617.Balanced.no_monochromatic_clique
 #print axioms Erdos617.Balanced.sum_le_sq
 #print axioms Erdos617.statement_five_of_extension_demand
 -- Conditional research surfaces; not listed in `proofs.yaml`.
+#print axioms Erdos23GapGA.OffCorridorChargeDecomposition.length_le_twice_slack
+#print axioms Erdos23GapGA.length_le_twice_slack_of_canonicalChargeTheorem
+#print axioms Erdos23GapGA.ledgerTheorem_of_canonicalChargeTheorem
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_large_k_near_diagonal_of_prime442
 #print axioms Erdos727.erdosAt_iff_window_sq_dvd_centralBinom
 #print axioms Erdos727.erdosAt2_iff_window_sq_dvd_centralBinom

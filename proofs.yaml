@@ -3252,6 +3252,25 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.exists_blockProduct_factorization_concentration
+    statement: >-
+      For every prime and every nonempty consecutive block, all p-adic
+      valuation outside one maximum-valuation factor is bounded by the
+      valuation of the universal coefficient (k-1)!.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
+    statement: >-
+      If the whole gap is p^e, one lower-block factor carries all but the
+      single possible p=3 loss and the exact (k-1)! concentration loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
     theorem: Erdos686.Erdos686Variant.gap_primePower_existsUnique_local_sq_lift
     statement: >-
       A positive prime power p^e dividing the gap, with p at least the block
@@ -3327,6 +3346,192 @@ proofs:
       The corresponding exact k=15 localized bounds have constant 35.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.no_odd_gap_solution_of_primePower_gap_large
+    statement: >-
+      Uniform odd-row closure: for every prime base, a pure prime-power gap
+      at least 10^120 is impossible for each odd block length at most 15,
+      given the explicit verified ratio-window base bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_k5_of_gap_eq_primePower_of_ten_pow_120_le
+    statement: >-
+      Every pure prime-power gap d at least 10^120 is excluded for k=5,
+      uniformly over the prime base.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_k7_of_gap_eq_primePower_of_ten_pow_120_le
+    statement: >-
+      Every pure prime-power gap d at least 10^120 is excluded for k=7,
+      uniformly over the prime base.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_k9_of_gap_eq_primePower_of_ten_pow_120_le
+    statement: >-
+      Every pure prime-power gap d at least 10^120 is excluded for k=9,
+      uniformly over the prime base.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_k11_of_gap_eq_primePower_of_ten_pow_120_le
+    statement: >-
+      Every pure prime-power gap d at least 10^120 is excluded for k=11,
+      uniformly over the prime base.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_k13_of_gap_eq_primePower_of_ten_pow_120_le
+    statement: >-
+      Every pure prime-power gap d at least 10^120 is excluded for k=13,
+      uniformly over the prime base.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PadicLift.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_k15_of_gap_eq_primePower_of_ten_pow_120_le
+    statement: >-
+      Every pure prime-power gap d at least 10^120 is excluded for k=15,
+      uniformly over the prime base.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeGap.lean
+    theorem: Erdos686.Erdos686Variant.primePower_component_exists_large_local_divisor
+    statement: >-
+      Every primary component of an odd-tail gap has a divisor concentrated
+      in one lower factor, losing by at most the exact uniform factor 4096;
+      prime bases at least the block length incur no loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeGap.lean
+    theorem: Erdos686.Erdos686Variant.two_large_prime_support_bounded_pell
+    statement: >-
+      For a gap with two distinct prime-power components whose bases are at
+      least the odd block length, exact local lifts give distinct indices and
+      a bounded-coefficient generalized Pell equation; a center localization
+      forces the explicit bound d below A^5.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoPrimeGap.lean
+    theorem: Erdos686.Erdos686Variant.two_prime_support_has_distinct_noncenter_concentrations
+    statement: >-
+      Given the verified row ratio-window bound, any target-size odd-tail gap
+      with exactly two distinct prime divisors has concentrated primary
+      components at two distinct noncentral factors, uniformly including
+      prime bases 2 and 3.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.TwoDemandCutCondition.common_edge_not_isBridge
+    statement: >-
+      Under the symmetric two-demand cut condition, an edge common to the
+      two geodesics cannot be a bridge because its canonical cut has capacity one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.corridor_index_between_of_Q_order
+    statement: >-
+      Common vertices encountered in geodesic order have monotone corridor
+      coordinates, via equality in the path-metric triangle inequality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.sum_offCorridorComponentQCount
+    statement: >-
+      Canonical components of the graph off the corridor partition exactly
+      the vertices of the second geodesic lying off that corridor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.sum_offCorridorComponentRCount
+    statement: >-
+      The same canonical components partition exactly the vertices used by
+      neither geodesic.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.IsGeodesic.offCorridorComponentSpan_le_card_add_one
+    statement: >-
+      Each canonical off-corridor component has attachment span at most its
+      number of vertices plus one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.IsGeodesic.card_riddenCorridorEdgeIndices_le_commonVertices_sub_one
+    statement: >-
+      Actual ridden corridor edges form a strict coordinate subset and have
+      cardinality at most the number of common vertices minus one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.sum_assignedRiddenCount
+    statement: >-
+      Any owner assignment of actual ridden coordinates to canonical
+      components has fiber counts summing to the exact ridden-edge count.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.LocalComponentCharge.charge
+    statement: >-
+      The audited ordinary-or-exceptional local component data imply the
+      exact per-component charge inequality ridden plus excursions at most q plus 2r.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.ComponentLedger.length_le_twice_slack
+    statement: >-
+      A completed component ledger implies the first single-edge bound
+      D at most twice the corridor slack.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGA.lean
+    theorem: Erdos23GapGA.ComponentLedger.symmetric_bounds
+    statement: >-
+      Forward and swapped component ledgers imply both single-edge bounds
+      SE1 and SE2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
   - problem: 617
     source: erdosproblems
     file: ErdosProblems/Erdos617.lean

@@ -25,8 +25,26 @@ theorem erdos686_false_of_constant_bound_and_large_escape
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 314 audited headline theorems, axioms ⊆
+[R] CI gate: 384 manifest-tracked theorems, axioms ⊆
 `[propext, Classical.choice, Quot.sound]`, no `native_decide`, no `sorry`.
+
+[R] **All pure prime-power odd tails are closed.**  The p-adic lift module
+now proves that for every prime `p`, exponent `e`, and
+`k ∈ {5,7,9,11,13,15}`, the equation has no solution when
+`d=p^e≥10^120`.  For `p≥k` this is the clean localized square lift; for
+`p<k`, a maximum-valuation factor loses at most
+`1+v_p((k-1)!)`, and the exact residual bound is dominated by
+`14! * 35 * 13^30 < 10^120`.  This removes the entire one-prime-support
+regime but does not close mixed-prime gaps.
+
+[R] **Two-prime gaps are forced into a finite-coefficient noncentral
+regime.**  For `d=p^e q^f≥10^120`, concentration losses are at most `4096`
+per base.  The two components cannot land at one factor, and neither can
+land at the odd center; both exclusions have explicit constants below the
+cutoff.  If `p,q≥k`, the surviving data satisfy
+`a*p^(2e)-b*q^(2f)=3(i-j)` with `ab<A_k^2` and distinct noncentral `i,j`.
+This is a proper restriction, not a solution of the remaining Pell/prime-
+power families.
 
 [X] **The former large-branch target is falsified.** The fixed-prefix
 statement `RowSixteenBoundaryHypothesis` (rows 1..15 divide ⟹ row 16 fails)
@@ -56,8 +74,8 @@ Stern–Brocot descent certificate (`Erdos686ConvergentMachinery.lean`,
 no reals, no Mathlib CF, kernel decide ~1s) confines and refutes every
 candidate.  **k = 5 is banked closed for 221 ≤ d < 10^120**
 (`Erdos686FiveThue.lean`) — the community had k = 5 open;
-k ∈ {7, 9, 11, 13, 15} modules are in flight on verified mathematics
-(bounds 10^98–10^119).  Telescope caveat: k = 9, 15 have d = 1
+k ∈ {7, 9, 11, 13, 15} are also banked to the same `10^120` threshold.
+Telescope caveat: k = 9, 15 have d = 1
 polynomial identities (`P₉(8) = 4·P₉(7)`), excluded by the domain.
 
 [C] The open hypotheses (the entire remaining mathematical content):
@@ -76,7 +94,7 @@ def LargeKSmoothHypothesis : Prop :=                 -- large-k core
 ```
 
 [R] **The terminal reduction is banked**
-(`Erdos686FinalReduction.lean`, 346 audited theorems):
+(`Erdos686FinalReduction.lean`):
 
 ```lean
 theorem erdos686_false_of_thue_tails_and_smooth

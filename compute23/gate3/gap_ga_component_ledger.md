@@ -3,9 +3,12 @@
 Status: **PROVED on paper; second hostile audit PASS.**  The first hostile
 audit found and repaired one false exceptional-component subclaim.  The
 revised proof passed a second node-by-node audit and exact structural
-enumeration; see `gap_ga_audit.md`.  The numerical ledger-to-SE1/SE2 layer is
-kernel-checked in `ErdosProblems/Erdos23GapGA.lean`; formal construction of
-the graph-theoretic ledger remains the Lean intake step.
+enumeration; see `gap_ga_audit.md`.  The Lean module now checks the bridge,
+metric, canonical-component, exact `q_C/r_C`, attachment-span,
+ridden-owner, and local-charge layers.  The remaining intake step is
+exactly `CanonicalChargeTheorem`: construct the simultaneous canonical
+ride/excursion assignment with interval packing and exceptional-tail
+dispatch.
 
 ## Symmetric two-demand lemma
 

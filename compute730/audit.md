@@ -1,6 +1,8 @@
 # Erdős #730 — audit of the claimed GPT Pro proof of infinitely many consecutive pairs
 
-Audit date: 2026-07-10. One-pass capped audit; hard gate on the quantified digit-counting lemma.
+Audit date: 2026-07-10. The initial one-pass audit isolated a quantified
+digit-counting gate; a same-day adversarial follow-up proved that gate FALSE
+as stated and replaced it with an explicitly open range-split gate.
 
 ## 0. Problem and sources
 
@@ -219,10 +221,9 @@ N0  Consecutive pairs (n,n+1), infinitely many                    [OPEN — hing
  │      of obstructions ("case checking on range sizes")               structure;
  │                                                                     bound REPAIRABLE
  └─ N6  Restricted-digit counting on incomplete blocks +               *** THE GATE ***
-        global first-moment summability                                NOT ESTABLISHED
-                                                                       (not public;
-                                                                       naive version
-                                                                       FAILS the sum)
+        ├─ old interval-uniform lemma                                  FALSE
+        ├─ maximal-r near-affine payment                               PAPER-PROVED/EXACT (<0.01)
+        └─ separated far + short/top first-moment budget               NOT ESTABLISHED
 ```
 
 ### N1 — Kummer criterion. VERDICT: SOUND (elementary; proven and machine-checked)
@@ -303,9 +304,45 @@ explicit union {c | L(x), c in a bad class, L(x)/c prime}. Bounding it needs onl
 upper-bound sieve (Brun–Titchmarsh/Selberg for the linear forms) — standard, but the
 sieve constant (≈2) enters the final budget (see gate). Repairable, not free.
 
-### N6 — Incomplete-block restricted-digit counting + summability. THE GATE.
+### N6 — Incomplete-block restricted-digit counting + summability.
+### OLD UNIFORM FORM FALSE; CORRECTED GATE OPEN.
 
-**What the gate demands**: a lemma of the shape
+**Adversarial follow-up (proved, exact).**  Put `H=(p+1)/2` and
+`s=max(2r-a,0)`.  On the admissible Q branch, `b_Q=1,301,094` is a p-adic
+unit for `p=5,7,11`.  At `a=2r`, reduction modulo `p^(2r)` gives exactly
+
+```text
+G(k) = b_Q k+v.
+```
+
+After removing the one output residue that would make `p | c(k)`, partition
+the `H^r` restricted r-digit outputs by residue modulo `b_Q p`.  One class
+has at least `(H-1)H^(r-1)/(b_Q p)` members.  Translate the k-interval so
+that class is the affine image; all of its parameters span less than `p^r`
+and all outputs have r restricted lower digits and r zero upper digits.
+Extending the interval to `p^r` times any fixed polylogarithm does not remove
+the hits.  The ratio to the old proposed main term grows like
+`(p/H)^r/poly(r)`, hence tends to infinity.
+
+More generally, exact subtraction shows
+
+```text
+G(k+t)-G(k)-b_Q t = p^a t (A(2k+t)+u_Q).
+```
+
+Partitioning outputs modulo `b_Q p^max(s,1)` therefore yields the precise
+failure criterion
+
+```text
+(p/H)^r p^(-s) / poly(r) -> infinity.
+```
+
+In particular the old bound fails whenever
+`s <= (log_p(p/H)-epsilon)r` for fixed `epsilon>0` and large r.  Merely
+requiring `a<2r` does not repair it.  Full proof and exact diagnostics are in
+`compute730/campaign_uniform/`.
+
+**The original gate demanded the following FALSE uniform shape:**
   #{k ∈ I : first 2r base-p digits of G(k) restricted} ≤ 4^{-r}|I| + E(p,r,I)
 with E explicit and uniform over every obstruction prime p, every branch, every
 congruence class (x₀, a), and incomplete intervals I, such that the total error plus
@@ -320,13 +357,13 @@ appears exactly at the classic failure point:
 **The regime is exactly square-root-critical.** Blocks of length p^r against a digit
 condition mod p^{2r}: |I| = √(modulus). Generic completion + complete-sum bounds give
 error ~ √(p^{2r})·polylog = p^r·polylog ≥ main term p^r·4^{-r} — vacuous. Two
-structural facts can rescue it, and both are genuinely present here: (i) all complete
+structural facts remain useful outside the counterexample band: (i) all complete
 sums of e(hG(k)/p^m) vanish for p ∤ h (G is a permutation, N4), and (ii) the quadratic
 coefficient of G carries an extra factor p^a, so the surviving frequencies after
-completion live in a sparse arithmetic progression. A uniform incomplete bound with
-power saving below the √-threshold is therefore *plausible* — but it is nowhere
-written, and its polylog/constant losses feed directly into a budget that has almost
-no slack (next paragraph).
+completion live in a sparse arithmetic progression.  They cannot rescue the old
+uniform statement because its near-affine count is genuinely too large.  A restricted
+bound in a quantitatively separated range remains plausible but unproved, and its
+polylog/constant losses feed directly into a budget with almost no slack.
 
 **The summability budget (computed in this audit).** Empirics on x ∈ [1,3000]
 (every number involved fully factored; events = (branch, p, a) obstructions):
@@ -347,11 +384,13 @@ on some obstruction prime range sizes" the gist alludes to. Whether the PDF actu
 performs a split whose constants sum below 1, with uniform error terms, cannot be
 determined: **that text is not public**.
 
-**Gate outcome: NOT PASSED on the public record.** The one quantitative sentence
-available is the unquantified "essentially 4^{-r}" at the square-root-critical block
-length, and the naive quantification of exactly what is stated makes the global union
-bound sum to ≈ 1.2 > 1. The argument is not exhibited to survive; it is also not
-exhibited to fail — the missing content is confined to one well-posed lemma.
+**Gate outcome: old lemma FALSE; corrected far/top gate NOT PASSED.**  The failure is
+mathematical, not merely a missing public error term.  The live residual is one
+range-split lemma: establish an explicit incomplete-block estimate in
+`s >= (log_p(p/H)+1/12)r` and close its errors plus the short/top-range
+contribution below `0.99-delta`.  The complementary near-affine band is now
+proved to cost less than `0.01` for every `X>=2^57`, using maximal admissible
+`r` and valuation rarity; see `compute730/campaign_uniform/repair/`.
 
 ## 3. Numerical certificates produced by this audit
 
@@ -365,31 +404,49 @@ infinitude — infinitude is exactly N6.)
 
 ## 4. VERDICT
 
-**viable-pending-X**, X = the uniform incomplete-block restricted-digit lemma with a
-summable budget. Single decisive issue: *the counting bound "essentially 4^{-r}" is
-asserted exactly at the square-root-critical block length p^r vs modulus p^{2r},
-where generic completion is vacuous, and the naive quantified version of the publicly
-stated bounds makes the global first-moment total ≈ 1.2 > 1; the sections that would
-resolve this (PDF §§3–4 and the "case checking") are not public.*
+**viable-pending-far/top-X.**  The old uniform lemma is false.  This does
+**not** refute Erdős #730 or the possibility that the explicit family works after a
+different valuation split.
 
-The ONE lemma that must be proven:
+The near-affine part of the corrected split is now proved on paper and
+exact-arithmetic audited, with Lean intake still pending.  With `C=2`,
+`eta=1/12`, and maximal admissible `r`, its normalized contribution is
+less than `1/100` for all `X>=2^57`; the exact rational certificate is
 
-> **Lemma (uniform incomplete restricted-digit count).** There are absolute constants
-> C, B, δ > 0 such that for every prime p ∉ {2,3,41,43}, every branch L ∈ {P,Q,R,S},
-> every a ≥ 1 and admissible root x₀ mod p^a, every r ≥ 1, and every interval I with
-> |I| ≥ p^r (log p^r)^C:
-> #{k ∈ I : first 2r base-p digits of G_{L,p^a,x₀}(k) all ≤ (p−1)/2}
->   ≤ 4^{-r}(1+1/p)^{2r}|I| (1 + (log p^r)^{-1})
-> — together with a range-split first-moment computation (Fourier middle range,
-> congruence-class + sieve top range, exact full-block small range) whose grand total
-> is ≤ 1 − δ uniformly in the family cutoff X.
+```text
+232437037423222418449 / 27831344977224191180800 < 1/100.
+```
 
-Difficulty class: **analytic-standard** for the exponential-sum estimate itself (the
-p^a-divisible quadratic coefficient and vanishing complete sums put it within
-classical incomplete-Gauss-sum technology), but the summability half is
-**analytic-hard in bookkeeping**: the budget has ≤ 40% headroom (true 0.60 vs 1) and
-the naive constants overshoot to 1.2, so the proof lives or dies on the constants in
-the range split. No repair campaign is authorized by this audit; STOP.
+The ONE residual is the following separated counting/first-moment lemma:
+
+> **Separated far/top lemma (OPEN).**  Put `H=(p+1)/2`,
+> `s=max(2r-a,0)`, and `kappa_p=log_p(p/H)`.  There are explicit absolute
+> constants `B,delta>0` and explicit errors `E_far` such that:
+> (i) for every relevant prime, admissible branch/root, and interval
+> `|I|>=p^r(log p^r)^2` with `s >= (kappa_p+1/12)r`, the restricted-digit count is at
+> most `(H/p)^(2r)|I|(1+(log p^r)^(-1))+E_far`; and
+> (ii) the normalized sum of the far main terms and errors plus the
+> short/top-range contribution is at most `0.99-delta`, uniformly in the family cutoff.
+
+Neither part of this residual is proved here.  Sparse completion is relevant
+only to the separated range.  The empirical budget still suggests headroom,
+but no rigorous numerical closure is currently available.
+
+The separated Fourier audit sharpens part (i) to one exact signed inequality.
+With `Q=p^(2r)`, exact-valuation restricted set `E`, Fourier coefficients
+`F(h)`, and interval sums `S_I(h)` as defined in
+`campaign_uniform/repair/far/far_range_findings.md`, it is
+
+```text
+Re sum_(h=1)^(Q-1) F(h)S_I(h)
+  <= |I| H^(2r) (1/H + 1/log(p^r)).
+```
+
+The exact Fourier identity, cumulative energy, sparse Gauss support, and
+per-frequency completion bounds are paper-proved and exact-checked.  Their
+valuation-stratified triangle majorant is exponentially too large for
+`p=5,7,11`; signed cancellation is load-bearing.  The long subrange
+`|I|>=(H-1)Q` is proved, but does not reach the critical scale.
 
 ## 5. Provenance note
 

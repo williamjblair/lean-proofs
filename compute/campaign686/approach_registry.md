@@ -37,11 +37,12 @@ entry must name one quantified missing lemma.
 
 | ID | Family | Exact proposed leverage | Verdict | Evidence or gap |
 |---|---|---|---|---|
-| T1-CF | CF remainder identity | Substitute each exact quasi-convergent class into `P_k(X)-4P_k(Y)` and retain the signed integral remainder, not just `|alpha-X/Y|`. | active | Parallel analysis in progress. |
-| T1-VAL | p-adic valuation | A prime power `p^e | d`, `p >= k`, localizes to one lower factor and forces a square lift, cubic at the center. | proved on paper; Lean in progress | Exact consequence: `p^(2e) < A_k*d`, with `A_k = 14,17,23,26,29,35`; center gives `p^(3e) < A_k*d`. This excludes a dominant primary component but is vacuous for gaps supported below `k`. |
+| T1-CF | CF remainder identity | Substitute each exact quasi-convergent class into `P_k(X)-4P_k(Y)` and retain the signed integral remainder, not just `|alpha-X/Y|`. | active | For k=5, a genuine root must satisfy the exact floor pin `g^2=floor(5A_3/A_5)`; among 341 stored rows only three nontrivial square/divisor floors survive and none is a root. No theorem controls the infinite tail. |
+| T1-VAL | p-adic valuation | A prime power `p^e | d`, `p >= k`, localizes uniquely and forces a square lift, cubic at the center; valuation concentration replaces uniqueness when `p<k`. | proved and Lean-banked | For `p>=k`, `p^(2e)<A_k*d`, with `A_k=14,17,23,26,29,35`, and the center gives `p^(3e)<A_k*d`. For `p<k`, all valuation outside one factor loses at most `1+v_p((k-1)!)`; the exact universal constant `14!*35*13^30<10^120` excludes every whole prime-power gap `d=p^e>=10^120`, including bases 2 and 3. Mixed-prime gaps remain open. |
+| T1-2P | Two-prime concentration/Pell | For `d=p^e q^f`, combine the two concentrated local lifts before invoking any generic Diophantine theorem. | proved proper restriction; Lean-banked | Uniformly including `p=2,3`, target-size components must concentrate at distinct noncentral factors.  When `p,q>=k`, there are positive `a,b` with `ab<A_k^2` and `a p^(2e)-b q^(2f)=3(i-j)`.  The remaining finite-discriminant Pell/prime-power intersection is open and is not counted as solved. |
 | T1-PUI | Puiseux denominator | Expand the algebraic branch solving `P_k(X)=4P_k(Y)` beyond the leading root and prove an explicit denominator/integrality trap. | blocked | After `L` terms the cleared algebraic norm grows like `Y^(2L(k-1)-2)`; ordinary norm-smallness cannot force zero without new denominator cancellation. |
 | T1-UNIT | Unit equation | Use conjugate information in `Q(4^(1/k))` to bound the structured norm identity. | active | Generic Baker-Feldman bounds are disallowed unless below `10^120`. |
-| T1-SCALE | Primitive CF scale | For `X=gu`, `Y=gv`, exact coefficient reduction gives `g^2 | (r!)^2(u-4v)`. | proved exact; insufficient | The primitive branch `g=1` survives automatically; most recorded convergent scales survive as well. |
+| T1-SCALE | Primitive CF scale | For `X=gu`, `Y=gv`, use the exact polynomial in `z=g^2`, its coefficient filters, and the discriminant square condition. | partly proved; low-order closure refuted | An explicit unbounded k=5 family passes gcd, parity, sign, support, ratio, and the first two z-adic filters while `Q(z)>0`; the discriminant square lift is the original genus-6 curve in disguise. The floor pin is the surviving proper restriction. |
 
 ## Target 2 routes
 
@@ -69,8 +70,8 @@ These are premises for new attacks, not solutions of `LargeKSmoothHypothesis`.
 
 ## Pipeline audit
 
-The campaign baseline now has 349 manifest entries and 349 generated
-attestations, including 345 entries for problem 686.  The attestation emitter
+The campaign baseline now has 384 manifest entries and 384 generated
+attestations, including 370 entries for problem 686 and 10 for problem 23.  The attestation emitter
 parses wrapped and axiom-free reports, rejects missing theorem reports, and
 accepts any subset of `[propext, Classical.choice, Quot.sound]`.
 

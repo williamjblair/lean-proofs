@@ -24,12 +24,39 @@ UNCONDITIONAL: every k ≤ 15 with gap d < 10^120 (Runge + mod-p covers
 for even k; Farey-descent certificates for odd k); the k=14 case for
 all d; the terminal reduction `erdos686_false_of_thue_tails_and_smooth`.
 
+NEW BANKED RESTRICTIONS: exact p-adic square localization for every
+`p^e|d`, `p≥k` (cubic at an odd center), giving
+`p^(2e)<A_k d` with `A_k=14,17,23,26,29,35`; hence dominant components
+are impossible.  Valuation concentration supplies the missing small-prime
+case: for every prime base, a whole gap `d=p^e≥10^120` is impossible in
+all six odd rows.  The exact loss is bounded by
+`14! * 35 * 13^30 < 10^120`.  Reflection compression is kernel-checked.
+For a gap with exactly two distinct prime divisors, the concentrated
+components must land at distinct noncentral factors; if both prime bases
+are at least `k`, their residuals give
+`a*p^(2e)-b*q^(2f)=3(i-j)` with `ab<A_k^2`.  The finite-discriminant
+Pell/prime-power families remain open.
+For `k≥16`, the
+ratio window now gives `n>9d`, every lower term is composite, and the
+published Nair-Shorey `4.42k` theorem closes the paper-level wedge
+`50(d+k-1)≤221k`; only the downstream implication is in Lean because
+the external theorem itself is not formalized.
+
+ODD-TAIL ROUTE AUDIT: a complete exact `k=5` counterfamily refutes the
+first two primitive-scale congruences as an unbounded closure mechanism.
+The surviving floor pin `g²=floor(5A₃/A₅)` is proper but does not control
+the infinite CF tail.  Imposing the discriminant square reconstructs the
+original smooth genus-6 plane quintic (genus-2 sign quotient), so that
+cover is target-strength rather than a lower-genus reduction.
+
 OPEN CORE:
 1. `OddThueTailHypothesis` — for odd k ∈ {5..15}, no solution with
    d ≥ 10^120. Each tail extends ~1 decade per 2 CF terms; unbounded
    closure needs effective irrationality for 4^{1/k} below Liouville
    (none exists; hypergeometric method structurally fails at these k)
    or new CF structure. Watch: Calegari–Dimitrov–Tang holonomy program.
+   The pure-prime-power subcase is now excluded for every prime base;
+   the remaining gap has at least two distinct prime divisors.
 2. `LargeKSmoothHypothesis` — no k ≥ 16 solution with an entirely
    (d+k)-smooth lower block (prime obstruction banked; census: two
    clusters in 145+ billion window points, neither an equation solution).
@@ -67,14 +94,16 @@ certificates self-tighten); sandwich theorem: universal Lemma RL is
 conjecture-strength; RL proved on trees, s ≤ 1, and now for every
 `|M|=1` instance.  The former gap G-A is closed by a symmetric
 two-demand component ledger (complete paper proof, two hostile audits,
-exact structural replay); its ledger arithmetic and theorem interfaces are
-kernel-checked in `ErdosProblems/Erdos23GapGA.lean`, while the component
-construction itself still awaits Lean formalization.
+exact structural replay).  Lean now checks the bridge-cut reduction,
+geodesic coordinates, canonical off-corridor components, exact `q_C/r_C`
+partition sums, attachment spans, ridden-index/owner counting, and the
+ordinary/exceptional local charge.  The remaining kernel node is the
+simultaneous canonical ride/excursion assignment `CanonicalChargeTheorem`.
 
 OPEN CORE: the multi-edge aggregation G-B / inductive RL* in the exact
 region `n ≥ 14`, `2 ≤ s < (d+1)²/(2p(d))`, `|M| ≥ 2`; the 2-connected
 core (conjecture-strength, quarantined); and kernel formalization of the
-already-audited G-A component construction.
+already-audited G-A canonical assignment theorem.
 
 ## Erdős #699 — common prime factor p ≥ i of C(n,i), C(n,j)
 
@@ -87,12 +116,20 @@ large primes — parked.
 
 ## Erdős #730 — same prime support of consecutive central binomials
 
-Status: claimed proof AUDITED AND CAPPED (`compute730/audit.md`):
-elementary skeleton sound (machine-verified), decisive analytic
-content private, public bound fails the union budget (1.2 > 1).
-Named missing lemma: uniform incomplete-block restricted-digit count.
-Bonus banked: 1,556 certified consecutive pairs via the sound
-Kummer criterion.
+Status: claimed proof AUDITED; its decisive uniform incomplete-block
+lemma is FALSE as quantified.  On the Q branch, `a=2r` makes the map
+affine modulo `p^(2r)`, and translated intervals contain exponentially
+more restricted outputs than the claimed density, even after retaining
+the exact valuation.  The counterexample extends to the near-affine band
+`s=max(2r-a,0)` whenever `(p/H)^r p^(-s)/poly(r)` diverges.  This does
+not refute Erdős #730.  The corrected open gate is one explicit range-split
+lemma.  Its maximal-r near-affine payment is paper-proved and exact-audited
+below `0.01` for every `X>=2^57` (Lean intake pending); the remaining separated Fourier errors plus short/top
+range must total below `0.99-delta`.  Exact sparse Gauss completion is
+audited, but its triangle majorant is exponentially insufficient for
+`p=5,7,11`; the live analytic node is one explicit signed bilinear Fourier
+inequality.  Bonus banked: 1,556 certified consecutive
+pairs via the sound Kummer criterion.
 
 ## Erdős #64 — cycles of length 2^k under min degree 3
 

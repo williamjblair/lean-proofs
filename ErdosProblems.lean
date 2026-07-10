@@ -1,6 +1,7 @@
 -- Library root: import every hosted proof module so `lake build` builds them all.
 import ErdosProblems.Erdos154
 import ErdosProblems.Erdos154Sumset
+import ErdosProblems.Erdos23GapGA
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686ConstantQuotient
 import ErdosProblems.Erdos686QuotientConfinement
@@ -17,6 +18,7 @@ import ErdosProblems.Erdos686PrimeObstruction
 import ErdosProblems.Erdos686ReflectionCompression
 import ErdosProblems.Erdos686LargeKWedge
 import ErdosProblems.Erdos686PadicLift
+import ErdosProblems.Erdos686TwoPrimeGap
 import ErdosProblems.Erdos686ConvergentMachinery
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686SevenThue

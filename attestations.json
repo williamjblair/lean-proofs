@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:41645951d5df01a1885c4333d456748dc98c4533a294cb7e2a0208e9fc82daeb",
+  "verifier_output_hash": "sha256:6ee970302436fe2462198b82b5b8fa8a6425e4df2391747f9c41a5e369646d88",
   "attestations": [
     {
       "problem": 154,
@@ -4170,7 +4170,31 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.gap_dvd_three_blockProduct",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_blockProduct_factorization_concentration",
+      "file": "ErdosProblems/Erdos686PadicLift.lean",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor",
+      "file": "ErdosProblems/Erdos686PadicLift.lean",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4182,7 +4206,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.gap_primePower_existsUnique_local_sq_lift",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4194,7 +4218,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.center_factorial_sq_mul_three_factor_sub_gap_dvd_cube",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4206,7 +4230,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.gap_primePower_existsUnique_odd_local_bounds",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4218,7 +4242,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.gap_primePower_k5_local_bounds",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4230,7 +4254,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.gap_primePower_k7_local_bounds",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4242,7 +4266,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.gap_primePower_k9_local_bounds",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4254,7 +4278,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.gap_primePower_k11_local_bounds",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4266,7 +4290,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.gap_primePower_k13_local_bounds",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4278,10 +4302,247 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.gap_primePower_k15_local_bounds",
       "file": "ErdosProblems/Erdos686PadicLift.lean",
-      "proof_hash": "sha256:3af00d75fa49b699cec6857f18156b95ab2d2742449429af3b973d1c521f1c8b",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_odd_gap_solution_of_primePower_gap_large",
+      "file": "ErdosProblems/Erdos686PadicLift.lean",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_gap_solution_four_k5_of_gap_eq_primePower_of_ten_pow_120_le",
+      "file": "ErdosProblems/Erdos686PadicLift.lean",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_gap_solution_four_k7_of_gap_eq_primePower_of_ten_pow_120_le",
+      "file": "ErdosProblems/Erdos686PadicLift.lean",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_gap_solution_four_k9_of_gap_eq_primePower_of_ten_pow_120_le",
+      "file": "ErdosProblems/Erdos686PadicLift.lean",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_gap_solution_four_k11_of_gap_eq_primePower_of_ten_pow_120_le",
+      "file": "ErdosProblems/Erdos686PadicLift.lean",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_gap_solution_four_k13_of_gap_eq_primePower_of_ten_pow_120_le",
+      "file": "ErdosProblems/Erdos686PadicLift.lean",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_gap_solution_four_k15_of_gap_eq_primePower_of_ten_pow_120_le",
+      "file": "ErdosProblems/Erdos686PadicLift.lean",
+      "proof_hash": "sha256:c79fc63ec49355d6d59f54577becb6dbf5b6650e3be60e11ddb4cf247515ffb8",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.primePower_component_exists_large_local_divisor",
+      "file": "ErdosProblems/Erdos686TwoPrimeGap.lean",
+      "proof_hash": "sha256:7e10d8e836f798aeb9883612009b79ad81a5dbdd8fdb47b8d5f120407878d622",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_large_prime_support_bounded_pell",
+      "file": "ErdosProblems/Erdos686TwoPrimeGap.lean",
+      "proof_hash": "sha256:7e10d8e836f798aeb9883612009b79ad81a5dbdd8fdb47b8d5f120407878d622",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_prime_support_has_distinct_noncenter_concentrations",
+      "file": "ErdosProblems/Erdos686TwoPrimeGap.lean",
+      "proof_hash": "sha256:7e10d8e836f798aeb9883612009b79ad81a5dbdd8fdb47b8d5f120407878d622",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.TwoDemandCutCondition.common_edge_not_isBridge",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.corridor_index_between_of_Q_order",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.sum_offCorridorComponentQCount",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.sum_offCorridorComponentRCount",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.IsGeodesic.offCorridorComponentSpan_le_card_add_one",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.IsGeodesic.card_riddenCorridorEdgeIndices_le_commonVertices_sub_one",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.sum_assignedRiddenCount",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.LocalComponentCharge.charge",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.ComponentLedger.length_le_twice_slack",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGA.ComponentLedger.symmetric_bounds",
+      "file": "ErdosProblems/Erdos23GapGA.lean",
+      "proof_hash": "sha256:9369401caa2aa5aaeec9860f33388be55e42da675bba6cf5dcf1c07c21ffe9a2",
+      "axiom_footprint": [
+        "propext",
         "Quot.sound"
       ],
       "axioms_clean": true
