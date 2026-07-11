@@ -8,7 +8,11 @@
 > all-prime loss `G_k`, and the finite factorization interface is now
 > kernel-banked.  Global concentration constructs one certified assignment;
 > at target size its nonzero cleaned owner range cannot be covered by two
-> indices.  For Target 2, reflection and matching owners now correlate: every
+> indices.  A hostile-audited extraction now supplies three explicit distinct
+> live prime/owner witnesses inside that same assignment, with the factor,
+> square-residual, and coprimality data retained.  It is an at-least-three
+> witness, not an exactly-three factorization when further owners occur.  For
+> Target 2, reflection and matching owners now correlate: every
 > residual reflection-center power divides the absolute owner offset, with
 > reflected alignment as the exact surviving alternative.
 > For three cleaned residual buckets, cyclic second/third obstruction formulas

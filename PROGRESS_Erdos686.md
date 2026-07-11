@@ -88,6 +88,16 @@ size, that same assignment cannot be covered by any two indices.  Thus the
 remaining branch has more than two nonzero cleaned owner values; the old
 bookkeeping interface is no longer open.
 
+[R] **Three live owners are now extracted explicitly from that same
+assignment.**  The finite no-two-cover argument produces distinct prime
+factors `p,q,r` with nonzero cleaned exponents and pairwise-distinct owners,
+while retaining all three factor divisibilities, square-residual
+divisibilities, and pairwise coprimality statements.  The exact theorem
+returns the witness under `Nonempty`; an independent 4,729,716-model audit
+checks that no two-value cover is equivalent to at least three live values.
+This proves “at least three,” not “exactly three”: it does not claim
+`d=gPQR` or discard additional live owner buckets.
+
 [R] **Three cleaned buckets have exact second/third restrictions, but no
 closure.**  For `d=gPQR` and three step-three square residuals, Lean proves
 `P|3(C_iabc-12D_ig^2(i-j)(i-l))` and the companion square divisibility

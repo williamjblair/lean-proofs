@@ -50,7 +50,13 @@ now kernel-banked: global concentration constructs one certified assignment,
 and any two-index cover of its nonzero cleaned owner range constructs the
 predicate and contradicts the cutoff.  Consequently every target-size
 solution has a certified assignment whose nonzero cleaned range cannot be
-    covered by two indices.  For three cleaned residual buckets, exact second-
+covered by two indices.  The finite negative-cover argument is now
+kernel-banked through an explicit witness: in that same assignment there are
+three distinct prime factors with nonzero cleaned exponents, pairwise-distinct
+owners, pairwise-coprime cleaned powers, factor divisibility, and square
+residual divisibility.  This is an at-least-three witness, not an
+exactly-three decomposition when more owners remain.  For three cleaned
+residual buckets, exact second-
 and third-order eliminations are kernel-banked and all
 1,035 target index triples have distinct zero slopes.  The exact fourth local
 lift is now banked as well: each cleaned component supplies one cubic
@@ -98,8 +104,10 @@ OPEN CORE:
    every prime base.  The remaining gap has at least three distinct prime
    divisors.  For arbitrary prime support, finite factorization, owner choice,
    coprime bucket assembly, and `g<=G_k` are now banked.  The certified
-   assignment of any target-size solution has more than two nonzero cleaned
-   owner values; the remaining task is to contradict that multi-owner branch.
+   assignment of any target-size solution has three explicit distinct
+   nonzero cleaned owner witnesses; the remaining task is to contradict that
+   multi-owner branch.  The extraction does not absorb further owner buckets
+   into the bounded loss.
    In the exactly-three-cleaned-bucket slice, the current exact
    gap is the quantified short-CRT/window lemma in
    `compute/campaign686/three_bucket_findings.md`, now including the fourth

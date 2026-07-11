@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:5463f1e94aba5b2bb19a28b30a0579c4b6317f0f6e3583e6b46ba0132961bf0a",
+  "verifier_output_hash": "sha256:603768fe19c5160cb0e2302fe7f8c48d8e7632091cb362d8d8e12719797ee7af",
   "attestations": [
     {
       "problem": 154,
@@ -6273,6 +6273,30 @@
       "theorem": "Erdos730.FirstPowerRoutes.remaining_first_power_budget",
       "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
       "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.threeGlobalResidualOwnerWitness_of_not_two_cover",
+      "file": "ErdosProblems/Erdos686ThreeOwnerExtraction.lean",
+      "proof_hash": "sha256:6d056218c2d98025bdfc3a54741df01c3b35b78084d5a6d6dbcc5e1901e86b07",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_threeGlobalResidualOwnerWitness_of_target_size_solution",
+      "file": "ErdosProblems/Erdos686ThreeOwnerExtraction.lean",
+      "proof_hash": "sha256:6d056218c2d98025bdfc3a54741df01c3b35b78084d5a6d6dbcc5e1901e86b07",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

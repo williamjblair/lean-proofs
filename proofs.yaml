@@ -4831,3 +4831,23 @@ proofs:
       is 1779 over 2500.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeOwnerExtraction.lean
+    theorem: Erdos686.Erdos686Variant.threeGlobalResidualOwnerWitness_of_not_two_cover
+    statement: >-
+      A certified assignment with no two-index cover contains three explicit
+      nonzero cleaned prime powers at pairwise-distinct owners, with all
+      factor, square-residual, and coprimality data retained.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeOwnerExtraction.lean
+    theorem: Erdos686.Erdos686Variant.exists_threeGlobalResidualOwnerWitness_of_target_size_solution
+    statement: >-
+      Every target-size odd-row solution supplies one certified assignment
+      and an explicit at-least-three-owner witness inside that same
+      assignment.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

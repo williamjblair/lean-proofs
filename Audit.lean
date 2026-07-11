@@ -33,6 +33,7 @@ import ErdosProblems.Erdos686GlobalResidualConcentration
 import ErdosProblems.Erdos686GlobalResidualTwoPrime
 import ErdosProblems.Erdos686TwoOwnerAggregate
 import ErdosProblems.Erdos686TwoOwnerGroupingAudit
+import ErdosProblems.Erdos686ThreeOwnerExtractionHostileAudit
 import ErdosProblems.Erdos686ThreeBucketRestriction
 import ErdosProblems.Erdos686FourthLocalLiftAudit
 import ErdosProblems.Erdos686FiveThue
@@ -574,6 +575,8 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.fourth_order_local_algebra
 #print axioms Erdos686.Erdos686Variant.fourth_order_local_lift
 #print axioms Erdos686.Erdos686Variant.three_bucket_fourth_obstruction_dvd_cube
+#print axioms Erdos686.Erdos686Variant.threeGlobalResidualOwnerWitness_of_not_two_cover
+#print axioms Erdos686.Erdos686Variant.exists_threeGlobalResidualOwnerWitness_of_target_size_solution
 -- Conditional research surfaces; not listed in `proofs.yaml`.
 #print axioms Erdos686.Erdos686Variant.sq_dvd_finset_affine_prod_sub_constant_sub_linear
 #print axioms Erdos686.Erdos686Variant.localOffsetCofactor_second_order
