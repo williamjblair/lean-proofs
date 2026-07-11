@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:99a02460c6981511bef66ca6e9964a8ec98a5d90fbaf8eeb98a49a12a4105118",
+  "verifier_output_hash": "sha256:e24a389ac57d26b8710fc51fdfa48b19e4713bd3abe3f6a054f83ed531681322",
   "attestations": [
     {
       "problem": 154,
@@ -5186,6 +5186,246 @@
       "theorem": "Erdos730.halfBand_endpoint_payment_lt_one_percent",
       "file": "ErdosProblems/Erdos730HalfBandPayment.lean",
       "proof_hash": "sha256:3c1b5c51b7c6705da676d1ecd1edb78d596c85f8453ebd5088db5d5c0b337823",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_globalResidual_factorization_concentration_of_ne_three",
+      "file": "ErdosProblems/Erdos686GlobalResidualConcentration.lean",
+      "proof_hash": "sha256:495981605282c4a1963f95bdce0788b4baba6cfa05c8be00b8c57154f49f9e24",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_factorization_globalResidual_product",
+      "file": "ErdosProblems/Erdos686GlobalResidualConcentration.lean",
+      "proof_hash": "sha256:495981605282c4a1963f95bdce0788b4baba6cfa05c8be00b8c57154f49f9e24",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.primePower_component_exists_globalResidual_clean_of_ne_three",
+      "file": "ErdosProblems/Erdos686GlobalResidualConcentration.lean",
+      "proof_hash": "sha256:495981605282c4a1963f95bdce0788b4baba6cfa05c8be00b8c57154f49f9e24",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.threePower_component_exists_globalResidual_clean",
+      "file": "ErdosProblems/Erdos686GlobalResidualConcentration.lean",
+      "proof_hash": "sha256:495981605282c4a1963f95bdce0788b4baba6cfa05c8be00b8c57154f49f9e24",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.primePower_component_exists_globalResidual_clean",
+      "file": "ErdosProblems/Erdos686GlobalResidualConcentration.lean",
+      "proof_hash": "sha256:495981605282c4a1963f95bdce0788b4baba6cfa05c8be00b8c57154f49f9e24",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidual_prime_loss_factor_le",
+      "file": "ErdosProblems/Erdos686GlobalResidualConcentration.lean",
+      "proof_hash": "sha256:495981605282c4a1963f95bdce0788b4baba6cfa05c8be00b8c57154f49f9e24",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidual_three_loss_table",
+      "file": "ErdosProblems/Erdos686GlobalResidualConcentration.lean",
+      "proof_hash": "sha256:495981605282c4a1963f95bdce0788b4baba6cfa05c8be00b8c57154f49f9e24",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.localOffsetCofactor_third_order",
+      "file": "ErdosProblems/Erdos686GlobalResidualTwoPrime.lean",
+      "proof_hash": "sha256:ca1a59a8e3cef454d9255a8fd70dff3d7c516492bd4c379b097e711ef24c060d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.third_order_local_algebra",
+      "file": "ErdosProblems/Erdos686GlobalResidualTwoPrime.lean",
+      "proof_hash": "sha256:ca1a59a8e3cef454d9255a8fd70dff3d7c516492bd4c379b097e711ef24c060d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.third_order_local_lift",
+      "file": "ErdosProblems/Erdos686GlobalResidualTwoPrime.lean",
+      "proof_hash": "sha256:ca1a59a8e3cef454d9255a8fd70dff3d7c516492bd4c379b097e711ef24c060d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.localThirdQuadratic_eq_table",
+      "file": "ErdosProblems/Erdos686GlobalResidualTwoPrime.lean",
+      "proof_hash": "sha256:ca1a59a8e3cef454d9255a8fd70dff3d7c516492bd4c379b097e711ef24c060d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.target_local_taylor_bounds",
+      "file": "ErdosProblems/Erdos686GlobalResidualTwoPrime.lean",
+      "proof_hash": "sha256:ca1a59a8e3cef454d9255a8fd70dff3d7c516492bd4c379b097e711ef24c060d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.clean_second_obstruction_divisibilities",
+      "file": "ErdosProblems/Erdos686GlobalResidualTwoPrime.lean",
+      "proof_hash": "sha256:ca1a59a8e3cef454d9255a8fd70dff3d7c516492bd4c379b097e711ef24c060d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.clean_third_zero_component_dvd",
+      "file": "ErdosProblems/Erdos686GlobalResidualTwoPrime.lean",
+      "proof_hash": "sha256:ca1a59a8e3cef454d9255a8fd70dff3d7c516492bd4c379b097e711ef24c060d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_clean_residual_buckets_below_cutoff",
+      "file": "ErdosProblems/Erdos686GlobalResidualTwoPrime.lean",
+      "proof_hash": "sha256:ca1a59a8e3cef454d9255a8fd70dff3d7c516492bd4c379b097e711ef24c060d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_prime_support_below_cutoff_of_global_residual_lifts",
+      "file": "ErdosProblems/Erdos686GlobalResidualTwoPrime.lean",
+      "proof_hash": "sha256:ca1a59a8e3cef454d9255a8fd70dff3d7c516492bd4c379b097e711ef24c060d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_second_obstruction_dvd",
+      "file": "ErdosProblems/Erdos686ThreeBucketRestriction.lean",
+      "proof_hash": "sha256:baea042c70c412a0fad120239c07f707e390acea1416aaad8024985c47f85aea",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_third_obstruction_dvd_sq",
+      "file": "ErdosProblems/Erdos686ThreeBucketRestriction.lean",
+      "proof_hash": "sha256:baea042c70c412a0fad120239c07f707e390acea1416aaad8024985c47f85aea",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_slope_determinant_eq_zero_of_two_zeros",
+      "file": "ErdosProblems/Erdos686ThreeBucketRestriction.lean",
+      "proof_hash": "sha256:baea042c70c412a0fad120239c07f707e390acea1416aaad8024985c47f85aea",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_third_mod_owner_reduces_to_second",
+      "file": "ErdosProblems/Erdos686ThreeBucketRestriction.lean",
+      "proof_hash": "sha256:baea042c70c412a0fad120239c07f707e390acea1416aaad8024985c47f85aea",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

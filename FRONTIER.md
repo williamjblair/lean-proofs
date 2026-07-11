@@ -35,13 +35,18 @@ The exact equation also has a global quadratic lift: with
 `X_i=3(n+i)-d`, coefficient cancellation in
 `prod(X_i+4d)=4 prod(X_i+d)` gives
 `d^2 | prod_i X_i` with no prime-base or localization exception.
-For a gap with exactly two distinct prime divisors, the concentrated
-components must land at distinct noncentral factors; if both prime bases
-are at least `k`, their residuals give
-`a*p^(2e)-b*q^(2f)=3(i-j)` with `ab<A_k^2`.  A second local Taylor
-coefficient and six exact finite obstruction certificates now close that
-entire `p,q>=k` regime below `10^120`; the remaining two-prime slice has
-`min(p,q)<k`.  Two additional global moment identities use `2^2=4` to make
+Global residual concentration now cleans every prime-power component,
+including bases `2` and `3`, into a square divisor of one residual with an
+explicit loss.  Combining two such components with second and third local
+Taylor lifts closes **every** gap having exactly two distinct prime divisors
+below `10^120`; no `p,q>=k` hypothesis remains.  Thus any surviving odd-tail
+gap has at least three distinct prime divisors.  For three cleaned residual
+buckets, exact second- and third-order eliminations are kernel-banked and all
+1,035 target index triples have distinct zero slopes.  A 121-digit CRT
+non-solution satisfies the square, moment, and local congruences while
+failing both the equation and short window, so the exact remaining
+three-bucket node is archimedean/short-CRT rather than a finite resultant.
+Two additional global moment identities use `2^2=4` to make
 `d^3` divide explicit constant-plus-linear coefficient combinations.  They
 are cubic combinations, not cubic divisibility of either residual product.
 For `k≥16`, the
@@ -69,10 +74,12 @@ OPEN CORE:
    closure needs effective irrationality for 4^{1/k} below Liouville
    (none exists; hypergeometric method structurally fails at these k)
    or new CF structure. Watch: Calegari–Dimitrov–Tang holonomy program.
-   The pure-prime-power subcase is now excluded for every prime base;
-   the remaining gap has at least two distinct prime divisors.  Exactly two
-   components with both bases at least `k` are excluded; small-base
-   concentration and gaps with at least three prime divisors remain active.
+   The one- and two-distinct-prime-support subcases are now excluded for
+   every prime base.  The remaining gap has at least three distinct prime
+   divisors.  In the exactly-three-cleaned-bucket slice, the current exact
+   gap is the quantified short-CRT/window lemma in
+   `compute/campaign686/three_bucket_findings.md`; four-or-more buckets remain
+   unrestricted by that lemma.
 2. `LargeKSmoothHypothesis` — no k ≥ 16 solution with an entirely
    (d+k)-smooth lower block (prime obstruction banked; census: two
    clusters in 145+ billion window points, neither an equation solution).

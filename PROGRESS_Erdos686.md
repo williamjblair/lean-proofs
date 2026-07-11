@@ -25,8 +25,11 @@ theorem erdos686_false_of_constant_bound_and_large_escape
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 438 manifest-tracked theorems (399 for problem 686), axioms ⊆
-`[propext, Classical.choice, Quot.sound]`, no `native_decide`, no `sorry`.
+[R] CI gate: 458 manifest-tracked theorems (419 for problem 686), 458
+regenerated attestations, and 884 headline theorem surfaces with axioms
+contained in `[propext, Classical.choice, Quot.sound]`.  Every new module also
+passed its standalone build, exact reproduction, and independent hostile
+audit.
 
 [R] **All pure prime-power odd tails are closed.**  The p-adic lift module
 now proves that for every prime `p`, exponent `e`, and
@@ -51,17 +54,26 @@ wrapper in the live range.  This removes the derivative-coefficient loss
 before any new primewise concentration; it is a proper consequence, not yet
 a mixed-prime closure.
 
-[R] **Two-prime gaps are forced into a finite-coefficient noncentral
-regime.**  For `d=p^e q^f≥10^120`, concentration losses are at most `4096`
-per base.  The two components cannot land at one factor, and neither can
-land at the odd center; both exclusions have explicit constants below the
-cutoff.  If `p,q≥k`, the surviving data satisfy
-`a*p^(2e)-b*q^(2f)=3(i-j)` with `ab<A_k^2` and distinct noncentral `i,j`.
-The second local Taylor coefficient turns the two component divisibilities
-into fixed obstruction integers.  Six kernel-checked finite certificates
-prove they never vanish simultaneously and are below `10^20`; the Pell
-ratio then forces `d<35*10^40<10^120`.  Thus this entire regime is closed.
-The remaining two-prime slice has `min(p,q)<k`.
+[R] **Every two-distinct-prime gap is closed.**  The global square lift now
+cleans each `p^e|d` into a component `h` with `h|d`, `h|n+i`, and
+`h^2|3(n+i)-d`.  The exact loss is at most `64` for `p≠3` and `59049` for
+`p=3`; the latter is proved by removing the common three from the whole
+residual progression.  For `d=p^e q^f`, same-owner components multiply as
+coprime squares.  Distinct owners satisfy the cleaned Pell relation and
+second local obstructions; simultaneous reflected zeros are repaired by the
+third local lift with exact coefficient `20`.  The fully composed Lean
+theorem gives `d<10^120` for all distinct primes `p,q`, including `2,3`,
+without a base-size hypothesis.  Any surviving odd tail therefore has at
+least three distinct prime divisors.
+
+[R] **Three cleaned buckets have exact second/third restrictions, but no
+closure.**  For `d=gPQR` and three step-three square residuals, Lean proves
+`P|3(C_iabc-12D_ig^2(i-j)(i-l))` and the companion square divisibility
+`P^2|-3O_i+180E_ig^2(i-j)(i-l)d`, cyclically.  Exact arithmetic checks all
+1,035 index triples and 5,216 signed fixtures.  A 121-digit CRT construction
+satisfies this congruence package and both global moments but is explicitly
+not an equation solution and exceeds the verified short window.  The live
+three-bucket gap is the quantified short-CRT lemma, not a claimed resultant.
 
 [R] **Two global cubic moment combinations.**  Expanding at the evaluation
 ratio `2^2=4` cancels every term through degree two after explicit constant

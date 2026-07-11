@@ -1,5 +1,15 @@
 # Prompt: complete the refutation of Erdős #686
 
+> **2026-07-10 campaign update.**  Global residual concentration plus exact
+> second/third local lifts now exclude every odd-tail gap with one or exactly
+> two distinct prime divisors, uniformly including bases `2` and `3`.  Any
+> surviving Target 1 gap therefore has at least three distinct prime divisors.
+> For three cleaned residual buckets, cyclic second/third obstruction formulas
+> are kernel-banked and hostile-audited, but a 121-digit CRT non-solution shows
+> that the congruences alone do not enforce the verified short window.  The
+> exact next three-bucket node is the quantified short-CRT lemma in
+> `compute/campaign686/three_bucket_findings.md`; Target 1 itself remains open.
+
 ## Current task statement
 
 For naturals k, n, m write B(k, x) = (x+1)(x+2)···(x+k). Erdős

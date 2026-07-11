@@ -4013,6 +4013,186 @@ proofs:
       percent with a positive exact rational margin.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualConcentration.lean
+    theorem: Erdos686.Erdos686Variant.exists_globalResidual_factorization_concentration_of_ne_three
+    statement: >-
+      Away from the prime three, a maximum residual factor absorbs all but
+      half the consecutive-block valuation loss forced by the global square.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualConcentration.lean
+    theorem: Erdos686.Erdos686Variant.three_factorization_globalResidual_product
+    statement: >-
+      At the prime three, the residual product factors exactly after removing
+      the common factor from every term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualConcentration.lean
+    theorem: Erdos686.Erdos686Variant.primePower_component_exists_globalResidual_clean_of_ne_three
+    statement: >-
+      Every non-three prime-power component of the gap has a cleaned square
+      divisor concentrated in one positive residual and its matching factor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualConcentration.lean
+    theorem: Erdos686.Erdos686Variant.threePower_component_exists_globalResidual_clean
+    statement: >-
+      The prime-three component has the analogous cleaned residual square
+      concentration with its exact common-factor loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualConcentration.lean
+    theorem: Erdos686.Erdos686Variant.primePower_component_exists_globalResidual_clean
+    statement: >-
+      A uniform wrapper supplies the cleaned residual component for every
+      prime base, including two and three and the zero-clean-exponent edge.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualConcentration.lean
+    theorem: Erdos686.Erdos686Variant.globalResidual_prime_loss_factor_le
+    statement: >-
+      In the six odd rows the exact retained-component loss is at most sixty
+      four away from three and at most 59049 at three.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualConcentration.lean
+    theorem: Erdos686.Erdos686Variant.globalResidual_three_loss_table
+    statement: >-
+      Kernel arithmetic computes the exact prime-three loss exponents in all
+      six target rows.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualTwoPrime.lean
+    theorem: Erdos686.Erdos686Variant.localOffsetCofactor_third_order
+    statement: >-
+      The signed local cofactor has an exact third-order Taylor remainder
+      divisible by the cube of its increment.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualTwoPrime.lean
+    theorem: Erdos686.Erdos686Variant.third_order_local_algebra
+    statement: >-
+      Pure integer algebra converts the exact block ratio and cubic Taylor
+      remainders into the third signed local divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualTwoPrime.lean
+    theorem: Erdos686.Erdos686Variant.third_order_local_lift
+    statement: >-
+      A cleaned residual square localization in an exact gap satisfies the
+      third-order local Taylor congruence with coefficient twenty.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualTwoPrime.lean
+    theorem: Erdos686.Erdos686Variant.localThirdQuadratic_eq_table
+    statement: >-
+      A build-safe recursive coefficient certificate agrees with the exact
+      quadratic Taylor table in every target row and owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualTwoPrime.lean
+    theorem: Erdos686.Erdos686Variant.target_local_taylor_bounds
+    statement: >-
+      All three local Taylor coefficients are explicitly bounded and every
+      target-row quadratic coefficient is nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualTwoPrime.lean
+    theorem: Erdos686.Erdos686Variant.clean_second_obstruction_divisibilities
+    statement: >-
+      The cleaned Pell relation turns both second local lifts into fixed
+      signed obstruction divisibilities with the cleaning cofactor visible.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualTwoPrime.lean
+    theorem: Erdos686.Erdos686Variant.clean_third_zero_component_dvd
+    statement: >-
+      If a cleaned second obstruction vanishes, the third lift bounds its
+      owner after coprime cancellation of the opposite component.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualTwoPrime.lean
+    theorem: Erdos686.Erdos686Variant.two_clean_residual_buckets_below_cutoff
+    statement: >-
+      Two coprime cleaned residual buckets with the audited uniform cofactor
+      and local lifts have product below ten to the 120.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686GlobalResidualTwoPrime.lean
+    theorem: Erdos686.Erdos686Variant.two_prime_support_below_cutoff_of_global_residual_lifts
+    statement: >-
+      Every exact six-row gap with exactly two distinct prime bases is below
+      ten to the 120, with no lower bound on either base.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketRestriction.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_second_obstruction_dvd
+    statement: >-
+      Three step-three cleaned square residuals eliminate the two opposite
+      squares and force the exact second obstruction at each owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketRestriction.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_third_obstruction_dvd_sq
+    statement: >-
+      The third local lift composes into a square divisibility involving the
+      second obstruction and one explicit linear gap term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketRestriction.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_slope_determinant_eq_zero_of_two_zeros
+    statement: >-
+      Two vanished three-bucket obstructions force the exact cross-slope
+      determinant to vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketRestriction.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_third_mod_owner_reduces_to_second
+    statement: >-
+      Modulo its owner, the composed third obstruction reduces to minus three
+      times the second obstruction and supplies no hidden resultant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 617
     source: erdosproblems
     file: ErdosProblems/Erdos617.lean

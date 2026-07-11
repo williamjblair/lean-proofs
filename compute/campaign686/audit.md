@@ -6,11 +6,11 @@ It is updated as candidates enter or leave the proof path.
 ## Baseline
 
 - Focused terminal module compiles.
-- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 438
+- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 458
   theorem names.
-- The full axiom audit reports 864 theorem surfaces, all within the allowed
-  set `[propext, Classical.choice, Quot.sound]`.
-- `attestations.json` was regenerated successfully for all 438 entries.
+- The combined full axiom audit reports 884 theorem surfaces, all within the
+  allowlist `[propext, Classical.choice, Quot.sound]`.
+- `attestations.json` was regenerated successfully for all 458 entries.
 
 ## Dependency tree: odd-tail prime-power restriction
 
@@ -81,10 +81,36 @@ next node is valuation concentration inside the residual progression.
    and independently hostile-audited.**
 9. The Pell ratio bounds then give
    `d < 35 * 10^40 < 10^120`. **Lean banked.**
+10. Global residual cleaning removes the base-size hypothesis with loss at
+    most `64` for each base other than three and `59049` at three.  Same-owner
+    clean components multiply as coprime squares; distinct owners enter the
+    second/third obstruction split. **Lean banked, exact-reproduced, and
+    independently hostile-audited.**
+11. Hence every exact gap `d=p^e q^f` with distinct primes and positive
+    exponents is below `10^120`, including bases `2` and `3`. **Lean banked.**
 
-Verdict: the complete clean two-prime slice `p,q>=k` is closed, not merely
-reduced to Pell families.  The exact remaining two-prime slice has
-`min(p,q)<k`; three-or-more-prime support is unaffected.
+Verdict: the complete two-distinct-prime-support slice is closed, not merely
+reduced to Pell families.  The remaining odd-tail gap has at least three
+distinct prime divisors.
+
+## Dependency tree: three cleaned residual buckets
+
+1. Three pairwise-coprime cleaned buckets at distinct owners give two exact
+   step-three square-difference equations. **Explicit hypotheses.**
+2. Multiplying one second local lift by the two opposite coefficients
+   eliminates both opposite squares and gives `P|O_i`. **Lean banked.**
+3. The third local lift composes to
+   `P^2|-3O_i+180E_i g^2(i-j)(i-l)d`. **Lean banked.**
+4. All 1,035 unordered target triples have three pairwise-distinct exact zero
+   slopes. **Exact-reproduced; not claimed kernel-enumerated.**
+5. A 121-digit CRT pseudo-witness satisfies the square, second, third, global
+   square, and both global moment congruences, while its block equation and
+   `X_i<14d` window both fail. **Independent exact hostile reproduction.**
+
+Verdict: proper local restriction and decisive falsification of a
+congruence-only resultant route.  The single remaining exactly-three-bucket
+node is the quantified short-CRT/window lemma; it is not proved here and does
+not cover four-or-more buckets.
 
 ## Dependency tree: global cubic moment lifts
 

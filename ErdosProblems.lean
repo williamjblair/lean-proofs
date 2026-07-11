@@ -25,6 +25,9 @@ import ErdosProblems.Erdos686MatchingCompression
 import ErdosProblems.Erdos686MomentLifts
 import ErdosProblems.Erdos686TwoPrimeGap
 import ErdosProblems.Erdos686TwoPrimeSecondLift
+import ErdosProblems.Erdos686GlobalResidualConcentration
+import ErdosProblems.Erdos686GlobalResidualTwoPrime
+import ErdosProblems.Erdos686ThreeBucketRestriction
 import ErdosProblems.Erdos686ConvergentMachinery
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686SevenThue
