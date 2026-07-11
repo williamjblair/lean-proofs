@@ -1,6 +1,7 @@
 from compute23.gate3.gap_gb_joint_verify import (
     build_long_tail_c5_fixture,
     colored_fixture,
+    endpoint_gamma_block_absorbs,
     endpoint_move_budget_nonincrease,
     exact_series_induction_gate,
     joint_distance_excess,
@@ -91,4 +92,13 @@ def test_endpoint_move_budget_nonincrease_exact_grid() -> None:
         endpoint_move_budget_nonincrease(s=s, d=d)
         for s in range(0, 100)
         for d in range(2, 100)
+    )
+
+
+def test_endpoint_gamma_block_absorption_exact_grid() -> None:
+    assert all(
+        endpoint_gamma_block_absorbs(order=order, s=s, d=d)
+        for order in range(2, 100)
+        for s in range(0, 100)
+        for d in range(1, 100)
     )

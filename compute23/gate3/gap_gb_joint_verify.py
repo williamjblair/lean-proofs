@@ -217,6 +217,20 @@ def endpoint_move_budget_nonincrease(*, s: int, d: int) -> bool:
     return after <= before
 
 
+def endpoint_gamma_block_absorbs(*, order: int, s: int, d: int) -> bool:
+    """Exact endpoint-bridge absorption with a Gamma-controlled block."""
+
+    assert order >= 2 and s >= 0 and d >= 1
+    local = s * (2 * d + 2 + s) + 2 * s * p_of_d(d)
+    whole_s = s + order - 1
+    whole_d = d + 1
+    whole = (
+        whole_s * (2 * whole_d + 2 + whole_s)
+        + 2 * whole_s * p_of_d(whole_d)
+    )
+    return order**2 + local <= whole
+
+
 if __name__ == "__main__":
     tail = rooted_metrics(**build_long_tail_c5_fixture(3, 5))
     print(

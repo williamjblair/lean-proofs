@@ -24,10 +24,10 @@ new result.
 
 | ID | Route | Proposed leverage | Initial status |
 |---|---|---|---|
-| GB-FLOW | RFC flow/cut duality | Sum a weighted laminar family of RFC cuts so every long demand receives quadratic credit while corridor capacity is counted once. | active; must not assume multicommodity routability |
-| GB-2E | Two-edge joint excess | Prove that two internal edges cannot simultaneously approach the single-edge bounds; test `sum(D_i-4)<=2*s-4` and capacity-corrected variants. | active; first proper fallback is all `|M|=2` |
-| GB-DEL | Bridge-free deletion/induction | Delete or split at a corridor vertex whose removal preserves a smaller valid instance and quantify the exact distance/mass change. | active; must preserve bipartiteness, RFC, and distances explicitly |
-| GB-END | Endpoint-near series absorption | Extend the banked series theorem when one bridge component has at most three vertices by classifying the finite rooted block and paying its exact budget. | active; proper enlargement of the current series slice |
+| GB-FLOW | RFC flow/cut duality | Sum a weighted laminar family of RFC cuts so every long demand receives quadratic credit while corridor capacity is counted once. | blocked as a proof route: cut domination does not imply multicommodity routing; retained only as BF-RL search context |
+| GB-2E | Two-edge joint excess | Prove that two internal edges cannot simultaneously approach the single-edge bounds; test `sum(D_i-4)<=2*s-4` and capacity-corrected variants. | falsification-only: raw excess survives samples but is arithmetically insufficient for BF-RL without a separate multiplicity/cross-term bound |
+| GB-DEL | Bridge-free deletion/induction | Delete or split at a corridor vertex whose removal preserves a smaller valid instance and quantify the exact distance/mass change. | partial success: every corridor bridge is eliminated; remaining graph is fully corridor-bridge-free with `d<=2s`, `s>=5` |
+| GB-END | Endpoint-near series absorption | Extend the banked series theorem when one bridge component has at most three vertices by classifying the finite rooted block and paying its exact budget. | completed: exact gate dispatch, small-block retraction, and arbitrary endpoint-block absorption are proved |
 
 ## Mandatory falsification fixtures
 
@@ -47,3 +47,9 @@ Every candidate must be checked against:
 - Do not assign a uniform per-vertex load; the forced hub falsifies it.
 - Do not invoke multicommodity routing from the RFC cut condition.
 - Do not use order-11 flag algebras or a target-strength aggregation lemma.
+
+## Banked frontier after this campaign
+
+See `gap_gb_joint_findings.md` and `gap_gb_joint_audit.md`. The single open
+node is BF-RL on a selected geodesic whose every edge is a nonbridge, with
+the additional proved numerical restrictions `s>=5` and `d<=2s`.

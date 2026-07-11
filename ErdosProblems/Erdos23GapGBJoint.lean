@@ -67,6 +67,55 @@ theorem rlBudget_pred_le {s d : ℕ} (hd : 2 ≤ d) :
       Nat.add_le_add_left hmul _
     _ = s * (2 * d + 2 + s) + 2 * s * partnerDistance d := by ring
 
+/-- Absorption inequality for a Gamma-controlled block attached beyond an
+endpoint corridor bridge.  A block of order `a >= 2` contributes at most
+`a^2`; the remaining rooted block has slack `s` and distance `d`, while the
+whole instance has slack `s+a-1` and distance `d+1`. -/
+theorem gammaBlock_endpointBridge_le_rlBudget
+    {a s d Γ : ℕ} (ha : 2 ≤ a) (hd : 1 ≤ d) (hΓ : Γ ≤ a ^ 2) :
+    Γ + rlBudget s d ≤ rlBudget (s + a - 1) (d + 1) := by
+  have hp : partnerDistance d ≤ partnerDistance (d + 1) + 1 := by
+    unfold partnerDistance
+    by_cases hd1 : d = 1
+    · subst d
+      decide
+    · by_cases heven : d % 2 = 0
+      · have hmod := Nat.add_mod d 1 2
+        have hd0 : d ≠ 0 := by omega
+        have hnextOdd : (d + 1) % 2 ≠ 0 := by
+          simp [heven] at hmod
+          omega
+        simp [hd0, hd1, heven, hnextOdd]
+      · simp [hd1, heven]
+  have hppos := partnerDistance_pos (d + 1)
+  have hmul := Nat.mul_le_mul_left (2 * s) hp
+  have hsa : s + a - 1 = s + (a - 1) := by omega
+  have haEq : a - 1 + 1 = a := by omega
+  rw [hsa]
+  unfold rlBudget
+  calc
+    Γ + (s * (2 * d + 2 + s) + 2 * s * partnerDistance d) ≤
+        a ^ 2 + (s * (2 * d + 2 + s) +
+          2 * s * (partnerDistance (d + 1) + 1)) := by omega
+    _ ≤ (s + (a - 1)) *
+          (2 * (d + 1) + 2 + (s + (a - 1))) +
+        2 * (s + (a - 1)) * partnerDistance (d + 1) := by
+      nlinarith [show 0 ≤ 2 * s * (a - 1) by omega,
+        show 0 ≤ 2 * (a - 1) * d by omega,
+        show 0 ≤ 2 * (a - 1) * partnerDistance (d + 1) by omega]
+
+/-- Removing an M-free endpoint block of `a` vertices retracts one corridor
+edge and `a-1` slack vertices, and cannot increase the RL budget. -/
+theorem rlBudget_endpointBlock_retraction_le
+    {a s d : ℕ} (hd : 2 ≤ d) :
+    rlBudget (s - (a - 1)) (d - 1) ≤ rlBudget s d := by
+  calc
+    rlBudget (s - (a - 1)) (d - 1) ≤ rlBudget s (d - 1) := by
+      unfold rlBudget
+      have hp := partnerDistance_pos (d - 1)
+      nlinarith [Nat.sub_le s (a - 1)]
+    _ ≤ rlBudget s d := rlBudget_pred_le hd
+
 /-- Exact residual dispatch for an interior series bridge.  If both bridge
 components contain at least three vertices, strict Gamma induction applies
 through the exact partner-distance gate.  Thus any gate failure in the
@@ -205,37 +254,33 @@ theorem offCorridorComponentFinset_card_pos
   obtain ⟨x, hx⟩ := C.nonempty
   exact Finset.card_pos.mpr ⟨x, (mem_offCorridorComponentFinset C).2 hx⟩
 
-/-- Graph-level bridge-free corridor bound.  This instantiates the abstract
-interval count with the canonical connected components of `G - V(P)` and
-uses the already verified attachment-span theorem. -/
-theorem IsGeodesic.length_le_twice_slack_add_two_of_interior_nonbridge
+/-- Any specified set of nonbridge corridor edges is bounded by twice the
+off-corridor slack.  This instantiates the interval count with the canonical
+connected components of `G - V(P)`. -/
+theorem IsGeodesic.corridorIndexSet_card_le_twice_slack
     [Fintype V] [DecidableEq V] {G : SimpleGraph V} {u v : V}
-    {P : G.Walk u v} (hP : IsGeodesic P) (hd : 2 ≤ P.length)
-    (hnonbridge : ∀ i ∈ interiorCorridorIndices P.length,
+    {P : G.Walk u v} (hP : IsGeodesic P) (indices : Finset ℕ)
+    (hindices : ∀ i ∈ indices, i < P.length)
+    (hnonbridge : ∀ i ∈ indices,
       ¬G.IsBridge s(P.getVert i, P.getVert (i + 1))) :
-    P.length ≤ 2 * slack P + 2 := by
+    indices.card ≤ 2 * slack P := by
   classical
   let components : Finset (OffCorridorComponent P) := Finset.univ
   let intervals : OffCorridorComponent P → Finset ℕ :=
     offCorridorComponentIntervalEdges P
-  have hcover : interiorCorridorIndices P.length ⊆
-      components.biUnion intervals := by
+  have hcover : indices ⊆ components.biUnion intervals := by
     intro i hi
-    have hiLt : i < P.length := by
-      have hiIco := (Finset.mem_Ico.mp hi).2
-      omega
     obtain ⟨C, hC⟩ :=
-      hP.exists_offCorridorComponent_coversIndex_of_not_isBridge hiLt
+      hP.exists_offCorridorComponent_coversIndex_of_not_isBridge (hindices i hi)
         (hnonbridge i hi)
     apply Finset.mem_biUnion.mpr
     exact ⟨C, Finset.mem_univ C,
       mem_offCorridorComponentIntervalEdges_of_coversIndex P C hC⟩
   have hunion :
-      (interiorCorridorIndices P.length).card ≤
-        ∑ C : OffCorridorComponent P, (intervals C).card := by
+      indices.card ≤ ∑ C : OffCorridorComponent P, (intervals C).card := by
     calc
-      (interiorCorridorIndices P.length).card ≤
-          (components.biUnion intervals).card := Finset.card_le_card hcover
+      indices.card ≤ (components.biUnion intervals).card :=
+        Finset.card_le_card hcover
       _ ≤ ∑ C ∈ components, (intervals C).card :=
         Finset.card_biUnion_le
       _ = ∑ C : OffCorridorComponent P, (intervals C).card := by
@@ -296,15 +341,46 @@ theorem IsGeodesic.length_le_twice_slack_add_two_of_interior_nonbridge
     rw [hmassRaw, Finset.card_sdiff]
     simp only [Finset.inter_univ, Finset.card_univ, slack]
     omega
-  have hcard : (interiorCorridorIndices P.length).card ≤ 2 * slack P := by
+  have hcard : indices.card ≤ 2 * slack P := by
     rw [Finset.sum_add_distrib] at hspan
     simp only [Finset.sum_const, smul_eq_mul] at hspan
     omega
+  exact hcard
+
+/-- If every interior corridor edge is a nonbridge, then the corridor has
+length at most `2s+2`. -/
+theorem IsGeodesic.length_le_twice_slack_add_two_of_interior_nonbridge
+    [Fintype V] [DecidableEq V] {G : SimpleGraph V} {u v : V}
+    {P : G.Walk u v} (hP : IsGeodesic P) (hd : 2 ≤ P.length)
+    (hnonbridge : ∀ i ∈ interiorCorridorIndices P.length,
+      ¬G.IsBridge s(P.getVert i, P.getVert (i + 1))) :
+    P.length ≤ 2 * slack P + 2 := by
+  have hcard := corridorIndexSet_card_le_twice_slack hP
+    (interiorCorridorIndices P.length) (by
+      intro i hi
+      have hiIco := (Finset.mem_Ico.mp hi).2
+      omega) hnonbridge
   have hcardEq : (interiorCorridorIndices P.length).card = P.length - 2 := by
     simp [interiorCorridorIndices]
     omega
   rw [hcardEq] at hcard
   omega
+
+/-- If every edge of the selected geodesic is a nonbridge, complete
+attachment coverage removes the two endpoint losses and gives `d <= 2s`. -/
+theorem IsGeodesic.length_le_twice_slack_of_all_nonbridge
+    [Fintype V] [DecidableEq V] {G : SimpleGraph V} {u v : V}
+    {P : G.Walk u v} (hP : IsGeodesic P)
+    (hnonbridge : ∀ i < P.length,
+      ¬G.IsBridge s(P.getVert i, P.getVert (i + 1))) :
+    P.length ≤ 2 * slack P := by
+  let indices := Finset.Ico 0 P.length
+  have hcard := corridorIndexSet_card_le_twice_slack hP indices (by
+    intro i hi
+    exact (Finset.mem_Ico.mp hi).2) (by
+      intro i hi
+      exact hnonbridge i (Finset.mem_Ico.mp hi).2)
+  simpa [indices] using hcard
 
 /-- Concrete bridge-free residual consequence, expressed directly using
 the ambient graph order and the canonical geodesic slack. -/
@@ -321,6 +397,20 @@ theorem IsGeodesic.slack_at_least_four_of_large_bridge_free_corridor
   simp only [slack] at hcorridor ⊢
   omega
 
+/-- After endpoint-bridge reduction as well, the full bridge-free residual
+has at least five slack vertices. -/
+theorem IsGeodesic.slack_at_least_five_of_large_all_nonbridge_corridor
+    [Fintype V] [DecidableEq V] {G : SimpleGraph V} {u v : V}
+    {P : G.Walk u v} (hP : IsGeodesic P)
+    (hn : 14 ≤ Fintype.card V)
+    (hnonbridge : ∀ i < P.length,
+      ¬G.IsBridge s(P.getVert i, P.getVert (i + 1))) :
+    5 ≤ slack P := by
+  have hcorridor := length_le_twice_slack_of_all_nonbridge hP hnonbridge
+  have hsupp := hP.card_supportFinset
+  simp only [slack] at hcorridor ⊢
+  omega
+
 end GraphApplication
 
 #print axioms interior_coverage_card_le_twice_mass
@@ -328,8 +418,13 @@ end GraphApplication
 #print axioms bridge_free_residual_slack_at_least_four
 #print axioms partnerDistance_eq_three_iff
 #print axioms rlBudget_pred_le
+#print axioms gammaBlock_endpointBridge_le_rlBudget
+#print axioms rlBudget_endpointBlock_retraction_le
 #print axioms residual_series_gate_or_endpoint_pair
+#print axioms IsGeodesic.corridorIndexSet_card_le_twice_slack
 #print axioms IsGeodesic.length_le_twice_slack_add_two_of_interior_nonbridge
+#print axioms IsGeodesic.length_le_twice_slack_of_all_nonbridge
 #print axioms IsGeodesic.slack_at_least_four_of_large_bridge_free_corridor
+#print axioms IsGeodesic.slack_at_least_five_of_large_all_nonbridge_corridor
 
 end Erdos23GapGBJoint
