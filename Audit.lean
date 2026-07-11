@@ -34,6 +34,8 @@ import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686FinalReduction
 import ErdosProblems.Erdos730NearAffinePayment
 import ErdosProblems.Erdos730HalfBandPayment
+import ErdosProblems.Erdos730UnitBandPayment
+import ErdosProblems.Erdos730UnitBandPaymentAudit
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727
 
@@ -493,6 +495,19 @@ import ErdosProblems.Erdos727
 #print axioms Erdos730.powered_threshold_of_halfBand_maximal
 #print axioms Erdos730.halfBand_endpoint_powered_threshold_certificate
 #print axioms Erdos730.halfBand_endpoint_payment_lt_one_percent
+#print axioms Erdos730.unitBandEnvelope_forces_high_exponent
+#print axioms Erdos730.unitBandEnvelope_prime_power_clearance
+#print axioms Erdos730.cutoff_lt_of_unitBand_maximal
+#print axioms Erdos730.unitBandDyadicThresholdBase_strictMono_step
+#print axioms Erdos730.unitBand_endpoint_threshold_certificate
+#print axioms Erdos730.unitBand_endpoint_sqrt_floor_certificate
+#print axioms Erdos730.unitBand_endpoint_cuberoot_floor_certificate
+#print axioms Erdos730.unitBand_endpoint_payment_identity
+#print axioms Erdos730.unitBand_endpoint_payment_lt_one_percent
+#print axioms Erdos730.unitBand_endpoint_payment_margin
+#print axioms Erdos730.audit_unitBandEnvelope_iff
+#print axioms Erdos730.audit_unitBand_complement_iff
+#print axioms Erdos730.audit_unitBand_slack_ge_iff
 #print axioms Erdos617.Balanced.no_monochromatic_clique
 #print axioms Erdos617.Balanced.sum_le_sq
 #print axioms Erdos617.statement_five_of_extension_demand

@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:e24a389ac57d26b8710fc51fdfa48b19e4713bd3abe3f6a054f83ed531681322",
+  "verifier_output_hash": "sha256:9c25680edcadcd1dc584ae408c5fc6ab6bab85c4bedf82eee40565d8de00099c",
   "attestations": [
     {
       "problem": 154,
@@ -5426,6 +5426,160 @@
       "theorem": "Erdos686.Erdos686Variant.three_bucket_third_mod_owner_reduces_to_second",
       "file": "ErdosProblems/Erdos686ThreeBucketRestriction.lean",
       "proof_hash": "sha256:baea042c70c412a0fad120239c07f707e390acea1416aaad8024985c47f85aea",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.unitBandEnvelope_forces_high_exponent",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.unitBandEnvelope_prime_power_clearance",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.cutoff_lt_of_unitBand_maximal",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.unitBandDyadicThresholdBase_strictMono_step",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.unitBand_endpoint_threshold_certificate",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.unitBand_endpoint_sqrt_floor_certificate",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.unitBand_endpoint_cuberoot_floor_certificate",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.unitBand_endpoint_payment_identity",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.unitBand_endpoint_payment_lt_one_percent",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.unitBand_endpoint_payment_margin",
+      "file": "ErdosProblems/Erdos730UnitBandPayment.lean",
+      "proof_hash": "sha256:c4bdabbb108a817be8fd8d49bc2211995833d56740bb3251dae077191d9e9964",
+      "axiom_footprint": [
+        "propext"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.audit_unitBandEnvelope_iff",
+      "file": "ErdosProblems/Erdos730UnitBandPaymentAudit.lean",
+      "proof_hash": "sha256:a4b0303f742dfd296b0c0f947490507ed95575a9d656f2437521633cf653e057",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.audit_unitBand_complement_iff",
+      "file": "ErdosProblems/Erdos730UnitBandPaymentAudit.lean",
+      "proof_hash": "sha256:a4b0303f742dfd296b0c0f947490507ed95575a9d656f2437521633cf653e057",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.audit_unitBand_slack_ge_iff",
+      "file": "ErdosProblems/Erdos730UnitBandPaymentAudit.lean",
+      "proof_hash": "sha256:a4b0303f742dfd296b0c0f947490507ed95575a9d656f2437521633cf653e057",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

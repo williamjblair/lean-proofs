@@ -148,13 +148,13 @@ the exact valuation.  A stronger progression construction fixes the low
 `s/r<kappa_p/(1-kappa_p)`.  Its exact `p=5,r=432,s=176` witness lies in the
 former separated range and refutes the proposed signed Fourier inequality
 itself by a factor above `1.164`.  This does not refute Erdős #730.  The
-maximal-r valuation payment has therefore been enlarged uniformly to
-`2s<r`; it remains paper-proved and exact-audited below `0.01` for every
-`X>=2^57`.  Lean checks the half-band exponent clearance, powered maximality
-threshold, finite tail ingredients, dyadic step certificates, and exact
-endpoint payment.  The infinite reciprocal-tail
+maximal-r valuation payment has therefore been enlarged uniformly to the
+full strict high-valuation band `s<r`; it remains paper-proved and
+exact-audited below `0.01` for every `X>=2^57`.  The band forces
+`r+1<=a`, so Lean checks the clean threshold `X<2B^2(p^a)^2`, dyadic step
+certificates, and the exact endpoint payment `0.0048569067...`.  The infinite reciprocal-tail
 aggregation and real root/floor monotonic transfer remain outside the kernel;
-the remaining `s>=r/2` incomplete-block errors plus short/top
+the remaining `s>=r` (equivalently `a<=r`) incomplete-block errors plus short/top
 range must total below `0.99-delta`.  Exact sparse Gauss completion is
 audited, but its triangle majorant is exponentially insufficient for
 `p=5,7,11`; a new signed estimate with a payable error is required.  Bonus

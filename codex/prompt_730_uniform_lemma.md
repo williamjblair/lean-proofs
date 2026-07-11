@@ -29,10 +29,11 @@ in particular throughout `s <= (kappa_p-epsilon)r` for fixed
 This falsifies the analytic lemma, **not Erdős #730**.
 
 **AUDITED REPAIR (arithmetic spine kernel-banked).**  With `C=2` and `r`
-chosen maximally from the actual branch-class length, the whole half-band
-`2s<r` has normalized first-moment contribution below `1/100` for every
-`X>=2^57`.  The proof is in
-`compute730/campaign_uniform/repair/half_band_payment_findings.md`; all
+chosen maximally from the actual branch-class length, the whole strict band
+`s<r` has normalized first-moment contribution below `1/100` for every
+`X>=2^57`.  It forces `a>=r+1`, hence `p^(r+1)<=p^a`, and maximality gives
+the exact threshold `X<2B^2(p^a)^2`.  The proof is in
+`compute730/campaign_uniform/repair/unit_band_payment_findings.md`; all
 finite constants are reproduced with exact integer/rational tests.  Lean
 checks the near-envelope exponent clearance, powered maximality threshold,
 finite reciprocal-tail ingredients, dyadic step certificates, and exact
@@ -50,7 +51,8 @@ near-affine band and exceeds its right-hand side by a factor greater than
 counting and short/top-range lemma with constants `B,delta>0`:
 
 1. For every relevant prime, admissible branch/root, `a,r`, and interval
-   `|I|>=p^r(log p^r)^2` in the remaining range `s>=r/2`, prove an explicit
+   `|I|>=p^r(log p^r)^2` in the remaining range `s>=r` (equivalently
+   `a<=r`), prove an explicit
    incomplete-block estimate
 
    ```text

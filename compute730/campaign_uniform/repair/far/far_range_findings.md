@@ -12,8 +12,8 @@ at `p=5,r=432,s=176,a=688` violates (20) by a factor greater than
 This file makes no far-range estimate, global first-moment closure, or
 Erdős #730 claim beyond the proved proper long-interval subrange in
 Section 7 and the finite exact hostile checks in Section 8.  The corrected
-analytic intake starts at `s>=r/2`; the complementary half-band `2s<r` is
-paid arithmetically in `../half_band_payment_findings.md`.
+analytic intake starts at `s>=r`; the complementary strict band `s<r` is
+paid arithmetically in `../unit_band_payment_findings.md`.
 
 ## 1. Exact-valued restricted output set
 
@@ -396,7 +396,7 @@ F0  Critical separated-range incomplete-block estimate              OPEN
  +-- F8  Long intervals N>=(H-1)Q                                   PROVED
  `-- F9  Exact finite hostile grid, 104 rows                         EXACT-CHECKED
 
-G0  Full half-band 2s<r payment <1/100 for X>=2^57       LEAN-BANKED/EXACT-CHECKED
+G0  Full strict-band s<r payment <1/100 for X>=2^57      LEAN-BANKED/EXACT-CHECKED
 G1  Short/top-range payment                                          NOT CLAIMED
 G2  Combined first-moment budget                                     NOT CLAIMED
 ```

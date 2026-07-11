@@ -21,18 +21,18 @@ N0  Infinitely many consecutive equal-support pairs                    OPEN
       +-- N6.2  Claimed uniform count on every interval                FALSE
       +-- N6.3  Sparse-Fourier completion proving N6.2                 IMPOSSIBLE
       |          (the target itself has an affine high-a counterexample)
-      +-- N6.4  Maximal-r half-band payment for 2s<r                    PROVED
+      +-- N6.4  Maximal-r full strict-band payment for s<r              PROVED
       |          normalized contribution < 0.01 for X >= 2^57; Lean-banked
       +-- N6.5  Signed Fourier inequality (20) outside old band         FALSE
       |    +-- exact energy + sparse Gauss completion                  PROVED
       |    +-- post-completion triangle majorant                       INSUFFICIENT
       |    `-- exact p=5,r=432,s=176,a=688 witness                     EXACT-CHECKED
-      +-- N6.6  Corrected incomplete-block estimate for s>=r/2         OPEN
+      +-- N6.6  Corrected incomplete-block estimate for s>=r            OPEN
       `-- N6.7  Explicit global budget below 1                         OPEN
 ```
 
 The campaign now changes N6.2, N6.4, and N6.5: the original uniform lemma
-and its proposed signed repair are false, while the full half-band is paid
+and its proposed signed repair are false, while the full strict band is paid
 below one percent.  It does not challenge the audited algebraic nodes
 N1--N5, and it does not prove N0.
 
@@ -88,7 +88,7 @@ At least one quantifier must be weakened:
    degeneration.
 
 Sparse-frequency completion cannot prove N6.2 or the stronger signed
-inequality N6.5.  The entire half-band `2s<r` is instead paid by the exact
-maximal-r valuation bound in `repair/half_band_payment_findings.md`, whose
+inequality N6.5.  The entire strict band `s<r` is instead paid by the exact
+maximal-r valuation bound in `repair/unit_band_payment_findings.md`, whose
 arithmetic spine is Lean-banked.  The corrected analytic node is N6.6:
-an incomplete-block estimate with a globally payable error for `s>=r/2`.
+an incomplete-block estimate with a globally payable error for `s>=r`.

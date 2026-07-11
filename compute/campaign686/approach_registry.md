@@ -77,10 +77,10 @@ These are premises for new attacks, not solutions of `LargeKSmoothHypothesis`.
 
 ## Pipeline audit
 
-The campaign checkpoint has 458 manifest entries and 458 regenerated
+The combined checkpoint has 471 manifest entries and 471 regenerated
 attestations, including 419 entries for problem 686, 18 for problem 23, and
-17 arithmetic-spine entries for problem 730.  The combined axiom sweep reports
-884 clean headline surfaces.  The emitter
+30 arithmetic-spine entries for problem 730.  The combined axiom sweep reports
+897 clean headline surfaces.  The emitter
 parses wrapped and axiom-free reports, rejects missing theorem reports, and
 accepts any subset of `[propext, Classical.choice, Quot.sound]`.
 

@@ -222,7 +222,7 @@ N0  Consecutive pairs (n,n+1), infinitely many                    [OPEN — hing
  │                                                                     bound REPAIRABLE
  └─ N6  Restricted-digit counting on incomplete blocks +               *** THE GATE ***
         ├─ old interval-uniform lemma                                  FALSE
-        ├─ maximal-r near-affine payment                               PAPER-PROVED/EXACT (<0.01)
+        ├─ maximal-r full strict-band payment (`s<r`)                  PAPER-PROVED/EXACT (<0.01)
         │   └─ finite arithmetic spine and endpoint                    LEAN-BANKED
         └─ separated far + short/top first-moment budget               NOT ESTABLISHED
 ```
@@ -385,11 +385,11 @@ on some obstruction prime range sizes" the gist alludes to. Whether the PDF actu
 performs a split whose constants sum below 1, with uniform error terms, cannot be
 determined: **that text is not public**.
 
-**Gate outcome: old lemma FALSE; corrected far/top gate NOT PASSED.**  The failure is
+**Gate outcome: old lemma and proposed signed repair FALSE; corrected far/top gate NOT PASSED.**  The failure is
 mathematical, not merely a missing public error term.  The live residual is one
 range-split lemma: establish an explicit incomplete-block estimate in
-`s >= (log_p(p/H)+1/12)r` and close its errors plus the short/top-range
-contribution below `0.99-delta`.  The complementary near-affine band is now
+`s>=r` (equivalently `a<=r`) and close its errors plus the short/top-range
+contribution below `0.99-delta`.  The complementary strict band is now
 proved to cost less than `0.01` for every `X>=2^57`, using maximal admissible
 `r` and valuation rarity; see `compute730/campaign_uniform/repair/`.
 
@@ -409,26 +409,26 @@ infinitude — infinitude is exactly N6.)
 **not** refute Erdős #730 or the possibility that the explicit family works after a
 different valuation split.
 
-The near-affine part of the corrected split is now proved on paper and
-exact-arithmetic audited.  Lean checks its rational near envelope, powered
-maximality threshold, finite tail ingredients, dyadic step certificates, and
+The full strict band `s<r` of the corrected split is now proved on paper and
+exact-arithmetic audited.  Lean checks its exact natural-number envelope,
+the maximality threshold `X<2B^2(p^a)^2`, dyadic step certificates, and
 endpoint comparison.  The infinite prime-power aggregation and real
 root/floor monotonic transfer remain explicit kernel gaps, so no full Lean
-near-payment theorem is claimed.  With `C=2`, `eta=1/12`, and maximal
-admissible `r`, the paper proof gives normalized contribution below `1/100`
-for all `X>=2^57`; the exact rational endpoint certificate is
+strict-band payment theorem is claimed.  With `C=2` and maximal admissible
+`r`, the paper proof gives normalized contribution below `1/100` for all
+`X>=2^57`; the exact rational endpoint certificate is
 
 ```text
-232437037423222418449 / 27831344977224191180800 < 1/100.
+121726379332007683003 / 25062531926316810240000 < 1/100.
 ```
 
 The ONE residual is the following separated counting/first-moment lemma:
 
 > **Separated far/top lemma (OPEN).**  Put `H=(p+1)/2`,
-> `s=max(2r-a,0)`, and `kappa_p=log_p(p/H)`.  There are explicit absolute
+> `s=max(2r-a,0)`.  There are explicit absolute
 > constants `B,delta>0` and explicit errors `E_far` such that:
 > (i) for every relevant prime, admissible branch/root, and interval
-> `|I|>=p^r(log p^r)^2` with `s >= (kappa_p+1/12)r`, the restricted-digit count is at
+> `|I|>=p^r(log p^r)^2` with `s>=r`, the restricted-digit count is at
 > most `(H/p)^(2r)|I|(1+(log p^r)^(-1))+E_far`; and
 > (ii) the normalized sum of the far main terms and errors plus the
 > short/top-range contribution is at most `0.99-delta`, uniformly in the family cutoff.
@@ -437,7 +437,8 @@ Neither part of this residual is proved here.  Sparse completion is relevant
 only to the separated range.  The empirical budget still suggests headroom,
 but no rigorous numerical closure is currently available.
 
-The separated Fourier audit sharpens part (i) to one exact signed inequality.
+The separated Fourier audit reduced a zero-error version of part (i) to one
+exact signed inequality.
 With `Q=p^(2r)`, exact-valuation restricted set `E`, Fourier coefficients
 `F(h)`, and interval sums `S_I(h)` as defined in
 `campaign_uniform/repair/far/far_range_findings.md`, it is
@@ -447,10 +448,14 @@ Re sum_(h=1)^(Q-1) F(h)S_I(h)
   <= |I| H^(2r) (1/H + 1/log(p^r)).
 ```
 
+That inequality is **false**: the exact translated witness
+`p=5,r=432,s=176,a=688` exceeds its implied counting bound by a factor above
+`1.164`.  The entire witness band lies inside the now-paid region `s<r`.
 The exact Fourier identity, cumulative energy, sparse Gauss support, and
 per-frequency completion bounds are paper-proved and exact-checked.  Their
 valuation-stratified triangle majorant is exponentially too large for
-`p=5,7,11`; signed cancellation is load-bearing.  The long subrange
+`p=5,7,11`; any viable replacement in `s>=r` needs new cancellation or an
+explicit globally payable error.  The long subrange
 `|I|>=(H-1)Q` is proved, but does not reach the critical scale.
 
 ## 5. Provenance note
