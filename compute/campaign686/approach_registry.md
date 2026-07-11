@@ -48,6 +48,7 @@ entry must name one quantified missing lemma.
 | T1-3B-Q | Fourth-to-third quotient and lattice packing | Cancel the cubic lift to a fixed-coefficient quotient congruence, eliminate common variables across three owners, and pack two zero quotients. | 13 generic Lean theorems banked and hostile-audited; finite application exact but not row-wrapped | Exact arithmetic enumerates 2,603 noncentral two-zero placements. All 1,420 through `k=13` close; row 15 closes 901/1,183 and leaves 282. Centers, all-nonzero, one-zero, and those 282 placements remain open. |
 | T1-3B-SIGN | Short-window lattice signs and component packing | Classify exact quotient-sign cells and turn one-sided lattice mass into two component-square bounds. | 9 generic Lean theorems banked and hostile-audited; finite classification exact but not row-wrapped | All nine strict one-sided reflected slivers and 8/18 one-zero boundaries close. The live set is 2,381 mixed cells plus ten boundaries. Its exact missing lemma asks for two distinct proxies `V_s<=H_k*g^2`; coefficient signs alone are falsified. |
 | T1-MO | Complete finite-owner obstruction composition | Compose every opposite residual while retaining the original loss, then use the lower residual product to exclude zero obstructions. | 10 generic Lean theorems banked and hostile-audited | For every complete owner family of cardinality `4..15`, `P_s|O_s`, `P_s^2|F_s`, and target-size `O_s!=0`. The 42,274-subset exact scan and a 130-digit CRT falsifier show the direct nonzero-size and congruence-only routes remain open. |
+| T1-AO | Full-grid owner assembly | Put every retained cleaned prime power into its certified row bucket, preserve unit empty buckets and the original loss, and instantiate the finite-family obstruction package. | 30 Lean theorems banked and hostile-audited | Every target equation constructs `AllOwnerAssemblyCertificate`: exact full product and residual progression, bounded loss, all second/third divisibilities, and nonzero second obstructions. The remaining joint nonzero/short-window lemma is target-strength and open. |
 | T1-PUI | Puiseux denominator | Expand the algebraic branch solving `P_k(X)=4P_k(Y)` beyond the leading root and prove an explicit denominator/integrality trap. | blocked | After `L` terms the cleared algebraic norm grows like `Y^(2L(k-1)-2)`; ordinary norm-smallness cannot force zero without new denominator cancellation. |
 | T1-UNIT | Unit equation | Use conjugate information in `Q(4^(1/k))` to bound the structured norm identity. | active | Generic Baker-Feldman bounds are disallowed unless below `10^120`. |
 | T1-SCALE | Primitive CF scale | For `X=gu`, `Y=gv`, use the exact polynomial in `z=g^2`, its coefficient filters, and the discriminant square condition. | partly proved; low-order closure refuted | An explicit unbounded k=5 family passes gcd, parity, sign, support, ratio, and the first two z-adic filters while `Q(z)>0`; the discriminant square lift is the original genus-6 curve in disguise. The floor pin is the surviving proper restriction. |
@@ -88,10 +89,10 @@ These are premises for new attacks, not solutions of `LargeKSmoothHypothesis`.
 
 ## Pipeline audit
 
-The combined checkpoint has 569 manifest entries and 569 regenerated
-attestations, including 491 entries for problem 686, 30 for problem 23, and
+The combined checkpoint has 599 manifest entries and 599 regenerated
+attestations, including 521 entries for problem 686, 30 for problem 23, and
 44 arithmetic-spine entries for problem 730.  The combined axiom sweep reports
-995 clean headline surfaces.  The emitter
+1025 clean headline surfaces.  The emitter
 parses wrapped and axiom-free reports, rejects missing theorem reports, and
 accepts any subset of `[propext, Classical.choice, Quot.sound]`.
 

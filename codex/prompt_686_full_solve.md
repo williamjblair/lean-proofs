@@ -35,7 +35,12 @@
 > lattice-sign analysis closes all nine strict reflected one-sided slivers
 > and eight of eighteen zero boundaries.  The live cell set is 2,381 mixed
 > cells plus ten boundaries; its exact gap is the two-small-weighted-component
-> lemma stated in the lattice-sign findings.  Target 1 itself remains open.
+> lemma stated in the lattice-sign findings.  Finally, the full owner grid is
+> now assembled into an independently audited certificate directly from any
+> target equation, with the unchanged bounded loss, exact residuals, all
+> second/third divisibilities, and nonzero second obstructions at every row.
+> The joint nonzero all-owner short-window branch remains open.  Target 1
+> itself remains open.
 
 ## Current task statement
 

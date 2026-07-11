@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:3dbd47dd4650659e91f8ce1fc941f3a269971147df476d8b376c6f8035e06f1a",
+  "verifier_output_hash": "sha256:2f07ebae5fa98ad953515b65ead49f7e3754549983e3322c6e2c4612c531ecb5",
   "attestations": [
     {
       "problem": 154,
@@ -6771,6 +6771,366 @@
       "theorem": "Erdos686.Erdos686Variant.reflected_one_zero_short_window_gap_lt_cutoff",
       "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
       "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerBucket_pos",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerLoss_pos",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerBucket_dvd_factor",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerBucket_square_dvd_residual",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_residual_decomposition",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_one_prime_placement",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_bucket_product_eq_clean_product",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_gap_decomposition",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_gap_decomposition_at",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_residual_cast",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerCofactor_pos",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_residual_difference",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_residual_pos",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_second_local_lift",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_third_local_lift",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_natCast_mem_intGrid",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerIntGrid_card",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerIntGrid_exists_nat",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerIntGrid_prod_bucket",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerIntGrid_erase_prod_bucket",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerIntGrid_opposite_component",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerIntGrid_gap_decomposition",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerIntGrid_residual_difference",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_second_obstruction_dvd",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_third_obstruction_dvd_sq",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerIntGrid_target_range",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_localSecondConstant_ne_zero",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwnerIntGrid_residual_gt_five_gap",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_second_obstruction_ne_zero",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_allOwnerAssemblyCertificate",
+      "file": "ErdosProblems/Erdos686AllOwnerAssembly.lean",
+      "proof_hash": "sha256:a63011061fc8af531036374a238ae776ef861f3d21df937def40f156b50c88bf",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

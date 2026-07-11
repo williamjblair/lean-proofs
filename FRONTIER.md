@@ -85,6 +85,15 @@ independently re-proved; the finite cell classification is exact external
 arithmetic.  The remaining three-bucket node is 2,381 mixed cells plus ten
 live boundaries, quantified by the two-small-weighted-terms lemma recorded
 in the lattice-sign findings.
+The complete owner grid is now assembled end to end.  From the equation and
+target-size hypothesis, Lean constructs `AllOwnerAssemblyCertificate` with
+one bucket for every index in `Icc 1 k` (unit buckets where empty), the
+unchanged bounded cleaning loss, exact gap product, positive exact residual
+cofactors and step-three differences, and every second/third finite-family
+divisibility.  Every composed second obstruction is nonzero.  This removes
+the earlier unproved passage from an at-least-three witness to a complete
+owner decomposition.  It is a compositional bridge, not a resolution: the
+joint nonzero obstruction/short-window branch still requires a new bound.
 Two additional global moment identities use `2^2=4` to make
 `d^3` divide explicit constant-plus-linear coefficient combinations.  They
 are cubic combinations, not cubic divisibility of either residual product.
@@ -139,6 +148,12 @@ OPEN CORE:
    excludes every vanishing composed second obstruction at target size.
    The surviving multi-owner branch has every second obstruction nonzero;
    direct obstruction-size bounds grow with the family and do not close it.
+   The complete-grid bridge is now kernel-banked: every target solution
+   supplies an `AllOwnerAssemblyCertificate`, including all empty and live
+   owner buckets without absorbing omitted components into the loss.  The
+   exact remaining all-owner lemma is that any target-row block equation
+   carrying this certificate has `d<10^120`; this is target-strength and is
+   not counted as a further reduction.
    In the exactly-three slice, the lattice-sign route reduces the live cells
    to the exact requirement that two distinct weighted component proxies
    `V_s=P_s^2*max(1,|w_s z_s|)` are at most `H_k*g^2`; this is unproved and

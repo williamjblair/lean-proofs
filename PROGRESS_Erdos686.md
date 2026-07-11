@@ -25,8 +25,8 @@ theorem erdos686_false_of_constant_bound_and_large_escape
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 501 manifest-tracked theorems (445 for problem 686), 501
-regenerated attestations, and 927 headline theorem surfaces with axioms
+[R] CI gate: 599 manifest-tracked theorems (521 for problem 686), 599
+regenerated attestations, and 1,025 headline theorem surfaces with axioms
 contained in `[propext, Classical.choice, Quot.sound]` after the audited #730
 unit-range block spine.
 
@@ -168,6 +168,23 @@ congruences alone do not imply the short window or equation.  The
 `(2^N,3^N,5^N,7^N)` family refutes only a bounded-complement inference from
 product and component-square bounds; it is not a residual/window fixture.
 All nonzero multi-owner branches remain open.
+
+[R] **Every target solution now supplies a complete all-owner certificate.**
+The full grid `Icc 1 k` receives the exact cleaned bucket at each owner,
+including literal unit buckets when no retained prime lands there.  Prime and
+owner products commute to
+`d = globalResidualGroupedLoss * product_i P_i` with the original target loss
+bound.  Exact residual cofactors are positive, have pairwise step-three
+differences, and feed the finite-family second and third compositions at
+every index.  The target lower residual window then proves every composed
+second obstruction nonzero.  `exists_allOwnerAssemblyCertificate` constructs
+this package from only the odd target row, `d>=10^120`, and the exact block
+equation.  The independent hostile audit re-proves all 30 public theorems and
+the certificate constructor, with 15 focused tests.  This closes the
+bookkeeping passage from arbitrary prime support to the complete owner
+family; it does not close the joint nonzero obstruction branch.  The exact
+remaining all-owner statement—certificate plus equation implies
+`d<10^120`—is target-strength and remains open.
 
 [R] **Two global cubic moment combinations.**  Expanding at the evaluation
 ratio `2^2=4` cancels every term through degree two after explicit constant

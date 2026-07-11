@@ -5212,3 +5212,266 @@ proofs:
       below the supplied cutoff.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerBucket_pos
+    statement: >-
+      Every full-grid cleaned owner bucket is positive, including unit empty
+      buckets.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerLoss_pos
+    statement: >-
+      The unchanged grouped cleaning loss is positive.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerBucket_dvd_factor
+    statement: >-
+      Each full-grid cleaned bucket divides the lower block factor at its
+      certified owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerBucket_square_dvd_residual
+    statement: >-
+      The square of every full-grid cleaned bucket divides its local residual.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_residual_decomposition
+    statement: >-
+      Every local residual is exactly its natural cofactor times the square
+      of the full-grid bucket.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_one_prime_placement
+    statement: >-
+      Each retained cleaned prime power occurs exactly once in the full owner
+      grid, at its certified owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_bucket_product_eq_clean_product
+    statement: >-
+      Commuting the prime and owner products identifies the full bucket
+      product with the complete retained clean product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_gap_decomposition
+    statement: >-
+      The original gap is exactly the unchanged grouped loss times the full
+      owner-grid bucket product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_gap_decomposition_at
+    statement: >-
+      At any owner index the gap factors as that bucket times the original
+      loss and every opposite bucket.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_residual_cast
+    statement: >-
+      A positive natural residual casts to its exact untruncated signed
+      step-three square decomposition.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerCofactor_pos
+    statement: >-
+      Every positive local residual has a positive exact full-grid cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_residual_difference
+    statement: >-
+      Any two exact reconstructed residuals differ by three times their owner
+      offset.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_residual_pos
+    statement: >-
+      The target equation and short lower window make every full-grid local
+      residual positive.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_second_local_lift
+    statement: >-
+      Every full-grid bucket satisfies the second local Taylor lift with the
+      unchanged loss and all opposite buckets.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_third_local_lift
+    statement: >-
+      Every full-grid bucket satisfies the third local Taylor lift with the
+      unchanged loss and all opposite buckets.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_natCast_mem_intGrid
+    statement: >-
+      Membership in the natural owner grid embeds into the integer grid.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerIntGrid_card
+    statement: >-
+      The integer image of the complete owner grid has cardinality k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerIntGrid_exists_nat
+    statement: >-
+      Every integer-grid member comes from a natural full-grid owner index.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerIntGrid_prod_bucket
+    statement: >-
+      The integer-grid bucket product equals the corresponding natural-grid
+      product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerIntGrid_erase_prod_bucket
+    statement: >-
+      Erasing one cast owner commutes with the natural-to-integer bucket
+      product transport.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerIntGrid_opposite_component
+    statement: >-
+      The generic integer opposite-component product is the cast of the exact
+      erased natural bucket product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerIntGrid_gap_decomposition
+    statement: >-
+      The full gap decomposition transports exactly to the integer finite
+      family interface.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerIntGrid_residual_difference
+    statement: >-
+      Exact residual differences transport to every pair in the integer
+      owner grid.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_second_obstruction_dvd
+    statement: >-
+      Every full-grid bucket divides its composed finite-family second
+      obstruction with the original loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_third_obstruction_dvd_sq
+    statement: >-
+      Every full-grid bucket square divides its composed finite-family third
+      obstruction with the original loss and gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerIntGrid_target_range
+    statement: >-
+      Every integer owner-grid index lies in the uniform target range one
+      through fifteen.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_localSecondConstant_ne_zero
+    statement: >-
+      The local second constant is nonzero at every full-grid owner index.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwnerIntGrid_residual_gt_five_gap
+    statement: >-
+      Every integer-grid exact residual exceeds five times the gap under the
+      target equation window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_second_obstruction_ne_zero
+    statement: >-
+      At target size every composed full-grid second obstruction is nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AllOwnerAssembly.lean
+    theorem: Erdos686.Erdos686Variant.exists_allOwnerAssemblyCertificate
+    statement: >-
+      Every target-size odd-row solution constructs a complete all-owner
+      certificate with exact products, residuals, lifts, and nonzero second
+      obstructions.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
