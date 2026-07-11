@@ -139,6 +139,19 @@ congruence-only resultant route.  The single remaining exactly-three-bucket
 node is the quantified short-CRT/window lemma; it is not proved here and does
 not cover four-or-more buckets.
 
+### Quarantined zero-obstruction LCM follow-up
+
+A generic Lean theorem proves that a vanished composed obstruction packs all
+three pairwise-coprime components into one coefficient multiple and yields
+`d|L*g^4`; independent exact arithmetic checks all 1,427 positive-zero
+occurrences and puts their bounds below `10^120`.  Hostile audit did not admit
+this candidate to the manifest because no exported Lean wrapper discharges
+the six row-specific coefficient hypotheses.  It also rejected the claimed
+novelty of the associated `abc` thresholds: the banked `2d<n` inequality
+already implies `abc>125*g^2*d`, stronger by at least `2.7*10^84` at the
+target cutoff.  The generic node and falsification record are retained, but
+the short-CRT/window core is unchanged.
+
 ## Dependency tree: global cubic moment lifts
 
 1. For a polynomial `P`, the identity `P(2d)=4P(d)` and `2^2=4` cancel
