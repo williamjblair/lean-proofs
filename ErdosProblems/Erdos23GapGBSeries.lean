@@ -148,12 +148,30 @@ theorem gamma_series_le_rlBudget
 the whole series composite as soon as the opposite bridge component has at
 least four vertices.  This is the exact size gate needed to invoke strict
 Gamma induction. -/
+theorem minimalComposite_sizes_lt_series_of_partner_lt
+    {n₁ n₂ d₁ d₂ : ℕ}
+    (hp₁ : partnerDistance d₁ < n₂)
+    (hp₂ : partnerDistance d₂ < n₁) :
+    n₁ + partnerDistance d₁ < n₁ + n₂ ∧
+      n₂ + partnerDistance d₂ < n₁ + n₂ := by
+  omega
+
+/-- Exact characterization of the strict induction-size gate.  Unlike the
+old uniform `4 <= n_i` wrapper, this retains the actual partner distances
+and therefore applies to many two- and three-vertex endpoint blocks. -/
+theorem minimalComposite_sizes_lt_series_iff
+    {n₁ n₂ d₁ d₂ : ℕ} :
+    (n₁ + partnerDistance d₁ < n₁ + n₂ ∧
+      n₂ + partnerDistance d₂ < n₁ + n₂) ↔
+      partnerDistance d₁ < n₂ ∧ partnerDistance d₂ < n₁ := by
+  omega
+
 theorem minimalComposite_sizes_lt_series
     {n₁ n₂ d₁ d₂ : ℕ} (hn₁ : 4 ≤ n₁) (hn₂ : 4 ≤ n₂) :
     n₁ + partnerDistance d₁ < n₁ + n₂ ∧
       n₂ + partnerDistance d₂ < n₁ + n₂ := by
   have hp₁ := partnerDistance_le_three d₁
   have hp₂ := partnerDistance_le_three d₂
-  omega
+  exact minimalComposite_sizes_lt_series_of_partner_lt (by omega) (by omega)
 
 end Erdos23GapGBSeries
