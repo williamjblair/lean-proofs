@@ -25,10 +25,10 @@ theorem erdos686_false_of_constant_bound_and_large_escape
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 484 manifest-tracked theorems (432 for problem 686), 484
-regenerated attestations, and 910 headline theorem surfaces with axioms
+[R] CI gate: 488 manifest-tracked theorems (432 for problem 686), 488
+regenerated attestations, and 914 headline theorem surfaces with axioms
 contained in `[propext, Classical.choice, Quot.sound]` after the audited #730
-full-band module.
+unit-range block spine.
 
 [R] **All pure prime-power odd tails are closed.**  The p-adic lift module
 now proves that for every prime `p`, exponent `e`, and

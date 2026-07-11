@@ -50,9 +50,15 @@ near-affine band and exceeds its right-hand side by a factor greater than
 **CORRECTED LIVE TARGET (OPEN).**  Prove one explicit incomplete-block
 counting and short/top-range lemma with constants `B,delta>0`:
 
-1. For every relevant prime, admissible branch/root, `a,r`, and interval
-   `|I|>=p^r(log p^r)^2` in the remaining range `s>=r` (equivalently
-   `a<=r`), prove an explicit
+The aligned `p^r` block method now pays the entire higher-power subrange
+`2<=a<=r` on paper with exact arithmetic.  Its four-branch contribution is
+strictly below `58/125`; the quadratic block expansion and cleared
+normalization implication are kernel-banked, while the digit count and
+166-prime aggregation remain outside the kernel.  Thus the live long-class
+range below is only maximal-`r` `a=1`.
+
+1. For every relevant prime, admissible branch/root, and interval
+   `|I|>=p^r(log p^r)^2` in the remaining maximal-`r` range `a=1`, prove an explicit
    incomplete-block estimate
 
    ```text
@@ -61,11 +67,11 @@ counting and short/top-range lemma with constants `B,delta>0`:
 
    and prove that the normalized sum of `E_far` in the family sieve is
    bounded by an explicit constant.
-2. Combine the far-range main terms and errors with a rigorous short/top
+2. Combine that first-power contribution with a rigorous short/top
    range bound and verify
 
    ```text
-   far main + far errors + short/top range <= 0.99-delta.
+   first-power long classes + short/top range <= 263/500-delta.
    ```
 
 The displayed inequality is the single remaining campaign gate.  No

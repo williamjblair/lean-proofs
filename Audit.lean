@@ -38,6 +38,7 @@ import ErdosProblems.Erdos730NearAffinePayment
 import ErdosProblems.Erdos730HalfBandPayment
 import ErdosProblems.Erdos730UnitBandPayment
 import ErdosProblems.Erdos730UnitBandPaymentAudit
+import ErdosProblems.Erdos730UnitRangeBlockAudit
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727
 
@@ -523,6 +524,10 @@ import ErdosProblems.Erdos727
 #print axioms Erdos730.audit_unitBandEnvelope_iff
 #print axioms Erdos730.audit_unitBand_complement_iff
 #print axioms Erdos730.audit_unitBand_slack_ge_iff
+#print axioms Erdos730.UnitRangeBlock.quadratic_block_expansion
+#print axioms Erdos730.UnitRangeBlock.quadratic_block_difference_dvd_sq
+#print axioms Erdos730.UnitRangeBlock.normalized_block_cover_cross_bound
+#print axioms Erdos730.UnitRangeBlock.higher_prime_power_payment_ceiling_lt_half
 #print axioms Erdos617.Balanced.no_monochromatic_clique
 #print axioms Erdos617.Balanced.sum_le_sq
 #print axioms Erdos617.statement_five_of_extension_demand

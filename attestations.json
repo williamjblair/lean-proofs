@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:23e76deab537cf6d7992aa64d78e0cd72926cf0b824dbe5cd7039ed8680acad6",
+  "verifier_output_hash": "sha256:91e103e38be10cc01866de171d1ee57b4fe6b5e9e1f8a5e6242179435ddaa725",
   "attestations": [
     {
       "problem": 154,
@@ -5734,6 +5734,50 @@
       "theorem": "Erdos730.audit_unitBand_slack_ge_iff",
       "file": "ErdosProblems/Erdos730UnitBandPaymentAudit.lean",
       "proof_hash": "sha256:a4b0303f742dfd296b0c0f947490507ed95575a9d656f2437521633cf653e057",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.UnitRangeBlock.quadratic_block_expansion",
+      "file": "ErdosProblems/Erdos730UnitRangeBlock.lean",
+      "proof_hash": "sha256:f1df0d32fdced6794f7c11948841a816779512f1f173dc58745074b6733b9930",
+      "axiom_footprint": [
+        "propext"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.UnitRangeBlock.quadratic_block_difference_dvd_sq",
+      "file": "ErdosProblems/Erdos730UnitRangeBlock.lean",
+      "proof_hash": "sha256:f1df0d32fdced6794f7c11948841a816779512f1f173dc58745074b6733b9930",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.UnitRangeBlock.normalized_block_cover_cross_bound",
+      "file": "ErdosProblems/Erdos730UnitRangeBlock.lean",
+      "proof_hash": "sha256:f1df0d32fdced6794f7c11948841a816779512f1f173dc58745074b6733b9930",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.UnitRangeBlock.higher_prime_power_payment_ceiling_lt_half",
+      "file": "ErdosProblems/Erdos730UnitRangeBlock.lean",
+      "proof_hash": "sha256:f1df0d32fdced6794f7c11948841a816779512f1f173dc58745074b6733b9930",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

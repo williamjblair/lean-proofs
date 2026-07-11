@@ -387,9 +387,9 @@ determined: **that text is not public**.
 
 **Gate outcome: old lemma and proposed signed repair FALSE; corrected far/top gate NOT PASSED.**  The failure is
 mathematical, not merely a missing public error term.  The live residual is one
-range-split lemma: establish an explicit incomplete-block estimate in
-`s>=r` (equivalently `a<=r`) and close its errors plus the short/top-range
-contribution below `0.99-delta`.  The complementary strict band is now
+range-split lemma: the exact aligned-block method pays `2<=a<=r` by less
+than `58/125`, so only maximal-`r` `a=1` plus the short/top range must be
+bounded by `263/500-delta`.  The complementary strict band is now
 proved to cost less than `0.01` for every `X>=2^57`, using maximal admissible
 `r` and valuation rarity; see `compute730/campaign_uniform/repair/`.
 
@@ -422,16 +422,23 @@ strict-band payment theorem is claimed.  With `C=2` and maximal admissible
 121726379332007683003 / 25062531926316810240000 < 1/100.
 ```
 
-The ONE residual is the following separated counting/first-moment lemma:
+The higher-prime-power part of the former residual is now paid on paper and
+exact-arithmetic audited.  For `2<=a<=r`, every aligned `p^r` block contains
+at most `(H-1)H^(r-1)` bad parameters; exact root-class normalization and a
+geometric double sum give a four-branch contribution below `58/125`.  Lean
+checks the quadratic block algebra and cleared normalization implication,
+but not the digit-count or 166-prime aggregation.
+
+The ONE residual is the following first-power/short-top lemma:
 
 > **Separated far/top lemma (OPEN).**  Put `H=(p+1)/2`,
 > `s=max(2r-a,0)`.  There are explicit absolute
 > constants `B,delta>0` and explicit errors `E_far` such that:
 > (i) for every relevant prime, admissible branch/root, and interval
-> `|I|>=p^r(log p^r)^2` with `s>=r`, the restricted-digit count is at
+> `|I|>=p^r(log p^r)^2` with maximal `r` and `a=1`, the restricted-digit count is at
 > most `(H/p)^(2r)|I|(1+(log p^r)^(-1))+E_far`; and
-> (ii) the normalized sum of the far main terms and errors plus the
-> short/top-range contribution is at most `0.99-delta`, uniformly in the family cutoff.
+> (ii) its normalized contribution plus the explicitly defined
+> short/top-range contribution is at most `263/500-delta`, uniformly in the family cutoff.
 
 Neither part of this residual is proved here.  Sparse completion is relevant
 only to the separated range.  The empirical budget still suggests headroom,

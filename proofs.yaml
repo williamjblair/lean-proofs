@@ -4421,6 +4421,42 @@ proofs:
       least r.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730UnitRangeBlock.lean
+    theorem: Erdos730.UnitRangeBlock.quadratic_block_expansion
+    statement: >-
+      Every quadratic branch has an exact Taylor expansion across an aligned
+      prime-power block.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730UnitRangeBlock.lean
+    theorem: Erdos730.UnitRangeBlock.quadratic_block_difference_dvd_sq
+    statement: >-
+      After removing the affine block-index term, the aligned quadratic
+      remainder is divisible by the square block modulus.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730UnitRangeBlock.lean
+    theorem: Erdos730.UnitRangeBlock.normalized_block_cover_cross_bound
+    statement: >-
+      The critical-length, root-class, and aligned-cover hypotheses imply
+      the exact cross-multiplied normalized block bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730UnitRangeBlock.lean
+    theorem: Erdos730.UnitRangeBlock.higher_prime_power_payment_ceiling_lt_half
+    statement: >-
+      The exact rational ceiling for the audited higher-prime-power payment
+      is strictly below one half.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 617
     source: erdosproblems
     file: ErdosProblems/Erdos617.lean

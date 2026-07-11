@@ -42,5 +42,7 @@ import ErdosProblems.Erdos730NearAffinePayment
 import ErdosProblems.Erdos730HalfBandPayment
 import ErdosProblems.Erdos730UnitBandPayment
 import ErdosProblems.Erdos730UnitBandPaymentAudit
+import ErdosProblems.Erdos730UnitRangeBlock
+import ErdosProblems.Erdos730UnitRangeBlockAudit
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727

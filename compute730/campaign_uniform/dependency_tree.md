@@ -27,7 +27,9 @@ N0  Infinitely many consecutive equal-support pairs                    OPEN
       |    +-- exact energy + sparse Gauss completion                  PROVED
       |    +-- post-completion triangle majorant                       INSUFFICIENT
       |    `-- exact p=5,r=432,s=176,a=688 witness                     EXACT-CHECKED
-      +-- N6.6  Corrected incomplete-block estimate for s>=r            OPEN
+      +-- N6.6  Aligned-block payment for 2<=a<=r                       PROVED
+      |          paper/exact <58/125; generic Lean algebra banked
+      +-- N6.6a Maximal-r first-power classes a=1                       OPEN
       `-- N6.7  Explicit global budget below 1                         OPEN
 ```
 
@@ -90,5 +92,6 @@ At least one quantifier must be weakened:
 Sparse-frequency completion cannot prove N6.2 or the stronger signed
 inequality N6.5.  The entire strict band `s<r` is instead paid by the exact
 maximal-r valuation bound in `repair/unit_band_payment_findings.md`, whose
-arithmetic spine is Lean-banked.  The corrected analytic node is N6.6:
-an incomplete-block estimate with a globally payable error for `s>=r`.
+arithmetic spine is Lean-banked.  The corrected node N6.6 is now paid for
+`2<=a<=r`.  Its exact residue N6.6a is maximal-`r` `a=1`; together with the
+short/top sieve it must fit below `263/500-delta`.

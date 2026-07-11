@@ -6,11 +6,11 @@ It is updated as candidates enter or leave the proof path.
 ## Baseline
 
 - Focused terminal module compiles.
-- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 484
+- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 488
   theorem names.
-- The combined full axiom audit reports 910 theorem surfaces, all within the
+- The combined full axiom audit reports 914 theorem surfaces, all within the
   allowlist `[propext, Classical.choice, Quot.sound]`.
-- `attestations.json` was regenerated successfully for all 484 entries.
+- `attestations.json` was regenerated successfully for all 488 entries.
 
 ## Dependency tree: odd-tail prime-power restriction
 

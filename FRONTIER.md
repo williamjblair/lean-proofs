@@ -171,8 +171,14 @@ exact-audited below `0.01` for every `X>=2^57`.  The band forces
 `r+1<=a`, so Lean checks the clean threshold `X<2B^2(p^a)^2`, dyadic step
 certificates, and the exact endpoint payment `0.0048569067...`.  The infinite reciprocal-tail
 aggregation and real root/floor monotonic transfer remain outside the kernel;
-the remaining `s>=r` (equivalently `a<=r`) incomplete-block errors plus short/top
-range must total below `0.99-delta`.  Exact sparse Gauss completion is
+the corrected aligned-block argument now pays the full higher-power part
+`2<=a<=r` of the complementary range by less than `58/125`, across all four
+branches.  Lean checks the exact quadratic block identity and the cleared
+normalization inequality; the digit count, 166-prime rational certificate,
+tail, and branch aggregation remain paper/exact rather than kernel-expanded.
+The only unpaid exponent slice is maximal-`r` `a=1`; together with an
+explicitly defined short/top contribution it must total at most
+`263/500-delta`.  Exact sparse Gauss completion is
 audited, but its triangle majorant is exponentially insufficient for
 `p=5,7,11`; a new signed estimate with a payable error is required.  Bonus
 banked: 1,556 certified consecutive
