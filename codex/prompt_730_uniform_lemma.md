@@ -52,8 +52,10 @@ counting and short/top-range lemma with constants `B,delta>0`:
 
 The aligned `p^r` block method now pays the entire higher-power subrange
 `2<=a<=r` on paper with exact arithmetic.  Its four-branch contribution is
-strictly below `58/125`; the quadratic block expansion and cleared
-normalization implication are kernel-banked, while the digit count and
+strictly below `174/625`: the critical-length endpoint factor sharpens from
+`2` to `6/5`.  The quadratic block expansion, cleared normalization
+implication, Q/S two-digit top exclusions, and exact residual arithmetic
+`1-1/100-174/625=1779/2500` are kernel-banked, while the digit count and
 166-prime aggregation remain outside the kernel.  Thus the live long-class
 range below is only maximal-`r` `a=1`.
 
@@ -71,11 +73,21 @@ range below is only maximal-`r` `a=1`.
    range bound and verify
 
    ```text
-   first-power long classes + short/top range <= 263/500-delta.
+   first-power long classes + short/top range <= 1779/2500-delta.
    ```
 
-The displayed inequality is the single remaining campaign gate.  No
-far-range estimate or closed budget satisfying it is currently claimed.
+Before applying that inequality, prove the exhaustive event-multiplicity
+bridge
+
+```text
+BadFamilyCount(X) <= ObstructionEventCount(X)
+ <= StrictBand(X)+HigherPowerFar(X)+FirstPowerFar(X)+ShortTop(X).
+```
+
+The bridge and displayed inequality together are the single remaining
+campaign gate.  No far-range estimate or closed budget satisfying them is
+currently claimed.  Arbitrary `r=1` starts must retain the exact endpoint
+term `2(H-1)`, and `ShortTop` must retain all no-maximal-`r` short classes.
 
 The exact Fourier reduction is audited in
 `compute730/campaign_uniform/repair/far/far_range_findings.md`.  If `E` is

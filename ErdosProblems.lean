@@ -50,5 +50,7 @@ import ErdosProblems.Erdos730UnitBandPayment
 import ErdosProblems.Erdos730UnitBandPaymentAudit
 import ErdosProblems.Erdos730UnitRangeBlock
 import ErdosProblems.Erdos730UnitRangeBlockAudit
+import ErdosProblems.Erdos730FirstPowerRoutes
+import ErdosProblems.Erdos730FirstPowerRoutesAudit
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727

@@ -4741,3 +4741,93 @@ proofs:
       strictly smaller than the whole series instance.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.first_power_fixed_upper_slope
+    statement: >-
+      At first power, subtracting the fixed block shift leaves a multiple of
+      the square prime modulus.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.normalized_block_cover_six_fifths
+    statement: >-
+      The sharpened critical length gives the exact cleared six-fifths block
+      normalization inequality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.q_top_low_digit_large
+    statement: >-
+      The Q-branch top equation and small cofactor force its low digit above
+      the restricted half.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.s_top_low_digit_large
+    statement: >-
+      The S-branch top equation and small cofactor force its low digit above
+      the restricted half.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.q_top_small_cofactor_of_square_lt
+    statement: >-
+      The Q-branch two-digit square bound implies the small-cofactor
+      inequality from the explicit threshold 66.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.s_top_small_cofactor_of_square_lt
+    statement: >-
+      The S-branch two-digit square bound implies the small-cofactor
+      inequality from the explicit threshold 1856.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.q_top_two_digit_large
+    statement: >-
+      Beyond the finite Q threshold, the two-digit top regime is excluded by
+      its low base-p digit.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.s_top_two_digit_large
+    statement: >-
+      Beyond the finite S threshold, the two-digit top regime is excluded by
+      its low base-p digit.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.improved_higher_power_ceiling_lt_three_tenths
+    statement: >-
+      The sharpened higher-prime-power payment ceiling 174 over 625 is below
+      three tenths.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    theorem: Erdos730.FirstPowerRoutes.remaining_first_power_budget
+    statement: >-
+      After strict-band and higher-power payments, the exact remaining budget
+      is 1779 over 2500.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean

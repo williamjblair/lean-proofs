@@ -224,7 +224,8 @@ N0  Consecutive pairs (n,n+1), infinitely many                    [OPEN — hing
         ├─ old interval-uniform lemma                                  FALSE
         ├─ maximal-r full strict-band payment (`s<r`)                  PAPER-PROVED/EXACT (<0.01)
         │   └─ finite arithmetic spine and endpoint                    LEAN-BANKED
-        └─ separated far + short/top first-moment budget               NOT ESTABLISHED
+        ├─ higher-power endpoint sharpened to `174/625`                PAPER/EXACT; LEAN SPINE
+        └─ event coverage + first-power/short-top budget               NOT ESTABLISHED
 ```
 
 ### N1 — Kummer criterion. VERDICT: SOUND (elementary; proven and machine-checked)
@@ -388,8 +389,10 @@ determined: **that text is not public**.
 **Gate outcome: old lemma and proposed signed repair FALSE; corrected far/top gate NOT PASSED.**  The failure is
 mathematical, not merely a missing public error term.  The live residual is one
 range-split lemma: the exact aligned-block method pays `2<=a<=r` by less
-than `58/125`, so only maximal-`r` `a=1` plus the short/top range must be
-bounded by `263/500-delta`.  The complementary strict band is now
+than `174/625`, so only maximal-`r` `a=1` plus the short/top range must be
+bounded by `1779/2500-delta`.  The common obstruction-event coverage bridge
+must also be stated and proved before those upper bounds are summed.  The
+complementary strict band is now
 proved to cost less than `0.01` for every `X>=2^57`, using maximal admissible
 `r` and valuation rarity; see `compute730/campaign_uniform/repair/`.
 
@@ -425,20 +428,25 @@ strict-band payment theorem is claimed.  With `C=2` and maximal admissible
 The higher-prime-power part of the former residual is now paid on paper and
 exact-arithmetic audited.  For `2<=a<=r`, every aligned `p^r` block contains
 at most `(H-1)H^(r-1)` bad parameters; exact root-class normalization and a
-geometric double sum give a four-branch contribution below `58/125`.  Lean
-checks the quadratic block algebra and cleared normalization implication,
-but not the digit-count or 166-prime aggregation.
+geometric double sum, sharpened by the exact `6/5` endpoint normalization,
+give a four-branch contribution below `174/625`.  Lean checks the quadratic
+block algebra, cleared normalization implication, and terminal rational
+budget, but not the digit-count or 166-prime aggregation.
 
-The ONE residual is the following first-power/short-top lemma:
+The ONE residual is the following event-covered first-power/short-top lemma:
 
 > **Separated far/top lemma (OPEN).**  Put `H=(p+1)/2`,
 > `s=max(2r-a,0)`.  There are explicit absolute
 > constants `B,delta>0` and explicit errors `E_far` such that:
-> (i) for every relevant prime, admissible branch/root, and interval
+> (i) the family obstruction indicator is bounded by a common
+> `(branch,p,a)` event count partitioned into strict-band, higher-power,
+> first-power-far, and short/top contributions;
+> (ii) for every relevant prime, admissible branch/root, and interval
 > `|I|>=p^r(log p^r)^2` with maximal `r` and `a=1`, the restricted-digit count is at
 > most `(H/p)^(2r)|I|(1+(log p^r)^(-1))+E_far`; and
-> (ii) its normalized contribution plus the explicitly defined
-> short/top-range contribution is at most `263/500-delta`, uniformly in the family cutoff.
+> (iii) its normalized contribution, including arbitrary-start endpoints,
+> plus the explicitly defined short/top-range contribution is at most
+> `1779/2500-delta`, uniformly in the family cutoff.
 
 Neither part of this residual is proved here.  Sparse completion is relevant
 only to the separated range.  The empirical budget still suggests headroom,

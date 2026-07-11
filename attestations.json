@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:b7ffc94ac20de6e479b59af05e25a07695f8948ac62347a9dc85add05e2b97cd",
+  "verifier_output_hash": "sha256:5463f1e94aba5b2bb19a28b30a0579c4b6317f0f6e3583e6b46ba0132961bf0a",
   "attestations": [
     {
       "problem": 154,
@@ -6155,6 +6155,124 @@
       "theorem": "Erdos23GapGBSeries.minimalComposite_sizes_lt_series",
       "file": "ErdosProblems/Erdos23GapGBSeries.lean",
       "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.first_power_fixed_upper_slope",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.normalized_block_cover_six_fifths",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.q_top_low_digit_large",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.s_top_low_digit_large",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.q_top_small_cofactor_of_square_lt",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.s_top_small_cofactor_of_square_lt",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.q_top_two_digit_large",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.s_top_two_digit_large",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.improved_higher_power_ceiling_lt_three_tenths",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FirstPowerRoutes.remaining_first_power_budget",
+      "file": "ErdosProblems/Erdos730FirstPowerRoutes.lean",
+      "proof_hash": "sha256:ba313bb107c06cec137efced15da5a3c334c77082e981ac351b2d8db659d1825",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

@@ -188,13 +188,15 @@ exact-audited below `0.01` for every `X>=2^57`.  The band forces
 certificates, and the exact endpoint payment `0.0048569067...`.  The infinite reciprocal-tail
 aggregation and real root/floor monotonic transfer remain outside the kernel;
 the corrected aligned-block argument now pays the full higher-power part
-`2<=a<=r` of the complementary range by less than `58/125`, across all four
-branches.  Lean checks the exact quadratic block identity and the cleared
-normalization inequality; the digit count, 166-prime rational certificate,
-tail, and branch aggregation remain paper/exact rather than kernel-expanded.
-The only unpaid exponent slice is maximal-`r` `a=1`; together with an
-explicitly defined short/top contribution it must total at most
-`263/500-delta`.  Exact sparse Gauss completion is
+`2<=a<=r` of the complementary range by less than `174/625`, across all four
+branches.  The sharper `6/5` endpoint normalization, exact quadratic block
+identity, and terminal budget arithmetic are kernel-banked; the digit count,
+166-prime rational certificate, tail, and branch aggregation remain
+paper/exact rather than kernel-expanded.  The only unpaid exponent slice is
+maximal-`r` `a=1`; together with an explicitly defined short/top contribution
+it must total at most `1779/2500-delta`.  The intake must also prove the common
+event-multiplicity coverage bridge before summing those categories.  Exact
+sparse Gauss completion is
 audited, but its triangle majorant is exponentially insufficient for
 `p=5,7,11`; a new signed estimate with a payable error is required.  Bonus
 banked: 1,556 certified consecutive

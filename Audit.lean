@@ -42,6 +42,7 @@ import ErdosProblems.Erdos730HalfBandPayment
 import ErdosProblems.Erdos730UnitBandPayment
 import ErdosProblems.Erdos730UnitBandPaymentAudit
 import ErdosProblems.Erdos730UnitRangeBlockAudit
+import ErdosProblems.Erdos730FirstPowerRoutesAudit
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727
 
@@ -556,6 +557,16 @@ import ErdosProblems.Erdos727
 #print axioms Erdos730.UnitRangeBlock.quadratic_block_difference_dvd_sq
 #print axioms Erdos730.UnitRangeBlock.normalized_block_cover_cross_bound
 #print axioms Erdos730.UnitRangeBlock.higher_prime_power_payment_ceiling_lt_half
+#print axioms Erdos730.FirstPowerRoutes.first_power_fixed_upper_slope
+#print axioms Erdos730.FirstPowerRoutes.normalized_block_cover_six_fifths
+#print axioms Erdos730.FirstPowerRoutes.q_top_low_digit_large
+#print axioms Erdos730.FirstPowerRoutes.s_top_low_digit_large
+#print axioms Erdos730.FirstPowerRoutes.q_top_small_cofactor_of_square_lt
+#print axioms Erdos730.FirstPowerRoutes.s_top_small_cofactor_of_square_lt
+#print axioms Erdos730.FirstPowerRoutes.q_top_two_digit_large
+#print axioms Erdos730.FirstPowerRoutes.s_top_two_digit_large
+#print axioms Erdos730.FirstPowerRoutes.improved_higher_power_ceiling_lt_three_tenths
+#print axioms Erdos730.FirstPowerRoutes.remaining_first_power_budget
 #print axioms Erdos617.Balanced.no_monochromatic_clique
 #print axioms Erdos617.Balanced.sum_le_sq
 #print axioms Erdos617.statement_five_of_extension_demand
