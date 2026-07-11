@@ -1,6 +1,7 @@
 from compute23.gate3.gap_gb_joint_verify import (
     build_long_tail_c5_fixture,
     colored_fixture,
+    double_slack_resource_certificate,
     endpoint_gamma_block_absorbs,
     endpoint_move_budget_nonincrease,
     exact_series_induction_gate,
@@ -110,3 +111,22 @@ def test_threshold_layer_cake_identity_exact_grid() -> None:
         for a in range(height + 1):
             for b in range(height + 1):
                 assert threshold_separation_sum(a, b, height) == abs(a - b)
+
+
+def test_double_slack_resource_certificate_exact_compositions() -> None:
+    def compositions(total: int, parts: int):
+        if parts == 1:
+            yield (total,)
+            return
+        for first in range(1, total - parts + 2):
+            for tail in compositions(total - first, parts - 1):
+                yield (first,) + tail
+
+    for s in range(5, 14):
+        for total in range(1, s):
+            for parts in range(1, total + 1):
+                for resources in compositions(total, parts):
+                    distances = tuple(2 * r + 2 for r in resources)
+                    assert double_slack_resource_certificate(
+                        s=s, distances=distances, resources=resources
+                    )

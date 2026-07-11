@@ -4851,6 +4851,60 @@ proofs:
   - problem: 23
     source: erdosproblems
     file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.rootedCutCondition_totalCost_le_of_potentialFamilyCertificate
+    statement: >-
+      RFC plus a finite family of bounded potentials certifies a joint demand
+      cost bound through its exact L1 cut metric.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.rootedCutCondition_totalCost_le_of_weightedCutCertificate
+    statement: >-
+      RFC plus an explicit finite integral weighted-cut metric certificate
+      proves any specified joint internal-demand cost bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.rootedCutCondition_totalCost_le_of_scaledWeightedCutCertificate
+    statement: >-
+      A positive denominator-clearing scale turns exact rational cut weights
+      and reserve into the unscaled integral demand-cost bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.totalCost_le_doubleSlackBudget_of_resourcePacking
+    statement: >-
+      At d equals twice the slack, positive disjoint gap resources with
+      distance at most twice resource plus two imply the full RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.full_coverage_eq_twice_mass_forces_unit_intervals
+    statement: >-
+      Equality in the full d equals twice-slack interval count forces every
+      positive component to have size one and its disjoint interval size two.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.pairwiseDisjoint_of_card_biUnion_eq_sum_card
+    statement: >-
+      Equality in the finite biunion cardinality bound forces the indexed
+      family to be pairwise disjoint.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
     theorem: Erdos23GapGBJoint.rlBudget_endpointBlock_retraction_le
     statement: >-
       Removing an M-free endpoint block and retracting one corridor edge

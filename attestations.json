@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:8fab9b5e9238bbe6015cf1bd7880bcc88c18dd3f119c306da76cdfcbe73d0c0b",
+  "verifier_output_hash": "sha256:0639f885223c41f23cbfd014dbbd014c438b29283fe8f838cd61e8701719d890",
   "attestations": [
     {
       "problem": 154,
@@ -6190,7 +6190,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.partnerDistance_eq_three_iff",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext"
       ],
@@ -6200,7 +6200,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.rlBudget_pred_le",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -6211,7 +6211,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.gammaBlock_endpointBridge_le_rlBudget",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6223,7 +6223,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.endpointBlock_small_or_partner_lt",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6235,7 +6235,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.sum_thresholdSeparation_eq_dist",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6247,7 +6247,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.rootedCutCondition_natPotential",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6259,7 +6259,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.rootedCutCondition_natPotential_of_allCuts",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6271,7 +6271,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.rootedCutCondition_natPotential_of_rootCuts",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6283,7 +6283,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.totalCost_le_of_potentialCertificate",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6295,7 +6295,79 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.rootedCutCondition_totalCost_le_of_potentialCertificate",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBJoint.rootedCutCondition_totalCost_le_of_potentialFamilyCertificate",
+      "file": "ErdosProblems/Erdos23GapGBJoint.lean",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBJoint.rootedCutCondition_totalCost_le_of_weightedCutCertificate",
+      "file": "ErdosProblems/Erdos23GapGBJoint.lean",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBJoint.rootedCutCondition_totalCost_le_of_scaledWeightedCutCertificate",
+      "file": "ErdosProblems/Erdos23GapGBJoint.lean",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBJoint.totalCost_le_doubleSlackBudget_of_resourcePacking",
+      "file": "ErdosProblems/Erdos23GapGBJoint.lean",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBJoint.full_coverage_eq_twice_mass_forces_unit_intervals",
+      "file": "ErdosProblems/Erdos23GapGBJoint.lean",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBJoint.pairwiseDisjoint_of_card_biUnion_eq_sum_card",
+      "file": "ErdosProblems/Erdos23GapGBJoint.lean",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6307,7 +6379,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.rlBudget_endpointBlock_retraction_le",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6319,7 +6391,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.residual_series_gate_or_endpoint_pair",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6331,7 +6403,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.IsGeodesic.corridorIndexSet_card_le_twice_slack",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6343,7 +6415,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.IsGeodesic.length_le_twice_slack_of_all_nonbridge",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6355,7 +6427,7 @@
       "problem": 23,
       "theorem": "Erdos23GapGBJoint.IsGeodesic.slack_at_least_five_of_large_all_nonbridge_corridor",
       "file": "ErdosProblems/Erdos23GapGBJoint.lean",
-      "proof_hash": "sha256:70ee694462a8d6ff77b340565f79e0086ffbb6f982b3ab21f298b237b3c2ae00",
+      "proof_hash": "sha256:ae50a438ba7f023348efe43472a8820438dda04cc8199d9f9906baa0d951d3c6",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

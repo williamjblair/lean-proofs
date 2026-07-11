@@ -181,3 +181,59 @@ the `2*lambda` allowance. This is
 `rootedCutCondition_totalCost_le_of_potentialCertificate`. The missing BF-RL
 work is the uniform construction of such a potential, not the certificate
 algebra.
+
+The same landing condition is kernel checked for a finite family of bounded
+potentials.  In that form the separation and supply variation are summed over
+the family before the reserve argument is applied.  This is
+`rootedCutCondition_totalCost_le_of_potentialFamilyCertificate`; in
+particular, it covers finite integral weighted-cut metrics and laminar trees,
+which need not be the threshold chain of one potential.  The theorem asserts
+only that explicitly supplied family data certify the RL budget.  Existence
+of a family meeting those inequalities in every BF-RL instance remains the
+single open construction and is not claimed.
+
+For auditing a proposed dual without first encoding its cuts as potentials,
+`rootedCutCondition_totalCost_le_of_weightedCutCertificate` exposes the same
+criterion directly: a finite family of Boolean cuts, one natural weight per
+cut, per-demand weighted separation, and the single weighted supply budget.
+The conversion of a weighted cut to a two-valued potential is exact, including
+weight zero.
+
+Rational cut weights and a rational reserve are covered without a trusted
+floating-point step.  After clearing their common denominator by a positive
+natural `scale`, the integral costs and budget are multiplied by that same
+scale; kernel cancellation returns the unscaled conclusion. This is
+`rootedCutCondition_totalCost_le_of_scaledWeightedCutCertificate`.
+
+## 7. Audited equality-boundary arithmetic
+
+Equality in the proved corridor count suggests a separate, narrower route at
+`d=2s`: singleton span-two blocks separated by capacity-two articulations.
+The finite-set equality step is proved as
+`full_coverage_eq_twice_mass_forces_unit_intervals`: full coverage, positive
+component sizes summing to `s`, and interval cardinalities at most size plus
+one force union cardinality `2s`, pairwise-disjoint intervals, every component
+size one, and every interval cardinality two.  The converse-to-union-bound
+step is independently exposed as
+`pairwiseDisjoint_of_card_biUnion_eq_sum_card`.
+
+The arithmetic end of that route is now exact.  If every demand is assigned a
+positive natural resource `r_i`, the resources pack as
+
+```text
+sum_i r_i <= s-1,                 D_i <= 2*r_i+2,
+```
+
+then for `s>=5`
+
+```text
+sum_i (D_i+1)^2 <= F(s,2s).
+```
+
+This is `totalCost_le_doubleSlackBudget_of_resourcePacking`.  Its proof uses
+`sum r_i^2 <= (sum r_i)^2` and keeps the deliberately loose but sufficient
+bound `4R^2+21R <= 5s^2+6s`.  The graph-theoretic assertion that every
+`d=2s` BF-RL instance turns this interval rigidity into the displayed
+disjoint demand resources is **not proved**;
+accordingly the equality boundary remains inside BF-RL and this theorem is
+not counted as a frontier reduction.

@@ -311,7 +311,197 @@ theorem rootedCutCondition_totalCost_le_of_potentialCertificate
     (Nat.dist (f w) (f x₀)) budget lambda hcard hseparate
   exact hcoarea.trans hbudget
 
+/-- Finite-family version of the certificate interface.  This is the natural
+form for a weighted cut metric: each binary cut is one bounded potential, and
+finite families also cover laminar trees that cannot be encoded by a single
+chain of thresholds. -/
+theorem rootedCutCondition_totalCost_le_of_potentialFamilyCertificate
+    {V I_B I_M J : Type*}
+    [Fintype I_B] [Fintype I_M] [Fintype J]
+    (b₁ b₂ : I_B → V) (m₁ m₂ : I_M → V)
+    (w x₀ : V)
+    (hRFC : ∀ cut : V → Bool, cut w = false →
+      (∑ i : I_M, separation (cut (m₁ i)) (cut (m₂ i))) +
+          separation (cut w) (cut x₀) ≤
+        ∑ e : I_B, separation (cut (b₁ e)) (cut (b₂ e)))
+    (cost : I_M → ℕ) (f : J → V → ℕ) (H : J → ℕ)
+    (budget lambda : ℕ) (hf : ∀ j v, f j v ≤ H j)
+    (hcard : 2 ≤ Fintype.card I_M)
+    (hseparate : ∀ i, cost i + lambda ≤
+      ∑ j : J, Nat.dist (f j (m₁ i)) (f j (m₂ i)))
+    (hbudget :
+      (∑ j : J, ∑ e : I_B, Nat.dist (f j (b₁ e)) (f j (b₂ e))) ≤
+        (∑ j : J, Nat.dist (f j w) (f j x₀)) + budget + 2 * lambda) :
+    ∑ i : I_M, cost i ≤ budget := by
+  have hcoareaEach : ∀ j : J,
+      (∑ i : I_M, Nat.dist (f j (m₁ i)) (f j (m₂ i))) +
+          Nat.dist (f j w) (f j x₀) ≤
+        ∑ e : I_B, Nat.dist (f j (b₁ e)) (f j (b₂ e)) := by
+    intro j
+    exact rootedCutCondition_natPotential_of_rootCuts
+      b₁ b₂ m₁ m₂ w x₀ hRFC (f j) (H j) (hf j)
+  have hcoareaSum := Finset.sum_le_sum fun j (_hj : j ∈ (Finset.univ : Finset J)) =>
+    hcoareaEach j
+  have hcoarea :
+      (∑ i : I_M, ∑ j : J,
+          Nat.dist (f j (m₁ i)) (f j (m₂ i))) +
+          (∑ j : J, Nat.dist (f j w) (f j x₀)) ≤
+        ∑ j : J, ∑ e : I_B,
+          Nat.dist (f j (b₁ e)) (f j (b₂ e)) := by
+    rw [Finset.sum_add_distrib] at hcoareaSum
+    rw [Finset.sum_comm]
+    exact hcoareaSum
+  apply totalCost_le_of_potentialCertificate cost
+    (fun i => ∑ j : J, Nat.dist (f j (m₁ i)) (f j (m₂ i)))
+    (∑ j : J, Nat.dist (f j w) (f j x₀)) budget lambda hcard hseparate
+  exact hcoarea.trans hbudget
+
+/-- A weighted Boolean cut, viewed as a two-valued natural potential. -/
+def weightedCutPotential {V : Type*} (cut : V → Bool) (weight : ℕ) (v : V) : ℕ :=
+  if cut v then weight else 0
+
+@[simp]
+theorem weightedCutPotential_dist
+    {V : Type*} (cut : V → Bool) (weight : ℕ) (u v : V) :
+    Nat.dist (weightedCutPotential cut weight u)
+        (weightedCutPotential cut weight v) =
+      weight * separation (cut u) (cut v) := by
+  cases hu : cut u <;> cases hv : cut v <;>
+    simp [weightedCutPotential, hu, hv, separation, Nat.dist]
+
+/-- Direct finite weighted-cut certificate.  Unlike a single natural
+potential, this surface represents an arbitrary finite integral `L1` cut
+metric: each cut has its own nonnegative integer weight. -/
+theorem rootedCutCondition_totalCost_le_of_weightedCutCertificate
+    {V I_B I_M J : Type*}
+    [Fintype I_B] [Fintype I_M] [Fintype J]
+    (b₁ b₂ : I_B → V) (m₁ m₂ : I_M → V)
+    (w x₀ : V)
+    (hRFC : ∀ cut : V → Bool, cut w = false →
+      (∑ i : I_M, separation (cut (m₁ i)) (cut (m₂ i))) +
+          separation (cut w) (cut x₀) ≤
+        ∑ e : I_B, separation (cut (b₁ e)) (cut (b₂ e)))
+    (cost : I_M → ℕ) (cut : J → V → Bool) (weight : J → ℕ)
+    (budget lambda : ℕ) (hcard : 2 ≤ Fintype.card I_M)
+    (hseparate : ∀ i, cost i + lambda ≤
+      ∑ j : J, weight j * separation (cut j (m₁ i)) (cut j (m₂ i)))
+    (hbudget :
+      (∑ j : J, ∑ e : I_B,
+          weight j * separation (cut j (b₁ e)) (cut j (b₂ e))) ≤
+        (∑ j : J,
+          weight j * separation (cut j w) (cut j x₀)) +
+          budget + 2 * lambda) :
+    ∑ i : I_M, cost i ≤ budget := by
+  apply rootedCutCondition_totalCost_le_of_potentialFamilyCertificate
+    b₁ b₂ m₁ m₂ w x₀ hRFC cost
+    (fun j => weightedCutPotential (cut j) (weight j)) weight
+    budget lambda
+  · intro j v
+    by_cases hv : cut j v <;>
+      simp [weightedCutPotential, hv]
+  · exact hcard
+  · simpa using hseparate
+  · simpa using hbudget
+
+/-- Denominator-cleared weighted-cut certificate.  A positive common scale
+allows rational cut weights and a rational reserve (with a common
+denominator) to be recorded with natural numerators while the integral cost
+and budget remain unscaled. -/
+theorem rootedCutCondition_totalCost_le_of_scaledWeightedCutCertificate
+    {V I_B I_M J : Type*}
+    [Fintype I_B] [Fintype I_M] [Fintype J]
+    (b₁ b₂ : I_B → V) (m₁ m₂ : I_M → V)
+    (w x₀ : V)
+    (hRFC : ∀ cut : V → Bool, cut w = false →
+      (∑ i : I_M, separation (cut (m₁ i)) (cut (m₂ i))) +
+          separation (cut w) (cut x₀) ≤
+        ∑ e : I_B, separation (cut (b₁ e)) (cut (b₂ e)))
+    (cost : I_M → ℕ) (cut : J → V → Bool) (weight : J → ℕ)
+    (scale budget reserveNumerator : ℕ) (hscale : 0 < scale)
+    (hcard : 2 ≤ Fintype.card I_M)
+    (hseparate : ∀ i, scale * cost i + reserveNumerator ≤
+      ∑ j : J, weight j * separation (cut j (m₁ i)) (cut j (m₂ i)))
+    (hbudget :
+      (∑ j : J, ∑ e : I_B,
+          weight j * separation (cut j (b₁ e)) (cut j (b₂ e))) ≤
+        (∑ j : J,
+          weight j * separation (cut j w) (cut j x₀)) +
+          scale * budget + 2 * reserveNumerator) :
+    ∑ i : I_M, cost i ≤ budget := by
+  have hscaled := rootedCutCondition_totalCost_le_of_weightedCutCertificate
+    b₁ b₂ m₁ m₂ w x₀ hRFC (fun i => scale * cost i) cut weight
+    (scale * budget) reserveNumerator hcard (by
+      intro i
+      simpa using hseparate i) (by
+      simpa using hbudget)
+  rw [← Finset.mul_sum] at hscaled
+  exact Nat.le_of_mul_le_mul_left hscaled hscale
+
 end CutPotentialDuality
+
+section BoundaryResourcePacking
+
+/-- Exact arithmetic closure for the `d = 2s` chain-of-blocks route.  Each
+demand receives a positive number of articulation gaps, the gap resources
+are disjoint, and a demand using `r` gaps has distance at most `2r+2`.
+These three quantified facts already imply the full RL budget at the
+boundary.  The graph-theoretic construction of such resources is deliberately
+not asserted here. -/
+theorem totalCost_le_doubleSlackBudget_of_resourcePacking
+    {I : Type*} [Fintype I] (D resource : I → ℕ) (s : ℕ)
+    (hs : 5 ≤ s)
+    (hpositive : ∀ i, 1 ≤ resource i)
+    (hpack : (∑ i : I, resource i) ≤ s - 1)
+    (hdistance : ∀ i, D i ≤ 2 * resource i + 2) :
+    (∑ i : I, (D i + 1) ^ 2) ≤ rlBudget s (2 * s) := by
+  let R := ∑ i : I, resource i
+  have hcard : Fintype.card I ≤ R := by
+    calc
+      Fintype.card I = ∑ _i : I, 1 := by simp
+      _ ≤ ∑ i : I, resource i := by
+        apply Finset.sum_le_sum
+        intro i _
+        exact hpositive i
+  have hsquares : (∑ i : I, resource i ^ 2) ≤ R ^ 2 := by
+    simpa [R] using
+      (Finset.sum_sq_le_sq_sum_of_nonneg
+        (s := (Finset.univ : Finset I)) (f := resource)
+        (fun _ _ => Nat.zero_le _))
+  have hterm : ∀ i, (D i + 1) ^ 2 ≤
+      4 * resource i ^ 2 + 12 * resource i + 9 := by
+    intro i
+    have hi := hdistance i
+    nlinarith
+  have hsumTerm := Finset.sum_le_sum fun i
+      (_hi : i ∈ (Finset.univ : Finset I)) => hterm i
+  have haggregate : (∑ i : I, (D i + 1) ^ 2) ≤
+      4 * R ^ 2 + 21 * R := by
+    calc
+      (∑ i : I, (D i + 1) ^ 2) ≤
+          ∑ i : I, (4 * resource i ^ 2 + 12 * resource i + 9) := hsumTerm
+      _ = 4 * (∑ i : I, resource i ^ 2) + 12 * R +
+          9 * Fintype.card I := by
+            simp [R, Finset.sum_add_distrib, Finset.mul_sum]
+            ring
+      _ ≤ 4 * R ^ 2 + 21 * R := by omega
+  have hR : R ≤ s - 1 := hpack
+  have hnumeric : 4 * R ^ 2 + 21 * R ≤ 5 * s ^ 2 + 6 * s := by
+    have hRsq : R ^ 2 ≤ (s - 1) ^ 2 := by
+      simpa [pow_two] using Nat.mul_le_mul hR hR
+    have hmono : 4 * R ^ 2 + 21 * R ≤
+        4 * (s - 1) ^ 2 + 21 * (s - 1) := by omega
+    let t := s - 1
+    have hst : s = t + 1 := by simp [t]; omega
+    rw [hst]
+    have ht : 4 ≤ t := by omega
+    nlinarith
+  have hbudget : rlBudget s (2 * s) = 5 * s ^ 2 + 6 * s := by
+    simp [rlBudget, partnerDistance]
+    ring
+  rw [hbudget]
+  exact haggregate.trans hnumeric
+
+end BoundaryResourcePacking
 
 /-- Removing an M-free endpoint block of `a` vertices retracts one corridor
 edge and `a-1` slack vertices, and cannot increase the RL budget. -/
@@ -436,6 +626,171 @@ theorem corridor_length_le_twice_slack_add_two
     omega
   rw [hcardEq] at hcard
   omega
+
+/-- Equality in the cardinality union bound forces the indexed finite sets to
+be pairwise disjoint. -/
+theorem pairwiseDisjoint_of_card_biUnion_eq_sum_card
+    {α β : Type*} [DecidableEq α] [DecidableEq β]
+    (components : Finset α) (family : α → Finset β)
+    (heq : (components.biUnion family).card =
+      ∑ c ∈ components, (family c).card) :
+    (↑components : Set α).PairwiseDisjoint family := by
+  intro a ha b hb hab
+  by_contra hdisj
+  have hbErase : b ∈ components.erase a :=
+    Finset.mem_erase.mpr ⟨hab.symm, hb⟩
+  let rest := (components.erase a).biUnion family
+  have hfb : family b ⊆ rest := by
+    intro x hx
+    exact Finset.mem_biUnion.mpr ⟨b, hbErase, hx⟩
+  have hinterPos : 0 < (family a ∩ rest).card := by
+    rw [Finset.card_pos]
+    obtain ⟨x, hxa, hxb⟩ := Finset.not_disjoint_iff.mp hdisj
+    exact ⟨x, Finset.mem_inter.mpr ⟨hxa, hfb hxb⟩⟩
+  have hunionDecomp : components.biUnion family = family a ∪ rest := by
+    ext x
+    simp only [Finset.mem_biUnion, Finset.mem_union, rest]
+    constructor
+    · rintro ⟨c, hc, hxc⟩
+      by_cases hca : c = a
+      · exact Or.inl (by simpa [hca] using hxc)
+      · exact Or.inr ⟨c, Finset.mem_erase.mpr ⟨hca, hc⟩, hxc⟩
+    · rintro (hxa | ⟨c, hc, hxc⟩)
+      · exact ⟨a, ha, hxa⟩
+      · exact ⟨c, Finset.mem_of_mem_erase hc, hxc⟩
+  have hrestCard : rest.card ≤
+      ∑ c ∈ components.erase a, (family c).card := Finset.card_biUnion_le
+  have hunionCard := Finset.card_union_add_card_inter (family a) rest
+  have hsumErase : (∑ c ∈ components.erase a, (family c).card) +
+      (family a).card = ∑ c ∈ components, (family c).card :=
+    Finset.sum_erase_add _ _ ha
+  rw [hunionDecomp] at heq
+  omega
+
+/-- Equality case of the full corridor interval count.  If intervals cover
+all `2s` coordinates while their positive component sizes sum to `s`, then
+every component has size one, every interval has cardinality two, and no
+cardinality is lost in the union.  This is the exact finite-set rigidity
+behind the prospective `d = 2s` chain-of-blocks reduction. -/
+theorem full_coverage_eq_twice_mass_forces_unit_intervals
+    {α : Type*} [DecidableEq α]
+    (components : Finset α) (interval : α → Finset ℕ) (size : α → ℕ)
+    (s : ℕ)
+    (hcover : Finset.range (2 * s) ⊆ components.biUnion interval)
+    (hspan : ∀ c ∈ components, (interval c).card ≤ size c + 1)
+    (hpositive : ∀ c ∈ components, 1 ≤ size c)
+    (hmass : ∑ c ∈ components, size c = s) :
+    (components.biUnion interval).card = 2 * s ∧
+      (↑components : Set α).PairwiseDisjoint interval ∧
+      ∀ c ∈ components, size c = 1 ∧ (interval c).card = 2 := by
+  have hcomponents : components.card ≤ s := by
+    calc
+      components.card = ∑ _c ∈ components, 1 := by simp
+      _ ≤ ∑ c ∈ components, size c := by
+        apply Finset.sum_le_sum
+        intro c hc
+        exact hpositive c hc
+      _ = s := hmass
+  have hsumSpan : ∑ c ∈ components, (interval c).card ≤ 2 * s := by
+    calc
+      ∑ c ∈ components, (interval c).card ≤
+          ∑ c ∈ components, (size c + 1) := by
+            apply Finset.sum_le_sum
+            intro c hc
+            exact hspan c hc
+      _ = s + components.card := by
+        rw [Finset.sum_add_distrib, hmass]
+        simp
+      _ ≤ 2 * s := by omega
+  have hunionLe : (components.biUnion interval).card ≤
+      ∑ c ∈ components, (interval c).card := Finset.card_biUnion_le
+  have hunionGe : 2 * s ≤ (components.biUnion interval).card := by
+    simpa using Finset.card_le_card hcover
+  have hunionEq : (components.biUnion interval).card = 2 * s := by omega
+  have hsumSpanEq : ∑ c ∈ components, (interval c).card = 2 * s := by omega
+  have hcomponentsEq : components.card = s := by
+    have hsumUpper : ∑ c ∈ components, (size c + 1) =
+        s + components.card := by
+      rw [Finset.sum_add_distrib, hmass]
+      simp
+    have : 2 * s ≤ s + components.card := by
+      rw [← hsumUpper, ← hsumSpanEq]
+      apply Finset.sum_le_sum
+      intro c hc
+      exact hspan c hc
+    omega
+  constructor
+  · exact hunionEq
+  constructor
+  · apply pairwiseDisjoint_of_card_biUnion_eq_sum_card
+    exact hunionEq.trans hsumSpanEq.symm
+  · intro c hc
+    have hsize : size c = 1 := by
+      have hrest' : (components.erase c).card ≤
+          ∑ x ∈ components.erase c, size x := by
+        calc
+          (components.erase c).card =
+              ∑ x ∈ components.erase c, 1 := by simp
+          _ ≤ ∑ x ∈ components.erase c, size x := by
+            apply Finset.sum_le_sum
+            intro x hx
+            exact hpositive x (Finset.mem_of_mem_erase hx)
+      have hsizeSum : size c + ∑ x ∈ components.erase c, size x = s := by
+        calc
+          size c + ∑ x ∈ components.erase c, size x =
+              (∑ x ∈ components.erase c, size x) + size c := Nat.add_comm _ _
+          _ = ∑ x ∈ components, size x :=
+            Finset.sum_erase_add _ _ hc
+          _ = s := hmass
+      have hcardRest : (components.erase c).card + 1 = s := by
+        calc
+          (components.erase c).card + 1 = components.card :=
+            Finset.card_erase_add_one hc
+          _ = s := hcomponentsEq
+      have hsizeBound : (components.erase c).card + size c ≤
+          (components.erase c).card + 1 := by
+        calc
+          (components.erase c).card + size c ≤
+              (∑ x ∈ components.erase c, size x) + size c :=
+                Nat.add_le_add_right hrest' _
+          _ = s := by omega
+          _ = (components.erase c).card + 1 := hcardRest.symm
+      exact Nat.le_antisymm (Nat.le_of_add_le_add_left hsizeBound)
+        (hpositive c hc)
+    have hinterval : (interval c).card = 2 := by
+      have hrest : ∑ x ∈ components.erase c, (interval x).card ≤
+          ∑ x ∈ components.erase c, (size x + 1) := by
+        apply Finset.sum_le_sum
+        intro x hx
+        exact hspan x (Finset.mem_of_mem_erase hx)
+      have hleft : (interval c).card +
+          ∑ x ∈ components.erase c, (interval x).card = 2 * s := by
+        calc
+          (interval c).card + ∑ x ∈ components.erase c, (interval x).card =
+              (∑ x ∈ components.erase c, (interval x).card) +
+                (interval c).card := Nat.add_comm _ _
+          _ = ∑ x ∈ components, (interval x).card :=
+            Finset.sum_erase_add _ _ hc
+          _ = 2 * s := hsumSpanEq
+      have hright : (size c + 1) +
+          ∑ x ∈ components.erase c, (size x + 1) = 2 * s := by
+        have hupperTotal : ∑ x ∈ components, (size x + 1) = 2 * s := by
+          calc
+            ∑ x ∈ components, (size x + 1) =
+                (∑ x ∈ components, size x) + ∑ _x ∈ components, 1 := by
+                  rw [Finset.sum_add_distrib]
+            _ = s + components.card := by rw [hmass]; simp
+            _ = 2 * s := by rw [hcomponentsEq]; omega
+        calc
+          (size c + 1) + ∑ x ∈ components.erase c, (size x + 1) =
+              (∑ x ∈ components.erase c, (size x + 1)) + (size c + 1) :=
+                Nat.add_comm _ _
+          _ = ∑ x ∈ components, (size x + 1) :=
+            Finset.sum_erase_add _ _ hc
+          _ = 2 * s := hupperTotal
+      have hcspan := hspan c hc
+      omega
+    exact ⟨hsize, hinterval⟩
 
 /-- In the `n>=14` residual, the bridge-free coverage inequality excludes
 both previously enumerated thin rows `s=2` and `s=3`. -/
@@ -624,6 +979,8 @@ end GraphApplication
 
 #print axioms interior_coverage_card_le_twice_mass
 #print axioms corridor_length_le_twice_slack_add_two
+#print axioms pairwiseDisjoint_of_card_biUnion_eq_sum_card
+#print axioms full_coverage_eq_twice_mass_forces_unit_intervals
 #print axioms bridge_free_residual_slack_at_least_four
 #print axioms partnerDistance_eq_three_iff
 #print axioms rlBudget_pred_le
@@ -635,6 +992,10 @@ end GraphApplication
 #print axioms rootedCutCondition_natPotential_of_rootCuts
 #print axioms totalCost_le_of_potentialCertificate
 #print axioms rootedCutCondition_totalCost_le_of_potentialCertificate
+#print axioms rootedCutCondition_totalCost_le_of_potentialFamilyCertificate
+#print axioms rootedCutCondition_totalCost_le_of_weightedCutCertificate
+#print axioms rootedCutCondition_totalCost_le_of_scaledWeightedCutCertificate
+#print axioms totalCost_le_doubleSlackBudget_of_resourcePacking
 #print axioms rlBudget_endpointBlock_retraction_le
 #print axioms residual_series_gate_or_endpoint_pair
 #print axioms IsGeodesic.corridorIndexSet_card_le_twice_slack

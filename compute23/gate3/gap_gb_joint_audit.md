@@ -74,8 +74,24 @@ reduction. Full RL* remains unproved.**
    - No potential with target-strength quadratic separation is asserted.
    - The exact sufficient certificate algebra is kernel checked by
      `totalCost_le_of_potentialCertificate` and
-     `rootedCutCondition_totalCost_le_of_potentialCertificate`; existence of
-     the required potential is explicitly not asserted.
+     `rootedCutCondition_totalCost_le_of_potentialCertificate`.  The finite
+     weighted-cut version is
+     `rootedCutCondition_totalCost_le_of_potentialFamilyCertificate`, with
+     the direct Boolean-cut surface
+     `rootedCutCondition_totalCost_le_of_weightedCutCertificate` and its
+     denominator-cleared rational form
+     `rootedCutCondition_totalCost_le_of_scaledWeightedCutCertificate`.
+     Existence of either required certificate is explicitly not asserted.
+
+10. **`d=2s` resource arithmetic — PASS, non-closing.**
+    - Equality in the finite interval count forces size-one components and
+      pairwise-disjoint two-coordinate intervals; kernel:
+      `full_coverage_eq_twice_mass_forces_unit_intervals`.
+    - Quantified claim: for `s>=5`, positive resources with total at most
+      `s-1` and `D_i<=2r_i+2` imply the exact RL budget at `d=2s`.
+    - Kernel: `totalCost_le_doubleSlackBudget_of_resourcePacking`.
+    - The graph-level resource construction is not asserted, so this node
+      does not exclude `d=2s` from the remaining lemma.
 
 ## Falsification record
 
@@ -107,7 +123,9 @@ reduction. Full RL* remains unproved.**
 - exhaustive bounded residual dispatch;
 - a `100 x 98` endpoint-move grid; and
 - a `98 x 100 x 99` endpoint-block absorption grid; and
-- every threshold pair through height 99 for the layer-cake identity.
+- every threshold pair through height 99 for the layer-cake identity; and
+- every positive resource composition with `5<=s<=13` for the `d=2s`
+  arithmetic certificate.
 
 All arithmetic is integer arithmetic. No floating point or heuristic result
 is a proof dependency; the discovery-only random harness was not banked.

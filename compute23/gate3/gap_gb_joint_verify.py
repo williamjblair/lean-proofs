@@ -238,6 +238,20 @@ def threshold_separation_sum(a: int, b: int, height: int) -> int:
     return sum((k < a) != (k < b) for k in range(height))
 
 
+def double_slack_resource_certificate(
+    *, s: int, distances: tuple[int, ...], resources: tuple[int, ...]
+) -> bool:
+    """Exact ``d=2s`` resource-packing implication banked in Lean."""
+
+    assert s >= 5 and len(distances) == len(resources)
+    assert all(r >= 1 for r in resources)
+    assert sum(resources) <= s - 1
+    assert all(d <= 2 * r + 2 for d, r in zip(distances, resources))
+    return sum((d + 1) ** 2 for d in distances) <= (
+        s * (2 * (2 * s) + 2 + s) + 2 * s * p_of_d(2 * s)
+    )
+
+
 if __name__ == "__main__":
     tail = rooted_metrics(**build_long_tail_c5_fixture(3, 5))
     print(
