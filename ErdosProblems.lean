@@ -29,6 +29,8 @@ import ErdosProblems.Erdos686TwoPrimeSecondLift
 import ErdosProblems.Erdos686GlobalResidualConcentration
 import ErdosProblems.Erdos686GlobalResidualTwoPrime
 import ErdosProblems.Erdos686TwoOwnerAggregate
+import ErdosProblems.Erdos686TwoOwnerGrouping
+import ErdosProblems.Erdos686TwoOwnerGroupingAudit
 import ErdosProblems.Erdos686ThreeBucketRestriction
 import ErdosProblems.Erdos686ConvergentMachinery
 import ErdosProblems.Erdos686FiveThue

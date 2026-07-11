@@ -4276,6 +4276,121 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.globalResidualGroupedLossFactor_mul_clean
+    statement: >-
+      Every prime-power gap component is exactly its complementary cleaning
+      loss times its retained clean power.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.globalResidualGroupedLossFactor_dvd_targetAggregateLoss
+    statement: >-
+      Each exact per-prime cleaning loss divides the explicit aggregate loss
+      budget of its target row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.globalResidualGroupedLoss_le_targetAggregateLoss
+    statement: >-
+      Pairwise coprimality packs the product of all per-prime losses below the
+      exact target-row aggregate budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.globalResidualGrouped_decomposition
+    statement: >-
+      A two-index cover of the retained owner range reconstructs the complete
+      gap as loss times two grouped cleaned buckets.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.globalResidualGroupedLeft_coprime_right
+    statement: >-
+      The two grouped retained buckets are coprime, including coincident
+      owners through first-owner precedence.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.globalResidualGroupedLeft_dvd_factor
+    statement: >-
+      The first grouped retained bucket divides the lower factor at its owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.globalResidualGroupedRight_dvd_factor
+    statement: >-
+      The second grouped retained bucket divides the lower factor at its owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.globalResidualGroupedLeft_square_dvd_residual
+    statement: >-
+      The square of the first grouped retained bucket divides its exact local
+      residual.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.globalResidualGroupedRight_square_dvd_residual
+    statement: >-
+      The square of the second grouped retained bucket divides its exact local
+      residual.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.hasAtMostTwoGlobalResidualOwners_of_assignment
+    statement: >-
+      A certified owner assignment covered by two indices supplies the exact
+      aggregate two-owner interface used by the cutoff theorem.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.exists_globalResidualOwnerAssignment
+    statement: >-
+      Global residual concentration chooses one certified owner for every
+      prime divisor of a nonzero exact solution gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.two_owner_range_equation_below_cutoff
+    statement: >-
+      Any certified two-index cover of a target-row owner assignment forces
+      the exact solution gap below ten to the 120.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerGrouping.lean
+    theorem: Erdos686.Erdos686Variant.exists_globalResidualOwnerAssignment_not_two_cover
+    statement: >-
+      Every target-size exact solution has one certified cleaned-owner
+      assignment whose nonzero range cannot be covered by two indices.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686ReflectionOwnerCorrelationAudit.lean
     theorem: Erdos686.Erdos686Variant.exists_reflection_owner_correlation_four
     statement: >-

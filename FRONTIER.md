@@ -45,10 +45,13 @@ calculus closes an arbitrary supplied pair of coprime cleaned owner buckets
 under the exact all-prime loss table
 `G_k=108,1620,136080,1224720,242494560,18914575680`: an exact solution
 equipped with `HasAtMostTwoGlobalResidualOwners` has `d<10^120`.  This is a
-strictly conditional theorem until the finite prime-factor grouping step
-constructs that predicate from per-prime chosen owners; the analytic node is
-closed, while the bookkeeping node remains outside the kernel.  For three cleaned residual
-buckets, exact second- and third-order eliminations are kernel-banked and all
+strict conditional interface, but the finite prime-factor grouping step is
+now kernel-banked: global concentration constructs one certified assignment,
+and any two-index cover of its nonzero cleaned owner range constructs the
+predicate and contradicts the cutoff.  Consequently every target-size
+solution has a certified assignment whose nonzero cleaned range cannot be
+covered by two indices.  For three cleaned residual buckets, exact second-
+and third-order eliminations are kernel-banked and all
 1,035 target index triples have distinct zero slopes.  A 121-digit CRT
 non-solution satisfies the square, moment, and local congruences while
 failing both the equation and short window, so the exact remaining
@@ -90,9 +93,10 @@ OPEN CORE:
    or new CF structure. Watch: Calegari–Dimitrov–Tang holonomy program.
    The one- and two-distinct-prime-support subcases are now excluded for
    every prime base.  The remaining gap has at least three distinct prime
-   divisors.  For arbitrary prime support, the at-most-two-owner analytic
-   closure is banked; its exact kernel gap is finite factorization and owner
-   grouping into `HasAtMostTwoGlobalResidualOwners`, including `g<=G_k`.
+   divisors.  For arbitrary prime support, finite factorization, owner choice,
+   coprime bucket assembly, and `g<=G_k` are now banked.  The certified
+   assignment of any target-size solution has more than two nonzero cleaned
+   owner values; the remaining task is to contradict that multi-owner branch.
    In the exactly-three-cleaned-bucket slice, the current exact
    gap is the quantified short-CRT/window lemma in
    `compute/campaign686/three_bucket_findings.md`; four-or-more buckets remain

@@ -6,11 +6,11 @@ It is updated as candidates enter or leave the proof path.
 ## Baseline
 
 - Focused terminal module compiles.
-- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 488
+- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 501
   theorem names.
-- The combined full axiom audit reports 914 theorem surfaces, all within the
+- The combined full axiom audit reports 927 theorem surfaces, all within the
   allowlist `[propext, Classical.choice, Quot.sound]`.
-- `attestations.json` was regenerated successfully for all 488 entries.
+- `attestations.json` was regenerated successfully for all 501 entries.
 
 ## Dependency tree: odd-tail prime-power restriction
 
@@ -93,7 +93,7 @@ Verdict: the complete two-distinct-prime-support slice is closed, not merely
 reduced to Pell families.  The remaining odd-tail gap has at least three
 distinct prime divisors.
 
-## Dependency tree: conditional aggregate two-owner closure
+## Dependency tree: complete aggregate two-owner branch
 
 1. Multiply all per-prime cleaning losses in a target row.  Exact Legendre
    arithmetic gives
@@ -112,13 +112,20 @@ distinct prime divisors.
 6. Therefore an exact target-row solution equipped with
    `HasAtMostTwoGlobalResidualOwners` has `d<10^120`. **Lean banked and
    independently hostile-audited.**
+7. Global concentration chooses one certified owner for every prime divisor.
+   If its nonzero cleaned owner range is covered by two indices, exact finite
+   factorization reconstructs `d=gPQ`, proves the two buckets coprime, proves
+   their factor and square divisibilities, and packs the complementary loss
+   below `G_k`. **Lean banked, exact-reproduced, and independently
+   hostile-audited.**
+8. Hence every target-size solution has one certified assignment with no
+   two-index cover. **Lean banked.**
 
-Verdict: the analytic two-owner node is complete, but the conclusion remains
-conditional.  The exact missing kernel lemma is finite prime-factor
-assembly: choose the per-prime owners, group all cleaned powers into `P,Q`,
-prove their product divisibilities and coprimality, put the complementary
-loss in `g`, and prove `g<=G_k`.  Until that lemma is composed, this section
-does not imply that every target-size solution has three cleaned owners.
+Verdict: the former finite grouping gap is closed.  The remaining odd-tail
+branch is a certified assignment with more than two distinct owner values
+among its nonzero cleaned components.  The theorem is scoped to the one
+assignment selected by concentration; it does not quantify over all possible
+assignments.
 
 ## Dependency tree: three cleaned residual buckets
 

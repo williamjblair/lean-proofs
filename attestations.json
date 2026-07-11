@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:91e103e38be10cc01866de171d1ee57b4fe6b5e9e1f8a5e6242179435ddaa725",
+  "verifier_output_hash": "sha256:3d7f52ac8d83afa0a1f20f163cfa46376cfeccf627ce1bb07d9b438b9c3f482d",
   "attestations": [
     {
       "problem": 154,
@@ -5532,6 +5532,162 @@
       "theorem": "Erdos686.Erdos686Variant.atMostTwoGlobalResidualOwners_below_cutoff",
       "file": "ErdosProblems/Erdos686TwoOwnerAggregate.lean",
       "proof_hash": "sha256:35959fee7b3080b2d0a91885a7a465455fcbed4ead9ecc1d652024ec7eabe009",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidualGroupedLossFactor_mul_clean",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidualGroupedLossFactor_dvd_targetAggregateLoss",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidualGroupedLoss_le_targetAggregateLoss",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidualGrouped_decomposition",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidualGroupedLeft_coprime_right",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidualGroupedLeft_dvd_factor",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidualGroupedRight_dvd_factor",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidualGroupedLeft_square_dvd_residual",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.globalResidualGroupedRight_square_dvd_residual",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.hasAtMostTwoGlobalResidualOwners_of_assignment",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_globalResidualOwnerAssignment",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_owner_range_equation_below_cutoff",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_globalResidualOwnerAssignment_not_two_cover",
+      "file": "ErdosProblems/Erdos686TwoOwnerGrouping.lean",
+      "proof_hash": "sha256:63799ee4a2cc6fc0632776c231ac0961ddc038d60348c1b2fc43def3803797ef",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

@@ -25,8 +25,8 @@ theorem erdos686_false_of_constant_bound_and_large_escape
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 488 manifest-tracked theorems (432 for problem 686), 488
-regenerated attestations, and 914 headline theorem surfaces with axioms
+[R] CI gate: 501 manifest-tracked theorems (445 for problem 686), 501
+regenerated attestations, and 927 headline theorem surfaces with axioms
 contained in `[propext, Classical.choice, Quot.sound]` after the audited #730
 unit-range block spine.
 
@@ -65,8 +65,8 @@ theorem gives `d<10^120` for all distinct primes `p,q`, including `2,3`,
 without a base-size hypothesis.  Any surviving odd tail therefore has at
 least three distinct prime divisors.
 
-[R] **The analytic at-most-two-owner branch is closed, conditional only on
-finite grouping.**  For all prime bases at once, the exact aggregate cleaning
+[R] **The finite at-most-two-owner branch is closed end to end.**  For all
+prime bases at once, the exact aggregate cleaning
 loss is
 
 ```text
@@ -79,10 +79,14 @@ If the cleaned mass is supplied as two coprime owner buckets `P,Q` with
 second obstructions vanish, the third lifts and the cleaned Pell gcd cancel
 the opposite coefficients.  Lean proves that the resulting exact equation
 has `d<10^120`, including coincident owners and unit buckets.  The theorem
-takes `HasAtMostTwoGlobalResidualOwners` as an explicit hypothesis.  It does
-not yet construct that predicate from the per-prime owner witnesses: the
-sole remaining interface is the finite factorization/product grouping
-lemma, not another Diophantine estimate.
+takes `HasAtMostTwoGlobalResidualOwners` as an explicit analytic interface.
+The new finite grouping module constructs it from any certified per-prime
+assignment covered by two indices: it proves the exact factorization, bucket
+coprimality, factor and square divisibilities, and `g<=G_k`.  Global
+concentration then chooses one assignment for every solution.  At target
+size, that same assignment cannot be covered by any two indices.  Thus the
+remaining branch has more than two nonzero cleaned owner values; the old
+bookkeeping interface is no longer open.
 
 [R] **Three cleaned buckets have exact second/third restrictions, but no
 closure.**  For `d=gPQR` and three step-three square residuals, Lean proves
