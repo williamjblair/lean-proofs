@@ -46,6 +46,7 @@ entry must name one quantified missing lemma.
 | T1-3B | Three cleaned residual buckets | Eliminate the two opposite near-square residuals from the second through fourth local lifts, then use the verified short window. | exact local restrictions through fourth order banked; short-CRT node open | Cyclically, `P|O_i`, `P^2|-3O_i+180E_i g^2(i-j)(i-l)d`, and `P^3|3bcF_i+P^2J_i`.  All 1,035 zero slopes are pairwise distinct, but an unbounded Hensel/CRT pseudo-family lifts the package through fourth order while failing the equation/window.  The next lemma must use the short window quantitatively. |
 | T1-3B-Z | Zero-obstruction LCM packing | If one `O_s` vanishes, pack all three cleaned components into one coefficient product and apply the target loss bound. | repaired six-row wrapper Lean-banked and hostile-audited | The repaired ordinary-`decide` certificate checks all six target rows and gives exact coefficient bounds `<10^30,<10^18`; coprime packing yields `d|A*B*K*g^4`, excluding every designated zero at `d>=10^120`. The historical noncompiling SHA remains an immutable FAIL record. The all-nonzero short-CRT/window core remains. |
 | T1-3B-Q | Fourth-to-third quotient and lattice packing | Cancel the cubic lift to a fixed-coefficient quotient congruence, eliminate common variables across three owners, and pack two zero quotients. | 13 generic Lean theorems banked and hostile-audited; finite application exact but not row-wrapped | Exact arithmetic enumerates 2,603 noncentral two-zero placements. All 1,420 through `k=13` close; row 15 closes 901/1,183 and leaves 282. Centers, all-nonzero, one-zero, and those 282 placements remain open. |
+| T1-3B-SIGN | Short-window lattice signs and component packing | Classify exact quotient-sign cells and turn one-sided lattice mass into two component-square bounds. | 9 generic Lean theorems banked and hostile-audited; finite classification exact but not row-wrapped | All nine strict one-sided reflected slivers and 8/18 one-zero boundaries close. The live set is 2,381 mixed cells plus ten boundaries. Its exact missing lemma asks for two distinct proxies `V_s<=H_k*g^2`; coefficient signs alone are falsified. |
 | T1-MO | Complete finite-owner obstruction composition | Compose every opposite residual while retaining the original loss, then use the lower residual product to exclude zero obstructions. | 10 generic Lean theorems banked and hostile-audited | For every complete owner family of cardinality `4..15`, `P_s|O_s`, `P_s^2|F_s`, and target-size `O_s!=0`. The 42,274-subset exact scan and a 130-digit CRT falsifier show the direct nonzero-size and congruence-only routes remain open. |
 | T1-PUI | Puiseux denominator | Expand the algebraic branch solving `P_k(X)=4P_k(Y)` beyond the leading root and prove an explicit denominator/integrality trap. | blocked | After `L` terms the cleared algebraic norm grows like `Y^(2L(k-1)-2)`; ordinary norm-smallness cannot force zero without new denominator cancellation. |
 | T1-UNIT | Unit equation | Use conjugate information in `Q(4^(1/k))` to bound the structured norm identity. | active | Generic Baker-Feldman bounds are disallowed unless below `10^120`. |
@@ -87,10 +88,10 @@ These are premises for new attacks, not solutions of `LargeKSmoothHypothesis`.
 
 ## Pipeline audit
 
-The combined checkpoint has 560 manifest entries and 560 regenerated
-attestations, including 482 entries for problem 686, 30 for problem 23, and
+The combined checkpoint has 569 manifest entries and 569 regenerated
+attestations, including 491 entries for problem 686, 30 for problem 23, and
 44 arithmetic-spine entries for problem 730.  The combined axiom sweep reports
-986 clean headline surfaces.  The emitter
+995 clean headline surfaces.  The emitter
 parses wrapped and axiom-free reports, rejects missing theorem reports, and
 accepts any subset of `[propext, Classical.choice, Quot.sound]`.
 

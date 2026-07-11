@@ -77,7 +77,14 @@ kernel-banked and independently hostile-audited.  Exact arithmetic closes
 all 1,420 noncentral two-zero placements through `k=13` and 901 of 1,183 at
 `k=15`; this finite row application is diagnostic rather than attested.
 The remaining quotient branches are all-nonzero, one-zero,
-center-containing multi-zero, and 282 noncentral row-15 placements.
+center-containing multi-zero, and 282 noncentral row-15 placements.  Exact
+lattice-sign analysis of all 1,035 triples closes all nine strict one-sided
+reflected slivers and eight of eighteen one-zero boundaries.  The generic
+component-square, coprime-lcm, and cutoff implications are kernel-banked and
+independently re-proved; the finite cell classification is exact external
+arithmetic.  The remaining three-bucket node is 2,381 mixed cells plus ten
+live boundaries, quantified by the two-small-weighted-terms lemma recorded
+in the lattice-sign findings.
 Two additional global moment identities use `2^2=4` to make
 `d^3` divide explicit constant-plus-linear coefficient combinations.  They
 are cubic combinations, not cubic divisibility of either residual product.
@@ -132,6 +139,10 @@ OPEN CORE:
    excludes every vanishing composed second obstruction at target size.
    The surviving multi-owner branch has every second obstruction nonzero;
    direct obstruction-size bounds grow with the family and do not close it.
+   In the exactly-three slice, the lattice-sign route reduces the live cells
+   to the exact requirement that two distinct weighted component proxies
+   `V_s=P_s^2*max(1,|w_s z_s|)` are at most `H_k*g^2`; this is unproved and
+   coefficient signs alone are explicitly insufficient.
 2. `LargeKSmoothHypothesis` — no k ≥ 16 solution with an entirely
    (d+k)-smooth lower block (prime obstruction banked; census: two
    clusters in 145+ billion window points, neither an equation solution).

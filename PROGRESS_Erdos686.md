@@ -143,6 +143,20 @@ noncentral two-zero placements: all 1,420 cases through `k=13` close, and
 is not advertised as kernel-banked because it has no six-row Lean wrapper.
 The center, all-nonzero, one-zero, and 282 row-15 branches remain open.
 
+[R] **The lattice-sign route closes every strict one-sided sliver and eight
+one-zero boundaries.**  Exact rational arithmetic classifies all 1,035
+owner triples: the primitive weights contain 1,539 positive, 1,539 negative,
+and 27 zero components.  Among the live cells, 2,381 are mixed and nine are
+strict one-sided reflected slivers; all nine slivers force `d<10^120` through
+the banked two-component square bound.  Coprime lcm packing closes eight of
+eighteen one-zero boundaries, leaving ten.  A hostile Lean module freshly
+reproves all nine generic theorems.  The finite cell scan is exact but not
+row-wrapped for attestation.  The single remaining three-bucket size lemma is
+to find distinct owners `r,s` with
+`P_r^2*max(1,|w_r z_r|), P_s^2*max(1,|w_s z_s|) <= H_k*g^2` in each of the
+2,381 mixed cells and ten live boundaries; coefficient signs alone are
+falsified as a route to that bound.
+
 [R] **The finite-family obstruction algebra now retains every selected
 owner without inflating the loss.**  For an arbitrary finite owner set, Lean
 composes all opposite square residuals modulo the distinguished component,

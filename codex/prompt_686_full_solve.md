@@ -31,7 +31,11 @@
 > row-15 placements remain.  Arbitrary finite owner families now also have
 > exact second/third compositions with the original bounded loss, and every
 > composed second obstruction is nonzero at target size; their joint
-> nonzero branch remains open.  Target 1 itself remains open.
+> nonzero branch remains open.  In the exactly-three slice, exact
+> lattice-sign analysis closes all nine strict reflected one-sided slivers
+> and eight of eighteen zero boundaries.  The live cell set is 2,381 mixed
+> cells plus ten boundaries; its exact gap is the two-small-weighted-component
+> lemma stated in the lattice-sign findings.  Target 1 itself remains open.
 
 ## Current task statement
 

@@ -39,6 +39,7 @@ import ErdosProblems.Erdos686ThreeBucketZeroExclusionRepairAudit
 import ErdosProblems.Erdos686MultiOwnerExtensionHostileAudit
 import ErdosProblems.Erdos686FourthLocalLiftAudit
 import ErdosProblems.Erdos686ShortWindowQuotientHostileAudit
+import ErdosProblems.Erdos686ShortWindowLatticeSignHostileAudit
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686FinalReduction
 import ErdosProblems.Erdos730NearAffinePayment
@@ -611,6 +612,15 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.two_zero_third_quotient_gap_square_bound
 #print axioms Erdos686.Erdos686Variant.two_zero_third_quotient_gap_lt_cutoff
 #print axioms Erdos686.Erdos686Variant.third_quotient_bound_of_short_window
+#print axioms Erdos686.Erdos686Variant.square_le_of_nonzero_weighted_term
+#print axioms Erdos686.Erdos686Variant.two_component_short_window_gap_bound
+#print axioms Erdos686.Erdos686Variant.two_component_short_window_gap_lt_cutoff
+#print axioms Erdos686.Erdos686Variant.two_weighted_terms_short_window_gap_lt_cutoff
+#print axioms Erdos686.Erdos686Variant.reflected_one_sided_short_window_gap_lt_cutoff
+#print axioms Erdos686.Erdos686Variant.coprime_square_product_dvd_lcm
+#print axioms Erdos686.Erdos686Variant.reflected_boundary_lcm_bound
+#print axioms Erdos686.Erdos686Variant.reflected_one_zero_short_window_gap_bound
+#print axioms Erdos686.Erdos686Variant.reflected_one_zero_short_window_gap_lt_cutoff
 -- Conditional research surfaces; not listed in `proofs.yaml`.
 #print axioms Erdos686.Erdos686Variant.sq_dvd_finset_affine_prod_sub_constant_sub_linear
 #print axioms Erdos686.Erdos686Variant.localOffsetCofactor_second_order

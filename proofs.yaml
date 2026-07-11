@@ -5131,3 +5131,84 @@ proofs:
       has a nonzero composed second obstruction at each distinguished owner.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowLatticeSign.lean
+    theorem: Erdos686.Erdos686Variant.square_le_of_nonzero_weighted_term
+    statement: >-
+      A nonzero weighted quotient term bounded by the lattice mass yields the
+      corresponding cleaned component-square bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowLatticeSign.lean
+    theorem: Erdos686.Erdos686Variant.two_component_short_window_gap_bound
+    statement: >-
+      Two component-square bounds and the short upper residual window give
+      the exact gap majorant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowLatticeSign.lean
+    theorem: Erdos686.Erdos686Variant.two_component_short_window_gap_lt_cutoff
+    statement: >-
+      The two-component short-window majorant and bounded loss force the gap
+      below the supplied cutoff.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowLatticeSign.lean
+    theorem: Erdos686.Erdos686Variant.two_weighted_terms_short_window_gap_lt_cutoff
+    statement: >-
+      Two nonzero weighted quotient terms below the common lattice threshold
+      imply the target short-window cutoff.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowLatticeSign.lean
+    theorem: Erdos686.Erdos686Variant.reflected_one_sided_short_window_gap_lt_cutoff
+    statement: >-
+      A reflected one-sided lattice identity bounds both endpoint components
+      and forces the gap below the numeric cutoff.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowLatticeSign.lean
+    theorem: Erdos686.Erdos686Variant.coprime_square_product_dvd_lcm
+    statement: >-
+      Coprime component squares dividing two integers have their product
+      dividing the least common multiple.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowLatticeSign.lean
+    theorem: Erdos686.Erdos686Variant.reflected_boundary_lcm_bound
+    statement: >-
+      The common reflected coefficient and loss factor give the exact lcm
+      majorant needed at a one-zero boundary.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowLatticeSign.lean
+    theorem: Erdos686.Erdos686Variant.reflected_one_zero_short_window_gap_bound
+    statement: >-
+      One zero endpoint quotient, the opposite weighted-square identity, and
+      coprime lcm packing give a tenth-power loss bound for the gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowLatticeSign.lean
+    theorem: Erdos686.Erdos686Variant.reflected_one_zero_short_window_gap_lt_cutoff
+    statement: >-
+      The reflected one-zero boundary majorant and bounded loss force the gap
+      below the supplied cutoff.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

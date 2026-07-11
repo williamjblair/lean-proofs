@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:aa55d893f6156127a212e08ca7eeeff8ceef961897f2c4e1b6ea4d93f582708e",
+  "verifier_output_hash": "sha256:3dbd47dd4650659e91f8ce1fc941f3a269971147df476d8b376c6f8035e06f1a",
   "attestations": [
     {
       "problem": 154,
@@ -6664,6 +6664,113 @@
       "theorem": "Erdos686.Erdos686Variant.target_multi_owner_second_obstruction_ne_zero",
       "file": "ErdosProblems/Erdos686MultiOwnerExtension.lean",
       "proof_hash": "sha256:eb1672572473b14ab4ffb19a15573e577afa5e6fba093e6559fa781bc7ac051c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.square_le_of_nonzero_weighted_term",
+      "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
+      "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_component_short_window_gap_bound",
+      "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
+      "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_component_short_window_gap_lt_cutoff",
+      "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
+      "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_weighted_terms_short_window_gap_lt_cutoff",
+      "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
+      "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reflected_one_sided_short_window_gap_lt_cutoff",
+      "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
+      "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.coprime_square_product_dvd_lcm",
+      "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
+      "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reflected_boundary_lcm_bound",
+      "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
+      "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reflected_one_zero_short_window_gap_bound",
+      "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
+      "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reflected_one_zero_short_window_gap_lt_cutoff",
+      "file": "ErdosProblems/Erdos686ShortWindowLatticeSign.lean",
+      "proof_hash": "sha256:1085863ae92e0d98841da3d667fa12de774ec843fe2a97988173f414dd8c905c",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
