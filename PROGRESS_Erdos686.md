@@ -131,6 +131,18 @@ cyclic views.  The earlier noncompiling source SHA remains a historical FAIL;
 the repaired SHA alone is banked.  This removes only the zero branch and does
 not prove the all-nonzero short-window lemma.
 
+[R] **Fourth-order quotient cancellation and two-zero packing are now
+banked.**  Cancelling the square factor in the cubic lift gives the exact
+third quotient and then the fixed-coefficient congruence
+`P | 27*C^2*b*c*z + K*g^4`.  Lean also proves the opposite-cofactor overlap,
+the three-row lattice identity, and a generic coprime two-zero packing bound
+`d^2*W <= L^2*Gamma*g^12`.  A fresh hostile module independently reproves all
+13 public theorems.  Independent exact arithmetic enumerates 2,603
+noncentral two-zero placements: all 1,420 cases through `k=13` close, and
+901 of 1,183 close for `k=15`, leaving exactly 282.  This finite application
+is not advertised as kernel-banked because it has no six-row Lean wrapper.
+The center, all-nonzero, one-zero, and 282 row-15 branches remain open.
+
 [R] **Two global cubic moment combinations.**  Expanding at the evaluation
 ratio `2^2=4` cancels every term through degree two after explicit constant
 and linear corrections.  Lean proves `d^3` divides the resulting

@@ -4924,3 +4924,120 @@ proofs:
       obstructions nonzero.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_reduced_fourth_identity
+    statement: >-
+      The reduced fourth-order expression has the exact fixed-coefficient
+      decomposition used by the quotient route.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.square_factor_cancel_from_cube_dvd
+    statement: >-
+      A nonzero integer square factor cancels from the corresponding cubic
+      divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_fourth_to_third_quotient
+    statement: >-
+      The fourth local obstruction implies the exact third-quotient
+      divisibility after square-factor cancellation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_fourth_obstruction_to_quotient
+    statement: >-
+      The banked fourth-order owner obstruction specializes to the exact
+      quotient congruence.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_reduced_fourth_quotient_dvd
+    statement: >-
+      The second obstruction eliminates the quotient variable from the
+      reduced fourth-order congruence.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_fourth_obstruction_reduced_dvd
+    statement: >-
+      The composed fourth-order obstruction yields a divisibility with
+      coefficients independent of the eliminated local variables.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_reduced_fourth_coefficient_eq_zero_of_odd_coefficients
+    statement: >-
+      The reduced fourth coefficient vanishes at the odd-row center when
+      the relevant odd Taylor coefficients vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.common_component_third_quotient_dvd_fixed
+    statement: >-
+      A component common to the local quotient and cleaned bucket divides
+      the fixed coefficient times the fourth power of the loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.common_component_opposite_cofactor_dvd_offset
+    statement: >-
+      A component common to an owner bucket and an opposite cofactor divides
+      three times the owner offset.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.three_third_quotient_lattice_identity
+    statement: >-
+      Three third-quotient relations combine to an exact lattice identity
+      eliminating their two common variables.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.two_zero_third_quotient_gap_square_bound
+    statement: >-
+      Two zero quotients, coprime packing, and the remaining weighted-square
+      bound give the exact gap-square majorant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.two_zero_third_quotient_gap_lt_cutoff
+    statement: >-
+      The generic two-zero gap-square majorant and an explicit numeric
+      inequality force the gap below the supplied cutoff.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ShortWindowQuotient.lean
+    theorem: Erdos686.Erdos686Variant.third_quotient_bound_of_short_window
+    statement: >-
+      The lower residual bound and upper short-window product bound give the
+      proper normalized quotient inequality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

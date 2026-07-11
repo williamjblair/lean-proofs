@@ -70,7 +70,14 @@ for a supplied bounded-loss three-bucket factorization at target size, none
 of the three composed second obstructions can vanish.  Its historical
 noncompiling source audit remains recorded separately; only the repaired
 source is attested.  The surviving three-bucket branch therefore has all
-three second obstructions nonzero.
+three second obstructions nonzero.  Fourth-to-third quotient cancellation,
+the fixed-coefficient reduced congruence, opposite-cofactor overlap, the
+three-row lattice identity, and generic two-zero packing are also
+kernel-banked and independently hostile-audited.  Exact arithmetic closes
+all 1,420 noncentral two-zero placements through `k=13` and 901 of 1,183 at
+`k=15`; this finite row application is diagnostic rather than attested.
+The remaining quotient branches are all-nonzero, one-zero,
+center-containing multi-zero, and 282 noncentral row-15 placements.
 Two additional global moment identities use `2^2=4` to make
 `d^3` divide explicit constant-plus-linear coefficient combinations.  They
 are cubic combinations, not cubic divisibility of either residual product.
@@ -115,11 +122,12 @@ OPEN CORE:
    multi-owner branch.  The extraction does not absorb further owner buckets
    into the bounded loss.
    In the exactly-three-cleaned-bucket slice, the current exact
-   zero-obstruction placements are excluded, and the current exact gap is
-   the all-nonzero quantified short-CRT/window lemma in
-   `compute/campaign686/three_bucket_findings.md`, now including the fourth
-   cyclic divisibilities from `Erdos686FourthLocalLift.lean`; four-or-more
-   buckets remain unrestricted by that lemma.
+   zero-obstruction placements are excluded.  The audited quotient package
+   additionally closes the noncentral two-zero placements through `k=13`
+   and 901 of 1,183 at `k=15`.  The current exact gap comprises the
+   all-nonzero, one-zero, center-containing multi-zero, and 282 noncentral
+   row-15 quotient placements; four-or-more buckets remain outside this
+   three-bucket slice.
 2. `LargeKSmoothHypothesis` — no k ≥ 16 solution with an entirely
    (d+k)-smooth lower block (prime obstruction banked; census: two
    clusters in 145+ billion window points, neither an equation solution).

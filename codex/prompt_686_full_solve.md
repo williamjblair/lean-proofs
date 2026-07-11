@@ -23,8 +23,12 @@
 > The repaired, hostile-audited six-row wrapper also excludes every vanishing
 > composed second obstruction in a supplied bounded-loss three-bucket
 > factorization.  The exact next three-bucket node is therefore the
-> all-nonzero quantified short-CRT lemma in
-> `compute/campaign686/three_bucket_findings.md`; Target 1 itself remains open.
+> quotient/window system: generic fourth-to-third cancellation, a
+> fixed-coefficient congruence, the three-row lattice identity, and two-zero
+> packing are now kernel-banked and independently hostile-audited.  Exact
+> arithmetic closes all noncentral two-zero placements through `k=13` and
+> 901 of 1,183 at `k=15`; all-nonzero, one-zero, center-containing, and 282
+> row-15 placements remain.  Target 1 itself remains open.
 
 ## Current task statement
 

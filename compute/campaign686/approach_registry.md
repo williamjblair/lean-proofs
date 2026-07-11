@@ -45,6 +45,7 @@ entry must name one quantified missing lemma.
 | T1-MOM | Global moment cancellation | Use `2^2=4` at the two signed residual centers to cancel the quadratic coefficient. | proved and Lean-banked | `d^3` divides two explicit constant-plus-linear coefficient combinations.  An exact solution shows neither raw product need be cube-divisible; the proper next use is the three-or-more-bucket regime. |
 | T1-3B | Three cleaned residual buckets | Eliminate the two opposite near-square residuals from the second through fourth local lifts, then use the verified short window. | exact local restrictions through fourth order banked; short-CRT node open | Cyclically, `P|O_i`, `P^2|-3O_i+180E_i g^2(i-j)(i-l)d`, and `P^3|3bcF_i+P^2J_i`.  All 1,035 zero slopes are pairwise distinct, but an unbounded Hensel/CRT pseudo-family lifts the package through fourth order while failing the equation/window.  The next lemma must use the short window quantitatively. |
 | T1-3B-Z | Zero-obstruction LCM packing | If one `O_s` vanishes, pack all three cleaned components into one coefficient product and apply the target loss bound. | repaired six-row wrapper Lean-banked and hostile-audited | The repaired ordinary-`decide` certificate checks all six target rows and gives exact coefficient bounds `<10^30,<10^18`; coprime packing yields `d|A*B*K*g^4`, excluding every designated zero at `d>=10^120`. The historical noncompiling SHA remains an immutable FAIL record. The all-nonzero short-CRT/window core remains. |
+| T1-3B-Q | Fourth-to-third quotient and lattice packing | Cancel the cubic lift to a fixed-coefficient quotient congruence, eliminate common variables across three owners, and pack two zero quotients. | 13 generic Lean theorems banked and hostile-audited; finite application exact but not row-wrapped | Exact arithmetic enumerates 2,603 noncentral two-zero placements. All 1,420 through `k=13` close; row 15 closes 901/1,183 and leaves 282. Centers, all-nonzero, one-zero, and those 282 placements remain open. |
 | T1-PUI | Puiseux denominator | Expand the algebraic branch solving `P_k(X)=4P_k(Y)` beyond the leading root and prove an explicit denominator/integrality trap. | blocked | After `L` terms the cleared algebraic norm grows like `Y^(2L(k-1)-2)`; ordinary norm-smallness cannot force zero without new denominator cancellation. |
 | T1-UNIT | Unit equation | Use conjugate information in `Q(4^(1/k))` to bound the structured norm identity. | active | Generic Baker-Feldman bounds are disallowed unless below `10^120`. |
 | T1-SCALE | Primitive CF scale | For `X=gu`, `Y=gv`, use the exact polynomial in `z=g^2`, its coefficient filters, and the discriminant square condition. | partly proved; low-order closure refuted | An explicit unbounded k=5 family passes gcd, parity, sign, support, ratio, and the first two z-adic filters while `Q(z)>0`; the discriminant square lift is the original genus-6 curve in disguise. The floor pin is the surviving proper restriction. |
@@ -85,10 +86,10 @@ These are premises for new attacks, not solutions of `LargeKSmoothHypothesis`.
 
 ## Pipeline audit
 
-The combined checkpoint has 537 manifest entries and 537 regenerated
-attestations, including 459 entries for problem 686, 30 for problem 23, and
+The combined checkpoint has 550 manifest entries and 550 regenerated
+attestations, including 472 entries for problem 686, 30 for problem 23, and
 44 arithmetic-spine entries for problem 730.  The combined axiom sweep reports
-963 clean headline surfaces.  The emitter
+976 clean headline surfaces.  The emitter
 parses wrapped and axiom-free reports, rejects missing theorem reports, and
 accepts any subset of `[propext, Classical.choice, Quot.sound]`.
 
