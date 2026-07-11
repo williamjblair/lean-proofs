@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:3d7f52ac8d83afa0a1f20f163cfa46376cfeccf627ce1bb07d9b438b9c3f482d",
+  "verifier_output_hash": "sha256:ce4682868143cd9c0e4aad50cf7a19d7dc07fc26656b67e53e557c0e29152c2f",
   "attestations": [
     {
       "problem": 154,
@@ -5970,6 +5970,54 @@
       "theorem": "Erdos617.statement_five_of_extension_demand",
       "file": "ErdosProblems/Erdos617.lean",
       "proof_hash": "sha256:d333db5483ea2cffed9f393994387d9f27eabd519e519ffe0f90fb7b0e43c72e",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.localOffsetCofactor_fourth_order",
+      "file": "ErdosProblems/Erdos686FourthLocalLift.lean",
+      "proof_hash": "sha256:22d853c7eac8064aeee977c20757b5f4000006483a2cfade54ef0347c8c4d0be",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourth_order_local_algebra",
+      "file": "ErdosProblems/Erdos686FourthLocalLift.lean",
+      "proof_hash": "sha256:22d853c7eac8064aeee977c20757b5f4000006483a2cfade54ef0347c8c4d0be",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourth_order_local_lift",
+      "file": "ErdosProblems/Erdos686FourthLocalLift.lean",
+      "proof_hash": "sha256:22d853c7eac8064aeee977c20757b5f4000006483a2cfade54ef0347c8c4d0be",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_fourth_obstruction_dvd_cube",
+      "file": "ErdosProblems/Erdos686FourthLocalLift.lean",
+      "proof_hash": "sha256:22d853c7eac8064aeee977c20757b5f4000006483a2cfade54ef0347c8c4d0be",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

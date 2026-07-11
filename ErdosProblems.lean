@@ -32,6 +32,8 @@ import ErdosProblems.Erdos686TwoOwnerAggregate
 import ErdosProblems.Erdos686TwoOwnerGrouping
 import ErdosProblems.Erdos686TwoOwnerGroupingAudit
 import ErdosProblems.Erdos686ThreeBucketRestriction
+import ErdosProblems.Erdos686FourthLocalLift
+import ErdosProblems.Erdos686FourthLocalLiftAudit
 import ErdosProblems.Erdos686ConvergentMachinery
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686SevenThue

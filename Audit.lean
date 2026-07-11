@@ -33,6 +33,7 @@ import ErdosProblems.Erdos686GlobalResidualTwoPrime
 import ErdosProblems.Erdos686TwoOwnerAggregate
 import ErdosProblems.Erdos686TwoOwnerGroupingAudit
 import ErdosProblems.Erdos686ThreeBucketRestriction
+import ErdosProblems.Erdos686FourthLocalLiftAudit
 import ErdosProblems.Erdos686FiveThue
 import ErdosProblems.Erdos686FinalReduction
 import ErdosProblems.Erdos730NearAffinePayment
@@ -545,6 +546,10 @@ import ErdosProblems.Erdos727
 #print axioms Erdos617.Balanced.no_monochromatic_clique
 #print axioms Erdos617.Balanced.sum_le_sq
 #print axioms Erdos617.statement_five_of_extension_demand
+#print axioms Erdos686.Erdos686Variant.localOffsetCofactor_fourth_order
+#print axioms Erdos686.Erdos686Variant.fourth_order_local_algebra
+#print axioms Erdos686.Erdos686Variant.fourth_order_local_lift
+#print axioms Erdos686.Erdos686Variant.three_bucket_fourth_obstruction_dvd_cube
 -- Conditional research surfaces; not listed in `proofs.yaml`.
 #print axioms Erdos686.Erdos686Variant.sq_dvd_finset_affine_prod_sub_constant_sub_linear
 #print axioms Erdos686.Erdos686Variant.localOffsetCofactor_second_order

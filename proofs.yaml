@@ -4601,3 +4601,39 @@ proofs:
       Erdos-Gyarfas conjecture holds for r=5.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/617.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FourthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.localOffsetCofactor_fourth_order
+    statement: >-
+      The signed local cofactor equals its cubic Taylor truncation modulo the
+      fourth power of the local offset.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FourthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.fourth_order_local_algebra
+    statement: >-
+      Exact denominator clearing retains every cubic cofactor correction and
+      produces the fourth local divisibility without dividing by three.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FourthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.fourth_order_local_lift
+    statement: >-
+      Every cleaned local owner in an exact block equation satisfies the
+      explicit fourth-order owner-adic obstruction.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FourthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_fourth_obstruction_dvd_cube
+    statement: >-
+      Three square residual buckets compose cyclically to an explicit
+      cube-divisibility obstruction at each cleaned owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

@@ -97,6 +97,19 @@ satisfies this congruence package and both global moments but is explicitly
 not an equation solution and exceeds the verified short window.  The live
 three-bucket gap is the quantified short-CRT lemma, not a claimed resultant.
 
+[R] **The fourth local lift is exact and proper, but still does not close the
+short window.**  Retaining the cubic cofactor coefficient gives
+`H^3 | 3*T3 + H^2*(-9*D*A^2 + 36*E*A*M^2 + 84*F*M^4)` without dividing by
+three.  Multiplying the two opposite square-residual differences then yields
+the cyclic owner obstruction `P^3 | 3*b*c*F_i + P^2*J_i`, and similarly at
+`Q,R`.  Lean checks the four theorem surface; independent exact arithmetic
+checks 15,120 denominator identities and 111,780 cyclic compositions.  A
+target-size Hensel/CRT construction lifts all three obstructions through this
+new digit and even makes the corresponding local block differences divisible
+by `P_i^5`, while remaining outside the short window and failing the equation.
+Thus fourth order is a genuine necessary restriction, not a congruence-only
+bound; the quantified short-CRT/window lemma remains the exact gap.
+
 [R] **Two global cubic moment combinations.**  Expanding at the evaluation
 ratio `2^2=4` cancels every term through degree two after explicit constant
 and linear corrections.  Lean proves `d^3` divides the resulting

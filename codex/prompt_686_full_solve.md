@@ -12,9 +12,11 @@
 > residual reflection-center power divides the absolute owner offset, with
 > reflected alignment as the exact surviving alternative.
 > For three cleaned residual buckets, cyclic second/third obstruction formulas
-> are kernel-banked and hostile-audited, but a 121-digit CRT non-solution shows
-> that the congruences alone do not enforce the verified short window.  The
-> exact next three-bucket node is the quantified short-CRT lemma in
+> are kernel-banked and hostile-audited.  The exact fourth local lift and its
+> cyclic cube-divisibility obstruction are now banked too, but a 121-digit
+> Hensel/CRT non-solution satisfies the entire package through fourth order.
+> Thus the congruences alone still do not enforce the verified short window.
+> The exact next three-bucket node is the quantified short-CRT lemma in
 > `compute/campaign686/three_bucket_findings.md`; Target 1 itself remains open.
 
 ## Current task statement

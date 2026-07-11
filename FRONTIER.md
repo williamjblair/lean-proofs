@@ -50,12 +50,15 @@ now kernel-banked: global concentration constructs one certified assignment,
 and any two-index cover of its nonzero cleaned owner range constructs the
 predicate and contradicts the cutoff.  Consequently every target-size
 solution has a certified assignment whose nonzero cleaned range cannot be
-covered by two indices.  For three cleaned residual buckets, exact second-
+    covered by two indices.  For three cleaned residual buckets, exact second-
 and third-order eliminations are kernel-banked and all
-1,035 target index triples have distinct zero slopes.  A 121-digit CRT
-non-solution satisfies the square, moment, and local congruences while
-failing both the equation and short window, so the exact remaining
-three-bucket node is archimedean/short-CRT rather than a finite resultant.
+1,035 target index triples have distinct zero slopes.  The exact fourth local
+lift is now banked as well: each cleaned component supplies one cubic
+owner-adic obstruction, and the three cyclic obstructions compose modulo
+`P^3,Q^3,R^3`.  A Hensel/CRT family with 121-digit gap satisfies the square,
+moment, and all local congruences through fourth order while failing both the
+equation and short window, so the exact remaining three-bucket node is
+archimedean/short-CRT rather than a finite resultant.
 Two additional global moment identities use `2^2=4` to make
 `d^3` divide explicit constant-plus-linear coefficient combinations.  They
 are cubic combinations, not cubic divisibility of either residual product.
@@ -99,8 +102,9 @@ OPEN CORE:
    owner values; the remaining task is to contradict that multi-owner branch.
    In the exactly-three-cleaned-bucket slice, the current exact
    gap is the quantified short-CRT/window lemma in
-   `compute/campaign686/three_bucket_findings.md`; four-or-more buckets remain
-   unrestricted by that lemma.
+   `compute/campaign686/three_bucket_findings.md`, now including the fourth
+   cyclic divisibilities from `Erdos686FourthLocalLift.lean`; four-or-more
+   buckets remain unrestricted by that lemma.
 2. `LargeKSmoothHypothesis` — no k ≥ 16 solution with an entirely
    (d+k)-smooth lower block (prime obstruction banked; census: two
    clusters in 145+ billion window points, neither an equation solution).
