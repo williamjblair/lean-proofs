@@ -143,6 +143,18 @@ noncentral two-zero placements: all 1,420 cases through `k=13` close, and
 is not advertised as kernel-banked because it has no six-row Lean wrapper.
 The center, all-nonzero, one-zero, and 282 row-15 branches remain open.
 
+[R] **The finite-family obstruction algebra now retains every selected
+owner without inflating the loss.**  For an arbitrary finite owner set, Lean
+composes all opposite square residuals modulo the distinguished component,
+proves `P_s | O_s` and `P_s^2 | F_s`, and uses the lower residual product to
+exclude `O_s=0` uniformly for complete target families of cardinality
+`4..15`.  Independent exact arithmetic covers 42,274 target subsets and
+309,329 owner slopes; a 130-digit CRT pseudo-family confirms that the
+congruences alone do not imply the short window or equation.  The
+`(2^N,3^N,5^N,7^N)` family refutes only a bounded-complement inference from
+product and component-square bounds; it is not a residual/window fixture.
+All nonzero multi-owner branches remain open.
+
 [R] **Two global cubic moment combinations.**  Expanding at the evaluation
 ratio `2^2=4` cancels every term through degree two after explicit constant
 and linear corrections.  Lean proves `d^3` divides the resulting

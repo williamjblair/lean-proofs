@@ -28,7 +28,10 @@
 > packing are now kernel-banked and independently hostile-audited.  Exact
 > arithmetic closes all noncentral two-zero placements through `k=13` and
 > 901 of 1,183 at `k=15`; all-nonzero, one-zero, center-containing, and 282
-> row-15 placements remain.  Target 1 itself remains open.
+> row-15 placements remain.  Arbitrary finite owner families now also have
+> exact second/third compositions with the original bounded loss, and every
+> composed second obstruction is nonzero at target size; their joint
+> nonzero branch remains open.  Target 1 itself remains open.
 
 ## Current task statement
 

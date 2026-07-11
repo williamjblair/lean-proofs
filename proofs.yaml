@@ -5041,3 +5041,93 @@ proofs:
       proper normalized quotient inequality.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.multi_owner_opposite_product_modeq_sq
+    statement: >-
+      Every opposite square residual composes to the product of its exact
+      step-three owner differences modulo the distinguished square.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.multi_owner_opposite_product_sub_dvd_sq
+    statement: >-
+      The finite-family opposite-product congruence has the corresponding
+      square-divisibility form.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.multi_owner_second_obstruction_dvd
+    statement: >-
+      The second local lift composes over an arbitrary finite owner family
+      while retaining the original loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.multi_owner_third_obstruction_dvd_sq
+    statement: >-
+      The third local lift composes over the same finite owner family modulo
+      the distinguished component square.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.multi_owner_cofactor_product_scaled_lower
+    statement: >-
+      The residual lower window and exact complete decomposition give a
+      strict scaled lower bound for the full cofactor product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.multi_owner_target_cofactor_product_gt_zero_bound
+    statement: >-
+      Four or more target-size residuals force the complete cofactor product
+      above the uniform zero-obstruction coefficient times the loss square.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.multi_owner_zero_coefficient_natAbs_lt
+    statement: >-
+      The bounded Taylor coefficient, owner count, and offset product lie
+      below the explicit uniform zero-obstruction ceiling.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.bounded_multi_owner_second_obstruction_ne_zero
+    statement: >-
+      A cofactor product above the uniform coefficient prevents the bounded
+      finite-family second obstruction from vanishing.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.multi_owner_delta_natAbs_le_pow
+    statement: >-
+      Owner offsets in the target grid give the uniform power bound on the
+      signed finite delta product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MultiOwnerExtension.lean
+    theorem: Erdos686.Erdos686Variant.target_multi_owner_second_obstruction_ne_zero
+    statement: >-
+      Every complete target owner family of cardinality four through fifteen
+      has a nonzero composed second obstruction at each distinguished owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

@@ -126,8 +126,12 @@ OPEN CORE:
    additionally closes the noncentral two-zero placements through `k=13`
    and 901 of 1,183 at `k=15`.  The current exact gap comprises the
    all-nonzero, one-zero, center-containing multi-zero, and 282 noncentral
-   row-15 quotient placements; four-or-more buckets remain outside this
-   three-bucket slice.
+   row-15 quotient placements.  For arbitrary complete owner families of
+   cardinality `4..15`, exact second/third obstruction composition with the
+   original loss is now banked, and the equation-level lower residual bound
+   excludes every vanishing composed second obstruction at target size.
+   The surviving multi-owner branch has every second obstruction nonzero;
+   direct obstruction-size bounds grow with the family and do not close it.
 2. `LargeKSmoothHypothesis` — no k ≥ 16 solution with an entirely
    (d+k)-smooth lower block (prime obstruction banked; census: two
    clusters in 145+ billion window points, neither an equation solution).
