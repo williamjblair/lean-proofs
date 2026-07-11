@@ -4,6 +4,12 @@
 > second/third local lifts now exclude every odd-tail gap with one or exactly
 > two distinct prime divisors, uniformly including bases `2` and `3`.  Any
 > surviving Target 1 gap therefore has at least three distinct prime divisors.
+> The obstruction argument also closes any supplied two-owner grouping under
+> the exact all-prime loss `G_k`; the sole missing interface is a finite
+> factorization theorem constructing that grouping from the per-prime owner
+> choices.  For Target 2, reflection and matching owners now correlate: every
+> residual reflection-center power divides the absolute owner offset, with
+> reflected alignment as the exact surviving alternative.
 > For three cleaned residual buckets, cyclic second/third obstruction formulas
 > are kernel-banked and hostile-audited, but a 121-digit CRT non-solution shows
 > that the congruences alone do not enforce the verified short window.  The

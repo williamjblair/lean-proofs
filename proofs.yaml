@@ -4193,6 +4193,123 @@ proofs:
       times the second obstruction and supplies no hidden resultant.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerAggregate.lean
+    theorem: Erdos686.Erdos686Variant.targetAggregateLoss_table
+    statement: >-
+      The aggregate loss products for all six odd target rows are the exact
+      row constants used by the grouped residual argument.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerAggregate.lean
+    theorem: Erdos686.Erdos686Variant.aggregate_second_obstruction_abs_lt
+    statement: >-
+      Every grouped second obstruction lies below ten to the sixteen times
+      the square of the aggregate cleaning loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerAggregate.lean
+    theorem: Erdos686.Erdos686Variant.dvd_scaled_of_dvd_mul_of_gcd_dvd
+    statement: >-
+      A generic gcd cancellation moves a divisor from a coefficient to any
+      multiple of the relevant gcd.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerAggregate.lean
+    theorem: Erdos686.Erdos686Variant.pell_left_gcd_dvd_three_natAbs
+    statement: >-
+      The cleaned Pell identity bounds the left owner-coefficient gcd by
+      three times the absolute owner displacement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerAggregate.lean
+    theorem: Erdos686.Erdos686Variant.pell_right_gcd_dvd_three_natAbs
+    statement: >-
+      The symmetric cleaned Pell identity gives the corresponding right
+      owner-coefficient gcd bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerAggregate.lean
+    theorem: Erdos686.Erdos686Variant.clean_third_zero_component_dvd_refined
+    statement: >-
+      In a vanished second-obstruction branch the third lift cancels the
+      opposite coefficient and bounds the cleaned owner cubically.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerAggregate.lean
+    theorem: Erdos686.Erdos686Variant.two_owner_abstract_buckets_below_cutoff
+    statement: >-
+      Two distinct cleaned owner buckets under the exact aggregate row-loss
+      budget have total gap below ten to the 120.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerAggregate.lean
+    theorem: Erdos686.Erdos686Variant.grouped_two_owner_equation_below_cutoff
+    statement: >-
+      An exact target-row equation with a supplied two-owner grouped
+      decomposition has gap below ten to the 120.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoOwnerAggregate.lean
+    theorem: Erdos686.Erdos686Variant.atMostTwoGlobalResidualOwners_below_cutoff
+    statement: >-
+      The conditional at-most-two-global-residual-owner predicate excludes
+      every target-size exact gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ReflectionOwnerCorrelationAudit.lean
+    theorem: Erdos686.Erdos686Variant.exists_reflection_owner_correlation_four
+    statement: >-
+      Every prime of the reflection center has lower and upper concentration
+      owners carrying the same residual power into two exact differences.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ReflectionOwnerCorrelationAudit.lean
+    theorem: Erdos686.Erdos686Variant.reflection_owner_correlation_offset_and_lcm
+    statement: >-
+      The two reflection-owner landings force the residual prime power into
+      the absolute owner offset and, off reflection, the short offset lcm.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ReflectionOwnerCorrelationAudit.lean
+    theorem: Erdos686.Erdos686Variant.exists_reflection_owner_offset_restriction_four
+    statement: >-
+      Every exact equation supplies a reflected owner pair or a residual
+      prime power absorbed by the short owner-offset lcm.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ReflectionOwnerCorrelationAudit.lean
+    theorem: Erdos686.Erdos686Variant.reflection_lcm_compression_four
+    statement: >-
+      The complete reflection center divides one parity coefficient, one
+      factorial, and the lcm of the positive reflected differences.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 730
     source: erdosproblems
     file: ErdosProblems/Erdos730UnitBandPayment.lean

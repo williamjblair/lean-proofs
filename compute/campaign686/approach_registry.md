@@ -40,6 +40,7 @@ entry must name one quantified missing lemma.
 | T1-CF | CF remainder identity | Substitute each exact quasi-convergent class into `P_k(X)-4P_k(Y)` and retain the signed integral remainder, not just `|alpha-X/Y|`. | active | For k=5, a genuine root must satisfy the exact floor pin `g^2=floor(5A_3/A_5)`; among 341 stored rows only three nontrivial square/divisor floors survive and none is a root. No theorem controls the infinite tail. |
 | T1-VAL | p-adic valuation | A prime power `p^e | d`, `p >= k`, localizes uniquely and forces a square lift, cubic at the center; valuation concentration replaces uniqueness when `p<k`. | proved and Lean-banked | For `p>=k`, `p^(2e)<A_k*d`, with `A_k=14,17,23,26,29,35`, and the center gives `p^(3e)<A_k*d`. For `p<k`, all valuation outside one factor loses at most `1+v_p((k-1)!)`; the exact universal constant `14!*35*13^30<10^120` excludes every whole prime-power gap `d=p^e>=10^120`, including bases 2 and 3. Mixed-prime gaps remain open. |
 | T1-2P | Two-prime concentration/Pell | For `d=p^e q^f`, combine global residual cleaning with the second and third local lifts. | complete two-prime-support slice closed; Lean-banked and hostile-audited | Uniformly including `p=2,3`, same owners close by coprime square multiplication; distinct owners close by a cleaned Pell relation, second obstructions, and cubic repair of reflected simultaneous zeros.  Every such gap is below `10^120`; surviving gaps have at least three distinct prime divisors. |
+| T1-2O | Aggregate cleaned owners | Group arbitrary prime support by cleaned residual owner and apply the two-bucket obstruction calculus. | analytic closure banked and hostile-audited; finite grouping active | The exact all-prime loss table is `G_k=(108,1620,136080,1224720,242494560,18914575680)`. Lean proves `HasAtMostTwoGlobalResidualOwners -> d<10^120`, including coincident owners and unit buckets. It does not yet derive that predicate from per-prime chosen owners; the missing lemma is finite product assembly, coprime bucket divisibility, and `g<=G_k`. |
 | T1-GSQ | Global residual square lift | Recenter every lower factor as `X_i=3(n+i)-d` and retain coefficient cancellation in the exact transformed product equation. | proved and Lean-banked | `d^2 | product_i X_i` for every exact equation, with no prime-base or localization exception. Residual-progression concentration and two-bucket consequences are active. |
 | T1-MOM | Global moment cancellation | Use `2^2=4` at the two signed residual centers to cancel the quadratic coefficient. | proved and Lean-banked | `d^3` divides two explicit constant-plus-linear coefficient combinations.  An exact solution shows neither raw product need be cube-divisible; the proper next use is the three-or-more-bucket regime. |
 | T1-3B | Three cleaned residual buckets | Eliminate the two opposite near-square residuals from the second and third local lifts, then use the verified short window. | exact local restriction banked; short-CRT node open | Cyclically, `P|O_i` and `P^2|-3O_i+180E_i g^2(i-j)(i-l)d`.  All 1,035 zero slopes are pairwise distinct, but an unbounded CRT pseudo-family satisfies the congruence package while failing the equation/window.  The next lemma must use the short window quantitatively. |
@@ -55,7 +56,7 @@ entry must name one quantified missing lemma.
 | T2-VAL | Sliding-window valuations | Compare the unique landing rows of every prime power `p^e > k` with the exponent budget from the exact equation. | active | Gross log-mass counting alone is known insufficient. |
 | T2-TRANS | Row-transition rigidity | Use changes between consecutive row windows to force an unsupported prime power at an unbounded row. | active | Fixed-prefix variants are refuted. |
 | T2-XFER | Transfer to centered equation | Combine double smoothness with the centered `P_k` identity to obtain structure absent from arbitrary smooth blocks. | active | Smoothness by itself is not a universal obstruction. |
-| T2-REFL | Reflection gcd compression | With `S=2n+d+k+1`, compress the banked reflection congruence to `S | reflectionCoeff(k)*reflectionProduct(k,d)`. | proved and Lean-banked | Exact smooth row-prefix counterexamples satisfy this too, so full row constraints remain essential. |
+| T2-REFL | Reflection gcd and owner correlation | With `S=2n+d+k+1`, combine reflection, lower/upper concentration, and matching. | proved proper restrictions; Lean-banked and hostile-audited | Besides `S | reflectionCoeff(k)*reflectionProduct(k,d)`, every residual prime power divides `|i+j-(k+1)|`; non-reflected pairs land in `lcm(1,...,k-1)`, while `j=k+1-i` remains. Also `S | reflectionCoeff(k)*(k-1)!*reflectionDiffLcm(k,d)`. The factorial-lcm and product bounds are incomparable. |
 | T2-442 | Greatest-prime-factor wedge | Apply the published Nair-Shorey `P(x...(x+k-1)) > 4.42k` theorem after proving every lower term composite. | paper-rigorous; Lean-checked downstream of explicit interface | Closes the unbounded range `k >= 16`, `k <= d`, `50*(d+k-1) <= 221*k`; the Nair-Shorey theorem itself is not formalized here. |
 
 ## Stronger banked Target 2 facts
@@ -71,16 +72,22 @@ entry must name one quantified missing lemma.
 - `blockProduct_dvd_factorial_mul_centeredDiffLcm_four`: the exact equation
   puts the complete lower block into one centered lcm after one factorial
   allowance.
+- `exists_reflection_owner_offset_restriction_four`: every reflection-center
+  prime power lands on an owner offset; the reflected pair is the surviving
+  alternative.
+- `reflection_lcm_compression_four`: the reflection center divides one
+  coefficient, one factorial, and the lcm of the positive reflected
+  differences.
 - `k_mul_gap_lt_five_mul_n_of_four_solution`: `kd<5n` for `k>=16`.
 
 These are premises for new attacks, not solutions of `LargeKSmoothHypothesis`.
 
 ## Pipeline audit
 
-The combined checkpoint has 471 manifest entries and 471 regenerated
-attestations, including 419 entries for problem 686, 18 for problem 23, and
+The combined checkpoint has 484 manifest entries and 484 regenerated
+attestations, including 432 entries for problem 686, 18 for problem 23, and
 30 arithmetic-spine entries for problem 730.  The combined axiom sweep reports
-897 clean headline surfaces.  The emitter
+910 clean headline surfaces.  The emitter
 parses wrapped and axiom-free reports, rejects missing theorem reports, and
 accepts any subset of `[propext, Classical.choice, Quot.sound]`.
 

@@ -25,8 +25,8 @@ theorem erdos686_false_of_constant_bound_and_large_escape
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 471 manifest-tracked theorems (419 for problem 686), 471
-regenerated attestations, and 897 headline theorem surfaces with axioms
+[R] CI gate: 484 manifest-tracked theorems (432 for problem 686), 484
+regenerated attestations, and 910 headline theorem surfaces with axioms
 contained in `[propext, Classical.choice, Quot.sound]` after the audited #730
 full-band module.
 
@@ -65,6 +65,25 @@ theorem gives `d<10^120` for all distinct primes `p,q`, including `2,3`,
 without a base-size hypothesis.  Any surviving odd tail therefore has at
 least three distinct prime divisors.
 
+[R] **The analytic at-most-two-owner branch is closed, conditional only on
+finite grouping.**  For all prime bases at once, the exact aggregate cleaning
+loss is
+
+```text
+k:    5     7       9        11          13             15
+G_k: 108  1620  136080  1224720  242494560  18914575680.
+```
+
+If the cleaned mass is supplied as two coprime owner buckets `P,Q` with
+`d=gPQ`, `g<=G_k`, the second obstruction is below `10^16 g^2`; if both
+second obstructions vanish, the third lifts and the cleaned Pell gcd cancel
+the opposite coefficients.  Lean proves that the resulting exact equation
+has `d<10^120`, including coincident owners and unit buckets.  The theorem
+takes `HasAtMostTwoGlobalResidualOwners` as an explicit hypothesis.  It does
+not yet construct that predicate from the per-prime owner witnesses: the
+sole remaining interface is the finite factorization/product grouping
+lemma, not another Diophantine estimate.
+
 [R] **Three cleaned buckets have exact second/third restrictions, but no
 closure.**  For `d=gPQR` and three step-three square residuals, Lean proves
 `P|3(C_iabc-12D_ig^2(i-j)(i-l))` and the companion square divisibility
@@ -94,6 +113,19 @@ forcing `(kd)^k < 5^k (k-1)! C(k,d)`.  Both named deep row-prefix fixtures
 and the `d=1` telescopes pass the hostile audit.  The result is a proper
 compression, not a closure: generic lcm mass still has `2k-1` possible hosts
 and grows with degree `2k-1` in `d`.
+
+[R] **Reflection and matching owners now correlate prime by prime.**  Put
+`S=2n+d+k+1`.  For every prime `p`, after subtracting the valuation of the
+parity coefficient and one `(k-1)!` loss, an exact equation supplies lower
+and upper owners `i,j` on which the same residual power lands.  It divides
+both a reflected difference and a centered difference, hence
+`|i+j-(k+1)|`; a non-reflected pair is absorbed by
+`lcm(1,...,k-1)`.  The exact obstruction is `j=k+1-i`, which is exhibited by
+the audited synthetic fixtures and is not closed.  Independently, Lean
+aggregates the lower landing to
+`S | reflectionCoeff(k)*(k-1)!*reflectionDiffLcm(k,d)`.  This and the older
+full reflection product are structurally incomparable, so neither is
+presented as uniformly sharper.
 
 [X] **The former large-branch target is falsified.** The fixed-prefix
 statement `RowSixteenBoundaryHypothesis` (rows 1..15 divide ⟹ row 16 fails)

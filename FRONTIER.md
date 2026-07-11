@@ -40,7 +40,14 @@ including bases `2` and `3`, into a square divisor of one residual with an
 explicit loss.  Combining two such components with second and third local
 Taylor lifts closes **every** gap having exactly two distinct prime divisors
 below `10^120`; no `p,q>=k` hypothesis remains.  Thus any surviving odd-tail
-gap has at least three distinct prime divisors.  For three cleaned residual
+gap has at least three distinct prime divisors.  The same obstruction
+calculus closes an arbitrary supplied pair of coprime cleaned owner buckets
+under the exact all-prime loss table
+`G_k=108,1620,136080,1224720,242494560,18914575680`: an exact solution
+equipped with `HasAtMostTwoGlobalResidualOwners` has `d<10^120`.  This is a
+strictly conditional theorem until the finite prime-factor grouping step
+constructs that predicate from per-prime chosen owners; the analytic node is
+closed, while the bookkeeping node remains outside the kernel.  For three cleaned residual
 buckets, exact second- and third-order eliminations are kernel-banked and all
 1,035 target index triples have distinct zero slopes.  A 121-digit CRT
 non-solution satisfies the square, moment, and local congruences while
@@ -55,7 +62,14 @@ matching across the exact lower and upper blocks compresses the whole lower
 block into `(k-1)!` times the lcm of
 `d-k+1,...,d+k-1`, including all small prime bases.  This forces two explicit
 lcm transition inequalities but does not close large `d`, because the host
-interval still has `2k-1` possible differences.  Every lower term is
+interval still has `2k-1` possible differences.  A second composition uses
+the reflection center `S=2n+d+k+1`: after the parity coefficient and one
+factorial loss, every residual prime power lands on lower and upper owners
+`i,j` and divides `|i+j-(k+1)|`.  Non-reflected pairs land in
+`lcm(1,...,k-1)`; the exact surviving alternative is the reflected alignment
+`j=k+1-i`.  Aggregating the lower landing proves the distinct necessary
+divisibility `S | reflectionCoeff(k)*(k-1)!*reflectionDiffLcm(k,d)`.
+Every lower term is
 composite, and the
 published Nair-Shorey `4.42k` theorem closes the paper-level wedge
 `50(d+k-1)≤221k`; only the downstream implication is in Lean because
@@ -76,7 +90,10 @@ OPEN CORE:
    or new CF structure. Watch: Calegari–Dimitrov–Tang holonomy program.
    The one- and two-distinct-prime-support subcases are now excluded for
    every prime base.  The remaining gap has at least three distinct prime
-   divisors.  In the exactly-three-cleaned-bucket slice, the current exact
+   divisors.  For arbitrary prime support, the at-most-two-owner analytic
+   closure is banked; its exact kernel gap is finite factorization and owner
+   grouping into `HasAtMostTwoGlobalResidualOwners`, including `g<=G_k`.
+   In the exactly-three-cleaned-bucket slice, the current exact
    gap is the quantified short-CRT/window lemma in
    `compute/campaign686/three_bucket_findings.md`; four-or-more buckets remain
    unrestricted by that lemma.

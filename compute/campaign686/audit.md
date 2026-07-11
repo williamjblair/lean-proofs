@@ -6,11 +6,11 @@ It is updated as candidates enter or leave the proof path.
 ## Baseline
 
 - Focused terminal module compiles.
-- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 471
+- `proofs.yaml` and the manifest-tracked `Audit.lean` section agree on 484
   theorem names.
-- The combined full axiom audit reports 897 theorem surfaces, all within the
+- The combined full axiom audit reports 910 theorem surfaces, all within the
   allowlist `[propext, Classical.choice, Quot.sound]`.
-- `attestations.json` was regenerated successfully for all 471 entries.
+- `attestations.json` was regenerated successfully for all 484 entries.
 
 ## Dependency tree: odd-tail prime-power restriction
 
@@ -93,6 +93,33 @@ Verdict: the complete two-distinct-prime-support slice is closed, not merely
 reduced to Pell families.  The remaining odd-tail gap has at least three
 distinct prime divisors.
 
+## Dependency tree: conditional aggregate two-owner closure
+
+1. Multiply all per-prime cleaning losses in a target row.  Exact Legendre
+   arithmetic gives
+   `G_k=108,1620,136080,1224720,242494560,18914575680`.
+   **Lean table banked and independently reproduced.**
+2. Supply a decomposition `d=gPQ`, with `P,Q` coprime cleaned square
+   components at at most two residual owners and `g<=G_k`.
+   **Explicit `HasAtMostTwoGlobalResidualOwners` hypothesis.**
+3. Coincident owners multiply as coprime squares and force
+   `d<A_k g^2`. **Lean banked.**
+4. Distinct owners satisfy a cleaned Pell identity.  A nonzero second
+   obstruction gives `d<A_k*(10^16)^2*g^6`. **Lean banked and exact-audited.**
+5. If both second obstructions vanish, the third lifts and
+   `gcd(P,b),gcd(Q,a) | 3|i-j|` cancel the opposite coefficients, yielding
+   a cubic bound below `10^120`. **Lean banked and exact-audited.**
+6. Therefore an exact target-row solution equipped with
+   `HasAtMostTwoGlobalResidualOwners` has `d<10^120`. **Lean banked and
+   independently hostile-audited.**
+
+Verdict: the analytic two-owner node is complete, but the conclusion remains
+conditional.  The exact missing kernel lemma is finite prime-factor
+assembly: choose the per-prime owners, group all cleaned powers into `P,Q`,
+prove their product divisibilities and coprimality, put the complementary
+loss in `g`, and prove `g<=G_k`.  Until that lemma is composed, this section
+does not imply that every target-size solution has three cleaned owners.
+
 ## Dependency tree: three cleaned residual buckets
 
 1. Three pairwise-coprime cleaned buckets at distinct owners give two exact
@@ -152,10 +179,21 @@ restrictions, but primitive `g=1` candidates and the infinite CF tail remain.
 2. Per-factor `gcd(S,n+i) | d+k+1-2i`. **Banked.**
 3. Finite-product gcd compression. **Lean banked.**
 4. `S | reflectionCoeff(k)*reflectionProduct(k,d)`. **Lean banked.**
+5. Lower and upper maximum-valuation owners carry the reflection-center
+   residual power after the parity coefficient and one factorial loss.
+   **Lean banked and independently hostile-audited.**
+6. Subtracting the reflected and centered owner differences puts that power
+   into `|i+j-(k+1)|`; a non-reflected pair lands in
+   `lcm(1,...,k-1)`. **Lean banked.**
+7. The lower landing also aggregates to
+   `S | reflectionCoeff(k)*(k-1)!*reflectionDiffLcm(k,d)`.
+   **Lean banked.**
 
 Verdict: genuinely new but insufficient.  Exact smooth row-prefix points and
 two stronger synthetic counterexamples satisfy the reflection conditions and
-still fail row divisibility or the equation.
+still fail row divisibility or the equation.  The exact surviving owner
+alternative is `j=k+1-i`; the factorial-lcm and product right sides are not
+uniformly ordered.
 
 ## Dependency tree: maximum-valuation matching compression
 
