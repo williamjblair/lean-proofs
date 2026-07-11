@@ -346,3 +346,7 @@ supports lookahead cubing (--assignment-cutoff) and LRAT output
 14:59 CORRECTION: SMS trio never died - monitor kill -0 is sandbox-blocked (false exits); duplicates culled; switching liveness checks to ps -p
 15:03 culled 3 baseline legs; cores to SMS trio + swarm
 15:10 VERDICT: sms_silent_floor75 UNSAT (Result 20, 769.8s) => THEOREM: silent class needs >= 76 edges => s=2 cube CLOSED (2*76 + 3*50 = 302 > 300). Remaining: s=0 (edges_loud+floor_loud), s=1 (sum_silent, SMS running).
+15:38 K26-direct SMS relaunched from main session (pid 96853, prior run died unflushed at ~48 CPU-min)
+15:45 swarm drivers restarted under main session (resume-aware): sum pid 29630, edges pid 29631, 3 workers each
+15:46 Full SMS coverage under main session: K26-direct (96853), sum_silent (19422), edges_loud (32126), floor_loud (32127) + kissat e7_bounded (7980). Swarm evidence banked (390 UNSAT / 0 SAT in results.tsv); cube lists died with agent, not regenerating - SMS supersedes.
+16:49 escalation pulled forward: sum_silent in SMS cube mode (simple-assignment-cutoff 60, pid 66235) alongside plain run
