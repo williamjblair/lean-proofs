@@ -4887,6 +4887,15 @@ proofs:
   - problem: 23
     source: erdosproblems
     file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.totalCost_le_doubleSlackBudget_of_articulationCuts
+    statement: >-
+      At d equals twice the slack, unit-capacity articulation cuts and the
+      exact cut-count distance comparison imply the full RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
     theorem: Erdos23GapGBJoint.full_coverage_eq_twice_mass_forces_unit_intervals
     statement: >-
       Equality in the full d equals twice-slack interval count forces every
@@ -4900,6 +4909,15 @@ proofs:
     statement: >-
       Equality in the finite biunion cardinality bound forces the indexed
       family to be pairwise disjoint.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.pairwise_twoIntervals_tile_even
+    statement: >-
+      Pairwise-disjoint two-edge integer intervals covering zero through
+      twice the slack are exactly the consecutive even tiles.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/23.lean
   - problem: 23
@@ -4927,6 +4945,15 @@ proofs:
     statement: >-
       Any set of nonbridge geodesic corridor edges has cardinality at most
       twice the off-corridor slack.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.IsGeodesic.doubleSlack_allNonbridge_rigidity
+    statement: >-
+      At corridor length exactly twice the slack, complete nonbridge coverage
+      forces singleton off-corridor components on the disjoint even span-two tiles.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/23.lean
   - problem: 23

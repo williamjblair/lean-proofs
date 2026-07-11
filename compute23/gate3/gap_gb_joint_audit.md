@@ -87,9 +87,15 @@ reduction. Full RL* remains unproved.**
     - Equality in the finite interval count forces size-one components and
       pairwise-disjoint two-coordinate intervals; kernel:
       `full_coverage_eq_twice_mass_forces_unit_intervals`.
+    - The same conclusion for the actual canonical components and attachment
+      intervals of an all-nonbridge geodesic is kernel checked as
+      `IsGeodesic.doubleSlack_allNonbridge_rigidity`.
+      Its even-tiling node is `pairwise_twoIntervals_tile_even`.
     - Quantified claim: for `s>=5`, positive resources with total at most
       `s-1` and `D_i<=2r_i+2` imply the exact RL budget at `d=2s`.
     - Kernel: `totalCost_le_doubleSlackBudget_of_resourcePacking`.
+      The cut-count specialization is
+      `totalCost_le_doubleSlackBudget_of_articulationCuts`.
     - The graph-level resource construction is not asserted, so this node
       does not exclude `d=2s` from the remaining lemma.
 

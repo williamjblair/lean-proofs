@@ -217,6 +217,15 @@ size one, and every interval cardinality two.  The converse-to-union-bound
 step is independently exposed as
 `pairwiseDisjoint_of_card_biUnion_eq_sum_card`.
 
+The equality statement is also instantiated on the actual graph objects.
+If every edge of a geodesic `P` is a nonbridge and
+`P.length=2*slack(P)`, then
+`IsGeodesic.doubleSlack_allNonbridge_rigidity` proves that every canonical
+component of `B-V(P)` is a singleton and that its actual attachment interval
+has two edges, with the intervals pairwise disjoint.  The generic interval
+lemma `pairwise_twoIntervals_tile_even` then proves these are exactly the
+tiles `[2k,2k+2)`; this conclusion is included in the graph-level theorem.
+
 The arithmetic end of that route is now exact.  If every demand is assigned a
 positive natural resource `r_i`, the resources pack as
 
@@ -232,8 +241,21 @@ sum_i (D_i+1)^2 <= F(s,2s).
 
 This is `totalCost_le_doubleSlackBudget_of_resourcePacking`.  Its proof uses
 `sum r_i^2 <= (sum r_i)^2` and keeps the deliberately loose but sufficient
-bound `4R^2+21R <= 5s^2+6s`.  The graph-theoretic assertion that every
-`d=2s` BF-RL instance turns this interval rigidity into the displayed
-disjoint demand resources is **not proved**;
+bound `4R^2+21R <= 5s^2+6s`.  The remaining graph assertion is narrower:
+the proved singleton/span-two tiling, together with RFC, must supply the
+displayed per-demand articulation resources.  That implication is **not proved**;
 accordingly the equality boundary remains inside BF-RL and this theorem is
 not counted as a frontier reduction.
+
+The RFC-facing arithmetic has also been isolated.  With `s-1` articulation
+cuts, at most one internal demand crossing each cut, legal distances at least
+four, and
+
+```text
+D_i <= 2*(number of articulation cuts crossed by i)+2,
+```
+
+`totalCost_le_doubleSlackBudget_of_articulationCuts` derives the full RL
+budget.  Thus the unproved boundary step is now exactly the graph construction
+of those cuts and the displayed distance comparison, not any summation or
+quadratic algebra.

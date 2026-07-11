@@ -501,6 +501,40 @@ theorem totalCost_le_doubleSlackBudget_of_resourcePacking
   rw [hbudget]
   exact haggregate.trans hnumeric
 
+/-- Cut-count form of the `d=2s` resource certificate.  Each articulation
+cut separates at most one demand; a demand's resource is the number of such
+cuts separating its endpoints.  The only remaining graph input is the exact
+distance comparison against that count. -/
+theorem totalCost_le_doubleSlackBudget_of_articulationCuts
+    {I K : Type*} [Fintype I] [Fintype K]
+    (D : I → ℕ) (crosses : I → K → ℕ) (s : ℕ)
+    (hs : 5 ≤ s) (hcuts : Fintype.card K = s - 1)
+    (hlegal : ∀ i, 4 ≤ D i)
+    (hcapacity : ∀ k, (∑ i : I, crosses i k) ≤ 1)
+    (hdistance : ∀ i, D i ≤ 2 * (∑ k : K, crosses i k) + 2) :
+    (∑ i : I, (D i + 1) ^ 2) ≤ rlBudget s (2 * s) := by
+  let resource : I → ℕ := fun i => ∑ k : K, crosses i k
+  have hpositive : ∀ i, 1 ≤ resource i := by
+    intro i
+    have hD := hlegal i
+    have hbound := hdistance i
+    simp only [resource] at hbound ⊢
+    omega
+  have hpack : (∑ i : I, resource i) ≤ s - 1 := by
+    calc
+      (∑ i : I, resource i) = ∑ k : K, ∑ i : I, crosses i k := by
+        simp only [resource]
+        rw [Finset.sum_comm]
+      _ ≤ ∑ _k : K, 1 := by
+        apply Finset.sum_le_sum
+        intro k _
+        exact hcapacity k
+      _ = s - 1 := by simp [hcuts]
+  exact totalCost_le_doubleSlackBudget_of_resourcePacking
+    D resource s hs hpositive hpack (by
+      intro i
+      exact hdistance i)
+
 end BoundaryResourcePacking
 
 /-- Removing an M-free endpoint block of `a` vertices retracts one corridor
@@ -666,6 +700,51 @@ theorem pairwiseDisjoint_of_card_biUnion_eq_sum_card
     Finset.sum_erase_add _ _ ha
   rw [hunionDecomp] at heq
   omega
+
+/-- A pairwise-disjoint family of two-edge integer intervals covering
+`[0,2s)` is forced to be the even tiling `[2k,2k+2)`. -/
+theorem pairwise_twoIntervals_tile_even
+    {α : Type*} [DecidableEq α]
+    (components : Finset α) (interval : α → Finset ℕ) (s : ℕ)
+    (hunion : components.biUnion interval = Finset.range (2 * s))
+    (hdisjoint : (↑components : Set α).PairwiseDisjoint interval)
+    (hIco : ∀ c ∈ components, ∃ l : ℕ,
+      interval c = Finset.Ico l (l + 2)) :
+    ∀ k < s, ∃ c ∈ components,
+      interval c = Finset.Ico (2 * k) (2 * k + 2) := by
+  intro k
+  induction k using Nat.strong_induction_on with
+  | h k ih =>
+      intro hk
+      have hmemUnion : 2 * k ∈ components.biUnion interval := by
+        rw [hunion]
+        simp
+        omega
+      obtain ⟨c, hc, hmem⟩ := Finset.mem_biUnion.mp hmemUnion
+      obtain ⟨l, hl⟩ := hIco c hc
+      have hlbounds : l ≤ 2 * k ∧ 2 * k < l + 2 := by
+        simpa [hl] using hmem
+      by_cases hstart : l = 2 * k
+      · exact ⟨c, hc, by simpa [hstart] using hl⟩
+      · have hlprev : l = 2 * k - 1 := by omega
+        have hkpos : 0 < k := by omega
+        obtain ⟨cprev, hcprev, hprev⟩ := ih (k - 1) (by omega) (by omega)
+        have hpointCurr : 2 * k - 1 ∈ interval c := by
+          rw [hl, hlprev]
+          simp
+        have hpointPrev : 2 * k - 1 ∈ interval cprev := by
+          rw [hprev]
+          simp
+          omega
+        have hne : c ≠ cprev := by
+          intro heq
+          subst cprev
+          have hright : 2 * k ∈ interval c := hmem
+          rw [hprev] at hright
+          simp at hright
+          omega
+        have hd := hdisjoint hc hcprev hne
+        exact (Finset.disjoint_left.mp hd hpointCurr hpointPrev).elim
 
 /-- Equality case of the full corridor interval count.  If intervals cover
 all `2s` coordinates while their positive component sizes sum to `s`, then
@@ -911,6 +990,128 @@ theorem IsGeodesic.corridorIndexSet_card_le_twice_slack
     omega
   exact hcard
 
+/-- Graph-level equality rigidity at the boundary `length P = 2*slack P`.
+If every corridor edge is a nonbridge, then the actual canonical
+off-corridor components are singletons and their length-two attachment
+intervals are pairwise disjoint. -/
+theorem IsGeodesic.doubleSlack_allNonbridge_rigidity
+    [Fintype V] [DecidableEq V] {G : SimpleGraph V} {u v : V}
+    {P : G.Walk u v} (hP : IsGeodesic P)
+    (hdouble : P.length = 2 * slack P)
+    (hnonbridge : ∀ i < P.length,
+      ¬G.IsBridge s(P.getVert i, P.getVert (i + 1))) :
+    (∀ k < slack P, ∃ C : OffCorridorComponent P,
+      offCorridorComponentIntervalEdges P C =
+        Finset.Ico (2 * k) (2 * k + 2)) ∧
+      ((↑(Finset.univ : Finset (OffCorridorComponent P)) :
+          Set (OffCorridorComponent P)).PairwiseDisjoint
+        (offCorridorComponentIntervalEdges P)) ∧
+      ∀ C : OffCorridorComponent P,
+        (offCorridorComponentFinset C).card = 1 ∧
+        (offCorridorComponentIntervalEdges P C).card = 2 := by
+  classical
+  let components : Finset (OffCorridorComponent P) := Finset.univ
+  let interval : OffCorridorComponent P → Finset ℕ :=
+    offCorridorComponentIntervalEdges P
+  let size : OffCorridorComponent P → ℕ := fun C =>
+    (offCorridorComponentFinset C).card
+  have hcoverLength : Finset.range P.length ⊆
+      components.biUnion interval := by
+    intro i hi
+    have hiLength : i < P.length := Finset.mem_range.mp hi
+    obtain ⟨C, hC⟩ :=
+      hP.exists_offCorridorComponent_coversIndex_of_not_isBridge hiLength
+        (hnonbridge i hiLength)
+    exact Finset.mem_biUnion.mpr
+      ⟨C, Finset.mem_univ C,
+        mem_offCorridorComponentIntervalEdges_of_coversIndex P C hC⟩
+  have hcover : Finset.range (2 * slack P) ⊆
+      components.biUnion interval := by
+    simpa [hdouble] using hcoverLength
+  have hspan : ∀ C ∈ components, (interval C).card ≤ size C + 1 := by
+    intro C _
+    rw [show (interval C).card = offCorridorComponentSpan P C by
+      simpa [interval] using card_offCorridorComponentIntervalEdges P C]
+    exact hP.offCorridorComponentSpan_le_card_add_one C
+  have hpositive : ∀ C ∈ components, 1 ≤ size C := by
+    intro C _
+    exact offCorridorComponentFinset_card_pos C
+  have hmassRaw :
+      ∑ C : OffCorridorComponent P,
+          (offCorridorComponentFinset C).card =
+        ((Finset.univ : Finset V) \ supportFinset P).card := by
+    calc
+      ∑ C : OffCorridorComponent P,
+          (offCorridorComponentFinset C).card =
+          ∑ C : OffCorridorComponent P, ∑ x : V,
+            if x ∈ C then 1 else 0 := by
+        apply Finset.sum_congr rfl
+        intro C _
+        rw [Finset.sum_boole]
+        congr 1
+      _ = ∑ x : V, ∑ C : OffCorridorComponent P,
+          if x ∈ C then 1 else 0 := by
+        rw [Finset.sum_comm]
+      _ = ∑ x : V, if x ∉ supportFinset P then 1 else 0 := by
+        apply Finset.sum_congr rfl
+        intro x _
+        by_cases hx : x ∈ supportFinset P
+        · simp [ComponentCompl.mem_supp_iff, hx]
+        · simp [ComponentCompl.mem_supp_iff, hx]
+      _ = ((Finset.univ : Finset V) \ supportFinset P).card := by
+        rw [Finset.sum_boole, ← Finset.sdiff_eq_filter]
+        norm_cast
+  have hmassType :
+      ∑ C : OffCorridorComponent P,
+          (offCorridorComponentFinset C).card = slack P := by
+    rw [hmassRaw, Finset.card_sdiff]
+    simp only [Finset.inter_univ, Finset.card_univ, slack]
+    have hsupp := hP.card_supportFinset
+    have hle : P.length + 1 ≤ Fintype.card V := by
+      rw [← hsupp]
+      exact Finset.card_le_univ _
+    omega
+  have hmass : ∑ C ∈ components, size C = slack P := by
+    simpa [components, size] using hmassType
+  obtain ⟨hunionCard, hdisjoint, hunit⟩ :=
+    full_coverage_eq_twice_mass_forces_unit_intervals
+      components interval size (slack P) hcover hspan hpositive hmass
+  have hunionEq : components.biUnion interval =
+      Finset.range (2 * slack P) := by
+    symm
+    apply Finset.eq_of_subset_of_card_le hcover
+    simpa [hunionCard]
+  have hIco : ∀ C ∈ components, ∃ l : ℕ,
+      interval C = Finset.Ico l (l + 2) := by
+    intro C hc
+    have hc2 := (hunit C hc).2
+    let A := offCorridorAttachmentIndices P C
+    by_cases hA : A.Nonempty
+    · let l := A.min' hA
+      let h := A.max' hA
+      have hinterval : interval C = Finset.Ico l h := by
+        simp [interval, offCorridorComponentIntervalEdges, A, hA, l, h]
+      have hcard : (Finset.Ico l h).card = 2 := by
+        rw [← hinterval]
+        exact hc2
+      have hdiff : h - l = 2 := by
+        simpa [Nat.card_Ico] using hcard
+      have hh : h = l + 2 := by omega
+      exact ⟨l, by rw [hinterval, hh]⟩
+    · have hempty : interval C = ∅ := by
+        simp [interval, offCorridorComponentIntervalEdges, A, hA]
+      rw [hempty] at hc2
+      simp at hc2
+  have htiles := pairwise_twoIntervals_tile_even
+    components interval (slack P) hunionEq hdisjoint hIco
+  constructor
+  · intro k hk
+    simpa [components, interval] using htiles k hk
+  constructor
+  · simpa [components, interval] using hdisjoint
+  · intro C
+    simpa [components, interval, size] using hunit C (Finset.mem_univ C)
+
 /-- If every interior corridor edge is a nonbridge, then the corridor has
 length at most `2s+2`. -/
 theorem IsGeodesic.length_le_twice_slack_add_two_of_interior_nonbridge
@@ -980,6 +1181,7 @@ end GraphApplication
 #print axioms interior_coverage_card_le_twice_mass
 #print axioms corridor_length_le_twice_slack_add_two
 #print axioms pairwiseDisjoint_of_card_biUnion_eq_sum_card
+#print axioms pairwise_twoIntervals_tile_even
 #print axioms full_coverage_eq_twice_mass_forces_unit_intervals
 #print axioms bridge_free_residual_slack_at_least_four
 #print axioms partnerDistance_eq_three_iff
@@ -996,9 +1198,11 @@ end GraphApplication
 #print axioms rootedCutCondition_totalCost_le_of_weightedCutCertificate
 #print axioms rootedCutCondition_totalCost_le_of_scaledWeightedCutCertificate
 #print axioms totalCost_le_doubleSlackBudget_of_resourcePacking
+#print axioms totalCost_le_doubleSlackBudget_of_articulationCuts
 #print axioms rlBudget_endpointBlock_retraction_le
 #print axioms residual_series_gate_or_endpoint_pair
 #print axioms IsGeodesic.corridorIndexSet_card_le_twice_slack
+#print axioms IsGeodesic.doubleSlack_allNonbridge_rigidity
 #print axioms IsGeodesic.length_le_twice_slack_add_two_of_interior_nonbridge
 #print axioms IsGeodesic.length_le_twice_slack_of_all_nonbridge
 #print axioms IsGeodesic.slack_at_least_four_of_large_bridge_free_corridor
