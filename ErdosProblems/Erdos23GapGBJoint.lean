@@ -104,6 +104,215 @@ theorem gammaBlock_endpointBridge_le_rlBudget
         show 0 ≤ 2 * (a - 1) * d by omega,
         show 0 ≤ 2 * (a - 1) * partnerDistance (d + 1) by omega]
 
+/-- Exact endpoint-block dispatch: an endpoint component is either one of
+the three M-free small orders or is large enough to provide the strict
+partner-distance room for the opposite minimal composite. -/
+theorem endpointBlock_small_or_partner_lt (a d : ℕ) :
+    a ≤ 3 ∨ partnerDistance d < a := by
+  have hp := partnerDistance_le_three d
+  omega
+
+section CutPotentialDuality
+
+@[simp]
+theorem separation_not_not (a b : Bool) :
+    separation (!a) (!b) = separation a b := by
+  cases a <;> cases b <;> simp [separation]
+
+/-- Membership of a vertex value above an integer threshold. -/
+def thresholdBit {V : Type*} (f : V → ℕ) (k : ℕ) (v : V) : Bool :=
+  decide (k < f v)
+
+/-- Exact layer-cake identity: the number of thresholds separating two
+natural values is their natural distance. -/
+theorem sum_thresholdSeparation_eq_dist
+    {a b H : ℕ} (ha : a ≤ H) (hb : b ≤ H) :
+    ∑ k ∈ Finset.range H,
+        separation (decide (k < a)) (decide (k < b)) = Nat.dist a b := by
+  have hforward : ∀ {x y : ℕ}, x ≤ y → y ≤ H →
+      (∑ k ∈ Finset.range H,
+        separation (decide (k < x)) (decide (k < y))) = y - x := by
+    intro x y hxy hyH
+    have hfilter :
+        (Finset.range H).filter (fun k => x ≤ k ∧ k < y) =
+          Finset.Ico x y := by
+      ext k
+      simp
+      omega
+    calc
+      ∑ k ∈ Finset.range H,
+          separation (decide (k < x)) (decide (k < y)) =
+          ∑ k ∈ Finset.range H, if x ≤ k ∧ k < y then 1 else 0 := by
+            apply Finset.sum_congr rfl
+            intro k hk
+            by_cases hkx : k < x <;> by_cases hky : k < y <;>
+              simp [separation, hkx, hky] <;> omega
+      _ = (Finset.Ico x y).card := by
+        rw [Finset.sum_boole]
+        exact congrArg Finset.card hfilter
+      _ = y - x := by simp
+  rcases le_total a b with hab | hba
+  · rw [hforward hab hb]
+    exact (Nat.dist_eq_sub_of_le hab).symm
+  · have hsym :
+        (∑ k ∈ Finset.range H,
+          separation (decide (k < a)) (decide (k < b))) =
+        ∑ k ∈ Finset.range H,
+          separation (decide (k < b)) (decide (k < a)) := by
+      apply Finset.sum_congr rfl
+      intro k _
+      exact separation_comm _ _
+    rw [hsym, hforward hba ha]
+    exact (Nat.dist_eq_sub_of_le_right hba).symm
+
+/-- Exact coarea dual of RFC.  If every threshold cut of an integer
+potential satisfies the rooted cut inequality, then the total potential
+variation of all internal demands plus the terminal pair is dominated by
+the supply-edge variation.
+
+The finite index types permit repeated abstract edges; graph applications
+instantiate them with edge subtypes. -/
+theorem rootedCutCondition_natPotential
+    {V I_B I_M : Type*} [Fintype I_B] [Fintype I_M]
+    (b₁ b₂ : I_B → V) (m₁ m₂ : I_M → V)
+    (w x₀ : V) (f : V → ℕ) (H : ℕ)
+    (hf : ∀ v, f v ≤ H)
+    (hcut : ∀ k < H,
+      (∑ i : I_M, separation (thresholdBit f k (m₁ i))
+          (thresholdBit f k (m₂ i))) +
+        separation (thresholdBit f k w) (thresholdBit f k x₀) ≤
+      ∑ e : I_B, separation (thresholdBit f k (b₁ e))
+        (thresholdBit f k (b₂ e))) :
+    (∑ i : I_M, Nat.dist (f (m₁ i)) (f (m₂ i))) +
+        Nat.dist (f w) (f x₀) ≤
+      ∑ e : I_B, Nat.dist (f (b₁ e)) (f (b₂ e)) := by
+  have hsum := Finset.sum_le_sum fun k (hk : k ∈ Finset.range H) =>
+    hcut k (Finset.mem_range.mp hk)
+  calc
+    (∑ i : I_M, Nat.dist (f (m₁ i)) (f (m₂ i))) +
+        Nat.dist (f w) (f x₀) =
+      (∑ i : I_M, ∑ k ∈ Finset.range H,
+        separation (thresholdBit f k (m₁ i))
+          (thresholdBit f k (m₂ i))) +
+      ∑ k ∈ Finset.range H,
+        separation (thresholdBit f k w) (thresholdBit f k x₀) := by
+          congr 1
+          · apply Finset.sum_congr rfl
+            intro i _
+            simpa [thresholdBit] using
+              (sum_thresholdSeparation_eq_dist (hf (m₁ i)) (hf (m₂ i))).symm
+          · simpa [thresholdBit] using
+              (sum_thresholdSeparation_eq_dist (hf w) (hf x₀)).symm
+    _ = ∑ k ∈ Finset.range H,
+        ((∑ i : I_M, separation (thresholdBit f k (m₁ i))
+            (thresholdBit f k (m₂ i))) +
+          separation (thresholdBit f k w) (thresholdBit f k x₀)) := by
+      rw [Finset.sum_comm]
+      simp [Finset.sum_add_distrib]
+    _ ≤ ∑ k ∈ Finset.range H,
+        ∑ e : I_B, separation (thresholdBit f k (b₁ e))
+          (thresholdBit f k (b₂ e)) := hsum
+    _ = ∑ e : I_B, Nat.dist (f (b₁ e)) (f (b₂ e)) := by
+      rw [Finset.sum_comm]
+      apply Finset.sum_congr rfl
+      intro e _
+      simpa [thresholdBit] using
+        sum_thresholdSeparation_eq_dist (hf (b₁ e)) (hf (b₂ e))
+
+/-- Direct all-cuts form of the integer-potential dual.  This is the exact
+abstract RFC interface: instantiate `cut` by membership in an arbitrary
+vertex subset. -/
+theorem rootedCutCondition_natPotential_of_allCuts
+    {V I_B I_M : Type*} [Fintype I_B] [Fintype I_M]
+    (b₁ b₂ : I_B → V) (m₁ m₂ : I_M → V)
+    (w x₀ : V)
+    (hRFC : ∀ cut : V → Bool,
+      (∑ i : I_M, separation (cut (m₁ i)) (cut (m₂ i))) +
+          separation (cut w) (cut x₀) ≤
+        ∑ e : I_B, separation (cut (b₁ e)) (cut (b₂ e)))
+    (f : V → ℕ) (H : ℕ) (hf : ∀ v, f v ≤ H) :
+    (∑ i : I_M, Nat.dist (f (m₁ i)) (f (m₂ i))) +
+        Nat.dist (f w) (f x₀) ≤
+      ∑ e : I_B, Nat.dist (f (b₁ e)) (f (b₂ e)) := by
+  exact rootedCutCondition_natPotential b₁ b₂ m₁ m₂ w x₀ f H hf
+    (fun k _ => hRFC (thresholdBit f k))
+
+/-- Original rooted RFC form, quantified only over cuts not containing the
+root.  Complementing a cut containing the root preserves every separation,
+so it supplies the all-cuts hypothesis above. -/
+theorem rootedCutCondition_natPotential_of_rootCuts
+    {V I_B I_M : Type*} [Fintype I_B] [Fintype I_M]
+    (b₁ b₂ : I_B → V) (m₁ m₂ : I_M → V)
+    (w x₀ : V)
+    (hRFC : ∀ cut : V → Bool, cut w = false →
+      (∑ i : I_M, separation (cut (m₁ i)) (cut (m₂ i))) +
+          separation (cut w) (cut x₀) ≤
+        ∑ e : I_B, separation (cut (b₁ e)) (cut (b₂ e)))
+    (f : V → ℕ) (H : ℕ) (hf : ∀ v, f v ≤ H) :
+    (∑ i : I_M, Nat.dist (f (m₁ i)) (f (m₂ i))) +
+        Nat.dist (f w) (f x₀) ≤
+      ∑ e : I_B, Nat.dist (f (b₁ e)) (f (b₂ e)) := by
+  apply rootedCutCondition_natPotential_of_allCuts b₁ b₂ m₁ m₂ w x₀
+    (f := f) (H := H) (hf := hf)
+  intro cut
+  by_cases hw : cut w = false
+  · exact hRFC cut hw
+  · let cut' : V → Bool := fun v => !(cut v)
+    have hwtrue : cut w = true := by
+      cases h : cut w <;> simp_all
+    have hcomp := hRFC cut' (by simp [cut', hwtrue])
+    simpa [cut'] using hcomp
+
+/-- A potential that separates every internal demand by its prescribed cost
+plus a common reserve `lambda` certifies the total cost.  The reserve is paid
+twice because the intended RL application has at least two internal edges. -/
+theorem totalCost_le_of_potentialCertificate
+    {I : Type*} [Fintype I]
+    (cost variation : I → ℕ) (terminal budget lambda : ℕ)
+    (hcard : 2 ≤ Fintype.card I)
+    (hseparate : ∀ i, cost i + lambda ≤ variation i)
+    (hcoarea : (∑ i, variation i) + terminal ≤
+      terminal + budget + 2 * lambda) :
+    ∑ i, cost i ≤ budget := by
+  have hsum := Finset.sum_le_sum fun i (_hi : i ∈ (Finset.univ : Finset I)) =>
+    hseparate i
+  rw [Finset.sum_add_distrib] at hsum
+  simp only [Finset.sum_const, smul_eq_mul] at hsum
+  have hcard' : 2 ≤ (Finset.univ : Finset I).card := by
+    simpa using hcard
+  have hlambda : 2 * lambda ≤ (Finset.univ : Finset I).card * lambda := by
+    exact Nat.mul_le_mul_right lambda hcard'
+  omega
+
+/-- Complete RFC cut-dual certificate interface.  The hypotheses after RFC
+are now purely constructive: a bounded natural potential, a uniform reserve,
+per-demand quadratic separation, and one explicit supply-variation budget.
+Supplying such data for BF-RL would close its aggregation without any
+multicommodity-routing assertion. -/
+theorem rootedCutCondition_totalCost_le_of_potentialCertificate
+    {V I_B I_M : Type*} [Fintype I_B] [Fintype I_M]
+    (b₁ b₂ : I_B → V) (m₁ m₂ : I_M → V)
+    (w x₀ : V)
+    (hRFC : ∀ cut : V → Bool, cut w = false →
+      (∑ i : I_M, separation (cut (m₁ i)) (cut (m₂ i))) +
+          separation (cut w) (cut x₀) ≤
+        ∑ e : I_B, separation (cut (b₁ e)) (cut (b₂ e)))
+    (cost : I_M → ℕ) (f : V → ℕ) (H budget lambda : ℕ)
+    (hf : ∀ v, f v ≤ H) (hcard : 2 ≤ Fintype.card I_M)
+    (hseparate : ∀ i, cost i + lambda ≤
+      Nat.dist (f (m₁ i)) (f (m₂ i)))
+    (hbudget : (∑ e : I_B, Nat.dist (f (b₁ e)) (f (b₂ e))) ≤
+      Nat.dist (f w) (f x₀) + budget + 2 * lambda) :
+    ∑ i : I_M, cost i ≤ budget := by
+  have hcoarea := rootedCutCondition_natPotential_of_rootCuts
+    b₁ b₂ m₁ m₂ w x₀ hRFC f H hf
+  apply totalCost_le_of_potentialCertificate cost
+    (fun i => Nat.dist (f (m₁ i)) (f (m₂ i)))
+    (Nat.dist (f w) (f x₀)) budget lambda hcard hseparate
+  exact hcoarea.trans hbudget
+
+end CutPotentialDuality
+
 /-- Removing an M-free endpoint block of `a` vertices retracts one corridor
 edge and `a-1` slack vertices, and cannot increase the RL budget. -/
 theorem rlBudget_endpointBlock_retraction_le
@@ -419,6 +628,13 @@ end GraphApplication
 #print axioms partnerDistance_eq_three_iff
 #print axioms rlBudget_pred_le
 #print axioms gammaBlock_endpointBridge_le_rlBudget
+#print axioms endpointBlock_small_or_partner_lt
+#print axioms sum_thresholdSeparation_eq_dist
+#print axioms rootedCutCondition_natPotential
+#print axioms rootedCutCondition_natPotential_of_allCuts
+#print axioms rootedCutCondition_natPotential_of_rootCuts
+#print axioms totalCost_le_of_potentialCertificate
+#print axioms rootedCutCondition_totalCost_le_of_potentialCertificate
 #print axioms rlBudget_endpointBlock_retraction_le
 #print axioms residual_series_gate_or_endpoint_pair
 #print axioms IsGeodesic.corridorIndexSet_card_le_twice_slack

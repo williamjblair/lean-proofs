@@ -201,18 +201,29 @@ partition sums, attachment spans, ridden-index/owner counting, and the
 ordinary/exceptional local charge, including the simultaneous canonical
 ride/excursion assignment and the repaired exceptional tail.  The final
 kernel theorem `gapGA_symmetric_bounds` proves both SE1 and SE2.  A new
-series-composition reduction closes every remaining RL* instance containing
-an interior stub-geodesic bridge whose two components each have at least four
-vertices: rooted cut validity composes cutwise, the exact RL budget is
-superadditive, and both induced minimal composites are strictly smaller.
+series-composition reduction first closed every remaining RL* instance
+containing an interior stub-geodesic bridge whose two components each have
+at least four vertices.  The exact partner-distance gate now extends this to
+all three-vertex sides; a two-vertex side retracts as an M-free endpoint
+leaf.  Endpoint corridor bridges are also closed, either by small-block
+retraction or by absorbing the endpoint block's `a^2` Gamma allowance into
+the exact RL budget.  Hence every corridor bridge is eliminated.  For a
+fully nonbridge root-stub geodesic, the canonical attachment intervals give
+the new kernel bounds `d ≤ 2s` and, in the `n ≥ 14` residual, `s ≥ 5`.
 The hostile audit includes the `n=14`, distances `[4,4]`, and `n=17`,
-distances `[4,6]`, middle-regime fixtures.
+distances `[4,6]`, middle-regime fixtures plus every killed aggregation
+fixture.
 
-OPEN CORE: the multi-edge aggregation G-B / inductive RL* in the exact
-region `n ≥ 14`, `2 ≤ s < (d+1)²/(2p(d))`, `|M| ≥ 2`, now restricted so
-every interior stub-geodesic bridge leaves a component of order at most
-three.  This is weaker than a 2-connected reduction; the bridge-free core
-remains conjecture-strength and quarantined.
+OPEN CORE: BF-RL, the multi-edge aggregation G-B / inductive RL* in the exact
+region `n ≥ 14`, `5 ≤ s`, `d ≤ 2s`, `2sp(d) < (d+1)²`, `|M| ≥ 2`, with a
+chosen root-stub geodesic whose every edge is a nonbridge.  This is still
+weaker than assuming the whole cut graph is 2-connected.  No target-strength
+joint aggregation is asserted.  An exact kernel-checked coarea theorem now
+turns RFC into total-variation domination for every integer vertex potential,
+providing a weighted-cut dual interface but not the missing quadratic
+certificate.  `compute23/gate3/gap_gb_joint_findings.md`
+and `gap_gb_joint_audit.md` give the exact proof and remaining quantified
+lemma.
 
 ## Erdős #699 — common prime factor p ≥ i of C(n,i), C(n,j)
 

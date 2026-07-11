@@ -14,6 +14,7 @@ import ErdosProblems.Erdos23GapGA
 import ErdosProblems.Erdos23GapGACanonical
 import ErdosProblems.Erdos23GapGAClosed
 import ErdosProblems.Erdos23GapGBSeriesAudit
+import ErdosProblems.Erdos23GapGBJoint
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686SmallBranch
 import ErdosProblems.Erdos686Reduction
@@ -528,7 +529,24 @@ import ErdosProblems.Erdos727
 #print axioms Erdos23GapGBSeries.series_slack_identity
 #print axioms Erdos23GapGBSeries.rlBudget_series_superadditive
 #print axioms Erdos23GapGBSeries.gamma_series_le_rlBudget
+#print axioms Erdos23GapGBSeries.minimalComposite_sizes_lt_series_of_partner_lt
+#print axioms Erdos23GapGBSeries.minimalComposite_sizes_lt_series_iff
 #print axioms Erdos23GapGBSeries.minimalComposite_sizes_lt_series
+#print axioms Erdos23GapGBJoint.partnerDistance_eq_three_iff
+#print axioms Erdos23GapGBJoint.rlBudget_pred_le
+#print axioms Erdos23GapGBJoint.gammaBlock_endpointBridge_le_rlBudget
+#print axioms Erdos23GapGBJoint.endpointBlock_small_or_partner_lt
+#print axioms Erdos23GapGBJoint.sum_thresholdSeparation_eq_dist
+#print axioms Erdos23GapGBJoint.rootedCutCondition_natPotential
+#print axioms Erdos23GapGBJoint.rootedCutCondition_natPotential_of_allCuts
+#print axioms Erdos23GapGBJoint.rootedCutCondition_natPotential_of_rootCuts
+#print axioms Erdos23GapGBJoint.totalCost_le_of_potentialCertificate
+#print axioms Erdos23GapGBJoint.rootedCutCondition_totalCost_le_of_potentialCertificate
+#print axioms Erdos23GapGBJoint.rlBudget_endpointBlock_retraction_le
+#print axioms Erdos23GapGBJoint.residual_series_gate_or_endpoint_pair
+#print axioms Erdos23GapGBJoint.IsGeodesic.corridorIndexSet_card_le_twice_slack
+#print axioms Erdos23GapGBJoint.IsGeodesic.length_le_twice_slack_of_all_nonbridge
+#print axioms Erdos23GapGBJoint.IsGeodesic.slack_at_least_five_of_large_all_nonbridge_corridor
 #print axioms Erdos730.eight_mul_sq_le_succ_cube
 #print axioms Erdos730.nearEnvelope_forces_high_exponent
 #print axioms Erdos730.nearEnvelope_prime_power_clearance

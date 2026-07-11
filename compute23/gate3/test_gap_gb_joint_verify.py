@@ -8,6 +8,7 @@ from compute23.gate3.gap_gb_joint_verify import (
     residual_regime,
     residual_series_dispatch,
     rooted_metrics,
+    threshold_separation_sum,
 )
 
 
@@ -102,3 +103,10 @@ def test_endpoint_gamma_block_absorption_exact_grid() -> None:
         for s in range(0, 100)
         for d in range(1, 100)
     )
+
+
+def test_threshold_layer_cake_identity_exact_grid() -> None:
+    for height in range(0, 100):
+        for a in range(height + 1):
+            for b in range(height + 1):
+                assert threshold_separation_sum(a, b, height) == abs(a - b)

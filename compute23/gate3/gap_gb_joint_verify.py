@@ -231,6 +231,13 @@ def endpoint_gamma_block_absorbs(*, order: int, s: int, d: int) -> bool:
     return order**2 + local <= whole
 
 
+def threshold_separation_sum(a: int, b: int, height: int) -> int:
+    """Exact finite layer-cake count used by the RFC potential dual."""
+
+    assert 0 <= a <= height and 0 <= b <= height
+    return sum((k < a) != (k < b) for k in range(height))
+
+
 if __name__ == "__main__":
     tail = rooted_metrics(**build_long_tail_c5_fixture(3, 5))
     print(

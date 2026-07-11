@@ -4741,6 +4741,158 @@ proofs:
       strictly smaller than the whole series instance.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.minimalComposite_sizes_lt_series_of_partner_lt
+    statement: >-
+      The exact partner-distance inequalities, rather than a uniform
+      four-vertex bound, make both series minimal composites strict.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.minimalComposite_sizes_lt_series_iff
+    statement: >-
+      Strictness of both series minimal composites is equivalent to the two
+      exact cross-component partner-distance inequalities.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.partnerDistance_eq_three_iff
+    statement: >-
+      Partner distance three occurs exactly at rooted stub distance one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.rlBudget_pred_le
+    statement: >-
+      Retracting an M-free root or stub leaf cannot increase the exact RL
+      budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.gammaBlock_endpointBridge_le_rlBudget
+    statement: >-
+      An endpoint block's order-squared Gamma allowance is absorbed by the
+      exact RL budget after endpoint series attachment.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.endpointBlock_small_or_partner_lt
+    statement: >-
+      Every endpoint block either has one of the three M-free small orders or
+      supplies strict partner-distance room for the opposite composite.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.sum_thresholdSeparation_eq_dist
+    statement: >-
+      The number of integer thresholds separating two natural values is
+      exactly their natural distance.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.rootedCutCondition_natPotential
+    statement: >-
+      Rooted cut validity coarea-dominates the total variation of every
+      integer-valued vertex potential.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.rootedCutCondition_natPotential_of_allCuts
+    statement: >-
+      The universally quantified rooted cut condition directly dominates
+      the total variation of every bounded natural vertex potential.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.rootedCutCondition_natPotential_of_rootCuts
+    statement: >-
+      RFC in its original root-excluding form dominates the total variation
+      of every bounded natural vertex potential.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.totalCost_le_of_potentialCertificate
+    statement: >-
+      Two or more demand costs are bounded by a common-reserve potential
+      certificate and its exact total-variation budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.rootedCutCondition_totalCost_le_of_potentialCertificate
+    statement: >-
+      RFC plus an explicit bounded potential certificate proves any specified
+      joint internal-demand cost bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.rlBudget_endpointBlock_retraction_le
+    statement: >-
+      Removing an M-free endpoint block and retracting one corridor edge
+      cannot increase the exact RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.residual_series_gate_or_endpoint_pair
+    statement: >-
+      In the strict residual, every failed exact interior-series gate has a
+      two-vertex endpoint component.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.IsGeodesic.corridorIndexSet_card_le_twice_slack
+    statement: >-
+      Any set of nonbridge geodesic corridor edges has cardinality at most
+      twice the off-corridor slack.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.IsGeodesic.length_le_twice_slack_of_all_nonbridge
+    statement: >-
+      A geodesic whose every edge is a nonbridge has length at most twice its
+      off-corridor slack.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBJoint.lean
+    theorem: Erdos23GapGBJoint.IsGeodesic.slack_at_least_five_of_large_all_nonbridge_corridor
+    statement: >-
+      A fully nonbridge corridor in the n-at-least-fourteen residual has at
+      least five off-corridor vertices.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
   - problem: 730
     source: erdosproblems
     file: ErdosProblems/Erdos730FirstPowerRoutes.lean

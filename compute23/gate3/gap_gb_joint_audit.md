@@ -45,6 +45,8 @@ reduction. Full RL* remains unproved.**
      ordinary smaller valid instance and receives the stated `a^2` Gamma
      bound from the induction hypothesis.
    - Budget kernel: `gammaBlock_endpointBridge_le_rlBudget`.
+   - Exhaustive small/large order split:
+     `endpointBlock_small_or_partner_lt`.
 
 7. **Canonical interval cover — PASS.**
    - Every specified nonbridge corridor edge is covered by a canonical
@@ -59,6 +61,21 @@ reduction. Full RL* remains unproved.**
      `n=d+1+s>=14`, this implies `s>=5`.
    - Kernel: `IsGeodesic.length_le_twice_slack_of_all_nonbridge`,
      `IsGeodesic.slack_at_least_five_of_large_all_nonbridge_corridor`.
+
+9. **Integer-potential coarea interface — PASS, non-closing.**
+   - Every threshold invokes exactly one RFC cut; finite sum interchange and
+     the exact layer-cake identity give the displayed total-variation bound.
+     Thresholds containing the root use the complementary RFC cut, which has
+     identical edge counts and terminal separation.
+   - Kernel: `sum_thresholdSeparation_eq_dist`,
+     `rootedCutCondition_natPotential`, and
+     `rootedCutCondition_natPotential_of_allCuts`, with original RFC supplied
+     by `rootedCutCondition_natPotential_of_rootCuts`.
+   - No potential with target-strength quadratic separation is asserted.
+   - The exact sufficient certificate algebra is kernel checked by
+     `totalCost_le_of_potentialCertificate` and
+     `rootedCutCondition_totalCost_le_of_potentialCertificate`; existence of
+     the required potential is explicitly not asserted.
 
 ## Falsification record
 
@@ -89,7 +106,8 @@ reduction. Full RL* remains unproved.**
 - exact interior size-gate extension;
 - exhaustive bounded residual dispatch;
 - a `100 x 98` endpoint-move grid; and
-- a `98 x 100 x 99` endpoint-block absorption grid.
+- a `98 x 100 x 99` endpoint-block absorption grid; and
+- every threshold pair through height 99 for the layer-cake identity.
 
 All arithmetic is integer arithmetic. No floating point or heuristic result
 is a proof dependency; the discovery-only random harness was not banked.

@@ -108,7 +108,8 @@ Gamma_A + F(sC,d-1) <= a^2 + F(sC,d-1)
 
 The second inequality is
 `gammaBlock_endpointBridge_le_rlBudget`. Thus endpoint bridges reduce for
-every component order.
+every component order. The exhaustive order dispatch itself is kernel checked
+as `endpointBlock_small_or_partner_lt`.
 
 ## 4. Full nonbridge consequence
 
@@ -143,3 +144,40 @@ least four. The present proof closes:
 What remains is the genuine simultaneous-distance aggregation BF-RL above.
 No volume packing, per-vertex load, summed SE1/SE2, or multicommodity
 routability statement is used.
+
+## 6. Exact weighted-cut dual interface
+
+One further non-closing interface is banked for BF-RL. For every integer
+potential `f:V->Nat`, summing RFC over the threshold cuts `{v:k<f(v)}` gives
+
+```text
+sum_{uv in M} |f(u)-f(v)| + |f(w)-f(x0)|
+  <= sum_{ab in B} |f(a)-f(b)|.                         (C)
+```
+
+The layer-cake identity and (C) are kernel checked as
+`sum_thresholdSeparation_eq_dist` and
+`rootedCutCondition_natPotential_of_allCuts` (with the threshold-family core
+`rootedCutCondition_natPotential`). The original root-excluding RFC form is
+connected kernel-side by `rootedCutCondition_natPotential_of_rootCuts`.
+This is a genuine cut-dual reformulation,
+but it does not itself supply a potential whose left side majorizes the
+quadratic Gamma objective at the required right-side cost. That construction
+is part of BF-RL and is not claimed.
+
+The complement step is exact: cut edge counts and terminal separation are
+unchanged.
+
+The landing condition is also kernel checked. If `|M|>=2`, a bounded
+potential `f` and reserve `lambda` suffice when
+
+```text
+(D_uv+1)^2 + lambda <= |f(u)-f(v)|       for every uv in M,
+sum_B |Delta f| <= |f(w)-f(x0)| + F(s,d) + 2*lambda.
+```
+
+Coarea then pays one `lambda` per M-edge and the two guaranteed edges absorb
+the `2*lambda` allowance. This is
+`rootedCutCondition_totalCost_le_of_potentialCertificate`. The missing BF-RL
+work is the uniform construction of such a potential, not the certificate
+algebra.
