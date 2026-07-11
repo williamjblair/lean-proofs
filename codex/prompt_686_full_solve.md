@@ -20,7 +20,10 @@
 > cyclic cube-divisibility obstruction are now banked too, but a 121-digit
 > Hensel/CRT non-solution satisfies the entire package through fourth order.
 > Thus the congruences alone still do not enforce the verified short window.
-> The exact next three-bucket node is the quantified short-CRT lemma in
+> The repaired, hostile-audited six-row wrapper also excludes every vanishing
+> composed second obstruction in a supplied bounded-loss three-bucket
+> factorization.  The exact next three-bucket node is therefore the
+> all-nonzero quantified short-CRT lemma in
 > `compute/campaign686/three_bucket_findings.md`; Target 1 itself remains open.
 
 ## Current task statement

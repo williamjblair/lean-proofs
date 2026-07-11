@@ -65,6 +65,12 @@ owner-adic obstruction, and the three cyclic obstructions compose modulo
 moment, and all local congruences through fourth order while failing both the
 equation and short window, so the exact remaining three-bucket node is
 archimedean/short-CRT rather than a finite resultant.
+The former zero-obstruction wrapper is now repaired and hostile-audited:
+for a supplied bounded-loss three-bucket factorization at target size, none
+of the three composed second obstructions can vanish.  Its historical
+noncompiling source audit remains recorded separately; only the repaired
+source is attested.  The surviving three-bucket branch therefore has all
+three second obstructions nonzero.
 Two additional global moment identities use `2^2=4` to make
 `d^3` divide explicit constant-plus-linear coefficient combinations.  They
 are cubic combinations, not cubic divisibility of either residual product.
@@ -109,7 +115,8 @@ OPEN CORE:
    multi-owner branch.  The extraction does not absorb further owner buckets
    into the bounded loss.
    In the exactly-three-cleaned-bucket slice, the current exact
-   gap is the quantified short-CRT/window lemma in
+   zero-obstruction placements are excluded, and the current exact gap is
+   the all-nonzero quantified short-CRT/window lemma in
    `compute/campaign686/three_bucket_findings.md`, now including the fourth
    cyclic divisibilities from `Erdos686FourthLocalLift.lean`; four-or-more
    buckets remain unrestricted by that lemma.

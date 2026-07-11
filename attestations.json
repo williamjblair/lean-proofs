@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:603768fe19c5160cb0e2302fe7f8c48d8e7632091cb362d8d8e12719797ee7af",
+  "verifier_output_hash": "sha256:80097a23cc582ec21aae61ff6f0a4f12156862a6d548d1639191aa8351b68f51",
   "attestations": [
     {
       "problem": 154,
@@ -6297,6 +6297,100 @@
       "theorem": "Erdos686.Erdos686Variant.exists_threeGlobalResidualOwnerWitness_of_target_size_solution",
       "file": "ErdosProblems/Erdos686ThreeOwnerExtraction.lean",
       "proof_hash": "sha256:6d056218c2d98025bdfc3a54741df01c3b35b78084d5a6d6dbcc5e1901e86b07",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.target_three_bucket_zero_table_certificate",
+      "file": "ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean",
+      "proof_hash": "sha256:de9ddc72881c67f4ce7c7b0987eeccd71040f2ac4064deb8f0d6b70f075bd4bd",
+      "axiom_footprint": [
+        "propext"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.target_three_bucket_zero_coefficient_certificate",
+      "file": "ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean",
+      "proof_hash": "sha256:de9ddc72881c67f4ce7c7b0987eeccd71040f2ac4064deb8f0d6b70f075bd4bd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_zero_target_numeric_cutoff",
+      "file": "ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean",
+      "proof_hash": "sha256:de9ddc72881c67f4ce7c7b0987eeccd71040f2ac4064deb8f0d6b70f075bd4bd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_zero_gap_lt_cutoff_of_target_coefficients",
+      "file": "ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean",
+      "proof_hash": "sha256:de9ddc72881c67f4ce7c7b0987eeccd71040f2ac4064deb8f0d6b70f075bd4bd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.targetThreeBucketSecondObstruction_swap",
+      "file": "ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean",
+      "proof_hash": "sha256:de9ddc72881c67f4ce7c7b0987eeccd71040f2ac4064deb8f0d6b70f075bd4bd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.targetThreeBucketThirdObstruction_swap",
+      "file": "ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean",
+      "proof_hash": "sha256:de9ddc72881c67f4ce7c7b0987eeccd71040f2ac4064deb8f0d6b70f075bd4bd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.target_three_bucket_designated_zero_gap_lt",
+      "file": "ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean",
+      "proof_hash": "sha256:de9ddc72881c67f4ce7c7b0987eeccd71040f2ac4064deb8f0d6b70f075bd4bd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.target_three_bucket_all_second_obstructions_nonzero",
+      "file": "ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean",
+      "proof_hash": "sha256:de9ddc72881c67f4ce7c7b0987eeccd71040f2ac4064deb8f0d6b70f075bd4bd",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

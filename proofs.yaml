@@ -4851,3 +4851,76 @@ proofs:
       assignment.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean
+    theorem: Erdos686.Erdos686Variant.target_three_bucket_zero_table_certificate
+    statement: >-
+      Ordinary kernel evaluation certifies the complete coefficient table in
+      all six odd target rows.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean
+    theorem: Erdos686.Erdos686Variant.target_three_bucket_zero_coefficient_certificate
+    statement: >-
+      Every ordered distinct target-row owner triple has positive bounded
+      cross and third-order zero coefficients.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_zero_target_numeric_cutoff
+    statement: >-
+      The worst coefficient and bounded-loss majorant is strictly below ten
+      to the 120.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_zero_gap_lt_cutoff_of_target_coefficients
+    statement: >-
+      The exact coprime packing divisibilities and target coefficient bounds
+      force a three-bucket gap below the cutoff.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean
+    theorem: Erdos686.Erdos686Variant.targetThreeBucketSecondObstruction_swap
+    statement: >-
+      The target three-bucket second obstruction is invariant under swapping
+      the two opposite owners.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean
+    theorem: Erdos686.Erdos686Variant.targetThreeBucketThirdObstruction_swap
+    statement: >-
+      The target three-bucket third obstruction is invariant under swapping
+      the two opposite owners.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean
+    theorem: Erdos686.Erdos686Variant.target_three_bucket_designated_zero_gap_lt
+    statement: >-
+      A designated vanishing second obstruction with the cyclic target
+      divisibilities forces the supplied three-bucket gap below the cutoff.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThreeBucketZeroExclusion.lean
+    theorem: Erdos686.Erdos686Variant.target_three_bucket_all_second_obstructions_nonzero
+    statement: >-
+      Every bounded-loss target-size three-bucket configuration satisfying
+      the cyclic second and third divisibilities has all three second
+      obstructions nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

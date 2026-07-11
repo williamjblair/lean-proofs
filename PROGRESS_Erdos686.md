@@ -120,6 +120,17 @@ by `P_i^5`, while remaining outside the short window and failing the equation.
 Thus fourth order is a genuine necessary restriction, not a congruence-only
 bound; the quantified short-CRT/window lemma remains the exact gap.
 
+[R] **The three-bucket zero-obstruction branch is closed.**  A repaired
+six-row Boolean certificate proves explicit nonzero coefficient bounds
+`<10^30` and `<10^18`; coprime packing then gives
+`d | A*B*K*g^4`, whose worst target loss is still below `10^120`.  Hence a
+bounded-loss target-size three-bucket configuration satisfying the cyclic
+second/third divisibilities has all three composed second obstructions
+nonzero.  The fresh hostile audit checks all 6,210 ordered triples and 18,630
+cyclic views.  The earlier noncompiling source SHA remains a historical FAIL;
+the repaired SHA alone is banked.  This removes only the zero branch and does
+not prove the all-nonzero short-window lemma.
+
 [R] **Two global cubic moment combinations.**  Expanding at the evaluation
 ratio `2^2=4` cancels every term through degree two after explicit constant
 and linear corrections.  Lean proves `d^3` divides the resulting
