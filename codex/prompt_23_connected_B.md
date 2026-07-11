@@ -7,8 +7,12 @@
 > ride/excursion assignment, including the repaired exceptional tail, and
 > `ErdosProblems/Erdos23GapGAClosed.lean` proves both exact laws SE1 and SE2
 > by the forward and swapped ledgers.  Thus the prompt's allowed G-A target,
-> and hence the `|M|=1` case, is closed.  RL* in the remaining multi-edge
-> regime is still open.
+> and hence the `|M|=1` case, is closed.  The audited series-composition
+> reduction now also closes any remaining RL* instance with an interior
+> stub-geodesic bridge having at least four vertices on both sides.  The exact
+> residual multi-edge regime has every such bridge within three vertices of
+> an endpoint; this restriction is weaker than 2-connectedness, and RL*
+> remains open there.
 
 ## Current task statement
 

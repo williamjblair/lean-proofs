@@ -4637,3 +4637,107 @@ proofs:
       cube-divisibility obstruction at each cleaned owner.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.partnerDistance_one
+    statement: >-
+      The parity-minimal rooted partner distance at stub distance one is
+      exactly three.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.partnerDistance_pos
+    statement: >-
+      Every rooted partner distance in the RL budget is positive.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.partnerDistance_le_three
+    statement: >-
+      Every rooted partner distance in the RL budget is at most three.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.separation_comm
+    statement: >-
+      Boolean cut separation is symmetric in its two terminals.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.rootedCutCondition_swapTerminals
+    statement: >-
+      The symmetric rooted cut condition is preserved when root and stub
+      terminal are exchanged.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.separation_le_series
+    statement: >-
+      End-to-end separation across a three-link terminal chain is bounded by
+      the sum of its link separations.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.rootedCutCondition_series
+    statement: >-
+      Two rooted-valid blocks joined by one cut edge remain rooted-valid
+      under series composition.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.rootedCutCondition_series_family
+    statement: >-
+      The cutwise series-composition law holds uniformly over an arbitrary
+      family of vertex cuts.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.series_slack_identity
+    statement: >-
+      Corridor slack is exactly additive across a single series bridge.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.rlBudget_series_superadditive
+    statement: >-
+      The exact rooted RL budget is superadditive under positive-distance
+      series composition.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.gamma_series_le_rlBudget
+    statement: >-
+      RL bounds for two blocks compose to an RL bound for their disjoint
+      series union.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBSeries.lean
+    theorem: Erdos23GapGBSeries.minimalComposite_sizes_lt_series
+    statement: >-
+      Four vertices on each side make both induced minimal composites
+      strictly smaller than the whole series instance.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean

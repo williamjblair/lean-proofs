@@ -692,7 +692,7 @@ ledger and both single-edge laws.  The repaired proof is independently
 audited in `gap_ga_audit.md`; no unproved uniformity or computational
 extrapolation enters it.
 
-**G-B (multi-edge aggregation).**  For |M| ≥ 2 the charging lemma's
+**G-B (multi-edge aggregation): SERIES SLICE CLOSED.**  For |M| ≥ 2 the charging lemma's
 per-vertex bound fails (shared F-endpoints of distinct crossing edges),
 and no aggregated form of SE1/SE2 that implies RL has been found.  By
 Theorem 2.7 the regime s = Θ(n), d = O(1) of G-B carries the full
@@ -702,8 +702,21 @@ middle regime of Corollary 7.2 (n ≥ 14, 2 ≤ s < (d+1)²/(2p)).  The known
 tight families of Conjecture Γ live outside it: a balanced blow-up plus
 pendant stub has d = 1 and lands in the covered regime.  So the residual
 G-B excludes the self-tight configurations that killed gate 2's
-candidates — consistent with the strong rigidity in the thin-corridor
-data — but remains unproved.
+candidates — consistent with the strong rigidity in the thin-corridor data.
+The audited series theorem now removes every case in which an interior edge
+of a chosen stub geodesic is a B-bridge and both resulting components have at
+least four vertices: symmetric RFC composes cutwise, Gamma and slack split
+exactly, and the RL budget is superadditive.  Thus a remaining counterexample
+must satisfy the exact additional restriction
+
+```text
+for every interior stub-geodesic edge e,
+  IsBridge_B(e) -> min(|A_e|,|C_e|) <= 3.
+```
+
+This is strictly weaker than saying B is 2-connected.  Bridge-free segments,
+endpoint-near bridges, and the genuine multiplicity aggregation remain open;
+see `gap_gb_series_findings.md` and its hostile audit.
 
 **Candidate repairs assessed and killed/blocked.**
 

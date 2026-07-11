@@ -4,6 +4,8 @@ import ErdosProblems.Erdos154Sumset
 import ErdosProblems.Erdos23GapGA
 import ErdosProblems.Erdos23GapGACanonical
 import ErdosProblems.Erdos23GapGAClosed
+import ErdosProblems.Erdos23GapGBSeries
+import ErdosProblems.Erdos23GapGBSeriesAudit
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686ConstantQuotient
 import ErdosProblems.Erdos686QuotientConfinement

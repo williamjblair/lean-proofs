@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:ce4682868143cd9c0e4aad50cf7a19d7dc07fc26656b67e53e557c0e29152c2f",
+  "verifier_output_hash": "sha256:b7ffc94ac20de6e479b59af05e25a07695f8948ac62347a9dc85add05e2b97cd",
   "attestations": [
     {
       "problem": 154,
@@ -6018,6 +6018,143 @@
       "theorem": "Erdos686.Erdos686Variant.three_bucket_fourth_obstruction_dvd_cube",
       "file": "ErdosProblems/Erdos686FourthLocalLift.lean",
       "proof_hash": "sha256:22d853c7eac8064aeee977c20757b5f4000006483a2cfade54ef0347c8c4d0be",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.partnerDistance_one",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.partnerDistance_pos",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.partnerDistance_le_three",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.separation_comm",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.rootedCutCondition_swapTerminals",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.separation_le_series",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.rootedCutCondition_series",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.rootedCutCondition_series_family",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.series_slack_identity",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.rlBudget_series_superadditive",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.gamma_series_le_rlBudget",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 23,
+      "theorem": "Erdos23GapGBSeries.minimalComposite_sizes_lt_series",
+      "file": "ErdosProblems/Erdos23GapGBSeries.lean",
+      "proof_hash": "sha256:5a2fccaaf2694d6110a6d64bac9ccc46e5ce0a0c84250ba3e402f517a1db9b94",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

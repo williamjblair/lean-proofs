@@ -147,11 +147,19 @@ geodesic coordinates, canonical off-corridor components, exact `q_C/r_C`
 partition sums, attachment spans, ridden-index/owner counting, and the
 ordinary/exceptional local charge, including the simultaneous canonical
 ride/excursion assignment and the repaired exceptional tail.  The final
-kernel theorem `gapGA_symmetric_bounds` proves both SE1 and SE2.
+kernel theorem `gapGA_symmetric_bounds` proves both SE1 and SE2.  A new
+series-composition reduction closes every remaining RL* instance containing
+an interior stub-geodesic bridge whose two components each have at least four
+vertices: rooted cut validity composes cutwise, the exact RL budget is
+superadditive, and both induced minimal composites are strictly smaller.
+The hostile audit includes the `n=14`, distances `[4,4]`, and `n=17`,
+distances `[4,6]`, middle-regime fixtures.
 
 OPEN CORE: the multi-edge aggregation G-B / inductive RL* in the exact
-region `n ≥ 14`, `2 ≤ s < (d+1)²/(2p(d))`, `|M| ≥ 2`; the 2-connected
-core (conjecture-strength, quarantined).
+region `n ≥ 14`, `2 ≤ s < (d+1)²/(2p(d))`, `|M| ≥ 2`, now restricted so
+every interior stub-geodesic bridge leaves a component of order at most
+three.  This is weaker than a 2-connected reduction; the bridge-free core
+remains conjecture-strength and quarantined.
 
 ## Erdős #699 — common prime factor p ≥ i of C(n,i), C(n,j)
 

@@ -13,6 +13,7 @@ import ErdosProblems.Erdos154Sumset
 import ErdosProblems.Erdos23GapGA
 import ErdosProblems.Erdos23GapGACanonical
 import ErdosProblems.Erdos23GapGAClosed
+import ErdosProblems.Erdos23GapGBSeriesAudit
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686SmallBranch
 import ErdosProblems.Erdos686Reduction
@@ -509,6 +510,18 @@ import ErdosProblems.Erdos727
 #print axioms Erdos23GapGA.canonicalChargeTheorem
 #print axioms Erdos23GapGA.canonical_ledgerTheorem
 #print axioms Erdos23GapGA.gapGA_symmetric_bounds
+#print axioms Erdos23GapGBSeries.partnerDistance_one
+#print axioms Erdos23GapGBSeries.partnerDistance_pos
+#print axioms Erdos23GapGBSeries.partnerDistance_le_three
+#print axioms Erdos23GapGBSeries.separation_comm
+#print axioms Erdos23GapGBSeries.rootedCutCondition_swapTerminals
+#print axioms Erdos23GapGBSeries.separation_le_series
+#print axioms Erdos23GapGBSeries.rootedCutCondition_series
+#print axioms Erdos23GapGBSeries.rootedCutCondition_series_family
+#print axioms Erdos23GapGBSeries.series_slack_identity
+#print axioms Erdos23GapGBSeries.rlBudget_series_superadditive
+#print axioms Erdos23GapGBSeries.gamma_series_le_rlBudget
+#print axioms Erdos23GapGBSeries.minimalComposite_sizes_lt_series
 #print axioms Erdos730.eight_mul_sq_le_succ_cube
 #print axioms Erdos730.nearEnvelope_forces_high_exponent
 #print axioms Erdos730.nearEnvelope_prime_power_clearance
