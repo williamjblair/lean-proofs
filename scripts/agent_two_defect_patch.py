@@ -12,6 +12,8 @@ new = '''set_option maxHeartbeats 800000 in
 quotients, so this isolated theorem needs a larger elaboration budget. -/
 theorem IsGeodesic.pair_spanTwo_geometry
 '''
-if old not in text:
+if old in text:
+    text = text.replace(old, new, 1)
+elif new not in text:
     raise SystemExit('expected heartbeat block not found')
-path.write_text(text.replace(old, new, 1))
+path.write_text(text)
