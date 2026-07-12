@@ -1,0 +1,23 @@
+name: verify-erdos23-two-defect
+
+on:
+  pull_request:
+    paths:
+      - 'ErdosProblems/Erdos23GapGBTwoDefectFinal.lean'
+      - '.github/workflows/verify-erdos23-two-defect.yml'
+  workflow_dispatch:
+
+jobs:
+  check-two-defect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: true
+      - name: Compile two-defect final module
+        run: lake env lean ErdosProblems/Erdos23GapGBTwoDefectFinal.lean
