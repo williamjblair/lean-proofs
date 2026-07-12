@@ -156,9 +156,9 @@ theorem IsGeodesic.levelAligned_of_twoSidedAnchors
     rw [Nat.dist_eq_sub_of_le_right hgt.le] at hlower ⊢
     omega
 
-/-- A size-two component of span two is a doubled diamond vertex together
-with one tip.  The doubled vertex is on level `l+1` and the tip on `l+2`. -/
 set_option maxHeartbeats 800000 in
+/-- The local shortest-path extraction below traverses component-complement
+quotients, so this isolated theorem needs a larger elaboration budget. -/
 theorem IsGeodesic.pair_spanTwo_geometry
     {V : Type*} [Fintype V] [DecidableEq V]
     {G : SimpleGraph V} [DecidableRel G.Adj]
