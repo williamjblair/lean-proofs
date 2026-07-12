@@ -6071,6 +6071,302 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686CFTailBand.lean
+    theorem: Erdos686.Erdos686Variant.no_odd_target_gap_solution_below_e1000
+    statement: >-
+      For every odd target row, the exact quotient-four equation has no
+      solution throughout 10^120 <= d < 10^1000.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CFTailReduction.lean
+    theorem: Erdos686.Erdos686Variant.oddThueTailHypothesis_of_tail1000
+    statement: >-
+      The six tails beginning at 10^1000, composed with the exact intervening
+      certificates, imply the former 10^120 odd-tail interface.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ThirdObstructionNonzero.lean
+    theorem: Erdos686.Erdos686Variant.exists_allOwnerAssemblyThirdNonzeroCertificate
+    statement: >-
+      Every target-size odd-row equation constructs a complete all-owner
+      certificate whose composed second and third obstructions are all
+      nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ExactRatioThirdSign.lean
+    theorem: Erdos686.Erdos686Variant.exactRatio_allOwner_third_obstruction_ne_zero
+    statement: >-
+      The exact ratio window makes every composed third obstruction on the
+      complete owner grid nonzero, including unit buckets.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.target_three_bucket_fifth_obstruction_dvd_fourth
+    statement: >-
+      Three exact cleaned residual buckets compose the fifth local lift into
+      a cyclic fourth-power owner divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK16.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_sixteen
+    statement: >-
+      The quotient-four block equation has no solution in row k=16 for any
+      admissible gap d>=16.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK18.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_eighteen
+    statement: >-
+      The quotient-four block equation has no solution in row k=18 for any
+      admissible gap d>=18.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK182024.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_twenty
+    statement: >-
+      The quotient-four block equation has no solution in row k=20 for any
+      admissible gap d>=20.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK182024.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_twentyfour
+    statement: >-
+      The quotient-four block equation has no solution in row k=24 for any
+      admissible gap d>=24.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenTailSupply.lean
+    theorem: Erdos686.Erdos686Variant.no_even_tail_solution_universal
+    statement: >-
+      Every even row k=2r>=4 has a constructed explicit coefficient
+      threshold beyond which the quotient-four equation is impossible.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ConsecutivePropertyMass.lean
+    theorem: Erdos686.Erdos686Variant.factorial_dvd_kSmallBlockProduct
+    statement: >-
+      The product of the parts supported on primes at most k in every
+      length-k consecutive block is divisible by k factorial.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ConsecutivePropertyMass.lean
+    theorem: Erdos686.Erdos686Variant.kSmallBlockProduct_eq_four_of_block_eq
+    statement: >-
+      An exact quotient-four block equation preserves an exact factor four
+      after all prime factors above k are stripped.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SmallPrimeBand.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_lower_term_prime_power_of_factorial_loss_le
+    statement: >-
+      A lower-block prime power is impossible at every position satisfying
+      the exact split-factorial valuation-loss inequality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SmallPrimeBand.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_lower_term_cofactor_prime_power_base_gt_length_of_size
+    statement: >-
+      A large-base prime-power owner with small cofactor is impossible once
+      its explicit owner-size bound lies below the lower block term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SharperRatioWindow.lean
+    theorem: Erdos686.Erdos686Variant.three_k_mul_gap_lt_five_mul_n_of_four_solution
+    statement: >-
+      Every quotient-four solution with k>=16 and d>=k satisfies the exact
+      strengthened lower window 3*k*d < 5*n.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CenteredRatioWindow.lean
+    theorem: Erdos686.Erdos686Variant.thirteen_k_mul_gap_lt_twenty_mul_n_of_four_solution
+    statement: >-
+      Centered pairing of opposite block positions proves that every
+      quotient-four solution with k>=16 and d>=k satisfies 13*k*d < 20*n.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CenteredRatioWindowSharp.lean
+    theorem: Erdos686.Erdos686Variant.maximal_sharp_bracket_ratio_of_four_solution
+    statement: >-
+      The exact seven-term centered root bracket proves the maximal fixed-
+      bracket ratio 1218443*k*d < 1853952*n for k>=16 and d>=k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CenteredRatioWindowSharp.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_lower_term_cofactor_prime_power_base_gt_length_of_maximal_sharp_band
+    statement: >-
+      The sharp centered ratio excludes every lower owner a*p^A with p>k
+      throughout the exact band 3707904*a <= 1218443*k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CenteredRatioWindow.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_lower_term_cofactor_prime_power_base_gt_length_of_band
+    statement: >-
+      The centered ratio window excludes every lower owner a*p^A with p>k
+      throughout the exact linear cofactor band 40*a <= 13*k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FinalResidual.lean
+    theorem: Erdos686.Erdos686Variant.erdos686_false_of_finalResidual
+    statement: >-
+      The single explicitly restricted final residual core implies the full
+      refutation of the universal Erdős 686 statement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK28.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_twentyeight
+    statement: >-
+      The quotient-four block equation has no solution in row k=28 for any
+      admissible gap d>=28.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK32.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_thirtytwo
+    statement: >-
+      The quotient-four block equation has no solution in row k=32 for any
+      admissible gap d>=32.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargePrimeGapComponent.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_of_large_prime_gap_component_dominance
+    statement: >-
+      A prime-power component p^e of the gap with p>=k rules out a large-row
+      equation whenever its square reaches the exact residual ceiling.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargePrimeGapComponent.lean
+    theorem: Erdos686.Erdos686Variant.large_prime_gap_component_square_strict_upper_of_four_solution
+    statement: >-
+      Every large-row solution forces 6*p^(2e) below the explicit linear
+      ceiling for each prime-power gap component p^e with p>=k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargePrimeGapComponent.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_gap_eq_large_prime_power_of_three_k_le
+    statement: >-
+      A whole prime-power gap d=p^e with p>=k is impossible once d>=3k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargePrimeGapComponent.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_gap_eq_large_prime_power_exponent_ge_two
+    statement: >-
+      Every whole gap d=p^e with p>=k>=16 and e>=2 is impossible.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686PrimePowerBinomialBoundary.lean
+    theorem: Erdos686.Erdos686Variant.prime_power_pred_four_solution_endpoints_not_dvd
+    statement: >-
+      In every row k=p^a-1 with prime p>=5, an exact quotient-four equation
+      forces p^a to divide neither endpoint parameter.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargePrimeSameOwner.lean
+    theorem: Erdos686.Erdos686Variant.localResidual_square_strict_upper_of_four_solution
+    statement: >-
+      Every square divisor of one positive large-row local residual lies
+      below the exact 18-over-13 residual ceiling.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargePrimeSameOwner.lean
+    theorem: Erdos686.Erdos686Variant.grouped_owner_square_strict_upper_of_four_solution
+    statement: >-
+      Every complete cleaned owner bucket supplied by a large-row equation
+      has its square below the explicit residual ceiling.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargePrimeSameOwner.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_of_grouped_owner_dominance
+    statement: >-
+      A certified cleaned owner bucket reaching the residual ceiling rules
+      out the quotient-four equation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargePrimeSameOwner.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_of_two_large_prime_components_same_owner_dominance
+    statement: >-
+      Two distinct large-prime components localized at one lower owner are
+      impossible whenever their product square reaches the exact ceiling.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargePrimeSameOwner.lean
+    theorem: Erdos686.Erdos686Variant.two_large_prime_whole_gap_has_distinct_local_owners
+    statement: >-
+      If a whole large-row gap has exactly two distinct prime-power factors
+      with bases at least k, their unique lower localization owners differ.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOddTwoPrimePell.lean
+    theorem: Erdos686.Erdos686Variant.large_odd_two_large_prime_pell_certificate
+    statement: >-
+      Every odd row k>=17 with a whole two-large-prime gap constructs the
+      uniform A=3k+2 Pell and second-lift certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686AllOwnerAssembly.lean
     theorem: Erdos686.Erdos686Variant.allOwnerLoss_pos
     statement: >-
@@ -6321,5 +6617,14 @@ proofs:
       Every target-size odd-row solution constructs a complete all-owner
       certificate with exact products, residuals, lifts, and nonzero second
       obstructions.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FinalResidual.lean
+    theorem: Erdos686.Erdos686Variant.finalResidual_iff_tail1000_and_smooth
+    statement: >-
+      The explicit final residual interface is logically equivalent to the
+      conjunction of the updated odd-tail and large-smoothness hypotheses.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean

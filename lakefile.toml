@@ -2,6 +2,7 @@ name = "lean-proofs"
 version = "0.1.0"
 keywords = ["math", "formal-proofs", "erdos"]
 defaultTargets = ["ErdosProblems", "Erdos699"]
+weakLeanArgs = ["-s", "65520"]
 
 [leanOptions]
 pp.unicode.fun = true

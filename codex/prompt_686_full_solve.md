@@ -1,5 +1,17 @@
 # Prompt: complete the refutation of Erdős #686
 
+> **SUPERSEDED INTAKE (2026-07-12).**  This file preserves the original
+> two-target campaign prompt and falsification record, but its `10^120`
+> finite-band context is no longer the live handoff.  The canonical odd
+> certificates now cover `10^120 <= d < 10^1000`, and
+> `ErdosProblems/Erdos686FinalResidual.lean` gives the current exact interface.
+> Its theorem `finalResidual_iff_tail1000_and_smooth` proves that the single
+> residual is equivalent to
+> `OddThueTail1000Hypothesis ∧ LargeKSmoothHypothesis`; it is packaging, not
+> a weaker theorem.  Use `FRONTIER.md` and `PROGRESS_Erdos686.md` for the live
+> list of closed rows and restrictions.  The mandatory fixtures and route
+> prohibitions below remain active.
+
 > **2026-07-10 campaign update.**  Global residual concentration plus exact
 > second/third local lifts now exclude every odd-tail gap with one or exactly
 > two distinct prime divisors, uniformly including bases `2` and `3`.  Any

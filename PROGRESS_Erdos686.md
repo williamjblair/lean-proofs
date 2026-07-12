@@ -1,6 +1,6 @@
 # PROGRESS.md - Erdős Problem #686
 
-Date: 2026-07-10 (full-solution campaign, day 2)
+Date: 2026-07-12 (full-solution campaign checkpoint)
 Formal lane: refute the universal positive statement by proving `N = 4` has no
 quotient representation. Previous plan archived in
 `PROGRESS_Erdos686_gptpro_archive.md`.
@@ -13,22 +13,71 @@ counterexample.
 
 ## 0. Executive status
 
-[R] The refutation of Erdős #686 is now machine-checked down to exactly two
-open hypotheses. In `ErdosProblems/Erdos686SmallBranch.lean`:
+[R] The refutation of Erdős #686 is machine-checked down to the two updated
+open hypotheses, equivalently packaged by one exact residual interface in
+`ErdosProblems/Erdos686FinalResidual.lean`:
 
 ```lean
-theorem erdos686_false_of_constant_bound_and_large_escape
-    (hbound : ConstantCaseBoundHypothesis)
-    (hlarge : LargeKEscapeHypothesis) :
+theorem erdos686_false_of_finalResidual
+    (hres : FinalResidual686Hypothesis) :
     ¬ ∀ N : ℕ, 2 ≤ N → ∃ k n m : ℕ, 2 ≤ k ∧ m ≥ n + k ∧
       (N : ℚ) = (∏ i ∈ Finset.Icc 1 k, ((m + i : ℕ) : ℚ)) /
                 (∏ i ∈ Finset.Icc 1 k, ((n + i : ℕ) : ℚ))
 ```
 
-[R] CI gate: 599 manifest-tracked theorems (521 for problem 686), 599
-regenerated attestations, and 1,025 headline theorem surfaces with axioms
-contained in `[propext, Classical.choice, Quot.sound]` after the audited #730
-unit-range block spine.
+[R] CI gate: the expanded manifest and attestations are regenerated from
+`proofs.yaml`; every admitted headline is checked against the axiom subset
+`[propext, Classical.choice, Quot.sound]`.
+
+[R] **The six finite odd-tail bands now reach `10^1000`.**  Six generated
+Farey-neighbor certificates, ordinary kernel reduction, and independent exact
+reproduction exclude every odd target row for
+`10^120 <= d < 10^1000`.  The remaining odd tail starts at `10^1000`; no
+infinite continued-fraction assertion is inferred from the finite band.
+
+[R] **Every even row now has an unconditional effective tail, and six large
+rows are fully closed.**  For `k=2r`, Lean constructs the monic rational
+polynomial part of the square root of the centered product, clears
+denominators, proves the deficit nonzero using the simple root at one, and
+builds an exact coefficient threshold `M_r`.  No equation exists for
+`d>=max(2r,M_r)`.  Separate integral traps and ordinary-kernel prime-field
+covers close all gaps for `k=16,18,20,24,28,32`.  The k=18, k=28, and k=32
+covers are balanced across checked-in shards and use no `native_decide`.
+
+[R] **The large-row window and prime-power exclusions are sharper.**  Centered
+pairing plus an exact seven-term bracket proves that every solution with
+`k>=16,d>=k` satisfies `1218443kd<1853952n`.
+Both lower-block prime-power
+endpoints are impossible for every prime.  At an interior position the exact
+criterion compares `v_p((k-1)!)` with
+`v_p(4)+v_p((i-1)!(k-i)!)`; every base `p>k` follows.  A single large-base
+owner `a*p^A` is excluded whenever `a(d+k-1)<n+i`, hence whenever
+`3707904a<=1218443k`.  Exact p=2 and p=3 fixtures prevent overclaiming the all-prime
+interior statement.
+
+[R] **Large prime-power gap components and grouped owners now have one exact
+square ceiling.**  For every solution with `k>=16,d>=k`, every prime
+`p>=k`, positive `e`, and `p^e|d`, Lean proves
+`6p^(2e)<(13k-6)d+18(k-1)`.  This excludes every whole `d=p^e` with
+`e>=2`, and every whole prime-power gap with `d>=3k`.  The same inequality
+holds for the square of each complete cleaned owner bucket.  Hence a whole
+gap `d=p^e q^f` with distinct `p,q>=k` has distinct lower owners.  In odd
+rows `k>=17`, those owners construct a uniform `A=3k+2` Pell certificate
+with both second-lift divisibilities.  For prime-power boundary rows
+`k=p^a-1`, `p>=5`, Lucas arithmetic additionally proves
+`p^a∤n` and `p^a∤(n+d)`.  None of these statements closes the surviving
+distinct-owner or mixed small-prime branches.
+
+[R] **One exact residual hypothesis packages the former two-interface
+handoff.**  `FinalResidual686Hypothesis` starts the odd arm at `10^1000` with
+the complete all-owner second/third-nonzero certificate.  Its large-row arm
+removes `k=16,18,20,24,28,32`, all constructed even tails, and the exact
+prime-power/owner families above.  It also records the component,
+grouped-owner, Lucas boundary, and uniform odd two-prime Pell restrictions.
+Lean proves both that it implies the two
+updated terminal hypotheses and that their conjunction implies it.  Thus the
+interface is equivalent packaging, not a weaker missing lemma.  The residual
+statement itself is open and is not counted as a proof.
 
 [R] **All pure prime-power odd tails are closed.**  The p-adic lift module
 now proves that for every prime `p`, exponent `e`, and
@@ -186,6 +235,15 @@ family; it does not close the joint nonzero obstruction branch.  The exact
 remaining all-owner statement—certificate plus equation implies
 `d<10^120`—is target-strength and remains open.
 
+[R] **The joint all-owner resultant route is now exhaustively audited and
+does not close the branch.**  Exact arithmetic checks all 42,274 owner
+subsets and all 2,576 primitive four-owner circuits; every circuit is
+sign-mixed.  The one-dimensional Vandermonde annihilator necessarily retains
+the common cofactor product.  On the full grid its resultant is exactly the
+degree-at-most-three truncation of the block equation, while the omitted tail
+begins at `d^4`; after `d=gM`, the apparent `M^4` divisibility is automatic
+term by term.  This is a structural negative audit, not a new theorem.
+
 [R] **Two global cubic moment combinations.**  Expanding at the evaluation
 ratio `2^2=4` cancels every term through degree two after explicit constant
 and linear corrections.  Lean proves `d^3` divides the resulting
@@ -258,7 +316,7 @@ polynomial identities (`P₉(8) = 4·P₉(7)`), excluded by the domain.
 -- per odd k: no equation solution at astronomical heights
 def NoLargeGapSolutionFour (k B : ℕ) : Prop :=
   ∀ n d : ℕ, B ≤ d → blockProduct k (n + d) ≠ 4 * blockProduct k n
--- six tails: NoLargeGapSolutionFour k (10^120-ish), k ∈ {5,7,9,11,13,15}
+-- six tails: NoLargeGapSolutionFour k (10^1000), k ∈ {5,7,9,11,13,15}
 
 def LargeKSmoothHypothesis : Prop :=                 -- large-k core
   ∀ k n d : ℕ, 16 ≤ k → k ≤ d →
@@ -425,49 +483,47 @@ fails some row j ≤ 17.
 
 ## 8. Current proof obligations, ordered
 
-1. [in flight] Even-k Runge theorems (k = 6,8,10,12,14) — restricts the open
-   small-k core to odd k.
-2. [open, highest mathematical value] `ConstantCaseBoundHypothesis` for odd
-   k; sharpest attack: the k = 5 third-row (s,t)-elimination with the tight
-   window pinning `s = σ·t + O(1)`, σ = (c−3)/(72−23c), plus the
-   divisor-cascade identities of the form `e₁e₂ = 72⁵(T₂e₁ − T₁e₂)`.
-3. [open] `LargeKEscapeHypothesis`: needs a genuinely new idea; the failing
-   row is unbounded. Candidate frame: for every window point some `n + j`
-   (j ≤ k) has a prime power with no multiple in its row interval.
-4. Housekeeping: PR the conditional reduction toward formal-conjectures
-   (`erdos_686.variants.four` is open there with `answer(sorry)`).
+1. [open, Target 1] Prove `OddThueTail1000Hypothesis`: for each
+   `k in {5,7,9,11,13,15}`, exclude every exact equation with
+   `d >= 10^1000`.  Every survivor already carries
+   `AllOwnerAssemblyThirdNonzeroCertificate`; the certificate-plus-equation
+   contradiction is target-strength and is not counted as a reduction.
+2. [open, Target 2] Prove `LargeKSmoothHypothesis`, equivalently exclude the
+   remaining `k>=16,d>=k` equations after the closed rows, universal even
+   tails, exact ratio band, component/grouped-owner ceilings, and prime-power
+   owner and boundary exclusions.  The equation itself supplies the
+   smoothness premise.
+3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as
+   equivalent packaging via `finalResidual_iff_tail1000_and_smooth`; do not
+   report its isolation as mathematical progress.  Regenerate the manifest
+   and attestations after every newly closed row.
 
 ---
 
-## 9. Terminal assessment: what blocks the full solve (2026-07-10)
+## 9. Terminal assessment: what blocks the full solve (2026-07-12)
 
-The two open hypotheses are research problems, not formalization gaps:
+The two open hypotheses are mathematical gaps, not formalization gaps.
 
-**The six odd tails** (`OddThueTailHypothesis`, d ≥ 10^120).  Any
-concrete bound is cheap (each decade of d costs ~2 CF terms in the
-descent certificate; 10^1000 is minutes of work).  Unbounded closure
-needs one of:
-- an effective irrationality measure < k for `4^{1/k}` at odd
-  k ∈ {5..15} — none exists; the hypergeometric method structurally
-  fails at these k (verified);
-- Baker–Feldman — effective on paper but with bounds ~10^(10^500),
-  unreachable by certificate, and linear forms in logarithms have
-  never been formalized in any proof assistant;
-- structure in cf(4^{1/k}) — none known.
-Beukers–Shorey–Tijdeman prove the tails are finite via Siegel —
-fundamentally ineffective.  Watch the Calegari–Dimitrov–Tang holonomy
-program (arXiv:2510.04156), which announces effective measures for
-high-order roots: if explicit constants materialize for 4^{1/k}, the
-tails become finishable on paper and then formalizable.
+**The six odd tails.**  The finite Farey machinery now reaches the strict
+boundary `d < 10^1000`, but any finite extension merely moves that boundary.
+The live branch begins at equality and has at least three cleaned prime
+owners, exact short-window residuals, and simultaneous nonzero second and
+third obstructions.  The checked congruence, sign, resultant, and finite-order
+Taylor routes all have exact falsifiers unless the full equation/window is
+used.  No quantified bound currently closes this joint branch.
 
-**Large-k double smoothness** (`LargeKSmoothHypothesis`).  A special
-case of the open conjecture behind Erdős #388 (uniform-in-k
-finiteness); needs Grimm-strength control of smooth numbers in sliding
-windows.  Census evidence: no candidate in 145+ billion window points
-(k ≤ 6500, n ≤ 3·10^7).
+**Large-k double smoothness.**  The equation forces both blocks to be
+`(d+k)`-smooth and supplies all row divisibilities.  Universal even-row Runge
+certificates remove every even tail above an explicit threshold, while
+separate finite-field certificates close several complete rows.  The
+remaining odd rows and finite even strips still require a uniform argument;
+gross mass, pure congruences, and fixed row-prefix caps are falsified routes.
 
-**Standing.**  Unconditional k ≤ 15 to d < 10^120 exceeds the
-literature (community: k ≤ 4 plus a k = 6 sketch; k = 5 was open).
-Natural next steps: upstream PR toward formal-conjectures
-(`erdos_686.variants.four`), a note on the erdosproblems.com/686
-forum, and monitoring the holonomy program.
+The exact formal handoff is the equivalence
+
+```text
+FinalResidual686Hypothesis
+  <-> OddThueTail1000Hypothesis and LargeKSmoothHypothesis.
+```
+
+No theorem-strength lemma is treated as a completed solution.

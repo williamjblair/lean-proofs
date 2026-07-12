@@ -17,12 +17,15 @@ reproduction, (2) adversarial audit against the falsification record,
 
 ## Erdős #686 — N = 4 has no equal-length block-quotient representation
 
-Status: OPEN upstream; here reduced to two exact hypotheses.
+Status: OPEN upstream; here packaged as one exact residual hypothesis
+equivalent to the two updated targets.
 Docs: `PROGRESS_Erdos686.md`. Modules: `ErdosProblems/Erdos686*.lean`.
 
-UNCONDITIONAL: every k ≤ 15 with gap d < 10^120 (Runge + mod-p covers
-for even k; Farey-descent certificates for odd k); the k=14 case for
-all d; the terminal reduction `erdos686_false_of_thue_tails_and_smooth`.
+UNCONDITIONAL: every admissible `k ≤ 15` case with `k ≤ d < 10^120`
+(Runge + mod-p covers for even k; Farey descent for odd k), and now every odd target row throughout
+`10^120 ≤ d < 10^1000`; the k=14 case for all d; the complete large rows
+`k=16,18,20,24,28,32`.  The theorem `erdos686_false_of_finalResidual` is the
+conditional terminal reduction from the still-open equivalent residual.
 
 NEW BANKED RESTRICTIONS: exact p-adic square localization for every
 `p^e|d`, `p≥k` (cubic at an odd center), giving
@@ -116,6 +119,44 @@ published Nair-Shorey `4.42k` theorem closes the paper-level wedge
 `50(d+k-1)≤221k`; only the downstream implication is in Lean because
 the external theorem itself is not formalized.
 
+NEW EVEN-ROW AND VALUATION CLOSURES: for every `r≥2`, Lean now constructs
+the rational polynomial part of the square root of the centered even-row
+polynomial, clears denominators, proves the deficit nonzero from its simple
+root at one, and produces an explicit coefficient threshold `M_r`.  The
+equation is impossible for `k=2r` and `d≥max(2r,M_r)`.  Separate integral
+traps and ordinary-kernel finite-field covers close every admissible gap in
+rows `k=16,18,20,24,28,32`; the k=18, k=28, and k=32 covers are split into
+bounded shards and use no `native_decide`.  Centered pairing and an exact seven-term root bracket
+sharpen the large-row ratio window to `1218443kd<1853952n`.
+Every lower-block endpoint that is a prime power is impossible for every
+prime.  At an interior position the exact split-factorial valuation criterion
+is banked; in particular, every prime power with base `p>k` is excluded.
+More generally a single large-base owner `a*p^A` is excluded for
+`3707904a≤1218443k`.
+Exact `p=2` and `p=3` fixtures show why the unrestricted interior statement
+would be false.
+Every large-row equation also forces the exact gap-component ceiling
+`6p^(2e)<(13k-6)d+18(k-1)` for every `p^e|d` with prime `p≥k`.
+Consequently every whole gap `d=p^e` with `e≥2` is impossible, as is every
+whole prime-power gap with `d≥3k`.  The same ceiling applies to every
+complete cleaned owner bucket.  Thus a whole two-large-prime gap
+`d=p^e q^f` with distinct bases `p,q≥k` must have distinct lower owners.
+For every odd `k≥17`, Lean then constructs the uniform `A=3k+2` Pell and
+second-lift certificate for that distinct-owner branch.  Finally, in every
+row `k=p^a-1`, `p≥5`, neither endpoint parameter is divisible by `p^a`.
+These are proper restrictions; the distinct-owner Pell branch and mixed
+small-prime gaps remain open.
+
+CONSECUTIVE-PART MASS: stripping all primes above `k` preserves the exact
+factor four, while the lower stripped product is divisible by `k!`; both
+facts are kernel-banked.  The published Erdős-Lacampagne-Selfridge bounded
+classification then forces a split rough-owner graph and, beyond an explicit
+threshold, one spanning component or two even half-size components.  This
+last classification is recorded paper-level because ELS Theorem 4 is not
+formalized.  An exact reflection-compatible four-cycle survives ordering,
+row divisibility, `n>9d`, and reflection, failing only the lower ratio window;
+there is no hidden alternating-cycle determinant.
+
 ODD-TAIL ROUTE AUDIT: a complete exact `k=5` counterfamily refutes the
 first two primitive-scale congruences as an unbounded closure mechanism.
 The surviving floor pin `g²=floor(5A₃/A₅)` is proper but does not control
@@ -123,9 +164,10 @@ the infinite CF tail.  Imposing the discriminant square reconstructs the
 original smooth genus-6 plane quintic (genus-2 sign quotient), so that
 cover is target-strength rather than a lower-genus reduction.
 
-OPEN CORE:
-1. `OddThueTailHypothesis` — for odd k ∈ {5..15}, no solution with
-   d ≥ 10^120. Each tail extends ~1 decade per 2 CF terms; unbounded
+OPEN CORE (the two arms below are equivalently packaged as the single
+`FinalResidual686Hypothesis`):
+1. `OddThueTail1000Hypothesis` — for odd k ∈ {5..15}, no solution with
+   d ≥ 10^1000. Each tail extends ~1 decade per 2 CF terms; unbounded
    closure needs effective irrationality for 4^{1/k} below Liouville
    (none exists; hypergeometric method structurally fails at these k)
    or new CF structure. Watch: Calegari–Dimitrov–Tang holonomy program.
@@ -149,8 +191,9 @@ OPEN CORE:
    The surviving multi-owner branch has every second obstruction nonzero;
    direct obstruction-size bounds grow with the family and do not close it.
    The complete-grid bridge is now kernel-banked: every target solution
-   supplies an `AllOwnerAssemblyCertificate`, including all empty and live
-   owner buckets without absorbing omitted components into the loss.  The
+   supplies an `AllOwnerAssemblyThirdNonzeroCertificate`, including all empty
+   and live owner buckets without absorbing omitted components into the loss,
+   and every composed second and third obstruction is nonzero.  The
    exact remaining all-owner lemma is that any target-row block equation
    carrying this certificate has `d<10^120`; this is target-strength and is
    not counted as a further reduction.
@@ -158,9 +201,26 @@ OPEN CORE:
    to the exact requirement that two distinct weighted component proxies
    `V_s=P_s^2*max(1,|w_s z_s|)` are at most `H_k*g^2`; this is unproved and
    coefficient signs alone are explicitly insufficient.
-2. `LargeKSmoothHypothesis` — no k ≥ 16 solution with an entirely
-   (d+k)-smooth lower block (prime obstruction banked; census: two
-   clusters in 145+ billion window points, neither an equation solution).
+   For the complete owner grid, all 42,274 subsets and 2,576 four-owner
+   circuits have now been checked exactly; every circuit is sign-mixed.  The
+   unique product-square Vandermonde resultant retains the common cofactor
+   product and becomes the degree-three truncation of the original equation.
+   Its apparent fourth-power divisibility is therefore tautological from the
+   `d^4` remainder and supplies no hidden cutoff.
+2. The restricted large-row arm — no remaining k ≥ 16 equation after removing
+   `k=16,18,20,24,28,32`, every even tail above its explicit `M_r`, the exact
+   split-factorial prime-power families, and every large-base owner
+   `a*p^A` with `3707904a≤1218443k`.  The equation itself already supplies
+   smoothness, `1218443kd<1853952n`, the component and grouped-owner square
+   ceilings, and the prime-power boundary restrictions.  The census fixtures
+   remain non-equations and do not discharge this arm.
+
+Lean proves that this single residual hypothesis implies the former
+`OddThueTailHypothesis`, `LargeKSmoothHypothesis`, and the full refutation.
+It also proves the converse from the updated odd-tail and smoothness
+hypotheses, so this is equivalent packaging rather than a weaker reduction.
+The residual nonexistence statement is still open and is not counted as a
+solution merely because it has been isolated.
 
 REFUTED (witnesses in repo): fixed-prefix row-16 boundary
 ((984, 3177026, 4480) passes rows 1..16); bare residual obstruction;
