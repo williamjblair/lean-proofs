@@ -66,15 +66,19 @@ is inserted.
 
 ## Simultaneous-zero audit
 
-The natural claim that one second obstruction is always nonzero is not used.
 The determinant vanishes at reflected owner pairs.  A full-component
 simultaneous zero would require the rational number
 
 `4(k+1-2i) * sum_{s=i}^{k-i} 1/s`
 
-to be integral.  Exact scanning finds no integral value through odd `k=1001`,
-but this is not promoted to a theorem.  The package therefore returns both
-divisibilities and stops; it does not claim a finite obstruction closure.
+to be integral.  Exact scanning found no integral value through odd `k=1001`.
+The follow-up reflected-harmonic development now promotes the uniform
+nonintegrality statement and its coefficient bridge to Lean.  The named
+corollary `LargeOddTwoPrimePellCertificate.exists_nonzero_second_obstruction`
+unpacks this package and proves that at least one of the two divisible
+obstructions is nonzero.  This is still not a complete finite obstruction
+closure because no uniform size bound for the surviving nonzero obstruction
+is claimed.
 
 This boundary is materially different from a pure congruence route.  The
 package already uses the exact equation, archimedean window, full local square
@@ -103,7 +107,7 @@ lifts, bounded Pell coefficients, and second-order Taylor identities.
 - source scan: no `native_decide`, `sorry`, `admit`, or declared axiom;
 - trailing-whitespace scan: clean;
 - Lean direct-check: success;
-- both `#print axioms` gates: exactly
+- all three `#print axioms` gates: exactly
   `[propext, Classical.choice, Quot.sound]`;
-- shared imports, manifests, attestations, and existing theorem files:
-  untouched.
+- manifest and attestation coverage is handled by the aggregate campaign
+  gates.

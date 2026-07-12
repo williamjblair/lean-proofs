@@ -6252,6 +6252,43 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686ReflectedHarmonic.lean
+    theorem: Erdos686.Erdos686Variant.reflected_harmonic_not_integer
+    statement: >-
+      For every odd k at least five and every owner left of the center, the
+      exact reflected simultaneous-zero harmonic value is not an integer.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOddTwoPrimePell.lean
+    theorem: Erdos686.Erdos686Variant.LargeOddTwoPrimePellCertificate.exists_nonzero_second_obstruction
+    statement: >-
+      For r at least two, every two-prime Pell certificate in row k=2r+1
+      exposes the two exact divisible second obstructions and proves that at
+      least one is nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ReflectedHarmonicBridge.lean
+    theorem: Erdos686.Erdos686Variant.no_simultaneous_second_obstruction_zero
+    statement: >-
+      In every odd row k at least five, the two exact second obstructions
+      attached to distinct owners cannot vanish simultaneously.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ReflectedHarmonicBridge.lean
+    theorem: Erdos686.Erdos686Variant.second_obstruction_pair_not_both_zero
+    statement: >-
+      In every odd row k at least five, at least one of the two exact second
+      obstructions attached to distinct owners is nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686EvenK28.lean
     theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_twentyeight
     statement: >-

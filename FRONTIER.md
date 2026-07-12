@@ -142,10 +142,15 @@ whole prime-power gap with `d≥3k`.  The same ceiling applies to every
 complete cleaned owner bucket.  Thus a whole two-large-prime gap
 `d=p^e q^f` with distinct bases `p,q≥k` must have distinct lower owners.
 For every odd `k≥17`, Lean then constructs the uniform `A=3k+2` Pell and
-second-lift certificate for that distinct-owner branch.  Finally, in every
+second-lift certificate for that distinct-owner branch.  The classical
+Sylvester--Schur theorem is now vendored and kernel-checked, and Lean proves
+that the reflected harmonic value forced by simultaneous zero obstructions
+is never integral for any odd `k≥5`.  The coefficient-algebra bridge is also
+Lean-banked: for distinct owners, the two exact second obstructions cannot
+vanish simultaneously.  Finally, in every
 row `k=p^a-1`, `p≥5`, neither endpoint parameter is divisible by `p^a`.
-These are proper restrictions; the distinct-owner Pell branch and mixed
-small-prime gaps remain open.
+These are proper restrictions; the surviving nonzero-obstruction Pell branch
+and mixed small-prime gaps remain open.
 
 CONSECUTIVE-PART MASS: stripping all primes above `k` preserves the exact
 factor four, while the lower stripped product is divisible by `k!`; both

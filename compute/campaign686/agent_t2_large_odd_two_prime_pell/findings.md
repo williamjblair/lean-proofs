@@ -113,15 +113,23 @@ integer.  The smallest observed denominator was 3, at `(k,i)=(5,1)`, where
 `t=100/3`.  The excluded boundary `k=3,i=1` does have the integral value
 `t=12`.
 
-This is evidence, not a uniform proof.  The exact remaining standalone lemma
-for eliminating the simultaneous-zero branch is:
+The original lane stopped here with exact evidence.  The follow-up
+reflected-harmonic lane now proves the required uniform lemma in Lean:
 
 ```text
 For every odd k>=5 and 1<=i<(k+1)/2,
 4(k+1-2i) * sum_{s=i}^{k-i} 1/s is not an integer.
 ```
 
-No claim based on that lemma appears in the Lean theorem.
+`Erdos686ReflectedHarmonic.lean` proves this nonintegrality using the
+Sylvester--Schur theorem, and `Erdos686ReflectedHarmonicBridge.lean` formalizes
+the coefficient identities and reflection argument.  The equation-facing
+corollary
+`LargeOddTwoPrimePellCertificate.exists_nonzero_second_obstruction` now
+composes those results with this lane's certificate: the two divisible second
+obstructions cannot both vanish.  This closes only the simultaneous-zero
+subbranch; a uniform size contradiction for the surviving nonzero obstruction
+remains open.
 
 ## Reproduction
 
@@ -134,7 +142,9 @@ Result: `6 passed in 3.96s`.
 
 Frozen hashes:
 
-- Lean source: `15375f927b4f136b11c0d45223fe4016a1e7018890600cc7da72915fa82e1a7a`;
+- pre-closure Lean source: `15375f927b4f136b11c0d45223fe4016a1e7018890600cc7da72915fa82e1a7a`;
+- current Lean source with the nonzero-obstruction composition theorem:
+  `bd2a26c2a5282b7be69e0eeabcab32d0b4a1862af8f5a71842175d7872129c8b`;
 - exact verifier: `1e0f43cb96237a7e413c8aacdfa35b759a63e79dd490da587185d4b0cda5bdff`;
 - tests: `9b31ac2f823fa11f7d3b947102dd8f6b78bcb063972634cc64eaace11e89520e`.
 

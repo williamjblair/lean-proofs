@@ -342,15 +342,18 @@ smooth lower terms contain such a prime-power owner.
    uniform `A=3k+2` Pell certificate and both second-lift divisibilities.
    **Lean banked.**
 6. Simultaneous vanishing forces a reflected harmonic-denominator value.
-   Exact scans through odd `k=1001` find no integer value, but the uniform
-   denominator lemma is unproved and is not assumed. **Exact evidence only.**
+   The complete Sylvester--Schur theorem is now vendored, and a p-adic
+   interval wrapper proves uniformly that this value is not an integer for
+   every odd `k>=5`.  The generic coefficient identities, strict monotonicity
+   of the owner slope, reflection step, and final bridge from two zero
+   obstructions to that value are also formalized. **Lean banked.**
 7. Independently, Lucas arithmetic at `k=p^a-1`, `p>=5`, excludes `p^a`
    from both endpoint parameters. **Lean banked; a proper restriction, not
    a congruence-only closure.**
 
 Verdict: PASS as genuine infinite subclasses and a uniform Pell reduction.
-The distinct-owner Pell branch, arbitrary mixed support, and the harmonic
-denominator lemma remain open.
+The surviving nonzero-obstruction Pell branch and arbitrary mixed support
+remain open.
 
 ## Dependency tree: consecutive small-part mass
 

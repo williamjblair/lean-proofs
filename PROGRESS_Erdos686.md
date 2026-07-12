@@ -63,10 +63,15 @@ square ceiling.**  For every solution with `k>=16,d>=k`, every prime
 holds for the square of each complete cleaned owner bucket.  Hence a whole
 gap `d=p^e q^f` with distinct `p,q>=k` has distinct lower owners.  In odd
 rows `k>=17`, those owners construct a uniform `A=3k+2` Pell certificate
-with both second-lift divisibilities.  For prime-power boundary rows
+with both second-lift divisibilities.  A vendored, allowed-axiom proof of
+Sylvester--Schur now gives the exact uniform theorem that the reflected
+harmonic value forced by simultaneous zero obstructions is nonintegral in
+every odd row `k>=5`.  The elementary coefficient bridge is now Lean-banked
+too, proving that the two second obstructions at distinct owners cannot both
+vanish.  For prime-power boundary rows
 `k=p^a-1`, `p>=5`, Lucas arithmetic additionally proves
 `p^a∤n` and `p^a∤(n+d)`.  None of these statements closes the surviving
-distinct-owner or mixed small-prime branches.
+nonzero-obstruction or mixed small-prime branches.
 
 [R] **One exact residual hypothesis packages the former two-interface
 handoff.**  `FinalResidual686Hypothesis` starts the odd arm at `10^1000` with

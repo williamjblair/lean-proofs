@@ -32,6 +32,7 @@ FinalResidual686Hypothesis
 |   +-- one complete cleaned assignment has every bucket below that ceiling
 |   +-- k=p^a-1, p>=5 excludes p^a from both endpoint parameters
 |   +-- odd whole two-large-prime gaps carry the A=3k+2 Pell certificate
+|   +-- their reflected harmonic simultaneous-zero value is nonintegral
 |   `-- residual arm gives contradiction
 |
 `-- old terminal N=4 reduction gives not universal Erdős 686
@@ -50,6 +51,7 @@ FinalResidual686Hypothesis
 | Gap-component square ceiling | PASS | The local quadratic lift and exact `18/13` window prove the strict bound for every `p^e|d`, `p>=k`. |
 | Complete grouped-owner ceiling | PASS | Global concentration constructs one assignment; every grouped square divides its positive residual and inherits the same strict bound. |
 | Prime-power boundary rows | PASS | Lucas arithmetic proves `p^a` divides neither endpoint when `k=p^a-1`, `p>=5`. |
+| Reflected harmonic obstruction | PASS | Vendored Sylvester--Schur plus a p-adic interval wrapper proves uniform nonintegrality, and the formal coefficient bridge proves that distinct-owner second obstructions cannot both vanish. |
 | Equivalence to the updated two targets | PASS | Both directions are proved by `finalResidual_iff_tail1000_and_smooth`. |
 | Residual contradiction itself | OPEN | This is precisely `FinalResidual686Hypothesis`. |
 | Full Erdős 686 refutation without the residual premise | NOT CLAIMED | The terminal theorem remains conditional on the displayed residual. |

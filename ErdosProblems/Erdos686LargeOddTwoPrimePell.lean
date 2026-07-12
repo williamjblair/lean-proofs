@@ -1,6 +1,7 @@
 /- leanprover/lean4:v4.29.1  mathlib v4.29.1 -/
 import ErdosProblems.Erdos686LargePrimeGapComponent
 import ErdosProblems.Erdos686TwoPrimeSecondLift
+import ErdosProblems.Erdos686ReflectedHarmonicBridge
 
 /-!
 # Uniform two-large-prime Pell reduction in large odd rows
@@ -43,6 +44,28 @@ def LargeOddTwoPrimePellCertificate
     (j = r + 1 →
       (q ^ f) ^ 3 ∣ localResidual n d j ∧
         d < (3 * (2 * r + 1) + 2) ^ 5)
+
+/-- For `r ≥ 2`, a Pell certificate in the row `k=2r+1 ≥ 5` exposes two
+divisible second obstructions, and the reflected-harmonic bridge proves that
+at least one is nonzero. -/
+theorem LargeOddTwoPrimePellCertificate.exists_nonzero_second_obstruction
+    {p q e f r n d : ℕ} (hr2 : 2 ≤ r)
+    (hcert : LargeOddTwoPrimePellCertificate p q e f r n d) :
+    ∃ i j a b,
+      i ∈ Finset.Icc 1 (2 * r + 1) ∧
+      j ∈ Finset.Icc 1 (2 * r + 1) ∧
+      i ≠ j ∧
+      ((p ^ e : ℕ) : ℤ) ∣
+        secondObstructionLeft (2 * r + 1) i j (a * b) ∧
+      ((q ^ f : ℕ) : ℤ) ∣
+        secondObstructionRight (2 * r + 1) i j (a * b) ∧
+      (secondObstructionLeft (2 * r + 1) i j (a * b) ≠ 0 ∨
+        secondObstructionRight (2 * r + 1) i j (a * b) ≠ 0) := by
+  rcases hcert with
+    ⟨i, j, a, b, hi, hj, hij, _, _, _, _, _, _, _, _, hpObs, hqObs, _, _⟩
+  refine ⟨i, j, a, b, hi, hj, hij, hpObs, hqObs, ?_⟩
+  exact second_obstruction_pair_not_both_zero
+    (by exact ⟨r, by omega⟩) (by omega) hi hj hij
 
 /-- The `18/13` large-row window implies the convenient integral base bound
 `n+1<k*d`. -/
@@ -203,6 +226,7 @@ theorem large_odd_two_large_prime_pell_certificate
 
 #print axioms base_lt_row_mul_gap_of_large_odd_four_solution
 #print axioms large_odd_two_large_prime_pell_certificate
+#print axioms LargeOddTwoPrimePellCertificate.exists_nonzero_second_obstruction
 
 end Erdos686Variant
 end Erdos686

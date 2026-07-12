@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:652feb647d13566557f4b39dad83279727d2867b48e45ab78ffb2b58aeba6e1f",
+  "verifier_output_hash": "sha256:d5d2944b7a7a8b1b164d1aebfa247cb88ecc99f7694350054d23d394eea91f60",
   "attestations": [
     {
       "problem": 154,
@@ -8100,7 +8100,55 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.erdos686_false_of_finalResidual",
       "file": "ErdosProblems/Erdos686FinalResidual.lean",
-      "proof_hash": "sha256:3ab5ae2c8b611d23e94ff1cb5824aef9795e93e766f689e78b7f42bc54b9801a",
+      "proof_hash": "sha256:60613672d6513ec52a5b9fce81ca4769186f89a4a5298813053d512ff27a3762",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reflected_harmonic_not_integer",
+      "file": "ErdosProblems/Erdos686ReflectedHarmonic.lean",
+      "proof_hash": "sha256:c5a40ae98ea30623456d1fbe257ea701dd9c1734b879ee537d449ddc4936141e",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.LargeOddTwoPrimePellCertificate.exists_nonzero_second_obstruction",
+      "file": "ErdosProblems/Erdos686LargeOddTwoPrimePell.lean",
+      "proof_hash": "sha256:bd2a26c2a5282b7be69e0eeabcab32d0b4a1862af8f5a71842175d7872129c8b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_simultaneous_second_obstruction_zero",
+      "file": "ErdosProblems/Erdos686ReflectedHarmonicBridge.lean",
+      "proof_hash": "sha256:dbc8424086fdb4d91a78c7a976a7b39199cad952bcf54ef4307f2c75da948fae",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.second_obstruction_pair_not_both_zero",
+      "file": "ErdosProblems/Erdos686ReflectedHarmonicBridge.lean",
+      "proof_hash": "sha256:dbc8424086fdb4d91a78c7a976a7b39199cad952bcf54ef4307f2c75da948fae",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -8256,7 +8304,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.large_odd_two_large_prime_pell_certificate",
       "file": "ErdosProblems/Erdos686LargeOddTwoPrimePell.lean",
-      "proof_hash": "sha256:15375f927b4f136b11c0d45223fe4016a1e7018890600cc7da72915fa82e1a7a",
+      "proof_hash": "sha256:bd2a26c2a5282b7be69e0eeabcab32d0b4a1862af8f5a71842175d7872129c8b",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -8616,7 +8664,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.finalResidual_iff_tail1000_and_smooth",
       "file": "ErdosProblems/Erdos686FinalResidual.lean",
-      "proof_hash": "sha256:3ab5ae2c8b611d23e94ff1cb5824aef9795e93e766f689e78b7f42bc54b9801a",
+      "proof_hash": "sha256:60613672d6513ec52a5b9fce81ca4769186f89a4a5298813053d512ff27a3762",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

@@ -31,7 +31,8 @@ Every large prime-power component of the gap and every complete cleaned owner
 bucket is also forced below an explicit square ceiling, while prime-power
 boundary rows `k=p^a-1` exclude divisibility of both endpoint parameters by
 `p^a` for `p≥5`.  Whole two-large-prime gaps in odd rows carry the uniform
-`A=3k+2` Pell and second-lift certificate.
+`A=3k+2` Pell and second-lift certificate; its equation-facing composition
+theorem proves that the two exact second obstructions cannot both vanish.
 
 The residual statement is not asserted here.  The theorems below prove both
 directions of its equivalence with the updated odd-tail and large-smoothness
