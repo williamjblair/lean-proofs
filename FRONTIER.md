@@ -210,12 +210,31 @@ retraction or by absorbing the endpoint block's `a^2` Gamma allowance into
 the exact RL budget.  Hence every corridor bridge is eliminated.  For a
 fully nonbridge root-stub geodesic, the canonical attachment intervals give
 the new kernel bounds `d ≤ 2s` and, in the `n ≥ 14` residual, `s ≥ 5`.
+At the equality boundary `d = 2s`, those intervals are forced to be a chain
+of singleton even tiles.  Lean now constructs the `s-1` capacity-two block
+cuts, proves that RFC leaves capacity one for internal demands, and derives
+the exact cut-count distance bound, including terminal endpoints by
+bipartite parity.  The theorem
+`totalCost_le_rlBudget_of_doubleSlack_allNonbridge_sameSide` therefore closes
+the full bridge-free equality slice.  The next row `d = 2s-1` is also
+kernel-closed: the canonical interval ledger has one mass, span, or overlap
+defect; bipartiteness excludes span, and the two surviving geometries yield
+a literal one-high binary BFS chain.  The theorem
+`totalCost_le_rlBudget_of_oneDefect_allNonbridge_sameSide` proves exact
+demand alignment and the RL budget.  Independently, the complete
+two-demand strict-residual slice with either distance four is kernel-closed
+by `totalCost_le_rlBudget_of_twoDemands_existsDistanceFour`.
+The two-demand long-slack slice `2d<s` is also kernel-closed by
+`totalCost_le_rlBudget_of_twoDemands_twoLength_lt_slack`: the proof combines
+rooted and internal-pair G-A inequalities at quadratic strength and therefore
+survives the false joint-sum fixture.  For even root distance, the partner-two
+version also closes the four rows `2d-3<=s<=2d`.
 The hostile audit includes the `n=14`, distances `[4,4]`, and `n=17`,
 distances `[4,6]`, middle-regime fixtures plus every killed aggregation
 fixture.
 
 OPEN CORE: BF-RL, the multi-edge aggregation G-B / inductive RL* in the exact
-region `n ≥ 14`, `5 ≤ s`, `d ≤ 2s`, `2sp(d) < (d+1)²`, `|M| ≥ 2`, with a
+region `n ≥ 14`, `5 ≤ s`, `d ≤ 2s-2`, `2sp(d) < (d+1)²`, `|M| ≥ 2`, with a
 chosen root-stub geodesic whose every edge is a nonbridge.  This is still
 weaker than assuming the whole cut graph is 2-connected.  No target-strength
 joint aggregation is asserted.  An exact kernel-checked coarea theorem now
@@ -224,6 +243,13 @@ providing a weighted-cut dual interface but not the missing quadratic
 certificate.  `compute23/gate3/gap_gb_joint_findings.md`
 and `gap_gb_joint_audit.md` give the exact proof and remaining quantified
 lemma.
+
+The proposed two-demand shortcut `D1+D2<=n+p(d)-2` has now been decisively
+falsified inside this same live region: an exact `n=76,d=11,s=64,p=1`
+all-nonbridge RFC fixture has distances `(38,38)`, so `76>75`, while its
+actual RL cost remains far below budget (`3042<=5760`).  The two-demand core
+therefore requires a quadratic or geometry-sensitive invariant rather than
+that linear sum bound.
 
 ## Erdős #699 — common prime factor p ≥ i of C(n,i), C(n,j)
 

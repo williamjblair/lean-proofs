@@ -1,9 +1,10 @@
 # G-B joint frontier: complete corridor-bridge elimination
 
-Status: **PROVED proper enlargement of the banked series slice.** This is
-not a proof of all RL*. It proves RL for every residual instance having a
-bridge on a selected root-stub geodesic and reduces the exact open core to a
-fully bridge-free corridor with `s >= 5` and `d <= 2s`.
+Status: **PROVED proper enlargement of the banked series slice, plus the
+full equality and one-defect boundaries.** This is not a proof of all RL*. It proves RL for
+every residual instance having a bridge on a selected root-stub geodesic,
+proves the fully nonbridge `d=2s` and `d=2s-1` slices, and reduces the exact
+open core to a fully bridge-free corridor with `s >= 5` and `d <= 2s-2`.
 
 ## 1. Statement
 
@@ -25,14 +26,31 @@ forall i < d, not IsBridge_B(u_i u_{i+1}),
 d <= 2*s.
 ```
 
+The equality case in the last display now satisfies RL by
+`totalCost_le_rlBudget_of_doubleSlack_allNonbridge_sameSide`. Thus a
+remaining counterexample first has `d < 2*s`.  The follow-on theorem
+`totalCost_le_rlBudget_of_oneDefect_allNonbridge_sameSide` closes the whole
+next row `d=2*s-1`, so the live inequality is `d <= 2*s-2`.
+
 The only remaining quantified lemma is therefore:
 
 > **BF-RL.** Every valid one-stub rooted instance satisfying the displayed
 > residual assumptions and admitting a root-stub geodesic all of whose edges
-> are nonbridges satisfies
+> are nonbridges, with `d <= 2*s-2`, satisfies
 > `Gamma_int <= s*(2*d+2+s)+2*s*p(d)`.
 
 BF-RL is a strict graph class, not a renamed unrestricted RL statement.
+
+Within BF-RL, the complete two-demand subregion `2d<s` is now closed by
+`totalCost_le_rlBudget_of_twoDemands_twoLength_lt_slack`.  Rooted G-A gives
+`2Dmax<=2s+d`, while applying G-A to the two internal geodesics gives
+`Dmin+2Dmax<=2(s+d)`; a kernel-checked convex endpoint argument pays both
+squares.  This avoids the false raw sum estimate.  Positive even root
+distance supplies partner distance two; the same endpoint calculation then
+closes `2d<=s` and all four rows `2d-3<=s<=2d`.  Together with the
+independent distance-four theorem, the exact remaining two-demand slice has
+both distances at least six and either odd `d` with `s<=2d`, or even `d`
+with `s<=2d-4`.
 
 ## 2. Interior bridge
 
@@ -226,7 +244,7 @@ has two edges, with the intervals pairwise disjoint.  The generic interval
 lemma `pairwise_twoIntervals_tile_even` then proves these are exactly the
 tiles `[2k,2k+2)`; this conclusion is included in the graph-level theorem.
 
-The arithmetic end of that route is now exact.  If every demand is assigned a
+The arithmetic end of that route is exact.  If every demand is assigned a
 positive natural resource `r_i`, the resources pack as
 
 ```text
@@ -241,11 +259,7 @@ sum_i (D_i+1)^2 <= F(s,2s).
 
 This is `totalCost_le_doubleSlackBudget_of_resourcePacking`.  Its proof uses
 `sum r_i^2 <= (sum r_i)^2` and keeps the deliberately loose but sufficient
-bound `4R^2+21R <= 5s^2+6s`.  The remaining graph assertion is narrower:
-the proved singleton/span-two tiling, together with RFC, must supply the
-displayed per-demand articulation resources.  That implication is **not proved**;
-accordingly the equality boundary remains inside BF-RL and this theorem is
-not counted as a frontier reduction.
+bound `4R^2+21R <= 5s^2+6s`.
 
 The RFC-facing arithmetic has also been isolated.  With `s-1` articulation
 cuts, at most one internal demand crossing each cut, legal distances at least
@@ -256,6 +270,28 @@ D_i <= 2*(number of articulation cuts crossed by i)+2,
 ```
 
 `totalCost_le_doubleSlackBudget_of_articulationCuts` derives the full RL
-budget.  Thus the unproved boundary step is now exactly the graph construction
-of those cuts and the displayed distance comparison, not any summation or
-quadratic algebra.
+budget.
+
+The follow-on equality-boundary module now supplies the formerly missing
+graph step.  It constructs a canonical block projection of every graph
+vertex onto the singleton even-tile chain.  For each of the `s-1` internal
+block boundaries, the associated left-region cut has graph capacity at most
+two and separates the root from the stub.  RFC therefore permits at most one
+internal demand across that cut.  If a demand crosses `r_i` block cuts, its
+endpoints link to their block anchors in at most one step each, yielding
+
+```text
+D_i <= 2*r_i+2.
+```
+
+At the truncated terminal block the first path estimate is one unit weaker;
+same-side bipartite parity removes that unit.  The arbitrary finite demand
+index type preserves multiplicity throughout.  The root-excluding RFC is
+converted to the symmetric cut form by exact complement identities.
+
+The kernel headline
+`totalCost_le_rlBudget_of_doubleSlack_allNonbridge_sameSide` therefore proves
+RL unconditionally throughout the fully nonbridge `d=2s`, `s>=5` slice.  Its
+hostile dependency audit is
+`agent_d2s/equality_boundary_audit.md`.  Combining it with the earlier
+`d<=2s` reduction leaves the strict frontier `d<2s`.

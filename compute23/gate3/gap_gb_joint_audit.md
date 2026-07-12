@@ -83,7 +83,7 @@ reduction. Full RL* remains unproved.**
      `rootedCutCondition_totalCost_le_of_scaledWeightedCutCertificate`.
      Existence of either required certificate is explicitly not asserted.
 
-10. **`d=2s` resource arithmetic — PASS, non-closing.**
+10. **`d=2s` equality boundary — PASS, closing this slice.**
     - Equality in the finite interval count forces size-one components and
       pairwise-disjoint two-coordinate intervals; kernel:
       `full_coverage_eq_twice_mass_forces_unit_intervals`.
@@ -96,8 +96,39 @@ reduction. Full RL* remains unproved.**
     - Kernel: `totalCost_le_doubleSlackBudget_of_resourcePacking`.
       The cut-count specialization is
       `totalCost_le_doubleSlackBudget_of_articulationCuts`.
-    - The graph-level resource construction is not asserted, so this node
-      does not exclude `d=2s` from the remaining lemma.
+    - The follow-on module `Erdos23GapGBEqualityBoundary.lean` constructs the
+      actual `s-1` block cuts, proves their graph capacity is at most two,
+      obtains internal-demand capacity at most one from RFC, and proves
+      `D_i <= 2r_i+2`, including the terminal-block parity case.
+    - Kernel headline:
+      `totalCost_le_rlBudget_of_doubleSlack_allNonbridge_sameSide`.
+      Thus `d=2s` is excluded from the remaining lemma.
+
+11. **`d=2s-1` one-defect boundary — PASS, closing this slice.**
+    - The exact interval-defect identity gives one mass, span, or overlap
+      defect; bipartiteness eliminates span.
+    - The two surviving cases have a kernel-checked one-high binary BFS
+      profile. Canonical component geometry proves ordinary-gap completeness,
+      two-sided routing at the unique high gap, same-layer diameter at most
+      two, and exact alignment of every legal same-side demand.
+    - Kernel headline:
+      `Erdos23GapGBOneDefectAlignment.totalCost_le_rlBudget_of_oneDefect_allNonbridge_sameSide`.
+      The independent exact checker covers 88 mass geometries, 22 overlap
+      geometries, and 6,910 eligible pairs for `5 <= s <= 8`. Thus
+      `d=2s-1` is also excluded by the quantified Lean theorem, while the
+      finite checker remains falsification support rather than its proof.
+
+12. **Two-demand weighted slices — PASS.**
+    - Symmetric RFC for `Fin 2` demands implies the internal two-demand cut
+      condition.  The two orientations of G-A give
+      `Dmin+2Dmax<=2(s+d)`; rooted G-A gives `2Dmax<=2s+d`.
+    - Exact convex endpoint arithmetic proves the RL cost whenever `2d<s`.
+      Partner distance two additionally proves the closed ratio `2d<=s`
+      for even `d` and the four rows through `s=2d-3`. Kernel headlines:
+      `Erdos23GapGBTwoDemandWeighted.totalCost_le_rlBudget_of_twoDemands_twoLength_lt_slack`.
+      `Erdos23GapGBTwoDemandWeighted.totalCost_le_rlBudget_of_twoDemands_even_near_twiceLength`.
+    - The arithmetic checkers exhaust 7,377,764 tuples in total, and the
+      exact `n=76` GB-2SUM counterexample lies inside the proved ratio.
 
 ## Falsification record
 
@@ -111,6 +142,10 @@ reduction. Full RL* remains unproved.**
   `sum D=16>14`). No volume or unit-congestion statement occurs.
 - **Mixed distances:** the rooted `[4,6]` fixture is reproduced exactly;
   no constant-distance hypothesis occurs.
+- **Two-demand joint sum:** the exact all-nonbridge strict-residual fixture
+  `n=76,d=11,s=64,p=1,(D1,D2)=(38,38)` falsifies
+  `D1+D2<=n+p(d)-2` by one while satisfying RL by 2718.  No such linear
+  estimate is used or left as an asserted route.
 - **Strict boundaries:** the residual predicate uses strict `<`; the gate
   uses strict `<`; two- and three-vertex sides are dispatched separately.
 - **Endpoint edges:** treated explicitly in both orientations, not silently
@@ -147,7 +182,7 @@ There is no `sorry`, `axiom`, private theorem, or `native_decide`.
 For every valid one-stub rooted instance with
 
 ```text
-n>=14, |M|>=2, 5<=s, d<=2s,
+n>=14, |M|>=2, 5<=s, d<=2s-2,
 2*s*p(d)<(d+1)^2,
 and some w-x0 geodesic P satisfying
   forall i<d, not IsBridge_B(P_i P_{i+1}),
@@ -160,4 +195,5 @@ sum_{uv in M} (d_B(u,v)+1)^2
   <= s*(2*d+2+s)+2*s*p(d).
 ```
 
-This is BF-RL. No theorem-strength replacement for BF-RL is claimed.
+This below-one-defect statement is the remaining BF-RL. No theorem-strength
+replacement for it is claimed.

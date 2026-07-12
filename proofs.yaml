@@ -4974,6 +4974,621 @@ proofs:
       least five off-corridor vertices.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.totalCost_le_rlBudget_of_disjoint_componentResources
+    statement: >-
+      Demands housed in disjoint off-corridor vertex resources, each large
+      enough for its geodesic, are paid by the square term of the RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.privatePathOrder_eq_excessCrossTerm
+    statement: >-
+      The numeric private-path order is exactly endpoint count plus total
+      distance excess plus three times the demand count.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.cutCondition_of_privatePathPayments
+    statement: >-
+      Per-demand cut payments sum to an abstract supply-cut inequality, once
+      those payments have separately been constructed.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.completionOrder_lt_ambient_of_sq_le_rlBudget
+    statement: >-
+      In the strict residual, every numeric completion whose order-square fits
+      the RL budget has order strictly below the ambient rooted instance.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.totalCost_le_rlBudget_of_completion
+    statement: >-
+      A separately supplied Gamma bound and square-fit certificate imply the
+      target RL cost bound by transitivity.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.rlBudget_ge_135_of_large_frontier
+    statement: >-
+      Every rooted frontier with order at least fourteen, slack at least five,
+      and positive terminal distance has RL budget at least 135.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.completion_sq_le_rlBudget_of_order_le_eleven
+    statement: >-
+      Every separately valid exact completion of order at most eleven fits
+      the square gate on the large rooted frontier.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.doubleDistanceFour_completion_fits_large_frontier
+    statement: >-
+      The order-ten completion for two distance-four demands always fits the
+      large-frontier RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.distinctTwoDistanceCompletionOrder_four_eight
+    statement: >-
+      The numeric path-and-detour completion order for distances four and
+      eight is exactly eleven.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.fourEight_completion_fits_large_frontier
+    statement: >-
+      The order-eleven exact paper completion for distances four and eight
+      fits every large-frontier RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.equalTwoDistanceCompletionOrder_four
+    statement: >-
+      The numeric two-lane completion order for two distance-four demands is
+      exactly eight.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.twoEvenCosts_le_rlBudget_of_jointDistanceSum
+    statement: >-
+      For two even demands in the BF residual, the larger-edge SE2 law and
+      one explicit joint distance-sum estimate imply the full quadratic RL
+      budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBAggregationArithmetic.lean
+    theorem: Erdos23GapGBAggregationArithmetic.twoCosts_le_rlBudget_of_oneDistanceFour
+    statement: >-
+      In the strict BF residual, two demands with one distance exactly four
+      are paid by the RL budget using only SE2 for the other edge.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemand.lean
+    theorem: Erdos23GapGBTwoDemand.twoDemandCutCondition_of_rootedCutCondition
+    statement: >-
+      Rooted RFC for a finite demand family contains the symmetric
+      root-stub cut condition paired with each selected internal demand.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemand.lean
+    theorem: Erdos23GapGBTwoDemand.two_mul_dist_le_twice_slack_add_length_of_rootedCutCondition
+    statement: >-
+      Rooted RFC and the closed G-A ledger give the sharp SE2 distance bound
+      for every selected internal demand.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemand.lean
+    theorem: Erdos23GapGBTwoDemand.totalCost_le_rlBudget_of_twoDemands_oneDistanceFour
+    statement: >-
+      In the strict BF residual, a rooted instance with exactly two internal
+      demands satisfies RL when the first indexed distance is four.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemand.lean
+    theorem: Erdos23GapGBTwoDemand.totalCost_le_rlBudget_of_twoDemands_existsDistanceFour
+    statement: >-
+      In the strict BF residual, a rooted instance with exactly two internal
+      demands satisfies RL whenever either internal distance is four.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.twoCosts_le_rlBudget_of_weightedBounds
+    statement: >-
+      The rooted and internal-pair weighted distance bounds imply the exact
+      two-demand RL budget throughout the long-slack ratio two d less than s.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.twoCosts_le_rlBudget_of_weightedBounds_partner_two
+    statement: >-
+      With partner distance at least two, the same weighted pair bounds pay
+      the exact two-demand RL budget throughout the closed ratio two d at
+      most s.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.twoCosts_le_rlBudget_of_weightedBounds_partner_two_near
+    statement: >-
+      With partner distance at least two, the weighted pair bounds pay RL on
+      the four rows where zero through three units separate s from two d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.internalTwoDemandCutCondition_of_rootedCutCondition
+    statement: >-
+      Rooted RFC for two internal demands contains the symmetric internal
+      two-demand cut condition after the rooted separation term is dropped.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.internalWeightedDistanceBounds_of_rootedCutCondition
+    statement: >-
+      Applying the symmetric G-A ledger in both internal-demand orientations
+      gives both exact weighted distance inequalities under RFC.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.TwoDemandCutCondition.second_geodesic_support_one_bridgeSide
+    statement: >-
+      A geodesic for the second demand lies wholly on one side of every
+      bridge used by a geodesic for the first demand.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.IsBridge.connected_induce_bridgeSide
+    statement: >-
+      The canonical reachability side of a bridge induces a connected supply
+      graph.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.IsBridge.cutSize_bridgeSideExtension
+    statement: >-
+      Extending a cut by the entire opposite bridge side exactly preserves
+      its induced-side cut capacity while leaving the bridge uncut.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.TwoDemandCutCondition.induce_bridgeSide
+    statement: >-
+      The two-demand cut condition restricts to a connected bridge side,
+      truncating the first demand at the bridge endpoint and retaining the
+      second demand.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.IsGeodesic.induce_of_support_subset
+    statement: >-
+      A geodesic contained in a vertex set remains geodesic in the induced
+      graph on that set.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.no_bridge_of_equalLedger_sideSE2
+    statement: >-
+      The equal-ledger order identity, an induced-side SE2 bound, and the
+      opposite-suffix vertex count give an exact arithmetic contradiction.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.IsGeodesic.exists_doubleSlackPosition
+    statement: >-
+      Every vertex in the all-nonbridge double-slack geometry has certified
+      left and next anchors in the rigid chain of even tiles.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.IsGeodesic.eq_corridorEndpoints_of_dist_eq_length_doubleSlack
+    statement: >-
+      On the all-nonbridge double-slack face, the corridor terminals are the
+      unique unordered pair at the corridor diameter.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.three_mul_equalLength_le_card_sub_two_of_allNonbridge
+    statement: >-
+      Distinct equal even demands satisfy the sharp strict order bound three
+      D at most two times n minus two when the first geodesic is all
+      nonbridge.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.totalCost_le_rlBudget_of_twoDemands_twoLength_lt_slack
+    statement: >-
+      Every connected rooted instance with exactly two internal demands
+      satisfies RL whenever twice the root-stub distance is below the slack.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.totalCost_le_rlBudget_of_twoDemands_twoLength_le_slack_of_even
+    statement: >-
+      For positive even root distance, every two-demand rooted instance
+      satisfies RL throughout the closed long-slack ratio two d at most s.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDemandWeighted.lean
+    theorem: Erdos23GapGBTwoDemandWeighted.totalCost_le_rlBudget_of_twoDemands_even_near_twiceLength
+    statement: >-
+      For even root distance at least six, every two-demand rooted instance
+      satisfies RL on the rows two d minus three through two d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBIsometricCuts.lean
+    theorem: Erdos23GapGBIsometricCuts.totalCost_le_rlBudget_of_sumDistances_le_length
+    statement: >-
+      Two or more legal demands whose total distance is at most the corridor
+      length satisfy RL throughout the range d at most twice the slack.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBIsometricCuts.lean
+    theorem: Erdos23GapGBIsometricCuts.sum_add_one_sq_le_total_sub_three_sq_add_twentyFive
+    statement: >-
+      For at least two legal demands, concentrating every distance unit over
+      four on one demand maximizes the total quadratic cost.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBIsometricCuts.lean
+    theorem: Erdos23GapGBIsometricCuts.totalCost_le_rlBudget_of_sumDistances_le_twiceSlack
+    statement: >-
+      A total-distance bound of twice the slack implies RL whenever three
+      times the slack is at most twice the corridor length.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBIsometricCuts.lean
+    theorem: Erdos23GapGBIsometricCuts.totalCost_le_rlBudget_of_dominatingTwoCutBasis
+    statement: >-
+      A multiset of d size-two rooted cuts whose separation count dominates
+      every demand distance forces the exact RL budget by RFC.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBIsometricCuts.lean
+    theorem: Erdos23GapGBIsometricCuts.totalCost_le_rlBudget_of_dominatingTwoCutFamily_twiceSlack
+    statement: >-
+      In the near-boundary range, a terminal-separating size-two cut family
+      with at most twice the slack coordinates and dominating every demand
+      distance forces the exact RL budget by RFC.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBIsometricCuts.lean
+    theorem: Erdos23GapGBIsometricCuts.totalCost_le_rlBudget_of_isometricTwoCutBasis
+    statement: >-
+      An isometric family of d size-two cuts that all separate the rooted
+      terminals forces the exact RL budget by RFC.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBEqualityBoundary.lean
+    theorem: Erdos23GapGBEqualityBoundary.totalCost_le_rlBudget_of_doubleSlack_allNonbridge_sameSide
+    statement: >-
+      In the fully nonbridge equality slice d equals twice the slack, rooted
+      flip validity and same-side bipartite demands imply the exact RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBOneDefect.lean
+    theorem: Erdos23GapGBOneDefect.IsGeodesic.canonical_oneDefect_trichotomy
+    statement: >-
+      In the fully nonbridge row d equals twice the slack minus one, the
+      canonical attachment intervals have exactly one unit of mass, span,
+      or overlap defect.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBOneDefect.lean
+    theorem: Erdos23GapGBOneDefect.canonical_spanDefect_case_false
+    statement: >-
+      A proper Boolean coloring rules out the canonical singleton span-one
+      alternative in the d equals twice the slack minus one trichotomy.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBOneDefect.lean
+    theorem: Erdos23GapGBOneDefect.totalCost_le_oneDefectBudget_of_cutFamily
+    statement: >-
+      For at least two internal demands, an explicit family of slack-minus-one
+      root-separating capacity-two cuts with the quantified distance comparison
+      implies the exact d equals twice the slack minus one RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBOneDefectIntervals.lean
+    theorem: Erdos23GapGBOneDefectIntervals.massIntervalProfile
+    statement: >-
+      A disjoint tiling of range two-s-minus-one by one length-three and
+      otherwise length-two intervals has exactly s interior levels, every
+      gap active, and one unique adjacent interior pair.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.IsGeodesic.canonical_twoDefect_five_shapes
+    statement: >-
+      In the fully nonbridge row d equals twice the slack minus two, exact
+      mass-span-overlap accounting and bipartiteness leave precisely five
+      aggregate canonical shapes, with their exceptional component sizes
+      and interval spans classified.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.overlapDefect_two_lengthTwo_structure
+    statement: >-
+      A length-two interval cover with overlap defect two has exactly two
+      distinct double-covered coordinates; a single triple-covered
+      coordinate is impossible.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.totalCost_le_rlBudget_of_nearBoundary_adjacentExtras
+    statement: >-
+      For a level-aligned near-boundary graph, adjacent layer extras with
+      total gap weight at most twice the slack and adjacent interaction at
+      most two imply the exact RL budget through the arbitrary-capacity
+      level-cut envelope.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.twoHighColumns_fin_profile_bounds
+    statement: >-
+      If at most two residual cut columns exceed the baseline one and those
+      columns are at most three, then their linear and ordered-pair minimum
+      aggregates are at most d plus four and d squared plus eight.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.baselineColumns_fin_profile_bounds
+    statement: >-
+      If every residual corridor column is at most one, its linear aggregate
+      is at most d and its ordered-pair minimum aggregate is at most d squared.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.rootedCutCondition_atMostOne_cutSupported_exception
+    statement: >-
+      RFC permits at most one exceptional internal demand supported by a
+      cut with one unit of residual capacity after the root-stub demand.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.rootedCutCondition_atMostOne_pendant_exception
+    statement: >-
+      RFC permits at most one exceptional internal demand through the
+      singleton cut of a pendant vertex distinct from the root and stub.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.totalCost_le_rlBudget_of_pureSpan_twoHighColumns
+    statement: >-
+      A two-high-column pure-span profile with one pendant distance exception
+      of at most two and threshold span at most d minus two satisfies the exact
+      d equals twice the slack minus two RL budget for slack at least five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.totalCost_le_rlBudget_of_pureSpan_stubBaselineColumns
+    statement: >-
+      The terminal pure-span attachment at BFS level d plus one satisfies the
+      exact RL budget when its corridor columns remain baseline and its unique
+      exceptional truncated threshold span is at most d minus one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefect.lean
+    theorem: Erdos23GapGBTwoDefect.totalCost_le_rlBudget_of_q3_twoHighColumns
+    statement: >-
+      A two-high-column saturated size-three profile with one local exceptional
+      demand of distance four and threshold span zero or two satisfies the exact
+      d equals twice the slack minus two RL budget for slack at least five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefectAlignment.lean
+    theorem: Erdos23GapGBTwoDefectAlignment.totalCost_le_rlBudget_of_q3_zeroOrOneExceptionLevelCuts
+    statement: >-
+      A rooted level-cut profile with at most one saturated size-three
+      exceptional demand satisfies the exact d equals twice the slack minus
+      two RL budget when at most two residual columns have capacity three and
+      every other residual column has capacity one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefectAlignment.lean
+    theorem: Erdos23GapGBTwoDefectAlignment.totalCost_le_rlBudget_of_aligned_twoHighRootLevelProfile
+    statement: >-
+      An aligned rooted BFS profile with at most two adjacent doubled-level
+      gaps, the quantified level image and injectivity data, and RFC satisfies
+      the exact d equals twice the slack minus two RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefectAlignment.lean
+    theorem: Erdos23GapGBTwoDefectAlignment.totalCost_le_rlBudget_of_one_addTwo_levelCuts
+    statement: >-
+      Threshold cuts realize the general one-row add-two matrix bound whenever
+      all other demands are level-aligned, RFC supplies the stated residual
+      column capacities, and the explicit scaled polynomial envelope holds.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefectAlignment.lean
+    theorem: Erdos23GapGBTwoDefectAlignment.totalCost_le_rlBudget_of_q3PureMass_allNonbridge_sameSide
+    statement: >-
+      In the pure-mass size-three branch at d equals twice the slack minus two,
+      the canonical component geometry, rooted cut condition, injective simple
+      demand surface, legality, and same-color endpoints imply the exact RL
+      budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefectAlignment.lean
+    theorem: Erdos23GapGBTwoDefectAlignment.totalCost_le_rlBudget_of_q2q2PureMass_allNonbridge_sameSide
+    statement: >-
+      In the pure-mass two-size-two-components branch at d equals twice the
+      slack minus two, the canonical component geometry, rooted cut condition,
+      legality, and same-color endpoints imply the exact RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBOneDefectIntervals.lean
+    theorem: Erdos23GapGBOneDefectIntervals.overlapIntervalProfile
+    statement: >-
+      Any s length-two intervals covering range two-s-minus-one have distinct
+      starts and exactly s midpoint levels, with every gap active and one
+      unique adjacent midpoint pair.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBBinaryLayers.lean
+    theorem: Erdos23GapGBBinaryLayers.totalCost_le_rlBudget_of_binaryBfsLayers_levelAligned
+    statement: >-
+      Rooted flip validity implies the exact RL budget when the relevant BFS
+      layers have the encoded binary adjacent-layer profile and every internal
+      demand's graph distance equals its BFS-level span.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBBinaryLayerAuto.lean
+    theorem: Erdos23GapGBBinaryLayerAuto.totalCost_le_rlBudget_of_binaryLayerExtras_levelAligned
+    statement: >-
+      Literal zero-one level extras automatically generate the adjacent
+      binary cut profile and its global count, leaving only the exact
+      high-gap budget and level alignment as structural inputs to RL.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBOneDefectAlignment.lean
+    theorem: Erdos23GapGBOneDefectAlignment.totalCost_le_rlBudget_of_oneDefect_allNonbridge_sameSide
+    statement: >-
+      Every connected bipartite rooted instance with an all-nonbridge
+      root-stub geodesic of length twice the slack minus one satisfies the
+      exact RL budget: the canonical mass and overlap defect geometries both
+      force a one-high binary BFS chain, while the span defect is impossible.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBLayerCapacity.lean
+    theorem: Erdos23GapGBLayerCapacity.totalCost_le_rlBudget_of_levelAlignedCutCapacities
+    statement: >-
+      For level-aligned demands, RFC and literal residual threshold-cut
+      capacities imply RL whenever their exact ordered-pair minimum envelope
+      fits four times the RL budget.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
   - problem: 730
     source: erdosproblems
     file: ErdosProblems/Erdos730FirstPowerRoutes.lean

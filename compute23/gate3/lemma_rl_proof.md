@@ -269,9 +269,11 @@ operative target is
 on ≤ n vertices, then every valid one-stub rooted instance on n vertices
 satisfies RL.*
 
-RL\* suffices for the entire corollary chain (§9), because in a minimal
-counterexample of size N every block has n ≤ N − 1.  §7 proves RL\* on a
-large explicit regime; §§4–6 attack the remaining regime unconditionally.
+RL\* suffices for the one-stub (`k=1`) block corollary in §9, because in a
+minimal counterexample of size N every proper block has n ≤ N − 1. It does
+not supply the multi-stub inequality explicitly left open in §11, nor the
+final connected/2-connected case. Section 7 proves RL\* on a large explicit
+regime; §§4–6 attack the remaining one-stub regime unconditionally.
 
 ---
 

@@ -13,6 +13,17 @@
 > residual multi-edge regime has every such bridge within three vertices of
 > an endpoint; this restriction is weaker than 2-connectedness, and RL*
 > remains open there.
+>
+> **2026-07-11 correction.** The complete corridor-bridge reduction now
+> eliminates endpoint-near bridges as well, and the kernel theorem
+> `Erdos23GapGBEqualityBoundary.totalCost_le_rlBudget_of_doubleSlack_allNonbridge_sameSide`
+> closes the fully nonbridge boundary `d=2s`; the follow-on theorem
+> `Erdos23GapGBOneDefectAlignment.totalCost_le_rlBudget_of_oneDefect_allNonbridge_sameSide`
+> closes `d=2s−1` by an exact defect classification and BFS alignment proof.
+> The remaining one-stub BF-RL range has `n≥14`, `|M|≥2`, `s≥5`,
+> `d≤2s−2`, and an all-nonbridge root-stub
+> geodesic. One-stub RL* only supplies the `k=1` articulation corollary;
+> the multi-stub and connected/2-connected cases are separate obligations.
 
 ## Current task statement
 
@@ -22,19 +33,16 @@ cut edges, and for uv ∈ M let d_B(u, v) be the B-distance (even, ≥ 4,
 by maximality and triangle-freeness). Define
 Γ = Σ_{uv ∈ M} (d_B(u, v) + 1)².
 
-TARGET (inductive form RL*, sufficient for the program): assuming the
-inequality Γ ≤ N² holds for all connected instances on fewer than n
-vertices, prove it for connected instances on n vertices — OR prove
-outright the localized gap G-A below, which completes the |M| = 1 case
-unconditionally.
+TARGET: assuming the inequality Γ ≤ N² holds for all connected instances on
+fewer than n vertices, prove it for every connected instance on n vertices.
+This is the exact connected-case induction and is not already reduced to
+one-stub RL*. A proper current subtarget is the strict BF-RL range in the
+campaign correction above; closing it would complete the one-stub input but
+would still leave the stated multi-stub and connected-core steps.
 
-GAP G-A (fully self-contained; see compute23/gate3/lemma_rl_proof.md
-in williamjblair/lean-proofs): in a valid rooted one-stub instance
-where the M-endpoint lies OFF the stub corridor, prove the single-edge
-laws SE1 (D ≤ 2s) and SE2 (2D ≤ 2s + d). The on-corridor cases are
-proved; the obstruction is one double-count in a ledger argument
-(E ≤ q + 2r); all definitions and the verified data are in the cited
-file.
+FORMER GAP G-A: closed by the canonical component ledger and the theorem
+`Erdos23GapGA.gapGA_symmetric_bounds`. It must not be returned as an open
+subproblem.
 
 ## Verified context
 
@@ -54,7 +62,7 @@ file.
   counterexample has a singly-crossed cut vertex.
 - The sandwich theorem (proved): universal (non-inductive) Lemma RL is
   equivalent to Γ up to O(N) — do NOT attempt it directly; work with
-  RL* or G-A.
+  the strict BF-RL residual or the remaining connected-core induction.
 
 ## Falsification record — dead certificate families (exact witnesses
 in compute23/gate2/)

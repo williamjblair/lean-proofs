@@ -2,11 +2,13 @@
 
 ## Current task statement
 
-This is the single remaining mathematical gap between the machine-
-verified scaffolding and a complete proof of Erdős #23 (β(G) ≤ N²/25 for
-triangle-free G). Everything below it in the dependency chain is proved
-and kernel-checked; everything above it follows by an already-proved
-corollary chain. Close this and #23 falls.
+This is the remaining one-stub inductive gap in the machine-verified
+scaffolding for Erdős #23 (β(G) ≤ N²/25 for triangle-free G). Closing it is
+necessary progress, but it is not by itself a full proof of #23: the current
+paper chain eliminates a cut vertex crossed by exactly one monochromatic
+edge, while the multi-stub case and the final connected/2-connected core
+remain separate quantified obligations. Do not infer those obligations from
+RL* without proving them.
 
 Setup (all definitions self-contained in
 `compute23/gate3/lemma_rl_proof.md §1`, williamjblair/lean-proofs):
@@ -18,7 +20,8 @@ d = d_B(w,x₀) ≥ 1, s = n−1−d ≥ 0 (slack), Γ_int = Σ_{uv∈M}(d_B(u,v
 p(d) the parity-minimal partner distance (p∈{1,2,3}, d+p even ≥ 4).
 
 **TARGET (RL\*, the inductive step).** Assume Conjecture Γ holds for all
-valid instances on ≤ n−1 vertices (the induction hypothesis). Prove
+valid instances on ≤ n vertices (equivalently, index the outer induction by
+the larger minimal-composite order `n+p(d)`). Prove
 **Lemma RL** for every valid one-stub rooted instance on n vertices:
 
     Γ_int  ≤  s·(2d + 2 + s) + 2·s·p(d).
@@ -27,13 +30,21 @@ By the reductions below this is needed ONLY in the residual regime
 
     n ≥ 14,   2 ≤ s < (d+1)²/(2·p(d))   (hence d ≥ 3),   |M| ≥ 2,
 
-AND, after the banked series-superadditivity theorem, only for instances
-where every interior stub-geodesic edge e that is a B-bridge has
-min(|A_e|, |C_e|) ≤ 3 (bridge-free segments, endpoint-near bridges, and
-genuine multi-edge aggregation). Proving RL here — combined with the
-proved large-slack case (Thm 7.1) and single-edge case (Thm 6.2) — gives
-RL* in full, and RL* closes #23 by induction on n (base case n ≤ 13,
-exhaustive).
+AND, after the banked complete corridor-bridge elimination and the first two
+boundary theorems, only for instances admitting a root-stub geodesic all of
+whose edges are B-nonbridges and satisfying
+
+    5 ≤ s,   d ≤ 2s−2.
+
+The case `d=2s` is now kernel-closed by
+`Erdos23GapGBEqualityBoundary.totalCost_le_rlBudget_of_doubleSlack_allNonbridge_sameSide`.
+The next row `d=2s−1` is kernel-closed by
+`Erdos23GapGBOneDefectAlignment.totalCost_le_rlBudget_of_oneDefect_allNonbridge_sameSide`:
+the exact mass/span/overlap trichotomy eliminates the span case and turns
+both surviving cases into a one-high binary BFS chain with literal demand
+alignment. Proving RL in the remaining residual — combined with the proved large-slack and
+single-edge cases — gives the one-stub RL* statement in full. It does not
+silently discharge the separate multi-stub or connected-core obligations.
 
 A complete solution proves RL in this regime with every constant
 explicit and no unproved aggregation asserted. A proof of a strictly
@@ -57,17 +68,40 @@ main of williamjblair/lean-proofs)
   RL budget is superadditive — so such instances reduce to smaller ones.
   The residual therefore excludes those bridges.
 - **Large-slack is PROVED** (Thm 7.1): if 2s·p(d) ≥ (d+1)², RL follows
-  from the induction hypothesis directly (B ∪ M is a valid instance on n
+  from the induction hypothesis through order n directly (B ∪ M is a valid instance on n
   vertices, so Γ_int ≤ n² = RHS − 2sp + (d+1)² ≤ RHS). This is why the
   open regime is bounded slack s < (d+1)²/(2p).
 - **Reductions/rigidity (all PROVED, §3):** s ≤ 1 forces M = ∅; trees
   satisfy RL for any |M| (Thm 3.7); crossing-free cut vertices superadd;
   crossed cut vertices reduce to rooted instances; minimal
   counterexamples have every B-leaf M-loaded.
-- **Corollary chain (PROVED modulo RL, §9):** RL ⟹ the k=1 pair
+- **One-stub corollary (PROVED modulo RL, §9):** RL implies the k=1 pair
   inequality (Thm 9.2: Γ₁+Γ₂+(d₁+d₂+1)² ≤ N²−2s₁s₂ via partner
-  admissibility Lemma 9.1) ⟹ Γ ≤ N² ⟹ #23. So RL* is genuinely
-  sufficient; you do not need to re-prove anything above it.
+  admissibility Lemma 9.1), excluding a cut vertex crossed by exactly one
+  M-edge in a minimal counterexample. Section 11 explicitly leaves the
+  multi-stub pair inequality open; the connected/2-connected case is not a
+  consequence of §9 alone.
+- **Equality boundary (PROVED):** on a fully nonbridge corridor with
+  `d=2s` and `s≥5`, canonical singleton tiles give `s-1` capacity-two cuts;
+  RFC, block projection, and bipartite parity prove the exact RL budget in
+  `Erdos23GapGBEqualityBoundary.lean`. The live BF-RL boundary is strict.
+- **One-defect boundary (PROVED):** on a fully nonbridge corridor with
+  `d=2s−1` and `s≥5`, canonical intervals have exactly one mass, span, or
+  overlap defect. Bipartiteness kills span; Lean derives the complete
+  one-high BFS geometry, exact level alignment for every legal same-side
+  demand, and the RL budget in `Erdos23GapGBOneDefectAlignment.lean`.
+- **Two-demand distance-four slice (PROVED):** in the strict BF residual,
+  if `|M|=2` and either internal distance is four, RFC supplies SE2 for the
+  other distance and exact residue-sensitive arithmetic proves RL. Kernel:
+  `Erdos23GapGBTwoDemand.totalCost_le_rlBudget_of_twoDemands_existsDistanceFour`.
+- **Two-demand weighted slices (PROVED):** if `|M|=2` and `2d<s`, RFC
+  supplies both rooted SE2 and the internal-pair weighted bound
+  `Dmin+2Dmax<=2(s+d)`; exact convex arithmetic proves RL without the false
+  joint-distance sum.  For positive even `d`, the same argument closes
+  `2d<=s` and the next three rows `2d-3<=s<=2d`. Kernels:
+  `totalCost_le_rlBudget_of_twoDemands_twoLength_lt_slack` and
+  `totalCost_le_rlBudget_of_twoDemands_even_near_twiceLength` in
+  `Erdos23GapGBTwoDemandWeighted`.
 - **Sandwich theorem (PROVED, Thm 2.7):** the UNCONDITIONAL (non-
   inductive) universal RL is conjecture-strength — do NOT attempt it.
   The whole point of RL* is that under the induction hypothesis the hard
@@ -94,6 +128,12 @@ main of williamjblair/lean-proofs)
 - **Naive per-edge SE1/SE2 + summation:** wrong direction —
   (Σ(D_i+1))² ≥ Σ(D_i+1)², giving only Γ ≤ |M|(2s+1)², far above RHS for
   |M| ≥ 2 at small d.
+- **Two-demand joint sum:** `D₁+D₂ ≤ n+p(d)−2` is FALSE even in the live
+  strict all-nonbridge residual.  The exact `n=76,d=11,s=64,p=1` RFC
+  fixture has `(D₁,D₂)=(38,38)`, hence `76>75`; its RL cost is nevertheless
+  only `3042≤5760`.  The cutwise gadget proof and exact checker are in
+  `compute23/gate3/agent_weighted_dual/joint_distance_counterexample_audit.md`.
+  Do not rephrase this linear conclusion as a missing lemma.
 - **Known LEAD (not a claim):** a JOINT bound of the form
   Σ_i (D_i − 4) ≤ 2s − 4 + (capacity excess) matches ALL current data
   (verified on the equality family, the n = 8 double-broom, the n = 12
