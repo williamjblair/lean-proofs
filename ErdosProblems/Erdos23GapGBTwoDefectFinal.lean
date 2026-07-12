@@ -158,6 +158,7 @@ theorem IsGeodesic.levelAligned_of_twoSidedAnchors
 
 /-- A size-two component of span two is a doubled diamond vertex together
 with one tip.  The doubled vertex is on level `l+1` and the tip on `l+2`. -/
+set_option maxHeartbeats 800000 in
 theorem IsGeodesic.pair_spanTwo_geometry
     {V : Type*} [Fintype V] [DecidableEq V]
     {G : SimpleGraph V} [DecidableRel G.Adj]
@@ -248,7 +249,9 @@ theorem IsGeodesic.pair_spanTwo_geometry
       have hjNe : j ≠ l := by
         intro hjEq
         have htipLeft : G.Adj tip (P.getVert l) := by
-          simpa [hjGet, hjEq] using hty
+          have h := hty
+          rw [← hjGet, hjEq] at h
+          exact h
         have hat := color.valid hAdjAT
         have hal := color.valid hAdjL
         have htl := color.valid htipLeft
@@ -266,9 +269,11 @@ theorem IsGeodesic.pair_spanTwo_geometry
       have hyC : y ∈ offCorridorComponentFinset C := by
         simpa [← htOwn, hcompEq] using hyOwn
       have hyCases : y = cL ∨ y = tip := by simpa [hcomponent] using hyC
-      rcases hyCases with rfl | rfl
-      · omega
-      · exact (G.loopless.irrefl tip hty).elim
+      rcases hyCases with hy | hy
+      · subst y
+        omega
+      · subst y
+        exact (G.loopless.irrefl tip hty).elim
   have htUpper : G.dist w tip ≤ l + 2 := by
     have hATDist : G.dist cL tip = 1 := dist_eq_one_iff_adj.mpr hAdjAT
     have htri := hconn.dist_triangle (u := w) (v := cL) (w := tip)
@@ -282,7 +287,7 @@ theorem IsGeodesic.pair_spanTwo_geometry
   have hQnotNil : ¬ Q.Nil := by
     intro hnil
     have hwt : w = tip := hnil.eq
-    exact htw hwt
+    exact htw hwt.symm
   have hpenAdj : G.Adj tip Q.penultimate := (Q.adj_penultimate hQnotNil).symm
   have hpenLower := hneighborLower Q.penultimate hpenAdj
   have hdrop : G.dist w Q.penultimate ≤ Q.dropLast.length := dist_le Q.dropLast
