@@ -31,7 +31,7 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           set +e
-          lake env lean ErdosProblems/Erdos23GapGBTwoDefectFinal.lean > /tmp/two-defect.log 2>&1
+          lake build ErdosProblems.Erdos23GapGBTwoDefectFinal > /tmp/two-defect.log 2>&1
           status=$?
           cat /tmp/two-defect.log
           if [ "$status" -ne 0 ] && [ -n "$PR_NUMBER" ]; then
