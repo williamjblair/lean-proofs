@@ -35,7 +35,14 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           set +e
-          python3 scripts/agent_two_defect_patch.py > /tmp/two-defect-patch.log 2>&1
+          python3 - <<'PY' > /tmp/two-defect-patch.log 2>&1
+          import runpy
+          try:
+              runpy.run_path('scripts/agent_two_defect_patch.py', run_name='__main__')
+          except BaseException as exc:
+              print(type(exc).__name__ + ': ' + str(exc))
+              raise SystemExit(1)
+          PY
           status=$?
           cat /tmp/two-defect-patch.log
           if [ "$status" -ne 0 ] && [ -n "$PR_NUMBER" ]; then
