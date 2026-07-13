@@ -22,7 +22,12 @@ from compute.campaign686.agent_t1_all_owner.fifth_local_lift_verify import (
 )
 
 
-TARGET = 10**120
+LEGACY_TARGET = 10**120
+TAIL1000_INTERMEDIATE_CUTOFF = 10**200
+TAIL1000_TARGET = 10**1000
+# Keep the historical name for the sign-certificate and legacy packing
+# checks.  Those checks were originally proved at the 10^120 handoff.
+TARGET = LEGACY_TARGET
 RATIO = {
     5: (268048, 31951),
     7: (278097, 21902),
@@ -127,6 +132,8 @@ def certificate_rows() -> list[dict[str, Any]]:
                 abs(C) * U**3 + 8 * abs(D) * U * r + 40 * abs(E) * r**2
             )
             cutoff = center_bound**2 * determinant_bound**3 * LOSS[k] ** 12
+            if not cutoff < TAIL1000_INTERMEDIATE_CUTOFF < TAIL1000_TARGET:
+                raise AssertionError((k, r, "tail1000 packing cutoff", cutoff))
             rows.append(
                 {
                     "k": k,
@@ -141,25 +148,96 @@ def certificate_rows() -> list[dict[str, Any]]:
                     "loss_bound": LOSS[k],
                     "packing_cutoff": cutoff,
                     "packing_cutoff_digits": len(str(cutoff)),
-                    "closed_below_target": cutoff < TARGET,
+                    "closed_below_legacy_target": cutoff < LEGACY_TARGET,
+                    "closed_below_10_200": cutoff < TAIL1000_INTERMEDIATE_CUTOFF,
+                    "closed_below_tail1000": cutoff < TAIL1000_TARGET,
                 }
             )
     return rows
 
 
+def tail1000_upgrade_report(
+    certificates: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Reproduce the exact 12-to-27 reflected-pair cutoff upgrade.
+
+    Every quantity is a Python integer reconstructed by ``certificate_rows``.
+    The intermediate ``10^200`` inequality is deliberately stronger than the
+    tail handoff at ``10^1000`` and makes the new margin auditable without
+    decimal approximations or logarithms.
+    """
+
+    rows = certificate_rows() if certificates is None else certificates
+    legacy_closed = [row for row in rows if row["packing_cutoff"] < LEGACY_TARGET]
+    newly_closed = [
+        row
+        for row in rows
+        if LEGACY_TARGET <= row["packing_cutoff"] < TAIL1000_INTERMEDIATE_CUTOFF
+    ]
+    if len(rows) != 27 or len(legacy_closed) != 12 or len(newly_closed) != 15:
+        raise AssertionError((len(rows), len(legacy_closed), len(newly_closed)))
+    if not all(
+        isinstance(row["packing_cutoff"], int)
+        and row["packing_cutoff"] < TAIL1000_INTERMEDIATE_CUTOFF
+        < TAIL1000_TARGET
+        for row in rows
+    ):
+        raise AssertionError("tail1000 cutoff verification was not exact")
+
+    per_row_maxima: list[dict[str, int | bool]] = []
+    for k in ROWS:
+        row_certificates = [row for row in rows if row["k"] == k]
+        maximum = max(row_certificates, key=lambda row: row["packing_cutoff"])
+        per_row_maxima.append(
+            {
+                "k": k,
+                "pair_count": len(row_certificates),
+                "maximum_r": maximum["r"],
+                "maximum_cutoff": maximum["packing_cutoff"],
+                "maximum_cutoff_digits": maximum["packing_cutoff_digits"],
+                "maximum_below_10_200": (
+                    maximum["packing_cutoff"] < TAIL1000_INTERMEDIATE_CUTOFF
+                ),
+                "maximum_below_tail1000": (
+                    maximum["packing_cutoff"] < TAIL1000_TARGET
+                ),
+            }
+        )
+
+    return {
+        "legacy_target": LEGACY_TARGET,
+        "intermediate_cutoff": TAIL1000_INTERMEDIATE_CUTOFF,
+        "tail1000_target": TAIL1000_TARGET,
+        "total_pairs": len(rows),
+        "legacy_closed_pairs": len(legacy_closed),
+        "newly_closed_pairs": len(newly_closed),
+        "all_pairs_below_10_200": True,
+        "all_pairs_below_tail1000": True,
+        "per_row_maxima": per_row_maxima,
+        "newly_closed": [
+            {"k": row["k"], "r": row["r"], "cutoff": row["packing_cutoff"]}
+            for row in newly_closed
+        ],
+    }
+
+
 def report() -> dict[str, Any]:
     fifth = center_fifth_rows()
     certificates = certificate_rows()
-    closed = [row for row in certificates if row["closed_below_target"]]
-    surviving = [row for row in certificates if not row["closed_below_target"]]
+    legacy_closed = [
+        row for row in certificates if row["closed_below_legacy_target"]
+    ]
+    legacy_surviving = [
+        row for row in certificates if not row["closed_below_legacy_target"]
+    ]
     return {
         "view_count": {
             "unoriented_pairs": len(certificates),
             "oriented_views": 2 * len(certificates),
-            "closed_pairs": len(closed),
-            "closed_oriented_views": 2 * len(closed),
-            "surviving_pairs": len(surviving),
-            "surviving_oriented_views": 2 * len(surviving),
+            "legacy_10_120_closed_pairs": len(legacy_closed),
+            "legacy_10_120_closed_oriented_views": 2 * len(legacy_closed),
+            "legacy_10_120_surviving_pairs": len(legacy_surviving),
+            "legacy_10_120_surviving_oriented_views": 2 * len(legacy_surviving),
         },
         "fifth_specialization": {
             "formula": "8748*r^4*C*(255*C*G+180*E^2)*d",
@@ -170,20 +248,28 @@ def report() -> dict[str, Any]:
         },
         "determinant_grid": determinant_grid(),
         "all_27_cubic_sign_certificates": len(certificates) == 27,
-        "closed": [{"k": row["k"], "r": row["r"], "cutoff": row["packing_cutoff"]} for row in closed],
-        "surviving": [
+        "tail1000_upgrade": tail1000_upgrade_report(certificates),
+        "legacy_10_120_closed": [
+            {"k": row["k"], "r": row["r"], "cutoff": row["packing_cutoff"]}
+            for row in legacy_closed
+        ],
+        "legacy_10_120_surviving": [
             {
                 "k": row["k"],
                 "r": row["r"],
                 "cutoff": row["packing_cutoff"],
-                "target_multiple_floor": row["packing_cutoff"] // TARGET,
+                "legacy_target_multiple_floor": (
+                    row["packing_cutoff"] // LEGACY_TARGET
+                ),
             }
-            for row in surviving
+            for row in legacy_surviving
         ],
         "certificates": certificates,
         "quantified_remaining_gap": (
-            "the determinant packing bound remains above 10^120 exactly for "
-            "k=11,r in {4,5}, every k=13,r in [1,6], and every k=15,r in [1,7]"
+            "all 27 center/reflected pairs close below 10^1000; arbitrary "
+            "owner configurations and exactly-three configurations not "
+            "consisting of the center plus a reflected pair remain outside "
+            "this packing slice"
         ),
     }
 

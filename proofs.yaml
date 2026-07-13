@@ -6117,6 +6117,17 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686ReflectedThreeBucketDeterminant.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_of_exact_center_reflected_three_bucket_tail1000
+    statement: >-
+      At d at least 10^1000, an exact quotient-four equation cannot carry a
+      supplied three-bucket cleaned factorization whose owners are the center
+      and one reflected pair; the theorem derives the center cubic and both
+      endpoint determinant bounds from the equation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686EvenK16.lean
     theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_sixteen
     statement: >-

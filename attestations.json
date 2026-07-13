@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:424951086a3f5ae9764414663ee78f4b4dbe77219bcc6fe2fa412a8630dea517",
+  "verifier_output_hash": "sha256:2afeb6bc7122cc04dea667834adf722c04eb98cb895a03c8bb73008372d8dc2f",
   "attestations": [
     {
       "problem": 154,
@@ -7921,6 +7921,18 @@
       "theorem": "Erdos686.Erdos686Variant.target_three_bucket_fifth_obstruction_dvd_fourth",
       "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
       "proof_hash": "sha256:a05794d855c818a35956deb7bb8d06c20d7e69f75ad9a671952b077130b757ba",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_four_solution_of_exact_center_reflected_three_bucket_tail1000",
+      "file": "ErdosProblems/Erdos686ReflectedThreeBucketDeterminant.lean",
+      "proof_hash": "sha256:88579aac8b1a9694c0087c5a1d3503ecb679f559961ee55d757c4e7129632969",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

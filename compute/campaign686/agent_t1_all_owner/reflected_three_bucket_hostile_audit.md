@@ -50,3 +50,7 @@
 `[propext, Classical.choice, Quot.sound]` on its public theorem surfaces.  It
 contains no `sorry`, `admit`, new axiom, `native_decide`, or theorem-strength
 placeholder.
+
+The later `10^1000` supplied-slice upgrade is audited separately in
+`compute/campaign686/reflected_three_bucket_tail1000_hostile_audit.md`; this
+historical audit retains its correct `10^120` 12-pair PASS / 15-pair FAIL.

@@ -147,6 +147,34 @@ congruence-only resultant route.  The single remaining exactly-three-bucket
 node is the quantified short-CRT/window lemma; it is not proved here and does
 not cover four-or-more buckets.
 
+### Tail-1000 center/reflected determinant slice
+
+1. Fix `k in {5,7,9,11,13,15}` and
+   `1<=r<(k+1)/2`.  Supply positive `g,P,Q,R`, the exact decomposition
+   `d=gPQR`, `g<=G_k`, center/endpoint owner divisibilities, and the three
+   exact residual identities at the center and reflected endpoints.
+   **Explicit restricted-slice hypotheses; no arbitrary-owner extraction is
+   inferred.**
+2. The exact equation and row window give the center bound
+   `P^3<HC(k)d`.  The two equation-facing third lifts give endpoint
+   divisibilities `Q^2|T_-` and `R^2|T_+`. **Lean banked.**
+3. The residual-weighted determinant is nonzero and gives
+   `Q^2R^2<KD(k,r)g^2d`, with
+   `KD=54r(|C|U_k^3+8|D|U_kr+40|E|r^2)`. **Lean banked; every qualitative
+   size statement is this displayed inequality.**
+4. Exact integer reproduction and ordinary-kernel enumeration prove
+   `HC(k)^2 KD(k,r)^3 G_k^12<10^200<10^1000` for all 27 reflected pairs.
+   Twelve were already below `10^120`; the upgraded cutoff closes the other
+   fifteen. **Exact Python and Lean PASS.**
+5. `no_four_solution_of_exact_center_reflected_three_bucket_tail1000`
+   derives the two packing bounds rather than assuming them and concludes
+   `False`. **Kernel gate PASS with only
+   `[propext, Classical.choice, Quot.sound]`.**
+
+Verdict: PASS for the supplied exact center/reflected three-bucket slice at
+`d>=10^1000`.  Arbitrary three-owner geometries and four-or-more live owners
+remain outside this theorem; Target 1 and Erdős #686 are not claimed.
+
 ### Quarantined zero-obstruction LCM follow-up
 
 A generic Lean theorem proves that a vanished composed obstruction packs all

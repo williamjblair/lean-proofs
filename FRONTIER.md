@@ -88,6 +88,13 @@ independently re-proved; the finite cell classification is exact external
 arithmetic.  The remaining three-bucket node is 2,381 mixed cells plus ten
 live boundaries, quantified by the two-small-weighted-terms lemma recorded
 in the lattice-sign findings.
+At the upgraded odd-tail cutoff, the separate center/reflected determinant
+route now closes every one of the 27 reflected pairs for a supplied exact
+three-bucket factorization: Lean derives the center and endpoint packing
+bounds from the equation, and exact arithmetic puts every cutoff below
+`10^200<10^1000` (12 old pairs and 15 new).  This does not construct an
+exactly-three decomposition when more live owners remain, nor does it turn
+an arbitrary three-owner geometry into a center/reflected one.
 The complete owner grid is now assembled end to end.  From the equation and
 target-size hypothesis, Lean constructs `AllOwnerAssemblyCertificate` with
 one bucket for every index in `Icc 1 k` (unit buckets where empty), the

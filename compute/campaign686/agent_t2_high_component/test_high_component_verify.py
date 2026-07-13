@@ -140,3 +140,7 @@ def test_external_strip_is_quarantined_to_arithmetic_only() -> None:
     assert report["sharp_ratio_boundary_margin"] == 12_079_280
     assert report["ordinary_strip_cases"] > 100_000
     assert report["k82_strip_cases"] > 0
+
+
+def test_audit_verdict_tracks_the_banked_lean_closure() -> None:
+    assert verify.audit_report()["verdict"] == "MATHEMATICAL_PASS_LEAN_CLOSED"

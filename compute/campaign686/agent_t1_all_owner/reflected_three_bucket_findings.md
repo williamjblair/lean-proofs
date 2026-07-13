@@ -53,3 +53,10 @@ The first failed cutoff is `k=11,r=4`, where the bound is about `5.574` times
 `10^120`; the exact integer is emitted by `reflected_three_bucket_verify.py`.
 The minimum row-13 and row-15 failed cutoffs are respectively above
 `4.797 * 10^150` and `5.079 * 10^182`.  No higher-order lift is claimed.
+
+## Later tail-1000 upgrade
+
+This file freezes the historical `10^120` boundary.  The separately audited
+tail-1000 wrapper in `reflected_three_bucket_tail1000_findings.md` proves all
+27 supplied center/reflected pairs impossible once `d>=10^1000`; it does not
+alter the 12/15 split recorded here or close arbitrary owner geometry.

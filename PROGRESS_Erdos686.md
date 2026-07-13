@@ -237,6 +237,18 @@ to find distinct owners `r,s` with
 2,381 mixed cells and ten live boundaries; coefficient signs alone are
 falsified as a route to that bound.
 
+[R] **Every supplied center/reflected exactly-three slice now closes at the
+live `10^1000` tail.**  For owners at the center and distance `r` on both
+sides, Lean derives the center cubic bound and both endpoint third-square
+divisibilities from the exact block equation.  Their nonzero reflected
+determinant gives `Q^2R^2<KD(k,r)g^2d`.  Exact arithmetic proves the resulting
+packing cutoff below `10^200` in all 27 pairs: 12 were already below
+`10^120`, and 15 are newly closed.  The headline theorem
+`no_four_solution_of_exact_center_reflected_three_bucket_tail1000` assumes
+the exact factorization `d=gPQR` and this owner geometry; it does not discard
+additional live owners or convert an arbitrary three-owner configuration
+into a reflected one.
+
 [R] **The finite-family obstruction algebra now retains every selected
 owner without inflating the loss.**  For an arbitrary finite owner set, Lean
 composes all opposite square residuals modulo the distinguished component,
@@ -518,7 +530,9 @@ fails some row j ≤ 17.
    `k in {5,7,9,11,13,15}`, exclude every exact equation with
    `d >= 10^1000`.  Every survivor already carries
    `AllOwnerAssemblyThirdNonzeroCertificate`; the certificate-plus-equation
-   contradiction is target-strength and is not counted as a reduction.
+   contradiction is target-strength and is not counted as a reduction.  A
+   supplied exactly-three factorization at the center and a reflected pair is
+   now excluded; arbitrary owner geometry and additional live owners remain.
 2. [open, Target 2] Prove `LargeKSmoothHypothesis`, equivalently exclude the
    remaining `k>=16,d>=k` equations after the closed rows, universal even
    tails, exact ratio band, component/grouped-owner ceilings, and prime-power

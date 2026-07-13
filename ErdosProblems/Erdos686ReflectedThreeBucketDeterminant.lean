@@ -22,7 +22,10 @@ The left side is divisible by `Q²R²`.  The exact ratio lower bound proves that
 the parenthesized cubic cannot vanish in any of the 27 target reflected
 positions.  A finite packing certificate then closes all reflected pairs in
 rows 5, 7, and 9, and the three inner pairs in row 11.  The two outer row-11
-pairs and every row-13/15 pair remain outside this particular size cutoff.
+pairs and every row-13/15 pair remain outside that historical `10^120`
+cutoff.  At the upgraded `10^1000` odd-tail boundary, all 27 pairs close for
+a supplied exact center/reflected three-bucket decomposition; the final
+theorem derives every packing bound from the original block equation.
 -/
 
 namespace Erdos686
@@ -555,6 +558,151 @@ def targetReflectedDeterminantBound (k r : ℕ) : ℕ :=
 def targetReflectedCenterCubeBound (k : ℕ) : ℕ :=
   (((k - 1) / 2).factorial) ^ 2 * targetReflectedResidualCeiling k
 
+/-- Every target-row residual is positive and lies below the row ceiling at
+the upgraded odd-tail scale. -/
+theorem target_reflected_residual_window_tail1000
+    {k n d i : ℕ}
+    (hk : k = 5 ∨ k = 7 ∨ k = 9 ∨ k = 11 ∨ k = 13 ∨ k = 15)
+    (hi : i ∈ Finset.Icc 1 k)
+    (htail : 10 ^ 1000 ≤ d)
+    (heq : blockProduct k (n + d) = 4 * blockProduct k n) :
+    0 < localResidual n d i ∧
+      localResidual n d i < targetReflectedResidualCeiling k * d := by
+  have hkd : k ≤ d := by
+    rcases hk with rfl | rfl | rfl | rfl | rfl | rfl <;>
+      norm_num at htail ⊢ <;> omega
+  rcases hk with rfl | rfl | rfl | rfl | rfl | rfl
+  · simpa [targetReflectedResidualCeiling] using
+      (localResidual_pos_lt_of_base_bound (by norm_num) hkd hi heq
+        (row_base_upper_k5 (ratio_window_four_nat heq).2) (by norm_num))
+  · simpa [targetReflectedResidualCeiling] using
+      (localResidual_pos_lt_of_base_bound (by norm_num) hkd hi heq
+        (row_base_upper_k7 (ratio_window_four_nat heq).2) (by norm_num))
+  · simpa [targetReflectedResidualCeiling] using
+      (localResidual_pos_lt_of_base_bound (by norm_num) hkd hi heq
+        (row_base_upper_k9 (ratio_window_four_nat heq).2) (by norm_num))
+  · simpa [targetReflectedResidualCeiling] using
+      (localResidual_pos_lt_of_base_bound (by norm_num) hkd hi heq
+        (row_base_upper_k11 (ratio_window_four_nat heq).2) (by norm_num))
+  · simpa [targetReflectedResidualCeiling] using
+      (localResidual_pos_lt_of_base_bound (by norm_num) hkd hi heq
+        (row_base_upper_k13 (ratio_window_four_nat heq).2) (by norm_num))
+  · simpa [targetReflectedResidualCeiling] using
+      (localResidual_pos_lt_of_base_bound (by norm_num) hkd hi heq
+        (row_base_upper_k15 (ratio_window_four_nat heq).2) (by norm_num))
+
+/-- Reflection fixes the even Taylor coefficients and negates the odd linear
+coefficient at every target center/reflected pair. -/
+theorem target_reflected_coefficient_symmetry
+    {k r : ℕ}
+    (hk : k = 5 ∨ k = 7 ∨ k = 9 ∨ k = 11 ∨ k = 13 ∨ k = 15)
+    (hr : 1 ≤ r ∧ r < (k + 1) / 2) :
+    let left := (k + 1) / 2 - r
+    let right := (k + 1) / 2 + r
+    localSecondConstant k right = localSecondConstant k left ∧
+      localSecondLinear k right = -localSecondLinear k left ∧
+      localThirdQuadratic k right = localThirdQuadratic k left := by
+  have hleft : (k + 1) / 2 - r ∈ Finset.Icc 1 k := by
+    rw [Finset.mem_Icc]
+    constructor <;> omega
+  have hright : (k + 1) / 2 + r ∈ Finset.Icc 1 k := by
+    rw [Finset.mem_Icc]
+    constructor <;> omega
+  dsimp
+  rw [localSecondConstant_eq_table hk hright,
+    localSecondConstant_eq_table hk hleft,
+    localSecondLinear_eq_table hk hright,
+    localSecondLinear_eq_table hk hleft,
+    localThirdQuadratic_eq_table hk hright,
+    localThirdQuadratic_eq_table hk hleft]
+  rcases hk with rfl | rfl | rfl | rfl | rfl | rfl <;>
+    rcases hr with ⟨hr1, hrlt⟩ <;>
+    interval_cases r <;>
+    norm_num [secondCoefficientTable, thirdCoefficientTable] at *
+
+/-- Normalize the table definition of the determinant constant to the local
+coefficients at the left endpoint. -/
+theorem target_reflected_determinant_bound_eq
+    {k r : ℕ}
+    (hk : k = 5 ∨ k = 7 ∨ k = 9 ∨ k = 11 ∨ k = 13 ∨ k = 15)
+    (hr : 1 ≤ r ∧ r < (k + 1) / 2) :
+    let left := (k + 1) / 2 - r
+    targetReflectedDeterminantBound k r =
+      54 * r *
+        (Int.natAbs (localSecondConstant k left) *
+            targetReflectedResidualCeiling k ^ 3 +
+          8 * Int.natAbs (localSecondLinear k left) *
+            targetReflectedResidualCeiling k * r +
+          40 * Int.natAbs (localThirdQuadratic k left) * r ^ 2) := by
+  have hleft : (k + 1) / 2 - r ∈ Finset.Icc 1 k := by
+    rw [Finset.mem_Icc]
+    constructor <;> omega
+  dsimp [targetReflectedDeterminantBound]
+  rw [localSecondConstant_eq_table hk hleft,
+    localSecondLinear_eq_table hk hleft,
+    localThirdQuadratic_eq_table hk hleft]
+
+/-- Equation-facing center cubic bound for the supplied cleaned center
+bucket. -/
+theorem target_reflected_center_cube_bound_tail1000
+    {k n d g P Q R : ℕ}
+    (hk : k = 5 ∨ k = 7 ∨ k = 9 ∨ k = 11 ∨ k = 13 ∨ k = 15)
+    (htail : 10 ^ 1000 ≤ d)
+    (hgap : d = g * P * Q * R)
+    (hcenterFactor : P ∣ n + (k + 1) / 2)
+    (heq : blockProduct k (n + d) = 4 * blockProduct k n) :
+    P ^ 3 < targetReflectedCenterCubeBound k * d := by
+  have hkd : k ≤ d := by
+    rcases hk with rfl | rfl | rfl | rfl | rfl | rfl <;>
+      norm_num at htail ⊢ <;> omega
+  have hPdvd : P ∣ d := by
+    refine ⟨g * Q * R, ?_⟩
+    rw [hgap]
+    ring
+  rcases hk with rfl | rfl | rfl | rfl | rfl | rfl
+  · simpa [targetReflectedCenterCubeBound,
+      targetReflectedResidualCeiling] using
+      (center_raw_cube_lt_factorial_sq_mul
+        (h := P) (r := 2) (C := 4) (A := 14)
+        (by norm_num) hkd heq
+        (row_base_upper_k5 (ratio_window_four_nat heq).2)
+        (by norm_num) hPdvd hcenterFactor)
+  · simpa [targetReflectedCenterCubeBound,
+      targetReflectedResidualCeiling] using
+      (center_raw_cube_lt_factorial_sq_mul
+        (h := P) (r := 3) (C := 5) (A := 17)
+        (by norm_num) hkd heq
+        (row_base_upper_k7 (ratio_window_four_nat heq).2)
+        (by norm_num) hPdvd hcenterFactor)
+  · simpa [targetReflectedCenterCubeBound,
+      targetReflectedResidualCeiling] using
+      (center_raw_cube_lt_factorial_sq_mul
+        (h := P) (r := 4) (C := 7) (A := 23)
+        (by norm_num) hkd heq
+        (row_base_upper_k9 (ratio_window_four_nat heq).2)
+        (by norm_num) hPdvd hcenterFactor)
+  · simpa [targetReflectedCenterCubeBound,
+      targetReflectedResidualCeiling] using
+      (center_raw_cube_lt_factorial_sq_mul
+        (h := P) (r := 5) (C := 8) (A := 26)
+        (by norm_num) hkd heq
+        (row_base_upper_k11 (ratio_window_four_nat heq).2)
+        (by norm_num) hPdvd hcenterFactor)
+  · simpa [targetReflectedCenterCubeBound,
+      targetReflectedResidualCeiling] using
+      (center_raw_cube_lt_factorial_sq_mul
+        (h := P) (r := 6) (C := 9) (A := 29)
+        (by norm_num) hkd heq
+        (row_base_upper_k13 (ratio_window_four_nat heq).2)
+        (by norm_num) hPdvd hcenterFactor)
+  · simpa [targetReflectedCenterCubeBound,
+      targetReflectedResidualCeiling] using
+      (center_raw_cube_lt_factorial_sq_mul
+        (h := P) (r := 7) (C := 11) (A := 35)
+        (by norm_num) hkd heq
+        (row_base_upper_k15 (ratio_window_four_nat heq).2)
+        (by norm_num) hPdvd hcenterFactor)
+
 /-- Exactly the reflected positions closed by the determinant-plus-center
 packing inequality at the `10^120` cutoff. -/
 def targetReflectedPackingClosed (k r : ℕ) : Prop :=
@@ -575,6 +723,28 @@ theorem target_reflected_packing_cutoff_certificate
     norm_num [targetReflectedCenterCubeBound,
       targetReflectedDeterminantBound, targetReflectedResidualCeiling,
       secondCoefficientTable, thirdCoefficientTable, targetAggregateLoss] at *
+
+/-- At the upgraded `10^1000` odd-tail cutoff, every one of the 27
+center/reflected pairs satisfies the determinant-packing numerical bound.
+The finite calculation first proves the stronger uniform bound `10^200`. -/
+theorem target_reflected_packing_cutoff_certificate_tail1000
+    {k r : ℕ}
+    (hk : k = 5 ∨ k = 7 ∨ k = 9 ∨ k = 11 ∨ k = 13 ∨ k = 15)
+    (hr : 1 ≤ r ∧ r < (k + 1) / 2) :
+    targetReflectedCenterCubeBound k ^ 2 *
+        targetReflectedDeterminantBound k r ^ 3 *
+        targetAggregateLoss k ^ 12 < 10 ^ 1000 := by
+  have hsmall : targetReflectedCenterCubeBound k ^ 2 *
+        targetReflectedDeterminantBound k r ^ 3 *
+        targetAggregateLoss k ^ 12 < 10 ^ 200 := by
+    rcases hk with rfl | rfl | rfl | rfl | rfl | rfl <;>
+      rcases hr with ⟨hr1, hrlt⟩ <;>
+      interval_cases r <;>
+      norm_num [targetReflectedCenterCubeBound,
+        targetReflectedDeterminantBound, targetReflectedResidualCeiling,
+        secondCoefficientTable, thirdCoefficientTable, targetAggregateLoss] at *
+  exact lt_of_lt_of_le hsmall
+    (Nat.pow_le_pow_right (by norm_num : 0 < 10) (by omega))
 
 /-- Pure packing step: a center cubic bound and a reflected endpoint-square
 bound contradict the target cutoff. -/
@@ -619,6 +789,407 @@ theorem no_reflected_three_bucket_of_packing_bounds
     lt_of_lt_of_le (lt_trans hdBound (lt_of_le_of_lt hconst hcutoff)) htarget
   exact (Nat.lt_irrefl d this)
 
+/-- The generic reflected packing interface contradicts the upgraded odd
+tail cutoff in every target center/reflected position. -/
+theorem no_reflected_three_bucket_tail1000_of_packing_bounds
+    {k r d g P Q R : ℕ}
+    (hk : k = 5 ∨ k = 7 ∨ k = 9 ∨ k = 11 ∨ k = 13 ∨ k = 15)
+    (hr : 1 ≤ r ∧ r < (k + 1) / 2)
+    (hd : 0 < d) (hg : 0 < g) (hP : 0 < P) (hQ : 0 < Q) (hR : 0 < R)
+    (hgap : d = g * P * Q * R)
+    (hcenter : P ^ 3 < targetReflectedCenterCubeBound k * d)
+    (hendpoints : Q ^ 2 * R ^ 2 <
+      targetReflectedDeterminantBound k r * g ^ 2 * d)
+    (hloss : g ≤ targetAggregateLoss k)
+    (htail : 10 ^ 1000 ≤ d) : False := by
+  exact no_reflected_three_bucket_of_packing_bounds
+    hd hg hP hQ hR hgap hcenter hendpoints hloss
+    (target_reflected_packing_cutoff_certificate_tail1000 hk hr) htail
+
+/-- The equation and a supplied center/reflected three-bucket decomposition
+produce both endpoint square divisibilities; these are not assumptions of the
+final packing theorem. -/
+theorem target_reflected_endpoint_third_divisibilities_tail1000
+    {k n d r g P Q R a b c : ℕ}
+    (hk : k = 5 ∨ k = 7 ∨ k = 9 ∨ k = 11 ∨ k = 13 ∨ k = 15)
+    (hr : 1 ≤ r ∧ r < (k + 1) / 2)
+    (htail : 10 ^ 1000 ≤ d)
+    (hQpos : 0 < Q) (hRpos : 0 < R)
+    (hgap : d = g * P * Q * R)
+    (hcenterRes : localResidual n d ((k + 1) / 2) = a * P ^ 2)
+    (hleftRes : localResidual n d ((k + 1) / 2 - r) = b * Q ^ 2)
+    (hrightRes : localResidual n d ((k + 1) / 2 + r) = c * R ^ 2)
+    (hleftFactor : Q ∣ n + ((k + 1) / 2 - r))
+    (hrightFactor : R ∣ n + ((k + 1) / 2 + r))
+    (heq : blockProduct k (n + d) = 4 * blockProduct k n) :
+    let left := (k + 1) / 2 - r
+    let C := localSecondConstant k left
+    let D := localSecondLinear k left
+    let E := localThirdQuadratic k left
+    (Q : ℤ) ^ 2 ∣ reflectedLeftThird C D E (a * b * c) g r d ∧
+      (R : ℤ) ^ 2 ∣ reflectedRightThird C D E (a * b * c) g r d := by
+  let center := (k + 1) / 2
+  let left := center - r
+  let right := center + r
+  have hcenterIdx : center ∈ Finset.Icc 1 k := by
+    dsimp [center]
+    rw [Finset.mem_Icc]
+    constructor <;> omega
+  have hleftIdx : left ∈ Finset.Icc 1 k := by
+    dsimp [left, center]
+    rw [Finset.mem_Icc]
+    constructor <;> omega
+  have hrightIdx : right ∈ Finset.Icc 1 k := by
+    dsimp [right, center]
+    rw [Finset.mem_Icc]
+    constructor <;> omega
+  have hcenterPos :=
+    (target_reflected_residual_window_tail1000 hk hcenterIdx htail heq).1
+  have hleftPos :=
+    (target_reflected_residual_window_tail1000 hk hleftIdx htail heq).1
+  have hrightPos :=
+    (target_reflected_residual_window_tail1000 hk hrightIdx htail heq).1
+  have hcenterCast :
+      3 * ((n + center : ℕ) : ℤ) - (d : ℤ) =
+        (a : ℤ) * (P : ℤ) ^ 2 := by
+    have hdle : d ≤ 3 * (n + center) := by
+      unfold localResidual at hcenterPos
+      omega
+    have hcast : ((localResidual n d center : ℕ) : ℤ) =
+        3 * ((n + center : ℕ) : ℤ) - (d : ℤ) := by
+      unfold localResidual
+      rw [Int.ofNat_sub hdle]
+      push_cast
+      ring
+    rw [← hcast]
+    exact_mod_cast hcenterRes
+  have hleftCast :
+      3 * ((n + left : ℕ) : ℤ) - (d : ℤ) =
+        (b : ℤ) * (Q : ℤ) ^ 2 := by
+    have hdle : d ≤ 3 * (n + left) := by
+      unfold localResidual at hleftPos
+      omega
+    have hcast : ((localResidual n d left : ℕ) : ℤ) =
+        3 * ((n + left : ℕ) : ℤ) - (d : ℤ) := by
+      unfold localResidual
+      rw [Int.ofNat_sub hdle]
+      push_cast
+      ring
+    rw [← hcast]
+    exact_mod_cast hleftRes
+  have hrightCast :
+      3 * ((n + right : ℕ) : ℤ) - (d : ℤ) =
+        (c : ℤ) * (R : ℤ) ^ 2 := by
+    have hdle : d ≤ 3 * (n + right) := by
+      unfold localResidual at hrightPos
+      omega
+    have hcast : ((localResidual n d right : ℕ) : ℤ) =
+        3 * ((n + right : ℕ) : ℤ) - (d : ℤ) := by
+      unfold localResidual
+      rw [Int.ofNat_sub hdle]
+      push_cast
+      ring
+    rw [← hcast]
+    exact_mod_cast hrightRes
+  have hgapQ : d = Q * (g * P * R) := by rw [hgap]; ring
+  have hgapR : d = R * (g * P * Q) := by rw [hgap]; ring
+  have hthirdQ := third_order_local_lift
+    (k := k) (n := n) (d := d) (i := left)
+    (h := Q) (m := g * P * R) (a := b)
+    hleftIdx hQpos hgapQ hleftFactor hleftCast heq
+  have hthirdR := third_order_local_lift
+    (k := k) (n := n) (d := d) (i := right)
+    (h := R) (m := g * P * Q) (a := c)
+    hrightIdx hRpos hgapR hrightFactor hrightCast heq
+  have hleftCenter : (left : ℤ) - (center : ℤ) = -(r : ℤ) := by
+    dsimp [left]
+    push_cast
+    omega
+  have hleftRight : (left : ℤ) - (right : ℤ) = -2 * (r : ℤ) := by
+    dsimp [left, right]
+    push_cast
+    omega
+  have hrightCenter : (right : ℤ) - (center : ℤ) = (r : ℤ) := by
+    dsimp [right]
+    push_cast
+    omega
+  have hrightLeft : (right : ℤ) - (left : ℤ) = 2 * (r : ℤ) := by
+    dsimp [right, left]
+    push_cast
+    omega
+  have hleftDiffCenter :
+      (b : ℤ) * (Q : ℤ) ^ 2 - (a : ℤ) * (P : ℤ) ^ 2 =
+        3 * ((left : ℤ) - (center : ℤ)) := by
+    rw [← hleftCast, ← hcenterCast]
+    push_cast
+    ring
+  have hleftDiffRight :
+      (b : ℤ) * (Q : ℤ) ^ 2 - (c : ℤ) * (R : ℤ) ^ 2 =
+        3 * ((left : ℤ) - (right : ℤ)) := by
+    rw [← hleftCast, ← hrightCast]
+    push_cast
+    ring
+  have hrightDiffCenter :
+      (c : ℤ) * (R : ℤ) ^ 2 - (a : ℤ) * (P : ℤ) ^ 2 =
+        3 * ((right : ℤ) - (center : ℤ)) := by
+    rw [← hrightCast, ← hcenterCast]
+    push_cast
+    ring
+  have hrightDiffLeft :
+      (c : ℤ) * (R : ℤ) ^ 2 - (b : ℤ) * (Q : ℤ) ^ 2 =
+        3 * ((right : ℤ) - (left : ℤ)) := by
+    rw [← hrightCast, ← hleftCast]
+    push_cast
+    ring
+  have hcompQ := three_bucket_third_obstruction_dvd_sq
+    (P := (Q : ℤ)) (Q := (P : ℤ)) (R := (R : ℤ))
+    (a := (b : ℤ)) (b := (a : ℤ)) (c := (c : ℤ))
+    (g := (g : ℤ))
+    (C := localSecondConstant k left)
+    (D := localSecondLinear k left)
+    (E := localThirdQuadratic k left)
+    (deltaLeft := (left : ℤ) - (center : ℤ))
+    (deltaRight := (left : ℤ) - (right : ℤ))
+    hthirdQ hleftDiffCenter hleftDiffRight
+  have hcompR := three_bucket_third_obstruction_dvd_sq
+    (P := (R : ℤ)) (Q := (P : ℤ)) (R := (Q : ℤ))
+    (a := (c : ℤ)) (b := (a : ℤ)) (c := (b : ℤ))
+    (g := (g : ℤ))
+    (C := localSecondConstant k right)
+    (D := localSecondLinear k right)
+    (E := localThirdQuadratic k right)
+    (deltaLeft := (right : ℤ) - (center : ℤ))
+    (deltaRight := (right : ℤ) - (left : ℤ))
+    hthirdR hrightDiffCenter hrightDiffLeft
+  have hgapCast : (d : ℤ) = (g : ℤ) * (P : ℤ) * (Q : ℤ) * (R : ℤ) := by
+    exact_mod_cast hgap
+  have hgapQCast : (g : ℤ) * (Q : ℤ) * (P : ℤ) * (R : ℤ) = (d : ℤ) := by
+    rw [hgapCast]
+    ring
+  have hgapRCast : (g : ℤ) * (R : ℤ) * (P : ℤ) * (Q : ℤ) = (d : ℤ) := by
+    rw [hgapCast]
+    ring
+  have hsym := target_reflected_coefficient_symmetry hk hr
+  dsimp [left, right, center] at hsym ⊢
+  constructor
+  · convert hcompQ using 1 <;>
+      rw [hleftCenter, hleftRight, hgapQCast] <;>
+      simp [threeBucketThirdObstruction, threeBucketSecondObstruction,
+        reflectedLeftThird, left, center] <;> ring
+  · rw [hsym.1, hsym.2.1, hsym.2.2] at hcompR
+    convert hcompR using 1 <;>
+      rw [hrightCenter, hrightLeft, hgapRCast] <;>
+      simp [threeBucketThirdObstruction, threeBucketSecondObstruction,
+        reflectedRightThird] <;> ring
+
+/-- No target-row quotient-four equation at the upgraded odd-tail scale can
+carry a supplied exact cleaned decomposition whose three buckets lie at the
+center and one reflected owner pair.  The center and endpoint packing bounds
+are derived here from the equation and local lifts. -/
+theorem no_four_solution_of_exact_center_reflected_three_bucket_tail1000
+    {k n d r g P Q R a b c : ℕ}
+    (hk : k = 5 ∨ k = 7 ∨ k = 9 ∨ k = 11 ∨ k = 13 ∨ k = 15)
+    (hr : 1 ≤ r ∧ r < (k + 1) / 2)
+    (htail : 10 ^ 1000 ≤ d)
+    (hgpos : 0 < g) (hPpos : 0 < P) (hQpos : 0 < Q) (hRpos : 0 < R)
+    (hgap : d = g * P * Q * R)
+    (hloss : g ≤ targetAggregateLoss k)
+    (hcenterFactor : P ∣ n + (k + 1) / 2)
+    (hleftFactor : Q ∣ n + ((k + 1) / 2 - r))
+    (hrightFactor : R ∣ n + ((k + 1) / 2 + r))
+    (hcenterRes : localResidual n d ((k + 1) / 2) = a * P ^ 2)
+    (hleftRes : localResidual n d ((k + 1) / 2 - r) = b * Q ^ 2)
+    (hrightRes : localResidual n d ((k + 1) / 2 + r) = c * R ^ 2)
+    (heq : blockProduct k (n + d) = 4 * blockProduct k n) : False := by
+  let center := (k + 1) / 2
+  let left := center - r
+  let right := center + r
+  let X := localResidual n d center
+  let C := localSecondConstant k left
+  let D := localSecondLinear k left
+  let E := localThirdQuadratic k left
+  let t := a * b * c
+  let inner : ℤ := C * (t : ℤ) -
+    8 * D * (X : ℤ) * (g : ℤ) ^ 2 * (r : ℤ) -
+    40 * E * (g : ℤ) ^ 2 * (r : ℤ) ^ 2 * (d : ℤ)
+  let det : ℤ :=
+    ((X : ℤ) - 3 * (r : ℤ)) *
+        reflectedRightThird C D E (t : ℤ) (g : ℤ) (r : ℤ) (d : ℤ) -
+      ((X : ℤ) + 3 * (r : ℤ)) *
+        reflectedLeftThird C D E (t : ℤ) (g : ℤ) (r : ℤ) (d : ℤ)
+  have hcenterIdx : center ∈ Finset.Icc 1 k := by
+    dsimp [center]
+    rw [Finset.mem_Icc]
+    constructor <;> omega
+  have hleftIdx : left ∈ Finset.Icc 1 k := by
+    dsimp [left, center]
+    rw [Finset.mem_Icc]
+    constructor <;> omega
+  have hrightIdx : right ∈ Finset.Icc 1 k := by
+    dsimp [right, center]
+    rw [Finset.mem_Icc]
+    constructor <;> omega
+  have hcenterWindow :=
+    target_reflected_residual_window_tail1000 hk hcenterIdx htail heq
+  have hleftWindow :=
+    target_reflected_residual_window_tail1000 hk hleftIdx htail heq
+  have hrightWindow :=
+    target_reflected_residual_window_tail1000 hk hrightIdx htail heq
+  have hresidualCast : ∀ i, i ∈ Finset.Icc 1 k →
+      ((localResidual n d i : ℕ) : ℤ) =
+        3 * ((n + i : ℕ) : ℤ) - (d : ℤ) := by
+    intro i hi
+    have hpos := (target_reflected_residual_window_tail1000 hk hi htail heq).1
+    have hdle : d ≤ 3 * (n + i) := by
+      unfold localResidual at hpos
+      omega
+    unfold localResidual
+    rw [Int.ofNat_sub hdle]
+    push_cast
+    ring
+  have hcenterCast : (X : ℤ) = (a : ℤ) * (P : ℤ) ^ 2 := by
+    exact_mod_cast hcenterRes
+  have hcenterFormula := hresidualCast center hcenterIdx
+  have hleftFormula := hresidualCast left hleftIdx
+  have hrightFormula := hresidualCast right hrightIdx
+  have hleftDecomp : ((localResidual n d left : ℕ) : ℤ) =
+      (b : ℤ) * (Q : ℤ) ^ 2 := by
+    exact_mod_cast hleftRes
+  have hrightDecomp : ((localResidual n d right : ℕ) : ℤ) =
+      (c : ℤ) * (R : ℤ) ^ 2 := by
+    exact_mod_cast hrightRes
+  have hleftCast :
+      (X : ℤ) - 3 * (r : ℤ) = (b : ℤ) * (Q : ℤ) ^ 2 := by
+    have hrel : (center : ℤ) - (left : ℤ) = (r : ℤ) := by
+      dsimp [left]
+      push_cast
+      omega
+    calc
+      (X : ℤ) - 3 * (r : ℤ) =
+          ((localResidual n d center : ℕ) : ℤ) - 3 * (r : ℤ) := by rfl
+      _ = ((localResidual n d left : ℕ) : ℤ) := by
+        rw [hcenterFormula, hleftFormula]
+        push_cast
+        linear_combination 3 * hrel
+      _ = (b : ℤ) * (Q : ℤ) ^ 2 := hleftDecomp
+  have hrightCast :
+      (X : ℤ) + 3 * (r : ℤ) = (c : ℤ) * (R : ℤ) ^ 2 := by
+    have hrel : (right : ℤ) - (center : ℤ) = (r : ℤ) := by
+      dsimp [right]
+      push_cast
+      omega
+    calc
+      (X : ℤ) + 3 * (r : ℤ) =
+          ((localResidual n d center : ℕ) : ℤ) + 3 * (r : ℤ) := by rfl
+      _ = ((localResidual n d right : ℕ) : ℤ) := by
+        rw [hcenterFormula, hrightFormula]
+        push_cast
+        linear_combination -3 * hrel
+      _ = (c : ℤ) * (R : ℤ) ^ 2 := hrightDecomp
+  have hgapCast : (d : ℤ) = (g : ℤ) * (P : ℤ) * (Q : ℤ) * (R : ℤ) := by
+    exact_mod_cast hgap
+  have hproduct : (t : ℤ) * (d : ℤ) ^ 2 =
+      (g : ℤ) ^ 2 * (X : ℤ) *
+        ((X : ℤ) ^ 2 - 9 * (r : ℤ) ^ 2) := by
+    simpa [t] using reflected_three_bucket_product_identity
+      hcenterCast hleftCast hrightCast hgapCast
+  have hcenterNat : X = a * P ^ 2 := by simpa [X, center] using hcenterRes
+  have hleftNat : localResidual n d left = b * Q ^ 2 := by
+    simpa [left, center] using hleftRes
+  have hrightNat : localResidual n d right = c * R ^ 2 := by
+    simpa [right, center] using hrightRes
+  have hleftLinear : localResidual n d left + 3 * r = X := by
+    have hcast : ((localResidual n d left : ℕ) : ℤ) + 3 * (r : ℤ) =
+        (X : ℤ) := by
+      rw [hleftDecomp]
+      linarith [hleftCast]
+    exact_mod_cast hcast
+  have hrightLinear : localResidual n d right = X + 3 * r := by
+    have hcast : ((localResidual n d right : ℕ) : ℤ) =
+        (X : ℤ) + 3 * (r : ℤ) := by
+      rw [hrightDecomp]
+      linarith [hrightCast]
+    exact_mod_cast hcast
+  have hpair :
+      localResidual n d left * localResidual n d right ≤ X ^ 2 := by
+    have heqPair :
+        localResidual n d left * localResidual n d right + (3 * r) ^ 2 =
+          X ^ 2 := by
+      rw [hrightLinear, ← hleftLinear]
+      ring
+    omega
+  have hproductNat : t * d ^ 2 =
+      g ^ 2 * X *
+        (localResidual n d left * localResidual n d right) := by
+    calc
+      t * d ^ 2 = (a * b * c) * (g * P * Q * R) ^ 2 := by
+        rw [hgap]
+      _ = g ^ 2 * (a * P ^ 2) * ((b * Q ^ 2) * (c * R ^ 2)) := by ring
+      _ = g ^ 2 * X *
+          (localResidual n d left * localResidual n d right) := by
+        rw [hcenterNat, hleftNat, hrightNat]
+  have hproductLe : t * d ^ 2 ≤ g ^ 2 * X ^ 3 := by
+    rw [hproductNat]
+    have hscaled := Nat.mul_le_mul_left (g ^ 2 * X) hpair
+    convert hscaled using 1 <;> ring
+  have hdpos : 0 < d := lt_of_lt_of_le (by norm_num) htail
+  have htBound : t < g ^ 2 * targetReflectedResidualCeiling k ^ 3 * d :=
+    reflected_cofactor_product_lt hgpos hdpos
+      (by simpa [X, center] using hcenterWindow.2) hproductLe
+  have hd120 : 10 ^ 120 ≤ d := by
+    exact le_trans
+      (Nat.pow_le_pow_right (by norm_num : 0 < 10) (by omega : 120 ≤ 1000))
+      htail
+  have hinnerNe : inner ≠ 0 := by
+    have hraw := target_reflected_third_inner_ne_zero hk hr hd120 hgpos heq
+      (by simpa [X, center] using hcenterWindow.2) hproduct
+    simpa only [inner, C, D, E, t, X, left, center] using hraw
+  have hCpos : 0 < Int.natAbs C := by
+    have hcert := target_reflected_cubic_coefficient_certificate hk hr
+    simpa only [C, left, center] using hcert.1
+  have hinnerSize : Int.natAbs inner <
+      (Int.natAbs C * targetReflectedResidualCeiling k ^ 3 +
+        8 * Int.natAbs D * targetReflectedResidualCeiling k * r +
+        40 * Int.natAbs E * r ^ 2) * g ^ 2 * d := by
+    simpa [inner, C, D, E, t, X] using
+      (reflected_third_inner_abs_lt hCpos
+        (by simpa [X, center] using hcenterWindow.2) htBound)
+  have hthird := target_reflected_endpoint_third_divisibilities_tail1000
+    hk hr htail hQpos hRpos hgap hcenterRes hleftRes hrightRes
+      hleftFactor hrightFactor heq
+  have hdiv : (Q : ℤ) ^ 2 * (R : ℤ) ^ 2 ∣ det := by
+    have hraw := reflected_third_determinant_dvd_endpoint_squares
+      hleftCast hrightCast hthird.1 hthird.2
+    simpa [det, C, D, E, t] using hraw
+  have hdetIdentity : det = 54 * (r : ℤ) * inner := by
+    simpa [det, inner, C, D, E, t] using
+      reflected_third_determinant_identity C D E (t : ℤ) (g : ℤ)
+        (r : ℤ) (d : ℤ) (X : ℤ)
+  have hdetNe : det ≠ 0 := by
+    rw [hdetIdentity]
+    exact mul_ne_zero (mul_ne_zero (by norm_num)
+      (by exact_mod_cast (Nat.ne_of_gt hr.1))) hinnerNe
+  have hdetSize : Int.natAbs det <
+      targetReflectedDeterminantBound k r * g ^ 2 * d := by
+    have hscale : (54 * r) * Int.natAbs inner <
+        (54 * r) *
+          ((Int.natAbs C * targetReflectedResidualCeiling k ^ 3 +
+            8 * Int.natAbs D * targetReflectedResidualCeiling k * r +
+            40 * Int.natAbs E * r ^ 2) * g ^ 2 * d) :=
+      Nat.mul_lt_mul_of_pos_left hinnerSize
+        (Nat.mul_pos (by norm_num : 0 < 54) hr.1)
+    rw [target_reflected_determinant_bound_eq hk hr]
+    rw [hdetIdentity, Int.natAbs_mul, Int.natAbs_mul]
+    norm_num
+    simpa [mul_assoc] using hscale
+  have hendpoints : Q ^ 2 * R ^ 2 <
+      targetReflectedDeterminantBound k r * g ^ 2 * d :=
+    reflected_endpoint_square_product_lt_of_determinant hdiv hdetNe hdetSize
+  have hcenterBound : P ^ 3 < targetReflectedCenterCubeBound k * d :=
+    target_reflected_center_cube_bound_tail1000 hk htail hgap hcenterFactor heq
+  exact no_reflected_three_bucket_tail1000_of_packing_bounds
+    hk hr hdpos hgpos hPpos hQpos hRpos hgap hcenterBound hendpoints hloss htail
+
 #print axioms three_bucket_reduced_fifth_center_reflected
 #print axioms reflected_third_determinant_identity
 #print axioms reflected_third_determinant_dvd_endpoint_squares
@@ -634,6 +1205,14 @@ theorem no_reflected_three_bucket_of_packing_bounds
 #print axioms reflected_endpoint_square_product_lt_of_determinant
 #print axioms target_reflected_packing_cutoff_certificate
 #print axioms no_reflected_three_bucket_of_packing_bounds
+#print axioms target_reflected_packing_cutoff_certificate_tail1000
+#print axioms no_reflected_three_bucket_tail1000_of_packing_bounds
+#print axioms target_reflected_residual_window_tail1000
+#print axioms target_reflected_coefficient_symmetry
+#print axioms target_reflected_determinant_bound_eq
+#print axioms target_reflected_center_cube_bound_tail1000
+#print axioms target_reflected_endpoint_third_divisibilities_tail1000
+#print axioms no_four_solution_of_exact_center_reflected_three_bucket_tail1000
 
 end Erdos686Variant
 end Erdos686

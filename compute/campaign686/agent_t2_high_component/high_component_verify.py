@@ -448,7 +448,7 @@ def audit_report() -> dict[str, object]:
         "simple_to_exact_sweep": sweep_simple_implies_exact(),
         "prime_power_family_sweep": sweep_prime_power_family(),
         "external_strip_arithmetic": external_strip_arithmetic_report(),
-        "verdict": "MATHEMATICAL_PASS_LEAN_OPEN",
+        "verdict": "MATHEMATICAL_PASS_LEAN_CLOSED",
     }
 
 
