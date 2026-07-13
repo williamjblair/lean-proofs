@@ -1,6 +1,6 @@
 # PROGRESS.md - Erdős Problem #686
 
-Date: 2026-07-12 (full-solution campaign checkpoint)
+Date: 2026-07-13 (full-solution campaign checkpoint)
 Formal lane: refute the universal positive statement by proving `N = 4` has no
 quotient representation. Previous plan archived in
 `PROGRESS_Erdos686_gptpro_archive.md`.
@@ -43,6 +43,21 @@ builds an exact coefficient threshold `M_r`.  No equation exists for
 `d>=max(2r,M_r)`.  Separate integral traps and ordinary-kernel prime-field
 covers close all gaps for `k=16,18,20,24,28,32`.  The k=18, k=28, and k=32
 covers are balanced across checked-in shards and use no `native_decide`.
+
+[R] **An all-parity quadratic strip is now closed uniformly.**  Write
+`Lambda(m)=lcm(1,...,m)`.  Lean proves the sharp elementary estimate
+`Lambda(m)<=4^m` and, for any positive interval of `m` consecutive integers
+with product `B` and lcm `L`, the exact divisibility
+
+```text
+m! * L | B * Lambda(m).
+```
+
+Combining this interval theorem with the one-factorial centered-lcm
+compression and the exact ratio window proves that no equation with
+`k>=16,d>=k` can satisfy `18*d<=k^2`.  No parity hypothesis is used.  Thus
+every live large-row solution now satisfies the strict complement
+`k^2<18*d`; the excluded strip is already nonempty at `k=d=18`.
 
 [R] **The large-row window and prime-power exclusions are sharper.**  Centered
 pairing plus an exact seven-term bracket proves that every solution with
@@ -95,6 +110,24 @@ a supplied-owner theorem only: the missing large-row step is a quantified
 owner-supply or global aggregation theorem forcing one of these bounds to
 contradict the exact window.  Minimum-degree-two owner cycles still survive.
 
+[R] **An even reflection-center component now has a gcd/cofactor quotient
+bound without assuming that its full cofactor divides the gap.**  Let
+`H=2n+d+k+1=a*p^e`, where `p>=k` is prime and `p^e` is the complete
+`p`-component of `H`, and put
+`b=a/gcd(a,d)`.  Lean proves
+
+```text
+gcd(a,d) | (k-1)!!,
+2*p^e < 5*(k-1)!!*b,
+38*d < 5*((k-1)!!)^2*b^2,
+1218443*k*d < 2317440*((k-1)!!)^2*b^2.
+```
+
+The special case `a|d` has `b=1` and gives fixed-row exclusions.  The exact
+remaining obstruction is that no banked theorem bounds the gap-coprime
+quotient `b`; it may be unbounded, so these inequalities are not a uniform
+large-row closure.
+
 [R] **The full high prime-power component theorem is now Lean-banked for
 every prime base.**  The public dispatcher
 `no_four_solution_of_highPrimePower_component` composes
@@ -124,7 +157,7 @@ must merely satisfy the strict reverse of its displayed bound.
 handoff.**  `FinalResidual686Hypothesis` starts the odd arm at `10^1000` with
 the complete all-owner second/third-nonzero certificate.  Its large-row arm
 removes `k=16,18,20,24,28,32`, all constructed even tails, and the exact
-prime-power/owner families above.  It also records the component,
+prime-power/owner families above.  It also records `k^2<18*d`, the component,
 grouped-owner, Lucas boundary, uniform odd two-prime Pell restrictions, and
 the strict reverse of all three canonical high-component thresholds.
 Lean proves both that it implies the two
@@ -271,8 +304,8 @@ fixtures satisfy this congruence package while failing the block equation and
 short window.  The normalization is a proper necessary condition and an
 auditable obstruction to a fixed-resultant overclaim; it is not a cutoff.
 
-[R/E] **The normalized fourth and fifth quotients now have an
-equation-facing size layer.**  Lean proves the exact opposite-product bound,
+[R] **The normalized fourth and fifth quotients now have an ordinary-kernel,
+equation-facing nonvanishing layer.**  Lean proves the exact opposite-product bound,
 then
 
 ```text
@@ -283,14 +316,25 @@ P_s | N_s and N_s != 0  ->  P_s^2 < V_s*g^4*d,
 
 with explicit `W_s=27*C_s^2*U_k^2*B_s+|K_s|` and
 `V_s=27*W_s+|R1_s|`.  The exact eliminant
-`d^4*P_s*N_s=g^4*J_s(X_s,d)` is also kernel-checked.  Independent exact
-arithmetic reconstructs all coefficients and finds both `w_s` and `N_s`
-nonzero in all 3,024 cyclic positions of the 1,008 nonreflected triples at
-`d>=10^1000`; the coefficient/remainder scan is deliberately labeled `[E]`,
-not Lean-banked, because no ordinary-kernel finite wrapper is checked in.
-Even after accepting that ledger, multiplying the three component-square
-bounds has the wrong gap exponent and leaves the simultaneous mixed-sign
-system open.
+`d^4*P_s*N_s=g^4*J_s(X_s,d)` is also kernel-checked.  An ordinary-kernel
+certificate checks all 3,024 cyclic positions of the 1,008 nonreflected
+triples; a generic membership theorem proves exact coverage of the valid
+nonreflected cyclic domain in all six target rows.  Lean derives the padded residual-ratio interval and
+`localResidual<=36*d` from the exact block equation at `d>=10^1000`.
+The equation-facing wrapper then proves both the fourth quotient `w_s` and
+normalized fifth numerator `N_s` nonzero.  The direct selected-three bridge
+constructs the product, third-obstruction, opposite-product, fourth, and
+normalized identities from `d=gPQR`, the three exact square residuals, and
+the block equation.  It also proves the genuine divisibility `P_s|N_s`.
+The complete all-owner corollary can instantiate the same package after
+absorbing every omitted bucket into `g`, but makes no bounded-loss claim for
+that enlarged factor.  Even with all three cyclic instances, multiplying the
+component-square bounds has the wrong gap exponent and the simultaneous
+mixed-sign nonzero branch remains open.  The exact sign verifier reconstructs
+all lower-degree terms: `sign(w_s)=-sign(C_s)` in all 3,024 positions,
+`sign(N_s)` differs in 90 positions, and the canonical cyclic weighted
+`w`- and `N`-sign triples are mixed in every one of the 1,008 geometries.
+Thus the immediate one-sided cyclic sign argument is exactly falsified.
 
 [R] **Every supplied center/reflected exactly-three slice now closes at the
 live `10^1000` tail.**  For owners at the center and distance `r` on both
@@ -528,25 +572,56 @@ to appear at all scales but thin out; three-row survivors stop.
 
 ---
 
-## 5. Even k: the Kovač/Runge route (mathematics verified, Lean in progress)
+## 5. Even k: the Kovač/Runge route and the exact bridge obstruction
 
-For even k set `w = 2m+k+1`, `v = 2n+k+1` (odd); the equation becomes
-`S_k(w) = 4·S_k(v)` with `S_k(W) = ∏_{l odd < k} (W² − l²)`.
+For even `k=2r`, set `w=2m+k+1` and `v=2n+k+1`.  The equation becomes
+`S_r(w)=4*S_r(v)` with
+`S_r(X)=product_{j=1}^r (X^2-(2j-1)^2)`.  The general rational polynomial
+part of `sqrt(S_r)` and its explicit tail threshold are now Lean-banked, as
+are the complete rows `16,18,20,24,28,32`.  The older parity traps close the
+small even rows through `14`.
 
-- k ≡ 2 (mod 4): the polynomial part P of √S has 2-power denominators;
-  `2^{e}·P` is odd-valued at odd arguments while the doubled side is even —
-  a mod-2 gap of 2^{−v(k)} survives for all k ≡ 2 (mod 4) (verified k ≤ 60).
-  Kills k = 6, 10, 14 outside an explicit finite region.
-- k ≡ 0 (mod 4): P is integer-valued; the equation forces `P(w) = 2P(v)`
-  AND `R(w) = 4R(v)` exactly (R = S − P², deg R ≤ k/2−2) for w beyond an
-  explicit threshold. For k = 8: `R = −4096·W²`, so w = 2v — parity
-  contradiction. For k = 12: the system's resultant is nonzero with no
-  integer roots. Kills k = 8, 12.
-- In all five cases the sub-threshold region satisfies d ≤ 220 (via the
-  banked confinement lower bounds), already closed by the finite core.
+[X] The new all-parity quadratic strip does **not** compose with the canonical
+Runge threshold, even after parity weighting or fixed-divisor rescaling.
+If `Q_r` is the monic polynomial part, its first correction is exactly
 
-[C] A uniform even-k statement (all even k ≥ 16) would need the 2-adic
-coefficient pattern as a general lemma; per-k it is mechanical.
+```text
+[X^(r-1)]Q_r = 0,
+[X^(r-2)]Q_r = -r*(4*r^2-1)/6.
+```
+
+Thus the current coefficient threshold is already greater than
+`r*(4*r^2-1)/3`, while the quadratic strip reaches only
+`d<=k^2/18=2*r^2/9`; these ranges never overlap.  A decisive live row gives an
+exact route falsifier.  At `k=34,r=17`, the quadratic complement begins at
+`d=65`.  The exact bracket
+`1041616^34<4*1000000^34<1041617^34`, combined with both necessary equation
+power windows, forces `1528<=n<=1560` and hence `3091<=v<=3155`.
+The denominator-cleared Runge data have denominator `32768`, deficit degree
+`16`, leading deficit
+`188162318421570695167361039564800`, coefficient norm
+`6375143223540100100577353665680166719158383844425`, and exact odd-center
+fixed divisor `255`.  Even the optimistic leading-only lattice comparison
+requires
+`v>=225186598141623936273745117`; the full norm requires
+`v>=7629565936566640936850578356790181141762389`.
+These exact values falsify this bridge, not the original equation.
+
+[X] **The first open even row does not yet admit a kernel-feasible local
+sieve.**  At `k=22` the quadratic strip closes exactly `22<=d<=26`.  Three
+integral root-pair fixtures survive every unrestricted local mask and refute
+the original `d>=27` cover.  A corrected shifted trap for `d>=250` leaves
+`1<=t<=3795146531`; parity and mod 23 leave exactly 330,012,742 candidates,
+and an exact Python packed-bitset reproduction empties them with prime masks
+through 953.  The finite strip `27<=d<=249` has 16,859 ratio-window pairs and
+no equality in exact arithmetic.  Neither computation is Lean-banked: no
+ordinary-kernel certificate of feasible size is supplied, so `k=22` remains
+open.
+
+[C] A viable next Runge step must cancel the first omitted Laurent term
+before the integer-size trap and obtain a new gcd or owner-correlation gain.
+Parity and a sharper general interval-lcm constant cannot change the decisive
+exponent.
 
 ---
 
@@ -576,6 +651,9 @@ fails some row j ≤ 17.
 - [X] Affine-saturation-only route (k=7, d=302, u=135).
 - [X] Polynomial prefixes a ≤ 14 and row prefixes j ≤ 15 (survivor clusters).
 - [X] Pure congruence obstruction for (4,5) (admissible for every modulus).
+- [X] Direct quadratic-strip/Runge-tail composition, including parity and
+  fixed-divisor rescaling: the exact `k=34` coefficient audit above misses the
+  first complement center by more than twenty orders of magnitude.
 
 ---
 
@@ -587,14 +665,20 @@ fails some row j ≤ 17.
    `AllOwnerAssemblyThirdNonzeroCertificate`; the certificate-plus-equation
    contradiction is target-strength and is not counted as a reduction.  A
    supplied exactly-three factorization at the center and a reflected pair is
-   now excluded; arbitrary owner geometry and additional live owners remain.
+   now excluded.  The fifth-quotient configuration is now constructed for
+   arbitrary selected-three geometry; additional live owners can only be
+   absorbed by enlarging the loss and forfeiting its bounded estimate.
+   Simultaneous magnitude/gcd coupling and additional live owners remain.
 2. [open, Target 2] Prove `LargeKSmoothHypothesis`, equivalently exclude the
    remaining `k>=16,d>=k` equations after the closed rows, universal even
-   tails, exact ratio band, component/grouped-owner ceilings, and prime-power
-   owner and boundary exclusions.  Every surviving exact component
+   tails, the all-parity quadratic strip, exact ratio band,
+   component/grouped-owner ceilings, and prime-power owner and boundary
+   exclusions.  Every survivor satisfies `k^2<18*d`.  Every surviving exact component
    `p^e || d` with `p^e>=k` must also satisfy the strict reverse of its
-   canonical `p=2`, `p=3`, or `p>=5` dominance inequality.  The equation
-   itself supplies the smoothness premise.
+   canonical `p=2`, `p=3`, or `p>=5` dominance inequality.  In an even row,
+   any complete large-base reflection-center component also obeys the exact
+   cofactor-quotient bounds above, but the quotient `a/gcd(a,d)` remains
+   unbounded.  The equation itself supplies the smoothness premise.
 3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as
    equivalent packaging via `finalResidual_iff_tail1000_and_smooth`; do not
    report its isolation as mathematical progress.  Regenerate the manifest
@@ -602,7 +686,7 @@ fails some row j ≤ 17.
 
 ---
 
-## 9. Terminal assessment: what blocks the full solve (2026-07-12)
+## 9. Terminal assessment: what blocks the full solve (2026-07-13)
 
 The two open hypotheses are mathematical gaps, not formalization gaps.
 
@@ -610,19 +694,29 @@ The two open hypotheses are mathematical gaps, not formalization gaps.
 boundary `d < 10^1000`, but any finite extension merely moves that boundary.
 The live branch begins at equality and has at least three cleaned prime
 owners, exact short-window residuals, and simultaneous nonzero second and
-third obstructions.  The checked congruence, sign, resultant, and finite-order
-Taylor routes all have exact falsifiers unless the full equation/window is
-used.  No quantified bound currently closes this joint branch.
+third obstructions.  The 3,024-position fourth/fifth ledger and its
+equation-derived ratio window are now ordinary-kernel Lean, and the direct
+selected-three bridge constructs the local configuration identities and
+`P|N`.  All 1,008 cyclic systems can nevertheless still be simultaneously
+nonzero and sign-mixed.  The checked
+congruence, sign, resultant, and finite-order Taylor routes all have exact
+falsifiers unless the full equation/window is used.  No quantified bound
+currently closes this joint branch.
 
 **Large-k double smoothness.**  The equation forces both blocks to be
 `(d+k)`-smooth and supplies all row divisibilities.  Universal even-row Runge
 certificates remove every even tail above an explicit threshold, while
 separate finite-field certificates close several complete rows.  The
 all-prime high-component theorem additionally forces the strict reverse of
-the three exact component thresholds above.  The remaining odd rows and
-finite even strips still require a uniform argument; gaps whose every
-component misses those thresholds survive, and gross mass, pure congruences,
-and fixed row-prefix caps are falsified routes.
+the three exact component thresholds above, and the quadratic theorem forces
+`k^2<18*d`.  In even rows, reflection-center components satisfy the exact
+gcd/cofactor quotient bounds, but the gap-coprime quotient is unbounded.  The
+remaining odd rows and finite even strips above the quadratic boundary still
+require a uniform argument.  The exact `k=34` audit shows that the canonical
+Runge threshold, parity weighting, and a general interval-lcm improvement do
+not bridge this range.  Gaps whose components all miss the component
+thresholds survive, and gross mass, pure congruences, and fixed row-prefix
+caps are falsified routes.
 
 The exact formal handoff is the equivalence
 

@@ -6859,3 +6859,89 @@ proofs:
       conjunction of the updated odd-tail and large-smoothness hypotheses.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthQuotientKernelCertificate.lean
+    theorem: Erdos686.Erdos686Variant.fifth_quotient_target_position_certificate
+    statement: >-
+      Ordinary-kernel reduction verifies the exact fifth-quotient interval,
+      sign, and remainder certificate at all 3,024 cyclic target positions.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthQuotientKernelCertificate.lean
+    theorem: Erdos686.Erdos686Variant.fifth_quotient_target_position_mem_iff
+    statement: >-
+      The finite target generator contains exactly the valid cyclic
+      nonreflected positions in the six advertised odd rows.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthQuotientKernelCertificate.lean
+    theorem: Erdos686.Erdos686Variant.fifth_quotient_target_equation_fourth_and_normalized_nonzero
+    statement: >-
+      At the target cutoff, the exact block equation supplies the residual
+      ratio window and forces the named fourth and normalized fifth quotients
+      nonzero whenever the explicit local configuration identities hold.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthQuotientConfigurationBridge.lean
+    theorem: Erdos686.Erdos686Variant.direct_selected_three_fifth_quotient_configuration
+    statement: >-
+      From an actual selected-three gap factorization, three exact square
+      residual identities, and the block equation, Lean constructs the third,
+      fourth, and normalized fifth quotients, proves the genuine divisibility
+      P divides N, and proves both later quotients nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthQuotientConfigurationBridge.lean
+    theorem: Erdos686.Erdos686Variant.allOwner_selected_three_fifth_quotient_configuration
+    statement: >-
+      Every target equation carrying the complete all-owner certificate
+      instantiates the fifth-quotient configuration at each certified cyclic
+      position after absorbing all omitted buckets into an explicit loss;
+      no bounded-loss estimate for that enlarged factor is asserted.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CenterComponentLogStrip.lean
+    theorem: Erdos686.Erdos686Variant.initialLcm_le_four_pow
+    statement: >-
+      The least common multiple of one through N is bounded elementarily by
+      four to the N for every natural N.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CenterComponentLogStrip.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_of_quadratic_strip
+    statement: >-
+      For every parity and k at least 16, the quotient-four block equation has
+      no solution in the uniform strip k<=d and 18*d<=k^2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CenterComponentLogStrip.lean
+    theorem: Erdos686.Erdos686Variant.gcd_gap_reflectionCenter_dvd_oddDoubleFactorial
+    statement: >-
+      Every even-row quotient-four solution has the gcd of its gap and
+      reflection center supported inside the row's odd double factorial.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenCenterGapCofactor.lean
+    theorem: Erdos686.Erdos686Variant.even_reflectionCenter_gapCoprimeQuotient_sharp_gap_bound
+    statement: >-
+      A large-prime component of an even-row reflection center obeys the sharp
+      explicit gap bound after its cofactor is divided by its gcd with d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

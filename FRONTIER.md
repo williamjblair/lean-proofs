@@ -103,10 +103,23 @@ divisibility is equivalent to `P|27*w+M*R1*g^4`.  The new fourth quotient
 the exact opposite-product bound, the induced bounds
 `|w|<W*g^4*M`, `|N|<V*g^4*M`, the nonzero-divisible consequence
 `P^2<V*g^4*d`, and the eliminant identity `d^4*P*N=g^4*J(X,d)`.
-Independent exact arithmetic finds `w,N!=0` in all 3,024 cyclic positions of
-the 1,008 nonreflected triples at the live cutoff, but that finite ledger is
-not called kernel-banked because it has no ordinary-kernel wrapper.  The
-three component-square bounds still multiply with the wrong gap exponent.
+An ordinary-kernel certificate now covers all 3,024 cyclic positions of the
+1,008 nonreflected triples; a generic membership equivalence characterizes
+the generated set exactly as every valid nonreflected cyclic position in the
+six target rows.  Lean derives the padded residual-ratio interval
+and `X<=36d` from the exact block equation at the live cutoff, then proves
+`w,N!=0`.  A direct selected-three bridge now constructs the local product,
+third-obstruction, fourth-quotient, and normalized-fifth identities from an
+actual factorization `d=gPQR`, the three exact square residuals, and the block
+equation; in particular it proves the genuine consequence `P|N`.  Its
+all-owner corollary absorbs every omitted bucket into an explicit enlarged
+`g`, deliberately without inheriting the original bounded-loss estimate.
+Thus the configuration package is no longer a private premise, but the three
+simultaneous component-square bounds still multiply with the wrong gap
+exponent.  An independent exact sign reconstruction finds
+`sign(w)=-sign(C)` in all 3,024 positions and finds both canonical cyclic
+weighted sign triples mixed in every one of the 1,008 geometries; the
+all-nonzero mixed-sign branch is open.
 Exact Hensel fixtures
 at 121- and 1,004-digit gaps satisfy the entire congruence package while
 failing the equation and upper window, so no congruence-only fixed
@@ -127,8 +140,18 @@ For `k≥16`, the
 ratio window gives both `n>9d` and `kd<5n`.  Maximum-valuation owner
 matching across the exact lower and upper blocks compresses the whole lower
 block into `(k-1)!` times the lcm of
-`d-k+1,...,d+k-1`, including all small prime bases.  This forces two explicit
-lcm transition inequalities but does not close large `d`, because the host
+`d-k+1,...,d+k-1`, including all small prime bases.  The new exact interval
+theorem says that, for any positive interval of `m` consecutive integers
+with product `B` and lcm `L`,
+
+```text
+m!*L | B*lcm(1,...,m),       lcm(1,...,m) <= 4^m.
+```
+
+Combining it with the one-factorial compression and the equation-facing
+ratio lower bound excludes every `k>=16,d>=k` equation with
+`18d<=k^2`, for both parities.  Thus every live large-row solution satisfies
+the strict complement `k^2<18d`.  Beyond that quadratic strip the host
 interval still has `2k-1` possible differences.  A second composition uses
 the reflection center `S=2n+d+k+1`: after the parity coefficient and one
 factorial loss, every residual prime power lands on lower and upper owners
@@ -151,6 +174,23 @@ traps and ordinary-kernel finite-field covers close every admissible gap in
 rows `k=16,18,20,24,28,32`; the k=18, k=28, and k=32 covers are split into
 bounded shards and use no `native_decide`.  Centered pairing and an exact seven-term root bracket
 sharpen the large-row ratio window to `1218443kd<1853952n`.
+The quadratic strip does not directly meet the canonical Runge tail.  If
+`Q_r` is the monic polynomial part for `k=2r`, its first correction is
+`[X^(r-2)]Q_r=-r(4r^2-1)/6`, forcing the current coefficient threshold above
+`k^2/18` in every row.  The live row `k=34` is an exact route falsifier:
+the quadratic complement begins at `d=65`, and the exact bracket
+`1041616^34<4*1000000^34<1041617^34` together with both equation power
+windows forces `3091<=v<=3155`.  Even the optimistic leading-only comparison
+after the exact odd-center fixed divisor needs
+`v>=225186598141623936273745117` (the full coefficient norm needs
+`7629565936566640936850578356790181141762389`).  Parity weighting and a
+better general interval-lcm constant therefore do not bridge the gap; a new
+Laurent-term cancellation with gcd or owner-correlation gain is required.
+At `k=22`, a corrected shifted trap plus exact prime masks empties the
+`d>=250` parameter interval only as a 330,012,742-candidate Python bitset;
+three integral root fixtures refute the unrestricted `d>=27` mask route, and
+no feasible ordinary-kernel certificate exists yet.  This is recorded as a
+failed route, not a closed row.
 Every lower-block endpoint that is a prime power is impossible for every
 prime.  At an interior position the exact split-factorial valuation criterion
 is banked; in particular, every prime power with base `p>k` is excluded.
@@ -192,6 +232,21 @@ essential excluded boundary.  This dichotomy is arbitrary-modulus and
 kernel-banked, but it is conditional on a supplied matched owner: no banked
 theorem yet supplies a contradiction-producing owner or aggregates the
 surviving nonzero-residual edges.
+For an even row, a complete large-base component of the reflection center has
+an additional unconditional cofactor restriction.  If
+`H=2n+d+k+1=a*p^e`, `p>=k` is prime, and
+`b=a/gcd(a,d)`, then Lean proves
+
+```text
+gcd(a,d) | (k-1)!!,
+2*p^e < 5*(k-1)!!*b,
+38*d < 5*((k-1)!!)^2*b^2,
+1218443*k*d < 2317440*((k-1)!!)^2*b^2.
+```
+
+When `a|d`, `b=1` gives fixed-row exclusions.  In general no banked theorem
+bounds the gap-coprime quotient `b`; this exact unbounded parameter is the
+remaining obstruction to turning the center bounds into a uniform closure.
 Consequently every whole gap `d=p^e` with `e≥2` is impossible, as is every
 whole prime-power gap with `d≥3k`.  The same ceiling applies to every
 complete cleaned owner bucket.  Thus a whole two-large-prime gap
@@ -243,7 +298,12 @@ OPEN CORE (the two arms below are equivalently packaged as the single
    obstruction is nonzero, and the quotient-form theorem excludes every
    zero third quotient already from `d>=10^120`.  At the live `10^1000`
    boundary the center/reflected determinant removes 27 triples, leaving
-   exactly 1,008 nonreflected all-three-nonzero geometries.  For arbitrary
+   exactly 1,008 nonreflected all-three-nonzero geometries.  The 3,024 cyclic
+   fourth/fifth positions are now ordinary-kernel certified, and the exact
+   selected-three bridge constructs their quotient identities from the
+   factorization and equation, proves `P|N`, and proves `w,N!=0`.  Absorbing
+   additional owner buckets into `g` loses the bounded-loss estimate, and
+   simultaneous nonzero mixed-sign exclusion remains open.  For arbitrary
    complete owner families of
    cardinality `4..15`, exact second/third obstruction composition with the
    original loss is now banked, and the equation-level lower residual bound
@@ -269,9 +329,13 @@ OPEN CORE (the two arms below are equivalently packaged as the single
    `k=16,18,20,24,28,32`, every even tail above its explicit `M_r`, the exact
    split-factorial prime-power families, and every large-base owner
    `a*p^A` with `3707904a≤1218443k`.  The equation itself already supplies
-   smoothness, `1218443kd<1853952n`, the component and grouped-owner square
+   smoothness, `k^2<18d`, `1218443kd<1853952n`, the component and grouped-owner square
    ceilings, the strict all-prime high-component thresholds, and the
-   prime-power boundary restrictions.  The census fixtures remain
+   prime-power boundary restrictions.  In even rows, every complete
+   large-base reflection-center component satisfies the displayed
+   gcd/cofactor bounds, but `a/gcd(a,d)` remains unbounded.  The `k=34`
+   coefficient audit rules out direct composition of the quadratic strip
+   with the canonical Runge tail.  The census fixtures remain
    non-equations and do not discharge this arm.
 
 Lean proves that this single residual hypothesis implies the former

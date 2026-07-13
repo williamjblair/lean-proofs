@@ -9,6 +9,7 @@ import ErdosProblems.Erdos686EvenK32
 import ErdosProblems.Erdos686EvenTailSupply
 import ErdosProblems.Erdos686SmallPrimeBand
 import ErdosProblems.Erdos686CenteredRatioWindowSharp
+import ErdosProblems.Erdos686CenterComponentLogStrip
 import ErdosProblems.Erdos686LargePrimeGapComponent
 import ErdosProblems.Erdos686HighPrimePowerComponent
 import ErdosProblems.Erdos686PrimePowerBinomialBoundary
@@ -25,7 +26,8 @@ The odd arm starts only at `10^1000` and is supplied with the complete
 all-owner certificate, including nonzero second and third obstructions.  The
 large-row arm omits the six fully closed rows `16,18,20,24,28,32`; every remaining
 even row is restricted to the finite strip below its constructed Runge
-threshold; and all prime-power lower terms covered by the exact factorial-loss
+threshold; every parity is restricted to the strict complement `k^2 < 18*d`
+of the uniform quadratic strip; and all prime-power lower terms covered by the exact factorial-loss
 criterion, together with every large-base prime-power owner whose cofactor
 `a` satisfies the exact uniform bound `3707904a ≤ 1218443k`, have been removed.
 Every canonical prime-power component at least `k` is forced below its exact
@@ -57,6 +59,7 @@ def FinalResidual686Hypothesis : Prop :=
       (16 ≤ k ∧ k ≤ d ∧
         k ≠ 16 ∧ k ≠ 18 ∧ k ≠ 20 ∧ k ≠ 24 ∧ k ≠ 28 ∧ k ≠ 32 ∧
         1218443 * k * d < 1853952 * n ∧
+        k ^ 2 < 18 * d ∧
         (∀ r : ℕ, ∀ hr : 2 ≤ r, k = 2 * r →
           d < max (2 * r)
             (universalEvenTailCoefficientCertificate r hr).threshold) ∧
@@ -146,6 +149,10 @@ theorem no_gap_solution_large_k_of_finalResidual
     exact no_gap_solution_four_even_thirtytwo hd heq
   have hsharpWindow : 1218443 * k * d < 1853952 * n :=
     maximal_sharp_bracket_ratio_of_four_solution hk hd heq
+  have hquadraticStripComplement : k ^ 2 < 18 * d := by
+    by_contra hnot
+    have hstrip : 18 * d ≤ k ^ 2 := Nat.le_of_not_gt hnot
+    exact (no_four_solution_of_quadratic_strip hk hd hstrip) heq
   have hevenStrip : ∀ r : ℕ, ∀ hr : 2 ≤ r, k = 2 * r →
       d < max (2 * r)
         (universalEvenTailCoefficientCertificate r hr).threshold := by
@@ -250,6 +257,7 @@ theorem no_gap_solution_large_k_of_finalResidual
       hp hq hpq he hf hr8 hpk hqk hgap heq'
   exact hres k n d heq (Or.inr
     ⟨hk, hd, hk16, hk18, hk20, hk24, hk28, hk32, hsharpWindow,
+      hquadraticStripComplement,
       hevenStrip, hprimePower, hsmallCofactor, hlargePrimeComponents,
       hhighPrimePowerComponents, hgroupedOwners, hprimePowerBoundary,
       hlargeOddPell⟩)

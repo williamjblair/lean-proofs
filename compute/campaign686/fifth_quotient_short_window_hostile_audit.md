@@ -1,7 +1,8 @@
 # Hostile audit: Erdős 686 fifth-quotient short-window checkpoint
 
-Verdict: **PASS for the generic Lean consequences and exact-computational
-ledger; NOT LEAN-BANKED for the universal 3,024-position nonvanishing claim.**
+Verdict: **PASS for the generic Lean consequences and the ordinary-kernel
+3,024-position nonvanishing ledger, including the residual-ratio bridge from
+the exact block equation.**
 
 The checkpoint is a proper strengthening of the equation-facing
 three-bucket surface.  It does not prove the remaining simultaneous nonzero
@@ -28,21 +29,34 @@ target exact-three-bucket position
 +- Q5 exact eliminant                                            LEAN PASS
 |  `- d^4*P*N = g^4*J(X,d)
 |
-+- Q6 3,024-row coefficient and sign ledger                     EXACT PYTHON PASS
++- Q6 3,024-row coefficient and sign ledger                     LEAN PASS
 |  +- 1,008 nonreflected triples, three owners each
-|  +- zero critical points inside all rational intervals
-|  +- zero endpoint sign changes
-|  +- minimum leading margins > 1
-|  `- lower-degree majorants < 10^46
+|  +- exact rational interval enclosure of every leading form
+|  +- minimum certified leading separation > 1
+|  +- coarse lower-degree majorants < 10^80
+|  `- independent exact-Python critical-point reproduction
 |
-`- Q7 target cutoff d >= 10^1000                                EXACT PYTHON PASS
+`- Q7 target cutoff d >= 10^1000                                LEAN PASS
    `- leading margin*d^5 > remainder*d^4
 ```
 
-Q1--Q5 are kernel-checked generic theorems.  Q6--Q7 are deterministic exact
-integer/rational computations, not a Lean table certificate.  Therefore the
-combined statement “all 3,024 target-window fourth and fifth numerators are
-nonzero” is an exact-computational claim only in this checkpoint.
+Q1--Q7 are kernel checked.  The finite table is evaluated with ordinary
+kernel reduction, and the soundness layer proves both eliminants nonzero.
+The generic membership equivalence proves that its underlying set is exactly
+the valid cyclic nonreflected domain in rows `5,7,9,11,13,15`; separate
+ordinary-kernel theorems check every generated entry valid and the list length
+equal to `3024`.  The independent exact-Python loop reproduces the 1,008
+triple and 3,024-position counts.
+`fifth_target_localResidual_ratio_window` derives the padded ratio interval
+and `localResidual <= 36*d` from target-position membership, `d>=10^1000`,
+and the exact block equation.  The equation-specialized endpoint
+`fifth_quotient_target_equation_fourth_and_normalized_nonzero` concludes
+`w!=0` and `N!=0` once the displayed local configuration identities are
+supplied.  The separate direct selected-three bridge now derives those
+identities from an actual factorization, exact residual squares, and the block
+equation, and proves `P|N`.  Its all-owner corollary absorbs omitted buckets
+into an enlarged `g`; it does not preserve the bounded-loss estimate.  The
+remaining simultaneous cyclic exclusion is not supplied by either result.
 
 ## 2. Quantified bounds replacing informal uniformity
 
@@ -59,6 +73,9 @@ There is no use of “essentially bounded” or asymptotic notation.
   `5803459849500468008887094102834483923255296000 < 10^46`.
 - The worst fourth remainder sum is exactly
   `214942957388906222551373855660536441602048000 < 10^46`.
+- The Lean certificate uses deliberately coarser integer majorants and checks
+  both reconstructed remainder bounds are `<10^80` at every one of the 3,024
+  positions.
 - Both minimum leading margins are strictly greater than one, so
   `d>=10^1000` strictly dominates either remainder majorant.
 
@@ -99,10 +116,13 @@ The six row maxima are respectively
 
 Each is below `1000`, and the verifier checks exactly that
 `1000/10^1000 < 1/100`.  All endpoint values, correction bounds, and
-critical-point comparisons use `Fraction`, not floating point.  The lower
-endpoint absorbs the correction from the power window centered at `n+k`; the
-upper endpoint absorbs the correction from the power window centered at
-`n+1`.
+critical-point comparisons use `Fraction`, not floating point.  Independently,
+the Lean bridge linearizes the two exact natural power windows with the same
+adjacent brackets.  Target-position membership gives `1<=owner<=k`; the proof
+uses the stronger-than-needed consequence `4500<=d` to absorb every owner
+correction into the exact `1/100` padding.  The lower endpoint absorbs the
+correction from the power window centered at `n+k`; the upper endpoint absorbs
+the correction from the power window centered at `n+1`.
 
 ## 4. Sign certificate audit
 
@@ -117,6 +137,12 @@ and normalized fifth eliminants.
 Endpoint equality is treated as failure (`product <= 0`), not as a favorable
 sign.  The recorded minimum absolute endpoint margins are positive and frozen
 by pytest.
+
+The kernel certificate does not trust or formalize the derivative scan.  It
+uses signed termwise rational interval bounds for the sparse leading forms;
+the ordinary-kernel table checks that each resulting lower bound is `>1` or
+each upper bound is `<-1`.  The Python critical-point calculation is therefore
+an independent exact-arithmetic reproduction rather than a Lean dependency.
 
 ## 5. Algebra reconstruction audit
 
@@ -134,6 +160,12 @@ degree-five homogeneous coefficient dictionary against the displayed
 three-term form.  A coefficient mismatch raises an exception before a report
 is emitted.
 
+The Lean module independently reconstructs the first five affine-product
+coefficients with `FifthAffineCoefficients`.  The theorem
+`fifthLocalCoefficients_eq_localTaylor` identifies that recurrence with the
+banked Taylor coefficients `C,D,E,F,G`, so the finite table is connected to
+the actual eliminant identities rather than to a private coefficient oracle.
+
 ## 6. Hostile routes rejected
 
 - **Cyclic multiplication is exponent-wrong.**  The three inequalities
@@ -147,25 +179,37 @@ is emitted.
 - **`R1!=0` is not a proof that `w!=0`.**  Fourth nonvanishing is checked by a
   separate fourth eliminant ledger; it is not inferred from the normalized
   numerator.
-- **A Python exhaustive scan is not a kernel theorem.**  The absence of an
-  ordinary-`decide` or `norm_num` row certificate is recorded explicitly.
+- **The finite ledger is not the simultaneous exclusion.**  Kernel-banked
+  nonvanishing of each named `w` and `N` does not control the mixed signs or
+  prove that no three cyclic nonzero identities can hold together.
 
 ## 7. Axiom and forbidden-token boundary
 
-The direct Lean compile prints the five new theorem axiom sets within
+The direct Lean compile prints the finite-certificate, soundness, ratio-bridge,
+and equation-wrapper axiom sets within
 
 ```text
 [propext, Classical.choice, Quot.sound].
 ```
 
-No new `native_decide`, `sorry`, `admit`, custom `axiom`, `unsafe`, `extern`,
-or `implemented_by` construct is used.  The finite Python ledger cannot be
-promoted to the attested Lean surface until an ordinary-kernel certificate is
-added and checked.
+No new native evaluator shortcut, `sorry`, `admit`, custom `axiom`, `unsafe`,
+`extern`, or `implemented_by` construct is used.  The 3,024-position table and
+its cardinality are checked by ordinary-kernel reduction.  The headline
+theorems are:
+
+- `fifth_quotient_target_position_certificate`;
+- `fifth_quotient_target_position_count`;
+- `fifth_quotient_target_position_mem_iff`;
+- `fifth_quotient_target_eliminants_ne_zero`;
+- `fifth_target_localResidual_ratio_window`;
+- `fifth_quotient_target_equation_fourth_and_normalized_nonzero`.
+- `direct_selected_three_fifth_quotient_configuration`;
+- `allOwner_selected_three_fifth_quotient_configuration`.
 
 ## 8. Exact remaining gap
 
-After the exact-computational row scan, the unresolved statement is:
+After the kernel-banked row scan and equation-derived ratio bridge, the
+unresolved statement is:
 
 > For each of the 1,008 nonreflected target triples with `d>=10^1000`, exclude
 > the simultaneous system consisting of the three nonzero cyclic third,
@@ -174,10 +218,26 @@ After the exact-computational row scan, the unresolved statement is:
 
 No lemma equivalent to that statement is claimed here.
 
+The direct selected-three theorem now derives the full configuration package
+from exact selected-three data.  What remains is not package construction: it
+is a simultaneous magnitude/gcd contradiction across the three cyclic
+nonzero systems.  For a complete owner family with additional live buckets,
+the generic corollary constructs the package only after enlarging `g`, so the
+bounded-loss input needed by the existing size bounds is no longer available.
+The exact cyclic sign audit is not a closure: its weighted `w` and `N` signs
+are mixed in all 1,008 triples, with all 3,024 weights nonzero.
+
 ## 9. Reproduction
 
 ```bash
 lake env lean ErdosProblems/Erdos686FifthLocalLift.lean
+lake env lean ErdosProblems/Erdos686FifthQuotientKernelCertificate.lean
+lake env lean ErdosProblems/Erdos686FifthQuotientConfigurationBridge.lean
+lake build ErdosProblems.Erdos686FifthQuotientKernelCertificate
+PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider \
+  compute/campaign686/agent_fifth_configuration_bridge/test_fifth_configuration_bridge_verify.py
+PYTHONDONTWRITEBYTECODE=1 \
+  python3 -m compute.campaign686.agent_fifth_configuration_bridge.fifth_configuration_bridge_verify
 PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider \
   compute/campaign686/test_fifth_quotient_short_window_verify.py
 PYTHONDONTWRITEBYTECODE=1 \

@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:dca23769af78b2be06cacafff0d8b26ff063b2bc5af2912e32c23584a6cbd293",
+  "verifier_output_hash": "sha256:afbcf09884bed69a305964c6ccc71b6d0c1f3dea4c0ea3cd9f30ec6a076507ca",
   "attestations": [
     {
       "problem": 154,
@@ -8289,7 +8289,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.erdos686_false_of_finalResidual",
       "file": "ErdosProblems/Erdos686FinalResidual.lean",
-      "proof_hash": "sha256:de12ca2b49fca09efa4755cf21c8bb7c545d5b48041980c319a2247109619d2f",
+      "proof_hash": "sha256:c63e9323514d6520632ceced9bfe7b4b85ec77be450f2feffe941a7863c46032",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -8913,7 +8913,115 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.finalResidual_iff_tail1000_and_smooth",
       "file": "ErdosProblems/Erdos686FinalResidual.lean",
-      "proof_hash": "sha256:de12ca2b49fca09efa4755cf21c8bb7c545d5b48041980c319a2247109619d2f",
+      "proof_hash": "sha256:c63e9323514d6520632ceced9bfe7b4b85ec77be450f2feffe941a7863c46032",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fifth_quotient_target_position_certificate",
+      "file": "ErdosProblems/Erdos686FifthQuotientKernelCertificate.lean",
+      "proof_hash": "sha256:bbf4177c6cef92647c03b02bd9aec65693725c3c37ea8428213f1471985da553",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fifth_quotient_target_position_mem_iff",
+      "file": "ErdosProblems/Erdos686FifthQuotientKernelCertificate.lean",
+      "proof_hash": "sha256:bbf4177c6cef92647c03b02bd9aec65693725c3c37ea8428213f1471985da553",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fifth_quotient_target_equation_fourth_and_normalized_nonzero",
+      "file": "ErdosProblems/Erdos686FifthQuotientKernelCertificate.lean",
+      "proof_hash": "sha256:bbf4177c6cef92647c03b02bd9aec65693725c3c37ea8428213f1471985da553",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.direct_selected_three_fifth_quotient_configuration",
+      "file": "ErdosProblems/Erdos686FifthQuotientConfigurationBridge.lean",
+      "proof_hash": "sha256:e67c2bc2578850c4c972b5a10d2cd87cdae5ca89edcea729b11d3b5e97d103ba",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.allOwner_selected_three_fifth_quotient_configuration",
+      "file": "ErdosProblems/Erdos686FifthQuotientConfigurationBridge.lean",
+      "proof_hash": "sha256:e67c2bc2578850c4c972b5a10d2cd87cdae5ca89edcea729b11d3b5e97d103ba",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.initialLcm_le_four_pow",
+      "file": "ErdosProblems/Erdos686CenterComponentLogStrip.lean",
+      "proof_hash": "sha256:403ca583701c0df2641bed55ce6cbf85e0591cb1d535d94ef6d267b6cd889be5",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_four_solution_of_quadratic_strip",
+      "file": "ErdosProblems/Erdos686CenterComponentLogStrip.lean",
+      "proof_hash": "sha256:403ca583701c0df2641bed55ce6cbf85e0591cb1d535d94ef6d267b6cd889be5",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.gcd_gap_reflectionCenter_dvd_oddDoubleFactorial",
+      "file": "ErdosProblems/Erdos686CenterComponentLogStrip.lean",
+      "proof_hash": "sha256:403ca583701c0df2641bed55ce6cbf85e0591cb1d535d94ef6d267b6cd889be5",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.even_reflectionCenter_gapCoprimeQuotient_sharp_gap_bound",
+      "file": "ErdosProblems/Erdos686EvenCenterGapCofactor.lean",
+      "proof_hash": "sha256:6f3caf3916b5e78018d09c8481dcc8e21fa58e67e943d966bea69752bd3da651",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
