@@ -1,6 +1,43 @@
-# Prompt: the uniform incomplete-block digit-count lemma (Erdős #730)
+# Superseded prompt: the uniform incomplete-block digit-count lemma (Erdős #730)
 
-## Current task statement — corrected after exact falsification
+## Status — closed as a live target on 2026-07-13
+
+This prompt is no longer the open core.  A new positive-density proof has
+passed hostile paper audit and exact-arithmetic reproduction without using the
+false uniform estimate requested below.  The durable replacement is:
+
+- `compute730/full_density/proof.md` — self-contained cleaned proof;
+- `compute730/full_density/dependency_tree.md` — imported and proved nodes;
+- `compute730/full_density/audit.md` — quantified per-node hostile audit;
+- `compute730/full_density/verify.py` and `test_verify.py` — exact certificate;
+- `ErdosProblems/Erdos730FullDensityReduction.lean` — exact one-lemma reduction
+  to the upstream theorem.
+
+The proof separates limits in the order needed to avoid every counterexample
+below: `a>=2` by dominated convergence, then fixed `r` for `a=1`, then a
+uniform depth tail, followed by a transition estimate and fixed-modulus
+divisor switching.  The old counterexamples remain part of the regression
+suite and continue to falsify the old lemma.
+
+The current kernel intake boundary is the single quantified proposition
+
+```text
+Erdos730.FullDensityReduction.CandidatePositiveDensityClaim:
+  107/2500 < liminf_X
+    #{1<=x<=X : primeFactors(B(n_x))=primeFactors(B(n_x+1))}/X,
+```
+
+for the explicit quadratic family in `Erdos730FullDensityCore.lean`.  The
+repository proves that proposition implies the exact upstream infinite-set
+statement.  It is not yet an unconditional Lean theorem because the pinned
+library does not contain the reciprocal-prime Mertens theorem or the required
+fixed-modulus PNT in arithmetic progressions.  Do not revive the old target or
+register the headline theorem as kernel-proved until that analytic chain is
+formalized.
+
+The remainder of this file is retained verbatim as the falsification record.
+
+## Historical task statement — corrected after exact falsification
 
 An audited proof skeleton (`compute730/audit.md`) reduces “infinitely many
 consecutive pairs `(n,n+1)` whose central binomial coefficients share prime

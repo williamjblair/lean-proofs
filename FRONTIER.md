@@ -453,35 +453,67 @@ large primes — parked.
 
 ## Erdős #730 — same prime support of consecutive central binomials
 
-Status: claimed proof AUDITED; its decisive uniform incomplete-block
-lemma is FALSE as quantified.  On the Q branch, `a=2r` makes the map
-affine modulo `p^(2r)`, and translated intervals contain exponentially
-more restricted outputs than the claimed density, even after retaining
-the exact valuation.  A stronger progression construction fixes the low
-`s=max(2r-a,0)` output digits first and extends the obstruction through
-`s/r<kappa_p/(1-kappa_p)`.  Its exact `p=5,r=432,s=176` witness lies in the
-former separated range and refutes the proposed signed Fourier inequality
-itself by a factor above `1.164`.  This does not refute Erdős #730.  The
-maximal-r valuation payment has therefore been enlarged uniformly to the
-full strict high-valuation band `s<r`; it remains paper-proved and
-exact-audited below `0.01` for every `X>=2^57`.  The band forces
-`r+1<=a`, so Lean checks the clean threshold `X<2B^2(p^a)^2`, dyadic step
-certificates, and the exact endpoint payment `0.0048569067...`.  The infinite reciprocal-tail
-aggregation and real root/floor monotonic transfer remain outside the kernel;
-the corrected aligned-block argument now pays the full higher-power part
-`2<=a<=r` of the complementary range by less than `174/625`, across all four
-branches.  The sharper `6/5` endpoint normalization, exact quadratic block
-identity, and terminal budget arithmetic are kernel-banked; the digit count,
-166-prime rational certificate, tail, and branch aggregation remain
-paper/exact rather than kernel-expanded.  The only unpaid exponent slice is
-maximal-`r` `a=1`; together with an explicitly defined short/top contribution
-it must total at most `1779/2500-delta`.  The intake must also prove the common
-event-multiplicity coverage bridge before summing those categories.  Exact
-sparse Gauss completion is
-audited, but its triangle majorant is exponentially insufficient for
-`p=5,7,11`; a new signed estimate with a payable error is required.  Bonus
-banked: 1,556 certified consecutive
-pairs via the sound Kummer criterion.
+Status: **FULL PAPER PROOF HOSTILE-AUDIT PASS; exact certificates PASS;
+unconditional Lean headline remains OPEN.**  The durable proof, dependency
+tree, per-node hostile audit, and exact verifier are in
+`compute730/full_density/`.  The frozen submitted source has SHA-256
+`3df2e48ca62e35dbfbd25406badf37574d910efb2ab39360ab3458f3a31c4292`.
+The new proof gives the explicit family
+
+```text
+T=5289,
+P=42Tx+11, Q=72Tx+13, R=28Tx+5, S=72Tx+19,
+n_x=P(x)Q(x)-1,
+liminf Good(X)/X > 107/2500.
+```
+
+It genuinely bypasses the falsified uniform incomplete-block lemma.  All
+`a>=2` events are handled by a complete-block bound followed by dominated
+convergence.  For `a=1`, the Fourier estimate is used only at each fixed digit
+depth `r`; a separate uniform `r`-tail is then taken.  The transition interval
+`sqrt(X)<p<=sqrt(X)(log X)^2` is negligible, and divisor switching in the top
+range uses fixed-modulus PNT-AP only for moduli `222138` and `148092`.  Thus no
+estimate is asserted uniformly in valuation, digit depth, and translated
+interval.  The former `p=5,r=432,s=176,a=688` witness and all other recorded
+counterexamples remain valid against the old lemma and now pass as regression
+tests for the new routing.
+
+The exact constant node is
+
+```text
+4*S + (2/3) log 2
+  < 21498408212212214497 / 22462131847034880000
+  < 2393/2500,
+```
+
+with positive rational margin
+`2344391769572639 / 22462131847034880000`.  The new and legacy exact suite has
+119 passing tests.
+
+Kernel-banked modules now include the exact four-branch arithmetic and
+injective map into the upstream target (`Erdos730FullDensityCore`), the full
+consecutive-transition iff and pointwise bad-event coverage
+(`Erdos730ConsecutiveTransition`), the full infinite logarithmic-series budget
+(`Erdos730FullDensityBudget`), generic p-adic isometry and digit-box
+cardinality (`Erdos730PadicIsometry`), the higher-power Tannery and sublinear
+terminal-count layer (`Erdos730DominatedLimit`), and the density-to-infinitude
+bridge.  Their audit modules expose only
+`[propext, Classical.choice, Quot.sound]`; no `native_decide` is used.  The
+single explicit Lean intake boundary is
+`Erdos730.FullDensityReduction.CandidatePositiveDensityClaim`, expanded as
+
+```text
+107/2500 < liminf_X
+  #{1<=x<=X : primeFactors(B(n_x))=primeFactors(B(n_x+1))}/X.
+```
+
+`pairSet_infinite_of_candidatePositiveDensity` proves the exact upstream
+infinitude target from this one claim.  The pinned mathlib supplies Kummer's
+factorization identity but not the reciprocal-prime Mertens theorem or the
+fixed-modulus prime number theorem in arithmetic progressions used by the
+paper; the remaining work is kernel formalization of that analytic chain, not
+a paper-level mathematical gap.  The old live uniform-lemma prompt is
+superseded and retained only as a falsification record.
 
 ## Erdős #64 — cycles of length 2^k under min degree 3
 

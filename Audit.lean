@@ -106,6 +106,16 @@ import ErdosProblems.Erdos730UnitBandPayment
 import ErdosProblems.Erdos730UnitBandPaymentAudit
 import ErdosProblems.Erdos730UnitRangeBlockAudit
 import ErdosProblems.Erdos730FirstPowerRoutesAudit
+import ErdosProblems.Erdos730KummerTransitionAudit
+import ErdosProblems.Erdos730ConsecutiveTransitionAudit
+import ErdosProblems.Erdos730FullDensityCoreAudit
+import ErdosProblems.Erdos730ObstructionMapsAudit
+import ErdosProblems.Erdos730PadicIsometryAudit
+import ErdosProblems.Erdos730HigherPowerCountAudit
+import ErdosProblems.Erdos730DominatedLimitAudit
+import ErdosProblems.Erdos730FullDensityBudgetAudit
+import ErdosProblems.Erdos730FixedDepthParityAudit
+import ErdosProblems.Erdos730FullDensityReductionAudit
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727
 
@@ -722,6 +732,25 @@ import ErdosProblems.Erdos727
 #print axioms Erdos730.FirstPowerRoutes.s_top_two_digit_large
 #print axioms Erdos730.FirstPowerRoutes.improved_higher_power_ceiling_lt_three_tenths
 #print axioms Erdos730.FirstPowerRoutes.remaining_first_power_budget
+#print axioms Erdos730.KummerTransition.not_dvd_centralBinom_iff_lowerHalfDigits
+#print axioms Erdos730.ConsecutiveTransition.consecutive_primeFactors_eq_iff_transitionConditions
+#print axioms Erdos730.ConsecutiveTransition.exists_obstruction_of_primeFactors_ne
+#print axioms Erdos730.FullDensityCore.product_identity
+#print axioms Erdos730.FullDensityCore.branches_pairwise_coprime
+#print axioms Erdos730.FullDensityCore.switching_allowed_class_count_certificate
+#print axioms Erdos730.ObstructionMaps.PhiP_root_progression
+#print axioms Erdos730.ObstructionMaps.PhiQ_root_progression
+#print axioms Erdos730.ObstructionMaps.PhiR_root_progression
+#print axioms Erdos730.ObstructionMaps.PhiS_root_progression
+#print axioms Erdos730.ObstructionMaps.prime_dvd_residual_support
+#print axioms Erdos730.padicBranchMap_bijective
+#print axioms Erdos730.restrictedDigitBox_card
+#print axioms Erdos730.padicBranchAllowedCount_le
+#print axioms Erdos730.higherPrimePowerPairs_card_le
+#print axioms Erdos730.tendsto_tsum_higherPower_of_dominated
+#print axioms Erdos730.tendsto_higherPrimePowerPairs_card_div
+#print axioms Erdos730.densityBudget_final_lt
+#print axioms Erdos730.halfDigitParity_probabilityError
 #print axioms Erdos617.Balanced.no_monochromatic_clique
 #print axioms Erdos617.Balanced.sum_le_sq
 #print axioms Erdos617.statement_five_of_extension_demand
@@ -875,6 +904,7 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_finalResidual
 
 -- Conditional research surfaces; not listed in `proofs.yaml`.
+#print axioms Erdos730.FullDensityReduction.pairSet_infinite_of_candidatePositiveDensity
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_twentytwo_of_large_obstruction
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_tail1000_and_smooth
 #print axioms Erdos686.Erdos686Variant.exactRatio_target_three_bucket_all_third_obstructions_nonzero

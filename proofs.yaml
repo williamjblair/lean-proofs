@@ -6977,3 +6977,185 @@ proofs:
       explicit gap bound after its cofactor is divided by its gcd with d.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730KummerTransition.lean
+    theorem: Erdos730.KummerTransition.not_dvd_centralBinom_iff_lowerHalfDigits
+    statement: >-
+      For every odd prime p, p is absent from the central binomial
+      coefficient of t exactly when every base-p digit of t lies in the
+      lower half; this is the kernel-checked Kummer transition used by the
+      full-density proof.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FullDensityCore.lean
+    theorem: Erdos730.FullDensityCore.product_identity
+    statement: >-
+      The explicit four-linear-form family satisfies the exact product
+      identity 2 P(x) Q(x) = 3 R(x) S(x) + 1 for every parameter x.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FullDensityCore.lean
+    theorem: Erdos730.FullDensityCore.branches_pairwise_coprime
+    statement: >-
+      The four branch values P(x), Q(x), R(x), and S(x) in the explicit
+      positive-density family are pairwise coprime for every parameter x.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FullDensityCore.lean
+    theorem: Erdos730.FullDensityCore.switching_allowed_class_count_certificate
+    statement: >-
+      Exact finite enumeration certifies 20160 allowed reduced classes modulo
+      222138 and 13440 allowed reduced classes modulo 148092 in the top-prime
+      divisor-switching step.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730PadicIsometry.lean
+    theorem: Erdos730.padicBranchMap_bijective
+    statement: >-
+      A quadratic branch map whose quadratic part is divisible by p and whose
+      residual linear coefficient is a p-adic unit permutes every residue
+      system modulo p to the j.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730PadicIsometry.lean
+    theorem: Erdos730.restrictedDigitBox_card
+    statement: >-
+      Removing one allowed endpoint from the first digit of a depth-d digit
+      box leaves exactly (H-1) times H to the d-1 admissible strings.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FullDensityBudget.lean
+    theorem: Erdos730.densityBudget_final_lt
+    statement: >-
+      The complete infinite logarithmic-series certificate proves that four
+      times the small-prime budget plus two-thirds log 2 is strictly below
+      2393 over 2500.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FixedDepthParity.lean
+    theorem: Erdos730.halfDigitParity_probabilityError
+    statement: >-
+      For the odd half-digit alphabet, the exact normalized even-parity
+      discrepancy at depth d is one over twice the d-th power of the alphabet
+      size.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730HigherPowerCount.lean
+    theorem: Erdos730.padicBranchAllowedCount_le
+    statement: >-
+      A consecutive parameter interval meets an allowed p-adic branch-map
+      digit box at most the number of padded complete blocks times the exact
+      full-period digit-box count, including depth zero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    theorem: Erdos730.ObstructionMaps.PhiP_root_progression
+    statement: >-
+      Substitution along a P-branch prime-power root progression gives the
+      exact common quadratic branch map with residual coefficient -246T.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    theorem: Erdos730.ObstructionMaps.PhiQ_root_progression
+    statement: >-
+      Substitution along a Q-branch prime-power root progression gives the
+      exact common quadratic branch map with residual coefficient 246T.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    theorem: Erdos730.ObstructionMaps.PhiR_root_progression
+    statement: >-
+      Substitution along an R-branch prime-power root progression gives the
+      exact common quadratic branch map with residual coefficient 258T.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    theorem: Erdos730.ObstructionMaps.PhiS_root_progression
+    statement: >-
+      Substitution along an S-branch prime-power root progression gives the
+      exact common quadratic branch map with residual coefficient -258T.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    theorem: Erdos730.ObstructionMaps.prime_dvd_residual_support
+    statement: >-
+      Every prime divisor of the four residual linear coefficients belongs to
+      the exact exceptional set 2, 3, 41, 43.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730HigherPowerCount.lean
+    theorem: Erdos730.higherPrimePowerPairs_card_le
+    statement: >-
+      The finite number of prime-power pairs with exponent at least two and
+      p to the a at most Z is bounded by the square-root row plus the exact
+      cube-root and binary-logarithm rectangle.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730ConsecutiveTransition.lean
+    theorem: Erdos730.ConsecutiveTransition.consecutive_primeFactors_eq_iff_transitionConditions
+    statement: >-
+      For every positive n, equality of the prime-factor sets of the two
+      consecutive central binomial coefficients is equivalent to the exact
+      odd-prime drop and entry cofactor conditions.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730ConsecutiveTransition.lean
+    theorem: Erdos730.ConsecutiveTransition.exists_obstruction_of_primeFactors_ne
+    statement: >-
+      If the two consecutive central binomial coefficients have different
+      prime support, a fully quantified drop or entry obstruction witnesses
+      the failure; this is the exact event-coverage implication Bad into E.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730DominatedLimit.lean
+    theorem: Erdos730.tendsto_tsum_higherPower_of_dominated
+    statement: >-
+      Tannery dominated convergence applies to nonnegative higher-prime-power
+      contributions bounded by the summable exact majorant 2 over p to the a
+      for exponents a at least two.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730DominatedLimit.lean
+    theorem: Erdos730.tendsto_higherPrimePowerPairs_card_div
+    statement: >-
+      The number of prime-power pairs with exponent at least two and value at
+      most Z is sublinear in Z, closing the normalized terminal-pair count.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean

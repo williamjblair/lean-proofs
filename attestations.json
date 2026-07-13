@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:1a5de88f13e3541be76108c0d4e5b1e3d2bab1526434311e521bf5f7d97f7e25",
+  "verifier_output_hash": "sha256:8819648bc9254603e8b38fda4f0491bddaac86d80a486e375673d815be85ed02",
   "attestations": [
     {
       "problem": 154,
@@ -9058,6 +9058,232 @@
       "theorem": "Erdos686.Erdos686Variant.even_reflectionCenter_gapCoprimeQuotient_sharp_gap_bound",
       "file": "ErdosProblems/Erdos686EvenCenterGapCofactor.lean",
       "proof_hash": "sha256:6f3caf3916b5e78018d09c8481dcc8e21fa58e67e943d966bea69752bd3da651",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.KummerTransition.not_dvd_centralBinom_iff_lowerHalfDigits",
+      "file": "ErdosProblems/Erdos730KummerTransition.lean",
+      "proof_hash": "sha256:d3f40912e6485df5c41544a928efab9da5b0ef81197150d4eeffe4d58fbeea30",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FullDensityCore.product_identity",
+      "file": "ErdosProblems/Erdos730FullDensityCore.lean",
+      "proof_hash": "sha256:ede9fea84a7f522ee737fa0b76d8caa7301e704decfd74e086e4c8fe7ae5dbe4",
+      "axiom_footprint": [
+        "propext"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FullDensityCore.branches_pairwise_coprime",
+      "file": "ErdosProblems/Erdos730FullDensityCore.lean",
+      "proof_hash": "sha256:ede9fea84a7f522ee737fa0b76d8caa7301e704decfd74e086e4c8fe7ae5dbe4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FullDensityCore.switching_allowed_class_count_certificate",
+      "file": "ErdosProblems/Erdos730FullDensityCore.lean",
+      "proof_hash": "sha256:ede9fea84a7f522ee737fa0b76d8caa7301e704decfd74e086e4c8fe7ae5dbe4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.padicBranchMap_bijective",
+      "file": "ErdosProblems/Erdos730PadicIsometry.lean",
+      "proof_hash": "sha256:a9129736d6aa2c395d4d0166db04e085f6bcb7789c944948d2b3f1f31890be52",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.restrictedDigitBox_card",
+      "file": "ErdosProblems/Erdos730PadicIsometry.lean",
+      "proof_hash": "sha256:a9129736d6aa2c395d4d0166db04e085f6bcb7789c944948d2b3f1f31890be52",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.densityBudget_final_lt",
+      "file": "ErdosProblems/Erdos730FullDensityBudget.lean",
+      "proof_hash": "sha256:40b7da6cf5f9db0302f8084c98298b32019e9d0af8e8c76dcaa4290b59305292",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.halfDigitParity_probabilityError",
+      "file": "ErdosProblems/Erdos730FixedDepthParity.lean",
+      "proof_hash": "sha256:86b672b51d22755b63c9607e1e5adecdf84c32f6f6e5e0b5775119f65e8eec9f",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.padicBranchAllowedCount_le",
+      "file": "ErdosProblems/Erdos730HigherPowerCount.lean",
+      "proof_hash": "sha256:451573d5100bc511a924043f8bf707601d504cf72224069c215c9d7160870cfc",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.ObstructionMaps.PhiP_root_progression",
+      "file": "ErdosProblems/Erdos730ObstructionMaps.lean",
+      "proof_hash": "sha256:eabbab4a2828069f257acf145e7f5c1529a9840de7c9f06b83abe40282c42596",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.ObstructionMaps.PhiQ_root_progression",
+      "file": "ErdosProblems/Erdos730ObstructionMaps.lean",
+      "proof_hash": "sha256:eabbab4a2828069f257acf145e7f5c1529a9840de7c9f06b83abe40282c42596",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.ObstructionMaps.PhiR_root_progression",
+      "file": "ErdosProblems/Erdos730ObstructionMaps.lean",
+      "proof_hash": "sha256:eabbab4a2828069f257acf145e7f5c1529a9840de7c9f06b83abe40282c42596",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.ObstructionMaps.PhiS_root_progression",
+      "file": "ErdosProblems/Erdos730ObstructionMaps.lean",
+      "proof_hash": "sha256:eabbab4a2828069f257acf145e7f5c1529a9840de7c9f06b83abe40282c42596",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.ObstructionMaps.prime_dvd_residual_support",
+      "file": "ErdosProblems/Erdos730ObstructionMaps.lean",
+      "proof_hash": "sha256:eabbab4a2828069f257acf145e7f5c1529a9840de7c9f06b83abe40282c42596",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.higherPrimePowerPairs_card_le",
+      "file": "ErdosProblems/Erdos730HigherPowerCount.lean",
+      "proof_hash": "sha256:451573d5100bc511a924043f8bf707601d504cf72224069c215c9d7160870cfc",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.ConsecutiveTransition.consecutive_primeFactors_eq_iff_transitionConditions",
+      "file": "ErdosProblems/Erdos730ConsecutiveTransition.lean",
+      "proof_hash": "sha256:4c677c70f40721a235e508d2e42b2aad2584046abf43f0371775226bd9d2e1e6",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.ConsecutiveTransition.exists_obstruction_of_primeFactors_ne",
+      "file": "ErdosProblems/Erdos730ConsecutiveTransition.lean",
+      "proof_hash": "sha256:4c677c70f40721a235e508d2e42b2aad2584046abf43f0371775226bd9d2e1e6",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.tendsto_tsum_higherPower_of_dominated",
+      "file": "ErdosProblems/Erdos730DominatedLimit.lean",
+      "proof_hash": "sha256:3c3a7bbd8458dac79adb281adaf0f67dbc2db53be34896c080d35cc3ed8aa20d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.tendsto_higherPrimePowerPairs_card_div",
+      "file": "ErdosProblems/Erdos730DominatedLimit.lean",
+      "proof_hash": "sha256:3c3a7bbd8458dac79adb281adaf0f67dbc2db53be34896c080d35cc3ed8aa20d",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

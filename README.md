@@ -28,6 +28,24 @@ lake build
 bash scripts/check_axioms.sh
 ```
 
+## Erdős #730 full-density intake
+
+The explicit positive-density proof submitted on 2026-07-13 has passed the
+repository's hostile paper audit and exact-arithmetic reproduction.  Its
+family algebra, Kummer digit criterion, exact consecutive-transition and
+event-coverage theorems, generic p-adic permutation, finite digit counts,
+higher-power dominated-limit machinery, infinite numerical budget, and
+density-to-infinitude reduction are kernel-banked under the standard
+three-axiom gate.  See
+`compute730/full_density/` and `ErdosProblems/Erdos730FullDensityReduction.lean`.
+
+The unconditional headline is deliberately not advertised in `proofs.yaml`:
+the pinned Mathlib release lacks the reciprocal-prime Mertens asymptotic and
+fixed-modulus PNT in arithmetic progressions needed to formalize the analytic
+counting chain.  The exact remaining Lean proposition is
+`Erdos730.FullDensityReduction.CandidatePositiveDensityClaim`; the repository
+proves that it implies the exact Formal Conjectures infinite-set target.
+
 ## Index
 
 | Problem | Theorem | Statement | FC |
