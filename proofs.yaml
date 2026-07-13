@@ -6136,6 +6136,124 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686FifthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_opposite_third_quotient_lt
+    statement: >-
+      The exact opposite-product identity and short-window input bounds give
+      an explicit bound on the opposite cofactor times a third quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_fourth_quotient_abs_lt
+    statement: >-
+      A named reduced fourth quotient is bounded explicitly by the opposite
+      component product and the cleaning loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_normalized_fifth_numerator_abs_lt
+    statement: >-
+      The normalized fifth numerator inherits an explicit linear bound from
+      the named fourth quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_component_sq_lt_of_normalized_fifth
+    statement: >-
+      A nonzero normalized fifth numerator divisible by its owner component
+      yields the explicit component-square bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_normalized_fifth_eliminant_identity
+    statement: >-
+      Eliminating the named third and fourth quotients gives an exact sparse
+      polynomial identity for the normalized fifth numerator.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchedOwnerDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.matchedOwner_sharp_cofactor_ratio
+    statement: >-
+      A supplied modulus matched between lower and upper owners satisfies the
+      exact sharp cofactor ratio, in particular forcing its offset below its
+      lower cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchedOwnerDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.matchedOwnerLinearResidual_dvd
+    statement: >-
+      Every supplied matched modulus divides the exact signed first residual
+      obtained from the equation's local square lift.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchedOwnerDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.matchedOwner_nonzero_residual_gap_bound
+    statement: >-
+      A nonzero matched-owner linear residual gives an explicit
+      cofactor-sensitive upper bound on the gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchedOwnerDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.matchedOwnerQuadraticCoefficient_dvd_of_normalized_match
+    statement: >-
+      After an exact normalized matched-owner linear cancellation, the common
+      scale divides the fixed quadratic coefficient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchedOwnerDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.matchedOwnerQuadraticCoefficient_ne_zero_of_ratio_lt_two
+    statement: >-
+      In the sharp normalized range B less than A less than 2B, the fixed
+      quadratic coefficient cannot vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchedOwnerDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.matchedOwner_zero_residual_fixed_coefficient_bound
+    statement: >-
+      A normalized zero first residual forces the common scale to divide a
+      nonzero fixed coefficient and bounds the original gap explicitly.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchedOwnerDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.matchedOwner_zero_residual_gcd_normalization
+    statement: >-
+      A raw vanishing matched-owner residual admits the exact gcd-reduced
+      slope normalization and its fixed-coefficient gap bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchedOwnerDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.suppliedOwner_matched_residual_dichotomy
+    statement: >-
+      Every supplied matched modulus lies in either the quantitative nonzero
+      linear-residual branch or the gcd-normalized fixed-coefficient branch.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686ReflectedThreeBucketDeterminant.lean
     theorem: Erdos686.Erdos686Variant.no_four_solution_of_exact_center_reflected_three_bucket_tail1000
     statement: >-

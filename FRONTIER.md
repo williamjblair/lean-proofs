@@ -99,7 +99,15 @@ The fifth lift is now normalized exactly rather than treated as a possible
 fixed resultant.  Lean proves `R5(d)=27*K4+d*R1+d^2*R2`; after writing
 `d=P*M` and the reduced fourth numerator as `P*w`, the reduced fifth square
 divisibility is equivalent to `P|27*w+M*R1*g^4`.  The new fourth quotient
-`w` is not controlled by the third-quotient lattice.  Exact Hensel fixtures
+`w` is not controlled by the third-quotient lattice.  Lean now also proves
+the exact opposite-product bound, the induced bounds
+`|w|<W*g^4*M`, `|N|<V*g^4*M`, the nonzero-divisible consequence
+`P^2<V*g^4*d`, and the eliminant identity `d^4*P*N=g^4*J(X,d)`.
+Independent exact arithmetic finds `w,N!=0` in all 3,024 cyclic positions of
+the 1,008 nonreflected triples at the live cutoff, but that finite ledger is
+not called kernel-banked because it has no ordinary-kernel wrapper.  The
+three component-square bounds still multiply with the wrong gap exponent.
+Exact Hensel fixtures
 at 121- and 1,004-digit gaps satisfy the entire congruence package while
 failing the equation and upper window, so no congruence-only fixed
 resultant is counted.
@@ -171,6 +179,19 @@ at least `k`.  The corollary `no_four_solution_primePowerGap` also kernel-closes
 the explicit family `d=p^(k+t)` for every prime `p`, every `k≥16`, and every
 natural `t,n`.  This is a proper uniform restriction, not the full solution:
 gaps whose components all miss their thresholds remain.
+For any supplied positive modulus `q` with matched lower and upper owners
+`n+i=a*q` and `n+d+j=(a+b)*q`, the sharp window first gives
+`1218443*k*b<3707904*a`, hence `0<b<a`.  Lean then proves that `q` divides
+the exact signed linear residual `D`.  If `D!=0`, this yields the explicit
+cofactor-sensitive gap bound
+`1218443*k*d < 3707904*a^2*(C_j+2*C_i)`.  If `D=0`, gcd normalization gives
+`a=B*w`, `a+b=A*w`, `B<A<2B`, and `Z=w*q`; the next coefficient
+`c2=A^2*E_j-4*B^2*E_i` is nonzero, `Z|c2`, and
+`d≤(A-B)*|c2|+k-1`.  The abstract odd-center equality with ratio four is the
+essential excluded boundary.  This dichotomy is arbitrary-modulus and
+kernel-banked, but it is conditional on a supplied matched owner: no banked
+theorem yet supplies a contradiction-producing owner or aggregates the
+surviving nonzero-residual edges.
 Consequently every whole gap `d=p^e` with `e≥2` is impossible, as is every
 whole prime-power gap with `d≥3k`.  The same ceiling applies to every
 complete cleaned owner bucket.  Thus a whole two-large-prime gap

@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:c42bee6edb584bf904d847c75075e6d8357128c2d08812ad0c486475a22ac907",
+  "verifier_output_hash": "sha256:dca23769af78b2be06cacafff0d8b26ff063b2bc5af2912e32c23584a6cbd293",
   "attestations": [
     {
       "problem": 154,
@@ -7932,7 +7932,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.target_three_bucket_fifth_obstruction_dvd_fourth",
       "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
-      "proof_hash": "sha256:7894bb7f20d2ba38791eb0c7d5b9f5a6471d7389afba33a5a72084eaff1fab78",
+      "proof_hash": "sha256:06e079504af6f44e53ad51b0643df47b7abe92de1c0139c3273cbdd0602288f5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -7944,7 +7944,160 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.three_bucket_reduced_fifth_normalized_quotient_iff",
       "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
-      "proof_hash": "sha256:7894bb7f20d2ba38791eb0c7d5b9f5a6471d7389afba33a5a72084eaff1fab78",
+      "proof_hash": "sha256:06e079504af6f44e53ad51b0643df47b7abe92de1c0139c3273cbdd0602288f5",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_opposite_third_quotient_lt",
+      "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
+      "proof_hash": "sha256:06e079504af6f44e53ad51b0643df47b7abe92de1c0139c3273cbdd0602288f5",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_fourth_quotient_abs_lt",
+      "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
+      "proof_hash": "sha256:06e079504af6f44e53ad51b0643df47b7abe92de1c0139c3273cbdd0602288f5",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_normalized_fifth_numerator_abs_lt",
+      "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
+      "proof_hash": "sha256:06e079504af6f44e53ad51b0643df47b7abe92de1c0139c3273cbdd0602288f5",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_component_sq_lt_of_normalized_fifth",
+      "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
+      "proof_hash": "sha256:06e079504af6f44e53ad51b0643df47b7abe92de1c0139c3273cbdd0602288f5",
+      "axiom_footprint": [
+        "propext"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_normalized_fifth_eliminant_identity",
+      "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
+      "proof_hash": "sha256:06e079504af6f44e53ad51b0643df47b7abe92de1c0139c3273cbdd0602288f5",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchedOwner_sharp_cofactor_ratio",
+      "file": "ErdosProblems/Erdos686MatchedOwnerDichotomy.lean",
+      "proof_hash": "sha256:c608c9b1bf6f506c9735b5b47a24e3261f62907589bc95074acaf6ab6000600b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchedOwnerLinearResidual_dvd",
+      "file": "ErdosProblems/Erdos686MatchedOwnerDichotomy.lean",
+      "proof_hash": "sha256:c608c9b1bf6f506c9735b5b47a24e3261f62907589bc95074acaf6ab6000600b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchedOwner_nonzero_residual_gap_bound",
+      "file": "ErdosProblems/Erdos686MatchedOwnerDichotomy.lean",
+      "proof_hash": "sha256:c608c9b1bf6f506c9735b5b47a24e3261f62907589bc95074acaf6ab6000600b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchedOwnerQuadraticCoefficient_dvd_of_normalized_match",
+      "file": "ErdosProblems/Erdos686MatchedOwnerDichotomy.lean",
+      "proof_hash": "sha256:c608c9b1bf6f506c9735b5b47a24e3261f62907589bc95074acaf6ab6000600b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchedOwnerQuadraticCoefficient_ne_zero_of_ratio_lt_two",
+      "file": "ErdosProblems/Erdos686MatchedOwnerDichotomy.lean",
+      "proof_hash": "sha256:c608c9b1bf6f506c9735b5b47a24e3261f62907589bc95074acaf6ab6000600b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchedOwner_zero_residual_fixed_coefficient_bound",
+      "file": "ErdosProblems/Erdos686MatchedOwnerDichotomy.lean",
+      "proof_hash": "sha256:c608c9b1bf6f506c9735b5b47a24e3261f62907589bc95074acaf6ab6000600b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchedOwner_zero_residual_gcd_normalization",
+      "file": "ErdosProblems/Erdos686MatchedOwnerDichotomy.lean",
+      "proof_hash": "sha256:c608c9b1bf6f506c9735b5b47a24e3261f62907589bc95074acaf6ab6000600b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.suppliedOwner_matched_residual_dichotomy",
+      "file": "ErdosProblems/Erdos686MatchedOwnerDichotomy.lean",
+      "proof_hash": "sha256:c608c9b1bf6f506c9735b5b47a24e3261f62907589bc95074acaf6ab6000600b",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

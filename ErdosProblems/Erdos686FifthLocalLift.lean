@@ -939,6 +939,236 @@ theorem three_bucket_reduced_fifth_normalized_quotient_iff
   · exact three_bucket_reduced_fifth_sq_dvd_of_normalized_quotient
       hgap hfourth
 
+/-- Coarse exact size coefficient for a composed third obstruction in a
+three-bucket short window. -/
+def threeBucketThirdSizeBound
+    (C D E : ℤ) (U : ℕ) (deltaLeft deltaRight : ℤ) : ℕ :=
+  9 * Int.natAbs C * U ^ 3 +
+    108 * Int.natAbs (D * (deltaLeft * deltaRight)) +
+    180 * Int.natAbs (E * (deltaLeft * deltaRight))
+
+/-- Exact coefficient in the short-window bound for the normalized fourth
+quotient. -/
+def threeBucketFourthQuotientBound
+    (C K : ℤ) (U B : ℕ) : ℕ :=
+  27 * (Int.natAbs C) ^ 2 * U ^ 2 * B + Int.natAbs K
+
+/-- Exact coefficient in the induced bound for the normalized fifth
+numerator. -/
+def threeBucketNormalizedFifthNumeratorBound
+    (W : ℕ) (R1 : ℤ) : ℕ :=
+  27 * W + Int.natAbs R1
+
+/-- The product identity behind the opposite-cofactor third-quotient bound.
+All variables are nonnegative sizes; signed obstruction data enters through
+its absolute value before this lemma is applied. -/
+theorem three_bucket_opposite_third_quotient_lt
+    {d g U B X Y A Z T : ℕ}
+    (hd : 0 < d) (hg : 0 < g) (hU : 0 < U)
+    (hYpos : 0 < Y) (hTpos : 0 < T)
+    (hX : X < U * d) (hY : Y < U * d)
+    (hT : T < B * g ^ 2 * d)
+    (hscale : d ^ 2 * A * Z = g ^ 2 * X * Y * T) :
+    A * Z < U ^ 2 * B * g ^ 4 * d := by
+  have hUd : 0 < U * d := Nat.mul_pos hU hd
+  have hXY : X * Y < (U * d) ^ 2 := by
+    calc
+      X * Y < (U * d) * Y := Nat.mul_lt_mul_of_pos_right hX hYpos
+      _ < (U * d) * (U * d) := Nat.mul_lt_mul_of_pos_left hY hUd
+      _ = (U * d) ^ 2 := by ring
+  have hXYT : X * Y * T < (U * d) ^ 2 * (B * g ^ 2 * d) := by
+    calc
+      X * Y * T < (U * d) ^ 2 * T :=
+        Nat.mul_lt_mul_of_pos_right hXY hTpos
+      _ < (U * d) ^ 2 * (B * g ^ 2 * d) :=
+        Nat.mul_lt_mul_of_pos_left hT (pow_pos hUd 2)
+  have hg2 : 0 < g ^ 2 := pow_pos hg 2
+  have hscaled : g ^ 2 * (X * Y * T) <
+      g ^ 2 * ((U * d) ^ 2 * (B * g ^ 2 * d)) :=
+    Nat.mul_lt_mul_of_pos_left hXYT hg2
+  have hcancel : d ^ 2 * (A * Z) <
+      d ^ 2 * (U ^ 2 * B * g ^ 4 * d) := by
+    calc
+      d ^ 2 * (A * Z) = g ^ 2 * (X * Y * T) := by
+        simpa [mul_assoc] using hscale
+      _ < g ^ 2 * ((U * d) ^ 2 * (B * g ^ 2 * d)) := hscaled
+      _ = d ^ 2 * (U ^ 2 * B * g ^ 4 * d) := by ring
+  exact (Nat.mul_lt_mul_left (pow_pos hd 2)).mp hcancel
+
+/-- A named reduced fourth numerator `P*w` inherits a sharp linear bound in
+the opposite component product `M=d/P`.  No primality or coprimality is used. -/
+theorem three_bucket_fourth_quotient_abs_lt
+    {P M d g U B A : ℕ} {C K z w : ℤ}
+    (hP : 0 < P) (hd : 0 < d) (hC : C ≠ 0)
+    (hgap : d = P * M)
+    (hopposite : A * Int.natAbs z < U ^ 2 * B * g ^ 4 * d)
+    (hfourth :
+      (P : ℤ) * w =
+        27 * C ^ 2 * (A : ℤ) * z + K * (g : ℤ) ^ 4) :
+    Int.natAbs w <
+      threeBucketFourthQuotientBound C K U B * g ^ 4 * M := by
+  have hCabs : 0 < Int.natAbs C := Int.natAbs_pos.mpr hC
+  have hcoef : 0 < 27 * (Int.natAbs C) ^ 2 := by positivity
+  have hfirst := Nat.mul_lt_mul_of_pos_left hopposite hcoef
+  have hd1 : 1 ≤ d := hd
+  have hsecond : Int.natAbs K * g ^ 4 ≤
+      Int.natAbs K * g ^ 4 * d := by
+    calc
+      Int.natAbs K * g ^ 4 = Int.natAbs K * g ^ 4 * 1 := by ring
+      _ ≤ Int.natAbs K * g ^ 4 * d :=
+        Nat.mul_le_mul_left (Int.natAbs K * g ^ 4) hd1
+  have habsEq := congrArg Int.natAbs hfourth
+  have habsLe := Int.natAbs_add_le
+    (27 * C ^ 2 * (A : ℤ) * z) (K * (g : ℤ) ^ 4)
+  have hbound : P * Int.natAbs w <
+      threeBucketFourthQuotientBound C K U B * g ^ 4 * d := by
+    calc
+      P * Int.natAbs w = Int.natAbs ((P : ℤ) * w) := by
+        simp [Int.natAbs_mul, Int.natAbs_pow]
+      _ = Int.natAbs
+          (27 * C ^ 2 * (A : ℤ) * z + K * (g : ℤ) ^ 4) := habsEq
+      _ ≤ Int.natAbs (27 * C ^ 2 * (A : ℤ) * z) +
+          Int.natAbs (K * (g : ℤ) ^ 4) := habsLe
+      _ = 27 * (Int.natAbs C) ^ 2 * A * Int.natAbs z +
+          Int.natAbs K * g ^ 4 := by
+        simp [Int.natAbs_mul, Int.natAbs_pow]
+      _ < 27 * (Int.natAbs C) ^ 2 *
+            (U ^ 2 * B * g ^ 4 * d) +
+          Int.natAbs K * g ^ 4 * d :=
+        Nat.add_lt_add_of_lt_of_le (by simpa [mul_assoc] using hfirst) hsecond
+      _ = threeBucketFourthQuotientBound C K U B * g ^ 4 * d := by
+        simp [threeBucketFourthQuotientBound]
+        ring
+  rw [hgap] at hbound
+  have hrewrite :
+      threeBucketFourthQuotientBound C K U B * g ^ 4 * (P * M) =
+        P * (threeBucketFourthQuotientBound C K U B * g ^ 4 * M) := by ring
+  rw [hrewrite] at hbound
+  exact (Nat.mul_lt_mul_left hP).mp hbound
+
+/-- The named normalized fifth numerator inherits the fourth-quotient bound.
+This is the exact triangle-inequality step used by the finite short-window
+ledger. -/
+theorem three_bucket_normalized_fifth_numerator_abs_lt
+    {M g W : ℕ} {R1 w N : ℤ}
+    (hw : Int.natAbs w < W * g ^ 4 * M)
+    (hN : N = 27 * w + (M : ℤ) * R1 * (g : ℤ) ^ 4) :
+    Int.natAbs N <
+      threeBucketNormalizedFifthNumeratorBound W R1 * g ^ 4 * M := by
+  have hfirst : 27 * Int.natAbs w < 27 * (W * g ^ 4 * M) :=
+    Nat.mul_lt_mul_of_pos_left hw (by norm_num)
+  have habsEq := congrArg Int.natAbs hN
+  calc
+    Int.natAbs N =
+        Int.natAbs (27 * w + (M : ℤ) * R1 * (g : ℤ) ^ 4) := habsEq
+    _ ≤ Int.natAbs (27 * w) +
+        Int.natAbs ((M : ℤ) * R1 * (g : ℤ) ^ 4) := Int.natAbs_add_le _ _
+    _ = 27 * Int.natAbs w + M * Int.natAbs R1 * g ^ 4 := by
+      simp [Int.natAbs_mul]
+    _ < 27 * (W * g ^ 4 * M) + M * Int.natAbs R1 * g ^ 4 :=
+      Nat.add_lt_add_right hfirst _
+    _ = threeBucketNormalizedFifthNumeratorBound W R1 * g ^ 4 * M := by
+      simp [threeBucketNormalizedFifthNumeratorBound]
+      ring
+
+/-- A nonzero normalized fifth numerator divisible by a component `P` turns
+the numerator bound into the component-square estimate. -/
+theorem three_bucket_component_sq_lt_of_normalized_fifth
+    {P M d g V : ℕ} {N : ℤ}
+    (hP : 0 < P) (hgap : d = P * M)
+    (hNne : N ≠ 0) (hdiv : (P : ℤ) ∣ N)
+    (hNbound : Int.natAbs N < V * g ^ 4 * M) :
+    P ^ 2 < V * g ^ 4 * d := by
+  have hPle : P ≤ Int.natAbs N := by
+    simpa using Int.natAbs_le_of_dvd_ne_zero hdiv hNne
+  have hPbound : P < V * g ^ 4 * M := lt_of_le_of_lt hPle hNbound
+  calc
+    P ^ 2 = P * P := by ring
+    _ < P * (V * g ^ 4 * M) := Nat.mul_lt_mul_of_pos_left hPbound hP
+    _ = V * g ^ 4 * d := by rw [hgap]; ring
+
+/-- The sparse integral eliminant obtained after removing the named third and
+fourth quotients.  Here `X-3*deltaLeft` and `X-3*deltaRight` are the two
+opposite bucket factors. -/
+def threeBucketNormalizedFifthEliminant
+    (C D E K R1 X gap deltaLeft deltaRight : ℤ) : ℤ :=
+  let Y := X - 3 * deltaLeft
+  let Z := X - 3 * deltaRight
+  let delta := deltaLeft * deltaRight
+  729 * C ^ 2 *
+      (-9 * C * X * (Y * Z) ^ 2 +
+        delta * gap ^ 2 * Y * Z * (180 * E * gap + 108 * D)) +
+    gap ^ 4 * (27 * K + gap * R1)
+
+/-- Exact elimination of the third and fourth quotient variables.  This is a
+polynomial identity: it uses no sign, size, primality, or coprimality input. -/
+theorem three_bucket_normalized_fifth_eliminant_identity
+    {C D E K R1 X gap deltaLeft deltaRight Y Z t T b c z P M w N g : ℤ}
+    (hY : Y = X - 3 * deltaLeft)
+    (hZ : Z = X - 3 * deltaRight)
+    (hgap : gap = P * M)
+    (hproduct : gap ^ 2 * t = g ^ 2 * X * Y * Z)
+    (hthird :
+      T = -9 * C * t +
+        (deltaLeft * deltaRight) * g ^ 2 *
+          (180 * E * gap + 108 * D))
+    (hopposite : gap ^ 2 * b * c * z = g ^ 2 * Y * Z * T)
+    (hfourth : P * w = 27 * C ^ 2 * b * c * z + K * g ^ 4)
+    (hnormalized : N = 27 * w + M * R1 * g ^ 4) :
+    gap ^ 4 * P * N =
+      g ^ 4 * threeBucketNormalizedFifthEliminant
+        C D E K R1 X gap deltaLeft deltaRight := by
+  have hPN :
+      P * N =
+        729 * C ^ 2 * b * c * z + (27 * K + gap * R1) * g ^ 4 := by
+    calc
+      P * N = P * (27 * w + M * R1 * g ^ 4) := by rw [hnormalized]
+      _ = 27 * (P * w) + (P * M) * R1 * g ^ 4 := by ring
+      _ = 27 * (27 * C ^ 2 * b * c * z + K * g ^ 4) +
+          gap * R1 * g ^ 4 := by rw [hfourth, hgap]
+      _ = 729 * C ^ 2 * b * c * z +
+          (27 * K + gap * R1) * g ^ 4 := by ring
+  have hcore :
+      gap ^ 4 * b * c * z =
+        g ^ 4 *
+          (-9 * C * X * (Y * Z) ^ 2 +
+            (deltaLeft * deltaRight) * gap ^ 2 * Y * Z *
+              (180 * E * gap + 108 * D)) := by
+    calc
+      gap ^ 4 * b * c * z = gap ^ 2 * (gap ^ 2 * b * c * z) := by ring
+      _ = gap ^ 2 * (g ^ 2 * Y * Z * T) := by rw [hopposite]
+      _ = gap ^ 2 * (g ^ 2 * Y * Z *
+          (-9 * C * t + (deltaLeft * deltaRight) * g ^ 2 *
+            (180 * E * gap + 108 * D))) := by rw [hthird]
+      _ = -9 * C * g ^ 2 * Y * Z * (gap ^ 2 * t) +
+          (deltaLeft * deltaRight) * gap ^ 2 * g ^ 4 * Y * Z *
+            (180 * E * gap + 108 * D) := by ring
+      _ = -9 * C * g ^ 2 * Y * Z * (g ^ 2 * X * Y * Z) +
+          (deltaLeft * deltaRight) * gap ^ 2 * g ^ 4 * Y * Z *
+            (180 * E * gap + 108 * D) := by rw [hproduct]
+      _ = g ^ 4 *
+          (-9 * C * X * (Y * Z) ^ 2 +
+            (deltaLeft * deltaRight) * gap ^ 2 * Y * Z *
+              (180 * E * gap + 108 * D)) := by ring
+  calc
+    gap ^ 4 * P * N = gap ^ 4 * (P * N) := by ring
+    _ = gap ^ 4 *
+        (729 * C ^ 2 * b * c * z + (27 * K + gap * R1) * g ^ 4) := by
+      rw [hPN]
+    _ = 729 * C ^ 2 * (gap ^ 4 * b * c * z) +
+        gap ^ 4 * (27 * K + gap * R1) * g ^ 4 := by ring
+    _ = 729 * C ^ 2 *
+          (g ^ 4 *
+            (-9 * C * X * (Y * Z) ^ 2 +
+              (deltaLeft * deltaRight) * gap ^ 2 * Y * Z *
+                (180 * E * gap + 108 * D))) +
+        gap ^ 4 * (27 * K + gap * R1) * g ^ 4 := by rw [hcore]
+    _ = g ^ 4 * threeBucketNormalizedFifthEliminant
+          C D E K R1 X gap deltaLeft deltaRight := by
+      rw [hY, hZ]
+      simp only [threeBucketNormalizedFifthEliminant]
+      ring
+
 #print axioms localOffsetCofactor_fifth_order
 #print axioms fifth_order_local_algebra
 #print axioms fifth_order_local_lift
@@ -955,6 +1185,11 @@ theorem three_bucket_reduced_fifth_normalized_quotient_iff
 #print axioms three_bucket_reduced_fifth_normalized_quotient_dvd
 #print axioms three_bucket_reduced_fifth_sq_dvd_of_normalized_quotient
 #print axioms three_bucket_reduced_fifth_normalized_quotient_iff
+#print axioms three_bucket_opposite_third_quotient_lt
+#print axioms three_bucket_fourth_quotient_abs_lt
+#print axioms three_bucket_normalized_fifth_numerator_abs_lt
+#print axioms three_bucket_component_sq_lt_of_normalized_fifth
+#print axioms three_bucket_normalized_fifth_eliminant_identity
 
 end Erdos686Variant
 end Erdos686

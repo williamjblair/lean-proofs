@@ -73,6 +73,28 @@ vanish.  For prime-power boundary rows
 `p^a∤n` and `p^a∤(n+d)`.  None of these statements closes the surviving
 nonzero-obstruction or mixed small-prime branches.
 
+[R] **A supplied matched owner now has a complete two-level residual
+dichotomy.**  Let a positive modulus `q` land at lower owner `i` and upper
+owner `j` as `n+i=a*q` and `n+d+j=(a+b)*q`.  The exact ratio window gives
+`1218443*k*b<3707904*a`, so `0<b<a`, and the matched square lift makes `q`
+divide the signed linear residual `D`.  If `D!=0`, Lean proves
+
+```text
+1218443*k*d < 3707904*a^2*(C_j+2*C_i).
+```
+
+If `D=0`, the gcd-reduced slope equation has
+`a=B*w`, `a+b=A*w`, and `B<A<2B`.  For `Z=w*q`, the fixed quadratic
+coefficient `c2=A^2*E_j-4*B^2*E_i` is nonzero, `Z|c2`, and
+`d≤(A-B)*|c2|+k-1`.  The theorem accepts arbitrary `q`, so a dispatcher may
+use a prime power or an aggregate sharing the same owner pair.  The
+odd-center formal zero `A/B=4` is outside the proved sharp ratio range and is
+recorded in the hostile audit.  Exact scans through `k=300`, plus the row-22,
+row-984, `q=k`, and `d=1` fixtures, reproduce every boundary claim.  This is
+a supplied-owner theorem only: the missing large-row step is a quantified
+owner-supply or global aggregation theorem forcing one of these bounds to
+contradict the exact window.  Minimum-degree-two owner cycles still survive.
+
 [R] **The full high prime-power component theorem is now Lean-banked for
 every prime base.**  The public dispatcher
 `no_four_solution_of_highPrimePower_component` composes
@@ -248,6 +270,27 @@ not couple the new fourth quotients `w`.  Exact 121- and 1,004-digit Hensel
 fixtures satisfy this congruence package while failing the block equation and
 short window.  The normalization is a proper necessary condition and an
 auditable obstruction to a fixed-resultant overclaim; it is not a cutoff.
+
+[R/E] **The normalized fourth and fifth quotients now have an
+equation-facing size layer.**  Lean proves the exact opposite-product bound,
+then
+
+```text
+|w_s| < W_s*g^4*(d/P_s),
+|N_s| < V_s*g^4*(d/P_s),
+P_s | N_s and N_s != 0  ->  P_s^2 < V_s*g^4*d,
+```
+
+with explicit `W_s=27*C_s^2*U_k^2*B_s+|K_s|` and
+`V_s=27*W_s+|R1_s|`.  The exact eliminant
+`d^4*P_s*N_s=g^4*J_s(X_s,d)` is also kernel-checked.  Independent exact
+arithmetic reconstructs all coefficients and finds both `w_s` and `N_s`
+nonzero in all 3,024 cyclic positions of the 1,008 nonreflected triples at
+`d>=10^1000`; the coefficient/remainder scan is deliberately labeled `[E]`,
+not Lean-banked, because no ordinary-kernel finite wrapper is checked in.
+Even after accepting that ledger, multiplying the three component-square
+bounds has the wrong gap exponent and leaves the simultaneous mixed-sign
+system open.
 
 [R] **Every supplied center/reflected exactly-three slice now closes at the
 live `10^1000` tail.**  For owners at the center and distance `r` on both

@@ -37,6 +37,7 @@ import ErdosProblems.Erdos686LargeKWedge
 import ErdosProblems.Erdos686PadicLift
 import ErdosProblems.Erdos686GlobalSquareLift
 import ErdosProblems.Erdos686MatchingCompression
+import ErdosProblems.Erdos686MatchedOwnerDichotomy
 import ErdosProblems.Erdos686ReflectionOwnerCorrelationAudit
 import ErdosProblems.Erdos686MomentLifts
 import ErdosProblems.Erdos686TwoPrimeGap
