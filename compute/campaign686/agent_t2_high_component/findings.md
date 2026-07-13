@@ -2,7 +2,7 @@
 
 ## Verdict
 
-**MATHEMATICAL AUDIT PASS at paper level; Lean formalization OPEN.**
+**MATHEMATICAL AUDIT PASS; LEAN-BANKED.**
 
 The GPT-Pro high-component theorem is a genuine uniform no-solution theorem,
 not a target-equivalent reduction.  It handles every prime base, including
@@ -17,9 +17,39 @@ is therefore closed for every natural `n` (and in fact for odd as well as even
 `k`).  This packet independently checks every constant, exhausts the finite
 exceptional modular branches, and samples the general residue identities.
 
-Nothing here has passed the Lean kernel.  The theorem remains **OPEN in Lean**
-until its valuation, interval, and inequality proof is formalized behind the
-repository axiom gate.
+The complete trichotomy is now formalized in
+`ErdosProblems/Erdos686HighPrimePowerComponent.lean`.  The public dispatcher
+
+```lean
+no_four_solution_of_highPrimePower_component
+```
+
+and the three branch theorems
+
+```lean
+no_four_solution_of_highTwoPower_component
+no_four_solution_of_highThreePower_component
+no_four_solution_of_highPrimePower_ge_five_component
+```
+
+compile with exactly `[propext, Classical.choice, Quot.sound]`.  The module
+also exports the three exact residual-lift witnesses used by the size
+contradiction:
+
+```lean
+highTwoPower_exists_residual_lift
+highThreePower_exists_residual_lift
+highPrimePower_ge_five_exists_residual_lift
+```
+
+The simpler square conditions and the clean infinite family are kernel
+theorems too.  In particular:
+
+```lean
+theorem no_four_solution_primePowerGap
+    {p k t n : ℕ} (hp : p.Prime) (hk : 16 ≤ k) :
+    blockProduct k (n + p ^ (k + t)) ≠ 4 * blockProduct k n
+```
 
 The separate Nair-Shorey short-gap strip is **EXTERNAL/PAPER-ONLY**.  This
 packet checks only the rational arithmetic surrounding the quoted result; it
@@ -63,7 +93,7 @@ same modulus.
 ## Dependency tree
 
 ```text
-high prime-power component theorem                         [PAPER PASS]
+high prime-power component theorem                         [LEAN BANKED]
 |
 +- equation P_k(n+d)=4P_k(n)
 |  +- product ratio identity
@@ -95,17 +125,22 @@ high prime-power component theorem                         [PAPER PASS]
 +- exact positive upper bounds on 3a-m or a-m             [EXACT]
 `- strict-small-positive-multiple contradiction           [EXACT]
 
-simple component conditions                               [PAPER PASS]
+simple component conditions                               [LEAN BANKED]
 `- R_k(d)<15kd and p^lambda,3^mu<k                        [EXACT]
 
-d=p^(k+t) family                                           [PAPER PASS]
+d=p^(k+t) family                                           [LEAN BANKED]
 `- three elementary exponential inductions                [EXACT]
 
 Nair-Shorey linear strip                                   [PAPER-ONLY]
 +- sharp ratio arithmetic                                  [EXACT]
 `- quoted greatest-prime-factor theorem                    [EXTERNAL]
 
-Lean formalization                                         [OPEN]
+Lean formalization                                         [PASS]
+|-- p=2 residual lift and exclusion                        [LEAN BANKED]
+|-- p=3 half-owner classification, lift, and exclusion     [LEAN BANKED]
+|-- p>=5 residual lift and exclusion                       [LEAN BANKED]
+|-- all-prime dispatcher                                   [LEAN BANKED]
+`-- square criteria and d=p^(k+t) corollary                [LEAN BANKED]
 ```
 
 ## Exact archimedean constants
@@ -281,6 +316,8 @@ margin.  A further sweep checks all `13,875` tuples with `16<=k<=200`,
 ## Reproduction
 
 ```sh
+lake env lean ErdosProblems/Erdos686HighPrimePowerComponent.lean
+
 PYTHONDONTWRITEBYTECODE=1 python3 \
   compute/campaign686/agent_t2_high_component/high_component_verify.py
 
@@ -289,6 +326,10 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider \
 ```
 
 Focused result: `7 passed in 0.20s`.
+
+Every printed high-component theorem has axiom set exactly
+`[propext, Classical.choice, Quot.sound]`; the formalization uses neither
+`native_decide` nor a custom theorem axiom.
 
 The broad simple-to-exact sweep checks `98,172` full components, of which
 `35,087` satisfy a simple antecedent.  Every one satisfies the exact HC

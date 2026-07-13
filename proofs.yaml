@@ -6341,6 +6341,52 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686HighPrimePowerComponent.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_of_highPrimePower_component
+    statement: >-
+      A canonical prime-power component p^v_p(d) at least k excludes a
+      large-row quotient-four equation whenever it reaches the exact
+      base-sensitive threshold for p=2, p=3, or p at least five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686HighPrimePowerComponent.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_of_highPrimePower_ge_five_component_of_square
+    statement: >-
+      For p at least five, the cleaner component-square inequality
+      2*p^(2e) >= 5*k^2*d implies the exact high-component exclusion.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686HighPrimePowerComponent.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_of_highTwoPower_component_of_square
+    statement: >-
+      For p=2, the cleaner component-square inequality
+      8*2^(2e) >= 5*k^2*d implies the exact high-component exclusion.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686HighPrimePowerComponent.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_of_highThreePower_component_of_square
+    statement: >-
+      For p=3, the cleaner component-square inequality
+      2*3^(2e) >= 15*k^2*d implies the exact high-component exclusion.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686HighPrimePowerComponent.lean
+    theorem: Erdos686.Erdos686Variant.no_four_solution_primePowerGap
+    statement: >-
+      For every k at least sixteen, every prime p, and every t and n, the
+      whole gap d=p^(k+t) cannot satisfy the quotient-four block equation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686PrimePowerBinomialBoundary.lean
     theorem: Erdos686.Erdos686Variant.prime_power_pred_four_solution_endpoints_not_dvd
     statement: >-

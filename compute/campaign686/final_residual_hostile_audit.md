@@ -29,6 +29,8 @@ FinalResidual686Hypothesis
 |   +-- every split-factorial prime-power lower term excluded
 |   +-- every p>k owner a*p^A with 3707904*a <= 1218443*k excluded
 |   +-- every p^e|d with p>=k lies below the component-square ceiling
+|   +-- every exact p^e||d with p^e>=k violates its canonical
+|       high-component dominance threshold (separate p=2, p=3, p>=5 bounds)
 |   +-- one complete cleaned assignment has every bucket below that ceiling
 |   +-- k=p^a-1, p>=5 excludes p^a from both endpoint parameters
 |   +-- odd whole two-large-prime gaps carry the A=3k+2 Pell certificate
@@ -49,6 +51,7 @@ FinalResidual686Hypothesis
 | `1218443kd<1853952n` | PASS | Exact centered-pair product inequality, seven-term power bracket, and ratio-window composition in Lean. |
 | Prime-power lower-term exclusions | PASS | Exact valuation/factorial-loss theorems in Lean. |
 | Gap-component square ceiling | PASS | The local quadratic lift and exact `18/13` window prove the strict bound for every `p^e|d`, `p>=k`. |
+| All-prime high-component thresholds | PASS | `no_four_solution_of_highPrimePower_component` and its exact `p=2`, `p=3`, and `p>=5` branches prove the three canonical exclusions with exactly `[propext, Classical.choice, Quot.sound]`. |
 | Complete grouped-owner ceiling | PASS | Global concentration constructs one assignment; every grouped square divides its positive residual and inherits the same strict bound. |
 | Prime-power boundary rows | PASS | Lucas arithmetic proves `p^a` divides neither endpoint when `k=p^a-1`, `p>=5`. |
 | Reflected harmonic obstruction | PASS | Vendored Sylvester--Schur plus a p-adic interval wrapper proves uniform nonintegrality, and the formal coefficient bridge proves that distinct-owner second obstructions cannot both vanish. |
@@ -78,6 +81,17 @@ FinalResidual686Hypothesis
 - Gap components and grouped buckets: equality belongs to the excluded side;
   every solution gives the strict inequality
   `6h^2<(13k-6)d+18(k-1)`.
+- All-prime high components: if `p^e || d` and `k<=p^e`, every surviving
+  solution satisfies the strict reverse inequalities
+
+  ```text
+  p=2:  (13k-6)d+18(k-1) > 24*2^(2e-lambda_2(k));
+  p=3:  (13k-6)d+18(k-1) >  6*3^(2e-mu_3(k,e)-1);
+  p>=5: (13k-6)d+18(k-1) >  6*p^(2e-lambda_p(k)).
+  ```
+
+  Equality is excluded by the formal theorem; no asymptotic or unspecified
+  constant is hidden here.
 
 ## Mandatory fixtures
 
@@ -95,6 +109,7 @@ FinalResidual686Hypothesis
 
 ```bash
 lake env lean ErdosProblems/Erdos686FinalResidual.lean
+lake env lean ErdosProblems/Erdos686HighPrimePowerComponent.lean
 PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider \
   compute/campaign686/agent_cf_tail_e1000 \
   compute/campaign686/agent_t2_even_tail \
@@ -107,7 +122,8 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider \
   compute/campaign686/agent_t2_consecutive_property \
   compute/campaign686/agent_t2_binomial_kummer \
   compute/campaign686/agent_t2_large_prime_same_owner \
-  compute/campaign686/agent_t2_large_odd_two_prime_pell
+  compute/campaign686/agent_t2_large_odd_two_prime_pell \
+  compute/campaign686/agent_t2_high_component
 ```
 
 Every theorem named by the residual composition must print an axiom set

@@ -10,6 +10,7 @@ import ErdosProblems.Erdos686EvenTailSupply
 import ErdosProblems.Erdos686SmallPrimeBand
 import ErdosProblems.Erdos686CenteredRatioWindowSharp
 import ErdosProblems.Erdos686LargePrimeGapComponent
+import ErdosProblems.Erdos686HighPrimePowerComponent
 import ErdosProblems.Erdos686PrimePowerBinomialBoundary
 import ErdosProblems.Erdos686LargePrimeSameOwner
 import ErdosProblems.Erdos686LargeOddTwoPrimePell
@@ -27,11 +28,12 @@ even row is restricted to the finite strip below its constructed Runge
 threshold; and all prime-power lower terms covered by the exact factorial-loss
 criterion, together with every large-base prime-power owner whose cofactor
 `a` satisfies the exact uniform bound `3707904a ≤ 1218443k`, have been removed.
-Every large prime-power component of the gap and every complete cleaned owner
-bucket is also forced below an explicit square ceiling, while prime-power
-boundary rows `k=p^a-1` exclude divisibility of both endpoint parameters by
-`p^a` for `p≥5`.  Whole two-large-prime gaps in odd rows carry the uniform
-`A=3k+2` Pell and second-lift certificate; its equation-facing composition
+Every canonical prime-power component at least `k` is forced below its exact
+base-sensitive high-component threshold; every large-base component and every
+complete cleaned owner bucket is also forced below an explicit square ceiling.
+Prime-power boundary rows `k=p^a-1` exclude divisibility of both endpoint
+parameters by `p^a` for `p≥5`.  Whole two-large-prime gaps in odd rows carry
+the uniform `A=3k+2` Pell and second-lift certificate; its equation-facing composition
 theorem proves that the two exact second obstructions cannot both vanish.
 
 The residual statement is not asserted here.  The theorems below prove both
@@ -69,6 +71,16 @@ def FinalResidual686Hypothesis : Prop :=
           n + i ≠ a * p ^ A) ∧
         (∀ p e : ℕ, p.Prime → 0 < e → k ≤ p → p ^ e ∣ d →
           6 * p ^ (2 * e) < (13 * k - 6) * d + 18 * (k - 1)) ∧
+        (∀ p e : ℕ, p.Prime → d.factorization p = e → k ≤ p ^ e →
+          (p = 2 →
+            24 * 2 ^ (2 * e - highComponentLambda 2 k) <
+              (13 * k - 6) * d + 18 * (k - 1)) ∧
+          (p = 3 →
+            6 * 3 ^ (2 * e - highComponentMuThree k e - 1) <
+              (13 * k - 6) * d + 18 * (k - 1)) ∧
+          (5 ≤ p →
+            6 * p ^ (2 * e - highComponentLambda p k) <
+              (13 * k - 6) * d + 18 * (k - 1))) ∧
         (∃ owner : ℕ → ℕ,
           GlobalResidualOwnerAssignment k n d owner ∧
           ∀ i : ℕ, i ∈ Finset.Icc 1 k →
@@ -165,6 +177,44 @@ theorem no_gap_solution_large_k_of_finalResidual
     intro p e hp he hkp hpow
     exact large_prime_gap_component_square_strict_upper_of_four_solution
       hp he hk hd hkp hpow heq
+  have hhighPrimePowerComponents : ∀ p e : ℕ,
+      p.Prime → d.factorization p = e → k ≤ p ^ e →
+      (p = 2 →
+        24 * 2 ^ (2 * e - highComponentLambda 2 k) <
+          (13 * k - 6) * d + 18 * (k - 1)) ∧
+      (p = 3 →
+        6 * 3 ^ (2 * e - highComponentMuThree k e - 1) <
+          (13 * k - 6) * d + 18 * (k - 1)) ∧
+      (5 ≤ p →
+        6 * p ^ (2 * e - highComponentLambda p k) <
+          (13 * k - 6) * d + 18 * (k - 1)) := by
+    intro p e hp hexact hcomponent
+    constructor
+    · intro hp2
+      by_contra hnot
+      have hdom :
+          (13 * k - 6) * d + 18 * (k - 1) ≤
+            24 * 2 ^ (2 * e - highComponentLambda 2 k) :=
+        Nat.le_of_not_gt hnot
+      exact (no_four_solution_of_highPrimePower_component
+        hp hk hd hexact hcomponent (Or.inl ⟨hp2, hdom⟩)) heq
+    constructor
+    · intro hp3
+      by_contra hnot
+      have hdom :
+          (13 * k - 6) * d + 18 * (k - 1) ≤
+            6 * 3 ^ (2 * e - highComponentMuThree k e - 1) :=
+        Nat.le_of_not_gt hnot
+      exact (no_four_solution_of_highPrimePower_component
+        hp hk hd hexact hcomponent (Or.inr (Or.inl ⟨hp3, hdom⟩))) heq
+    · intro hp5
+      by_contra hnot
+      have hdom :
+          (13 * k - 6) * d + 18 * (k - 1) ≤
+            6 * p ^ (2 * e - highComponentLambda p k) :=
+        Nat.le_of_not_gt hnot
+      exact (no_four_solution_of_highPrimePower_component
+        hp hk hd hexact hcomponent (Or.inr (Or.inr ⟨hp5, hdom⟩))) heq
   have hgroupedOwners : ∃ owner : ℕ → ℕ,
       GlobalResidualOwnerAssignment k n d owner ∧
       ∀ i : ℕ, i ∈ Finset.Icc 1 k →
@@ -201,7 +251,8 @@ theorem no_gap_solution_large_k_of_finalResidual
   exact hres k n d heq (Or.inr
     ⟨hk, hd, hk16, hk18, hk20, hk24, hk28, hk32, hsharpWindow,
       hevenStrip, hprimePower, hsmallCofactor, hlargePrimeComponents,
-      hgroupedOwners, hprimePowerBoundary, hlargeOddPell⟩)
+      hhighPrimePowerComponents, hgroupedOwners, hprimePowerBoundary,
+      hlargeOddPell⟩)
 
 /-- The one residual core implies the former large-`k` smoothness interface.
 The smoothness premise is intentionally unused: the prime obstruction has

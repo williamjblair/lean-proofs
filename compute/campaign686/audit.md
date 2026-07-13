@@ -355,6 +355,49 @@ Verdict: PASS as genuine infinite subclasses and a uniform Pell reduction.
 The surviving nonzero-obstruction Pell branch and arbitrary mixed support
 remain open.
 
+## Dependency tree: high prime-power components at every prime base
+
+1. For `p^e || d` with `p^e>=k`, choose a lower-block factor of maximal
+   `p`-adic valuation.  Translation by `d` preserves the valuation and the
+   normalized unit below level `e`, while a valuation above `e` drops to
+   exactly `e`. **Lean banked.**
+2. For `p>=5`, the branches `s<e` and `s>e` contradict respectively the
+   normalized-unit equation modulo `p` and the total valuation equation.
+   The surviving unique owner gives
+   `p^(2e-lambda_p(k)) | 3(n+i)-d`. **Lean banked.**
+3. For `p=2`, the multiplier four changes total valuation by exactly two.
+   The only surviving owner has upper valuation `e+2` and gives
+   `2^(2e-lambda_2(k)+2) | 3(n+i)-d`. **Lean banked.**
+4. For `p=3`, the low, exact-`e`, and above-`e` branches are excluded.  At
+   level `e-1`, Lean proves there are at most two owners, excludes two owners
+   modulo nine, and obtains from the unique owner
+   `3^(2e-mu_3(k,e)-1) | 3(n+i)-d`. **Lean banked.**
+5. The exact `18/13` window turns those divisibilities into the three
+   no-solution thresholds
+
+   ```text
+   p=2:  (13k-6)d+18(k-1) <= 24*2^(2e-lambda_2(k));
+   p=3:  (13k-6)d+18(k-1) <=  6*3^(2e-mu_3(k,e)-1);
+   p>=5: (13k-6)d+18(k-1) <=  6*p^(2e-lambda_p(k)).
+   ```
+
+   **Lean banked.**
+6. The public dispatcher
+   `no_four_solution_of_highPrimePower_component` and its three exact branch
+   theorems compile with exactly
+   `[propext, Classical.choice, Quot.sound]`.  The three simpler square
+   criteria and `no_four_solution_primePowerGap`, excluding every
+   `d=p^(k+t)` for `k>=16`, are also kernel-banked. **Kernel gate PASS.**
+7. `FinalResidual686Hypothesis` records the strict reverse of these three
+   inequalities for every exact component with `k<=p^e`. **Composed into the
+   residual; not a full closure.**
+
+Verdict: PASS as a genuinely new uniform component exclusion, including the
+small bases two and three.  It does not solve the large-row arm: gaps for
+which every exact prime-power component lies strictly below its canonical
+dominance threshold remain.  The separate Nair-Shorey input is still
+external/paper-only and is not used in this kernel verdict.
+
 ## Dependency tree: consecutive small-part mass
 
 1. Define the part of each integer supported on primes at most `k`.
@@ -395,7 +438,8 @@ and carries `AllOwnerAssemblyThirdNonzeroCertificate`. Its large-row arm
 removes `k=16,18,20,24,28,32`, every universal even tail, the exact
 split-factorial prime-power families, and the large-base owner families with
 `3707904a<=1218443k`.  It also records the component and complete grouped-
-owner square ceilings and the prime-power boundary-row restriction.
+owner square ceilings, the prime-power boundary-row restriction, and the
+strict reverse of all three high prime-power component thresholds.
 For odd whole gaps supported on two distinct primes at least `k`, it also
 records the uniform `A=3k+2` Pell certificate and the exact second-lift
 divisibilities, without claiming that this restriction closes the family.

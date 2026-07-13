@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:d5d2944b7a7a8b1b164d1aebfa247cb88ecc99f7694350054d23d394eea91f60",
+  "verifier_output_hash": "sha256:424951086a3f5ae9764414663ee78f4b4dbe77219bcc6fe2fa412a8630dea517",
   "attestations": [
     {
       "problem": 154,
@@ -8100,7 +8100,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.erdos686_false_of_finalResidual",
       "file": "ErdosProblems/Erdos686FinalResidual.lean",
-      "proof_hash": "sha256:60613672d6513ec52a5b9fce81ca4769186f89a4a5298813053d512ff27a3762",
+      "proof_hash": "sha256:de12ca2b49fca09efa4755cf21c8bb7c545d5b48041980c319a2247109619d2f",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -8221,6 +8221,66 @@
       "theorem": "Erdos686.Erdos686Variant.no_four_solution_gap_eq_large_prime_power_exponent_ge_two",
       "file": "ErdosProblems/Erdos686LargePrimeGapComponent.lean",
       "proof_hash": "sha256:89af2b81cc3cc4ba26093cfebe0fa0239ce083b6668d6ef43b30302fda5b394a",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_four_solution_of_highPrimePower_component",
+      "file": "ErdosProblems/Erdos686HighPrimePowerComponent.lean",
+      "proof_hash": "sha256:dde4b8742aaf0dd0e849650da76f425b73cc070cec88caeefc9cd7404654ebf1",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_four_solution_of_highPrimePower_ge_five_component_of_square",
+      "file": "ErdosProblems/Erdos686HighPrimePowerComponent.lean",
+      "proof_hash": "sha256:dde4b8742aaf0dd0e849650da76f425b73cc070cec88caeefc9cd7404654ebf1",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_four_solution_of_highTwoPower_component_of_square",
+      "file": "ErdosProblems/Erdos686HighPrimePowerComponent.lean",
+      "proof_hash": "sha256:dde4b8742aaf0dd0e849650da76f425b73cc070cec88caeefc9cd7404654ebf1",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_four_solution_of_highThreePower_component_of_square",
+      "file": "ErdosProblems/Erdos686HighPrimePowerComponent.lean",
+      "proof_hash": "sha256:dde4b8742aaf0dd0e849650da76f425b73cc070cec88caeefc9cd7404654ebf1",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.no_four_solution_primePowerGap",
+      "file": "ErdosProblems/Erdos686HighPrimePowerComponent.lean",
+      "proof_hash": "sha256:dde4b8742aaf0dd0e849650da76f425b73cc070cec88caeefc9cd7404654ebf1",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -8664,7 +8724,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.finalResidual_iff_tail1000_and_smooth",
       "file": "ErdosProblems/Erdos686FinalResidual.lean",
-      "proof_hash": "sha256:60613672d6513ec52a5b9fce81ca4769186f89a4a5298813053d512ff27a3762",
+      "proof_hash": "sha256:de12ca2b49fca09efa4755cf21c8bb7c545d5b48041980c319a2247109619d2f",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

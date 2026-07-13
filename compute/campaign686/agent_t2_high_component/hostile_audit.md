@@ -2,8 +2,18 @@
 
 ## Outcome
 
-**The high-component theorem is a mathematical PASS as a self-contained paper
-proof.  Its Lean status is OPEN.**
+**The high-component theorem is a mathematical PASS and a Lean-kernel PASS.**
+
+The public theorem is
+`Erdos686.Erdos686Variant.no_four_solution_of_highPrimePower_component`.
+Its exact prime-base branches are
+`no_four_solution_of_highTwoPower_component`,
+`no_four_solution_of_highThreePower_component`, and
+`no_four_solution_of_highPrimePower_ge_five_component`.  All four print
+exactly `[propext, Classical.choice, Quot.sound]`.
+The derived theorem `no_four_solution_primePowerGap` kernel-closes
+`d=p^(k+t)` for every prime `p`, every `k>=16`, and every natural `t,n`;
+the three cleaner component-square criteria are also formalized.
 
 The Nair-Shorey short-gap strip is **EXTERNAL/PAPER-ONLY** and is not included
 in that PASS verdict.  Its quoted greatest-prime-factor theorem has neither
@@ -11,7 +21,8 @@ been imported into Lean nor independently proved here.
 
 The result does not solve Erdős 686.  It removes exactly those gaps having a
 prime-power component that meets one displayed dominance inequality.  Gaps
-whose every primary component is smaller remain.
+for which every exact component `p^e || d` with `p^e>=k` satisfies the strict
+reverse of its displayed prime-class inequality remain.
 
 ## Per-node dependency verdict
 
@@ -38,9 +49,9 @@ whose every primary component is smaller remain.
 | Upper residual quantities | PASS | Both are strictly below `R_k(d)/(6q)` by the displayed `18(n+i)` bound. |
 | Strict/non-strict boundary | PASS | HC uses `R<=threshold`; the candidate multiple is strictly smaller than the modulus, so equality at the HC boundary is excluded. |
 | Simple conditions | PASS | Exact bound `R<15kd`; exact component-size constants checked for all three prime classes. |
-| `d=p^(k+t)` family | PASS | Base cases plus monotone induction inequalities prove all exponents, not merely the finite verifier sweep. |
+| `d=p^(k+t)` family | LEAN PASS | `no_four_solution_primePowerGap` composes three kernel-checked prime-class branches after formal elementary power-growth inequalities. |
 | Nair-Shorey strip | EXTERNAL | Only surrounding arithmetic is reproduced; the greatest-prime-factor input is paper-only. |
-| Lean formalization | OPEN | No theorem declaration, axiom printout, or kernel attestation exists for this result. |
+| Lean formalization | PASS | The all-prime dispatcher, three branch exclusions, and three residual-lift witnesses compile in `Erdos686HighPrimePowerComponent.lean`; every printed theorem uses exactly `[propext, Classical.choice, Quot.sound]`. |
 
 ## No hidden uniformity
 
@@ -144,6 +155,8 @@ prime powers, while these finite sweeps guard implementation and sign errors.
 Commands:
 
 ```sh
+lake env lean ErdosProblems/Erdos686HighPrimePowerComponent.lean
+
 PYTHONDONTWRITEBYTECODE=1 python3 \
   compute/campaign686/agent_t2_high_component/high_component_verify.py
 
@@ -152,6 +165,14 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider \
 ```
 
 Result: `7 passed in 0.20s`.
+
+The Lean command prints the allowed axiom set for
+`highPrimePower_ge_five_exists_residual_lift`,
+`highTwoPower_exists_residual_lift`,
+`highThreePower_exists_residual_lift`, their three no-solution corollaries,
+`no_four_solution_of_highPrimePower_component`, the three square-condition
+corollaries, and `no_four_solution_primePowerGap`.  No `native_decide`,
+`sorry`, `admit`, or custom theorem axiom occurs in this module.
 
 Exact sweeps:
 

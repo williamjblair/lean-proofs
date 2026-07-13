@@ -73,12 +73,38 @@ vanish.  For prime-power boundary rows
 `p^a∤n` and `p^a∤(n+d)`.  None of these statements closes the surviving
 nonzero-obstruction or mixed small-prime branches.
 
+[R] **The full high prime-power component theorem is now Lean-banked for
+every prime base.**  The public dispatcher
+`no_four_solution_of_highPrimePower_component` composes
+`no_four_solution_of_highTwoPower_component`,
+`no_four_solution_of_highThreePower_component`, and
+`no_four_solution_of_highPrimePower_ge_five_component`.  For an exact
+component `p^e || d` with `p^e>=k`, these exclude respectively
+
+```text
+(13k-6)d+18(k-1) <= 24*2^(2e-lambda_2(k)),
+(13k-6)d+18(k-1) <=  6*3^(2e-mu_3(k,e)-1),
+(13k-6)d+18(k-1) <=  6*p^(2e-lambda_p(k)).
+```
+
+The valuation/unit translation, the special two-adic valuation gain, the
+three-adic half-owner classification modulo nine, all three exact residual
+lifts, and the final strict size contradiction compile with exactly
+`[propext, Classical.choice, Quot.sound]`.  The separate Nair-Shorey wedge
+remains external/paper-only.  The kernel theorem
+`no_four_solution_primePowerGap` closes `d=p^(k+t)` for every prime `p`,
+every `k>=16`, and every natural `t,n`; the three simpler component-square
+criteria are formalized as well.  This theorem closes a genuine uniform
+infinite subclass but not arbitrary mixed support: every surviving component
+must merely satisfy the strict reverse of its displayed bound.
+
 [R] **One exact residual hypothesis packages the former two-interface
 handoff.**  `FinalResidual686Hypothesis` starts the odd arm at `10^1000` with
 the complete all-owner second/third-nonzero certificate.  Its large-row arm
 removes `k=16,18,20,24,28,32`, all constructed even tails, and the exact
 prime-power/owner families above.  It also records the component,
-grouped-owner, Lucas boundary, and uniform odd two-prime Pell restrictions.
+grouped-owner, Lucas boundary, uniform odd two-prime Pell restrictions, and
+the strict reverse of all three canonical high-component thresholds.
 Lean proves both that it implies the two
 updated terminal hypotheses and that their conjunction implies it.  Thus the
 interface is equivalent packaging, not a weaker missing lemma.  The residual
@@ -496,8 +522,10 @@ fails some row j ≤ 17.
 2. [open, Target 2] Prove `LargeKSmoothHypothesis`, equivalently exclude the
    remaining `k>=16,d>=k` equations after the closed rows, universal even
    tails, exact ratio band, component/grouped-owner ceilings, and prime-power
-   owner and boundary exclusions.  The equation itself supplies the
-   smoothness premise.
+   owner and boundary exclusions.  Every surviving exact component
+   `p^e || d` with `p^e>=k` must also satisfy the strict reverse of its
+   canonical `p=2`, `p=3`, or `p>=5` dominance inequality.  The equation
+   itself supplies the smoothness premise.
 3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as
    equivalent packaging via `finalResidual_iff_tail1000_and_smooth`; do not
    report its isolation as mathematical progress.  Regenerate the manifest
@@ -521,8 +549,11 @@ used.  No quantified bound currently closes this joint branch.
 `(d+k)`-smooth and supplies all row divisibilities.  Universal even-row Runge
 certificates remove every even tail above an explicit threshold, while
 separate finite-field certificates close several complete rows.  The
-remaining odd rows and finite even strips still require a uniform argument;
-gross mass, pure congruences, and fixed row-prefix caps are falsified routes.
+all-prime high-component theorem additionally forces the strict reverse of
+the three exact component thresholds above.  The remaining odd rows and
+finite even strips still require a uniform argument; gaps whose every
+component misses those thresholds survive, and gross mass, pure congruences,
+and fixed row-prefix caps are falsified routes.
 
 The exact formal handoff is the equivalence
 

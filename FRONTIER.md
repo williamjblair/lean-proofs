@@ -137,6 +137,25 @@ Exact `p=2` and `p=3` fixtures show why the unrestricted interior statement
 would be false.
 Every large-row equation also forces the exact gap-component ceiling
 `6p^(2e)<(13k-6)d+18(k-1)` for every `p^e|d` with prime `p≥k`.
+The small-base gap is now closed at the component level as well.  For every
+prime `p` and exact component `p^e || d` with `p^e≥k`, the Lean-banked public
+dispatcher `no_four_solution_of_highPrimePower_component` excludes the three
+canonical dominance ranges
+
+```text
+p=2:  (13k-6)d+18(k-1) ≤ 24*2^(2e-lambda_2(k));
+p=3:  (13k-6)d+18(k-1) ≤  6*3^(2e-mu_3(k,e)-1);
+p≥5:  (13k-6)d+18(k-1) ≤  6*p^(2e-lambda_p(k)).
+```
+
+The separate branch theorems for two, three, and primes at least five, plus
+their residual-lift witnesses, all compile with exactly
+`[propext, Classical.choice, Quot.sound]`.  Thus a surviving large-row
+solution must satisfy the strict reverse inequality for every full component
+at least `k`.  The corollary `no_four_solution_primePowerGap` also kernel-closes
+the explicit family `d=p^(k+t)` for every prime `p`, every `k≥16`, and every
+natural `t,n`.  This is a proper uniform restriction, not the full solution:
+gaps whose components all miss their thresholds remain.
 Consequently every whole gap `d=p^e` with `e≥2` is impossible, as is every
 whole prime-power gap with `d≥3k`.  The same ceiling applies to every
 complete cleaned owner bucket.  Thus a whole two-large-prime gap
@@ -217,8 +236,9 @@ OPEN CORE (the two arms below are equivalently packaged as the single
    split-factorial prime-power families, and every large-base owner
    `a*p^A` with `3707904a≤1218443k`.  The equation itself already supplies
    smoothness, `1218443kd<1853952n`, the component and grouped-owner square
-   ceilings, and the prime-power boundary restrictions.  The census fixtures
-   remain non-equations and do not discharge this arm.
+   ceilings, the strict all-prime high-component thresholds, and the
+   prime-power boundary restrictions.  The census fixtures remain
+   non-equations and do not discharge this arm.
 
 Lean proves that this single residual hypothesis implies the former
 `OddThueTailHypothesis`, `LargeKSmoothHypothesis`, and the full refutation.
