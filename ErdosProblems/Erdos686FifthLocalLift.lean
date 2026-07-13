@@ -1,5 +1,5 @@
 /- leanprover/lean4:v4.29.1  mathlib v4.29.1 -/
-import ErdosProblems.Erdos686FourthLocalLift
+import ErdosProblems.Erdos686ShortWindowQuotient
 
 /-!
 # Erdős 686: fifth local lift and the squared third-quotient congruence
@@ -724,6 +724,59 @@ def threeBucketReducedFifthCoefficient
       120 * D ^ 2 * E * gap * p -
       100 * D * E ^ 2 * gap ^ 2 * p)
 
+/-- Coefficient of the term linear in the gap after the reduced fifth
+coefficient is split by gap degree.  This is an exact signed polynomial; it
+does not include the fourth-order constant term. -/
+def threeBucketReducedFifthLinearCoefficient
+    (C D E F G deltaLeft deltaRight : ℤ) : ℤ :=
+  let p := deltaLeft * deltaRight;
+  let s := deltaLeft + deltaRight;
+  8748 * p *
+    (255 * C ^ 2 * G * p - 120 * C * D * E * s +
+      240 * C * D * F * p + 180 * C * E ^ 2 * p -
+      120 * D ^ 2 * E * p)
+
+/-- Coefficient of the term quadratic in the gap after the reduced fifth
+coefficient is split by gap degree. -/
+def threeBucketReducedFifthQuadraticCoefficient
+    (C D E F deltaLeft deltaRight : ℤ) : ℤ :=
+  let p := deltaLeft * deltaRight;
+  let s := deltaLeft + deltaRight;
+  8748 * p *
+    (-100 * C * E ^ 2 * s + 400 * C * E * F * p -
+      100 * D * E ^ 2 * p)
+
+/-- Exact gap-degree decomposition of the reduced fifth coefficient.  Its
+constant term is precisely twenty-seven times the reduced fourth
+coefficient, so eliminating the fourth numerator leaves a new quotient
+congruence rather than a fixed component bound. -/
+theorem three_bucket_reduced_fifth_coefficient_decomposition
+    (C D E F G gap deltaLeft deltaRight : ℤ) :
+    threeBucketReducedFifthCoefficient C D E F G gap
+        deltaLeft deltaRight =
+      27 * threeBucketReducedFourthCoefficient C D E F
+        deltaLeft deltaRight +
+      gap * threeBucketReducedFifthLinearCoefficient C D E F G
+        deltaLeft deltaRight +
+      gap ^ 2 * threeBucketReducedFifthQuadraticCoefficient C D E F
+        deltaLeft deltaRight := by
+  simp [threeBucketReducedFifthCoefficient,
+    threeBucketReducedFourthCoefficient,
+    threeBucketReducedFifthLinearCoefficient,
+    threeBucketReducedFifthQuadraticCoefficient]
+  ring
+
+/-- The load-bearing failed-resultant certificate: at zero gap, fifth order
+reproduces exactly twenty-seven times the fourth-order fixed coefficient. -/
+theorem three_bucket_reduced_fifth_coefficient_at_zero
+    (C D E F G deltaLeft deltaRight : ℤ) :
+    threeBucketReducedFifthCoefficient C D E F G 0
+        deltaLeft deltaRight =
+      27 * threeBucketReducedFourthCoefficient C D E F
+        deltaLeft deltaRight := by
+  rw [three_bucket_reduced_fifth_coefficient_decomposition]
+  ring
+
 def threeBucketReducedFifthMultiplier
     (C D E F t g gap deltaLeft deltaRight : ℤ) : ℤ :=
   let p := deltaLeft * deltaRight;
@@ -782,6 +835,110 @@ theorem three_bucket_reduced_fifth_quotient_sq_dvd
       threeBucketReducedFifthCoefficient,
       threeBucketFourthCorrection, threeBucketFifthCorrection] <;> ring
 
+/-- Normalize the reduced fifth square divisibility by a named reduced
+fourth quotient.  When `gap = P*M`, the quadratic gap term disappears after
+one cancellation, while the linear term survives.  The conclusion controls
+the new quotient `q`; it is not a component bound. -/
+theorem three_bucket_reduced_fifth_normalized_quotient_dvd
+    {P C D E F G g gap b c z q M deltaLeft deltaRight : ℤ}
+    (hP : P ≠ 0)
+    (hgap : gap = P * M)
+    (hfourth :
+      27 * C ^ 2 * b * c * z +
+          threeBucketReducedFourthCoefficient C D E F
+            deltaLeft deltaRight * g ^ 4 =
+        P * q)
+    (hfifth : P ^ 2 ∣
+      729 * C ^ 2 * b * c * z +
+        threeBucketReducedFifthCoefficient C D E F G gap
+          deltaLeft deltaRight * g ^ 4) :
+    P ∣ 27 * q + M *
+      threeBucketReducedFifthLinearCoefficient C D E F G
+        deltaLeft deltaRight * g ^ 4 := by
+  let R1 : ℤ := threeBucketReducedFifthLinearCoefficient C D E F G
+    deltaLeft deltaRight
+  let R2 : ℤ := threeBucketReducedFifthQuadraticCoefficient C D E F
+    deltaLeft deltaRight
+  have hrewrite :
+      729 * C ^ 2 * b * c * z +
+          threeBucketReducedFifthCoefficient C D E F G gap
+            deltaLeft deltaRight * g ^ 4 =
+        P * (27 * q + M * R1 * g ^ 4 +
+          P * M ^ 2 * R2 * g ^ 4) := by
+    rw [three_bucket_reduced_fifth_coefficient_decomposition, hgap]
+    dsimp [R1, R2]
+    linear_combination 27 * hfourth
+  have hwhole : P ^ 2 ∣
+      P * (27 * q + M * R1 * g ^ 4 +
+        P * M ^ 2 * R2 * g ^ 4) := by
+    rw [← hrewrite]
+    exact hfifth
+  have hcancel : P ∣
+      27 * q + M * R1 * g ^ 4 + P * M ^ 2 * R2 * g ^ 4 := by
+    rcases hwhole with ⟨w, hw⟩
+    refine ⟨w, ?_⟩
+    apply mul_left_cancel₀ hP
+    calc
+      P * (27 * q + M * R1 * g ^ 4 + P * M ^ 2 * R2 * g ^ 4) =
+          P ^ 2 * w := hw
+      _ = P * (P * w) := by ring
+  have hquadratic : P ∣ P * M ^ 2 * R2 * g ^ 4 := by
+    refine ⟨M ^ 2 * R2 * g ^ 4, ?_⟩
+    ring
+  have hlinear := dvd_sub hcancel hquadratic
+  simpa [R1] using hlinear
+
+/-- Converse reconstruction of the reduced fifth square divisibility from
+the normalized quotient congruence and the exact fourth quotient identity. -/
+theorem three_bucket_reduced_fifth_sq_dvd_of_normalized_quotient
+    {P C D E F G g gap b c z q M deltaLeft deltaRight : ℤ}
+    (hgap : gap = P * M)
+    (hfourth :
+      27 * C ^ 2 * b * c * z +
+          threeBucketReducedFourthCoefficient C D E F
+            deltaLeft deltaRight * g ^ 4 =
+        P * q)
+    (hnormalized : P ∣ 27 * q + M *
+      threeBucketReducedFifthLinearCoefficient C D E F G
+        deltaLeft deltaRight * g ^ 4) :
+    P ^ 2 ∣
+      729 * C ^ 2 * b * c * z +
+        threeBucketReducedFifthCoefficient C D E F G gap
+          deltaLeft deltaRight * g ^ 4 := by
+  let R1 : ℤ := threeBucketReducedFifthLinearCoefficient C D E F G
+    deltaLeft deltaRight
+  let R2 : ℤ := threeBucketReducedFifthQuadraticCoefficient C D E F
+    deltaLeft deltaRight
+  rcases hnormalized with ⟨w, hw⟩
+  refine ⟨w + M ^ 2 * R2 * g ^ 4, ?_⟩
+  rw [three_bucket_reduced_fifth_coefficient_decomposition, hgap]
+  dsimp [R1, R2] at hw ⊢
+  linear_combination 27 * hfourth + P * hw
+
+/-- Exact equivalence between the reduced fifth square divisibility and its
+normalized fourth-quotient lift when the component is nonzero. -/
+theorem three_bucket_reduced_fifth_normalized_quotient_iff
+    {P C D E F G g gap b c z q M deltaLeft deltaRight : ℤ}
+    (hP : P ≠ 0)
+    (hgap : gap = P * M)
+    (hfourth :
+      27 * C ^ 2 * b * c * z +
+          threeBucketReducedFourthCoefficient C D E F
+            deltaLeft deltaRight * g ^ 4 =
+        P * q) :
+    P ^ 2 ∣
+        729 * C ^ 2 * b * c * z +
+          threeBucketReducedFifthCoefficient C D E F G gap
+            deltaLeft deltaRight * g ^ 4 ↔
+      P ∣ 27 * q + M *
+        threeBucketReducedFifthLinearCoefficient C D E F G
+          deltaLeft deltaRight * g ^ 4 := by
+  constructor
+  · exact three_bucket_reduced_fifth_normalized_quotient_dvd
+      hP hgap hfourth
+  · exact three_bucket_reduced_fifth_sq_dvd_of_normalized_quotient
+      hgap hfourth
+
 #print axioms localOffsetCofactor_fifth_order
 #print axioms fifth_order_local_algebra
 #print axioms fifth_order_local_lift
@@ -793,6 +950,11 @@ theorem three_bucket_reduced_fifth_quotient_sq_dvd
 #print axioms three_bucket_fifth_obstruction_to_third_quotient_sq
 #print axioms three_bucket_reduced_fifth_identity
 #print axioms three_bucket_reduced_fifth_quotient_sq_dvd
+#print axioms three_bucket_reduced_fifth_coefficient_decomposition
+#print axioms three_bucket_reduced_fifth_coefficient_at_zero
+#print axioms three_bucket_reduced_fifth_normalized_quotient_dvd
+#print axioms three_bucket_reduced_fifth_sq_dvd_of_normalized_quotient
+#print axioms three_bucket_reduced_fifth_normalized_quotient_iff
 
 end Erdos686Variant
 end Erdos686

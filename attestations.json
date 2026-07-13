@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:2afeb6bc7122cc04dea667834adf722c04eb98cb895a03c8bb73008372d8dc2f",
+  "verifier_output_hash": "sha256:c42bee6edb584bf904d847c75075e6d8357128c2d08812ad0c486475a22ac907",
   "attestations": [
     {
       "problem": 154,
@@ -7908,7 +7908,19 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.exactRatio_allOwner_third_obstruction_ne_zero",
       "file": "ErdosProblems/Erdos686ExactRatioThirdSign.lean",
-      "proof_hash": "sha256:650361489b0db6ca300bbd570760f7d0f862981d80ba10a052a08102999158f6",
+      "proof_hash": "sha256:d10cfe26f56232fce3ffdeafb2f6d20a4eadafa59e4efe5ef0a44563c6f694cd",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exactRatio_target_three_bucket_all_third_quotients_nonzero",
+      "file": "ErdosProblems/Erdos686ExactRatioThirdSign.lean",
+      "proof_hash": "sha256:d10cfe26f56232fce3ffdeafb2f6d20a4eadafa59e4efe5ef0a44563c6f694cd",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -7920,7 +7932,19 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.target_three_bucket_fifth_obstruction_dvd_fourth",
       "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
-      "proof_hash": "sha256:a05794d855c818a35956deb7bb8d06c20d7e69f75ad9a671952b077130b757ba",
+      "proof_hash": "sha256:7894bb7f20d2ba38791eb0c7d5b9f5a6471d7389afba33a5a72084eaff1fab78",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.three_bucket_reduced_fifth_normalized_quotient_iff",
+      "file": "ErdosProblems/Erdos686FifthLocalLift.lean",
+      "proof_hash": "sha256:7894bb7f20d2ba38791eb0c7d5b9f5a6471d7389afba33a5a72084eaff1fab78",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

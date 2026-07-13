@@ -6108,11 +6108,30 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686ExactRatioThirdSign.lean
+    theorem: Erdos686.Erdos686Variant.exactRatio_target_three_bucket_all_third_quotients_nonzero
+    statement: >-
+      In every supplied target three-bucket decomposition, the exact equation
+      and ratio window force all three named third quotients to be nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686FifthLocalLift.lean
     theorem: Erdos686.Erdos686Variant.target_three_bucket_fifth_obstruction_dvd_fourth
     statement: >-
       Three exact cleaned residual buckets compose the fifth local lift into
       a cyclic fourth-power owner divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FifthLocalLift.lean
+    theorem: Erdos686.Erdos686Variant.three_bucket_reduced_fifth_normalized_quotient_iff
+    statement: >-
+      After naming the reduced fourth quotient and factoring the gap by its
+      owner component, the reduced fifth square divisibility is exactly the
+      next linear Hensel congruence on that fourth quotient.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686

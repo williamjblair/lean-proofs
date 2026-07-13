@@ -211,31 +211,43 @@ cyclic views.  The earlier noncompiling source SHA remains a historical FAIL;
 the repaired SHA alone is banked.  This removes only the zero branch and does
 not prove the all-nonzero short-window lemma.
 
-[R] **Fourth-order quotient cancellation and two-zero packing are now
-banked.**  Cancelling the square factor in the cubic lift gives the exact
-third quotient and then the fixed-coefficient congruence
-`P | 27*C^2*b*c*z + K*g^4`.  Lean also proves the opposite-cofactor overlap,
-the three-row lattice identity, and a generic coprime two-zero packing bound
-`d^2*W <= L^2*Gamma*g^12`.  A fresh hostile module independently reproves all
-13 public theorems.  Independent exact arithmetic enumerates 2,603
-noncentral two-zero placements: all 1,420 cases through `k=13` close, and
-901 of 1,183 close for `k=15`, leaving exactly 282.  This finite application
-is not advertised as kernel-banked because it has no six-row Lean wrapper.
-The center, all-nonzero, one-zero, and 282 row-15 branches remain open.
+[R] **Every third-quotient zero branch is now explicitly removed from the
+live ledger.**  Cancelling the square factor in the cubic lift gives the
+exact third quotient and the fixed-coefficient congruence
+`P | 27*C^2*b*c*z + K*g^4`; the three-row lattice identity and generic
+two-zero packing theorem remain banked and hostile-audited.  Their historical
+`10^120` scan found 2,603 noncentral two-zero placements and left 282 row-15
+numerical survivors.  That is no longer the equation-facing branch split:
+the exact ratio window already proves all three composed third obstructions
+nonzero at `d>=10^120`, and
+`exactRatio_target_three_bucket_all_third_quotients_nonzero` now transports
+this result literally through `T_s=P_s^2*z_s`.  Thus every center or
+noncentral one-zero, two-zero, and three-zero quotient branch is impossible.
+An independent exact replay records that `10^131` already closes all 2,603
+old noncentral placements numerically (hence `10^1000` does too), but this is
+a historical audit rather than a premise of the live proof.
 
-[R] **The lattice-sign route closes every strict one-sided sliver and eight
-one-zero boundaries.**  Exact rational arithmetic classifies all 1,035
-owner triples: the primitive weights contain 1,539 positive, 1,539 negative,
-and 27 zero components.  Among the live cells, 2,381 are mixed and nine are
-strict one-sided reflected slivers; all nine slivers force `d<10^120` through
-the banked two-component square bound.  Coprime lcm packing closes eight of
-eighteen one-zero boundaries, leaving ten.  A hostile Lean module freshly
-reproves all nine generic theorems.  The finite cell scan is exact but not
-row-wrapped for attestation.  The single remaining three-bucket size lemma is
-to find distinct owners `r,s` with
-`P_r^2*max(1,|w_r z_r|), P_s^2*max(1,|w_s z_s|) <= H_k*g^2` in each of the
-2,381 mixed cells and ten live boundaries; coefficient signs alone are
-falsified as a route to that bound.
+[R] **The old lattice-sign boundary census is superseded by exact-ratio
+nonvanishing.**  The nine strict one-sided slivers and eighteen one-zero
+boundaries are not live cells, because they require a zero third quotient.
+After imposing the exact equation-facing sign/nonvanishing data, every one
+of the 1,035 three-owner geometries is all-three-nonzero and sign-mixed.  The
+tail-1000 determinant closes the 27 center/reflected triples, leaving exactly
+1,008 nonreflected exactly-three geometries.  Counting nonunit supports of
+all sizes, the live odd ledger has 43,282 subsets: those 1,008 triples plus
+all 42,274 supports of cardinality at least four.  Unit full-grid buckets are
+retained and are not counted as live owners.
+
+[R] **Fifth order is now normalized to the exact next Hensel quotient.**
+Lean proves the universal identity
+`R5(d)=27*K4+d*R1+d^2*R2`, including the dead-route certificate
+`R5(0)=27*K4`.  With `d=P*M` and reduced fourth numerator `P*w`, the reduced
+fifth square congruence is equivalent to
+`P | 27*w + M*R1*g^4`.  The third quotient disappears, so its lattice does
+not couple the new fourth quotients `w`.  Exact 121- and 1,004-digit Hensel
+fixtures satisfy this congruence package while failing the block equation and
+short window.  The normalization is a proper necessary condition and an
+auditable obstruction to a fixed-resultant overclaim; it is not a cutoff.
 
 [R] **Every supplied center/reflected exactly-three slice now closes at the
 live `10^1000` tail.**  For owners at the center and distance `r` on both

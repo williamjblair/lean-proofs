@@ -78,16 +78,16 @@ the fixed-coefficient reduced congruence, opposite-cofactor overlap, the
 three-row lattice identity, and generic two-zero packing are also
 kernel-banked and independently hostile-audited.  Exact arithmetic closes
 all 1,420 noncentral two-zero placements through `k=13` and 901 of 1,183 at
-`k=15`; this finite row application is diagnostic rather than attested.
-The remaining quotient branches are all-nonzero, one-zero,
-center-containing multi-zero, and 282 noncentral row-15 placements.  Exact
-lattice-sign analysis of all 1,035 triples closes all nine strict one-sided
-reflected slivers and eight of eighteen one-zero boundaries.  The generic
-component-square, coprime-lcm, and cutoff implications are kernel-banked and
-independently re-proved; the finite cell classification is exact external
-arithmetic.  The remaining three-bucket node is 2,381 mixed cells plus ten
-live boundaries, quantified by the two-small-weighted-terms lemma recorded
-in the lattice-sign findings.
+`k=15` at the historical `10^120` cutoff.  Those 282 old numerical
+survivors, the one-zero cells, and the center-zero cells are no longer live:
+the exact-ratio theorem proves every composed third obstruction nonzero from
+the equation, and its quotient-form corollary proves every named third
+quotient nonzero.  Independent arithmetic confirms that `10^131` already
+closes all 2,603 historical noncentral two-zero placements, but the live
+proof uses nonvanishing rather than this finite scan.  The old 2,381-cell and
+boundary sign census is therefore superseded.  After the 27 reflected
+triples are removed, the exactly-three branch consists of 1,008
+nonreflected, all-three-nonzero, sign-mixed geometries.
 At the upgraded odd-tail cutoff, the separate center/reflected determinant
 route now closes every one of the 27 reflected pairs for a supplied exact
 three-bucket factorization: Lean derives the center and endpoint packing
@@ -95,6 +95,14 @@ bounds from the equation, and exact arithmetic puts every cutoff below
 `10^200<10^1000` (12 old pairs and 15 new).  This does not construct an
 exactly-three decomposition when more live owners remain, nor does it turn
 an arbitrary three-owner geometry into a center/reflected one.
+The fifth lift is now normalized exactly rather than treated as a possible
+fixed resultant.  Lean proves `R5(d)=27*K4+d*R1+d^2*R2`; after writing
+`d=P*M` and the reduced fourth numerator as `P*w`, the reduced fifth square
+divisibility is equivalent to `P|27*w+M*R1*g^4`.  The new fourth quotient
+`w` is not controlled by the third-quotient lattice.  Exact Hensel fixtures
+at 121- and 1,004-digit gaps satisfy the entire congruence package while
+failing the equation and upper window, so no congruence-only fixed
+resultant is counted.
 The complete owner grid is now assembled end to end.  From the equation and
 target-size hypothesis, Lean constructs `AllOwnerAssemblyCertificate` with
 one bucket for every index in `Icc 1 k` (unit buckets where empty), the
@@ -210,12 +218,12 @@ OPEN CORE (the two arms below are equivalently packaged as the single
    nonzero cleaned owner witnesses; the remaining task is to contradict that
    multi-owner branch.  The extraction does not absorb further owner buckets
    into the bounded loss.
-   In the exactly-three-cleaned-bucket slice, the current exact
-   zero-obstruction placements are excluded.  The audited quotient package
-   additionally closes the noncentral two-zero placements through `k=13`
-   and 901 of 1,183 at `k=15`.  The current exact gap comprises the
-   all-nonzero, one-zero, center-containing multi-zero, and 282 noncentral
-   row-15 quotient placements.  For arbitrary complete owner families of
+   In the exactly-three-cleaned-bucket slice, every second and third
+   obstruction is nonzero, and the quotient-form theorem excludes every
+   zero third quotient already from `d>=10^120`.  At the live `10^1000`
+   boundary the center/reflected determinant removes 27 triples, leaving
+   exactly 1,008 nonreflected all-three-nonzero geometries.  For arbitrary
+   complete owner families of
    cardinality `4..15`, exact second/third obstruction composition with the
    original loss is now banked, and the equation-level lower residual bound
    excludes every vanishing composed second obstruction at target size.
@@ -225,13 +233,11 @@ OPEN CORE (the two arms below are equivalently packaged as the single
    supplies an `AllOwnerAssemblyThirdNonzeroCertificate`, including all empty
    and live owner buckets without absorbing omitted components into the loss,
    and every composed second and third obstruction is nonzero.  The
-   exact remaining all-owner lemma is that any target-row block equation
-   carrying this certificate has `d<10^120`; this is target-strength and is
-   not counted as a further reduction.
-   In the exactly-three slice, the lattice-sign route reduces the live cells
-   to the exact requirement that two distinct weighted component proxies
-   `V_s=P_s^2*max(1,|w_s z_s|)` are at most `H_k*g^2`; this is unproved and
-   coefficient signs alone are explicitly insufficient.
+   exact remaining odd arm is to exclude the 1,008 nonreflected
+   exactly-three supports and all 42,274 supports of cardinality at least
+   four at `d>=10^1000`.  Equivalently, any target-row equation carrying the
+   full certificate must have `d<10^1000`; this is target-strength and is not
+   counted as a further reduction.
    For the complete owner grid, all 42,274 subsets and 2,576 four-owner
    circuits have now been checked exactly; every circuit is sign-mixed.  The
    unique product-square Vandermonde resultant retains the common cofactor

@@ -236,6 +236,48 @@ theorem exactRatio_target_three_bucket_all_third_obstructions_nonzero
     hk hi hj hl hij hil hjl hgpos hdlarge hdecomp
     hfloorI hfloorJ hfloorL
 
+/-- Equation-facing quotient form of the exactly-three nonvanishing theorem.
+If the three composed third obstructions are named as component squares times
+their third quotients, then all three quotients are nonzero.  No component is
+cancelled and no primality hypothesis is needed. -/
+theorem exactRatio_target_three_bucket_all_third_quotients_nonzero
+    {k n d i j l P Q R g a b c : ℕ} {zP zQ zR : ℤ}
+    (hk : k = 5 ∨ k = 7 ∨ k = 9 ∨ k = 11 ∨ k = 13 ∨ k = 15)
+    (hi : i ∈ Finset.Icc 1 k)
+    (hj : j ∈ Finset.Icc 1 k)
+    (hl : l ∈ Finset.Icc 1 k)
+    (hij : i ≠ j) (hil : i ≠ l) (hjl : j ≠ l)
+    (hgpos : 0 < g)
+    (hdlarge : 10 ^ 120 ≤ d)
+    (hdecomp : d = g * P * Q * R)
+    (hPi : localResidual n d i = a * P ^ 2)
+    (hQj : localResidual n d j = b * Q ^ 2)
+    (hRl : localResidual n d l = c * R ^ 2)
+    (heq : blockProduct k (n + d) = 4 * blockProduct k n)
+    (hTP : targetThreeBucketThirdObstruction k i j l a b c g d =
+      (P : ℤ) ^ 2 * zP)
+    (hTQ : targetThreeBucketThirdObstruction k j i l a b c g d =
+      (Q : ℤ) ^ 2 * zQ)
+    (hTR : targetThreeBucketThirdObstruction k l i j a b c g d =
+      (R : ℤ) ^ 2 * zR) :
+    zP ≠ 0 ∧ zQ ≠ 0 ∧ zR ≠ 0 := by
+  have hnonzero := exactRatio_target_three_bucket_all_third_obstructions_nonzero
+    hk hi hj hl hij hil hjl hgpos hdlarge hdecomp hPi hQj hRl heq
+  constructor
+  · intro hzP
+    apply hnonzero.1
+    rw [hTP, hzP]
+    ring
+  constructor
+  · intro hzQ
+    apply hnonzero.2.1
+    rw [hTQ, hzQ]
+    ring
+  · intro hzR
+    apply hnonzero.2.2
+    rw [hTR, hzR]
+    ring
+
 /-- Equation-facing full-grid wrapper for the new multi-owner domination
 theorem.  Every full-grid third obstruction is nonzero, including unit
 owner buckets.  The theorem does not turn the resulting simultaneous
@@ -282,6 +324,7 @@ theorem exactRatio_allOwner_third_obstruction_ne_zero
 #print axioms target_exactRatio_localResidual_floor
 #print axioms target_exactRatio_threeResidual_product_lower
 #print axioms exactRatio_target_three_bucket_all_third_obstructions_nonzero
+#print axioms exactRatio_target_three_bucket_all_third_quotients_nonzero
 #print axioms exactRatio_allOwner_third_obstruction_ne_zero
 
 end Erdos686Variant

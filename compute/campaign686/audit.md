@@ -147,6 +147,33 @@ congruence-only resultant route.  The single remaining exactly-three-bucket
 node is the quantified short-CRT/window lemma; it is not proved here and does
 not cover four-or-more buckets.
 
+### Quotient-zero ledger and fifth normalization
+
+1. The exact equation and ratio window prove all three composed third
+   obstructions nonzero at `d>=10^120`. **Lean banked.**
+2. Naming them as `T_s=P_s^2*z_s` makes every `z_s` nonzero without
+   cancellation or primality. **Lean banked in the quotient-form corollary.**
+3. The historical noncentral two-zero scan contains exactly 2,603
+   placements. Independent exact arithmetic gives 27 zero-weight
+   contradictions and 2,576 numeric closures at `10^1000`; the sharp global
+   cutoff has 131 digits. **Exact reproduced.**
+4. Therefore the 282 old row-15 numerical survivors and every one-zero or
+   center-zero boundary are not live equation branches. **Ledger correction;
+   no finite scan is used as a theorem premise.**
+5. The reduced fifth coefficient satisfies universally
+   `R5(d)=27*K4+d*R1+d^2*R2`. With `d=P*M` and fourth numerator `P*w`, its
+   square divisibility is equivalent to `P|27*w+M*R1*g^4`. **Lean banked and
+   exact reproduced.**
+6. The new fourth quotient `w` is not controlled by the third-quotient
+   lattice. The 121- and 1,004-digit Hensel fixtures satisfy the congruence
+   package while failing the exact equation and short window. **Exact
+   falsification of a congruence-only fixed resultant.**
+
+Verdict: PASS as a correction of the live branch ledger and an exact
+normalization of fifth order. The remaining exactly-three branch is the
+1,008 nonreflected, all-three-nonzero geometries; all 42,274 supports of
+cardinality at least four remain in the full-owner joint-nonzero problem.
+
 ### Tail-1000 center/reflected determinant slice
 
 1. Fix `k in {5,7,9,11,13,15}` and
