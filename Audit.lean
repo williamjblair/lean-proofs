@@ -28,6 +28,7 @@ import ErdosProblems.Erdos23GapGBOneDefectAlignment
 import ErdosProblems.Erdos23GapGBLayerCapacity
 import ErdosProblems.Erdos23GapGBTwoDefect
 import ErdosProblems.Erdos23GapGBTwoDefectAlignment
+import ErdosProblems.Erdos23GapGBTwoDefectFinal
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686SmallBranch
 import ErdosProblems.Erdos686Reduction
@@ -78,6 +79,7 @@ import ErdosProblems.Erdos686ReflectedThreeBucketDeterminant
 import ErdosProblems.Erdos686EvenK16
 import ErdosProblems.Erdos686EvenK18
 import ErdosProblems.Erdos686EvenK182024
+import ErdosProblems.Erdos686EvenK22Core
 import ErdosProblems.Erdos686EvenK28
 import ErdosProblems.Erdos686EvenK32
 import ErdosProblems.Erdos686EvenTailRunge
@@ -675,6 +677,7 @@ import ErdosProblems.Erdos727
 #print axioms Erdos23GapGBTwoDefectAlignment.totalCost_le_rlBudget_of_one_addTwo_levelCuts
 #print axioms Erdos23GapGBTwoDefectAlignment.totalCost_le_rlBudget_of_q3PureMass_allNonbridge_sameSide
 #print axioms Erdos23GapGBTwoDefectAlignment.totalCost_le_rlBudget_of_q2q2PureMass_allNonbridge_sameSide
+#print axioms Erdos23GapGBTwoDefectFinal.totalCost_le_rlBudget_of_twoDefect_allNonbridge_sameSide
 #print axioms Erdos730.eight_mul_sq_le_succ_cube
 #print axioms Erdos730.nearEnvelope_forces_high_exponent
 #print axioms Erdos730.nearEnvelope_prime_power_clearance
@@ -830,6 +833,8 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_eighteen
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_twenty
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_twentyfour
+#print axioms Erdos686.Erdos686Variant.even22_small_gap_impossible
+#print axioms Erdos686.Erdos686Variant.even22_large_gap_reduction
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_twentyeight
 #print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_thirtytwo
 #print axioms Erdos686.Erdos686Variant.no_even_tail_solution_universal
@@ -870,6 +875,7 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_finalResidual
 
 -- Conditional research surfaces; not listed in `proofs.yaml`.
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_twentytwo_of_large_obstruction
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_tail1000_and_smooth
 #print axioms Erdos686.Erdos686Variant.exactRatio_target_three_bucket_all_third_obstructions_nonzero
 #print axioms Erdos686.Erdos686Variant.fifth_order_local_lift

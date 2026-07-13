@@ -19,6 +19,7 @@ import ErdosProblems.Erdos23GapGBOneDefectAlignment
 import ErdosProblems.Erdos23GapGBLayerCapacity
 import ErdosProblems.Erdos23GapGBTwoDefect
 import ErdosProblems.Erdos23GapGBTwoDefectAlignment
+import ErdosProblems.Erdos23GapGBTwoDefectFinal
 import ErdosProblems.Erdos686
 import ErdosProblems.Erdos686ConstantQuotient
 import ErdosProblems.Erdos686QuotientConfinement
@@ -92,6 +93,7 @@ import ErdosProblems.Erdos686ReflectedThreeBucketDeterminant
 import ErdosProblems.Erdos686EvenK16
 import ErdosProblems.Erdos686EvenK18
 import ErdosProblems.Erdos686EvenK182024
+import ErdosProblems.Erdos686EvenK22Core
 import ErdosProblems.Erdos686EvenK28
 import ErdosProblems.Erdos686EvenK32
 import ErdosProblems.Erdos686EvenTailRunge

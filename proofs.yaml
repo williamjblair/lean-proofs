@@ -5540,6 +5540,17 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/23.lean
   - problem: 23
     source: erdosproblems
+    file: ErdosProblems/Erdos23GapGBTwoDefectFinal.lean
+    theorem: Erdos23GapGBTwoDefectFinal.totalCost_le_rlBudget_of_twoDefect_allNonbridge_sameSide
+    statement: >-
+      At d equal to twice the slack minus two, fully nonbridge corridor geometry,
+      the rooted cut condition, injective simple demand pairs, legality, and
+      same-color endpoints imply the exact RL internal-cost budget across all
+      five canonical two-defect shapes.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 23
+    source: erdosproblems
     file: ErdosProblems/Erdos23GapGBOneDefectIntervals.lean
     theorem: Erdos23GapGBOneDefectIntervals.overlapIntervalProfile
     statement: >-
@@ -6297,6 +6308,27 @@ proofs:
     statement: >-
       The quotient-four block equation has no solution in row k=24 for any
       admissible gap d>=24.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK22Core.lean
+    theorem: Erdos686.Erdos686Variant.even22_small_gap_impossible
+    statement: >-
+      The quotient-four block equation in row k=22 has no solution for every
+      admissible gap 22 <= d <= 249; the finite strip covers exactly 16,859
+      ratio-window candidates with ordinary-kernel shards.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK22Core.lean
+    theorem: Erdos686.Erdos686Variant.even22_large_gap_reduction
+    statement: >-
+      Every hypothetical row-22 quotient-four solution with d >= 250 yields
+      integers w and v and an odd natural t with 1 <= t <= 3795146531 on the
+      exact centered polynomial surface S(w)=4*S(v) and
+      T(w)-2*T(v)=-33*t.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686

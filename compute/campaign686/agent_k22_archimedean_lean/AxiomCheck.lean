@@ -1,0 +1,13 @@
+import ErdosProblems.Erdos686EvenK22Core
+
+open Erdos686 Erdos686.Erdos686Variant
+
+#print axioms Erdos686.Erdos686Variant.even22_square_identity
+#print axioms Erdos686.Erdos686Variant.even22_centered_bridge
+#print axioms Erdos686.Erdos686Variant.even22_T_fixed_divisor
+#print axioms Erdos686.Erdos686Variant.even22_T_fixed_divisor_maximal
+#print axioms Erdos686.Erdos686Variant.even22_T_odd_at_odd
+#print axioms Erdos686.Erdos686Variant.even22_finite_strip
+#print axioms Erdos686.Erdos686Variant.even22_small_gap_impossible
+#print axioms Erdos686.Erdos686Variant.even22_large_gap_reduction
+#print axioms Erdos686.Erdos686Variant.no_gap_solution_four_even_twentytwo_of_large_obstruction

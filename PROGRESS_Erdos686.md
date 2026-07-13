@@ -523,6 +523,7 @@ row-4 escape → contradiction.
 | `Erdos686SmallCore.lean` | `row_full_escape_small_k_d_le_220`: 5 ≤ k ≤ 15, k ≤ d ≤ 220, window ⟹ some row j ≤ 5 fails; banded certs, 23,730 grid points; `window_n_bound_small_k` (n < 2287) |
 | `Erdos686ConstantSurvivors.lean` | the 45 prefix-three survivors + 6 band shadows; row-4 escape decide; banded membership certs for all 11 (k,q); u = d edge |
 | `Erdos686SmallBranch.lean` | assembly, the two open Props, conditional reductions, boundary falsification |
+| `Erdos686EvenK22Core.lean` | row `k=22`: unconditional closure for `22≤d≤249`, exact `d≥250` reduction to an odd `t≤3795146531`, and an explicit conditional wrapper for the remaining bounded surface |
 
 ---
 
@@ -607,16 +608,26 @@ requires
 `v>=7629565936566640936850578356790181141762389`.
 These exact values falsify this bridge, not the original equation.
 
-[X] **The first open even row does not yet admit a kernel-feasible local
-sieve.**  At `k=22` the quadratic strip closes exactly `22<=d<=26`.  Three
-integral root-pair fixtures survive every unrestricted local mask and refute
-the original `d>=27` cover.  A corrected shifted trap for `d>=250` leaves
-`1<=t<=3795146531`; parity and mod 23 leave exactly 330,012,742 candidates,
-and an exact Python packed-bitset reproduction empties them with prime masks
-through 953.  The finite strip `27<=d<=249` has 16,859 ratio-window pairs and
-no equality in exact arithmetic.  Neither computation is Lean-banked: no
-ordinary-kernel certificate of feasible size is supplied, so `k=22` remains
-open.
+[R/E/X] **The first open even row now has a kernel-checked finite strip and
+Archimedean reduction, but not a kernel-checked terminal cover.**  At `k=22`,
+`even22_small_gap_impossible` closes every `22<=d<=249`: the quadratic strip
+covers `22<=d<=26`, and 28 ordinary-kernel shards discharge all 16,859 exact
+ratio-window pairs for `27<=d<=249`.  For `d>=250`,
+`even22_large_gap_reduction` proves that every hypothetical solution yields
+integers `w,v` and an odd natural `t` satisfying
+
+```text
+S(w)=4S(v),  T(w)-2T(v)=-33t,  1<=t<=3795146531.
+```
+
+Parity and mod 23 leave exactly 330,012,742 candidates, and independent exact
+Python bitsets empty them with prime masks through 953.  That terminal step is
+not admitted: representative generated table declarations depended on named
+axioms from a temporary stub object, while an independent 20,000,000-bit Lean
+probe stack-overflows before producing an axiom report.  All contaminated
+generated sources and objects were quarantined.  Thus `k=22` remains open
+exactly at the quantified bounded surface above; no packed row closure is
+claimed.
 
 [C] A viable next Runge step must cancel the first omitted Laurent term
 before the integer-size trap and obtain a new gcd or owner-correlation gain.

@@ -24,7 +24,8 @@ Docs: `PROGRESS_Erdos686.md`. Modules: `ErdosProblems/Erdos686*.lean`.
 UNCONDITIONAL: every admissible `k ≤ 15` case with `k ≤ d < 10^120`
 (Runge + mod-p covers for even k; Farey descent for odd k), and now every odd target row throughout
 `10^120 ≤ d < 10^1000`; the k=14 case for all d; the complete large rows
-`k=16,18,20,24,28,32`.  The theorem `erdos686_false_of_finalResidual` is the
+`k=16,18,20,24,28,32`; and row `k=22` for `22≤d≤249`.  The theorem
+`erdos686_false_of_finalResidual` is the
 conditional terminal reduction from the still-open equivalent residual.
 
 NEW BANKED RESTRICTIONS: exact p-adic square localization for every
@@ -186,11 +187,16 @@ after the exact odd-center fixed divisor needs
 `7629565936566640936850578356790181141762389`).  Parity weighting and a
 better general interval-lcm constant therefore do not bridge the gap; a new
 Laurent-term cancellation with gcd or owner-correlation gain is required.
-At `k=22`, a corrected shifted trap plus exact prime masks empties the
-`d>=250` parameter interval only as a 330,012,742-candidate Python bitset;
-three integral root fixtures refute the unrestricted `d>=27` mask route, and
-no feasible ordinary-kernel certificate exists yet.  This is recorded as a
-failed route, not a closed row.
+At `k=22`, Lean now closes the exact 16,859-candidate finite strip
+`27<=d<=249` and proves that every hypothetical solution with `d>=250`
+produces an odd `t` with `1<=t<=3795146531` on the displayed centered
+`S,T` surface; together with the quadratic strip this closes `22<=d<=249`.
+Exact prime masks empty all 330,012,742 large-gap candidates in Python, but
+the attempted generated packed certificate failed the kernel gate: two
+representative table declarations were compiled through temporary named
+axiom stubs, and the independent 20,000,000-bit probe stack-overflows Lean.
+Those generated declarations were quarantined.  The full bounded surface
+therefore remains open and row `k=22` is not claimed closed.
 Every lower-block endpoint that is a prime power is impossible for every
 prime.  At an interior position the exact split-factorial valuation criterion
 is banked; in particular, every prime power with base `p>k` is excluded.
@@ -335,7 +341,9 @@ OPEN CORE (the two arms below are equivalently packaged as the single
    large-base reflection-center component satisfies the displayed
    gcd/cofactor bounds, but `a/gcd(a,d)` remains unbounded.  The `k=34`
    coefficient audit rules out direct composition of the quadratic strip
-   with the canonical Runge tail.  The census fixtures remain
+   with the canonical Runge tail.  In row `k=22`, only `d>=250` remains and
+   every solution lies on the exact odd bounded `S,T,t` surface above; its
+   kernel-checkable terminal cover is still missing.  The census fixtures remain
    non-equations and do not discharge this arm.
 
 Lean proves that this single residual hypothesis implies the former
