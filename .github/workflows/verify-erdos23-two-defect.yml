@@ -30,7 +30,25 @@ jobs:
           lint: false
           use-mathlib-cache: true
       - name: Apply candidate source patch
-        run: python3 scripts/agent_two_defect_patch.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set +e
+          python3 scripts/agent_two_defect_patch.py > /tmp/two-defect-patch.log 2>&1
+          status=$?
+          cat /tmp/two-defect-patch.log
+          if [ "$status" -ne 0 ] && [ -n "$PR_NUMBER" ]; then
+            {
+              echo '### Source-patch failure'
+              echo
+              echo '```text'
+              cat /tmp/two-defect-patch.log
+              echo '```'
+            } > /tmp/two-defect-comment.md
+            gh pr comment "$PR_NUMBER" --edit-last --create-if-none --body-file /tmp/two-defect-comment.md
+          fi
+          exit "$status"
       - name: Compile two-defect final module
         env:
           GH_TOKEN: ${{ github.token }}
