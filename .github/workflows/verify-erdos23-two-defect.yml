@@ -36,7 +36,19 @@ jobs:
         run: |
           set +e
           python3 - <<'PY' > /tmp/two-defect-patch.log 2>&1
+          import base64
           import runpy
+
+          original_b64decode = base64.b64decode
+
+          def padded_b64decode(data, *args, **kwargs):
+              if isinstance(data, str):
+                  data = data + '=' * (-len(data) % 4)
+              elif isinstance(data, bytes):
+                  data = data + b'=' * (-len(data) % 4)
+              return original_b64decode(data, *args, **kwargs)
+
+          base64.b64decode = padded_b64decode
           try:
               runpy.run_path('scripts/agent_two_defect_patch.py', run_name='__main__')
           except BaseException as exc:
