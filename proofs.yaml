@@ -7159,3 +7159,14 @@ proofs:
       most Z is sublinear in Z, closing the normalized terminal-pair count.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 730
+    source: erdosproblems
+    file: ErdosProblems/Erdos730FullDensityTheorem.lean
+    theorem: Erdos730.FullDensityTheorem.pairSet_infinite
+    statement: >-
+      There are infinitely many pairs m less than n whose central binomial
+      coefficients have identical prime-factor support; the proof gives
+      infinitely many consecutive pairs from an explicit positive-density
+      family.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/730.lean

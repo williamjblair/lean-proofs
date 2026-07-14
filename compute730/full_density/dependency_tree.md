@@ -1,87 +1,84 @@
-# Erdős #730 full-density candidate: dependency tree
+# Erdős #730 full-density proof: kernel dependency tree
 
 Audit date: 2026-07-13
 
 Status vocabulary:
 
-- `IMPORTED`: used as a named external theorem, not reproved here.
+- `IMPORTED-KERNEL`: used as a named theorem from Mathlib or the pinned
+  external PNT-AP cone; its axiom footprint passes the standard-three gate.
 - `EXACT-CHECKED`: all finite arithmetic was independently reproduced by
   `verify.py` and `test_verify.py`.
-- `PAPER-PROVED`: a quantified argument is present in the submitted proof and
-  survives this hostile audit.
-- `KERNEL-BANKED`: the stated node, or the explicitly named subnode, has a
+- `KERNEL-CLOSED`: the stated node has a
   no-`sorry` Lean theorem whose axiom footprint is contained in
   `[propext, Classical.choice, Quot.sound]`.
-- `LEAN-OPEN`: no kernel-checked realization has yet been established by this
-  intake lane.
 
-The labels are deliberately cumulative only where stated.  In particular,
-`PAPER-PROVED` never means `LEAN-PROVED`.
+The tree records the final kernel state.  `EXACT-CHECKED` labels identify
+finite certificates that also feed kernel theorems elsewhere in the tree.
 
 ```text
-H0  liminf_X Good(X)/X > 107/2500                         PAPER-PROVED; LEAN-OPEN
+H0  liminf_X Good(X)/X > 107/2500                              KERNEL-CLOSED
  |
- +-- I1  Kummer carry theorem                                      IMPORTED
- |    +-- p does not divide B(t) iff all digits are lower-half    KERNEL-BANKED
- |    `-- N1  exact consecutive-transition criterion              KERNEL-BANKED
- |         `-- endpoint digit shifts in (5), (6), and (8)         KERNEL-BANKED
+ +-- I1  Kummer carry theorem                               IMPORTED-KERNEL
+ |    +-- p does not divide B(t) iff all digits are lower-half    KERNEL-CLOSED
+ |    `-- N1  exact consecutive-transition criterion              KERNEL-CLOSED
+ |         `-- endpoint digit shifts in (5), (6), and (8)         KERNEL-CLOSED
  |
- +-- N2  four-branch family and separation                         KERNEL-BANKED
- |    +-- T=5289 and four slopes/constants                         KERNEL-BANKED
- |    +-- 2PQ-1=3RS and six linear identities                     KERNEL-BANKED
- |    +-- pairwise coprimality and fixed primes                    KERNEL-BANKED
- |    `-- four Phi_L obstruction formulae                          KERNEL-BANKED
+ +-- N2  four-branch family and separation                         KERNEL-CLOSED
+ |    +-- T=5289 and four slopes/constants                         KERNEL-CLOSED
+ |    +-- 2PQ-1=3RS and six linear identities                     KERNEL-CLOSED
+ |    +-- pairwise coprimality and fixed primes                    KERNEL-CLOSED
+ |    `-- four Phi_L obstruction formulae                          KERNEL-CLOSED
  |
- +-- N3  generic p-adic isometry and exact digit count             KERNEL-BANKED
- |    +-- common quadratic coefficient 3024*T^2                    KERNEL-BANKED
- |    +-- b_L factors supported on {2,3,41,43}                     KERNEL-BANKED
- |    +-- G mod p^j is injective/bijective under b_L a unit       KERNEL-BANKED
- |    `-- exact count (H-1)H^(d-1)                                 KERNEL-BANKED
+ +-- N3  generic p-adic isometry and exact digit count             KERNEL-CLOSED
+ |    +-- common quadratic coefficient 3024*T^2                    KERNEL-CLOSED
+ |    +-- b_L factors supported on {2,3,41,43}                     KERNEL-CLOSED
+ |    +-- G mod p^j is injective/bijective under b_L a unit       KERNEL-CLOSED
+ |    `-- exact count (H-1)H^(d-1)                                 KERNEL-CLOSED
  |
- +-- N4  bad parameter implies a witnessed obstruction             KERNEL-BANKED
- |    `-- finite union-bound count Bad(X) <= E(X)                  PAPER-PROVED
+ +-- N4  bad parameter implies a witnessed obstruction             KERNEL-CLOSED
+ |    `-- finite union-bound count Bad(X) <= E(X)                  KERNEL-CLOSED
  |
- +-- N5  higher powers a>=2 contribute o(X)                        PAPER-PROVED
- |    +-- complete/padded p^r block count                          KERNEL-BANKED
- |    +-- generic dominated convergence over (p,a)                 KERNEL-BANKED
- |    +-- instantiate event summands and pointwise decay           PAPER-PROVED
- |    +-- finite M(Z) square/cuberoot/log bound                    KERNEL-BANKED
- |    +-- M(Z)/Z tends to zero                                     KERNEL-BANKED
- |    `-- terminal powers X<p^a<=C0 X specialization               PAPER-PROVED
+ +-- N5  higher powers a>=2 contribute o(X)                        KERNEL-CLOSED
+ |    +-- complete/padded p^r block count                          KERNEL-CLOSED
+ |    +-- generic dominated convergence over (p,a)                 KERNEL-CLOSED
+ |    +-- instantiate event summands and pointwise decay           KERNEL-CLOSED
+ |    +-- finite M(Z) square/cuberoot/log bound                    KERNEL-CLOSED
+ |    +-- M(Z)/Z tends to zero                                     KERNEL-CLOSED
+ |    `-- terminal powers X<p^a<=C0 X specialization               KERNEL-CLOSED
  |
- +-- N6  fixed-depth Fourier lemma, only for a=1                    PAPER-PROVED
- |    +-- order-two half-digit parity count/error                  KERNEL-BANKED
- |    +-- effective moduli p^m, m<=r, vanish exactly               PAPER-PROVED
- |    +-- m>r completion and quadratic Gauss sum                   PAPER-PROVED
- |    +-- interval Fourier mass on one nonzero class               PAPER-PROVED
- |    `-- digit-box Fourier l1 norm                                PAPER-PROVED
+ +-- N6  fixed-depth Fourier lemma, only for a=1                    KERNEL-CLOSED
+ |    +-- order-two half-digit parity count/error                  KERNEL-CLOSED
+ |    +-- effective moduli p^m, m<=r, vanish exactly               KERNEL-CLOSED
+ |    +-- m>r completion and quadratic Gauss sum                   KERNEL-CLOSED
+ |    +-- interval Fourier mass on one nonzero class               KERNEL-CLOSED
+ |    `-- digit-box Fourier l1 norm                                KERNEL-CLOSED
  |
- +-- I2  Mertens reciprocal-prime theorem                           IMPORTED
- |    +-- N7  each fixed first-power band r                        PAPER-PROVED
- |    +-- N8  uniform tail in r                                    PAPER-PROVED
- |    `-- N9  transition range sqrt(X)<p<=Y is o(X)                PAPER-PROVED
+ +-- A2  reciprocal-prime Mertens input, proved locally            KERNEL-CLOSED
+ |    +-- N7  each fixed first-power band r                        KERNEL-CLOSED
+ |    +-- N8  uniform tail in r                                    KERNEL-CLOSED
+ |    `-- N9  transition range sqrt(X)<p<=Y is o(X)                KERNEL-CLOSED
  |
- +-- N10 top-prime classification                                  PAPER-PROVED
- |    +-- p/c>130 from Y=sqrt(X)(log X)^2                          PAPER-PROVED
+ +-- N10 top-prime classification                                  KERNEL-CLOSED
+ |    +-- p/c>130 from Y=sqrt(X)(log X)^2                          KERNEL-CLOSED
  |    +-- P classes c=3,4 mod 7                                    EXACT-CHECKED
  |    +-- R classes c=5,9 mod 14                                   EXACT-CHECKED
- |    `-- Q and S impossible under p/c>130                         PAPER-PROVED
+ |    `-- Q and S impossible under p/c>130                         KERNEL-CLOSED
  |
- +-- I3  fixed-modulus PNT in arithmetic progressions               IMPORTED
- |    `-- N11 divisor switching and top contribution <=2/3 log 2  PAPER-PROVED
+ +-- I2  fixed-modulus PNT in arithmetic progressions       IMPORTED-KERNEL
+ |    `-- N11 divisor switching and top contribution <=2/3 log 2  KERNEL-CLOSED
  |         +-- P: 20160 of phi(222138)=60480 classes               EXACT-CHECKED
  |         `-- R: 13440 of phi(148092)=40320 classes               EXACT-CHECKED
  |
- +-- N12 exact constant certificate                                KERNEL-BANKED
- |    `-- 4*S+(2/3)log 2 < 2393/2500                              KERNEL-BANKED
+ +-- N12 exact constant certificate                                KERNEL-CLOSED
+ |    `-- 4*S+(2/3)log 2 < 2393/2500                              KERNEL-CLOSED
  |
- `-- N13 density complement and strict increase                    PAPER-PROVED
-      `-- strict increase and density-to-upstream bridge           KERNEL-BANKED
+ `-- N13 density complement and strict increase                    KERNEL-CLOSED
+      `-- strict increase and density-to-upstream bridge           KERNEL-CLOSED
 ```
 
-## Exact imported theorem surface
+## Exact theorem surface
 
-The paper proof is relative to precisely these three external results.
+The paper proof invokes these three classical results.
 
 1. For every prime `p` and nonnegative `u,v`, the `p`-adic valuation of
    `binomial (u+v) u` is the number of carries in the base-`p` addition of
@@ -101,7 +98,20 @@ The paper proof is relative to precisely these three external results.
 
    Only `A=1`, `A=222138`, and `A=148092` are used.
 
-No fourth analytic input is hidden in an “essentially” or “standard
+The kernel proof obtains Kummer from Mathlib and proves the reciprocal-prime
+Mertens surface in `Erdos730Mertens.lean`.  Its only external analytic import
+is `PrimeNumberTheoremAnd.Consequences.chebyshev_asymptotic_pnt`, used to
+derive the qualitative PNT-AP limit at the three fixed moduli.  The package is
+pinned at `d7f9e2bfdcc7e34dfb9328b7494a6d424ff50c96`.
+
+The pinned external package contains `sorry` in the unrelated declarations
+`prelim_decay_2` and `prelim_decay_3`.  Neither declaration lies in the
+transitive dependency cone of `chebyshev_asymptotic_pnt`, `WeakPNT_AP`, or
+`Erdos730.FullDensity.requiredFixedModulusPNTAPInput`.  Their axiom reports
+contain no `sorryAx` and stay within
+`[propext, Classical.choice, Quot.sound]`.
+
+No fourth analytic input appears behind an “essentially” or “standard
 estimates” phrase.
 
 ## Quantified asymptotic nodes
@@ -142,6 +152,30 @@ The notation in the tree expands as follows.
   `limsup_{X->infinity} E_top,L(X)/X <= (1/3)log 2`.
 - `H0`: with `Good(X)=X-Bad(X)`,
   `liminf Good(X)/X > 107/2500`.
+
+## Terminal kernel declarations
+
+The fixed-depth and uniform-tail nodes assemble to
+
+```text
+Erdos730.SmallPrimeEvents.limsup_normalizedSmallPrimeWitnessCount_le :
+  limsup normalizedSmallPrimeWitnessCount atTop
+    <= 4*densityBudgetSeries.
+```
+
+The four-range density assembly then proves
+
+```text
+Erdos730.FullDensityTheorem.candidatePositiveDensity :
+  Erdos730.FullDensityReduction.CandidatePositiveDensityClaim
+
+Erdos730.FullDensityTheorem.pairSet_infinite :
+  Erdos730.FullDensityCore.PairSet.Infinite
+```
+
+The final audit reports only `[propext, Classical.choice, Quot.sound]` for
+both terminal declarations.  `bash scripts/check_axioms.sh` reports 1260
+clean headline declarations and no `sorryAx`.
 
 ## Falsification boundary
 

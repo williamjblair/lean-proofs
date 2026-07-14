@@ -28,23 +28,37 @@ lake build
 bash scripts/check_axioms.sh
 ```
 
-## Erdős #730 full-density intake
+## Erdős #730 full-density proof
 
-The explicit positive-density proof submitted on 2026-07-13 has passed the
-repository's hostile paper audit and exact-arithmetic reproduction.  Its
-family algebra, Kummer digit criterion, exact consecutive-transition and
-event-coverage theorems, generic p-adic permutation, finite digit counts,
-higher-power dominated-limit machinery, infinite numerical budget, and
-density-to-infinitude reduction are kernel-banked under the standard
-three-axiom gate.  See
-`compute730/full_density/` and `ErdosProblems/Erdos730FullDensityReduction.lean`.
+Erdős #730 is unconditionally kernel-proved.  The terminal theorem is
+`Erdos730.FullDensityTheorem.pairSet_infinite`: infinitely many consecutive
+central binomial coefficients have identical prime support.  The proof
+formalizes the explicit positive-density family, Kummer digit criterion,
+four-range event ledger, fixed-depth Fourier estimate, uniform depth tail,
+Mertens input, fixed-modulus PNT in arithmetic progressions, divisor
+switching, exact density budget, and density-to-infinitude bridge.  See
+`compute730/full_density/` and
+`ErdosProblems/Erdos730FullDensityTheorem.lean`.
 
-The unconditional headline is deliberately not advertised in `proofs.yaml`:
-the pinned Mathlib release lacks the reciprocal-prime Mertens asymptotic and
-fixed-modulus PNT in arithmetic progressions needed to formalize the analytic
-counting chain.  The exact remaining Lean proposition is
-`Erdos730.FullDensityReduction.CandidatePositiveDensityClaim`; the repository
-proves that it implies the exact Formal Conjectures infinite-set target.
+The hostile-audit certificate includes 119 passing exact-arithmetic tests and
+the strict rational bound
+
+```text
+4*S + (2/3) log 2
+  < 21498408212212214497 / 22462131847034880000
+  < 2393/2500,
+```
+
+with positive margin
+`2344391769572639 / 22462131847034880000`.  The terminal audit exposes only
+`[propext, Classical.choice, Quot.sound]`; no `native_decide` is used.
+
+The fixed-modulus PNT-AP step uses the pinned external
+`PrimeNumberTheoremAnd` package.  That package contains two admitted
+experimental declarations, `prelim_decay_2` and `prelim_decay_3`, outside the
+transitive dependency cone of the theorem used here.  The active PNT-AP route
+and the Erdős #730 terminal theorem do not depend on `sorryAx`, so this is a
+package-global hygiene qualification rather than a gap in the proof.
 
 ## Index
 
@@ -52,6 +66,7 @@ proves that it implies the exact Formal Conjectures infinite-set target.
 |--------:|---------|-----------|----|
 | [154](https://www.erdosproblems.com/154) | `Erdos154.erdos_154_sumset` | For a Sidon set `A` with `\|A\| ~ √N`, the sumset `A+A` is equidistributed over residue classes mod `m`. | [#4340](https://github.com/google-deepmind/formal-conjectures/pull/4340) |
 | [23](https://www.erdosproblems.com/23) | `Erdos23GapGBTwoDefectFinal.totalCost_le_rlBudget_of_twoDefect_allNonbridge_sameSide` | At `d = 2s - 2`, every fully nonbridge legal same-color demand family satisfying RFC and pair injectivity has total squared internal cost at most the exact RL budget. | [target](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/23.lean) |
+| [730](https://www.erdosproblems.com/730) | `Erdos730.FullDensityTheorem.pairSet_infinite` | Infinitely many consecutive central binomial coefficients have identical prime support. | [target](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/730.lean) |
 | [686](https://www.erdosproblems.com/686) | `Erdos686.Erdos686Variant.nonsquare_representable` | Every nonsquare natural number `N ≥ 2` has an Erdős 686 representation, already with `k=2`. | [target](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/686.lean) |
 | [686](https://www.erdosproblems.com/686) | `Erdos686.Erdos686Variant.erdos686_iff_square_representable` | Exact positive reduction: the full Erdős 686 statement is equivalent to representing every square `a^2` with `a≥2`. | [target](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/686.lean) |
 | [686](https://www.erdosproblems.com/686) | `Erdos686.Erdos686Variant.erdos686_false_iff_square_counterexample` | Exact negative reduction: a counterexample to the full Erdős 686 statement exists iff a square counterexample exists. | [target](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/686.lean) |

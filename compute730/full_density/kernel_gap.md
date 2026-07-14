@@ -1,84 +1,104 @@
-# Erdős #730 full-density proof: pinned-library kernel gap
+# Erdős #730 full-density proof: kernel gap closed
 
 Audit date: 2026-07-13
 Toolchain: Lean `v4.29.1`, Mathlib `v4.29.1`
 
 ## Result
 
-The pinned dependency graph contains the Kummer input needed by the proof,
-but it does not contain either of the two analytic asymptotics used to sum the
-prime bands.  Consequently the paper proof cannot currently be registered as
-an unconditional kernel theorem without adding a substantial analytic
-formalization.
+The former analytic kernel gap is closed.  The repository proves the exact
+positive-density claim for the explicit quadratic family and the upstream
+Erdős #730 infinitude statement:
 
-This is a library-availability statement, not a mathematical objection to the
-paper proof.  The exact missing surfaces are defined, without adding axioms,
-in `ErdosProblems/Erdos730AnalyticInputs.lean`.
+```text
+Erdos730.FullDensityTheorem.candidatePositiveDensity :
+  Erdos730.FullDensityReduction.CandidatePositiveDensityClaim
 
-## Available Kummer input
+Erdos730.FullDensityTheorem.pairSet_infinite :
+  Erdos730.FullDensityCore.PairSet.Infinite
+```
 
-Pinned Mathlib exposes Kummer in two useful forms:
+`Erdos730FullDensityTheoremAudit.lean` reports only
+`[propext, Classical.choice, Quot.sound]` for both declarations.
 
-- `Nat.Prime.multiplicity_choose` in `Mathlib/Data/Nat/Multiplicity.lean`;
+## Kummer input
+
+Pinned Mathlib supplies the Kummer results used by the transition criterion:
+
+- `Nat.Prime.multiplicity_choose` in
+  `Mathlib/Data/Nat/Multiplicity.lean`;
 - `padicValNat_choose` and
   `sub_one_mul_padicValNat_choose_eq_sub_sum_digits` in
   `Mathlib/NumberTheory/Padics/PadicVal/Basic.lean`.
 
-It also exposes `Nat.factorization_choose` in
-`Mathlib/Data/Nat/Choose/Factorization.lean`.  The local #730 Kummer module
-uses only theorem surfaces already in the pinned dependency.
+The local Kummer and consecutive-transition modules use these theorem
+surfaces without adding axioms.
 
-## Missing reciprocal-prime Mertens asymptotic
+## Reciprocal-prime Mertens closure
 
-`Mathlib/NumberTheory/SumPrimeReciprocals.lean` proves divergence of the sum
-of reciprocal primes (`Nat.Primes.not_summable_one_div`) and convergence of
-higher real powers.  It does not state the asymptotic
-
-```text
-sum_{p<=N} 1/p - log(log N) -> M.
-```
-
-The exact integer specialization of the paper's explicit bound is
-`Erdos730.FullDensity.MertensReciprocalPrimeInput`.
-
-## Missing fixed-modulus PNT in arithmetic progressions
-
-`Mathlib/NumberTheory/LSeries/PrimesInAP.lean` proves Dirichlet infinitude,
-not asymptotic equidistribution.  Its terminal public results include
-`Nat.infinite_setOf_prime_and_eq_mod` and
-`Nat.forall_exists_prime_gt_and_modEq`; there is no theorem asserting
+`Erdos730Mertens.lean` proves the required reciprocal-prime estimate inside
+the repository.  The proof builds a bounded first Mertens error from the
+factorial/von-Mangoldt identity, bounds proper prime powers, and applies Abel
+summation.  Its terminal surface is
 
 ```text
-pi(N; A,a) / (N/log N) -> 1/phi(A).
+Erdos730.FullDensity.mertensReciprocalPrimeInput :
+  Erdos730.FullDensity.MertensReciprocalPrimeInput
 ```
 
-The precise qualitative surfaces used here are
-`Erdos730.FullDensity.PNTAPInputAtModulus` at the fixed moduli `1`, `222138`,
-and `148092`, bundled by `RequiredFixedModulusPNTAPInput`.  The development
-does not assume modulus-uniform PNT-AP.
+The coefficient in the formal bound is explicit and positive.  The density
+argument requires its decay rate, so it does not depend on the paper's
+particular coefficient `4`.
 
-## External dependency check
+## Fixed-modulus PNT-AP closure
 
-The public `AlexKontorovich/PrimeNumberTheoremAnd` project was also inspected
-as a possible source compatible with this toolchain.  Its PNT-AP development
-still reaches unfinished Wiener/PNT nodes through declarations containing
-`sorry`; it therefore cannot pass this repository's kernel gate and was not
-added as a dependency.
-
-## Exact remaining Lean statement
-
-All downstream set-theoretic work is closed by
-`Erdos730.FullDensityReduction.pairSet_infinite_of_candidatePositiveDensity`.
-The kernel-banked chain also includes the complete consecutive-transition
-criterion, pointwise bad-event coverage, the summable higher-power majorant,
-generic dominated convergence, and the sublinear terminal prime-power count.
-The one remaining quantified lemma is
+`Erdos730PNTAP.lean` imports
+`PrimeNumberTheoremAnd.Consequences.chebyshev_asymptotic_pnt` and derives the
+unweighted prime-counting limit by partial summation.  It proves
 
 ```text
-Erdos730.FullDensityReduction.CandidatePositiveDensityClaim
+Erdos730.FullDensity.requiredFixedModulusPNTAPInput :
+  Erdos730.FullDensity.RequiredFixedModulusPNTAPInput
 ```
 
-whose expansion is the strict `107/2500` lower-density estimate for the
-explicit family.  This proposition is stronger than the upstream infinitude
-target and is exactly the theorem proved on paper; it is not introduced as an
-axiom or listed in `proofs.yaml`.
+for the fixed moduli `1`, `222138`, and `148092`.  The package revision is
+`d7f9e2bfdcc7e34dfb9328b7494a6d424ff50c96`.
+
+The external package contains admitted declarations in an unrelated
+Wiener/Fourier-decay experiment, named `prelim_decay_2` and
+`prelim_decay_3`.  The proof imports no declaration from that experiment.
+`Erdos730PNTAPAudit.lean` checks `chebyshev_asymptotic_pnt`, `WeakPNT_AP`,
+and `requiredFixedModulusPNTAPInput`; each dependency cone contains no
+`sorryAx` and uses at most `[propext, Classical.choice, Quot.sound]`.
+
+## Closed event-count chain
+
+The kernel proof covers each range used by the paper:
+
+- higher prime powers tend to zero by complete/padded blocks and dominated
+  convergence;
+- first powers up to `sqrt X` satisfy the fixed-depth Fourier bounds and the
+  uniform moving-depth tail estimate;
+- the transition range tends to zero;
+- divisor switching bounds the top-prime range by `(2/3) log 2`.
+
+The exact rational budget then gives lower density greater than `107/2500`,
+and strict increase of the family maps those parameters to distinct
+consecutive pairs.
+
+## Gate
+
+The verification command
+
+```text
+bash scripts/check_axioms.sh
+```
+
+completed with
+
+```text
+PASS: 1260 headline theorem(s) clean, axioms subset of
+      [propext, Classical.choice, Quot.sound]
+```
+
+The terminal cone contains no `sorry`, `admit`, `sorryAx`, new axiom, or
+`native_decide` proof.

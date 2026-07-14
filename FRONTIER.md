@@ -453,9 +453,12 @@ large primes — parked.
 
 ## Erdős #730 — same prime support of consecutive central binomials
 
-Status: **FULL PAPER PROOF HOSTILE-AUDIT PASS; exact certificates PASS;
-unconditional Lean headline remains OPEN.**  The durable proof, dependency
-tree, per-node hostile audit, and exact verifier are in
+Status: **SOLVED; unconditional Lean theorem kernel-proved.**  The terminal
+theorem is `Erdos730.FullDensityTheorem.pairSet_infinite`, proving that there
+are infinitely many consecutive central binomial coefficients with identical
+prime support.  Its audit exposes only
+`[propext, Classical.choice, Quot.sound]`; no `native_decide` is used.  The
+durable proof, dependency tree, per-node hostile audit, and exact verifier are in
 `compute730/full_density/`.  The frozen submitted source has SHA-256
 `3df2e48ca62e35dbfbd25406badf37574d910efb2ab39360ab3458f3a31c4292`.
 The new proof gives the explicit family
@@ -490,30 +493,31 @@ with positive rational margin
 `2344391769572639 / 22462131847034880000`.  The new and legacy exact suite has
 119 passing tests.
 
-Kernel-banked modules now include the exact four-branch arithmetic and
+Kernel-proved modules include the exact four-branch arithmetic and
 injective map into the upstream target (`Erdos730FullDensityCore`), the full
 consecutive-transition iff and pointwise bad-event coverage
 (`Erdos730ConsecutiveTransition`), the full infinite logarithmic-series budget
 (`Erdos730FullDensityBudget`), generic p-adic isometry and digit-box
-cardinality (`Erdos730PadicIsometry`), the higher-power Tannery and sublinear
-terminal-count layer (`Erdos730DominatedLimit`), and the density-to-infinitude
-bridge.  Their audit modules expose only
-`[propext, Classical.choice, Quot.sound]`; no `native_decide` is used.  The
-single explicit Lean intake boundary is
-`Erdos730.FullDensityReduction.CandidatePositiveDensityClaim`, expanded as
+cardinality (`Erdos730PadicIsometry`), fixed-depth Fourier and lower-half-box
+estimates, the higher-power Tannery and sublinear terminal-count layer, the
+Mertens and fixed-modulus PNT-AP inputs, the uniform small-prime tail, divisor
+switching, and the density-to-infinitude bridge.  The intermediate theorem
+`Erdos730.FullDensityTheorem.candidatePositiveDensity` proves
 
 ```text
 107/2500 < liminf_X
   #{1<=x<=X : primeFactors(B(n_x))=primeFactors(B(n_x+1))}/X.
 ```
 
-`pairSet_infinite_of_candidatePositiveDensity` proves the exact upstream
-infinitude target from this one claim.  The pinned mathlib supplies Kummer's
-factorization identity but not the reciprocal-prime Mertens theorem or the
-fixed-modulus prime number theorem in arithmetic progressions used by the
-paper; the remaining work is kernel formalization of that analytic chain, not
-a paper-level mathematical gap.  The old live uniform-lemma prompt is
-superseded and retained only as a falsification record.
+The terminal theorem then discharges the exact upstream infinitude target.
+The fixed-modulus PNT-AP route uses the pinned external
+`PrimeNumberTheoremAnd` package.  That package contains two admitted
+experimental declarations, `prelim_decay_2` and `prelim_decay_3`, outside the
+transitive dependency cone of the weighted PNT used here.  The active PNT-AP
+route and `pairSet_infinite` do not depend on `sorryAx`; this is deliberately
+not a claim that the third-party package is globally admission-free.  The old
+uniform-lemma prompt remains superseded and is retained as a falsification
+record, including the explicit counterexamples above.
 
 ## Erdős #64 — cycles of length 2^k under min degree 3
 

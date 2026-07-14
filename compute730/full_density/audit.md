@@ -1,27 +1,40 @@
-# Erdős #730 full-density proof: hostile intake audit
+# Erdős #730 full-density proof: hostile audit and kernel closure
 
 Audit date: 2026-07-13
 
 ## 1. Verdict
 
-**Paper verdict:** `PASS`, relative to the three explicitly imported theorems
+**Paper verdict:** `PASS`, relative to the three classical theorem surfaces
 listed below.  The submitted argument supplies a complete positive-density
-proof, and its new fixed-depth decomposition does not reuse either of the
-uniform incomplete-block statements already falsified in this repository.
+proof, and its fixed-depth decomposition avoids both uniform incomplete-block
+statements falsified in this repository.
 
 **Finite certificate verdict:** `PASS`.  An independent standard-library
 verifier reproduces the family arithmetic, exceptional factors, all top-range
 residue tables, both full CRT class counts, the six rational logarithm bounds,
 the infinite tail bound, and the final positive rational margin.
 
-**Lean verdict at intake:** `UNVERIFIED`.  A paper proof and exact Python
-certificates do not establish the headline theorem behind Lean's kernel.  The
-headline may be marked kernel-proved only after the exact theorem surface is
-formalized with no `sorry`, no new axioms, no `native_decide`, and an axiom
-report no larger than `[propext, Classical.choice, Quot.sound]`.
+**Lean verdict:** `PASS`.  The terminal declarations are
 
-This file audits the mathematics; it does not pre-announce the result of that
-later kernel gate.
+```text
+Erdos730.FullDensityTheorem.candidatePositiveDensity :
+  Erdos730.FullDensityReduction.CandidatePositiveDensityClaim
+
+Erdos730.FullDensityTheorem.pairSet_infinite :
+  Erdos730.FullDensityCore.PairSet.Infinite
+```
+
+`Erdos730FullDensityTheoremAudit.lean` reports only
+`[propext, Classical.choice, Quot.sound]` for both declarations.  The full
+repository gate completed with
+
+```text
+PASS: 1260 headline theorem(s) clean, axioms subset of
+      [propext, Classical.choice, Quot.sound]
+```
+
+The proof uses no `native_decide`, adds no axiom, and contains no admitted
+declaration in the dependency cone of either terminal theorem.
 
 ## 2. Frozen source and exact target
 
@@ -58,9 +71,9 @@ Here and below an asymptotic count is evaluated at positive integer `X`.
 
 The full node tree and quantifier expansion are in `dependency_tree.md`.
 
-## 3. Imported results: exact dependency surface
+## 3. Classical inputs and exact kernel dependency surface
 
-The proof imports, rather than reproves, only these results.
+The paper proof invokes three classical results.
 
 1. **Kummer.** For every prime `p` and nonnegative integers `u,v`, the
    exponent of `p` in `binomial(u+v,u)` equals the number of carries in the
@@ -84,9 +97,22 @@ The proof imports, rather than reproves, only these results.
 Only moduli `1`, `222138`, and `148092` occur.  The proof does not need
 uniformity as `A` varies.
 
-The cited explicit constant `4` in Mertens is stronger than needed.  The
-argument only requires an error tending to zero and the resulting
-`sum_{p<=z}1/p=O(log log z)`.
+The Lean realization handles these surfaces as follows.
+
+- Pinned Mathlib supplies Kummer.
+- `Erdos730Mertens.lean` proves `mertensReciprocalPrimeInput` from a
+  factorial/von-Mangoldt argument and Abel summation.  Its formal error
+  coefficient replaces the paper's inessential constant `4`.
+- `Erdos730PNTAP.lean` derives `requiredFixedModulusPNTAPInput` from
+  `PrimeNumberTheoremAnd.Consequences.chebyshev_asymptotic_pnt`, pinned at
+  revision `d7f9e2bfdcc7e34dfb9328b7494a6d424ff50c96`.
+
+The external `PrimeNumberTheoremAnd` package contains admitted declarations
+in an unrelated Wiener/Fourier-decay experiment (`prelim_decay_2` and
+`prelim_decay_3`).  The imported PNT-AP cone does not depend on them.
+`Erdos730PNTAPAudit.lean` prints the axioms of `chebyshev_asymptotic_pnt`,
+`WeakPNT_AP`, and `requiredFixedModulusPNTAPInput`; each footprint is contained
+in `[propext, Classical.choice, Quot.sound]` and contains no `sorryAx`.
 
 ## 4. Per-node hostile verdicts
 
@@ -207,7 +233,8 @@ Thus `Bad(X)<=E(X)`; injectivity of this assignment is not needed because
 Kernel intake now proves the load-bearing pointwise coverage statement:
 every positive bad parameter has a witnessed odd-prime drop or entry
 obstruction with all valuation and cofactor fields explicit.  The finite
-cardinality union bound is still recorded at paper level.
+cardinality union bound, the four disjoint range split, and the normalized
+bad-density comparison are also kernel-proved.
 
 The partition is disjoint and exhaustive:
 
@@ -258,9 +285,40 @@ M(Z) <= floor(sqrt Z) + floor(cuberoot Z)*floor(log_2 Z).
 
 It also proves the majorant `sum_p sum_(a>=2) 2/p^a` summable, a generic
 Tannery dominated-convergence theorem for contributions under that exact
-majorant, and `M(Z)/Z -> 0`.  Specializing the generic theorem to the paper's
-event-count summands and their depth function remains paper-proved rather than
-kernel-expanded.
+majorant, and `M(Z)/Z -> 0`.  The concrete event specialization is now also
+kernel-expanded.  For every branch `L`, prime power `p^a`, and `X`, put
+
+```text
+U = floor(X/p^a),  r = floor(log_p U),  H = (p+1)/2.
+```
+
+The formalized root-progression injection and p-adic permutation give the
+unconditional, depth-zero-safe inequality
+
+```text
+#E_{L,p,a}(X) <= (floor((U+1)/p^r)+1) H^r.
+```
+
+If `p^a<=X`, the explicitly normalized consequence used by the proof is
+
+```text
+#E_{L,p,a}(X)/X <= (4/p^a) rho_p^r
+                       = 2*higherPowerEnvelope(X,p,a).
+```
+
+If `X<p^a`, the unique root class gives `#E_{L,p,a}(X)<=1`.  Every occurring
+pair satisfies `p^a<=380827X`, so after summing the exact witness ledger over
+the four branches the kernel theorem is
+
+```text
+normalizedHigherPowerWitnessCount(X)
+  <= 4*(2*sum_{p prime,a>=2} higherPowerEnvelope(X,p,a)
+        + M(380827X)/X).
+```
+
+Tannery and the terminal pair estimate make the displayed majorant tend to
+zero.  Thus the concrete higher-power range is now kernel-proved to be
+`o(X)`, not merely paper-proved.
 
 ### 4.6 Fixed-depth Fourier lemma: `PASS`
 
@@ -282,6 +340,12 @@ Fourier mass at most `(p^m/p)(3+log(p^r))`, and the digit-box Fourier
 displayed explicit bound.
 
 There is no uniform claim in `r`, `a`, or interval length here.
+
+The kernel development proves the finite Fourier inversion, complete-sum
+vanishing, degenerate prime-power Gauss bound, shifted-grid frequency mass,
+digit-box `l^1` bound, and the translated interval hit-count estimate in
+`Erdos730FixedDepthFourier.lean`.  The axiom audit for
+`fixedDepth_intervalHitCount_le` contains only the standard three axioms.
 
 ### 4.7 Small first powers and uniform r-tail: `PASS`
 
@@ -317,6 +381,25 @@ lim_{R->infinity} limsup_{X->infinity}
 This is the load-bearing order of limits.  Fixed `p=5,7` eventually lies in
 the exact tail estimate; it is never passed to the Fourier lemma.
 
+`Erdos730SmallPrimeEvents.lean` now connects this analysis to the concrete
+obstruction ledger.  Its exact per-fiber bound retains the natural block
+floor `(X/p+1)/p^r`, converts the branch progression to the quadratic phase,
+and pays
+
+```text
+relaxedDigitDensity(r,p)/p + 1/X
+  + fixedDepthFourierErrorConstant(r)*fixedDepthFourierWeight(r,p)
+  + p^r/X.
+```
+
+After summing the four branches and assembling the uniform depth tail, the
+kernel theorem is
+
+```text
+limsup normalizedSmallPrimeWitnessCount atTop
+  <= 4*densityBudgetSeries.
+```
+
 ### 4.8 Transition range: `PASS`
 
 The direct multiple count gives
@@ -328,6 +411,9 @@ E_trans(X)
 
 Mertens makes the reciprocal-prime sum `o(1)`, and PNT gives
 `pi(Y)/X=O(log X/sqrt X)->0`.  Hence `E_trans(X)=o(X)`.
+
+The transition event count, reciprocal-prime band limit, and normalized
+limit are kernel-proved in `Erdos730TransitionDensity.lean`.
 
 ### 4.9 Top digit classification: `PASS`
 
@@ -344,6 +430,9 @@ The unit-residue tables were exhaustively reproduced:
 
 The Q/S exclusions are explicitly conditional on `p/c>130`; the proof does
 not extrapolate them to the short-prime regime.
+
+`Erdos730DivisorSwitching.lean` formalizes the four branch classifications,
+including the Q/S zero contributions and the P/R congruence classes.
 
 ### 4.10 Divisor switching and PNT-AP: `PASS`
 
@@ -372,6 +461,11 @@ Dropping the lower cutoff `p>Y` introduces at most
 `(Z/Y)*pi(Y)=O(Z/log Y)=o(Z)` pairs.  Consequently each of P and R has
 normalized limsup at most `(1/3)log 2`, while Q and S contribute zero.
 
+The Lean proof derives the needed fixed-modulus prime-counting limit from the
+axiom-clean `chebyshev_asymptotic_pnt` cone described in Section 3.  It then
+proves the divisor-switching partial summation and the combined top-range
+limsup bound `<= (2/3) log 2`.
+
 ### 4.11 Rational certificate and density transfer: `PASS`
 
 The independent exact outputs are
@@ -390,6 +484,11 @@ Thus the paper estimates give `limsup Bad(X)/X<2393/2500`, and complementing
 gives `liminf Good(X)/X>107/2500`.  Since both positive linear forms `P,Q`
 are strictly increasing, `n_x=PQ-1` is strictly increasing, so positive
 density in parameters produces infinitely many distinct consecutive pairs.
+
+`Erdos730FullDensityTheorem.candidatePositiveDensity` proves the strict
+`107/2500` lower-density statement.  The terminal theorem
+`Erdos730FullDensityTheorem.pairSet_infinite` transfers it to the exact
+infinite set in the upstream Erdős #730 statement.
 
 ## 5. Falsification-record audit
 
@@ -451,34 +550,29 @@ The current exact verifier contains no floating-point operation.  The legacy
 tests use floating point only in explicitly diagnostic paths; their hostile
 verdicts and the imported witness checked here use integers and `Fraction`.
 
-## 7. Paper-versus-kernel handoff
+## 7. Kernel closure
 
-The correct status after this audit is:
+All intake gates now pass:
 
 ```text
 paper proof relative to Kummer + Mertens + fixed-modulus PNT-AP: PASS
 finite exact certificates:                                      PASS
-unconditional Lean headline theorem:                            NOT KERNEL-PROVED
+unconditional Lean positive-density theorem:                    PASS
+unconditional Lean Erdős #730 infinitude theorem:               PASS
 ```
 
-If the pinned library does not expose the needed analytic theorems, the
-formal development must expose the missing quantified inputs and must not
-register a conditional theorem as an unconditional solution of Erdős #730.
-The library audit is recorded in `kernel_gap.md`.
-
-The present kernel intake banks the Kummer lower-half digit equivalence, full
-consecutive-transition criterion and pointwise event coverage, exact
-four-branch family and injection, generic p-adic permutation and digit-box
-cardinality, higher-power dominated-limit machinery, the complete
-logarithmic-series budget, and the final density-to-infinitude implication.
-The standard analytic inputs are stated, without adding axioms, in
-`Erdos730AnalyticInputs.lean`.  The one remaining quantified theorem surface is
+The former reduction hypothesis
+`Erdos730.FullDensityReduction.CandidatePositiveDensityClaim` is discharged
+by `Erdos730.FullDensityTheorem.candidatePositiveDensity`.  The exact terminal
+declaration is
 
 ```text
-Erdos730.FullDensityReduction.CandidatePositiveDensityClaim
+Erdos730.FullDensityTheorem.pairSet_infinite :
+  Erdos730.FullDensityCore.PairSet.Infinite
 ```
 
-and `pairSet_infinite_of_candidatePositiveDensity` proves the exact upstream
-target from it.  This claim is the explicit `107/2500` density theorem for the
-paper's fixed quadratic family, not a generic placeholder.  It remains outside
-`proofs.yaml` until the Mertens/PNT-AP counting chain is kernel formalized.
+The dependency cone includes the local reciprocal-prime Mertens proof and the
+fixed-modulus PNT-AP theorem imported from the axiom-clean external cone.  The
+package's unrelated admitted experiments remain outside that cone.  The
+kernel gate reports no `sorryAx` and no axiom beyond
+`[propext, Classical.choice, Quot.sound]`.

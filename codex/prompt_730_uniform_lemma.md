@@ -1,17 +1,28 @@
 # Superseded prompt: the uniform incomplete-block digit-count lemma (Erdős #730)
 
-## Status — closed as a live target on 2026-07-13
+## Status: unconditional kernel closure on 2026-07-13
 
-This prompt is no longer the open core.  A new positive-density proof has
-passed hostile paper audit and exact-arithmetic reproduction without using the
-false uniform estimate requested below.  The durable replacement is:
+The uniform lemma requested below remains false.  The completed
+positive-density proof avoids it and now proves Erdős #730 behind Lean's
+kernel.  The terminal declarations are
+
+```text
+Erdos730.FullDensityTheorem.candidatePositiveDensity :
+  Erdos730.FullDensityReduction.CandidatePositiveDensityClaim
+
+Erdos730.FullDensityTheorem.pairSet_infinite :
+  Erdos730.FullDensityCore.PairSet.Infinite
+```
+
+The durable closure record is:
 
 - `compute730/full_density/proof.md` — self-contained cleaned proof;
 - `compute730/full_density/dependency_tree.md` — imported and proved nodes;
 - `compute730/full_density/audit.md` — quantified per-node hostile audit;
 - `compute730/full_density/verify.py` and `test_verify.py` — exact certificate;
-- `ErdosProblems/Erdos730FullDensityReduction.lean` — exact one-lemma reduction
-  to the upstream theorem.
+- `ErdosProblems/Erdos730FullDensityTheorem.lean` — terminal positive-density
+  and infinitude theorems;
+- `ErdosProblems/Erdos730FullDensityTheoremAudit.lean` — final axiom audit.
 
 The proof separates limits in the order needed to avoid every counterexample
 below: `a>=2` by dominated convergence, then fixed `r` for `a=1`, then a
@@ -19,21 +30,19 @@ uniform depth tail, followed by a transition estimate and fixed-modulus
 divisor switching.  The old counterexamples remain part of the regression
 suite and continue to falsify the old lemma.
 
-The current kernel intake boundary is the single quantified proposition
+`Erdos730Mertens.lean` proves the reciprocal-prime input locally.
+`Erdos730PNTAP.lean` derives the three fixed-modulus prime-counting limits
+from the axiom-clean dependency cone of
+`PrimeNumberTheoremAnd.Consequences.chebyshev_asymptotic_pnt`.  The external
+package contains admitted Wiener/Fourier-decay experiments, but neither
+experiment lies in the imported PNT-AP cone.
 
-```text
-Erdos730.FullDensityReduction.CandidatePositiveDensityClaim:
-  107/2500 < liminf_X
-    #{1<=x<=X : primeFactors(B(n_x))=primeFactors(B(n_x+1))}/X,
-```
+The final audit reports only `[propext, Classical.choice, Quot.sound]` for
+both terminal declarations.  `bash scripts/check_axioms.sh` reports 1260
+clean headline theorems and no `sorryAx`.
 
-for the explicit quadratic family in `Erdos730FullDensityCore.lean`.  The
-repository proves that proposition implies the exact upstream infinite-set
-statement.  It is not yet an unconditional Lean theorem because the pinned
-library does not contain the reciprocal-prime Mertens theorem or the required
-fixed-modulus PNT in arithmetic progressions.  Do not revive the old target or
-register the headline theorem as kernel-proved until that analytic chain is
-formalized.
+Do not revive the old uniform target.  Its exact counterexamples remain valid
+and remain in the regression suite.
 
 The remainder of this file is retained verbatim as the falsification record.
 

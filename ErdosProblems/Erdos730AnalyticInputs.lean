@@ -7,10 +7,9 @@ import Mathlib.NumberTheory.SumPrimeReciprocals
 # Erdős 730: exact analytic dependency surface
 
 The fixed-depth proof uses two standard analytic-number-theory inputs which
-are not theorems in the pinned Mathlib release: Mertens' reciprocal-prime
+are not both theorems in the pinned Mathlib release: Mertens' reciprocal-prime
 asymptotic and the prime number theorem in each fixed arithmetic progression.
-This file defines their exact qualitative surfaces.  It deliberately declares
-no axiom and proves no instance of `RequiredAnalyticInputs`.
+This file defines their exact qualitative surfaces and declares no axiom.
 
 The ordinary qualitative PNT in AP is enough for the divisor-switching step:
 the modulus is fixed, so convergence is uniform over its finitely many reduced
@@ -26,14 +25,14 @@ namespace Erdos730.FullDensity
 noncomputable def reciprocalPrimeSum (N : ℕ) : ℝ :=
   ∑ p ∈ (range (N + 1)).filter Nat.Prime, (p : ℝ)⁻¹
 
-/-- The integer specialization of the explicit reciprocal-prime Mertens bound
-imported by the paper.  This quantitative surface is deliberately recorded
-rather than hiding the uniform depth-tail estimate behind big-O notation. -/
+/-- The integer specialization of a reciprocal-prime Mertens bound.  The
+coefficient is fixed and positive; its numerical value is immaterial to the
+uniform depth-tail argument. -/
 def MertensReciprocalPrimeInput : Prop :=
-  ∃ M : ℝ,
+  ∃ M C : ℝ, 0 < C ∧
     ∀ N : ℕ, 3 ≤ N →
       |reciprocalPrimeSum N - Real.log (Real.log N) - M| ≤
-        4 / Real.log N
+        C / Real.log N
 
 /-- Number of primes at most `N` in the residue class `a mod A`. -/
 def primeAPCount (A a N : ℕ) : ℕ :=

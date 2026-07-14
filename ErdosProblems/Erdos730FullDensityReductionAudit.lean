@@ -4,8 +4,9 @@ import ErdosProblems.Erdos730FullDensityReduction
 /-!
 # Hostile audit surface for the Erdős 730 full-density reduction
 
-These checks pin the exact remaining hypothesis, its concrete counting
-function, and the target theorem's axiom footprint.
+These checks pin the former intake hypothesis, its concrete counting function,
+and the historical reduction's axiom footprint.  The hypothesis is discharged
+by `Erdos730.FullDensityTheorem.candidatePositiveDensity`.
 -/
 
 open Filter

@@ -5,8 +5,8 @@
   "mathlib": "v4.29.1",
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
-  "lake_manifest_hash": "sha256:31b019389123eddfa623c3ce6541fd5ef2d5d66169aa1beb04730b3ea31318a9",
-  "verifier_output_hash": "sha256:8819648bc9254603e8b38fda4f0491bddaac86d80a486e375673d815be85ed02",
+  "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
+  "verifier_output_hash": "sha256:fbc04f56683f7b1039db2a518b335aaee7edfd5264c05572b9716751650af954",
   "attestations": [
     {
       "problem": 154,
@@ -9284,6 +9284,18 @@
       "theorem": "Erdos730.tendsto_higherPrimePowerPairs_card_div",
       "file": "ErdosProblems/Erdos730DominatedLimit.lean",
       "proof_hash": "sha256:3c3a7bbd8458dac79adb281adaf0f67dbc2db53be34896c080d35cc3ed8aa20d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FullDensityTheorem.pairSet_infinite",
+      "file": "ErdosProblems/Erdos730FullDensityTheorem.lean",
+      "proof_hash": "sha256:7f341400b34cd3241007dce7365aa84c367546ffda0acf164d7a32e003f98ba0",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

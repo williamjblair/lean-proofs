@@ -116,6 +116,28 @@ import ErdosProblems.Erdos730DominatedLimitAudit
 import ErdosProblems.Erdos730FullDensityBudgetAudit
 import ErdosProblems.Erdos730FixedDepthParityAudit
 import ErdosProblems.Erdos730FullDensityReductionAudit
+import ErdosProblems.Erdos730BranchEventsAudit
+import ErdosProblems.Erdos730DensityEventsAudit
+import ErdosProblems.Erdos730DensityAssemblyAudit
+import ErdosProblems.Erdos730DigitBoxesAudit
+import ErdosProblems.Erdos730DivisorSwitchingAudit
+import ErdosProblems.Erdos730FiniteBlockCountAudit
+import ErdosProblems.Erdos730FixedDepthDensityAudit
+import ErdosProblems.Erdos730FixedDepthFourierAudit
+import ErdosProblems.Erdos730HigherPowerDecayAudit
+import ErdosProblems.Erdos730HigherPowerDensityAudit
+import ErdosProblems.Erdos730HigherPowerEventsAudit
+import ErdosProblems.Erdos730LimsupSeriesAudit
+import ErdosProblems.Erdos730LowerHalfFourierAudit
+import ErdosProblems.Erdos730MertensAudit
+import ErdosProblems.Erdos730PNTAPAudit
+import ErdosProblems.Erdos730PrimeBandsAudit
+import ErdosProblems.Erdos730RangeAssemblyAudit
+import ErdosProblems.Erdos730SmallPrimeDepthAudit
+import ErdosProblems.Erdos730SmallPrimeEventsAudit
+import ErdosProblems.Erdos730SmallPrimeTailAudit
+import ErdosProblems.Erdos730TransitionDensityAudit
+import ErdosProblems.Erdos730FullDensityTheoremAudit
 import ErdosProblems.Erdos617
 import ErdosProblems.Erdos727
 
@@ -902,6 +924,7 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.second_obstruction_pair_not_both_zero
 #print axioms Erdos686.Erdos686Variant.finalResidual_iff_tail1000_and_smooth
 #print axioms Erdos686.Erdos686Variant.erdos686_false_of_finalResidual
+#print axioms Erdos730.FullDensityTheorem.pairSet_infinite
 
 -- Conditional research surfaces; not listed in `proofs.yaml`.
 #print axioms Erdos730.FullDensityReduction.pairSet_infinite_of_candidatePositiveDensity

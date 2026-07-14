@@ -12,18 +12,16 @@ import ErdosProblems.Erdos730PadicIsometry
 import ErdosProblems.Erdos730PositiveDensityBridge
 
 /-!
-# Erdős 730: exact final reduction for the supplied positive-density proof
+# Erdős 730: explicit positive-density reduction
 
-This module states the one remaining quantified density lemma and proves,
-without any extra axiom, that it implies the exact upstream infinitude target.
-The statement deliberately uses the explicit family from
-`Erdos730FullDensityCore`; it is not a theorem-strength placeholder over an
-arbitrary sequence.
+This module isolates the explicit quantified density claim and proves, without
+any extra axiom, that it implies the exact upstream infinitude target.  The
+statement deliberately uses the explicit family from `Erdos730FullDensityCore`;
+it is not a theorem-strength placeholder over an arbitrary sequence.
 
-The supplied paper proof claims the strict lower-density estimate below.  The
-elementary family identities and its final numerical budget are separately
-kernel-checked.  Formalizing the intervening Kummer/Mertens/PNT-in-progressions
-argument remains the analytic intake boundary.
+Historically this claim was the final intake boundary.  It is now discharged
+unconditionally in `Erdos730FullDensityTheorem`, after formalizing the
+Kummer, Mertens, fixed-modulus PNT-in-progressions, and counting arguments.
 -/
 
 open Filter
@@ -38,7 +36,7 @@ noncomputable section
 local instance : DecidablePred GoodParameter :=
   fun _ => Classical.propDecidable _
 
-/-- The single, explicit quantified lemma left by the Lean intake.
+/-- The explicit quantified density claim used by the historical reduction.
 
 It says that more than `107/2500` of the positive integer parameters in the
 four-linear-form family give equal prime support for the two consecutive
@@ -46,7 +44,7 @@ central binomial coefficients, in lower-density liminf. -/
 def CandidatePositiveDensityClaim : Prop :=
   FullDensity.HasCandidatePositiveDensity GoodParameter
 
-/-- Expanded form of the exact remaining lemma, useful for hostile audit. -/
+/-- Expanded form of the density claim, useful for hostile audit. -/
 theorem candidatePositiveDensityClaim_iff :
     CandidatePositiveDensityClaim ↔
       (107 : ℝ) / 2500 <
