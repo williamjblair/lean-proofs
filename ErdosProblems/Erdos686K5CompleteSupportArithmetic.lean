@@ -365,6 +365,59 @@ theorem k5_upper_residual_profile_of_global_eq_twenty_four
         simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
           Finset.filter_insert, Finset.filter_singleton]
 
+/-- The gcd of one canonical row product and one canonical column product is
+exactly their crossing cell.  All other factors are pairwise coprime across
+the two erased products. -/
+theorem canonicalOwner_row_column_gcd_eq_cell
+    {k n d t j i : ℕ}
+    (data : CanonicalOwnerData k n d t)
+    (hj : j ∈ Finset.Icc 1 k) (hi : i ∈ Finset.Icc 1 k) :
+    Nat.gcd
+      (∏ i' ∈ Finset.Icc 1 k, canonicalOwnerCell data j i')
+      (∏ j' ∈ Finset.Icc 1 k, canonicalOwnerCell data j' i) =
+        canonicalOwnerCell data j i := by
+  classical
+  let rowRest :=
+    ∏ i' ∈ (Finset.Icc 1 k).erase i, canonicalOwnerCell data j i'
+  let columnRest :=
+    ∏ j' ∈ (Finset.Icc 1 k).erase j, canonicalOwnerCell data j' i
+  have hcop : Nat.Coprime rowRest columnRest := by
+    dsimp [rowRest, columnRest]
+    apply Nat.Coprime.prod_left
+    intro i' hi'
+    have hi'ne : i' ≠ i := (Finset.mem_erase.mp hi').1
+    apply Nat.Coprime.prod_right
+    intro j' hj'
+    apply canonicalOwnerCells_pairwise_coprime data
+    intro heq
+    have hii : i' = i := congrArg Prod.snd heq
+    exact hi'ne hii
+  rw [← Finset.mul_prod_erase (Finset.Icc 1 k)
+      (fun i' => canonicalOwnerCell data j i') hi,
+    ← Finset.mul_prod_erase (Finset.Icc 1 k)
+      (fun j' => canonicalOwnerCell data j' i) hj]
+  change Nat.gcd (canonicalOwnerCell data j i * rowRest)
+      (canonicalOwnerCell data j i * columnRest) =
+    canonicalOwnerCell data j i
+  rw [Nat.gcd_mul_left, hcop.gcd_eq_one, mul_one]
+
+/-- A fully owned lower row and fully owned modified upper column expose
+their crossing owner as an exact gcd of the two arithmetic terms. -/
+theorem canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
+    {k n d t j i : ℕ}
+    (data : CanonicalOwnerData k n d t)
+    (hj : j ∈ Finset.Icc 1 k) (hi : i ∈ Finset.Icc 1 k)
+    (hlower : canonicalLowerResidual data j = 1)
+    (hupper : canonicalUpperResidual data i = 1) :
+    Nat.gcd (n + j) (upperTermAfterFour n d t i) =
+      canonicalOwnerCell data j i := by
+  rw [canonical_lower_term_factorization data,
+    canonical_modified_upper_term_factorization data,
+    hlower, hupper, one_mul, one_mul,
+    ← canonicalOwner_row_cell_product data,
+    ← canonicalOwner_column_cell_product data]
+  exact canonicalOwner_row_column_gcd_eq_cell data hj hi
+
 /-- Unless the total residual is the exceptional divisor `24`, the five
 lower residuals contain two distinct units.  Thus the proper-divisor branch
 supplies two independent fully owned row equations. -/
@@ -557,6 +610,54 @@ theorem k5_tail_complete_support_unit_cross
   exact ⟨hcells, exists_k5_unit_lower_residual data,
     exists_k5_unit_upper_residual data ht hfour hblocks⟩
 
+/-- Off the exceptional global residual `24`, complete support yields a
+`2 x 2` grid of nontrivial crossings whose four arithmetic gcds are exactly
+the four canonical owner cells. -/
+theorem k5_tail_proper_global_two_by_two_gcd_grid
+    {n d t : ℕ}
+    (data : CanonicalOwnerData 5 n d t)
+    (ht : t ∈ Finset.Icc 1 5)
+    (hfour : 4 ∣ n + d + t)
+    (hblocks : upperBlockAfterFour 5 n d t = blockProduct 5 n)
+    (htail : 10 ^ 1000 ≤ d)
+    (heq : blockProduct 5 (n + d) = 4 * blockProduct 5 n)
+    (hGne : canonicalOwnerResidual data ≠ 24) :
+    ∃ j₁, j₁ ∈ Finset.Icc 1 5 ∧
+      ∃ j₂, j₂ ∈ Finset.Icc 1 5 ∧ j₂ ≠ j₁ ∧
+      ∃ i₁, i₁ ∈ Finset.Icc 1 5 ∧
+      ∃ i₂, i₂ ∈ Finset.Icc 1 5 ∧ i₂ ≠ i₁ ∧
+        1 < canonicalOwnerCell data j₁ i₁ ∧
+        1 < canonicalOwnerCell data j₁ i₂ ∧
+        1 < canonicalOwnerCell data j₂ i₁ ∧
+        1 < canonicalOwnerCell data j₂ i₂ ∧
+        Nat.gcd (n + j₁) (upperTermAfterFour n d t i₁) =
+          canonicalOwnerCell data j₁ i₁ ∧
+        Nat.gcd (n + j₁) (upperTermAfterFour n d t i₂) =
+          canonicalOwnerCell data j₁ i₂ ∧
+        Nat.gcd (n + j₂) (upperTermAfterFour n d t i₁) =
+          canonicalOwnerCell data j₂ i₁ ∧
+        Nat.gcd (n + j₂) (upperTermAfterFour n d t i₂) =
+          canonicalOwnerCell data j₂ i₂ := by
+  obtain ⟨hcells, -, -⟩ :=
+    k5_tail_complete_support_unit_cross
+      data ht hfour hblocks htail heq
+  obtain ⟨j₁, hj₁, j₂, hj₂, hjne, hj₁one, hj₂one⟩ :=
+    exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four data hGne
+  obtain ⟨i₁, hi₁, i₂, hi₂, hine, hi₁one, hi₂one⟩ :=
+    exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four
+      data ht hfour hblocks hGne
+  refine ⟨j₁, hj₁, j₂, hj₂, hjne, i₁, hi₁, i₂, hi₂, hine,
+    hcells j₁ hj₁ i₁ hi₁, hcells j₁ hj₁ i₂ hi₂,
+    hcells j₂ hj₂ i₁ hi₁, hcells j₂ hj₂ i₂ hi₂, ?_, ?_, ?_, ?_⟩
+  · exact canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
+      data hj₁ hi₁ hj₁one hi₁one
+  · exact canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
+      data hj₁ hi₂ hj₁one hi₂one
+  · exact canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
+      data hj₂ hi₁ hj₂one hi₁one
+  · exact canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
+      data hj₂ hi₂ hj₂one hi₂one
+
 /-- Fully owned crossing in the exact row/column equation form consumed by
 the next global elimination step. -/
 theorem k5_tail_unit_cross_factorizations
@@ -601,9 +702,12 @@ theorem k5_tail_unit_cross_factorizations
 #print axioms exists_k5_unit_upper_residual
 #print axioms k5_lower_residual_profile_of_global_eq_twenty_four
 #print axioms k5_upper_residual_profile_of_global_eq_twenty_four
+#print axioms canonicalOwner_row_column_gcd_eq_cell
+#print axioms canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
 #print axioms exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four
 #print axioms exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four
 #print axioms k5_tail_complete_support_unit_cross
+#print axioms k5_tail_proper_global_two_by_two_gcd_grid
 #print axioms k5_tail_unit_cross_factorizations
 
 end Erdos686Variant

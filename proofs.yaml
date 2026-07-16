@@ -3561,6 +3561,24 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_row_column_gcd_eq_cell
+    statement: >-
+      In every canonical owner matrix, the gcd of a row-cell product and a
+      column-cell product is exactly their crossing cell.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
+    statement: >-
+      A fully owned lower row and fully owned modified upper column have
+      arithmetic gcd exactly equal to their canonical crossing owner cell.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
     theorem: Erdos686.Erdos686Variant.exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four
     statement: >-
       If the k=5 canonical global residual is a proper divisor of 24, then
@@ -3576,6 +3594,17 @@ proofs:
       If the k=5 canonical global residual is a proper divisor of 24, then
       two distinct modified upper residuals equal one, supplying two
       independent fully owned column equations.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_tail_proper_global_two_by_two_gcd_grid
+    statement: >-
+      On the complete-support k=5 tail with global residual not equal to 24,
+      two fully owned rows and two fully owned modified columns form a 2 by 2
+      grid of nontrivial crossings, and all four arithmetic gcds equal their
+      corresponding owner cells exactly.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686

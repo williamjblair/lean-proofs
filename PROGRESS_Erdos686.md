@@ -773,7 +773,14 @@ fails some row j ≤ 17.
    kernel-classified: each side either still has two units, or its multiset
    is exactly `{1,2,2,2,3}`. The elimination can use four independent global
    equations off the exceptional profile and exact 2/3-adic placements on
-   both sides of it. An invariant
+   both sides of it. Pairwise coprimality now also gives an exact crossing
+   gcd theorem: the gcd of any canonical row-cell product and column-cell
+   product is precisely their crossing cell; for fully owned rows and
+   modified columns this is the gcd of the corresponding arithmetic terms.
+   Off `G=24`, the two full rows and two full columns are now assembled into
+   a `2 x 2` grid of four nontrivial exact crossing gcds, exposing multiple
+   simultaneous global equations rather than a single crossing.
+   An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
    useful.
