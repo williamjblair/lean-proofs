@@ -3541,6 +3541,26 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four
+    statement: >-
+      If the k=5 canonical global residual is a proper divisor of 24, then
+      two distinct lower residuals equal one, supplying two independent
+      fully owned row equations.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four
+    statement: >-
+      If the k=5 canonical global residual is a proper divisor of 24, then
+      two distinct modified upper residuals equal one, supplying two
+      independent fully owned column equations.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
     theorem: Erdos686.Erdos686Variant.k5_tail_unit_cross_factorizations
     statement: >-
       Every hypothetical k=5 solution with d at least 10^1000 has all 25

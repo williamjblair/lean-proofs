@@ -96,6 +96,23 @@ private lemma five_factor_product_le_twenty_four_has_unit
   rw [hconst] at hprod
   omega
 
+private lemma proper_divisor_twenty_four_le_twelve
+    {G : ℕ} (hdvd : G ∣ 24) (hne : G ≠ 24) :
+    G ≤ 12 := by
+  have hle : G ≤ 24 := Nat.le_of_dvd (by norm_num) hdvd
+  interval_cases G <;> norm_num at hdvd
+  all_goals omega
+
+private lemma sixteen_le_four_factor_product
+    {a b c d : ℕ}
+    (ha : 2 ≤ a) (hb : 2 ≤ b) (hc : 2 ≤ c) (hd : 2 ≤ d) :
+    16 ≤ a * b * c * d := by
+  calc
+    16 = (2 * 2) * (2 * 2) := by norm_num
+    _ ≤ (a * b) * (c * d) :=
+      Nat.mul_le_mul (Nat.mul_le_mul ha hb) (Nat.mul_le_mul hc hd)
+    _ = a * b * c * d := by ring
+
 theorem exists_k5_unit_lower_residual
     {n d t : ℕ} (data : CanonicalOwnerData 5 n d t) :
     ∃ j, j ∈ Finset.Icc 1 5 ∧ canonicalLowerResidual data j = 1 := by
@@ -131,6 +148,170 @@ theorem exists_k5_unit_upper_residual
     exact canonicalUpperResidual_pos data ht hi hfour
   · rw [canonicalUpperResidual_product_eq_global data hblocks]
     exact hGle
+
+/-- Unless the total residual is the exceptional divisor `24`, the five
+lower residuals contain two distinct units.  Thus the proper-divisor branch
+supplies two independent fully owned row equations. -/
+theorem exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (hGne : canonicalOwnerResidual data ≠ 24) :
+    ∃ j, j ∈ Finset.Icc 1 5 ∧
+      ∃ j', j' ∈ Finset.Icc 1 5 ∧ j' ≠ j ∧
+        canonicalLowerResidual data j = 1 ∧
+        canonicalLowerResidual data j' = 1 := by
+  obtain ⟨j, hj, hjone⟩ := exists_k5_unit_lower_residual data
+  by_cases hsecond :
+      ∃ j', j' ∈ Finset.Icc 1 5 ∧ j' ≠ j ∧
+        canonicalLowerResidual data j' = 1
+  · obtain ⟨j', hj', hne, hj'one⟩ := hsecond
+    exact ⟨j, hj, j', hj', hne, hjone, hj'one⟩
+  · exfalso
+    have hge :
+        ∀ j', j' ∈ Finset.Icc 1 5 → j' ≠ j →
+          2 ≤ canonicalLowerResidual data j' := by
+      intro j' hj' hne
+      have hpos := canonicalLowerResidual_pos data hj'
+      have hnotone : canonicalLowerResidual data j' ≠ 1 := by
+        intro hone
+        exact hsecond ⟨j', hj', hne, hone⟩
+      omega
+    have hGle : canonicalOwnerResidual data ≤ 12 :=
+      proper_divisor_twenty_four_le_twelve
+        (canonicalOwnerResidual_dvd_factorial data) hGne
+    have hprod := canonicalLowerResidual_product_eq_global data
+    norm_num [Finset.prod_Icc_succ_top] at hprod
+    have hj1 : 1 ≤ j := (Finset.mem_Icc.mp hj).1
+    have hj5 : j ≤ 5 := (Finset.mem_Icc.mp hj).2
+    interval_cases j
+    · have h2 := hge 2 (by norm_num) (by omega)
+      have h3 := hge 3 (by norm_num) (by omega)
+      have h4 := hge 4 (by norm_num) (by omega)
+      have h5 := hge 5 (by norm_num) (by omega)
+      simp only [hjone, one_mul] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h2 h3 h4 h5
+      omega
+    · have h1 := hge 1 (by norm_num) (by omega)
+      have h3 := hge 3 (by norm_num) (by omega)
+      have h4 := hge 4 (by norm_num) (by omega)
+      have h5 := hge 5 (by norm_num) (by omega)
+      simp only [hjone, mul_one] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h1 h3 h4 h5
+      omega
+    · have h1 := hge 1 (by norm_num) (by omega)
+      have h2 := hge 2 (by norm_num) (by omega)
+      have h4 := hge 4 (by norm_num) (by omega)
+      have h5 := hge 5 (by norm_num) (by omega)
+      simp only [hjone, mul_one] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h1 h2 h4 h5
+      omega
+    · have h1 := hge 1 (by norm_num) (by omega)
+      have h2 := hge 2 (by norm_num) (by omega)
+      have h3 := hge 3 (by norm_num) (by omega)
+      have h5 := hge 5 (by norm_num) (by omega)
+      simp only [hjone, mul_one] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h1 h2 h3 h5
+      omega
+    · have h1 := hge 1 (by norm_num) (by omega)
+      have h2 := hge 2 (by norm_num) (by omega)
+      have h3 := hge 3 (by norm_num) (by omega)
+      have h4 := hge 4 (by norm_num) (by omega)
+      simp only [hjone, mul_one] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h1 h2 h3 h4
+      omega
+
+/-- Unless the total residual is `24`, the modified upper residuals also
+contain two distinct units, supplying two independent fully owned column
+equations. -/
+theorem exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (ht : t ∈ Finset.Icc 1 5) (hfour : 4 ∣ n + d + t)
+    (hblocks : upperBlockAfterFour 5 n d t = blockProduct 5 n)
+    (hGne : canonicalOwnerResidual data ≠ 24) :
+    ∃ i, i ∈ Finset.Icc 1 5 ∧
+      ∃ i', i' ∈ Finset.Icc 1 5 ∧ i' ≠ i ∧
+        canonicalUpperResidual data i = 1 ∧
+        canonicalUpperResidual data i' = 1 := by
+  obtain ⟨i, hi, hione⟩ :=
+    exists_k5_unit_upper_residual data ht hfour hblocks
+  by_cases hsecond :
+      ∃ i', i' ∈ Finset.Icc 1 5 ∧ i' ≠ i ∧
+        canonicalUpperResidual data i' = 1
+  · obtain ⟨i', hi', hne, hi'one⟩ := hsecond
+    exact ⟨i, hi, i', hi', hne, hione, hi'one⟩
+  · exfalso
+    have hge :
+        ∀ i', i' ∈ Finset.Icc 1 5 → i' ≠ i →
+          2 ≤ canonicalUpperResidual data i' := by
+      intro i' hi' hne
+      have hpos := canonicalUpperResidual_pos data ht hi' hfour
+      have hnotone : canonicalUpperResidual data i' ≠ 1 := by
+        intro hone
+        exact hsecond ⟨i', hi', hne, hone⟩
+      omega
+    have hGle : canonicalOwnerResidual data ≤ 12 :=
+      proper_divisor_twenty_four_le_twelve
+        (canonicalOwnerResidual_dvd_factorial data) hGne
+    have hprod :=
+      canonicalUpperResidual_product_eq_global data hblocks
+    norm_num [Finset.prod_Icc_succ_top] at hprod
+    have hi1 : 1 ≤ i := (Finset.mem_Icc.mp hi).1
+    have hi5 : i ≤ 5 := (Finset.mem_Icc.mp hi).2
+    interval_cases i
+    · have h2 := hge 2 (by norm_num) (by omega)
+      have h3 := hge 3 (by norm_num) (by omega)
+      have h4 := hge 4 (by norm_num) (by omega)
+      have h5 := hge 5 (by norm_num) (by omega)
+      simp only [hione, one_mul] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h2 h3 h4 h5
+      omega
+    · have h1 := hge 1 (by norm_num) (by omega)
+      have h3 := hge 3 (by norm_num) (by omega)
+      have h4 := hge 4 (by norm_num) (by omega)
+      have h5 := hge 5 (by norm_num) (by omega)
+      simp only [hione, mul_one] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h1 h3 h4 h5
+      omega
+    · have h1 := hge 1 (by norm_num) (by omega)
+      have h2 := hge 2 (by norm_num) (by omega)
+      have h4 := hge 4 (by norm_num) (by omega)
+      have h5 := hge 5 (by norm_num) (by omega)
+      simp only [hione, mul_one] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h1 h2 h4 h5
+      omega
+    · have h1 := hge 1 (by norm_num) (by omega)
+      have h2 := hge 2 (by norm_num) (by omega)
+      have h3 := hge 3 (by norm_num) (by omega)
+      have h5 := hge 5 (by norm_num) (by omega)
+      simp only [hione, mul_one] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h1 h2 h3 h5
+      omega
+    · have h1 := hge 1 (by norm_num) (by omega)
+      have h2 := hge 2 (by norm_num) (by omega)
+      have h3 := hge 3 (by norm_num) (by omega)
+      have h4 := hge 4 (by norm_num) (by omega)
+      simp only [hione, mul_one] at hprod
+      have hlower : 16 ≤ canonicalOwnerResidual data := by
+        rw [← hprod]
+        exact sixteen_le_four_factor_product h1 h2 h3 h4
+      omega
 
 /-- Every hypothetical complete-support tail solution has a fully owned row
 and a fully owned column, and every cell (including their crossing) is
@@ -202,6 +383,8 @@ theorem k5_tail_unit_cross_factorizations
 
 #print axioms exists_k5_unit_lower_residual
 #print axioms exists_k5_unit_upper_residual
+#print axioms exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four
+#print axioms exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four
 #print axioms k5_tail_complete_support_unit_cross
 #print axioms k5_tail_unit_cross_factorizations
 

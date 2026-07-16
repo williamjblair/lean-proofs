@@ -765,8 +765,13 @@ fails some row j ≤ 17.
    original curve with Q-simple Prym, and an unordered degree-10 `3+3`
    field leaves the sextic irreducible. Complete support plus `G|24` now
    forces a fully owned lower row and a fully owned modified upper column,
-   crossing at a nontrivial canonical cell; the remaining step is their
-   simultaneous global elimination. An invariant scout still ranks
+   crossing at a nontrivial canonical cell. The residual-profile split is
+   sharper in the proper-divisor branch: if `G!=24`, Lean forces two
+   distinct fully owned lower rows and two distinct fully owned modified
+   upper columns. Thus only the exact exceptional profile `G=24` can have
+   a unique unit on either side; the next elimination step can use four
+   independent global equations off that exceptional profile. An invariant
+   scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
    useful.
    The complementary normalized cell-local higher-jet route is now closed
