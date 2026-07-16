@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:7d7aeec569ba5e51995780d31c1b26d2b995d8359d87665e512f2262d21e9339",
+  "verifier_output_hash": "sha256:8bb0ac136f3d529ae014325f31f173cf277d7aecf78ccafa11ff7d6191221324",
   "attestations": [
     {
       "problem": 154,
@@ -5088,6 +5088,114 @@
       "theorem": "Erdos686.Erdos686Variant.controlled_pairing_total_gap_le_four_k_sub_one",
       "file": "ErdosProblems/Erdos686ControlledPairing.lean",
       "proof_hash": "sha256:07119a2b51df4d09d4f573c225e47e75b70a0956db8b6d13cd427839541a2402",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.list_nary_amgm",
+      "file": "ErdosProblems/Erdos686MatchingProductBound.lean",
+      "proof_hash": "sha256:a010b131d1dc3cfcdd9f5a50bf2be6f20633970e805cd83a8c1f56c1d417885b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.paired_product_upper_of_weight_sum",
+      "file": "ErdosProblems/Erdos686MatchingProductBound.lean",
+      "proof_hash": "sha256:a010b131d1dc3cfcdd9f5a50bf2be6f20633970e805cd83a8c1f56c1d417885b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.controlledPairing_natAbs_gap_sum_le",
+      "file": "ErdosProblems/Erdos686MatchingProductBound.lean",
+      "proof_hash": "sha256:a010b131d1dc3cfcdd9f5a50bf2be6f20633970e805cd83a8c1f56c1d417885b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.controlled_pairing_product_upper",
+      "file": "ErdosProblems/Erdos686MatchingProductBound.lean",
+      "proof_hash": "sha256:a010b131d1dc3cfcdd9f5a50bf2be6f20633970e805cd83a8c1f56c1d417885b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.controlledPairing_product_decomposition",
+      "file": "ErdosProblems/Erdos686MatchingProductBound.lean",
+      "proof_hash": "sha256:a010b131d1dc3cfcdd9f5a50bf2be6f20633970e805cd83a8c1f56c1d417885b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.controlled_matching_full_product_upper",
+      "file": "ErdosProblems/Erdos686MatchingProductBound.lean",
+      "proof_hash": "sha256:a010b131d1dc3cfcdd9f5a50bf2be6f20633970e805cd83a8c1f56c1d417885b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.owner_dvd_matchingResultant",
+      "file": "ErdosProblems/Erdos686MatchingResultant.lean",
+      "proof_hash": "sha256:f8af0da940d8f51e0ae788769656a19489ae3f572017da2f796618e55245b32b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matching_support_product_dvd_resultant",
+      "file": "ErdosProblems/Erdos686MatchingResultant.lean",
+      "proof_hash": "sha256:f8af0da940d8f51e0ae788769656a19489ae3f572017da2f796618e55245b32b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.owner_cell_support_product_dvd_resultant",
+      "file": "ErdosProblems/Erdos686MatchingResultant.lean",
+      "proof_hash": "sha256:f8af0da940d8f51e0ae788769656a19489ae3f572017da2f796618e55245b32b",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

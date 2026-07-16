@@ -855,7 +855,12 @@ fails some row j ≤ 17.
    proves permutation coverage, no duplication, unmatched count `m mod 2`,
    pair count `floor(m/2)`, nonzero selected secants, and total offset gap at
    most `4*(k-1)`. This proof does not rely on the source package's vague
-   repair-block sentence.
+   repair-block sentence. The exact product consequence is also
+   kernel-banked: division-free n-ary AM-GM, the paired product, the parity
+   owner, and the full denominator-cleared matching bound are proved with
+   ordinary kernel arithmetic. Given an integer interpolation polynomial,
+   Lean additionally proves every owner divides the common resultant and
+   combines pairwise-coprime owners to obtain the full product divisor.
    The square-Hermite,
    osculation, and ordinary matching-resultant designs are viable
    formalization targets, but the advertised verifier and certificate files

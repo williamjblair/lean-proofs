@@ -3995,6 +3995,87 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingProductBound.lean
+    theorem: Erdos686.Erdos686Variant.list_nary_amgm
+    statement: >-
+      The division-free n-ary AM-GM inequality gives q to the q times a
+      length-q natural product at most the qth power of its sum.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingProductBound.lean
+    theorem: Erdos686.Erdos686Variant.paired_product_upper_of_weight_sum
+    statement: >-
+      Affine individual pair bounds and a total gap-weight bound imply the
+      exact denominator-cleared controlled product estimate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingProductBound.lean
+    theorem: Erdos686.Erdos686Variant.controlledPairing_natAbs_gap_sum_le
+    statement: >-
+      The sum of natural absolute offset gaps selected by the explicit
+      controlled pairing is at most four times k minus one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingProductBound.lean
+    theorem: Erdos686.Erdos686Variant.controlled_pairing_product_upper
+    statement: >-
+      The selected pair-product satisfies the exact q-to-the-q cleared upper
+      bound used by the matching-tail comparison.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingProductBound.lean
+    theorem: Erdos686.Erdos686Variant.controlledPairing_product_decomposition
+    statement: >-
+      The full owner product is exactly the product over selected pairs times
+      the product over the optional unmatched owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingProductBound.lean
+    theorem: Erdos686.Erdos686Variant.controlled_matching_full_product_upper
+    statement: >-
+      Including the parity owner, the full controlled matching product obeys
+      the claimed exact denominator-cleared upper bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingResultant.lean
+    theorem: Erdos686.Erdos686Variant.owner_dvd_matchingResultant
+    statement: >-
+      An owner modulus divides the common interpolation resultant whenever
+      the integer polynomial takes the prescribed column value at its row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingResultant.lean
+    theorem: Erdos686.Erdos686Variant.matching_support_product_dvd_resultant
+    statement: >-
+      Pairwise-coprime owner moduli combine to make their full product divide
+      the common matching interpolation resultant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingResultant.lean
+    theorem: Erdos686.Erdos686Variant.owner_cell_support_product_dvd_resultant
+    statement: >-
+      The common resultant product divisor specializes exactly to owner-cell
+      row, column, and signed diagonal coordinates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686PadicLift.lean
     theorem: Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
     statement: >-

@@ -109,13 +109,28 @@ The exact block data are independently checked by
 
 ### 5. Product upper bound
 
-Pending. It may only be imported after the controlled pairing theorem and
-the required product/AM-GM inequalities are kernel-checked.
+Accepted and kernel-checked, including the optional parity owner and with
+every denominator cleared.
+
+Lean interfaces:
+
+- `Erdos686.Erdos686Variant.list_nary_amgm`
+- `Erdos686.Erdos686Variant.paired_product_upper_of_weight_sum`
+- `Erdos686.Erdos686Variant.controlled_pairing_product_upper`
+- `Erdos686.Erdos686Variant.controlled_matching_full_product_upper`
 
 ### 6. Matching interpolation
 
-Pending. No direct matching interpolation theorem from this package is yet
-on the manifest.
+Partially accepted. Given an integer interpolation polynomial with the
+claimed node values, the local and global common-resultant divisibility is
+kernel-checked. Construction of the specific integer interpolation
+polynomial remains pending.
+
+Lean interfaces:
+
+- `Erdos686.Erdos686Variant.owner_dvd_matchingResultant`
+- `Erdos686.Erdos686Variant.matching_support_product_dvd_resultant`
+- `Erdos686.Erdos686Variant.owner_cell_support_product_dvd_resultant`
 
 ### 7. Tangent-defect square theorem
 
