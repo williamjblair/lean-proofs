@@ -23,8 +23,8 @@ Docs: `PROGRESS_Erdos686.md`. Modules: `ErdosProblems/Erdos686*.lean`.
 
 UNCONDITIONAL: every admissible `k ≤ 15` case with `k ≤ d < 10^120`
 (Runge + mod-p covers for even k; Farey descent for odd k), and now every odd target row throughout
-`10^120 ≤ d < 10^1000`; the k=14 case for all d; the complete large rows
-`k=16,18,20,24,28,32`; and row `k=22` for `22≤d≤249`.  The theorem
+`10^120 ≤ d < 10^1000`; the k=14 case for all d; and the complete large rows
+`k=16,18,20,22,24,28,32`.  The theorem
 `erdos686_false_of_finalResidual` is the
 conditional terminal reduction from the still-open equivalent residual.
 
@@ -187,16 +187,16 @@ after the exact odd-center fixed divisor needs
 `7629565936566640936850578356790181141762389`).  Parity weighting and a
 better general interval-lcm constant therefore do not bridge the gap; a new
 Laurent-term cancellation with gcd or owner-correlation gain is required.
-At `k=22`, Lean now closes the exact 16,859-candidate finite strip
+At `k=22`, Lean closes the exact 16,859-candidate finite strip
 `27<=d<=249` and proves that every hypothetical solution with `d>=250`
 produces an odd `t` with `1<=t<=3795146531` on the displayed centered
-`S,T` surface; together with the quadratic strip this closes `22<=d<=249`.
-Exact prime masks empty all 330,012,742 large-gap candidates in Python, but
-the attempted generated packed certificate failed the kernel gate: two
-representative table declarations were compiled through temporary named
-axiom stubs, and the independent 20,000,000-bit probe stack-overflows Lean.
-Those generated declarations were quarantined.  The full bounded surface
-therefore remains open and row `k=22` is not claimed closed.
+`S,T` surface.  A regenerated ordinary-kernel certificate then empties all
+330,012,742 large-gap candidates using exact prime masks through 953, split
+across 24 packed shards and small local-support modules.  The full packed
+build and an independent hostile regeneration audit pass, and
+`no_gap_solution_four_even_twentytwo` exposes only the standard axioms
+`propext`, `Classical.choice`, and `Quot.sound`.  Thus the complete row
+`k=22`, for every admissible `d>=22`, is now unconditionally closed.
 Every lower-block endpoint that is a prime power is impossible for every
 prime.  At an interior position the exact split-factorial valuation criterion
 is banked; in particular, every prime power with base `p>k` is excluded.
@@ -284,6 +284,11 @@ The surviving floor pin `g²=floor(5A₃/A₅)` is proper but does not control
 the infinite CF tail.  Imposing the discriminant square reconstructs the
 original smooth genus-6 plane quintic (genus-2 sign quotient), so that
 cover is target-strength rather than a lower-genus reduction.
+The normalized cell-local higher-jet program is also exhausted at every
+order: the exact owner identity `C*Q_i(Y)=4R*Q_j(X)` and its quotient form are
+now kernel-banked. Owner-adic logarithmic corrections are therefore always a
+row term minus a column term. This verdict is local in one owner completion
+and does not invalidate the global punctured-grid interpolation route.
 
 OPEN CORE (the two arms below are equivalently packaged as the single
 `FinalResidual686Hypothesis`):
@@ -300,6 +305,69 @@ OPEN CORE (the two arms below are equivalently packaged as the single
    nonzero cleaned owner witnesses; the remaining task is to contradict that
    multi-owner branch.  The extraction does not absorb further owner buckets
    into the bounded loss.
+   A separate cleaned-grid jet route now passes every exact computational
+   obligation for proper support at `k=5`. All 25 puncture spaces have rank
+   `408` and nullity `7`; their saturated integral bases have worst
+   coefficient norm 70 digits, all 175 local denominator multipliers equal
+   one, and the height inequality retains 882 decimal orders. Exact
+   curve-section resultant gcds show that selected sections have precisely
+   the prescribed punctured grid as their common on-curve zero locus, with
+   no positive common zero. The corrected arithmetic composition is now
+   kernel-banked. The generic sparse checker proves the local high-order
+   divisibility and coefficient-`l1` evaluation bounds, and
+   `Erdos686K5AllPunctures.lean` supplies all 25 concrete endpoints. The
+   emitted proof surface has 1,272 local-row modules, 477 dense elimination
+   leaves, 53 thin assemblies, and 25 Bézout kernels; the central puncture
+   uses five sections and every other puncture uses two. The theorem
+   `no_k5_tail_solution_of_proper_support` proves that every hypothetical
+   `k=5`, `d>=10^1000` solution has complete canonical support. All generated
+   puncture sources are ordinary-kernel and contain no `native_decide`.
+   The hostile verifier, full build, 807-theorem manifest audit,
+   1,286-declaration axiom gate, and 807 regenerated attestations pass.
+   A separate direct `k=5` quotient is Lean-banked:
+   `y^2=9x^6+64x^5-200x^3+64x+144`, with the exact inverse relation and
+   exceptional point `(4,300)`. The corrected exact arithmetic certificate
+   gives `Sel^(2)(J/Q)=(Z/2Z)^5`, trivial torsion, and the full group
+   `J(Q)=Z^5`. The five supplied point differences have coordinate
+   determinant `-1`, so they are a saturated basis. The eight locally soluble
+   two-covers are now frozen: an irreducible degree-15 pair resolvent gives a
+   `2+4` factorization, all eight elliptic quartic covers have known points,
+   and the 34 known affine points occupy all classes with sorted counts
+   `[2,4,4,4,4,4,6,6]`. The exact remaining `k=5` obligation is to prove
+   that the 36 known projective points exhaust the curve. The current Magma
+   census says `proved_all=false`; bounded search is not closure. A custom
+   rank-five sieve now verifies fourteen packets through `p=59`, including
+   exact infinity vectors. Its combined HNF lattice has index
+   `42343330413030424784735169272832000000`; exact symbolic intersection
+   leaves `516168751624777728` cosets at density
+   `5383303927/441613360315210220469081750000`. All 36 known points are in
+   distinct combined classes. The height-pairing lower eigenvalue is
+   certified as `43/200`, and the formerly missing upper bridge is now
+   exact:
+   `hhat([P-P0]) <= 3*log(H(P))+log(32)+log(1077517601)/3`.
+   A certified `H(P)<=20000` lift ball has `sum m_i^2<=280`; exact
+   enumeration leaves exactly the 36 known vectors, with packets through
+   `p=23` sufficient. The weighted-projective integral lift is now
+   kernel-banked and proves `u<v<2u`, `H(P)<4u`, and, by reconnecting
+   `d=v-u<u` to the existing finite certificates, no admissible solution for
+   any `u<10^1000`. Thus the requested `u<=5000` range is subsumed without
+   using the conditional height sieve. On the exact surviving tail,
+   `|v/u-4^(1/5)|<C/u^2` with
+   `C=1702608047245783157000000/3031424763402858403856401<0.562`.
+   Since `C>1/2`, this alone does not give the simplest Legendre closure.
+   Classical Runge fails because there is one infinity orbit and a norm-one
+   unit obstruction; the normalized square lift is the original genus-6
+   curve with Q-simple Prym. A tested unordered degree-10 `3+3` partition
+   field leaves the sextic irreducible, so it does not replace the existing
+   degree-15 `2+4` field. Complete support and the residual bound `G|24`
+   additionally force a fully owned lower row and a fully owned modified
+   upper column crossing at a nontrivial cell. The remaining node is an
+   unbounded global arithmetic argument, either exhaustive two-cover analysis
+   or simultaneous complete-support row/column elimination. If a finite height bound is
+   later obtained, the invariant scout ranks `p=107` first via the wholly
+   new factor `11717`.
+   Every `k>5` puncture family and all other complete-support cases remain
+   open.
    In the exactly-three-cleaned-bucket slice, every second and third
    obstruction is nonzero, and the quotient-form theorem excludes every
    zero third quotient already from `d>=10^120`.  At the live `10^1000`
@@ -332,7 +400,7 @@ OPEN CORE (the two arms below are equivalently packaged as the single
    Its apparent fourth-power divisibility is therefore tautological from the
    `d^4` remainder and supplies no hidden cutoff.
 2. The restricted large-row arm — no remaining k ≥ 16 equation after removing
-   `k=16,18,20,24,28,32`, every even tail above its explicit `M_r`, the exact
+   `k=16,18,20,22,24,28,32`, every even tail above its explicit `M_r`, the exact
    split-factorial prime-power families, and every large-base owner
    `a*p^A` with `3707904a≤1218443k`.  The equation itself already supplies
    smoothness, `k^2<18d`, `1218443kd<1853952n`, the component and grouped-owner square
@@ -341,10 +409,26 @@ OPEN CORE (the two arms below are equivalently packaged as the single
    large-base reflection-center component satisfies the displayed
    gcd/cofactor bounds, but `a/gcd(a,d)` remains unbounded.  The `k=34`
    coefficient audit rules out direct composition of the quadratic strip
-   with the canonical Runge tail.  In row `k=22`, only `d>=250` remains and
-   every solution lies on the exact odd bounded `S,T,t` surface above; its
-   kernel-checkable terminal cover is still missing.  The census fixtures remain
-   non-equations and do not discharge this arm.
+   with the canonical Runge tail.  Row `k=22` is now closed by the exact
+   ordinary-kernel packed cover above.  The census fixtures remain
+   non-equations and do not discharge the other large-k rows.
+   The all-`k` valuation-concentration core and its `p=2` external-factor
+   arithmetic are now kernel-banked. So are the exact small-prime mass bound
+   `B_{<=k}(k,n) <= (k-1)!*(n+k)^pi(k)`, the complementary large-prime
+   factorization, and the cross-multiplied high-prime mass lower bound.
+   Lean also selects an upper term divisible by four for every `k>=4` and
+   proves that dividing this term by four converts the equation into equality
+   of two ordinary block products. Every `p>k` occurring in the lower block
+   has a unique full-exponent lower-upper owner cell.
+   The explicit canonical owner matrix is now kernel-banked in
+   `Erdos686CanonicalOwnerMatrix.lean`.  The theorem
+   `exists_canonicalOwnerSystem` proves `G|(k-1)!`, equal lower and upper
+   residual products, exact row and column factorizations with one
+   distinguished coefficient four, pairwise coprimality of distinct cells,
+   `A_ji|d+i-j`, and `G*product A_ji=B(k,n)`.  Its full axiom audit exposes
+   only `propext`, `Classical.choice`, and `Quot.sound`.  Eliminating the
+   resulting possibly sparse or disconnected row-column-diagonal structure
+   remains open.
 
 Lean proves that this single residual hypothesis implies the former
 `OddThueTailHypothesis`, `LargeKSmoothHypothesis`, and the full refutation.

@@ -4,6 +4,7 @@ import ErdosProblems.Erdos686ThirdObstructionNonzero
 import ErdosProblems.Erdos686EvenK16
 import ErdosProblems.Erdos686EvenK18
 import ErdosProblems.Erdos686EvenK182024
+import ErdosProblems.Erdos686EvenK22PackedCover
 import ErdosProblems.Erdos686EvenK28
 import ErdosProblems.Erdos686EvenK32
 import ErdosProblems.Erdos686EvenTailSupply
@@ -24,7 +25,7 @@ exclusion not discharged by the new unconditional results.
 
 The odd arm starts only at `10^1000` and is supplied with the complete
 all-owner certificate, including nonzero second and third obstructions.  The
-large-row arm omits the six fully closed rows `16,18,20,24,28,32`; every remaining
+large-row arm omits the seven fully closed rows `16,18,20,22,24,28,32`; every remaining
 even row is restricted to the finite strip below its constructed Runge
 threshold; every parity is restricted to the strict complement `k^2 < 18*d`
 of the uniform quadratic strip; and all prime-power lower terms covered by the exact factorial-loss
@@ -57,7 +58,7 @@ def FinalResidual686Hypothesis : Prop :=
         10 ^ 1000 ≤ d ∧
         Nonempty (AllOwnerAssemblyThirdNonzeroCertificate k n d)) ∨
       (16 ≤ k ∧ k ≤ d ∧
-        k ≠ 16 ∧ k ≠ 18 ∧ k ≠ 20 ∧ k ≠ 24 ∧ k ≠ 28 ∧ k ≠ 32 ∧
+        k ≠ 16 ∧ k ≠ 18 ∧ k ≠ 20 ∧ k ≠ 22 ∧ k ≠ 24 ∧ k ≠ 28 ∧ k ≠ 32 ∧
         1218443 * k * d < 1853952 * n ∧
         k ^ 2 < 18 * d ∧
         (∀ r : ℕ, ∀ hr : 2 ≤ r, k = 2 * r →
@@ -138,6 +139,9 @@ theorem no_gap_solution_large_k_of_finalResidual
   by_cases hk20 : k = 20
   · subst k
     exact no_gap_solution_four_even_twenty hd heq
+  by_cases hk22 : k = 22
+  · subst k
+    exact no_gap_solution_four_even_twentytwo hd heq
   by_cases hk24 : k = 24
   · subst k
     exact no_gap_solution_four_even_twentyfour hd heq
@@ -256,7 +260,7 @@ theorem no_gap_solution_large_k_of_finalResidual
     exact large_odd_two_large_prime_pell_certificate
       hp hq hpq he hf hr8 hpk hqk hgap heq'
   exact hres k n d heq (Or.inr
-    ⟨hk, hd, hk16, hk18, hk20, hk24, hk28, hk32, hsharpWindow,
+    ⟨hk, hd, hk16, hk18, hk20, hk22, hk24, hk28, hk32, hsharpWindow,
       hquadraticStripComplement,
       hevenStrip, hprimePower, hsmallCofactor, hlargePrimeComponents,
       hhighPrimePowerComponents, hgroupedOwners, hprimePowerBoundary,

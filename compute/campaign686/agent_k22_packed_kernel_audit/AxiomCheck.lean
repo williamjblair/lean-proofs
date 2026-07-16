@@ -1,0 +1,8 @@
+import ErdosProblems.Erdos686EvenK22PackedCover
+
+namespace Erdos686.Erdos686Variant
+
+#print axioms even22_packed_candidate_impossible
+#print axioms no_gap_solution_four_even_twentytwo
+
+end Erdos686.Erdos686Variant

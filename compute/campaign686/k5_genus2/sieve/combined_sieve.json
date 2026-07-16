@@ -1,0 +1,955 @@
+{
+  "algorithm": "exact primary-component factor graph plus HNF kernel lattice",
+  "combined_index_factorization": {
+    "11": 2,
+    "13": 3,
+    "151": 1,
+    "17": 2,
+    "19": 1,
+    "197": 1,
+    "2": 16,
+    "23": 2,
+    "239": 1,
+    "29": 1,
+    "3": 5,
+    "43": 1,
+    "5": 6,
+    "53": 1,
+    "67": 1,
+    "7": 1
+  },
+  "combined_lattice_column_hnf": [
+    [
+      2272656984397468486337520,
+      2236045930151685097308720,
+      446274085348498450134000,
+      899932995087731754391590,
+      358941319172850234503480
+    ],
+    [
+      0,
+      3981120,
+      1800240,
+      1692615,
+      1303150
+    ],
+    [
+      0,
+      0,
+      15600,
+      14460,
+      6380
+    ],
+    [
+      0,
+      0,
+      0,
+      15,
+      10
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      20
+    ]
+  ],
+  "combined_lattice_index": 42343330413030424784735169272832000000,
+  "incremental": [
+    {
+      "added_packet_prime": 7,
+      "combined_lattice_column_hnf": [
+        [
+          143,
+          139,
+          8,
+          32,
+          87
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "combined_lattice_index": 143,
+      "known_affine_class_count": 16,
+      "known_affine_class_merges": [
+        [
+          0,
+          6,
+          16,
+          26
+        ],
+        [
+          1,
+          7,
+          17,
+          27
+        ],
+        [
+          2,
+          8,
+          11
+        ],
+        [
+          3,
+          9,
+          10
+        ],
+        [
+          4,
+          18
+        ],
+        [
+          5,
+          19
+        ],
+        [
+          14,
+          25,
+          32
+        ],
+        [
+          15,
+          24,
+          33
+        ],
+        [
+          20,
+          29
+        ],
+        [
+          21,
+          28
+        ]
+      ],
+      "known_projective_class_count": 16,
+      "known_projective_class_merges": [
+        [
+          0,
+          6,
+          16,
+          26
+        ],
+        [
+          1,
+          7,
+          17,
+          27
+        ],
+        [
+          2,
+          8,
+          11
+        ],
+        [
+          3,
+          9,
+          10
+        ],
+        [
+          4,
+          18
+        ],
+        [
+          5,
+          19
+        ],
+        [
+          14,
+          25,
+          32
+        ],
+        [
+          15,
+          24,
+          33
+        ],
+        [
+          20,
+          29
+        ],
+        [
+          21,
+          28
+        ],
+        [
+          22,
+          35
+        ],
+        [
+          23,
+          34
+        ]
+      ],
+      "overlap_factor": 1,
+      "packet_reduction_image_order": 143,
+      "relative_index_factorization": {
+        "11": 1,
+        "13": 1
+      },
+      "relative_kernel_index_gain": 143,
+      "surviving_cosets": 16,
+      "surviving_density": "16/143"
+    },
+    {
+      "added_packet_prime": 11,
+      "combined_lattice_column_hnf": [
+        [
+          28171,
+          9720,
+          24318,
+          5323,
+          17390
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "combined_lattice_index": 28171,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 1,
+      "packet_reduction_image_order": 197,
+      "relative_index_factorization": {
+        "197": 1
+      },
+      "relative_kernel_index_gain": 197,
+      "surviving_cosets": 272,
+      "surviving_density": "272/28171"
+    },
+    {
+      "added_packet_prime": 13,
+      "combined_lattice_column_hnf": [
+        [
+          2253680,
+          1700969,
+          822826,
+          1423593,
+          1933018
+        ],
+        [
+          0,
+          4,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "combined_lattice_index": 9014720,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 1,
+      "packet_reduction_image_order": 320,
+      "relative_index_factorization": {
+        "2": 6,
+        "5": 1
+      },
+      "relative_kernel_index_gain": 320,
+      "surviving_cosets": 5984,
+      "surviving_density": "17/25610"
+    },
+    {
+      "added_packet_prime": 17,
+      "combined_lattice_column_hnf": [
+        [
+          6761040,
+          1113736,
+          2163841,
+          665016,
+          6161939
+        ],
+        [
+          0,
+          416,
+          406,
+          349,
+          221
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "combined_lattice_index": 5625185280,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 1,
+      "packet_reduction_image_order": 624,
+      "relative_index_factorization": {
+        "13": 1,
+        "2": 4,
+        "3": 1
+      },
+      "relative_kernel_index_gain": 624,
+      "surviving_cosets": 191488,
+      "surviving_density": "17/499395"
+    },
+    {
+      "added_packet_prime": 19,
+      "combined_lattice_column_hnf": [
+        [
+          1615888560,
+          609607336,
+          23497066,
+          1190608056,
+          1420269404
+        ],
+        [
+          0,
+          416,
+          396,
+          349,
+          211
+        ],
+        [
+          0,
+          0,
+          4,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "combined_lattice_index": 2688838563840,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 1,
+      "packet_reduction_image_order": 478,
+      "relative_index_factorization": {
+        "2": 1,
+        "239": 1
+      },
+      "relative_kernel_index_gain": 478,
+      "surviving_cosets": 4595712,
+      "surviving_density": "68/39785135"
+    },
+    {
+      "added_packet_prime": 23,
+      "combined_lattice_column_hnf": [
+        [
+          1615888560,
+          1519727144,
+          63335402,
+          774673190,
+          933843340
+        ],
+        [
+          0,
+          12064,
+          572,
+          6033,
+          4707
+        ],
+        [
+          0,
+          0,
+          52,
+          28,
+          19
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "combined_lattice_index": 1013692138567680,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 2,
+      "packet_reduction_image_order": 754,
+      "relative_index_factorization": {
+        "13": 1,
+        "29": 1
+      },
+      "relative_kernel_index_gain": 377,
+      "surviving_cosets": 73374720,
+      "surviving_density": "4777/65995581938"
+    },
+    {
+      "added_packet_prime": 29,
+      "combined_lattice_column_hnf": [
+        [
+          108264533520,
+          13100575800,
+          41403308050,
+          84031586982,
+          32578484628
+        ],
+        [
+          0,
+          180960,
+          85020,
+          102545,
+          89155
+        ],
+        [
+          0,
+          0,
+          52,
+          28,
+          19
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "combined_lattice_index": 1018760599260518400,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 1,
+      "packet_reduction_image_order": 1005,
+      "relative_index_factorization": {
+        "3": 1,
+        "5": 1,
+        "67": 1
+      },
+      "relative_kernel_index_gain": 1005,
+      "surviving_cosets": 2568115200,
+      "surviving_density": "33439/13265111969538"
+    },
+    {
+      "added_packet_prime": 31,
+      "combined_lattice_column_hnf": [
+        [
+          324793600560,
+          121365109320,
+          264908213310,
+          38062147622,
+          232564342908
+        ],
+        [
+          0,
+          180960,
+          42900,
+          58865,
+          139075
+        ],
+        [
+          0,
+          0,
+          3900,
+          444,
+          1267
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "combined_lattice_index": 229221134833616640000,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 6,
+      "packet_reduction_image_order": 1350,
+      "relative_index_factorization": {
+        "3": 2,
+        "5": 2
+      },
+      "relative_kernel_index_gain": 225,
+      "surviving_cosets": 19509450240,
+      "surviving_density": "2540293/29846501931460500"
+    },
+    {
+      "added_packet_prime": 37,
+      "combined_lattice_column_hnf": [
+        [
+          6171078410640,
+          446158709880,
+          3128165231100,
+          4616056036630,
+          5896138267184
+        ],
+        [
+          0,
+          180960,
+          85800,
+          113365,
+          151690
+        ],
+        [
+          0,
+          0,
+          7800,
+          2220,
+          4310
+        ],
+        [
+          0,
+          0,
+          0,
+          5,
+          4
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2
+        ]
+      ],
+      "combined_lattice_index": 87104031236774323200000,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 2,
+      "packet_reduction_image_order": 760,
+      "relative_index_factorization": {
+        "19": 1,
+        "2": 2,
+        "5": 1
+      },
+      "relative_kernel_index_gain": 380,
+      "surviving_cosets": 263377578240,
+      "surviving_density": "2540293/840123758070740000"
+    },
+    {
+      "added_packet_prime": 41,
+      "combined_lattice_column_hnf": [
+        [
+          1783441660674960,
+          1203806448784680,
+          1268199239412300,
+          1220318502932710,
+          1073492703307904
+        ],
+        [
+          0,
+          180960,
+          85800,
+          113365,
+          151690
+        ],
+        [
+          0,
+          0,
+          7800,
+          2220,
+          4310
+        ],
+        [
+          0,
+          0,
+          0,
+          5,
+          4
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2
+        ]
+      ],
+      "combined_lattice_index": 25173065027427779404800000,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 6,
+      "packet_reduction_image_order": 1734,
+      "relative_index_factorization": {
+        "17": 2
+      },
+      "relative_kernel_index_gain": 289,
+      "surviving_cosets": 1841404792320,
+      "surviving_density": "276547/3780556911318330000"
+    },
+    {
+      "added_packet_prime": 43,
+      "combined_lattice_column_hnf": [
+        [
+          76687991409023280,
+          11458429275956520,
+          70376396868857820,
+          48927216204278710,
+          10659408268581224
+        ],
+        [
+          0,
+          1990560,
+          1895400,
+          1922965,
+          1056490
+        ],
+        [
+          0,
+          0,
+          7800,
+          2220,
+          4310
+        ],
+        [
+          0,
+          0,
+          0,
+          5,
+          4
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2
+        ]
+      ],
+      "combined_lattice_index": 11906859757973339658470400000,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 4,
+      "packet_reduction_image_order": 1892,
+      "relative_index_factorization": {
+        "11": 1,
+        "43": 1
+      },
+      "relative_kernel_index_gain": 473,
+      "surviving_cosets": 21420511664640,
+      "surviving_density": "14915129/8290761306521097690000"
+    },
+    {
+      "added_packet_prime": 47,
+      "combined_lattice_column_hnf": [
+        [
+          11579886702762515280,
+          8063697527223400920,
+          2447704130548579500,
+          7715975939554227810,
+          1009375725548474410
+        ],
+        [
+          0,
+          1990560,
+          1895400,
+          1787775,
+          1599275
+        ],
+        [
+          0,
+          0,
+          7800,
+          6660,
+          7090
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          10
+        ]
+      ],
+      "combined_lattice_index": 26969037351809614326435456000000,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 1,
+      "packet_reduction_image_order": 2265,
+      "relative_index_factorization": {
+        "151": 1,
+        "3": 1,
+        "5": 1
+      },
+      "relative_kernel_index_gain": 2265,
+      "surviving_cosets": 1071025583232000,
+      "surviving_density": "14915129/375571487185405725357000"
+    },
+    {
+      "added_packet_prime": 53,
+      "combined_lattice_column_hnf": [
+        [
+          42880320460329594081840,
+          3134633107273102526520,
+          31742917156402602961980,
+          13718301832010372319330,
+          23820836323308042405370
+        ],
+        [
+          0,
+          1990560,
+          1895400,
+          1787775,
+          1599275
+        ],
+        [
+          0,
+          0,
+          7800,
+          6660,
+          7090
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          10
+        ]
+      ],
+      "combined_lattice_index": 99866345313751001850790493568000000,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 1,
+      "packet_reduction_image_order": 3703,
+      "relative_index_factorization": {
+        "23": 2,
+        "7": 1
+      },
+      "relative_kernel_index_gain": 3703,
+      "surviving_cosets": 72829739659776000,
+      "surviving_density": "14915129/20452076721287608838190750"
+    },
+    {
+      "added_packet_prime": 59,
+      "combined_lattice_column_hnf": [
+        [
+          2272656984397468486337520,
+          2236045930151685097308720,
+          446274085348498450134000,
+          899932995087731754391590,
+          358941319172850234503480
+        ],
+        [
+          0,
+          3981120,
+          1800240,
+          1692615,
+          1303150
+        ],
+        [
+          0,
+          0,
+          15600,
+          14460,
+          6380
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          10
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "combined_lattice_index": 42343330413030424784735169272832000000,
+      "known_affine_class_count": 34,
+      "known_affine_class_merges": [],
+      "known_projective_class_count": 36,
+      "known_projective_class_merges": [],
+      "overlap_factor": 10,
+      "packet_reduction_image_order": 4240,
+      "relative_index_factorization": {
+        "2": 3,
+        "53": 1
+      },
+      "relative_kernel_index_gain": 424,
+      "surviving_cosets": 516168751624777728,
+      "surviving_density": "5383303927/441613360315210220469081750000"
+    }
+  ],
+  "infinity_vectors_certified": true,
+  "known_affine_class_merges": [],
+  "known_affine_combined_class_count": 34,
+  "known_projective_class_merges": [],
+  "known_projective_combined_class_count": 36,
+  "packet_count": 14,
+  "packet_file": "compute/campaign686/k5_genus2/sieve/packets.json",
+  "packet_primes": [
+    7,
+    11,
+    13,
+    17,
+    19,
+    23,
+    29,
+    31,
+    37,
+    41,
+    43,
+    47,
+    53,
+    59
+  ],
+  "packet_sha256": "663aae990e395ba1bf168f0c67b55c78f7d755ed9f80ccb56719b7eaff953852",
+  "python_version": "3.13.9",
+  "rational_points_proved_complete": false,
+  "surviving_cosets": 516168751624777728,
+  "surviving_density": "5383303927/441613360315210220469081750000",
+  "sympy_version": "1.14.0",
+  "verdict": "PASS"
+}

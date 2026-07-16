@@ -26,6 +26,7 @@ BRANCHES = (17, 21, 25, 29)
 BOUND = 3_795_146_531
 CHUNK = 16_000_000
 EXPONENT = 18
+MAPS_PER_MODULE = 8
 
 
 Poly = dict[int, int]
@@ -422,15 +423,24 @@ def _balanced_tree(items: list[tuple[int, int]]) -> PackedTree:
     return ("node", _balanced_tree(items[:middle]), _balanced_tree(items[middle:]))
 
 
-def parse_packed_tree(text: str, branch: int, shard: int) -> PackedTree:
-    match = re.search(
-        rf"def even22PackedB{branch}S{shard}Tree : Even22PeriodicTree :=\n"
-        rf"  (.*?)\n\ndef even22PackedB{branch}S{shard}Intersection",
-        text,
-        re.DOTALL,
+def _tree_expression(tree: PackedTree) -> str:
+    if tree[0] == "leaf":
+        return f"(.leaf {tree[1]} {tree[2]})"
+    return f"(.node {_tree_expression(tree[1])} {_tree_expression(tree[2])})"
+
+
+def _balanced_reference_expression(names: list[str]) -> str:
+    assert names
+    if len(names) == 1:
+        return names[0]
+    middle = len(names) // 2
+    return (
+        "(.node "
+        + _balanced_reference_expression(names[:middle])
+        + " "
+        + _balanced_reference_expression(names[middle:])
+        + ")"
     )
-    assert match is not None
-    return _parse_tree_expression(match.group(1))
 
 
 def audit_packed_shards(primes: tuple[int, ...]) -> dict[str, object]:
@@ -440,11 +450,38 @@ def audit_packed_shards(primes: tuple[int, ...]) -> dict[str, object]:
         for shard, (lo, width) in enumerate(chunks(branch)):
             name = f"{PREFIX}PackedB{branch}S{shard}"
             text = (ERDOS / f"{name}.lean").read_text()
-            assert all_imports(text) == [f"{PREFIX}PackedDefs"]
             expected_items = [
                 (prime, q_pattern(prime, branch, lo)) for prime in primes
             ]
-            assert parse_packed_tree(text, branch, shard) == _balanced_tree(expected_items)
+            expected_map_modules = [
+                f"{name}Maps{group}"
+                for group, _ in enumerate(
+                    range(0, len(expected_items), MAPS_PER_MODULE)
+                )
+            ]
+            assert all_imports(text) == expected_map_modules
+            map_texts: list[str] = []
+            group_tree_names: list[str] = []
+            for group, map_name in enumerate(expected_map_modules):
+                map_text = (ERDOS / f"{map_name}.lean").read_text()
+                assert all_imports(map_text) == [f"{PREFIX}PackedDefs"]
+                start = group * MAPS_PER_MODULE
+                group_items = expected_items[start : start + MAPS_PER_MODULE]
+                group_tree_name = (
+                    f"even22PackedB{branch}S{shard}Group{group}Tree"
+                )
+                assert (
+                    f"def {group_tree_name} : Even22PeriodicTree :=\n"
+                    f"  {_tree_expression(_balanced_tree(group_items))}"
+                ) in map_text
+                assert f"theorem {group_tree_name}Supports" in map_text
+                group_tree_names.append(group_tree_name)
+                map_texts.append(map_text)
+            mappings = "\n".join(map_texts)
+            assert (
+                f"def even22PackedB{branch}S{shard}Tree : Even22PeriodicTree :=\n"
+                f"  {_balanced_reference_expression(group_tree_names)}"
+            ) in text
             assert (
                 f"def even22PackedB{branch}S{shard}Intersection : BitVec {width} :=\n"
                 f"  even22PackedB{branch}S{shard}Tree.eval {width} {EXPONENT}"
@@ -454,13 +491,13 @@ def audit_packed_shards(primes: tuple[int, ...]) -> dict[str, object]:
                 f"    even22PackedB{branch}S{shard}Intersection = BitVec.zero {width} := by\n"
                 "  decide +kernel"
             ) in text
-            assert text.count(f"private theorem even22_b{branch}_s{shard}_map_") == 2 * len(primes)
+            assert mappings.count(f"theorem even22_b{branch}_s{shard}_map_") == 2 * len(primes)
             for prime, pattern in expected_items:
                 stem = f"even22_b{branch}_s{shard}_map_{prime}"
-                assert f"private theorem {stem}_fin" in text
-                assert f"(46 * ({lo} + (r.val : ZMod {prime})) + {branch})" in text
-                assert f"({pattern}).testBit r.val = true" in text
-                assert f"({pattern}).testBit (i % {prime}) = true" in text
+                assert f"theorem {stem}_fin" in mappings
+                assert f"(46 * ({lo} + (r.val : ZMod {prime})) + {branch})" in mappings
+                assert f"({pattern}).testBit r.val = true" in mappings
+                assert f"({pattern}).testBit (i % {prime}) = true" in mappings
             assert (
                 f"theorem even22_packed_b{branch}_s{shard}_no_centers\n"
                 "    {w v : ℤ} {q : ℕ}\n"
@@ -578,11 +615,17 @@ def audit_packed_semantics(last_module: str) -> dict[str, object]:
 
     cover_path = ERDOS / f"{PREFIX}PackedCover.lean"
     cover = cover_path.read_text()
-    assert all_imports(cover) == [f"{PREFIX}PackedShards"]
+    assert all_imports(cover) == [
+        f"{PREFIX}PackedShards",
+        "Erdos686EvenK22Core",
+    ]
     assert last_module == expected_shards[-1]
     assert "r.val = 17 ∨ r.val = 21 ∨ r.val = 25 ∨ r.val = 29" in cover
     assert f"(htbound : t ≤ {BOUND})" in cover
     assert "(hm : -(33 * (t : ℤ)) = evenTable22T w - 2 * evenTable22T v)" in cover
+    assert "theorem no_gap_solution_four_even_twentytwo" in cover
+    assert "apply no_gap_solution_four_even_twentytwo_of_large_obstruction" in cover
+    assert "exact even22_packed_candidate_impossible hS hm htodd htpos htbound" in cover
     assert local_allowed_t_residues(23) == frozenset({2, 6, 17, 21})
     odd_classes = tuple(
         residue
@@ -604,9 +647,14 @@ def audit_packed_semantics(last_module: str) -> dict[str, object]:
     ]
     forbidden = {
         token: [path.name for path in generated if token in path.read_text()]
-        for token in ("native_decide", "sorry", "admit")
+        for token in ("native_decide", "sorry", "admit", "axiom ")
     }
-    assert forbidden == {"native_decide": [], "sorry": [], "admit": []}
+    assert forbidden == {
+        "native_decide": [],
+        "sorry": [],
+        "admit": [],
+        "axiom ": [],
+    }
     missing_imports: list[dict[str, str]] = []
     for path in generated:
         for dependency in all_imports(path.read_text()):
@@ -657,4 +705,4 @@ def audit() -> dict[str, object]:
 
 
 if __name__ == "__main__":
-    print(dumps(quarantine_audit(), indent=2, sort_keys=True))
+    print(dumps(audit(), indent=2, sort_keys=True))

@@ -523,7 +523,8 @@ row-4 escape → contradiction.
 | `Erdos686SmallCore.lean` | `row_full_escape_small_k_d_le_220`: 5 ≤ k ≤ 15, k ≤ d ≤ 220, window ⟹ some row j ≤ 5 fails; banded certs, 23,730 grid points; `window_n_bound_small_k` (n < 2287) |
 | `Erdos686ConstantSurvivors.lean` | the 45 prefix-three survivors + 6 band shadows; row-4 escape decide; banded membership certs for all 11 (k,q); u = d edge |
 | `Erdos686SmallBranch.lean` | assembly, the two open Props, conditional reductions, boundary falsification |
-| `Erdos686EvenK22Core.lean` | row `k=22`: unconditional closure for `22≤d≤249`, exact `d≥250` reduction to an odd `t≤3795146531`, and an explicit conditional wrapper for the remaining bounded surface |
+| `Erdos686EvenK22Core.lean` | row `k=22`: unconditional closure for `22≤d≤249` and exact `d≥250` reduction to an odd `t≤3795146531` on a bounded centered surface |
+| `Erdos686EvenK22PackedCover.lean` | unconditional row `k=22` closure: 24 packed ordinary-kernel shards combine exact finite-field masks for the bounded surface; hostile regeneration and axiom audits pass |
 
 ---
 
@@ -608,8 +609,7 @@ requires
 `v>=7629565936566640936850578356790181141762389`.
 These exact values falsify this bridge, not the original equation.
 
-[R/E/X] **The first open even row now has a kernel-checked finite strip and
-Archimedean reduction, but not a kernel-checked terminal cover.**  At `k=22`,
+[R/E] **The row `k=22` is now unconditionally kernel-closed.**  At `k=22`,
 `even22_small_gap_impossible` closes every `22<=d<=249`: the quadratic strip
 covers `22<=d<=26`, and 28 ordinary-kernel shards discharge all 16,859 exact
 ratio-window pairs for `27<=d<=249`.  For `d>=250`,
@@ -620,14 +620,15 @@ integers `w,v` and an odd natural `t` satisfying
 S(w)=4S(v),  T(w)-2T(v)=-33t,  1<=t<=3795146531.
 ```
 
-Parity and mod 23 leave exactly 330,012,742 candidates, and independent exact
-Python bitsets empty them with prime masks through 953.  That terminal step is
-not admitted: representative generated table declarations depended on named
-axioms from a temporary stub object, while an independent 20,000,000-bit Lean
-probe stack-overflows before producing an axiom report.  All contaminated
-generated sources and objects were quarantined.  Thus `k=22` remains open
-exactly at the quantified bounded surface above; no packed row closure is
-claimed.
+Parity and mod 23 leave exactly 330,012,742 candidates.  The regenerated
+certificate partitions the exact prime-mask cover into 24 packed shards, with
+small ordinary-kernel map modules proving local support before the shard-level
+union.  `no_gap_solution_four_even_twentytwo` combines that cover with the
+small-gap theorem and the exact reduction, closing every admissible `d>=22`.
+The full packed build succeeds, an independent hostile audit recomputes every
+mask and coverage digest, and `#print axioms` reports only `propext`,
+`Classical.choice`, and `Quot.sound`.  No `native_decide`, `sorry`, `admit`, or
+explicit axiom occurs in the generated dependency cone.
 
 [C] A viable next Runge step must cancel the first omitted Laurent term
 before the integer-size trap and obtain a new gcd or owner-correlation gain.
@@ -680,6 +681,101 @@ fails some row j ≤ 17.
    arbitrary selected-three geometry; additional live owners can only be
    absorbed by enlarging the loss and forfeiting its bounded estimate.
    Simultaneous magnitude/gcd coupling and additional live owners remain.
+   A new proper-support jet route is now exact at `k=5`: puncturing the full
+   owner grid gives 25 order-17 jet systems of shape `408 x 415`; after
+   saturating the integer kernel and LLL-reducing standard coefficients, the
+   worst basis norm has 70 digits and satisfies the corrected `10^1000`
+   budget with 882 decimal orders to spare. Exact local ambient division
+   shows all 175 denominator-clearing multipliers are one. An independent
+   resultant audit proves that, for every puncture, a selected subfamily has
+   exactly the prescribed punctured grid as its on-curve base locus and no
+   additional common zero; 24 punctures need two sections and the central
+   puncture needs five. Thus all computational obligations for the `k=5`
+   proper-support arm pass. The block/Lagrange decomposition
+   shows that only one or two top layers are genuinely dense, reducing the
+   prospective `k=15` residual to `448 x 540`. The corrected arithmetic
+   composition is now Lean-banked:
+   `no_k5_tail_solution_of_proper_canonical_support` reduces the full
+   proper-support conclusion to the finite `K5PunctureJetWitness` payload,
+   and `Erdos686SparseJetCertificate.lean` proves the generic local
+   divisibility and coefficient-height bounds for sparse integral sections.
+   The full `k=5` proper-support theorem is now ordinary-kernel banked.
+   `Erdos686K5AllPunctures.lean` assembles all 25 endpoints: 24 two-section
+   certificates and the exceptional central five-section certificate.
+   The split proof surface contains 1,272 local-row modules, 477 dense
+   elimination leaves, 53 thin elimination assemblies, and 25 Bézout
+   kernels. Every generated `K5P` source is free of `native_decide`, `sorry`,
+   and `admit`. The theorem
+   `no_k5_tail_solution_of_proper_support` proves that any `k=5` solution
+   with `d>=10^1000` has complete canonical owner support. The independent
+   hostile verifier, full repository build, 807-theorem manifest audit,
+   1,286-declaration axiom gate, and regeneration of 807 attestations all
+   pass. The all-puncture rows above `k=5` and every complete-support case
+   remain open. At `k=7`, puncture `(1,1)`, all 16
+   local quotient multipliers are also one and the denominator-cleared
+   215-digit norm retains 570 decimal orders. Two exact degree-`1806`
+   curve-section resultants have precisely the degree-`1776` prescribed
+   punctured grid as their gcd, so the constructive base-locus bridge passes
+   there as well.
+   A separate direct `k=5` genus-two lane is now exact through the full
+   Mordell-Weil group. Lean banks the reduction to
+   `y^2=9x^6+64x^5-200x^3+64x+144`, the rational inverse relation, and the
+   unique zero-denominator point `(4,300)`. Exact Magma V2.29-8 certificates
+   give `Sel^(2)(J/Q)=(Z/2Z)^5`, trivial torsion, and `J(Q)=Z^5` with
+   `proved=true`. Five supplied affine point differences have determinant
+   `-1` in the proved basis, so rank, finite-index generation, and saturation
+   are closed. `TwoCoverDescent` yields eight locally soluble covers. The
+   pair-sum resultant has an irreducible degree-15 factor of multiplicity
+   two; over that field the sextic factors `2+4`, all eight elliptic quartic
+   covers have known points, and the 34 known affine points occupy the eight
+   classes with sorted counts `[2,4,4,4,4,4,6,6]`. The remaining `k=5`
+   obligation is genuine rational-point completeness: prove that the 36 known
+   projective points exhaust the curve by elliptic Chabauty/two-cover
+   analysis or a high-rank Mordell-Weil sieve. `RationalPointsGenus2`
+   currently returns `proved_all=false`, so the bounded census is not counted
+   as closure. The high-rank sieve now contains fourteen exact packets
+   through `p=59`. All 34 affine and both infinity vectors survive, and all
+   36 known projective points occupy distinct combined classes. Exact HNF and
+   primary-component contraction give combined lattice index
+   `42343330413030424784735169272832000000`, surviving coset count
+   `516168751624777728`, and density
+   `5383303927/441613360315210220469081750000`. A rational Sylvester audit
+   plus a Magma entry enclosure certifies the height-pairing lower eigenvalue
+   `43/200`. The upper comparison is now exact: the Kummer embedding is
+   `(A^2*C:A^3:0:6*B+8*A*C^2+18*C^3)`, the duplication-quartic maximum
+   coefficient L1 norm is `1077517601`, and
+   `hhat([P-P0]) <= 3*log(H(P))+log(32)+log(1077517601)/3`.
+   All five basis generators, eight curve-point differences, the
+   factor-of-two normalization, `A=0`, and both infinity fibres are audited.
+   At `H(P)<=20000`, the resulting exact coefficient ball has
+   `sum m_i^2<=280`; all `6,944,265` vectors reduce to exactly the 36 known
+   projective vectors, already using packets through `p=23`. The remaining
+   global obligation is an independent absolute bound for `H(P)` or an
+   equivalent exhaustive integral-point/two-cover analysis. The integral
+   lift is now kernel-banked in the exact coordinates
+   `(v:10v^3-40u^3-16v+64u:2u)`, together with `u<v<2u`, `|B|<46u^3`,
+   and the exact cubed bound `H(P)<4u`. Combining `d=v-u<u` with the
+   existing small-core and Farey certificates proves the stronger exclusion
+   `u<10^1000`; the requested `u<=5000` range is only a corollary. On the
+   surviving tail, Lean proves
+   `|v/u-4^(1/5)|<C/u^2` with exact
+   `C=1702608047245783157000000/3031424763402858403856401<0.562`.
+   This is above `1/2`, so the simplest Legendre criterion does not close
+   the tail. The normalized square cover is the already audited genus-6
+   original curve with Q-simple Prym, and an unordered degree-10 `3+3`
+   field leaves the sextic irreducible. Complete support plus `G|24` now
+   forces a fully owned lower row and a fully owned modified upper column,
+   crossing at a nontrivial canonical cell; the remaining step is their
+   simultaneous global elimination. An invariant scout still ranks
+   `p=107` first only if a new finite height bound later makes another packet
+   useful.
+   The complementary normalized cell-local higher-jet route is now closed
+   at all orders by a kernel-checked exact identity:
+   `C*Q_i(Y)=4R*Q_j(X)`. Its rational ratio form is explicitly a lower local
+   quotient divided by an upper local quotient, so every owner-adic
+   logarithmic correction is a row term minus a column term. This does not
+   affect the global punctured-grid interpolation certificates. Complete
+   support must use simultaneous global row and column arithmetic instead.
 2. [open, Target 2] Prove `LargeKSmoothHypothesis`, equivalently exclude the
    remaining `k>=16,d>=k` equations after the closed rows, universal even
    tails, the all-parity quadratic strip, exact ratio band,
@@ -690,6 +786,22 @@ fails some row j ≤ 17.
    any complete large-base reflection-center component also obeys the exact
    cofactor-quotient bounds above, but the quotient `a/gcd(a,d)` remains
    unbounded.  The equation itself supplies the smoothness premise.
+   The valuation-concentration lemma and the full all-`k` canonical
+   pairwise-coprime owner matrix are now kernel-banked. The `p=2` allocation
+   against the original maximal upper valuation is valid without reselection:
+   `S-(F-2)=(S+2)-F` converts it directly to the upper omitted-valuation
+   bound. The exact small-prime mass theorem is also kernel-banked:
+   `B_{<=k}(k,n) <= (k-1)!*(n+k)^pi(k)`, together with the exact
+   small/large-prime decomposition and the cross-multiplied high-prime mass
+   lower bound. Lean chooses a distinguished upper column divisible by four,
+   matches every prime including two, and assembles the exact
+   two-dimensional system.  `exists_canonicalOwnerSystem` proves
+   `G|(k-1)!`, `product r_j=product s_i=G`, the exact lower and upper
+   factorizations, pairwise coprimality, `A_ji|d+i-j`, and
+   `G*product A_ji=B(k,n)`.  The resulting cleaned support is not assumed
+   connected.  The remaining large-k obligation is to eliminate that
+   canonical support, for example through a proved near-permutation/diffuse
+   mass-structure dichotomy.
 3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as
    equivalent packaging via `finalResidual_iff_tail1000_and_smooth`; do not
    report its isolation as mathematical progress.  Regenerate the manifest

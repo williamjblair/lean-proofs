@@ -1,0 +1,1692 @@
+{
+  "all_known_points_survive": true,
+  "infinity_vectors_certified": true,
+  "known_affine_point_count": 34,
+  "nonsurjective_primes": [
+    37
+  ],
+  "packet_count": 14,
+  "packet_file": "compute/campaign686/k5_genus2/sieve/packets.json",
+  "packet_sha256": "663aae990e395ba1bf168f0c67b55c78f7d755ed9f80ccb56719b7eaff953852",
+  "packets": {
+    "11": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 197,
+      "curve_image_size": 17,
+      "effective_density": "17/197",
+      "failed_known_points": [],
+      "invariants": [
+        197
+      ],
+      "known_class_count": 17,
+      "known_class_merges": [
+        {
+          "class": [
+            6
+          ],
+          "point_indices": [
+            14,
+            29
+          ]
+        },
+        {
+          "class": [
+            48
+          ],
+          "point_indices": [
+            19,
+            22
+          ]
+        },
+        {
+          "class": [
+            51
+          ],
+          "point_indices": [
+            7,
+            10,
+            33
+          ]
+        },
+        {
+          "class": [
+            65
+          ],
+          "point_indices": [
+            2,
+            12
+          ]
+        },
+        {
+          "class": [
+            76
+          ],
+          "point_indices": [
+            0,
+            4,
+            30
+          ]
+        },
+        {
+          "class": [
+            78
+          ],
+          "point_indices": [
+            24,
+            25
+          ]
+        },
+        {
+          "class": [
+            80
+          ],
+          "point_indices": [
+            1,
+            5,
+            31
+          ]
+        },
+        {
+          "class": [
+            91
+          ],
+          "point_indices": [
+            3,
+            13
+          ]
+        },
+        {
+          "class": [
+            105
+          ],
+          "point_indices": [
+            6,
+            11,
+            32
+          ]
+        },
+        {
+          "class": [
+            108
+          ],
+          "point_indices": [
+            18,
+            23
+          ]
+        },
+        {
+          "class": [
+            150
+          ],
+          "point_indices": [
+            15,
+            28
+          ]
+        },
+        {
+          "class": [
+            166
+          ],
+          "point_indices": [
+            17,
+            26
+          ]
+        },
+        {
+          "class": [
+            187
+          ],
+          "point_indices": [
+            16,
+            27
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "raw_packet_ratio": "17/197",
+      "reachable_curve_image_size": 17,
+      "reduction_image_order": 197,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "13": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 320,
+      "curve_image_size": 22,
+      "effective_density": "11/160",
+      "failed_known_points": [],
+      "invariants": [
+        320
+      ],
+      "known_class_count": 18,
+      "known_class_merges": [
+        {
+          "class": [
+            19
+          ],
+          "point_indices": [
+            5,
+            26
+          ]
+        },
+        {
+          "class": [
+            43
+          ],
+          "point_indices": [
+            9,
+            16
+          ]
+        },
+        {
+          "class": [
+            97
+          ],
+          "point_indices": [
+            8,
+            17
+          ]
+        },
+        {
+          "class": [
+            121
+          ],
+          "point_indices": [
+            4,
+            27
+          ]
+        },
+        {
+          "class": [
+            155
+          ],
+          "point_indices": [
+            0,
+            19,
+            28
+          ]
+        },
+        {
+          "class": [
+            157
+          ],
+          "point_indices": [
+            15,
+            23,
+            33
+          ]
+        },
+        {
+          "class": [
+            188
+          ],
+          "point_indices": [
+            3,
+            6,
+            10
+          ]
+        },
+        {
+          "class": [
+            272
+          ],
+          "point_indices": [
+            2,
+            7,
+            11
+          ]
+        },
+        {
+          "class": [
+            303
+          ],
+          "point_indices": [
+            14,
+            22,
+            32
+          ]
+        },
+        {
+          "class": [
+            305
+          ],
+          "point_indices": [
+            1,
+            18,
+            29
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "raw_packet_ratio": "11/160",
+      "reachable_curve_image_size": 22,
+      "reduction_image_order": 320,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "17": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 624,
+      "curve_image_size": 32,
+      "effective_density": "2/39",
+      "failed_known_points": [],
+      "invariants": [
+        624
+      ],
+      "known_class_count": 26,
+      "known_class_merges": [
+        {
+          "class": [
+            0
+          ],
+          "point_indices": [
+            5,
+            17,
+            20
+          ]
+        },
+        {
+          "class": [
+            67
+          ],
+          "point_indices": [
+            14,
+            18
+          ]
+        },
+        {
+          "class": [
+            162
+          ],
+          "point_indices": [
+            25,
+            29
+          ]
+        },
+        {
+          "class": [
+            194
+          ],
+          "point_indices": [
+            24,
+            28
+          ]
+        },
+        {
+          "class": [
+            289
+          ],
+          "point_indices": [
+            15,
+            19
+          ]
+        },
+        {
+          "class": [
+            356
+          ],
+          "point_indices": [
+            4,
+            16,
+            21
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3
+      ],
+      "raw_packet_ratio": "2/39",
+      "reachable_curve_image_size": 32,
+      "reduction_image_order": 624,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "19": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 478,
+      "curve_image_size": 24,
+      "effective_density": "12/239",
+      "failed_known_points": [],
+      "invariants": [
+        478
+      ],
+      "known_class_count": 20,
+      "known_class_merges": [
+        {
+          "class": [
+            0
+          ],
+          "point_indices": [
+            2,
+            6,
+            20
+          ]
+        },
+        {
+          "class": [
+            73
+          ],
+          "point_indices": [
+            22,
+            29
+          ]
+        },
+        {
+          "class": [
+            197
+          ],
+          "point_indices": [
+            23,
+            28
+          ]
+        },
+        {
+          "class": [
+            270
+          ],
+          "point_indices": [
+            3,
+            7,
+            21
+          ]
+        },
+        {
+          "class": [
+            289
+          ],
+          "point_indices": [
+            4,
+            17
+          ]
+        },
+        {
+          "class": [
+            304
+          ],
+          "point_indices": [
+            1,
+            12
+          ]
+        },
+        {
+          "class": [
+            345
+          ],
+          "point_indices": [
+            9,
+            14
+          ]
+        },
+        {
+          "class": [
+            365
+          ],
+          "point_indices": [
+            11,
+            24
+          ]
+        },
+        {
+          "class": [
+            383
+          ],
+          "point_indices": [
+            10,
+            25
+          ]
+        },
+        {
+          "class": [
+            403
+          ],
+          "point_indices": [
+            8,
+            15
+          ]
+        },
+        {
+          "class": [
+            444
+          ],
+          "point_indices": [
+            0,
+            13
+          ]
+        },
+        {
+          "class": [
+            459
+          ],
+          "point_indices": [
+            5,
+            16
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3
+      ],
+      "raw_packet_ratio": "12/239",
+      "reachable_curve_image_size": 24,
+      "reduction_image_order": 478,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "23": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 754,
+      "curve_image_size": 32,
+      "effective_density": "16/377",
+      "failed_known_points": [],
+      "invariants": [
+        754
+      ],
+      "known_class_count": 25,
+      "known_class_merges": [
+        {
+          "class": [
+            38
+          ],
+          "point_indices": [
+            10,
+            18
+          ]
+        },
+        {
+          "class": [
+            181
+          ],
+          "point_indices": [
+            2,
+            23
+          ]
+        },
+        {
+          "class": [
+            200
+          ],
+          "point_indices": [
+            14,
+            24
+          ]
+        },
+        {
+          "class": [
+            440
+          ],
+          "point_indices": [
+            15,
+            25
+          ]
+        },
+        {
+          "class": [
+            459
+          ],
+          "point_indices": [
+            3,
+            22
+          ]
+        },
+        {
+          "class": [
+            602
+          ],
+          "point_indices": [
+            11,
+            19
+          ]
+        },
+        {
+          "class": [
+            660
+          ],
+          "point_indices": [
+            0,
+            6
+          ]
+        },
+        {
+          "class": [
+            697
+          ],
+          "point_indices": [
+            4,
+            5
+          ]
+        },
+        {
+          "class": [
+            734
+          ],
+          "point_indices": [
+            1,
+            7
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "raw_packet_ratio": "16/377",
+      "reachable_curve_image_size": 32,
+      "reduction_image_order": 754,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "29": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 1005,
+      "curve_image_size": 35,
+      "effective_density": "7/201",
+      "failed_known_points": [],
+      "invariants": [
+        1005
+      ],
+      "known_class_count": 26,
+      "known_class_merges": [
+        {
+          "class": [
+            179
+          ],
+          "point_indices": [
+            10,
+            22
+          ]
+        },
+        {
+          "class": [
+            219
+          ],
+          "point_indices": [
+            11,
+            23
+          ]
+        },
+        {
+          "class": [
+            451
+          ],
+          "point_indices": [
+            5,
+            13
+          ]
+        },
+        {
+          "class": [
+            527
+          ],
+          "point_indices": [
+            3,
+            32
+          ]
+        },
+        {
+          "class": [
+            563
+          ],
+          "point_indices": [
+            7,
+            19
+          ]
+        },
+        {
+          "class": [
+            840
+          ],
+          "point_indices": [
+            6,
+            18
+          ]
+        },
+        {
+          "class": [
+            876
+          ],
+          "point_indices": [
+            2,
+            33
+          ]
+        },
+        {
+          "class": [
+            952
+          ],
+          "point_indices": [
+            4,
+            12
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "raw_packet_ratio": "7/201",
+      "reachable_curve_image_size": 35,
+      "reduction_image_order": 1005,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "31": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 1350,
+      "curve_image_size": 42,
+      "effective_density": "7/225",
+      "failed_known_points": [],
+      "invariants": [
+        3,
+        450
+      ],
+      "known_class_count": 28,
+      "known_class_merges": [
+        {
+          "class": [
+            0,
+            141
+          ],
+          "point_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "class": [
+            0,
+            144
+          ],
+          "point_indices": [
+            5,
+            22
+          ]
+        },
+        {
+          "class": [
+            1,
+            213
+          ],
+          "point_indices": [
+            18,
+            19
+          ]
+        },
+        {
+          "class": [
+            1,
+            438
+          ],
+          "point_indices": [
+            6,
+            7
+          ]
+        },
+        {
+          "class": [
+            2,
+            282
+          ],
+          "point_indices": [
+            4,
+            23
+          ]
+        },
+        {
+          "class": [
+            2,
+            285
+          ],
+          "point_indices": [
+            0,
+            2
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "raw_packet_ratio": "7/225",
+      "reachable_curve_image_size": 42,
+      "reduction_image_order": 1350,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "37": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 1520,
+      "curve_image_size": 42,
+      "effective_density": "27/760",
+      "failed_known_points": [],
+      "invariants": [
+        2,
+        2,
+        380
+      ],
+      "known_class_count": 24,
+      "known_class_merges": [
+        {
+          "class": [
+            0,
+            0,
+            110
+          ],
+          "point_indices": [
+            7,
+            30
+          ]
+        },
+        {
+          "class": [
+            0,
+            0,
+            370
+          ],
+          "point_indices": [
+            6,
+            31
+          ]
+        },
+        {
+          "class": [
+            0,
+            1,
+            197
+          ],
+          "point_indices": [
+            16,
+            25
+          ]
+        },
+        {
+          "class": [
+            0,
+            1,
+            209
+          ],
+          "point_indices": [
+            11,
+            26
+          ]
+        },
+        {
+          "class": [
+            0,
+            1,
+            229
+          ],
+          "point_indices": [
+            14,
+            23
+          ]
+        },
+        {
+          "class": [
+            0,
+            1,
+            251
+          ],
+          "point_indices": [
+            15,
+            22
+          ]
+        },
+        {
+          "class": [
+            0,
+            1,
+            271
+          ],
+          "point_indices": [
+            10,
+            27
+          ]
+        },
+        {
+          "class": [
+            0,
+            1,
+            283
+          ],
+          "point_indices": [
+            17,
+            24
+          ]
+        },
+        {
+          "class": [
+            1,
+            0,
+            171
+          ],
+          "point_indices": [
+            5,
+            28
+          ]
+        },
+        {
+          "class": [
+            1,
+            0,
+            309
+          ],
+          "point_indices": [
+            4,
+            29
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "raw_packet_ratio": "21/380",
+      "reachable_curve_image_size": 27,
+      "reduction_image_order": 760,
+      "surjective": false,
+      "unreachable_curve_image": [
+        [
+          0,
+          0,
+          15
+        ],
+        [
+          0,
+          0,
+          85
+        ],
+        [
+          0,
+          1,
+          50
+        ],
+        [
+          0,
+          1,
+          192
+        ],
+        [
+          0,
+          1,
+          196
+        ],
+        [
+          0,
+          1,
+          240
+        ],
+        [
+          0,
+          1,
+          284
+        ],
+        [
+          0,
+          1,
+          288
+        ],
+        [
+          1,
+          0,
+          50
+        ],
+        [
+          1,
+          0,
+          148
+        ],
+        [
+          1,
+          0,
+          332
+        ],
+        [
+          1,
+          1,
+          163
+        ],
+        [
+          1,
+          1,
+          239
+        ],
+        [
+          1,
+          1,
+          241
+        ],
+        [
+          1,
+          1,
+          317
+        ]
+      ],
+      "unreachable_curve_image_size": 15
+    },
+    "41": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 1734,
+      "curve_image_size": 42,
+      "effective_density": "7/289",
+      "failed_known_points": [],
+      "invariants": [
+        1734
+      ],
+      "known_class_count": 30,
+      "known_class_merges": [
+        {
+          "class": [
+            51
+          ],
+          "point_indices": [
+            0,
+            24
+          ]
+        },
+        {
+          "class": [
+            897
+          ],
+          "point_indices": [
+            1,
+            25
+          ]
+        },
+        {
+          "class": [
+            1107
+          ],
+          "point_indices": [
+            14,
+            29
+          ]
+        },
+        {
+          "class": [
+            1575
+          ],
+          "point_indices": [
+            15,
+            28
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "raw_packet_ratio": "7/289",
+      "reachable_curve_image_size": 42,
+      "reduction_image_order": 1734,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "43": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 1892,
+      "curve_image_size": 46,
+      "effective_density": "23/946",
+      "failed_known_points": [],
+      "invariants": [
+        2,
+        946
+      ],
+      "known_class_count": 32,
+      "known_class_merges": [
+        {
+          "class": [
+            1,
+            523
+          ],
+          "point_indices": [
+            3,
+            26
+          ]
+        },
+        {
+          "class": [
+            1,
+            853
+          ],
+          "point_indices": [
+            2,
+            27
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2
+      ],
+      "raw_packet_ratio": "23/946",
+      "reachable_curve_image_size": 46,
+      "reduction_image_order": 1892,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "47": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 2265,
+      "curve_image_size": 50,
+      "effective_density": "10/453",
+      "failed_known_points": [],
+      "invariants": [
+        2265
+      ],
+      "known_class_count": 30,
+      "known_class_merges": [
+        {
+          "class": [
+            164
+          ],
+          "point_indices": [
+            10,
+            17
+          ]
+        },
+        {
+          "class": [
+            350
+          ],
+          "point_indices": [
+            6,
+            25
+          ]
+        },
+        {
+          "class": [
+            1358
+          ],
+          "point_indices": [
+            7,
+            24
+          ]
+        },
+        {
+          "class": [
+            1544
+          ],
+          "point_indices": [
+            11,
+            16
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "raw_packet_ratio": "10/453",
+      "reachable_curve_image_size": 50,
+      "reduction_image_order": 2265,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "53": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 3703,
+      "curve_image_size": 68,
+      "effective_density": "68/3703",
+      "failed_known_points": [],
+      "invariants": [
+        3703
+      ],
+      "known_class_count": 32,
+      "known_class_merges": [
+        {
+          "class": [
+            0
+          ],
+          "point_indices": [
+            15,
+            20
+          ]
+        },
+        {
+          "class": [
+            3088
+          ],
+          "point_indices": [
+            14,
+            21
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2
+      ],
+      "raw_packet_ratio": "68/3703",
+      "reachable_curve_image_size": 68,
+      "reduction_image_order": 3703,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "59": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 4240,
+      "curve_image_size": 71,
+      "effective_density": "71/4240",
+      "failed_known_points": [],
+      "invariants": [
+        4240
+      ],
+      "known_class_count": 32,
+      "known_class_merges": [
+        {
+          "class": [
+            1065
+          ],
+          "point_indices": [
+            0,
+            16
+          ]
+        },
+        {
+          "class": [
+            3435
+          ],
+          "point_indices": [
+            1,
+            17
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2
+      ],
+      "raw_packet_ratio": "71/4240",
+      "reachable_curve_image_size": 71,
+      "reduction_image_order": 4240,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    },
+    "7": {
+      "all_known_points_survive": true,
+      "ambient_group_order": 143,
+      "curve_image_size": 16,
+      "effective_density": "16/143",
+      "failed_known_points": [],
+      "invariants": [
+        143
+      ],
+      "known_class_count": 16,
+      "known_class_merges": [
+        {
+          "class": [
+            0
+          ],
+          "point_indices": [
+            20,
+            29
+          ]
+        },
+        {
+          "class": [
+            30
+          ],
+          "point_indices": [
+            21,
+            28
+          ]
+        },
+        {
+          "class": [
+            34
+          ],
+          "point_indices": [
+            3,
+            9,
+            10
+          ]
+        },
+        {
+          "class": [
+            37
+          ],
+          "point_indices": [
+            14,
+            25,
+            32
+          ]
+        },
+        {
+          "class": [
+            52
+          ],
+          "point_indices": [
+            1,
+            7,
+            17,
+            27
+          ]
+        },
+        {
+          "class": [
+            73
+          ],
+          "point_indices": [
+            4,
+            18
+          ]
+        },
+        {
+          "class": [
+            100
+          ],
+          "point_indices": [
+            5,
+            19
+          ]
+        },
+        {
+          "class": [
+            121
+          ],
+          "point_indices": [
+            0,
+            6,
+            16,
+            26
+          ]
+        },
+        {
+          "class": [
+            136
+          ],
+          "point_indices": [
+            15,
+            24,
+            33
+          ]
+        },
+        {
+          "class": [
+            139
+          ],
+          "point_indices": [
+            2,
+            8,
+            11
+          ]
+        }
+      ],
+      "known_class_multiplicities": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        4,
+        4
+      ],
+      "raw_packet_ratio": "16/143",
+      "reachable_curve_image_size": 16,
+      "reduction_image_order": 143,
+      "surjective": true,
+      "unreachable_curve_image": [],
+      "unreachable_curve_image_size": 0
+    }
+  },
+  "surjective_primes": [
+    7,
+    11,
+    13,
+    17,
+    19,
+    23,
+    29,
+    31,
+    41,
+    43,
+    47,
+    53,
+    59
+  ],
+  "unimodular_known_basis_determinant": 1,
+  "verdict": "PASS"
+}

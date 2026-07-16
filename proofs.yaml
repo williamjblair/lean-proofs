@@ -3261,6 +3261,326 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedJetCoboundary.lean
+    theorem: Erdos686.Erdos686Variant.owner_shiftedLocalQuotient_coboundary
+    statement: >-
+      Cancelling a positive owner shared by one lower and one upper block
+      term gives the exact separated lower-cofactor versus upper-cofactor
+      identity underlying all normalized cell-local jet corrections.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.matched_equal_total_residual_le
+    statement: >-
+      Matching two equal prime-valuation totals at their selected lower and
+      upper exponents leaves at most their common consecutive-block
+      concentration loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerMass.lean
+    theorem: Erdos686.Erdos686Variant.kSmallConcentratedPart_le
+    statement: >-
+      After removing the universal factorial valuation loss, the product of
+      all retained prime powers with bases at most k is bounded by n plus k
+      raised to the exact number of primes at most k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerMass.lean
+    theorem: Erdos686.Erdos686Variant.kSmallPart_le_factorial_mul_pow_primeCounting
+    statement: >-
+      The complete part of the lower consecutive block supported on primes
+      at most k is bounded by one copy of (k-1)! times (n+k) to pi(k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerMass.lean
+    theorem: Erdos686.Erdos686Variant.kSmallPart_mul_kLargePart
+    statement: >-
+      Every nonzero integer is exactly the product of its prime-base-at-most-k
+      part and its prime-base-above-k part.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerMass.lean
+    theorem: Erdos686.Erdos686Variant.blockProduct_le_smallLoss_mul_kLargePart
+    statement: >-
+      The lower block product is at most the explicit factorial and
+      prime-counting small-prime loss times its complete large-prime part,
+      the cross-multiplied form of the high-prime mass lower bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerMass.lean
+    theorem: Erdos686.Erdos686Variant.large_prime_has_unique_full_exponent_owner_cell
+    statement: >-
+      Every prime base above the block length that occurs in the lower block
+      has one unique lower-upper owner cell carrying its entire lower-block
+      exponent on both sides of the quotient-four equation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.matched_two_external_residual_le
+    statement: >-
+      In the 2-adic row, subtracting the external exponent two from the
+      selected upper maximum and matching it with the lower maximum still
+      leaves at most the same factorial concentration loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.two_external_upper_residual_identity
+    statement: >-
+      The residual after matching against F minus two is exactly the
+      original upper omitted valuation, S plus two minus F.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.exists_upper_term_four_dvd
+    statement: >-
+      Every block of at least four consecutive positive integers contains a
+      distinguished upper term divisible by four.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.upperBlockAfterFour_eq_lowerBlock
+    statement: >-
+      Dividing one distinguished upper term by its external factor four
+      converts the quotient-four block equation into equality with the
+      ordinary lower block product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.exists_equal_product_upperBlockAfterFour
+    statement: >-
+      Every quotient-four solution of length at least four admits a
+      distinguished column whose four-removed upper product equals the lower
+      product exactly.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.exists_blockProduct_factorization_max_concentration
+    statement: >-
+      For every prime and nonempty consecutive block, an actual
+      maximum-valuation factor carries the whole block valuation except for
+      at most the universal (k-1)! concentration loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.exists_upper_two_max_concentration
+    statement: >-
+      In every upper block of length at least four, a maximum 2-adic
+      valuation is at least two and obeys the same one-factorial
+      concentration bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.exists_two_max_equal_product_upperBlockAfterFour
+    statement: >-
+      The external factor four can be removed from an actual maximum
+      2-adic upper term, yielding a modified upper block exactly equal to
+      the lower block.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.exists_canonicalPrimeOwnerMatch_of_ne_two
+    statement: >-
+      Every odd prime has a matched lower and modified-upper owner cell whose
+      shared retained exponent leaves at most one factorial valuation loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.exists_canonicalPrimeOwnerMatch_two
+    statement: >-
+      The exceptional prime two has a matched owner after its selected upper
+      maximum absorbs the external factor four, with the same factorial
+      residual bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerCleaning.lean
+    theorem: Erdos686.Erdos686Variant.exists_distinguished_canonicalPrimeOwnerMatches
+    statement: >-
+      A quotient-four solution of length at least four admits one
+      distinguished modified upper column for which every prime has a
+      canonical matched owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalOwnerMatrix.lean
+    theorem: Erdos686.Erdos686Variant.exists_canonicalOwnerSystem
+    statement: >-
+      Every quotient-four solution with k at least four and k at most d has
+      a pairwise-coprime canonical owner matrix, exact lower and upper
+      row-column factorizations, diagonal support, equal residual products,
+      global residual dividing (k-1)!, and exact reconstruction of the lower
+      block product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686JetCompressionArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.no_solution_of_jet_value_certificate
+    statement: >-
+      At the odd-tail scale, one nonzero integral section value divisible by
+      the complete owner product to order mu and obeying the corrected
+      coefficient-height budget contradicts d at least 10^1000.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686JetCompressionArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.no_k5_tail_solution_of_proper_canonical_support
+    statement: >-
+      The finite k=5 puncture witness interface implies that no live
+      quotient-four tail solution can have a missing canonical owner cell;
+      all matrix, divisibility, exact norm, and height arithmetic is
+      discharged in Lean.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5AllPunctures.lean
+    theorem: Erdos686.Erdos686Variant.no_k5_tail_solution_of_proper_support
+    statement: >-
+      Every k=5 quotient-four tail solution with d at least 10^1000 has
+      complete canonical owner support: all 25 possible missing cells are
+      excluded by ordinary-kernel local jet, elimination, height, and
+      Bézout certificates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5GenusTwoReduction.lean
+    theorem: Erdos686.Erdos686Variant.k5_genusTwo_denominator_zero
+    statement: >-
+      The denominator in the rationalized inverse map from the k=5
+      genus-two quotient vanishes at exactly the rational affine point
+      (x,y)=(4,300).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5GenusTwoReduction.lean
+    theorem: Erdos686.Erdos686Variant.k5_centered_solution_to_genusTwo
+    statement: >-
+      Every positive integral k=5 centered solution maps to the explicit
+      genus-two curve and satisfies the exact rationalized inverse relation
+      recovering the squared lower center.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5IntegralLift.lean
+    theorem: Erdos686.Erdos686Variant.k5_integral_lift_to_reduced_genusTwo
+    statement: >-
+      Every positive integral centered k=5 solution maps by the exact
+      weighted-projective coordinates
+      (v : 10v^3-40u^3-16v+64u : 2u) to the reduced genus-two model.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5IntegralLift.lean
+    theorem: Erdos686.Erdos686Variant.k5_integral_lift_height_cube_lt
+    statement: >-
+      Every positive integral centered k=5 solution satisfies u<v<2u,
+      |B|<46u^3, and the exact cubed weighted-projective height bound
+      max(v^3,(2u)^3,|B|)<(4u)^3.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5IntegralLift.lean
+    theorem: Erdos686.Erdos686Variant.no_k5_admissible_centered_solution_below_e1000
+    statement: >-
+      There is no admissible centered k=5 solution with gap at least five
+      and lower center u below 10^1000; in particular the requested
+      u<=5000 range is excluded.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5Approximation.lean
+    theorem: Erdos686.Erdos686Variant.k5_alpha_approximation
+    statement: >-
+      Every centered k=5 solution with u at least 1425 approximates
+      4^(1/5) from below with exact error less than
+      (1702608047245783157000000/3031424763402858403856401)/u^2.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_tail_unit_cross_factorizations
+    statement: >-
+      Every hypothetical k=5 solution with d at least 10^1000 has all 25
+      canonical owner cells strictly nontrivial, together with a fully owned
+      lower row and a fully owned modified upper column crossing at a
+      nontrivial cell, with both exact row and column product factorizations.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SparseJetCertificate.lean
+    theorem: Erdos686.Erdos686Variant.sparseBivariate_pow_dvd_natAbs_eval_of_order
+    statement: >-
+      A sparse integral bivariate polynomial whose shifted monomials all
+      have total order at least mu evaluates to a natural multiple of A^mu
+      whenever A divides both local coordinates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SparseJetCertificate.lean
+    theorem: Erdos686.Erdos686Variant.sparseBivariateEval_natAbs_le_of_degree
+    statement: >-
+      Sparse bivariate evaluation is bounded by the exact coefficient l1
+      norm times the common coordinate envelope to the certified total
+      degree.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedJetCoboundary.lean
+    theorem: Erdos686.Erdos686Variant.owner_shiftedLocalQuotient_ratio
+    statement: >-
+      Over the rationals, the normalized owner quotient is exactly the
+      lower shifted local quotient divided by the upper shifted local
+      quotient, making the row-column coboundary form explicit.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686PadicLift.lean
     theorem: Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
     statement: >-
@@ -6329,6 +6649,16 @@ proofs:
       integers w and v and an odd natural t with 1 <= t <= 3795146531 on the
       exact centered polynomial surface S(w)=4*S(v) and
       T(w)-2*T(v)=-33*t.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EvenK22PackedCover.lean
+    theorem: Erdos686.Erdos686Variant.no_gap_solution_four_even_twentytwo
+    statement: >-
+      The quotient-four block equation has no solution in row k=22 for any
+      admissible gap d>=22; an ordinary-kernel packed finite-field cover
+      discharges the exact bounded large-gap surface.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686

@@ -1,0 +1,209 @@
+import ErdosProblems.Erdos686EvenK22PackedDefs
+
+namespace Erdos686.Erdos686Variant
+
+-- Keep finite decisions below the process-stack danger zone.
+set_option maxRecDepth 10000
+
+theorem even22_b25_s1_map_563_fin : ∀ r : Fin 563,
+    even22A563 (-(33 * (46 * (16000000 + (r.val : ZMod 563)) + 25))) = true →
+      (27991449694287412596853343224833008146788224232613994377822298151330163741380062728545708005268429265726014220198320126184134359220293714864697602079202311700147416792063).testBit r.val = true := by decide
+
+theorem even22_b25_s1_map_563 (i : ℕ)
+    (h : even22A563 (-(33 * (46 * (16000000 + (i : ZMod 563)) + 25))) = true) :
+    (27991449694287412596853343224833008146788224232613994377822298151330163741380062728545708005268429265726014220198320126184134359220293714864697602079202311700147416792063).testBit (i % 563) = true := by
+  let r : Fin 563 := ⟨i % 563, Nat.mod_lt _ (by norm_num)⟩
+  apply even22_b25_s1_map_563_fin r
+  change even22A563
+    (-(33 * (46 * (16000000 + ((i % 563 : ℕ) : ZMod 563)) + 25))) = true
+  have hcast : (i : ZMod 563) = ((i % 563 : ℕ) : ZMod 563) :=
+    (ZMod.natCast_mod i 563).symm
+  rw [← hcast]
+  exact h
+
+
+theorem even22_b25_s1_map_569_fin : ∀ r : Fin 569,
+    even22A569 (-(33 * (46 * (16000000 + (r.val : ZMod 569)) + 25))) = true →
+      (1449201571071720519480808417153199714621004547751638159873679454572370398388693382256542094768012976405145141818614738292687554496032732164984606609384946627602652583934847).testBit r.val = true := by decide
+
+theorem even22_b25_s1_map_569 (i : ℕ)
+    (h : even22A569 (-(33 * (46 * (16000000 + (i : ZMod 569)) + 25))) = true) :
+    (1449201571071720519480808417153199714621004547751638159873679454572370398388693382256542094768012976405145141818614738292687554496032732164984606609384946627602652583934847).testBit (i % 569) = true := by
+  let r : Fin 569 := ⟨i % 569, Nat.mod_lt _ (by norm_num)⟩
+  apply even22_b25_s1_map_569_fin r
+  change even22A569
+    (-(33 * (46 * (16000000 + ((i % 569 : ℕ) : ZMod 569)) + 25))) = true
+  have hcast : (i : ZMod 569) = ((i % 569 : ℕ) : ZMod 569) :=
+    (ZMod.natCast_mod i 569).symm
+  rw [← hcast]
+  exact h
+
+
+theorem even22_b25_s1_map_571_fin : ∀ r : Fin 571,
+    even22A571 (-(33 * (46 * (16000000 + (r.val : ZMod 571)) + 25))) = true →
+      (7728953394951004043923128357843429807126955093694168908004584118702065590341494039877166979977217934285024480719881976192718850954180416378920465585769905063053672607378231).testBit r.val = true := by decide
+
+theorem even22_b25_s1_map_571 (i : ℕ)
+    (h : even22A571 (-(33 * (46 * (16000000 + (i : ZMod 571)) + 25))) = true) :
+    (7728953394951004043923128357843429807126955093694168908004584118702065590341494039877166979977217934285024480719881976192718850954180416378920465585769905063053672607378231).testBit (i % 571) = true := by
+  let r : Fin 571 := ⟨i % 571, Nat.mod_lt _ (by norm_num)⟩
+  apply even22_b25_s1_map_571_fin r
+  change even22A571
+    (-(33 * (46 * (16000000 + ((i % 571 : ℕ) : ZMod 571)) + 25))) = true
+  have hcast : (i : ZMod 571) = ((i % 571 : ℕ) : ZMod 571) :=
+    (ZMod.natCast_mod i 571).symm
+  rw [← hcast]
+  exact h
+
+
+theorem even22_b25_s1_map_577_fin : ∀ r : Fin 577,
+    even22A577 (-(33 * (46 * (16000000 + (r.val : ZMod 577)) + 25))) = true →
+      (461810219824929984774497836645510980249604349952771289940319076868878775446338665139526588021845843891807704602560674966881874992622045345224487745797667741233723683240932863).testBit r.val = true := by decide
+
+theorem even22_b25_s1_map_577 (i : ℕ)
+    (h : even22A577 (-(33 * (46 * (16000000 + (i : ZMod 577)) + 25))) = true) :
+    (461810219824929984774497836645510980249604349952771289940319076868878775446338665139526588021845843891807704602560674966881874992622045345224487745797667741233723683240932863).testBit (i % 577) = true := by
+  let r : Fin 577 := ⟨i % 577, Nat.mod_lt _ (by norm_num)⟩
+  apply even22_b25_s1_map_577_fin r
+  change even22A577
+    (-(33 * (46 * (16000000 + ((i % 577 : ℕ) : ZMod 577)) + 25))) = true
+  have hcast : (i : ZMod 577) = ((i % 577 : ℕ) : ZMod 577) :=
+    (ZMod.natCast_mod i 577).symm
+  rw [← hcast]
+  exact h
+
+
+theorem even22_b25_s1_map_587_fin : ∀ r : Fin 587,
+    even22A587 (-(33 * (46 * (16000000 + (r.val : ZMod 587)) + 25))) = true →
+      (498119381817670467565362159674784870657206039685921861573138724549702523425035456475453323823177318902823590111964413173203427555736995179316319018149126319876013027116415889395).testBit r.val = true := by decide
+
+theorem even22_b25_s1_map_587 (i : ℕ)
+    (h : even22A587 (-(33 * (46 * (16000000 + (i : ZMod 587)) + 25))) = true) :
+    (498119381817670467565362159674784870657206039685921861573138724549702523425035456475453323823177318902823590111964413173203427555736995179316319018149126319876013027116415889395).testBit (i % 587) = true := by
+  let r : Fin 587 := ⟨i % 587, Nat.mod_lt _ (by norm_num)⟩
+  apply even22_b25_s1_map_587_fin r
+  change even22A587
+    (-(33 * (46 * (16000000 + ((i % 587 : ℕ) : ZMod 587)) + 25))) = true
+  have hcast : (i : ZMod 587) = ((i % 587 : ℕ) : ZMod 587) :=
+    (ZMod.natCast_mod i 587).symm
+  rw [← hcast]
+  exact h
+
+
+theorem even22_b25_s1_map_593_fin : ∀ r : Fin 593,
+    even22A593 (-(33 * (46 * (16000000 + (r.val : ZMod 593)) + 25))) = true →
+      (32415987696038977446878942974574299098864816190384103129417461157539263646877807303268095959264673228144752655971693302504410636383326067959770806991183984123803040401080071483102).testBit r.val = true := by decide
+
+theorem even22_b25_s1_map_593 (i : ℕ)
+    (h : even22A593 (-(33 * (46 * (16000000 + (i : ZMod 593)) + 25))) = true) :
+    (32415987696038977446878942974574299098864816190384103129417461157539263646877807303268095959264673228144752655971693302504410636383326067959770806991183984123803040401080071483102).testBit (i % 593) = true := by
+  let r : Fin 593 := ⟨i % 593, Nat.mod_lt _ (by norm_num)⟩
+  apply even22_b25_s1_map_593_fin r
+  change even22A593
+    (-(33 * (46 * (16000000 + ((i % 593 : ℕ) : ZMod 593)) + 25))) = true
+  have hcast : (i : ZMod 593) = ((i % 593 : ℕ) : ZMod 593) :=
+    (ZMod.natCast_mod i 593).symm
+  rw [← hcast]
+  exact h
+
+
+theorem even22_b25_s1_map_599_fin : ∀ r : Fin 599,
+    even22A599 (-(33 * (46 * (16000000 + (r.val : ZMod 599)) + 25))) = true →
+      (2074502539103146082783642651199193449959312431377068123613392297238429904863783838888961861686696394268688278466435466545340517106702108351419040409700022717142562388577571730094079).testBit r.val = true := by decide
+
+theorem even22_b25_s1_map_599 (i : ℕ)
+    (h : even22A599 (-(33 * (46 * (16000000 + (i : ZMod 599)) + 25))) = true) :
+    (2074502539103146082783642651199193449959312431377068123613392297238429904863783838888961861686696394268688278466435466545340517106702108351419040409700022717142562388577571730094079).testBit (i % 599) = true := by
+  let r : Fin 599 := ⟨i % 599, Nat.mod_lt _ (by norm_num)⟩
+  apply even22_b25_s1_map_599_fin r
+  change even22A599
+    (-(33 * (46 * (16000000 + ((i % 599 : ℕ) : ZMod 599)) + 25))) = true
+  have hcast : (i : ZMod 599) = ((i % 599 : ℕ) : ZMod 599) :=
+    (ZMod.natCast_mod i 599).symm
+  rw [← hcast]
+  exact h
+
+
+theorem even22_b25_s1_map_601_fin : ∀ r : Fin 601,
+    even22A601 (-(33 * (46 * (16000000 + (r.val : ZMod 601)) + 25))) = true →
+      (6207051242711765160422260781936480590974769279038285379778989572044816740803101102389486750036893384153419824273357263519058062995910207252835848821037875528912186452966586143686655).testBit r.val = true := by decide
+
+theorem even22_b25_s1_map_601 (i : ℕ)
+    (h : even22A601 (-(33 * (46 * (16000000 + (i : ZMod 601)) + 25))) = true) :
+    (6207051242711765160422260781936480590974769279038285379778989572044816740803101102389486750036893384153419824273357263519058062995910207252835848821037875528912186452966586143686655).testBit (i % 601) = true := by
+  let r : Fin 601 := ⟨i % 601, Nat.mod_lt _ (by norm_num)⟩
+  apply even22_b25_s1_map_601_fin r
+  change even22A601
+    (-(33 * (46 * (16000000 + ((i % 601 : ℕ) : ZMod 601)) + 25))) = true
+  have hcast : (i : ZMod 601) = ((i % 601 : ℕ) : ZMod 601) :=
+    (ZMod.natCast_mod i 601).symm
+  rw [← hcast]
+  exact h
+
+def even22PackedB25S1Group9Tree : Even22PeriodicTree :=
+  (.node (.node (.node (.leaf 563 27991449694287412596853343224833008146788224232613994377822298151330163741380062728545708005268429265726014220198320126184134359220293714864697602079202311700147416792063) (.leaf 569 1449201571071720519480808417153199714621004547751638159873679454572370398388693382256542094768012976405145141818614738292687554496032732164984606609384946627602652583934847)) (.node (.leaf 571 7728953394951004043923128357843429807126955093694168908004584118702065590341494039877166979977217934285024480719881976192718850954180416378920465585769905063053672607378231) (.leaf 577 461810219824929984774497836645510980249604349952771289940319076868878775446338665139526588021845843891807704602560674966881874992622045345224487745797667741233723683240932863))) (.node (.node (.leaf 587 498119381817670467565362159674784870657206039685921861573138724549702523425035456475453323823177318902823590111964413173203427555736995179316319018149126319876013027116415889395) (.leaf 593 32415987696038977446878942974574299098864816190384103129417461157539263646877807303268095959264673228144752655971693302504410636383326067959770806991183984123803040401080071483102)) (.node (.leaf 599 2074502539103146082783642651199193449959312431377068123613392297238429904863783838888961861686696394268688278466435466545340517106702108351419040409700022717142562388577571730094079) (.leaf 601 6207051242711765160422260781936480590974769279038285379778989572044816740803101102389486750036893384153419824273357263519058062995910207252835848821037875528912186452966586143686655))))
+
+set_option maxRecDepth 10000 in
+theorem even22PackedB25S1Group9TreeSupports
+    {w v : ℤ} {i : ℕ}
+    (hi : i < 16000000)
+    (hS : evenTable22S w = 4 * evenTable22S v)
+    (hm : -(33 * (46 * (16000000 + (i : ℤ)) + 25)) =
+      evenTable22T w - 2 * evenTable22T v) :
+    even22PackedB25S1Group9Tree.Supports i 18 := by
+  constructor
+  · constructor
+    · constructor
+      · constructor
+        · norm_num at hi ⊢
+          omega
+        · apply even22_b25_s1_map_563 i
+          have hA := even22_allowed_int even22A563 even22_allowed_563 hS hm
+          simpa using hA
+      · constructor
+        · norm_num at hi ⊢
+          omega
+        · apply even22_b25_s1_map_569 i
+          have hA := even22_allowed_int even22A569 even22_allowed_569 hS hm
+          simpa using hA
+    · constructor
+      · constructor
+        · norm_num at hi ⊢
+          omega
+        · apply even22_b25_s1_map_571 i
+          have hA := even22_allowed_int even22A571 even22_allowed_571 hS hm
+          simpa using hA
+      · constructor
+        · norm_num at hi ⊢
+          omega
+        · apply even22_b25_s1_map_577 i
+          have hA := even22_allowed_int even22A577 even22_allowed_577 hS hm
+          simpa using hA
+  · constructor
+    · constructor
+      · constructor
+        · norm_num at hi ⊢
+          omega
+        · apply even22_b25_s1_map_587 i
+          have hA := even22_allowed_int even22A587 even22_allowed_587 hS hm
+          simpa using hA
+      · constructor
+        · norm_num at hi ⊢
+          omega
+        · apply even22_b25_s1_map_593 i
+          have hA := even22_allowed_int even22A593 even22_allowed_593 hS hm
+          simpa using hA
+    · constructor
+      · constructor
+        · norm_num at hi ⊢
+          omega
+        · apply even22_b25_s1_map_599 i
+          have hA := even22_allowed_int even22A599 even22_allowed_599 hS hm
+          simpa using hA
+      · constructor
+        · norm_num at hi ⊢
+          omega
+        · apply even22_b25_s1_map_601 i
+          have hA := even22_allowed_int even22A601 even22_allowed_601 hS hm
+          simpa using hA
+end Erdos686.Erdos686Variant
