@@ -418,6 +418,22 @@ theorem canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
     ← canonicalOwner_column_cell_product data]
   exact canonicalOwner_row_column_gcd_eq_cell data hj hi
 
+/-- Away from the distinguished column, the modified upper term is the
+original consecutive upper term, so the crossing cell is its exact gcd with
+the fully owned lower term. -/
+theorem canonicalOwner_fullyOwned_gcd_upper_eq_cell_of_ne
+    {k n d t j i : ℕ}
+    (data : CanonicalOwnerData k n d t)
+    (hj : j ∈ Finset.Icc 1 k) (hi : i ∈ Finset.Icc 1 k)
+    (hit : i ≠ t)
+    (hlower : canonicalLowerResidual data j = 1)
+    (hupper : canonicalUpperResidual data i = 1) :
+    Nat.gcd (n + j) (n + d + i) =
+      canonicalOwnerCell data j i := by
+  simpa [upperTermAfterFour, hit] using
+    canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
+      data hj hi hlower hupper
+
 /-- Unless the total residual is the exceptional divisor `24`, the five
 lower residuals contain two distinct units.  Thus the proper-divisor branch
 supplies two independent fully owned row equations. -/
@@ -658,6 +674,58 @@ theorem k5_tail_proper_global_two_by_two_gcd_grid
   · exact canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
       data hj₂ hi₂ hj₂one hi₂one
 
+/-- Since two distinct fully owned upper columns exist off `G=24`, at least
+one is not distinguished.  One original upper consecutive term therefore
+has two coprime nontrivial exact gcds with two distinct lower consecutive
+terms. -/
+theorem k5_tail_proper_global_common_upper_two_coprime_gcds
+    {n d t : ℕ}
+    (data : CanonicalOwnerData 5 n d t)
+    (ht : t ∈ Finset.Icc 1 5)
+    (hfour : 4 ∣ n + d + t)
+    (hblocks : upperBlockAfterFour 5 n d t = blockProduct 5 n)
+    (htail : 10 ^ 1000 ≤ d)
+    (heq : blockProduct 5 (n + d) = 4 * blockProduct 5 n)
+    (hGne : canonicalOwnerResidual data ≠ 24) :
+    ∃ j₁, j₁ ∈ Finset.Icc 1 5 ∧
+      ∃ j₂, j₂ ∈ Finset.Icc 1 5 ∧ j₂ ≠ j₁ ∧
+      ∃ i, i ∈ Finset.Icc 1 5 ∧ i ≠ t ∧
+        1 < Nat.gcd (n + j₁) (n + d + i) ∧
+        1 < Nat.gcd (n + j₂) (n + d + i) ∧
+        Nat.Coprime
+          (Nat.gcd (n + j₁) (n + d + i))
+          (Nat.gcd (n + j₂) (n + d + i)) := by
+  obtain ⟨hcells, -, -⟩ :=
+    k5_tail_complete_support_unit_cross
+      data ht hfour hblocks htail heq
+  obtain ⟨j₁, hj₁, j₂, hj₂, hjne, hj₁one, hj₂one⟩ :=
+    exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four data hGne
+  obtain ⟨i₁, hi₁, i₂, hi₂, hine, hi₁one, hi₂one⟩ :=
+    exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four
+      data ht hfour hblocks hGne
+  obtain ⟨i, hi, hit, hione⟩ :
+      ∃ i, i ∈ Finset.Icc 1 5 ∧ i ≠ t ∧
+        canonicalUpperResidual data i = 1 := by
+    by_cases hi₁t : i₁ = t
+    · refine ⟨i₂, hi₂, ?_, hi₂one⟩
+      intro hi₂t
+      exact hine (hi₂t.trans hi₁t.symm)
+    · exact ⟨i₁, hi₁, hi₁t, hi₁one⟩
+  have hg₁ := canonicalOwner_fullyOwned_gcd_upper_eq_cell_of_ne
+    data hj₁ hi hit hj₁one hione
+  have hg₂ := canonicalOwner_fullyOwned_gcd_upper_eq_cell_of_ne
+    data hj₂ hi hit hj₂one hione
+  refine ⟨j₁, hj₁, j₂, hj₂, hjne, i, hi, hit, ?_, ?_, ?_⟩
+  · rw [hg₁]
+    exact hcells j₁ hj₁ i hi
+  · rw [hg₂]
+    exact hcells j₂ hj₂ i hi
+  · rw [hg₁, hg₂]
+    apply canonicalOwnerCells_pairwise_coprime data
+    intro hequal
+    have hj : j₁ = j₂ := congrArg Prod.fst hequal
+    exact hjne hj.symm
+
 /-- Fully owned crossing in the exact row/column equation form consumed by
 the next global elimination step. -/
 theorem k5_tail_unit_cross_factorizations
@@ -704,10 +772,12 @@ theorem k5_tail_unit_cross_factorizations
 #print axioms k5_upper_residual_profile_of_global_eq_twenty_four
 #print axioms canonicalOwner_row_column_gcd_eq_cell
 #print axioms canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell
+#print axioms canonicalOwner_fullyOwned_gcd_upper_eq_cell_of_ne
 #print axioms exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four
 #print axioms exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four
 #print axioms k5_tail_complete_support_unit_cross
 #print axioms k5_tail_proper_global_two_by_two_gcd_grid
+#print axioms k5_tail_proper_global_common_upper_two_coprime_gcds
 #print axioms k5_tail_unit_cross_factorizations
 
 end Erdos686Variant

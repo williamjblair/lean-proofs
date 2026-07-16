@@ -779,7 +779,10 @@ fails some row j ≤ 17.
    modified columns this is the gcd of the corresponding arithmetic terms.
    Off `G=24`, the two full rows and two full columns are now assembled into
    a `2 x 2` grid of four nontrivial exact crossing gcds, exposing multiple
-   simultaneous global equations rather than a single crossing.
+   simultaneous global equations rather than a single crossing. Since at
+   least one of the two columns is not distinguished, one original upper
+   consecutive term has two nontrivial pairwise-coprime exact gcds with two
+   distinct lower consecutive terms.
    An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet

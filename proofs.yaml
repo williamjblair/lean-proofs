@@ -3579,6 +3579,16 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_gcd_upper_eq_cell_of_ne
+    statement: >-
+      Away from the distinguished divided-by-four column, a fully owned lower
+      term and fully owned upper consecutive term have gcd exactly equal to
+      their canonical crossing cell.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
     theorem: Erdos686.Erdos686Variant.exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four
     statement: >-
       If the k=5 canonical global residual is a proper divisor of 24, then
@@ -3605,6 +3615,16 @@ proofs:
       two fully owned rows and two fully owned modified columns form a 2 by 2
       grid of nontrivial crossings, and all four arithmetic gcds equal their
       corresponding owner cells exactly.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_tail_proper_global_common_upper_two_coprime_gcds
+    statement: >-
+      Off the exceptional global residual 24, one original upper consecutive
+      term has two nontrivial pairwise-coprime exact gcds with two distinct
+      lower consecutive terms.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
