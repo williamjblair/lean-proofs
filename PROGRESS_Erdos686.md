@@ -848,7 +848,14 @@ fails some row j ≤ 17.
    sharp `23*k*d < 35*n` ratio, including exact handling of `k=16,...,22`.
    A zero secant then has offset gap one, row gap beyond half the row span,
    and equal signs. On support with injective row-diagonal offsets this gives
-   a zero-secant graph of maximum degree one.
+   a zero-secant graph of maximum degree one. The high-risk controlled
+   pairing claim is now repaired and kernel-banked with a fully explicit
+   terminating algorithm. It recursively consumes four sorted owners and
+   uses the exact six-owner terminal block when parity requires it. Lean
+   proves permutation coverage, no duplication, unmatched count `m mod 2`,
+   pair count `floor(m/2)`, nonzero selected secants, and total offset gap at
+   most `4*(k-1)`. This proof does not rely on the source package's vague
+   repair-block sentence.
    The square-Hermite,
    osculation, and ordinary matching-resultant designs are viable
    formalization targets, but the advertised verifier and certificate files

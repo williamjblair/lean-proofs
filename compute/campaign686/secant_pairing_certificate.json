@@ -1,0 +1,15 @@
+{
+  "schema": "erdos686.secant-pairing.v1",
+  "algorithm": "four-block cross pairing, preceded by one six-block when q is odd",
+  "four_block": {
+    "pairs": [[0, 2], [1, 3]],
+    "adjacent_gap_coefficients": [1, 2, 1]
+  },
+  "six_block": {
+    "pairs": [[0, 2], [1, 4], [3, 5]],
+    "adjacent_gap_coefficients": [1, 2, 1, 2, 1]
+  },
+  "minimum_supported_owner_count": 7,
+  "unmatched_rule": "when m is odd, leave the final sorted owner unmatched",
+  "claimed_total_gap_bound": "2*(maximum_offset-minimum_offset) <= 4*(k-1)"
+}

@@ -41,6 +41,7 @@ import ErdosProblems.Erdos686PadicLift
 import ErdosProblems.Erdos686NormalizedJetCoboundary
 import ErdosProblems.Erdos686NormalizedMatching
 import ErdosProblems.Erdos686SecantPairing
+import ErdosProblems.Erdos686ControlledPairing
 import ErdosProblems.Erdos686CanonicalOwnerCleaning
 import ErdosProblems.Erdos686CanonicalOwnerMatrix
 import ErdosProblems.Erdos686JetCompressionArithmetic
@@ -574,6 +575,15 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.large_k_zero_secant_classification
 #print axioms Erdos686.Erdos686Variant.zero_secant_neighbor_unique
 #print axioms Erdos686.Erdos686Variant.zero_secant_graph_max_degree_one
+#print axioms Erdos686.Erdos686Variant.pairedEntries_perm
+#print axioms Erdos686.Erdos686Variant.pair_count_and_unmatched
+#print axioms Erdos686.Erdos686Variant.controlledPairing_core_spec
+#print axioms Erdos686.Erdos686Variant.unmatched_length_eq_mod_two
+#print axioms Erdos686.Erdos686Variant.pair_count_eq_div_two
+#print axioms Erdos686.Erdos686Variant.every_pair_avoids_unit_gap_relation
+#print axioms Erdos686.Erdos686Variant.explicit_controlled_pairing
+#print axioms Erdos686.Erdos686Variant.controlled_pairing_secants_nonzero
+#print axioms Erdos686.Erdos686Variant.controlled_pairing_total_gap_le_four_k_sub_one
 #print axioms Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
 #print axioms Erdos686.Erdos686Variant.gap_primePower_existsUnique_local_sq_lift
 #print axioms Erdos686.Erdos686Variant.center_factorial_sq_mul_three_factor_sub_gap_dvd_cube

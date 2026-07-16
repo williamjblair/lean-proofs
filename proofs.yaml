@@ -3912,6 +3912,89 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686ControlledPairing.lean
+    theorem: Erdos686.Erdos686Variant.pairedEntries_perm
+    statement: >-
+      Flattening the explicit controlled pairs together with the optional
+      unmatched entry is a permutation of the original owner list.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ControlledPairing.lean
+    theorem: Erdos686.Erdos686Variant.pair_count_and_unmatched
+    statement: >-
+      Twice the number of explicit controlled pairs plus the unmatched count
+      is exactly the input owner count.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ControlledPairing.lean
+    theorem: Erdos686.Erdos686Variant.controlledPairing_core_spec
+    statement: >-
+      The terminating four-block and six-block algorithm leaves at most one
+      owner, gives every pair key gap at least two, and costs at most twice
+      the full ordered key span.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ControlledPairing.lean
+    theorem: Erdos686.Erdos686Variant.unmatched_length_eq_mod_two
+    statement: >-
+      The explicit controlled pairing leaves exactly the parity bit of the
+      owner count unmatched.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ControlledPairing.lean
+    theorem: Erdos686.Erdos686Variant.pair_count_eq_div_two
+    statement: >-
+      The explicit controlled pairing produces exactly floor of the owner
+      count divided by two pairs.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ControlledPairing.lean
+    theorem: Erdos686.Erdos686Variant.every_pair_avoids_unit_gap_relation
+    statement: >-
+      Every selected pair avoids any forbidden relation whose occurrence
+      would force its ordered key gap to be one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ControlledPairing.lean
+    theorem: Erdos686.Erdos686Variant.explicit_controlled_pairing
+    statement: >-
+      A strictly key-ordered owner list of size at least seven admits the
+      explicit terminating controlled pairing with exact coverage, parity,
+      pair count, nonunit gaps, and twice-span cost.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ControlledPairing.lean
+    theorem: Erdos686.Erdos686Variant.controlled_pairing_secants_nonzero
+    statement: >-
+      Every pair selected from a sorted quotient-four owner support has
+      nonzero secant because its offset gap is at least two.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ControlledPairing.lean
+    theorem: Erdos686.Erdos686Variant.controlled_pairing_total_gap_le_four_k_sub_one
+    statement: >-
+      The total selected offset gap in the k by k owner square is at most
+      four times k minus one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686PadicLift.lean
     theorem: Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
     statement: >-

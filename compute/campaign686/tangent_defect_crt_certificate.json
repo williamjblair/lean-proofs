@@ -1,0 +1,10 @@
+{
+  "schema": "erdos686.tangent-defect-crt.v1",
+  "variable_order": ["L", "x", "y", "phiPrime", "b", "signedFourA"],
+  "taylor_representative": "(L-phiPrime)*x+L*y",
+  "kappa": "signedFourA*L-b*phiPrime",
+  "normalized_form": "b*y-(signedFourA-b)*x",
+  "identity": "b*taylor_representative-kappa*x=L*normalized_form",
+  "defect_polynomial_terms": 3,
+  "crt_status": "symbolic identity audited; full Lean CRT interface pending"
+}
