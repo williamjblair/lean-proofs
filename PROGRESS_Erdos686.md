@@ -782,7 +782,15 @@ fails some row j ≤ 17.
    simultaneous global equations rather than a single crossing. Since at
    least one of the two columns is not distinguished, one original upper
    consecutive term has two nontrivial pairwise-coprime exact gcds with two
-   distinct lower consecutive terms.
+   distinct lower consecutive terms. In the remaining branch where both
+   residual vectors have the exact exceptional multiset `{1,2,2,2,3}`, Lean
+   now proves that both block bases `n` and `n+d` are odd and hence that the
+   gap `d` is even. The three residual twos on each exceptional side are
+   placed exactly at indices `1,3,5`; in particular the distinguished
+   divided-by-four upper index is odd, its modified residual equals two, and
+   the original distinguished upper term is divisible by eight. This is a
+   strict parity and placement narrowing of the exceptional profile, not a
+   closure of the k=5 tail.
    An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
@@ -817,7 +825,21 @@ fails some row j ≤ 17.
    `G|(k-1)!`, `product r_j=product s_i=G`, the exact lower and upper
    factorizations, pairwise coprimality, `A_ji|d+i-j`, and
    `G*product A_ji=B(k,n)`.  The resulting cleaned support is not assumed
-   connected.  The remaining large-k obligation is to eliminate that
+   connected. A normalized-matching prose package has been audited in
+   `compute/campaign686/large_k_normalized_matching_import_report.md`.
+   Its normalization is valid only with the explicit high-prime coprimality
+   needed to cancel modulo composite owner squares. That repair is now
+   kernel-banked in `Erdos686NormalizedMatching.lean`: it proves the exact
+   factorial-to-normalized identity, the equivalent upper-term form, and the
+   composite-square cancellation from high-prime support plus a prefactor
+   dividing `(k-1)!`. The binomial specialization is not yet assembled.
+   The square-Hermite,
+   osculation, and ordinary matching-resultant designs are viable
+   formalization targets, but the advertised verifier and certificate files
+   were not attached, the uniform `B_{>k}>3(n+1)` step was not proved, and no
+   binomial-specialized square congruence, Hermite construction, or resultant
+   branch from that package is yet manifest-banked. The remaining large-k
+   obligation is to eliminate that
    canonical support, for example through a proved near-permutation/diffuse
    mass-structure dichotomy.
 3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as

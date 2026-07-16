@@ -766,6 +766,164 @@ theorem k5_tail_unit_cross_factorizations
             ∏ j' ∈ Finset.Icc 1 5, canonicalOwnerCell data j' i := by
         rw [canonicalOwner_column_cell_product data]
 
+private theorem three_residual_twos_force_base_odd
+    {base : ℕ} {f : ℕ → ℕ}
+    (hthree : ((Finset.Icc 1 5).filter (fun j => f j = 2)).card = 3)
+    (hdvd : ∀ j, j ∈ Finset.Icc 1 5 → f j ∣ base + j) :
+    base % 2 = 1 := by
+  have hmodlt : base % 2 < 2 := Nat.mod_lt _ (by norm_num)
+  by_contra hnot
+  have hmod0 : base % 2 = 0 := by omega
+  have h2base : 2 ∣ base := (Nat.dvd_iff_mod_eq_zero).mpr hmod0
+  have hsubset :
+      (Finset.Icc 1 5).filter (fun j => f j = 2) ⊆
+        ({2, 4} : Finset ℕ) := by
+    intro j hj
+    have hjparts := Finset.mem_filter.mp hj
+    have hjIcc := hjparts.1
+    have hfj : f j = 2 := hjparts.2
+    have h2term : 2 ∣ base + j := by
+      simpa [hfj] using hdvd j hjIcc
+    have h2j : 2 ∣ j := by
+      have hbase_le : base ≤ base + j := Nat.le_add_right _ _
+      have := Nat.dvd_sub h2term h2base
+      simpa [Nat.add_sub_cancel_left] using this
+    have hj1 : 1 ≤ j := (Finset.mem_Icc.mp hjIcc).1
+    have hj5 : j ≤ 5 := (Finset.mem_Icc.mp hjIcc).2
+    interval_cases j <;> simp_all
+  have hcard := Finset.card_le_card hsubset
+  rw [hthree] at hcard
+  norm_num at hcard
+
+/-- An exceptional lower residual profile forces the lower block base to be
+odd: three residual factors equal two, but an even base has only the two even
+positions `2` and `4`. -/
+theorem k5_exceptional_lower_base_odd
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (hprofile : K5ExceptionalResidualProfile (canonicalLowerResidual data)) :
+    n % 2 = 1 := by
+  apply three_residual_twos_force_base_odd hprofile.2.1
+  intro j hj
+  refine ⟨canonicalOwnerRow data j, ?_⟩
+  exact canonical_lower_term_factorization data
+
+/-- The same parity count on the modified upper residuals forces the original
+upper block base `n+d` to be odd. -/
+theorem k5_exceptional_upper_base_odd
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (hfour : 4 ∣ n + d + t)
+    (hprofile : K5ExceptionalResidualProfile (canonicalUpperResidual data)) :
+    (n + d) % 2 = 1 := by
+  apply three_residual_twos_force_base_odd hprofile.2.1
+  intro i hi
+  exact dvd_trans
+    ⟨canonicalOwnerColumn data i,
+      canonical_modified_upper_term_factorization data⟩
+    (upperTermAfterFour_dvd_original hfour)
+
+/-- If both sides of the exceptional `G=24` branch have profile
+`{1,2,2,2,3}`, then the gap is even. -/
+theorem k5_exceptional_both_force_even_gap
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (hfour : 4 ∣ n + d + t)
+    (hlower : K5ExceptionalResidualProfile (canonicalLowerResidual data))
+    (hupper : K5ExceptionalResidualProfile (canonicalUpperResidual data)) :
+    2 ∣ d := by
+  have hn := k5_exceptional_lower_base_odd data hlower
+  have hnd := k5_exceptional_upper_base_odd data hfour hupper
+  omega
+
+private theorem residual_twos_eq_odd_positions
+    {base : ℕ} {f : ℕ → ℕ}
+    (hodd : base % 2 = 1)
+    (hthree : ((Finset.Icc 1 5).filter (fun j => f j = 2)).card = 3)
+    (hdvd : ∀ j, j ∈ Finset.Icc 1 5 → f j ∣ base + j) :
+    (Finset.Icc 1 5).filter (fun j => f j = 2) = {1, 3, 5} := by
+  have hsubset :
+      (Finset.Icc 1 5).filter (fun j => f j = 2) ⊆
+        ({1, 3, 5} : Finset ℕ) := by
+    intro j hj
+    have hjparts := Finset.mem_filter.mp hj
+    have hjIcc := hjparts.1
+    have hfj : f j = 2 := hjparts.2
+    have h2term : 2 ∣ base + j := by
+      simpa [hfj] using hdvd j hjIcc
+    have hsum0 : (base + j) % 2 = 0 :=
+      (Nat.dvd_iff_mod_eq_zero).mp h2term
+    rw [Nat.add_mod, hodd] at hsum0
+    have hj1 : 1 ≤ j := (Finset.mem_Icc.mp hjIcc).1
+    have hj5 : j ≤ 5 := (Finset.mem_Icc.mp hjIcc).2
+    interval_cases j <;> norm_num at hsum0 <;> simp
+  apply Finset.eq_of_subset_of_card_le hsubset
+  simpa [hthree]
+
+/-- In an exceptional lower profile, the three residual factors equal to two
+occur exactly at the odd block positions. -/
+theorem k5_exceptional_lower_twos_eq_odd_positions
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (hprofile : K5ExceptionalResidualProfile (canonicalLowerResidual data)) :
+    (Finset.Icc 1 5).filter
+        (fun j => canonicalLowerResidual data j = 2) = {1, 3, 5} := by
+  apply residual_twos_eq_odd_positions
+    (k5_exceptional_lower_base_odd data hprofile) hprofile.2.1
+  intro j hj
+  exact ⟨canonicalOwnerRow data j, canonical_lower_term_factorization data⟩
+
+/-- In an exceptional upper profile, the three residual factors equal to two
+also occur exactly at the odd original upper-block positions. -/
+theorem k5_exceptional_upper_twos_eq_odd_positions
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (hfour : 4 ∣ n + d + t)
+    (hprofile : K5ExceptionalResidualProfile (canonicalUpperResidual data)) :
+    (Finset.Icc 1 5).filter
+        (fun i => canonicalUpperResidual data i = 2) = {1, 3, 5} := by
+  apply residual_twos_eq_odd_positions
+    (k5_exceptional_upper_base_odd data hfour hprofile) hprofile.2.1
+  intro i hi
+  exact dvd_trans
+    ⟨canonicalOwnerColumn data i,
+      canonical_modified_upper_term_factorization data⟩
+    (upperTermAfterFour_dvd_original hfour)
+
+/-- The distinguished divided-by-four upper position in an exceptional
+profile is one of the odd positions and has residual exactly two. -/
+theorem k5_exceptional_upper_residual_two_at_distinguished
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (ht : t ∈ Finset.Icc 1 5)
+    (hfour : 4 ∣ n + d + t)
+    (hprofile : K5ExceptionalResidualProfile (canonicalUpperResidual data)) :
+    canonicalUpperResidual data t = 2 := by
+  have hodd := k5_exceptional_upper_base_odd data hfour hprofile
+  have heq :=
+    k5_exceptional_upper_twos_eq_odd_positions data hfour hprofile
+  have htodd : t ∈ ({1, 3, 5} : Finset ℕ) := by
+    have hbaseodd : (n + d) % 2 = 1 := hodd
+    have h2sum : 2 ∣ n + d + t := dvd_trans (by norm_num) hfour
+    have hsum0 : (n + d + t) % 2 = 0 :=
+      (Nat.dvd_iff_mod_eq_zero).mp h2sum
+    rw [Nat.add_mod, hbaseodd] at hsum0
+    have ht1 : 1 ≤ t := (Finset.mem_Icc.mp ht).1
+    have ht5 : t ≤ 5 := (Finset.mem_Icc.mp ht).2
+    interval_cases t <;> norm_num at hsum0 <;> simp
+  have : t ∈ (Finset.Icc 1 5).filter
+      (fun i => canonicalUpperResidual data i = 2) := by
+    rw [heq]
+    exact htodd
+  exact (Finset.mem_filter.mp this).2
+
+/-- The exceptional upper profile upgrades the distinguished divisibility
+from four to eight. -/
+theorem k5_exceptional_upper_eight_dvd_distinguished
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (ht : t ∈ Finset.Icc 1 5)
+    (hfour : 4 ∣ n + d + t)
+    (hprofile : K5ExceptionalResidualProfile (canonicalUpperResidual data)) :
+    8 ∣ n + d + t := by
+  have htwo := k5_exceptional_upper_residual_two_at_distinguished
+    data ht hfour hprofile
+  rw [canonical_upper_term_factorization data hfour, if_pos rfl, htwo]
+  exact dvd_mul_right 8 (canonicalOwnerColumn data t)
+
 #print axioms exists_k5_unit_lower_residual
 #print axioms exists_k5_unit_upper_residual
 #print axioms k5_lower_residual_profile_of_global_eq_twenty_four
@@ -779,6 +937,13 @@ theorem k5_tail_unit_cross_factorizations
 #print axioms k5_tail_proper_global_two_by_two_gcd_grid
 #print axioms k5_tail_proper_global_common_upper_two_coprime_gcds
 #print axioms k5_tail_unit_cross_factorizations
+#print axioms k5_exceptional_lower_base_odd
+#print axioms k5_exceptional_upper_base_odd
+#print axioms k5_exceptional_both_force_even_gap
+#print axioms k5_exceptional_lower_twos_eq_odd_positions
+#print axioms k5_exceptional_upper_twos_eq_odd_positions
+#print axioms k5_exceptional_upper_residual_two_at_distinguished
+#print axioms k5_exceptional_upper_eight_dvd_distinguished
 
 end Erdos686Variant
 end Erdos686

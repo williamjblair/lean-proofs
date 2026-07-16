@@ -3640,6 +3640,71 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_lower_base_odd
+    statement: >-
+      If the lower residual multiset in the exceptional k=5 branch is exactly
+      one 1, three 2s, and one 3, then the lower block base n is odd.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_upper_base_odd
+    statement: >-
+      If the modified upper residual multiset in the exceptional k=5 branch
+      is exactly one 1, three 2s, and one 3, then the original upper block
+      base n+d is odd.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_both_force_even_gap
+    statement: >-
+      If both sides of the exceptional G=24 branch have residual multiset
+      one 1, three 2s, and one 3, then the gap d is even.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_lower_twos_eq_odd_positions
+    statement: >-
+      In the exceptional lower residual profile, the three residual factors
+      equal to two occur exactly at block positions 1, 3, and 5.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_upper_twos_eq_odd_positions
+    statement: >-
+      In the exceptional modified upper residual profile, the three residual
+      factors equal to two occur exactly at original upper-block positions
+      1, 3, and 5.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_upper_residual_two_at_distinguished
+    statement: >-
+      In the exceptional upper profile, the distinguished divided-by-four
+      position is odd and its modified upper residual equals two.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_upper_eight_dvd_distinguished
+    statement: >-
+      The exceptional upper residual profile upgrades the distinguished
+      original upper-term divisibility from four to eight.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686SparseJetCertificate.lean
     theorem: Erdos686.Erdos686Variant.sparseBivariate_pow_dvd_natAbs_eval_of_order
     statement: >-
@@ -3666,6 +3731,62 @@ proofs:
       Over the rationals, the normalized owner quotient is exactly the
       lower shifted local quotient divided by the upper shifted local
       quotient, making the row-column coboundary form explicit.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.factorialMatchingForm_eq_prefactor_mul_normalized
+    statement: >-
+      The factorial-weighted owner matching form is exactly its reduced
+      normalized form multiplied by the common factorial prefactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.normalizedMatchingForm_eq_upper_form
+    statement: >-
+      The normalized gap form is identically the equivalent upper-term form
+      b*y minus 4 times the signed reduced lower coefficient times x.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.largePrimeSupport_coprime_factorial
+    statement: >-
+      A natural modulus all of whose prime divisors exceed k is coprime to
+      the factorial (k-1)!.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.largePrimeSupport_square_isCoprime_of_dvd_factorial
+    statement: >-
+      The square of a high-prime modulus is integrally coprime to every
+      prefactor dividing (k-1)!, including for composite owner moduli.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.owner_square_normalized_iff_of_isCoprime
+    statement: >-
+      With the common prefactor explicitly a unit modulo P squared, the
+      factorial owner-square divisibility is equivalent to the normalized
+      owner-square divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.owner_square_normalized_iff_of_largePrimeSupport
+    statement: >-
+      If every prime divisor of P exceeds k and the removed prefactor divides
+      (k-1)!, then factorial and normalized square congruences are exactly
+      equivalent modulo the composite square P^2.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
