@@ -3837,6 +3837,25 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686SecantPairing.lean
+    theorem: Erdos686.Erdos686Variant.twoOwnerSecantForm_recenter
+    statement: >-
+      Re-expanding the signed two-owner secant determinant at the second
+      owner gives exactly the same integer linear form.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SecantPairing.lean
+    theorem: Erdos686.Erdos686Variant.two_owner_secant_dvd
+    statement: >-
+      Two coprime composite owner moduli, each dividing its translated row
+      and diagonal coordinates, have product dividing their common signed
+      secant determinant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686PadicLift.lean
     theorem: Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
     statement: >-

@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:75c93f48a6efff97d39694a1c6dc1021ad7828fb04f3496de0afc02ada4755ff",
+  "verifier_output_hash": "sha256:99e3b358f9a9b0603c173e4d8a0b219624c53bbf011be376aab68dca8d40fc8a",
   "attestations": [
     {
       "problem": 154,
@@ -4885,6 +4885,29 @@
       "theorem": "Erdos686.Erdos686Variant.reducedMatchingRight_le",
       "file": "ErdosProblems/Erdos686NormalizedMatching.lean",
       "proof_hash": "sha256:bcaadebe49470531775535a03c3aa2f621669935e61e20370deccefd8f0159ce",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.twoOwnerSecantForm_recenter",
+      "file": "ErdosProblems/Erdos686SecantPairing.lean",
+      "proof_hash": "sha256:9965e2cbcf58f743d1c9fb4cea636b340afc46b783b5ac0427ce0d204d3349f5",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.two_owner_secant_dvd",
+      "file": "ErdosProblems/Erdos686SecantPairing.lean",
+      "proof_hash": "sha256:9965e2cbcf58f743d1c9fb4cea636b340afc46b783b5ac0427ce0d204d3349f5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

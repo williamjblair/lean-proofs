@@ -838,7 +838,11 @@ fails some row j ≤ 17.
    open: Lean now proves `C_h*F_h=(k-1)!`, constructs the common prefactor
    dividing `(k-1)!`, and derives the exact normalized square congruence for
    every composite high-prime owner cell. The row-binomial lcm identity is
-   still open.
+   still open. The direct large-k secant audit has also started from the
+   exact signed integer determinant. `two_owner_secant_dvd` is now
+   kernel-banked: two coprime composite owner moduli divide the same secant
+   form after explicit recentering at the two owners, so their product
+   divides it. No primality shortcut is used.
    The square-Hermite,
    osculation, and ordinary matching-resultant designs are viable
    formalization targets, but the advertised verifier and certificate files

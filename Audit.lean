@@ -40,6 +40,7 @@ import ErdosProblems.Erdos686LargeKWedge
 import ErdosProblems.Erdos686PadicLift
 import ErdosProblems.Erdos686NormalizedJetCoboundary
 import ErdosProblems.Erdos686NormalizedMatching
+import ErdosProblems.Erdos686SecantPairing
 import ErdosProblems.Erdos686CanonicalOwnerCleaning
 import ErdosProblems.Erdos686CanonicalOwnerMatrix
 import ErdosProblems.Erdos686JetCompressionArithmetic
@@ -565,6 +566,8 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.matched_owner_normalized_square_dvd
 #print axioms Erdos686.Erdos686Variant.reducedMatchingLeft_le
 #print axioms Erdos686.Erdos686Variant.reducedMatchingRight_le
+#print axioms Erdos686.Erdos686Variant.twoOwnerSecantForm_recenter
+#print axioms Erdos686.Erdos686Variant.two_owner_secant_dvd
 #print axioms Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
 #print axioms Erdos686.Erdos686Variant.gap_primePower_existsUnique_local_sq_lift
 #print axioms Erdos686.Erdos686Variant.center_factorial_sq_mul_three_factor_sub_gap_dvd_cube
