@@ -3541,6 +3541,26 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_lower_residual_profile_of_global_eq_twenty_four
+    statement: >-
+      When the k=5 canonical global residual equals 24, either two distinct
+      lower residuals are units or the lower residual multiset is exactly
+      one 1, three 2s, and one 3.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_upper_residual_profile_of_global_eq_twenty_four
+    statement: >-
+      When the k=5 canonical global residual equals 24, either two distinct
+      modified upper residuals are units or their multiset is exactly one 1,
+      three 2s, and one 3.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
     theorem: Erdos686.Erdos686Variant.exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four
     statement: >-
       If the k=5 canonical global residual is a proper divisor of 24, then

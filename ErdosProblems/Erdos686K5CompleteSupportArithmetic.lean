@@ -113,6 +113,61 @@ private lemma sixteen_le_four_factor_product
       Nat.mul_le_mul (Nat.mul_le_mul ha hb) (Nat.mul_le_mul hc hd)
     _ = a * b * c * d := by ring
 
+private lemma eight_le_three_factor_product
+    {a b c : ℕ} (ha : 2 ≤ a) (hb : 2 ≤ b) (hc : 2 ≤ c) :
+    8 ≤ a * b * c := by
+  calc
+    8 = (2 * 2) * 2 := by norm_num
+    _ ≤ (a * b) * c :=
+      Nat.mul_le_mul (Nat.mul_le_mul ha hb) hc
+    _ = a * b * c := by ring
+
+private lemma four_factor_product_eq_twenty_four_profile
+    {a b c d : ℕ}
+    (ha : 2 ≤ a) (hb : 2 ≤ b) (hc : 2 ≤ c) (hd : 2 ≤ d)
+    (hprod : a * b * c * d = 24) :
+    (a = 3 ∧ b = 2 ∧ c = 2 ∧ d = 2) ∨
+    (a = 2 ∧ b = 3 ∧ c = 2 ∧ d = 2) ∨
+    (a = 2 ∧ b = 2 ∧ c = 3 ∧ d = 2) ∨
+    (a = 2 ∧ b = 2 ∧ c = 2 ∧ d = 3) := by
+  have ha8 : 8 * a ≤ a * b * c * d := by
+    have h8 := Nat.mul_le_mul_left a
+      (eight_le_three_factor_product hb hc hd)
+    nlinarith
+  have hb8 : 8 * b ≤ a * b * c * d := by
+    have h8 := Nat.mul_le_mul_left b
+      (eight_le_three_factor_product ha hc hd)
+    nlinarith
+  have hc8 : 8 * c ≤ a * b * c * d := by
+    have h8 := Nat.mul_le_mul_left c
+      (eight_le_three_factor_product ha hb hd)
+    nlinarith
+  have hd8 : 8 * d ≤ a * b * c * d := by
+    have h8 := Nat.mul_le_mul_left d
+      (eight_le_three_factor_product ha hb hc)
+    nlinarith
+  have ha3 : a ≤ 3 := by omega
+  have hb3 : b ≤ 3 := by omega
+  have hc3 : c ≤ 3 := by omega
+  have hd3 : d ≤ 3 := by omega
+  interval_cases a
+  all_goals interval_cases b
+  all_goals interval_cases c
+  all_goals interval_cases d
+  all_goals norm_num at hprod
+  all_goals norm_num
+
+/-- The exact exceptional five-residual multiset: one unit, three twos, and
+one three. -/
+def K5ExceptionalResidualProfile (f : ℕ → ℕ) : Prop :=
+  ((Finset.Icc 1 5).filter (fun r => f r = 1)).card = 1 ∧
+  ((Finset.Icc 1 5).filter (fun r => f r = 2)).card = 3 ∧
+  ((Finset.Icc 1 5).filter (fun r => f r = 3)).card = 1
+
+private lemma Icc_one_five_eq :
+    Finset.Icc 1 5 = ({1, 2, 3, 4, 5} : Finset ℕ) := by
+  decide
+
 theorem exists_k5_unit_lower_residual
     {n d t : ℕ} (data : CanonicalOwnerData 5 n d t) :
     ∃ j, j ∈ Finset.Icc 1 5 ∧ canonicalLowerResidual data j = 1 := by
@@ -148,6 +203,167 @@ theorem exists_k5_unit_upper_residual
     exact canonicalUpperResidual_pos data ht hi hfour
   · rw [canonicalUpperResidual_product_eq_global data hblocks]
     exact hGle
+
+/-- At global residual `24`, either two distinct lower residuals are units
+or the entire lower residual vector has the exact exceptional multiset
+`{1,2,2,2,3}`. -/
+theorem k5_lower_residual_profile_of_global_eq_twenty_four
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (hG : canonicalOwnerResidual data = 24) :
+    (∃ j, j ∈ Finset.Icc 1 5 ∧
+      ∃ j', j' ∈ Finset.Icc 1 5 ∧ j' ≠ j ∧
+        canonicalLowerResidual data j = 1 ∧
+        canonicalLowerResidual data j' = 1) ∨
+      K5ExceptionalResidualProfile (canonicalLowerResidual data) := by
+  obtain ⟨j, hj, hjone⟩ := exists_k5_unit_lower_residual data
+  by_cases hsecond :
+      ∃ j', j' ∈ Finset.Icc 1 5 ∧ j' ≠ j ∧
+        canonicalLowerResidual data j' = 1
+  · obtain ⟨j', hj', hne, hj'one⟩ := hsecond
+    exact Or.inl ⟨j, hj, j', hj', hne, hjone, hj'one⟩
+  · right
+    have hge :
+        ∀ j', j' ∈ Finset.Icc 1 5 → j' ≠ j →
+          2 ≤ canonicalLowerResidual data j' := by
+      intro j' hj' hne
+      have hpos := canonicalLowerResidual_pos data hj'
+      have hnotone : canonicalLowerResidual data j' ≠ 1 := by
+        intro hone
+        exact hsecond ⟨j', hj', hne, hone⟩
+      omega
+    have hprod := canonicalLowerResidual_product_eq_global data
+    rw [hG] at hprod
+    norm_num [Finset.prod_Icc_succ_top] at hprod
+    have hj1 : 1 ≤ j := (Finset.mem_Icc.mp hj).1
+    have hj5 : j ≤ 5 := (Finset.mem_Icc.mp hj).2
+    interval_cases j
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 2 (by norm_num) (by omega))
+        (hge 3 (by norm_num) (by omega))
+        (hge 4 (by norm_num) (by omega))
+        (hge 5 (by norm_num) (by omega))
+        (by simpa [hjone] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 1 (by norm_num) (by omega))
+        (hge 3 (by norm_num) (by omega))
+        (hge 4 (by norm_num) (by omega))
+        (hge 5 (by norm_num) (by omega))
+        (by simpa [hjone] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 1 (by norm_num) (by omega))
+        (hge 2 (by norm_num) (by omega))
+        (hge 4 (by norm_num) (by omega))
+        (hge 5 (by norm_num) (by omega))
+        (by simpa [hjone] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 1 (by norm_num) (by omega))
+        (hge 2 (by norm_num) (by omega))
+        (hge 3 (by norm_num) (by omega))
+        (hge 5 (by norm_num) (by omega))
+        (by simpa [hjone] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 1 (by norm_num) (by omega))
+        (hge 2 (by norm_num) (by omega))
+        (hge 3 (by norm_num) (by omega))
+        (hge 4 (by norm_num) (by omega))
+        (by simpa [hjone] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
+
+/-- At global residual `24`, either two distinct modified upper residuals
+are units or the upper residual vector has the same exact exceptional
+multiset `{1,2,2,2,3}`. -/
+theorem k5_upper_residual_profile_of_global_eq_twenty_four
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (ht : t ∈ Finset.Icc 1 5) (hfour : 4 ∣ n + d + t)
+    (hblocks : upperBlockAfterFour 5 n d t = blockProduct 5 n)
+    (hG : canonicalOwnerResidual data = 24) :
+    (∃ i, i ∈ Finset.Icc 1 5 ∧
+      ∃ i', i' ∈ Finset.Icc 1 5 ∧ i' ≠ i ∧
+        canonicalUpperResidual data i = 1 ∧
+        canonicalUpperResidual data i' = 1) ∨
+      K5ExceptionalResidualProfile (canonicalUpperResidual data) := by
+  obtain ⟨i, hi, hione⟩ :=
+    exists_k5_unit_upper_residual data ht hfour hblocks
+  by_cases hsecond :
+      ∃ i', i' ∈ Finset.Icc 1 5 ∧ i' ≠ i ∧
+        canonicalUpperResidual data i' = 1
+  · obtain ⟨i', hi', hne, hi'one⟩ := hsecond
+    exact Or.inl ⟨i, hi, i', hi', hne, hione, hi'one⟩
+  · right
+    have hge :
+        ∀ i', i' ∈ Finset.Icc 1 5 → i' ≠ i →
+          2 ≤ canonicalUpperResidual data i' := by
+      intro i' hi' hne
+      have hpos := canonicalUpperResidual_pos data ht hi' hfour
+      have hnotone : canonicalUpperResidual data i' ≠ 1 := by
+        intro hone
+        exact hsecond ⟨i', hi', hne, hone⟩
+      omega
+    have hprod := canonicalUpperResidual_product_eq_global data hblocks
+    rw [hG] at hprod
+    norm_num [Finset.prod_Icc_succ_top] at hprod
+    have hi1 : 1 ≤ i := (Finset.mem_Icc.mp hi).1
+    have hi5 : i ≤ 5 := (Finset.mem_Icc.mp hi).2
+    interval_cases i
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 2 (by norm_num) (by omega))
+        (hge 3 (by norm_num) (by omega))
+        (hge 4 (by norm_num) (by omega))
+        (hge 5 (by norm_num) (by omega))
+        (by simpa [hione] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 1 (by norm_num) (by omega))
+        (hge 3 (by norm_num) (by omega))
+        (hge 4 (by norm_num) (by omega))
+        (hge 5 (by norm_num) (by omega))
+        (by simpa [hione] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 1 (by norm_num) (by omega))
+        (hge 2 (by norm_num) (by omega))
+        (hge 4 (by norm_num) (by omega))
+        (hge 5 (by norm_num) (by omega))
+        (by simpa [hione] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 1 (by norm_num) (by omega))
+        (hge 2 (by norm_num) (by omega))
+        (hge 3 (by norm_num) (by omega))
+        (hge 5 (by norm_num) (by omega))
+        (by simpa [hione] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
+    · have hp := four_factor_product_eq_twenty_four_profile
+        (hge 1 (by norm_num) (by omega))
+        (hge 2 (by norm_num) (by omega))
+        (hge 3 (by norm_num) (by omega))
+        (hge 4 (by norm_num) (by omega))
+        (by simpa [hione] using hprod)
+      rcases hp with hp | hp | hp | hp <;>
+        simp_all [K5ExceptionalResidualProfile, Icc_one_five_eq,
+          Finset.filter_insert, Finset.filter_singleton]
 
 /-- Unless the total residual is the exceptional divisor `24`, the five
 lower residuals contain two distinct units.  Thus the proper-divisor branch
@@ -383,6 +599,8 @@ theorem k5_tail_unit_cross_factorizations
 
 #print axioms exists_k5_unit_lower_residual
 #print axioms exists_k5_unit_upper_residual
+#print axioms k5_lower_residual_profile_of_global_eq_twenty_four
+#print axioms k5_upper_residual_profile_of_global_eq_twenty_four
 #print axioms exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four
 #print axioms exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four
 #print axioms k5_tail_complete_support_unit_cross

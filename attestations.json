@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:ad57b77686b10a566eec59877d705d10c31819fa1de2990bb4bf6b0e0695f4cb",
+  "verifier_output_hash": "sha256:daa08b0c96811cac1bd96b6e13f89e43231041fa58529b33fec1f9b4d736028a",
   "attestations": [
     {
       "problem": 154,
@@ -4525,9 +4525,33 @@
     },
     {
       "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_lower_residual_profile_of_global_eq_twenty_four",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:8c0f88804c8d395424b192e684b988e3ddfb0d70868b2faf4e536d22954bd1d1",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_upper_residual_profile_of_global_eq_twenty_four",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:8c0f88804c8d395424b192e684b988e3ddfb0d70868b2faf4e536d22954bd1d1",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:f1f7964d3f13cb1d5a61ca62ead04ce7a16125c5689d58a169dd627f17453f02",
+      "proof_hash": "sha256:8c0f88804c8d395424b192e684b988e3ddfb0d70868b2faf4e536d22954bd1d1",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4539,7 +4563,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:f1f7964d3f13cb1d5a61ca62ead04ce7a16125c5689d58a169dd627f17453f02",
+      "proof_hash": "sha256:8c0f88804c8d395424b192e684b988e3ddfb0d70868b2faf4e536d22954bd1d1",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4551,7 +4575,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_tail_unit_cross_factorizations",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:f1f7964d3f13cb1d5a61ca62ead04ce7a16125c5689d58a169dd627f17453f02",
+      "proof_hash": "sha256:8c0f88804c8d395424b192e684b988e3ddfb0d70868b2faf4e536d22954bd1d1",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

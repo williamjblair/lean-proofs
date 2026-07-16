@@ -769,8 +769,11 @@ fails some row j ≤ 17.
    sharper in the proper-divisor branch: if `G!=24`, Lean forces two
    distinct fully owned lower rows and two distinct fully owned modified
    upper columns. Thus only the exact exceptional profile `G=24` can have
-   a unique unit on either side; the next elimination step can use four
-   independent global equations off that exceptional profile. An invariant
+   a unique unit on either side. Both exceptional vectors are now
+   kernel-classified: each side either still has two units, or its multiset
+   is exactly `{1,2,2,2,3}`. The elimination can use four independent global
+   equations off the exceptional profile and exact 2/3-adic placements on
+   both sides of it. An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
    useful.
