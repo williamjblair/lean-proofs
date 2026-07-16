@@ -3791,6 +3791,24 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.reducedMatchingLeft_le
+    statement: >-
+      The reduced numerator C_i/gcd(C_i,C_j) is at most the row-binomial
+      coefficient binom(k-1,|i-j|) for all owner-grid indices.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.reducedMatchingRight_le
+    statement: >-
+      The reduced denominator C_j/gcd(C_i,C_j) is at most the row-binomial
+      coefficient binom(k-1,|i-j|) for all owner-grid indices.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686PadicLift.lean
     theorem: Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
     statement: >-

@@ -832,7 +832,10 @@ fails some row j ≤ 17.
    kernel-banked in `Erdos686NormalizedMatching.lean`: it proves the exact
    factorial-to-normalized identity, the equivalent upper-term form, and the
    composite-square cancellation from high-prime support plus a prefactor
-   dividing `(k-1)!`. The binomial specialization is not yet assembled.
+   dividing `(k-1)!`. The exact reduced-binomial inequalities are also
+   kernel-banked: both `C_i/gcd(C_i,C_j)` and `C_j/gcd(C_i,C_j)` are at most
+   `binom(k-1,|i-j|)`. The lcm identity and the factorial owner-square
+   specialization are not yet assembled.
    The square-Hermite,
    osculation, and ordinary matching-resultant designs are viable
    formalization targets, but the advertised verifier and certificate files

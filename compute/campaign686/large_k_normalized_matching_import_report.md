@@ -14,9 +14,9 @@ Imported prose source:
 
 The attachment is a mathematical report, not an importable theorem package.
 It contains no Lean source and the four linked verifier/certificate artifacts
-were not attached. Therefore none of the newly claimed Theorems A--E, the
-ordinary matching resultant, or the stated certificate hashes is imported
-into `Audit.lean` or `proofs.yaml` by this audit.
+were not attached. Therefore no certificate-dependent theorem was imported
+directly from the attachment. The normalization repair and exact
+reduced-binomial bounds have since been independently reconstructed in Lean.
 
 Several symbolic arguments in the report are mathematically viable after the
 repairs below. They remain reconstruction targets until expressed and checked
@@ -24,13 +24,15 @@ in Lean.
 
 ## Accepted claims
 
-The following claims are accepted as correct mathematical interfaces to
+The following claims are accepted as correct mathematical interfaces. The
+first reduced-binomial item has since been reconstructed and kernel-checked in
+`Erdos686NormalizedMatching.lean`; the remaining items are still designs to
 formalize, subject to their stated hypotheses:
 
 1. The reduced-binomial ratio bound
    `a_ij,b_ij <= binom(k-1,|i-j|)`. The unreduced ratio is
    `binom(k-j,r)/binom(j+r-1,r)` for `i=j+r`; reduction can only decrease
-   numerator and denominator.
+   numerator and denominator. **Kernel-banked after this audit.**
 2. For a matching with distinct signed offsets,
    `sum max(a_ij,b_ij) <= 2^k-1`.
 3. The square-Hermite dimension count: the degree bounds
@@ -160,8 +162,10 @@ The nearest banked interfaces are:
 - `blockProduct_dvd_factorial_mul_centeredDiffLcm_four`
 - `owner_shiftedLocalQuotient_coboundary`
 
-They do not yet define `C_h,g_ij,a_ij,b_ij,D_k,U_S,V_S,Phi_S,Q_S`, and they
-do not imply the claimed square-Hermite or ordinary matching resultants.
+The new normalized module now defines the row binomials and reduced ratios.
+It does not yet define `D_k,U_S,V_S,Phi_S,Q_S`, specialize the original
+factorial owner-square theorem, or imply the claimed square-Hermite and
+ordinary matching resultants.
 
 ## Required Lean interfaces before import
 
@@ -247,7 +251,10 @@ They are recorded for provenance only and have not been reproduced.
 
 - Accepted into the repository: this audit report and its exact repair map.
 - Accepted into `Audit.lean` / `proofs.yaml`: none of the attachment's new
-  large-`k` claims.
-- Next formalization priority: the repaired normalized owner-square
-  equivalence, followed by reduced-binomial identities.
+  certificate-dependent large-`k` claims. The repaired normalization layer
+  and the exact reduced-binomial bounds were independently reconstructed and
+  are now kernel-banked.
+- Next formalization priority: the row-binomial lcm identity and the
+  binomial specialization of the repaired normalized owner-square
+  equivalence.
 - Repository-scale support enumeration: not authorized and not started.

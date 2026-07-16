@@ -560,6 +560,8 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.largePrimeSupport_square_isCoprime_of_dvd_factorial
 #print axioms Erdos686.Erdos686Variant.owner_square_normalized_iff_of_isCoprime
 #print axioms Erdos686.Erdos686Variant.owner_square_normalized_iff_of_largePrimeSupport
+#print axioms Erdos686.Erdos686Variant.reducedMatchingLeft_le
+#print axioms Erdos686.Erdos686Variant.reducedMatchingRight_le
 #print axioms Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
 #print axioms Erdos686.Erdos686Variant.gap_primePower_existsUnique_local_sq_lift
 #print axioms Erdos686.Erdos686Variant.center_factorial_sq_mul_three_factor_sub_gap_dvd_cube

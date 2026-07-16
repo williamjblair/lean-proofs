@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:bd335dc6c4197bf51ac199e8da000cc480bd67aa54c7d23d396503f821a85c33",
+  "verifier_output_hash": "sha256:2d88a83ede35985092d9efd0e3eeec5ab5b2e5c074a6580877b9894f6f344ec2",
   "attestations": [
     {
       "problem": 154,
@@ -4767,7 +4767,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.factorialMatchingForm_eq_prefactor_mul_normalized",
       "file": "ErdosProblems/Erdos686NormalizedMatching.lean",
-      "proof_hash": "sha256:4083a91791ac10529ec5c457b4971e31a78638be6f9131bb0d9cb7c0058629a3",
+      "proof_hash": "sha256:c5f0e1c0c47a1fdb272deb3d7b0ef69707cff3bc33a319b862714edd6044feeb",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -4778,7 +4778,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.normalizedMatchingForm_eq_upper_form",
       "file": "ErdosProblems/Erdos686NormalizedMatching.lean",
-      "proof_hash": "sha256:4083a91791ac10529ec5c457b4971e31a78638be6f9131bb0d9cb7c0058629a3",
+      "proof_hash": "sha256:c5f0e1c0c47a1fdb272deb3d7b0ef69707cff3bc33a319b862714edd6044feeb",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -4789,7 +4789,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.largePrimeSupport_coprime_factorial",
       "file": "ErdosProblems/Erdos686NormalizedMatching.lean",
-      "proof_hash": "sha256:4083a91791ac10529ec5c457b4971e31a78638be6f9131bb0d9cb7c0058629a3",
+      "proof_hash": "sha256:c5f0e1c0c47a1fdb272deb3d7b0ef69707cff3bc33a319b862714edd6044feeb",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4801,7 +4801,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.largePrimeSupport_square_isCoprime_of_dvd_factorial",
       "file": "ErdosProblems/Erdos686NormalizedMatching.lean",
-      "proof_hash": "sha256:4083a91791ac10529ec5c457b4971e31a78638be6f9131bb0d9cb7c0058629a3",
+      "proof_hash": "sha256:c5f0e1c0c47a1fdb272deb3d7b0ef69707cff3bc33a319b862714edd6044feeb",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4813,7 +4813,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.owner_square_normalized_iff_of_isCoprime",
       "file": "ErdosProblems/Erdos686NormalizedMatching.lean",
-      "proof_hash": "sha256:4083a91791ac10529ec5c457b4971e31a78638be6f9131bb0d9cb7c0058629a3",
+      "proof_hash": "sha256:c5f0e1c0c47a1fdb272deb3d7b0ef69707cff3bc33a319b862714edd6044feeb",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -4824,7 +4824,31 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.owner_square_normalized_iff_of_largePrimeSupport",
       "file": "ErdosProblems/Erdos686NormalizedMatching.lean",
-      "proof_hash": "sha256:4083a91791ac10529ec5c457b4971e31a78638be6f9131bb0d9cb7c0058629a3",
+      "proof_hash": "sha256:c5f0e1c0c47a1fdb272deb3d7b0ef69707cff3bc33a319b862714edd6044feeb",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reducedMatchingLeft_le",
+      "file": "ErdosProblems/Erdos686NormalizedMatching.lean",
+      "proof_hash": "sha256:c5f0e1c0c47a1fdb272deb3d7b0ef69707cff3bc33a319b862714edd6044feeb",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reducedMatchingRight_le",
+      "file": "ErdosProblems/Erdos686NormalizedMatching.lean",
+      "proof_hash": "sha256:c5f0e1c0c47a1fdb272deb3d7b0ef69707cff3bc33a319b862714edd6044feeb",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
