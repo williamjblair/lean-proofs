@@ -568,6 +568,12 @@ import ErdosProblems.Erdos727
 #print axioms Erdos686.Erdos686Variant.reducedMatchingRight_le
 #print axioms Erdos686.Erdos686Variant.twoOwnerSecantForm_recenter
 #print axioms Erdos686.Erdos686Variant.two_owner_secant_dvd
+#print axioms Erdos686.Erdos686Variant.zero_secant_direction_classification
+#print axioms Erdos686.Erdos686Variant.zero_secant_classification
+#print axioms Erdos686.Erdos686Variant.large_k_zero_secant_scale
+#print axioms Erdos686.Erdos686Variant.large_k_zero_secant_classification
+#print axioms Erdos686.Erdos686Variant.zero_secant_neighbor_unique
+#print axioms Erdos686.Erdos686Variant.zero_secant_graph_max_degree_one
 #print axioms Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
 #print axioms Erdos686.Erdos686Variant.gap_primePower_existsUnique_local_sq_lift
 #print axioms Erdos686.Erdos686Variant.center_factorial_sq_mul_three_factor_sub_gap_dvd_cube

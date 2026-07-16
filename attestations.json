@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:99e3b358f9a9b0603c173e4d8a0b219624c53bbf011be376aab68dca8d40fc8a",
+  "verifier_output_hash": "sha256:b65e2c8619ac884621a7163a72da7ef5f8bd7d0a802bd30ec0a2022df49c6996",
   "attestations": [
     {
       "problem": 154,
@@ -4896,7 +4896,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.twoOwnerSecantForm_recenter",
       "file": "ErdosProblems/Erdos686SecantPairing.lean",
-      "proof_hash": "sha256:9965e2cbcf58f743d1c9fb4cea636b340afc46b783b5ac0427ce0d204d3349f5",
+      "proof_hash": "sha256:e3ceddaebe5e970b61b5c00f5c000424482edceef3fde95be505f4b08b735b6c",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -4907,7 +4907,79 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.two_owner_secant_dvd",
       "file": "ErdosProblems/Erdos686SecantPairing.lean",
-      "proof_hash": "sha256:9965e2cbcf58f743d1c9fb4cea636b340afc46b783b5ac0427ce0d204d3349f5",
+      "proof_hash": "sha256:e3ceddaebe5e970b61b5c00f5c000424482edceef3fde95be505f4b08b735b6c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.zero_secant_direction_classification",
+      "file": "ErdosProblems/Erdos686SecantPairing.lean",
+      "proof_hash": "sha256:e3ceddaebe5e970b61b5c00f5c000424482edceef3fde95be505f4b08b735b6c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.zero_secant_classification",
+      "file": "ErdosProblems/Erdos686SecantPairing.lean",
+      "proof_hash": "sha256:e3ceddaebe5e970b61b5c00f5c000424482edceef3fde95be505f4b08b735b6c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.large_k_zero_secant_scale",
+      "file": "ErdosProblems/Erdos686SecantPairing.lean",
+      "proof_hash": "sha256:e3ceddaebe5e970b61b5c00f5c000424482edceef3fde95be505f4b08b735b6c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.large_k_zero_secant_classification",
+      "file": "ErdosProblems/Erdos686SecantPairing.lean",
+      "proof_hash": "sha256:e3ceddaebe5e970b61b5c00f5c000424482edceef3fde95be505f4b08b735b6c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.zero_secant_neighbor_unique",
+      "file": "ErdosProblems/Erdos686SecantPairing.lean",
+      "proof_hash": "sha256:e3ceddaebe5e970b61b5c00f5c000424482edceef3fde95be505f4b08b735b6c",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.zero_secant_graph_max_degree_one",
+      "file": "ErdosProblems/Erdos686SecantPairing.lean",
+      "proof_hash": "sha256:e3ceddaebe5e970b61b5c00f5c000424482edceef3fde95be505f4b08b735b6c",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

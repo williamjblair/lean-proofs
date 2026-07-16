@@ -3856,6 +3856,62 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686SecantPairing.lean
+    theorem: Erdos686.Erdos686Variant.zero_secant_direction_classification
+    statement: >-
+      A zero secant under the exact positive scale inequality has unit
+      diagonal gap, row gap beyond half the ambient span, and equal signs.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SecantPairing.lean
+    theorem: Erdos686.Erdos686Variant.zero_secant_classification
+    statement: >-
+      The translated two-owner secant form specializes the pure direction
+      classification without dividing by either translated coordinate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SecantPairing.lean
+    theorem: Erdos686.Erdos686Variant.large_k_zero_secant_scale
+    statement: >-
+      At the exact gap threshold 708827 k squared below 5000000 d, every
+      quotient-four solution with k at least 16 satisfies the strict scale
+      inequality needed by zero-secant classification.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SecantPairing.lean
+    theorem: Erdos686.Erdos686Variant.large_k_zero_secant_classification
+    statement: >-
+      Two distinct row-diagonal offsets in the k by k owner square can have
+      zero secant only with unit offset gap, a row gap beyond half the row
+      span, and equal signs.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SecantPairing.lean
+    theorem: Erdos686.Erdos686Variant.zero_secant_neighbor_unique
+    statement: >-
+      On support with injective diagonal offsets, any fixed owner has at
+      most one other owner joined to it by a zero secant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686SecantPairing.lean
+    theorem: Erdos686.Erdos686Variant.zero_secant_graph_max_degree_one
+    statement: >-
+      The filtered zero-secant neighbor set of every owner in injective
+      row-diagonal support has cardinality at most one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686PadicLift.lean
     theorem: Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
     statement: >-

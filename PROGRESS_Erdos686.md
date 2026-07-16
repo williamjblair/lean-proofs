@@ -842,7 +842,13 @@ fails some row j ≤ 17.
    exact signed integer determinant. `two_owner_secant_dvd` is now
    kernel-banked: two coprime composite owner moduli divide the same secant
    form after explicit recentering at the two owners, so their product
-   divides it. No primality shortcut is used.
+   divides it. No primality shortcut is used. The zero-secant layer is now
+   kernel-banked as well. At the exact integer gap threshold
+   `708827*k^2 < 5000000*d`, Lean derives the strict local scale from the
+   sharp `23*k*d < 35*n` ratio, including exact handling of `k=16,...,22`.
+   A zero secant then has offset gap one, row gap beyond half the row span,
+   and equal signs. On support with injective row-diagonal offsets this gives
+   a zero-secant graph of maximum degree one.
    The square-Hermite,
    osculation, and ordinary matching-resultant designs are viable
    formalization targets, but the advertised verifier and certificate files
