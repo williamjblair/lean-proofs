@@ -834,8 +834,11 @@ fails some row j ≤ 17.
    composite-square cancellation from high-prime support plus a prefactor
    dividing `(k-1)!`. The exact reduced-binomial inequalities are also
    kernel-banked: both `C_i/gcd(C_i,C_j)` and `C_j/gcd(C_i,C_j)` are at most
-   `binom(k-1,|i-j|)`. The lcm identity and the factorial owner-square
-   specialization are not yet assembled.
+   `binom(k-1,|i-j|)`. The factorial owner-square specialization is no longer
+   open: Lean now proves `C_h*F_h=(k-1)!`, constructs the common prefactor
+   dividing `(k-1)!`, and derives the exact normalized square congruence for
+   every composite high-prime owner cell. The row-binomial lcm identity is
+   still open.
    The square-Hermite,
    osculation, and ordinary matching-resultant designs are viable
    formalization targets, but the advertised verifier and certificate files

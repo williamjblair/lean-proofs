@@ -104,6 +104,177 @@ theorem owner_square_normalized_iff_of_largePrimeSupport
   exact owner_square_normalized_iff_of_isCoprime
     (largePrimeSupport_square_isCoprime_of_dvd_factorial hsupport hq)
 
+/-- Exact identity `C_h F_h = (k-1)!` between the row binomial and the
+unsigned local derivative coefficient. -/
+theorem matchingBinomial_mul_localCoefficientNat
+    {k h : ℕ} (hh : h ∈ Finset.Icc 1 k) :
+    matchingBinomial k h * localBlockCoefficientNat k h =
+      (k - 1).factorial := by
+  have hh1 : 1 ≤ h := (Finset.mem_Icc.mp hh).1
+  have hhk : h ≤ k := (Finset.mem_Icc.mp hh).2
+  have hle : h - 1 ≤ k - 1 := by omega
+  have hsub : (k - 1) - (h - 1) = k - h := by omega
+  simpa [matchingBinomial, localBlockCoefficientNat, hsub, mul_assoc] using
+    (Nat.choose_mul_factorial_mul_factorial hle)
+
+/-- The two local factorial coefficients have the common prefactor required
+by normalization. The prefactor divides `(k-1)!`, and the remaining factors
+are exactly the two reduced row-binomial ratios. -/
+theorem exists_matchingCommonPrefactor
+    {k i j : ℕ}
+    (hi : i ∈ Finset.Icc 1 k)
+    (hj : j ∈ Finset.Icc 1 k) :
+    ∃ q : ℕ,
+      q ∣ (k - 1).factorial ∧
+      localBlockCoefficientNat k i = q * reducedMatchingRight k i j ∧
+      localBlockCoefficientNat k j = q * reducedMatchingLeft k i j := by
+  let Ci := matchingBinomial k i
+  let Cj := matchingBinomial k j
+  let Fi := localBlockCoefficientNat k i
+  let Fj := localBlockCoefficientNat k j
+  let g := Nat.gcd Ci Cj
+  let a := Ci / g
+  let b := Cj / g
+  have hCiPos : 0 < Ci := by
+    dsimp [Ci, matchingBinomial]
+    exact Nat.choose_pos (by
+      have hi1 := (Finset.mem_Icc.mp hi).1
+      have hik := (Finset.mem_Icc.mp hi).2
+      omega)
+  have hCjPos : 0 < Cj := by
+    dsimp [Cj, matchingBinomial]
+    exact Nat.choose_pos (by
+      have hj1 := (Finset.mem_Icc.mp hj).1
+      have hjk := (Finset.mem_Icc.mp hj).2
+      omega)
+  have hgPos : 0 < g := Nat.gcd_pos_of_pos_left Cj hCiPos
+  have haPos : 0 < a := Nat.div_pos
+    (Nat.le_of_dvd hCiPos (Nat.gcd_dvd_left Ci Cj)) hgPos
+  have hbPos : 0 < b := Nat.div_pos
+    (Nat.le_of_dvd hCjPos (Nat.gcd_dvd_right Ci Cj)) hgPos
+  have hcop : a.Coprime b := Nat.coprime_div_gcd_div_gcd hgPos
+  have hCi : g * a = Ci := Nat.mul_div_cancel' (Nat.gcd_dvd_left Ci Cj)
+  have hCj : g * b = Cj := Nat.mul_div_cancel' (Nat.gcd_dvd_right Ci Cj)
+  have hLi : Ci * Fi = (k - 1).factorial :=
+    matchingBinomial_mul_localCoefficientNat hi
+  have hLj : Cj * Fj = (k - 1).factorial :=
+    matchingBinomial_mul_localCoefficientNat hj
+  have hab : a * Fi = b * Fj := by
+    apply Nat.mul_left_cancel hgPos
+    calc
+      g * (a * Fi) = (g * a) * Fi := by ring
+      _ = Ci * Fi := by rw [hCi]
+      _ = (k - 1).factorial := hLi
+      _ = Cj * Fj := hLj.symm
+      _ = (g * b) * Fj := by rw [hCj]
+      _ = g * (b * Fj) := by ring
+  have hbFi : b ∣ Fi := by
+    apply hcop.symm.dvd_of_dvd_mul_left
+    rw [hab]
+    exact dvd_mul_right b Fj
+  let q := Fi / b
+  have hqFi : q * b = Fi := by
+    dsimp [q]
+    rw [Nat.mul_comm]
+    exact Nat.mul_div_cancel' hbFi
+  have hqFj : q * a = Fj := by
+    apply Nat.mul_left_cancel hbPos
+    calc
+      b * (q * a) = a * (q * b) := by ring
+      _ = a * Fi := by rw [hqFi]
+      _ = b * Fj := hab
+  have hqDvdFi : q ∣ Fi := ⟨b, hqFi.symm⟩
+  have hFiDvdL : Fi ∣ (k - 1).factorial := by
+    rw [← hLi]
+    exact dvd_mul_left Fi Ci
+  refine ⟨q, dvd_trans hqDvdFi hFiDvdL, ?_, ?_⟩
+  · simpa [Fi, b, reducedMatchingRight, Ci, Cj, g] using hqFi.symm
+  · simpa [Fj, a, reducedMatchingLeft, Ci, Cj, g] using hqFj.symm
+
+private theorem neg_one_pow_add_eq_pred_mul_pred
+    {i j : ℕ} (hi : 1 ≤ i) (hj : 1 ≤ j) :
+    (-1 : ℤ) ^ (i + j) =
+      (-1 : ℤ) ^ (i - 1) * (-1 : ℤ) ^ (j - 1) := by
+  have hexp : i + j = (i - 1) + (j - 1) + 2 := by omega
+  rw [hexp, pow_add, pow_add]
+  norm_num
+
+/-- Exact binomial-specialized normalized owner-square congruence. This
+closes the normalization audit for a possibly composite high-prime owner
+modulus, starting from the banked factorial square lift. -/
+theorem matched_owner_normalized_square_dvd
+    {k n d i j P : ℕ}
+    (hd : k ≤ d)
+    (hi : i ∈ Finset.Icc 1 k)
+    (hj : j ∈ Finset.Icc 1 k)
+    (hsupport : ∀ p, p.Prime → p ∣ P → k < p)
+    (hlower : P ∣ n + j)
+    (hupper : P ∣ n + d + i)
+    (heq : blockProduct k (n + d) = 4 * blockProduct k n) :
+    ((P : ℤ) ^ 2) ∣
+      normalizedMatchingForm
+        (reducedMatchingLeft k i j : ℤ)
+        (reducedMatchingRight k i j : ℤ)
+        ((-1 : ℤ) ^ (i + j))
+        ((d + i - j : ℕ) : ℤ)
+        ((n + j : ℕ) : ℤ) := by
+  obtain ⟨q, hq, hFi, hFj⟩ :=
+    exists_matchingCommonPrefactor hi hj
+  have hraw := matched_owner_local_coefficients_dvd_sq
+    hj hi hlower hupper heq
+  rw [localBlockCoefficient_eq_sign_mul_nat hi,
+    localBlockCoefficient_eq_sign_mul_nat hj] at hraw
+  have hi1 : 1 ≤ i := (Finset.mem_Icc.mp hi).1
+  have hj1 : 1 ≤ j := (Finset.mem_Icc.mp hj).1
+  have hsign := neg_one_pow_add_eq_pred_mul_pred hi1 hj1
+  have hweighted :
+      ((P : ℤ) ^ 2) ∣
+        (localBlockCoefficientNat k i : ℤ) *
+            ((n + d + i : ℕ) : ℤ) -
+          4 * ((-1 : ℤ) ^ (i + j)) *
+            (localBlockCoefficientNat k j : ℤ) *
+              ((n + j : ℕ) : ℤ) := by
+    rcases neg_one_pow_eq_or ℤ (i - 1) with hisign | hisign
+    · simpa [hisign, hsign, mul_assoc, mul_comm, mul_left_comm] using hraw
+    · have hneg := dvd_neg.mpr hraw
+      rw [hisign] at hneg
+      convert hneg using 1
+      rw [hsign, hisign]
+      ring
+  have hdiff :
+      ((n + j : ℕ) : ℤ) + ((d + i - j : ℕ) : ℤ) =
+        ((n + d + i : ℕ) : ℤ) := by
+    have hjle : j ≤ d + i := by
+      have hjk := (Finset.mem_Icc.mp hj).2
+      have hi1 := (Finset.mem_Icc.mp hi).1
+      omega
+    exact_mod_cast (by omega :
+      n + j + (d + i - j) = n + d + i)
+  have hfactorial :
+      ((P : ℤ) ^ 2) ∣
+        factorialMatchingForm
+          (q : ℤ)
+          (reducedMatchingLeft k i j : ℤ)
+          (reducedMatchingRight k i j : ℤ)
+          ((-1 : ℤ) ^ (i + j))
+          ((d + i - j : ℕ) : ℤ)
+          ((n + j : ℕ) : ℤ) := by
+    have hFiZ :
+        (localBlockCoefficientNat k i : ℤ) =
+          (q : ℤ) * (reducedMatchingRight k i j : ℤ) := by
+      exact_mod_cast hFi
+    have hFjZ :
+        (localBlockCoefficientNat k j : ℤ) =
+          (q : ℤ) * (reducedMatchingLeft k i j : ℤ) := by
+      exact_mod_cast hFj
+    unfold factorialMatchingForm
+    rw [← hFiZ, ← hFjZ]
+    convert hweighted using 1
+    rw [← hdiff]
+    ring
+  exact (owner_square_normalized_iff_of_largePrimeSupport hsupport hq).mp
+    hfactorial
+
 private theorem reducedMatchingLeft_le_of_le
     {k i j : ℕ}
     (hi : i ∈ Finset.Icc 1 k)
@@ -246,6 +417,9 @@ theorem reducedMatchingRight_le
 #print axioms largePrimeSupport_square_isCoprime_of_dvd_factorial
 #print axioms owner_square_normalized_iff_of_isCoprime
 #print axioms owner_square_normalized_iff_of_largePrimeSupport
+#print axioms matchingBinomial_mul_localCoefficientNat
+#print axioms exists_matchingCommonPrefactor
+#print axioms matched_owner_normalized_square_dvd
 #print axioms reducedMatchingLeft_le
 #print axioms reducedMatchingRight_le
 

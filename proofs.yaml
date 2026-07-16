@@ -3792,6 +3792,34 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.matchingBinomial_mul_localCoefficientNat
+    statement: >-
+      For every owner-grid index h, the row binomial C_h times the unsigned
+      local derivative coefficient F_h is exactly (k-1)!.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.exists_matchingCommonPrefactor
+    statement: >-
+      The two local factorial coefficients factor through one common divisor
+      of (k-1)! times the two reduced row-binomial ratios.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
+    theorem: Erdos686.Erdos686Variant.matched_owner_normalized_square_dvd
+    statement: >-
+      A composite high-prime owner shared by lower row j and upper column i
+      satisfies the exact factorial-free square congruence with reduced
+      binomial coefficients and sign (-1)^(i+j).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686NormalizedMatching.lean
     theorem: Erdos686.Erdos686Variant.reducedMatchingLeft_le
     statement: >-
       The reduced numerator C_i/gcd(C_i,C_j) is at most the row-binomial

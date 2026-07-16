@@ -19,8 +19,9 @@ directly from the attachment. The normalization repair and exact
 reduced-binomial bounds have since been independently reconstructed in Lean.
 
 Several symbolic arguments in the report are mathematically viable after the
-repairs below. They remain reconstruction targets until expressed and checked
-in Lean.
+repairs below. The normalization theorem and reduced-binomial bounds have now
+been independently reconstructed and checked in Lean; the remaining items
+stay reconstruction targets.
 
 ## Accepted claims
 
@@ -95,8 +96,8 @@ Coprime P ((k-1)!)
 or an equivalent hypothesis saying every prime divisor of `P` exceeds `k`.
 That hypothesis makes the prefactor a unit modulo the composite modulus
 `P^2`. The attachment uses high-prime owner moduli, so the repair is
-compatible with its intended application, but it must appear explicitly in
-the Lean theorem interface.
+compatible with its intended application. This exact repaired interface is
+now kernel-banked as `matched_owner_normalized_square_dvd`.
 
 ### D. Nonvanishing of `Phi_S`
 
@@ -162,10 +163,11 @@ The nearest banked interfaces are:
 - `blockProduct_dvd_factorial_mul_centeredDiffLcm_four`
 - `owner_shiftedLocalQuotient_coboundary`
 
-The new normalized module now defines the row binomials and reduced ratios.
-It does not yet define `D_k,U_S,V_S,Phi_S,Q_S`, specialize the original
-factorial owner-square theorem, or imply the claimed square-Hermite and
-ordinary matching resultants.
+The new normalized module now defines the row binomials and reduced ratios,
+proves `C_h*F_h=(k-1)!`, constructs the common prefactor, and specializes the
+original factorial owner-square theorem to the exact normalized congruence.
+It does not yet define `D_k,U_S,V_S,Phi_S,Q_S` or imply the claimed
+square-Hermite and ordinary matching resultants.
 
 ## Required Lean interfaces before import
 
@@ -254,7 +256,6 @@ They are recorded for provenance only and have not been reproduced.
   certificate-dependent large-`k` claims. The repaired normalization layer
   and the exact reduced-binomial bounds were independently reconstructed and
   are now kernel-banked.
-- Next formalization priority: the row-binomial lcm identity and the
-  binomial specialization of the repaired normalized owner-square
-  equivalence.
+- Next formalization priority: the row-binomial lcm identity, followed by the
+  square-Hermite kernel.
 - Repository-scale support enumeration: not authorized and not started.
