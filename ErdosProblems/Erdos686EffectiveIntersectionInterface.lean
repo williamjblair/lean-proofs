@@ -7,8 +7,12 @@ import Mathlib.Algebra.Polynomial.Eval.Defs
 
 This module does not assert that a small resultant exists uniformly.  It
 records the exact data a support-specific certificate must provide: a shear,
-a nonzero univariate resultant, its complete integral root list, complete
-fiber-gcd root lists, and verification on the original curve.
+a nonzero univariate resultant, explicit Sylvester coefficient and integral
+root bounds, its complete integral root list, complete fiber-gcd root lists,
+and verification on the original curve.
+
+The numerical bounds remain support-dependent.  Nothing in this interface
+claims that they beat the surviving Diophantine scale.
 -/
 
 namespace Erdos686
@@ -34,6 +38,12 @@ structure EffectiveIntersectionCertificate
   lambda : ℤ
   resultant : Polynomial ℤ
   resultant_ne_zero : resultant ≠ 0
+  /-- Explicit bound for every coefficient of the computed Sylvester
+  resultant. -/
+  coefficientBound : ℕ
+  resultant_coefficient_bound :
+    ∀ i : ℕ, (resultant.coeff i).natAbs ≤ coefficientBound
+  /-- Explicit bound for every integral root of the computed resultant. -/
   rootBound : ℕ
   integralTRoots : Finset ℤ
   fiberGCD : ℤ → Polynomial ℤ
@@ -64,6 +74,15 @@ structure EffectiveIntersectionCertificate
       evalIntAt (unshearPoint lambda t y) P = 0 →
       evalIntAt (unshearPoint lambda t y) Q = 0 →
       originalCurve (unshearPoint lambda t y)
+
+/-- Public access to the support-dependent Sylvester coefficient bound. -/
+theorem EffectiveIntersectionCertificate.resultant_coeff_natAbs_le
+    {P Q : BivariateIntPolynomial}
+    {originalCurve : (Fin 2 → ℤ) → Prop}
+    (C : EffectiveIntersectionCertificate P Q originalCurve)
+    (i : ℕ) :
+    (C.resultant.coeff i).natAbs ≤ C.coefficientBound :=
+  C.resultant_coefficient_bound i
 
 /-- Every common integral zero is captured by the exact sheared resultant
 and fiber-gcd lists and is verified on the original curve. -/
@@ -108,6 +127,7 @@ def EffectiveIntersectionCertificate.candidatePairs
     (C.integralYRoots t).image fun y => (t, y)
 
 #print axioms unshearPoint_sheared_coordinate
+#print axioms EffectiveIntersectionCertificate.resultant_coeff_natAbs_le
 #print axioms EffectiveIntersectionCertificate.common_zero_enumerated
 
 end Erdos686Variant
