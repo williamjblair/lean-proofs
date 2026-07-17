@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:421c8815d2025ea0b389fc4a86152789cd3d682ea2a9a3a3d19317f61d3647b9",
+  "verifier_output_hash": "sha256:1352b1c66d8f8807a80819716304505c127e682b7176e9cec696a92566f5c14e",
   "attestations": [
     {
       "problem": 154,
@@ -15638,6 +15638,257 @@
       "theorem": "Erdos686.Erdos686Variant.EffectiveIntersectionCertificate.common_zero_effective_package",
       "file": "ErdosProblems/Erdos686MomentEffectiveAudit.lean",
       "proof_hash": "sha256:03eabdc817fa3746ccdf780c72f2d556c6b240293ee045a17c43c9031b95f066",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_G12_fixed_cofactor_narrow_window",
+      "file": "ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean",
+      "proof_hash": "sha256:c54fad7895ea6c56c75811a43ab4575adb5b32731bb03a0d3fce4e9a994e1d73",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_G12_fixed_cofactor_exterior_two_adic_constraint",
+      "file": "ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean",
+      "proof_hash": "sha256:c54fad7895ea6c56c75811a43ab4575adb5b32731bb03a0d3fce4e9a994e1d73",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_G12_fixed_cofactor_not_eight",
+      "file": "ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean",
+      "proof_hash": "sha256:c54fad7895ea6c56c75811a43ab4575adb5b32731bb03a0d3fce4e9a994e1d73",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_G12_fixed_cofactor_six_values",
+      "file": "ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean",
+      "proof_hash": "sha256:c54fad7895ea6c56c75811a43ab4575adb5b32731bb03a0d3fce4e9a994e1d73",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_G12_six_cofactor_owner_bound",
+      "file": "ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean",
+      "proof_hash": "sha256:c54fad7895ea6c56c75811a43ab4575adb5b32731bb03a0d3fce4e9a994e1d73",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_primitive_scale_quadratic_identity",
+      "file": "ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean",
+      "proof_hash": "sha256:48c15dff4f05a2417852b7cbb6fe81ae3961ac74b99056d39f7f41953d25b5b0",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_primitive_five_cubic_gap_gt_eight_linear_gap",
+      "file": "ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean",
+      "proof_hash": "sha256:48c15dff4f05a2417852b7cbb6fe81ae3961ac74b99056d39f7f41953d25b5b0",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_primitive_scale_floor_pin",
+      "file": "ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean",
+      "proof_hash": "sha256:48c15dff4f05a2417852b7cbb6fe81ae3961ac74b99056d39f7f41953d25b5b0",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_primitive_scale_euclidean_division",
+      "file": "ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean",
+      "proof_hash": "sha256:48c15dff4f05a2417852b7cbb6fe81ae3961ac74b99056d39f7f41953d25b5b0",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_primitive_power_gap_window",
+      "file": "ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean",
+      "proof_hash": "sha256:48c15dff4f05a2417852b7cbb6fe81ae3961ac74b99056d39f7f41953d25b5b0",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_odd_primitive_convergent_euclidean_constraint",
+      "file": "ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean",
+      "proof_hash": "sha256:48c15dff4f05a2417852b7cbb6fe81ae3961ac74b99056d39f7f41953d25b5b0",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_odd_primitive_convergent_computable_filter",
+      "file": "ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean",
+      "proof_hash": "sha256:48c15dff4f05a2417852b7cbb6fe81ae3961ac74b99056d39f7f41953d25b5b0",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourCycle_upper_quotient_eq_row_add_diagonal",
+      "file": "ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean",
+      "proof_hash": "sha256:c0840302bd15fb7ebb501f8db048860957fa187fcc1be9955b383ae8ac780e61",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourCycle_upper_quotient_additive_system",
+      "file": "ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean",
+      "proof_hash": "sha256:c0840302bd15fb7ebb501f8db048860957fa187fcc1be9955b383ae8ac780e61",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourCycle_zero_tangent_forces_rowOwner_dvd_diagonalCofactor",
+      "file": "ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean",
+      "proof_hash": "sha256:c0840302bd15fb7ebb501f8db048860957fa187fcc1be9955b383ae8ac780e61",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.normalized_square_implies_owner_dvd_fourCycleTangentDefect",
+      "file": "ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean",
+      "proof_hash": "sha256:c0840302bd15fb7ebb501f8db048860957fa187fcc1be9955b383ae8ac780e61",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourCycle_tangentProduct_or_extraOwner_crowding",
+      "file": "ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean",
+      "proof_hash": "sha256:c0840302bd15fb7ebb501f8db048860957fa187fcc1be9955b383ae8ac780e61",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourCycle_tangentProduct_or_diagonalProduct_ownerCrowding",
+      "file": "ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean",
+      "proof_hash": "sha256:c0840302bd15fb7ebb501f8db048860957fa187fcc1be9955b383ae8ac780e61",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourCycle_equations_tangentProduct_or_extraOwner_crowding",
+      "file": "ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean",
+      "proof_hash": "sha256:c0840302bd15fb7ebb501f8db048860957fa187fcc1be9955b383ae8ac780e61",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourCycle_equations_tangentProduct_or_diagonalProduct_ownerCrowding",
+      "file": "ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean",
+      "proof_hash": "sha256:c0840302bd15fb7ebb501f8db048860957fa187fcc1be9955b383ae8ac780e61",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fourCycle_normalizedSquares_tangentProduct_or_diagonalProduct_ownerCrowding",
+      "file": "ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean",
+      "proof_hash": "sha256:c0840302bd15fb7ebb501f8db048860957fa187fcc1be9955b383ae8ac780e61",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

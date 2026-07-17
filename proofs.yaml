@@ -12019,3 +12019,193 @@ proofs:
       package.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_fixed_cofactor_narrow_window
+    statement: >-
+      The G equals twelve complement has a fixed cofactor and lies in the
+      exact narrow multiplicative window around its fully owned row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_fixed_cofactor_exterior_two_adic_constraint
+    statement: >-
+      Four dividing the fixed cofactor forces exact exterior quotient parity
+      and the corresponding residues of n and d modulo four.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_fixed_cofactor_not_eight
+    statement: >-
+      The remaining G equals twelve complement cofactor is never divisible
+      by eight.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_fixed_cofactor_six_values
+    statement: >-
+      The remaining complement cofactor is coprime to three, divides twenty,
+      and belongs to the exact six-value set.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12FixedCofactorWindow.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_six_cofactor_owner_bound
+    statement: >-
+      Substitution of the six-value classification bounds n plus four by ten
+      times the selected four-owner product with the repeated crossing.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_scale_quadratic_identity
+    statement: >-
+      Primitive centered coordinates satisfy the exact quadratic identity
+      between the fifth, cubic, and linear power gaps.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_five_cubic_gap_gt_eight_linear_gap
+    statement: >-
+      The centered ratio window makes five times the cubic gap exceed eight
+      times the linear gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_scale_floor_pin
+    statement: >-
+      The quotient of five times the cubic power gap by the fifth power gap
+      is exactly the squared primitive scale.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_scale_euclidean_division
+    statement: >-
+      The associated Euclidean division has quotient the scale square and
+      positive remainder exactly four times the first scale quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_power_gap_window
+    statement: >-
+      Every primitive centered solution satisfies the ratio and fifth-power
+      windows needed by the Euclidean constraint.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean
+    theorem: Erdos686.Erdos686Variant.k5_odd_primitive_convergent_euclidean_constraint
+    statement: >-
+      An odd primitive convergent satisfies the exact Euclidean quotient,
+      remainder, and six-case gcd constraints.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveEuclideanConstraint.lean
+    theorem: Erdos686.Erdos686Variant.k5_odd_primitive_convergent_computable_filter
+    statement: >-
+      The odd primitive branch yields a scale-free computable filter with an
+      odd-square quotient, positive four-divisible remainder, and six gcd
+      values.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_upper_quotient_eq_row_add_diagonal
+    statement: >-
+      Cancelling a four-cycle corner owner expresses its upper quotient as
+      the sum of the row and signed-diagonal quotient contributions.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_upper_quotient_additive_system
+    statement: >-
+      All four corners of a row-diagonal cycle satisfy the simultaneous
+      exact upper-quotient additive system.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_zero_tangent_forces_rowOwner_dvd_diagonalCofactor
+    statement: >-
+      A zero tangent defect forces the row-partner owner into the opposite
+      signed-diagonal cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.normalized_square_implies_owner_dvd_fourCycleTangentDefect
+    statement: >-
+      The normalized composite owner-square congruence implies the direct
+      four-cycle tangent-defect divisor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_tangentProduct_or_extraOwner_crowding
+    statement: >-
+      Four tangent divisors force either a tangent-product bound or an extra
+      copy of one cycle owner in a diagonal cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_tangentProduct_or_diagonalProduct_ownerCrowding
+    statement: >-
+      The four-owner mass is bounded by the tangent product or the diagonal
+      product contains the mass times a repeated owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_equations_tangentProduct_or_extraOwner_crowding
+    statement: >-
+      The exact four upper equations turn the local tangent alternative into
+      an equation-facing extra-owner crowding dichotomy.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_equations_tangentProduct_or_diagonalProduct_ownerCrowding
+    statement: >-
+      The equation-facing four-cycle alternative bounds the owner mass or
+      forces repeated-owner divisibility in the diagonal product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_normalizedSquares_tangentProduct_or_diagonalProduct_ownerCrowding
+    statement: >-
+      Four normalized owner-square congruences yield the final tangent
+      product versus repeated-owner diagonal crowding dichotomy.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

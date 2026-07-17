@@ -1235,6 +1235,17 @@ fails some row j ≤ 17.
    allocation is `E8 | J*((d+1)/2)*(d-1)*((d+3)/2)`, and those same owners
    are already absorbed by the three gap factors. Thus comparing `E8`
    directly with `23040` would be invalid.
+   Exact residual parity and the full row-one/column-four complement now
+   sharpen this substantially: `8` never divides `J`, the centered target is
+   coprime to three, and Lean proves
+   `J in {1,2,4,5,10,20}`. Substitution back into the exact complement
+   factorization improves the selected-owner inequality to
+   `n+4 < 10*P^2*Q*A*B`. This is a strict finite-cofactor reduction, but no
+   independent equation yet excludes all six values. Independently, the
+   primitive convergent branch now has an exact Euclidean filter:
+   `(5*A3)/A5=g^2`, `(5*A3)%A5=4*t`, the quotient is an odd square, and the
+   quotient/remainder gcd lies in `{1,3,5,15,25,75}`. An effective all-index
+   exclusion for this computable convergent filter remains open.
    The corrected bounded-osculation dichotomy is now complete through its
    honest zero-dimensional interface. Finite avoidance of irreducible-factor
    divisibility subspaces selects two factor-coprime residual elements from
@@ -1256,6 +1267,14 @@ fails some row j ≤ 17.
    divisibility from those same first-order jets plus target vanishing.
    Dense closure must add an independent global equation or genuinely
    transverse higher-order information.
+   In the diffuse large-k lane, a genuine row-diagonal four-cycle now carries
+   four exact upper-quotient additive equations. Combining them with the
+   normalized owner-square congruences gives a new cycle-level alternative:
+   either the four-owner mass is bounded by the product of four tangent
+   defects, or the two diagonal cofactors contain the ordinary owner mass
+   times a second copy of one cycle owner. This avoids the tautological
+   complementary-modulus lift, but the nonzero tangent product is not yet
+   globally bounded and canonical cycle coverage remains open.
 3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as
    equivalent packaging via `finalResidual_iff_tail1000_and_smooth`; do not
    report its isolation as mathematical progress.  Regenerate the manifest
