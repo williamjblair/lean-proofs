@@ -11613,3 +11613,219 @@ proofs:
       divides seventy-five.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquationValue_at_cell
+    statement: >-
+      The actual normalized equation component vanishes at every complete
+      owner-grid cell.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquation_directional_at_cell
+    statement: >-
+      The normalized directional derivative of the equation component
+      vanishes at every owner-grid cell.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquation_multiple_cell_jet_zero
+    statement: >-
+      Every equation multiple has zero value and tangent jet at a grid cell
+      for arbitrary cofactor data.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquation_cell_jets_do_not_force_cofactor_divisibility
+    statement: >-
+      A constant cofactor gives an exact global countermodel to deriving
+      cofactor divisibility from the complete-grid first-order jets.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.gridRootProduct_neg_nat
+    statement: >-
+      The grid root product at a negative natural argument is the signed
+      consecutive block product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquationValue_at_target
+    statement: >-
+      The original block equation makes the normalized equation component
+      vanish at the global arithmetic target.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.evalRatAt_normalizedEquationPolynomial_int
+    statement: >-
+      Rational polynomial evaluation of the normalized equation component
+      agrees with its exact integer formula.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.evalRatAt_pderiv_normalizedEquationPolynomial_X_at_cell
+    statement: >-
+      The actual X partial derivative at a grid cell equals the certified
+      signed local-block formula.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.evalRatAt_pderiv_normalizedEquationPolynomial_Y_at_cell
+    statement: >-
+      The actual Y partial derivative at a grid cell equals the certified
+      signed local-block formula.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquationPolynomial_directional_pderiv_at_cell
+    statement: >-
+      The actual polynomial partial derivatives satisfy the normalized
+      directional jet identity at every grid cell.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquationPolynomial_multiple_cell_jet_zero
+    statement: >-
+      Every actual polynomial multiple of the equation has zero value and
+      normalized tangent at every grid cell.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquationPolynomial_full_grid_jet_countermodel
+    statement: >-
+      The actual equation polynomial with constant cofactor is a complete
+      full-grid jet countermodel to nonunit cofactor divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquationPolynomial_at_target
+    statement: >-
+      The actual normalized rational polynomial vanishes at the target of a
+      consecutive-block solution.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.normalizedEquationPolynomial_target_full_grid_countermodel
+    statement: >-
+      Full-grid first-order jets and target vanishing together still permit
+      the constant cofactor one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686DenseCommonComponentNoGo.lean
+    theorem: Erdos686.Erdos686Variant.degreeBounded_normalizedEquationMultiples_target_noGo
+    statement: >-
+      Every bounded equation multiple vanishes at the target while the
+      constant cofactor evaluation remains one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveApproximation.lean
+    theorem: Erdos686.Erdos686Variant.k5_centered_primitive_factor_equation
+    statement: >-
+      Removing the common centered scale gives the exact primitive
+      factorized quintic equation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveApproximation.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_alpha_approximation
+    statement: >-
+      Primitive reduction improves the fifth-root approximation denominator
+      by the exact square of the common scale.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveApproximation.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_alpha_strict_legendre
+    statement: >-
+      Every nontrivially scaled k equals five solution satisfies the strict
+      one-over-two-denominator-squared Legendre threshold.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveApproximation.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_ratio_is_convergent
+    statement: >-
+      A coprime primitive ratio from a nontrivially scaled solution is an
+      actual continued-fraction convergent of the fifth root of four.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveApproximation.lean
+    theorem: Erdos686.Erdos686Variant.k5_odd_primitive_scale_overlap_six_values
+    statement: >-
+      Odd common scale restricts the scale-quotient gcd to exactly six
+      possible divisors of seventy-five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveApproximation.lean
+    theorem: Erdos686.Erdos686Variant.k5_odd_primitive_tail_constraint_package
+    statement: >-
+      The odd primitive branch simultaneously satisfies strict Legendre
+      approximation and the six-case overlap classification.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveApproximation.lean
+    theorem: Erdos686.Erdos686Variant.k5_odd_primitive_convergent_constraint_package
+    statement: >-
+      The odd primitive tail is an actual fifth-root convergent together
+      with one of six exact scale-overlap cases.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12ResultantGCDClosure.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_centered_resultant_quotient_gcd_bounds
+    statement: >-
+      The remaining G equals twelve quotient has fixed gcd bounds with all
+      four normalized factors of the centered degree-five resultant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12ResultantGCDClosure.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_remaining_complement_quotient_dvd_23040
+    statement: >-
+      The complete-support G equals twelve tail forces the remaining
+      complement quotient to divide twenty-three thousand forty.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
