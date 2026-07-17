@@ -1235,6 +1235,17 @@ fails some row j ≤ 17.
    allocation is `E8 | J*((d+1)/2)*(d-1)*((d+3)/2)`, and those same owners
    are already absorbed by the three gap factors. Thus comparing `E8`
    directly with `23040` would be invalid.
+   The corrected bounded-osculation dichotomy is now complete through its
+   honest zero-dimensional interface. Finite avoidance of irreducible-factor
+   divisibility subspaces selects two factor-coprime residual elements from
+   the whole presented residual space; it does not assume an arbitrary pair
+   is coprime. A separately certified nonzero affine resultant with nonzero
+   fibers captures every rational common zero and bounds their number by
+   `deg(resultant)*maxFiberDegree`, hence by `(r-e)^2` when both degree bounds
+   are at most `r-e`. The effective integral interface now also carries a
+   coefficient-derived Cauchy root bound and exact candidate-pair capture.
+   These are kernel-checked interfaces, not a concrete support resultant,
+   not a projective multiplicity theorem, and not a tail exclusion.
    Finally, the dense large-k common component is now an exact polynomial
    no-go rather than a dimension warning. For
    `E(X,Y)=4*prod_h(X-h)-prod_h(X+Y-h)`, Lean checks the actual

@@ -27,6 +27,12 @@ SHA-256:
   `6c6700eb2cc7d38953f9a926b2244d6b1e47ba4f3496f08582212829897be4ba`.
 - `Erdos686MatchingOsculationBridge.lean`:
   `602dff0f44c702c1c687bd44b47f6c71f29c5d0321ce616cd032115b0b185665`.
+- `Erdos686OsculationResidualPair.lean`:
+  `05d97f27107cb86dddc7d6dd3aebbe751b96dd6bb653b20d3affc1e00590ec43`.
+- `Erdos686AffineResultantIntersectionCount.lean`:
+  `cf95efdb4449511ad89c88a4c9d50496b81d017a2f1f2dd85f7a108aa974be99`.
+- `Erdos686MomentEffectiveAudit.lean`:
+  `03eabdc817fa3746ccdf780c72f2d556c6b240293ee045a17c43c9031b95f066`.
 
 ## Retained
 
@@ -116,12 +122,30 @@ SHA-256:
   have unit gcd. No pairwise coprimality is inferred.
 - A presented fixed divisor leaves a residual family with no common
   nonunit factor and gives the exact specialization split.
+- Finite avoidance of the proper residual-divisibility subspaces selects
+  two residual elements with no common nonunit factor. This is an
+  existence theorem for a selected pair, not a claim about an arbitrary
+  pair.
+- The corrected specialization dichotomy now selects that factor-coprime
+  pair: either the fixed divisor vanishes, or both residual elements vanish.
+- A separately checkable affine resultant/fiber certificate captures every
+  rational common zero and gives
+  `#zeros <= natDegree(resultant)*fiberDegreeBound`.
+- If both certified degrees are at most `r-e`, the affine common-zero count
+  is at most `(r-e)^2`. This is not a projective Bézout or multiplicity
+  theorem.
 - The actual normalized `2m` osculation matrix satisfies the entry envelope,
   so the bounded fixed-divisor presentation is instantiated for the matching
   data rather than left as an abstract matrix interface.
 - Distinct matching nodes with value and derivative vanishing give
   `W_S^2 | matchingPhi` in `Z[T]`; the finite moment theorem then constructs
   a nonzero quotient and proves its exact degree.
+- The moment quotient degree is exported in the requested normal form
+  `m*(k-2)-q*k`.
+- Every integral root of a nonzero resultant satisfies the canonical
+  coefficient-derived Cauchy bound, and the effective certificate packages
+  that bound with exact resultant-root, fiber-root, candidate-pair, and
+  original-curve checks.
 
 ## Certificate-backed
 
@@ -134,10 +158,10 @@ SHA-256:
 - An effective coefficient-level computation of the multivariate fixed
   divisor for a concrete support. Existence and its universal property are
   kernel-checked under the exact bounded-kernel hypotheses.
-- Extraction of two coprime residual elements from the whole residual space.
-  Absence of a common divisor for the family does not by itself select a
-  coprime pair; this remains a separate certificate interface.
-- The `(r-e)^2` projective intersection bound in the exact formal interface.
+- A general projective Bézout theorem with points at infinity and
+  intersection multiplicities. The banked `(r-e)^2` result is an affine
+  distinct-point bound under explicit resultant and fiber degree
+  certificates.
 - Transfer of the full-jet divisor-degree bound to the bounded space.
 - Any concrete support-specific instance of the effective intersection
   interface. The interface itself does not claim its root bound beats the

@@ -11829,3 +11829,193 @@ proofs:
       complement quotient to divide twenty-three thousand forty.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationResidualPair.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.mem_residualDivisibilitySubspace_iff
+    statement: >-
+      Membership in a residual divisibility subspace is exactly divisibility
+      of the presented residual quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationResidualPair.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.residualDivisibilitySubspace_ne_top
+    statement: >-
+      Divisibility by an irreducible residual factor cuts out a proper
+      rational subspace of a fixed-divisor presentation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationResidualPair.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.quotient_ne_zero_of_ne_zero
+    statement: >-
+      Every nonzero element of a fixed-divisor presentation has a nonzero
+      residual quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationResidualPair.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.exists_factorCoprime_residual_pair
+    statement: >-
+      A nonzero presented residual space contains two residual elements with
+      no common nonunit factor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationResidualPair.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.exists_coprimeResidualPairCertificate
+    statement: >-
+      The corrected coprime residual-pair certificate is inhabited for every
+      nonzero fixed-divisor presentation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationResidualPair.lean
+    theorem: Erdos686.Erdos686Variant.exists_boundedOsculationPresentation_with_coprimeResidualPair
+    statement: >-
+      The exact bounded osculation entry hypotheses construct both a fixed
+      divisor presentation and a selected factor-coprime residual pair.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationResidualPair.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.exists_factorCoprime_specialization_split
+    statement: >-
+      A vanishing presented space splits into a vanishing fixed divisor or
+      two vanishing factor-coprime residual quotients.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AffineResultantIntersectionCount.lean
+    theorem: Erdos686.Erdos686Variant.rationalShearedPair_injective
+    statement: >-
+      The rational affine shear used by the resultant interface is
+      injective.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AffineResultantIntersectionCount.lean
+    theorem: Erdos686.Erdos686Variant.AffineResultantFiberCertificate.shearedPair_mem_candidatePairs
+    statement: >-
+      Every affine common zero maps into the finite resultant-and-fiber
+      candidate set.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AffineResultantIntersectionCount.lean
+    theorem: Erdos686.Erdos686Variant.AffineResultantFiberCertificate.candidatePairs_card_le
+    statement: >-
+      The candidate-pair count is bounded by resultant degree times the
+      uniform fiber-degree bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AffineResultantIntersectionCount.lean
+    theorem: Erdos686.Erdos686Variant.AffineResultantFiberCertificate.commonZeroSet_finite
+    statement: >-
+      A nonzero resultant with nonzero certified fibers makes the affine
+      rational common-zero set finite.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AffineResultantIntersectionCount.lean
+    theorem: Erdos686.Erdos686Variant.AffineResultantFiberCertificate.commonZeroSet_ncard_le
+    statement: >-
+      The affine rational common-zero count obeys the exact
+      resultant-degree times fiber-degree bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AffineResultantIntersectionCount.lean
+    theorem: Erdos686.Erdos686Variant.AffineResultantFiberCertificate.commonZeroSet_ncard_le_degree_sq
+    statement: >-
+      Equal certified resultant and fiber degree bounds give the square
+      affine intersection bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AffineResultantIntersectionCount.lean
+    theorem: Erdos686.Erdos686Variant.AffineResultantFiberCertificate.commonZeroSet_ncard_le_r_sub_e_sq
+    statement: >-
+      Residual degree bounds at most r minus e give at most
+      r-minus-e squared affine common zeros.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686AffineResultantIntersectionCount.lean
+    theorem: Erdos686.Erdos686Variant.CertifiedCoprimeResidualIntersection.commonZeroSet_ncard_le_r_sub_e_sq
+    statement: >-
+      A selected factor-coprime residual pair with explicit resultant
+      certificate satisfies the corrected affine intersection-count bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentEffectiveAudit.lean
+    theorem: Erdos686.Erdos686Variant.momentNumerator_first_block_generating_identity
+    statement: >-
+      The first surviving barycentric moment block has the exact
+      denominator-cleared generating identity.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentEffectiveAudit.lean
+    theorem: Erdos686.Erdos686Variant.rational_moment_block_zero_iff
+    statement: >-
+      For k at least three the rational moment block vanishes exactly when
+      both first surviving moments vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentEffectiveAudit.lean
+    theorem: Erdos686.Erdos686Variant.matchingPhi_quotient_natDegree_eq_m_mul_k_sub_two_sub_q_mul_k
+    statement: >-
+      The osculation quotient has the requested exact degree
+      m times k minus two minus q times k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentEffectiveAudit.lean
+    theorem: Erdos686.Erdos686Variant.integer_root_natAbs_lt_cauchyRootBound
+    statement: >-
+      Every integer root of a nonzero integer polynomial lies below the
+      canonical coefficient-derived Cauchy bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentEffectiveAudit.lean
+    theorem: Erdos686.Erdos686Variant.EffectiveIntersectionCertificate.common_zero_mem_candidatePairs
+    statement: >-
+      Every common integral zero belongs to the exact finite candidate-pair
+      set of an effective intersection certificate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MomentEffectiveAudit.lean
+    theorem: Erdos686.Erdos686Variant.EffectiveIntersectionCertificate.common_zero_effective_package
+    statement: >-
+      A common integral zero satisfies the complete resultant root, Cauchy
+      height, fiber root, candidate-pair, and original-curve verification
+      package.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
