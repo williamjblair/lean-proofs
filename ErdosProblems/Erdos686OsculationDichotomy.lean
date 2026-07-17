@@ -177,8 +177,12 @@ theorem PrimitiveRationalGCDPresentation.specialization_split
     h.factor_first h.factor_second p hz₁ hz₂
 
 /-- If the displayed fixed factor is a unit polynomial, its specialization
-cannot vanish, so every common zero lies in the residual-pair branch. -/
-theorem PrimitiveRationalGCDPresentation.residualPairAt_of_isUnit_G
+cannot vanish, so every common zero lies in the residual-pair branch.
+
+The theorem name is retained for source compatibility with the frozen
+919-theorem checkpoint; its conclusion uses the corrected `ResidualPairAt`
+terminology. -/
+theorem PrimitiveRationalGCDPresentation.quotientPairAt_of_isUnit_G
     {F₁ F₂ : BivariateIntPolynomial}
     (h : PrimitiveRationalGCDPresentation F₁ F₂)
     (p : Fin 2 → ℤ)
@@ -207,7 +211,7 @@ theorem PrimitiveRationalGCDPresentation.coprime_quotient_interface
 #print axioms bivariate_specialization_split
 #print axioms bivariate_quotients_vanish_of_isUnit_common_factor
 #print axioms PrimitiveRationalGCDPresentation.specialization_split
-#print axioms PrimitiveRationalGCDPresentation.residualPairAt_of_isUnit_G
+#print axioms PrimitiveRationalGCDPresentation.quotientPairAt_of_isUnit_G
 #print axioms PrimitiveRationalGCDPresentation.coprime_quotient_interface
 
 end Erdos686Variant
