@@ -806,6 +806,13 @@ fails some row j ≤ 17.
    coprime to six, and divides its own shifted diagonal, while both full
    row and column product divisibilities remain available. This is an exact
    simultaneous row/column narrowing, not a closure of the k=5 tail.
+   The exceptional branch is now owner-free at its sharpest interface:
+   in each of the four cases the selected lower and upper terms equal the
+   products of their five exact shifted gcds. In the proper-global branch,
+   both coprime lower-row products, both coprime modified-upper products, and
+   their joint lcm divide the single nine-diagonal window
+   `(d-4)(d-3)...(d+4)`, while the four exact crossing gcds are retained.
+   Neither statement yet supplies the required absolute contradiction.
    An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
@@ -961,6 +968,15 @@ fails some row j ≤ 17.
    weights, the essential zero branch `mu_0=0`, and `k>=3`, finite
    Vandermonde termination now produces a least `1<=q<=|S|` with
    `Delta_q!=0`; hence `matchingPhi` is nonzero and has that exact degree.
+   The bridge to the actual normalized osculation matrix is now complete:
+   its entries satisfy the advertised envelope, it has the bounded
+   fixed-divisor presentation, node value/derivative vanishing gives
+   `W_S^2 | matchingPhi` over `Z[T]`, and the nonzero quotient with its exact
+   degree is constructed rather than assumed.
+   The equation-facing tangent-defect square theorem is also banked from the
+   normalized composite-owner congruence. Exact division `R=M*U`, cancellation
+   of one owner, explicit Bézout inversion modulo that owner, and finite CRT
+   assembly with a representative below `M` are kernel-checked.
    Finally, a support-dependent effective intersection
    certificate now has a kernel interface covering integer shear, nonzero
    resultant roots, fiber-gcd roots, finite candidate lists, a root bound,

@@ -134,14 +134,34 @@ Lean interfaces:
 
 ### 7. Tangent-defect square theorem
 
-The polynomial identity has been independently checked in
-`tangent_defect_crt_certificate.json`. The full divisibility theorem remains
-pending in Lean and is not counted as accepted.
+Accepted and kernel-checked.
+
+Lean interfaces:
+
+- `Erdos686.Erdos686Variant.sq_dvd_eval_sub_eval_sub_derivative`
+- `Erdos686.Erdos686Variant.owner_sq_dvd_matchingResultant_tangent_defect`
+- `Erdos686.Erdos686Variant.matched_owner_sq_dvd_matchingResultant_tangent_defect`
+
+The last theorem starts from the actual normalized binomial owner-square
+congruence, so the result is not merely the independently checked polynomial
+identity in `tangent_defect_crt_certificate.json`.
 
 ### 8. Exact CRT
 
-Pending. In particular, division by `M` and inversion modulo every composite
-owner must expose all nonzero and coprimality hypotheses.
+Accepted after exposing all cancellation and inversion hypotheses.
+
+Lean interfaces:
+
+- `Erdos686.Erdos686Variant.owner_dvd_resultantQuotient_tangent_defect`
+- `Erdos686.Erdos686Variant.resultantQuotient_tangent_modEq_explicit_inverse`
+- `Erdos686.Erdos686Variant.tangentCRTRepresentative_modEq`
+- `Erdos686.Erdos686Variant.tangentCRTRepresentative_lt_product`
+
+The local theorem writes `R=M*U`, `M=P*Mrest`, and the row term as
+`P*xrest`, cancels one nonzero `P` from the square divisor, and requires an
+explicit Bézout identity for `b*Mrest` before inversion modulo the possibly
+composite owner. The finite CRT representative satisfies every local residue
+and lies below the exact product modulus.
 
 ### 9. Collinear-support exclusion
 
@@ -197,3 +217,5 @@ exclusion can be called formal.
   `e8f4c6575400a4e8428540548ff8f353b66566fc2caf55b1b0dbcb1d387e256e`
 - `verify_matching_tail.py`:
   `6f6b7c1efcd5bdf8be080f41a8b298e65febb5fd3ed4597adb5d52dac0212958`
+- `Erdos686TangentDefectCRT.lean`:
+  `e68902eaa2e7cd21fbb9220abd765f281c1eefb40d6b20fbe0e2996acbb0626a`

@@ -1,0 +1,10 @@
+/- Kernel-audit entrypoint for the tangent-defect and exact CRT package. -/
+import ErdosProblems.Erdos686TangentDefectCRT
+
+#print axioms Erdos686.Erdos686Variant.sq_dvd_eval_sub_eval_sub_derivative
+#print axioms Erdos686.Erdos686Variant.owner_sq_dvd_matchingResultant_tangent_defect
+#print axioms Erdos686.Erdos686Variant.matched_owner_sq_dvd_matchingResultant_tangent_defect
+#print axioms Erdos686.Erdos686Variant.owner_dvd_resultantQuotient_tangent_defect
+#print axioms Erdos686.Erdos686Variant.resultantQuotient_tangent_modEq_explicit_inverse
+#print axioms Erdos686.Erdos686Variant.tangentCRTRepresentative_modEq
+#print axioms Erdos686.Erdos686Variant.tangentCRTRepresentative_lt_product

@@ -25,6 +25,8 @@ SHA-256:
   `539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d`.
 - `Erdos686EffectiveIntersectionInterface.lean`:
   `6c6700eb2cc7d38953f9a926b2244d6b1e47ba4f3496f08582212829897be4ba`.
+- `Erdos686MatchingOsculationBridge.lean`:
+  `602dff0f44c702c1c687bd44b47f6c71f29c5d0321ce616cd032115b0b185665`.
 
 ## Retained
 
@@ -114,6 +116,12 @@ SHA-256:
   have unit gcd. No pairwise coprimality is inferred.
 - A presented fixed divisor leaves a residual family with no common
   nonunit factor and gives the exact specialization split.
+- The actual normalized `2m` osculation matrix satisfies the entry envelope,
+  so the bounded fixed-divisor presentation is instantiated for the matching
+  data rather than left as an abstract matrix interface.
+- Distinct matching nodes with value and derivative vanishing give
+  `W_S^2 | matchingPhi` in `Z[T]`; the finite moment theorem then constructs
+  a nonzero quotient and proves its exact degree.
 
 ## Certificate-backed
 

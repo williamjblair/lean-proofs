@@ -3805,6 +3805,88 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalDiagonalGCD.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_row_exact_shifted_gcds_of_coprime_six
+    statement: >-
+      In a fully owned row coprime to six, every owner cell is exactly the
+      gcd of the lower term and its shifted diagonal.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalDiagonalGCD.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_column_exact_shifted_gcds_of_coprime_six
+    statement: >-
+      In a fully owned nondistinguished column coprime to six, every owner
+      cell is exactly the gcd of the upper term and its shifted diagonal.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalDiagonalGCD.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_unit_upper_terms_coprime_six
+    statement: >-
+      The exact exceptional mod-twenty-four placement makes the selected
+      unit upper term coprime to six.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalDiagonalGCD.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_exact_shifted_gcd_star
+    statement: >-
+      Each exceptional crossing produces nine exact shifted gcd identities
+      across its full row and column.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalDiagonalGCD.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_exact_gcd_star_products_eq_terms
+    statement: >-
+      An exact row-column gcd star reconstructs both the lower and upper
+      terms as products of their five shifted gcds.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalDiagonalGCD.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_pure_gcd_product_residual
+    statement: >-
+      The exceptional k=5 branch reduces owner-free to four exact residue
+      cases with simultaneous lower and upper five-gcd product identities.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalCRT.lean
+    theorem: Erdos686.Erdos686Variant.k5_two_fullyOwned_lower_rows_product_dvd_diagonalWindow
+    statement: >-
+      The product of two coprime fully owned lower rows divides the common
+      nine-diagonal k=5 window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalCRT.lean
+    theorem: Erdos686.Erdos686Variant.k5_two_fullyOwned_modifiedUpper_product_dvd_diagonalWindow
+    statement: >-
+      The product of two coprime fully owned modified upper columns divides
+      the same common nine-diagonal window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalCRT.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_simultaneous_diagonal_window_bounds
+    statement: >-
+      The proper-global branch places both coprime row and column products
+      and their joint lcm in one degree-nine diagonal window while retaining
+      all four exact crossing gcds.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686SparseJetCertificate.lean
     theorem: Erdos686.Erdos686Variant.sparseBivariate_pow_dvd_natAbs_eval_of_order
     statement: >-
@@ -4172,6 +4254,69 @@ proofs:
     statement: >-
       The common resultant product divisor specializes exactly to owner-cell
       row, column, and signed diagonal coordinates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TangentDefectCRT.lean
+    theorem: Erdos686.Erdos686Variant.sq_dvd_eval_sub_eval_sub_derivative
+    statement: >-
+      The first-order Taylor remainder of every integer polynomial is
+      divisible by the square of the displacement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TangentDefectCRT.lean
+    theorem: Erdos686.Erdos686Variant.owner_sq_dvd_matchingResultant_tangent_defect
+    statement: >-
+      A normalized owner-square congruence gives the exact square divisor of
+      the matching resultant tangent defect.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TangentDefectCRT.lean
+    theorem: Erdos686.Erdos686Variant.matched_owner_sq_dvd_matchingResultant_tangent_defect
+    statement: >-
+      The tangent-defect square theorem specializes to the banked normalized
+      binomial owner congruence for every composite high-prime owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TangentDefectCRT.lean
+    theorem: Erdos686.Erdos686Variant.owner_dvd_resultantQuotient_tangent_defect
+    statement: >-
+      Exact division of R=M U and the row term by one owner cancels a square
+      tangent divisor to a congruence modulo that composite owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TangentDefectCRT.lean
+    theorem: Erdos686.Erdos686Variant.resultantQuotient_tangent_modEq_explicit_inverse
+    statement: >-
+      An explicit Bezout identity inverts the local quotient coefficient and
+      determines U modulo a composite owner without hidden primality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TangentDefectCRT.lean
+    theorem: Erdos686.Erdos686Variant.tangentCRTRepresentative_modEq
+    statement: >-
+      The canonical finite CRT representative satisfies every prescribed
+      local residue modulo the pairwise-coprime composite owners.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TangentDefectCRT.lean
+    theorem: Erdos686.Erdos686Variant.tangentCRTRepresentative_lt_product
+    statement: >-
+      The canonical exact CRT representative lies below the full owner
+      product modulus.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
@@ -5062,6 +5207,62 @@ proofs:
     statement: >-
       Two vanishing bounded-space elements specialize to either a vanishing
       fixed divisor or two vanishing residual quotients, without jet inheritance.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingOsculationBridge.lean
+    theorem: Erdos686.Erdos686Variant.osculationConstraintMatrix_entry_bound
+    statement: >-
+      The actual normalized two-row-per-owner osculation matrix satisfies the
+      exact coefficient envelope used by the bounded-kernel theorem.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingOsculationBridge.lean
+    theorem: Erdos686.Erdos686Variant.exists_fixedDivisorPresentation_normalizedOsculation
+    statement: >-
+      Exact normalized support bounds construct a fixed-divisor presentation
+      for the actual bounded osculation space.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingOsculationBridge.lean
+    theorem: Erdos686.Erdos686Variant.W_sq_dvd_of_value_derivative_vanish
+    statement: >-
+      At distinct integral support nodes, simultaneous value and derivative
+      vanishing makes the square of the node polynomial divide Phi over the
+      integers.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingOsculationBridge.lean
+    theorem: Erdos686.Erdos686Variant.fin_matchingPhi_zero_branch_nonzero_and_quotient_exact_degree
+    statement: >-
+      In the finite zero branch a certified W-squared quotient is nonzero and
+      has the exact first-moment degrees for Phi and Q.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingOsculationBridge.lean
+    theorem: Erdos686.Erdos686Variant.fin_matchingPhi_zero_branch_exists_nonzero_quotient_exact_degree
+    statement: >-
+      The actual barycentric node jets construct a nonzero W-squared quotient
+      and its exact residual degree without taking quotient existence as a
+      hypothesis.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingOsculationBridge.lean
+    theorem: Erdos686.Erdos686Variant.normalizedOsculation_and_matchingPhi_zero_branch
+    statement: >-
+      One support package supplies both the actual bounded fixed-divisor
+      presentation and the exact nonzero matching quotient branch.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
