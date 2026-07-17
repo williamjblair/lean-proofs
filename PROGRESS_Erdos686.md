@@ -1191,6 +1191,34 @@ fails some row j ≤ 17.
    designated quotient products, and the unique five-owner cube lift are
    kernel-checked. The complete mod-625 placement scan leaves every placement
    compatible, so this arithmetic layer does not close the branch.
+   A sharper large-radius kernel construction is now banked separately from
+   the corrected finite-cube family. For a `q` by `N` integer matrix with
+   `q<N`, it produces `N-q` independent integral kernel vectors with the
+   explicit coordinate bound `(N*H+1)^q`. Consequently the complete
+   normalized `k` by `k` grid has `k` independent degree-`2k-1` osculation
+   polynomials. This does not close the large-k branch: the degree-`k`
+   equation polynomial and its degree-`k-1` cofactors can contain the entire
+   guaranteed family and vanish at the target solution. Lean proves the exact
+   escape threshold `4m<3k^2+k` for sparse support and proves that the full
+   grid is outside that regime for every `k>=2`. It also rejects reflection
+   row compression by exact coefficient transformation laws and a
+   kernel-checked `k=3` counterexample.
+   In the G=12 k=5 branch, the antidiagonal complement now has the unitary
+   overlap bound `gcd(AB,J)|180`. The current linear aggregate nevertheless
+   admits an explicit arbitrarily large CRT family, so that aggregate is not
+   counted as a scale bound. A genuinely nonlinear use of the five-block
+   equation gives
+   `2*n+d+5 | 5*(d-3)^2*(d-1)*(d+1)*(d+3)` and, after four forced owners are
+   cancelled,
+   `J | 5*((d-3)/P)^2*((d-1)/A)*((d+1)/Q)*((d+3)/B)`.
+   This degree-five divisor is new but does not yet bound `J`.
+   Independently, primitive centered k=5 coordinates satisfy
+   `z | 4*t+300*v^3`, `t | 60*v^3*(5-17*z*v^2)`, and hence
+   `gcd(z,t)|300`, sharpened to `75` for odd `z`. No bound on `z` or `t`
+   has yet been deduced. Finally, the G=24 noncrossing five-owner placement
+   has full nine-cell owner-square CRT models modulo every power of five.
+   Thus the local five-adic cube-lift route is rejected even to arbitrary
+   precision; this is a local countermodel, not an integral solution.
 3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as
    equivalent packaging via `finalResidual_iff_tail1000_and_smooth`; do not
    report its isolation as mathematical progress.  Regenerate the manifest

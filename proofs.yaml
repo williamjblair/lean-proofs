@@ -11167,3 +11167,449 @@ proofs:
       residue and cubic-valuation table.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.largeRadius_cube_cardinality_inequality
+    statement: >-
+      The explicit large cube has more points than the bounded image when
+      the integer matrix has fewer rows than columns.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_nonzero_bounded_integer_kernel_vector_largeRadius
+    statement: >-
+      A wide integer matrix has a nonzero integral kernel vector with the
+      explicit large-radius coordinate bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_bounded_independent_integer_kernel_family_largeRadius
+    statement: >-
+      A q by N integer matrix with q less than N has N minus q independent
+      bounded integral kernel vectors at the explicit large radius.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_nonzero_bounded_integer_kernel_vector_largeRadius_of_entry_bound
+    statement: >-
+      The large-radius nonzero kernel theorem follows from an entrywise
+      matrix bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_bounded_independent_integer_kernel_family_largeRadius_of_entry_bound
+    statement: >-
+      An entrywise matrix bound gives a full N minus q independent integral
+      kernel family at an explicit radius.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_nonzero_bounded_osculation_kernel_vector_largeRadius
+    statement: >-
+      A two-jet osculation matrix with fewer rows than monomials has one
+      explicitly bounded nonzero integral kernel polynomial.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_bounded_independent_osculation_kernel_family_largeRadius
+    statement: >-
+      A two-jet osculation matrix has the full algebraic-nullity family of
+      independent bounded integral kernel polynomials.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.fullGrid_lowDegree_column_count
+    statement: >-
+      Degree two k minus one has strictly more monomials than the two-jet
+      row count on the complete k by k grid.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.fullGrid_lowDegree_kernel_count
+    statement: >-
+      The exact algebraic-nullity count for degree two k minus one complete
+      grid osculation equals k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculationEvaluate_natAbs_le_of_coeff_bound
+    statement: >-
+      A coefficient and coordinate envelope gives the exact elementary
+      height bound for bivariate osculation evaluation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculation_constraints_of_mulVec_eq_zero
+    statement: >-
+      Matrix-kernel membership gives both the value and directional
+      derivative osculation conditions at every support cell.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_fullGrid_lowDegree_normalizedOsculation_kernel
+    statement: >-
+      The complete normalized owner grid admits one bounded nonzero
+      osculation kernel polynomial in degree two k minus one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_fullGrid_lowDegree_normalizedOsculation_kernel_family
+    statement: >-
+      The complete normalized owner grid admits k independent bounded
+      osculation kernel polynomials in degree two k minus one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_linearIndependent_member_not_mem_of_finrank_lt
+    statement: >-
+      An independent family larger than a finite-dimensional subspace has a
+      member outside that subspace.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.sparseSupport_commonComponent_dimension_gap
+    statement: >-
+      Four times the support size below three k squared plus k gives the
+      exact dimension gap beyond degree-k equation multiples.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_sparseSupport_lowDegree_kernel_not_mem_commonComponent
+    statement: >-
+      Sparse support forces a bounded low-degree osculation kernel outside
+      any common-component subspace with the expected dimension bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.fullGrid_not_in_sparse_commonComponent_regime
+    statement: >-
+      The complete k by k grid lies outside the sparse common-component
+      dimension regime for every k at least two.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.mem_degreeBoundedEquationMultipleSpace_iff
+    statement: >-
+      Membership in the bounded equation-multiple space is exactly
+      multiplication by a cofactor of total degree at most k minus one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.degreeBoundedEquationMultipleSpace_finrank_le
+    statement: >-
+      The degree-bounded equation-multiple space has dimension at most the
+      number of cofactor monomials.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.degreeBoundedEquationMultipleSpace_specialization_vanishes
+    statement: >-
+      Every degree-bounded equation multiple vanishes at a zero of the
+      equation polynomial.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.exists_sparseSupport_lowDegree_kernel_outside_degreeBoundedEquationMultiples
+    statement: >-
+      Sparse support unconditionally produces a bounded low-degree kernel
+      polynomial outside the concrete equation-multiple space.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.matchingBinomial_reflect
+    statement: >-
+      The matching binomial coefficient is invariant under reflection of a
+      one-based block index.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.reducedMatchingLeft_reflect_left
+    statement: >-
+      The reduced left matching coefficient is invariant under reflection
+      of its left index.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.reducedMatchingRight_reflect_left
+    statement: >-
+      The reduced right matching coefficient is invariant under reflection
+      of its left index.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.neg_one_pow_reflect_left_of_odd
+    statement: >-
+      Left-index reflection preserves the matching sign when k is odd.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.neg_one_pow_reflect_left_of_even
+    statement: >-
+      Left-index reflection reverses the matching sign when k is even.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.neg_one_pow_reflect_both
+    statement: >-
+      Simultaneous reflection of both matching indices preserves the sign.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.normalizedDirectionCoefficient_reflect_left_of_odd
+    statement: >-
+      Odd-row reflection preserves the normalized directional coefficient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.normalizedDirectionCoefficient_reflect_left_of_even
+    statement: >-
+      Even-row reflection sends the normalized directional coefficient to
+      its exact signed affine transform.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.reflected_left_rho_sub_rho
+    statement: >-
+      Row reflection moves the normalized diagonal coordinate by the exact
+      displacement k plus one minus twice the row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.reflected_both_node
+    statement: >-
+      Simultaneous index reflection acts on an osculation node by the exact
+      affine coordinate symmetry.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullGridOneVectorOsculation.lean
+    theorem: Erdos686.Erdos686Variant.odd_reflected_rows_not_duplicate_counterexample
+    statement: >-
+      An exact k equals three fixture disproves duplicate-row compression
+      under odd-index reflection.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12AntidiagonalUnitaryOverlap.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_antidiagonal_quotient_unitary_overlap_dvd_180
+    statement: >-
+      The G equals twelve antidiagonal quotient and its complementary
+      cofactor have common divisor dividing one hundred eighty.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12AntidiagonalUnitaryOverlap.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_linear_aggregate_has_unbounded_CRT_models
+    statement: >-
+      An explicit arbitrarily scaled CRT family satisfies every current
+      linear G equals twelve aggregate constraint.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFiveAdicCountermodel.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j2_i2_c4_lift_polynomial_defect
+    statement: >-
+      The exceptional noncrossing placement has an exact five-adic lift
+      polynomial defect identity.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFiveAdicCountermodel.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j2_i2_c4_lift_difference
+    statement: >-
+      The exceptional five-adic lift polynomial has the exact first-order
+      difference formula.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFiveAdicCountermodel.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j2_i2_c4_lift_step
+    statement: >-
+      Every exceptional five-adic approximation lifts one additional
+      power while preserving the required congruence class.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFiveAdicCountermodel.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j2_i2_c4_all_five_powers
+    statement: >-
+      Exceptional five-adic equation models exist modulo every positive
+      power of five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFiveAdicCountermodel.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j2_i2_c4_square_fixture_of_crt
+    statement: >-
+      A CRT assembly gives the full exceptional nine-cell owner-square
+      fixture at a fixed five-power precision.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFiveAdicCountermodel.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j2_i2_c4_lift_step_preserving_crt
+    statement: >-
+      The five-adic lift step preserves all nonfive owner-square CRT
+      conditions.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFiveAdicCountermodel.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j2_i2_c4_full_square_crt_all_five_powers
+    statement: >-
+      Full exceptional owner-square CRT models exist to every five-adic
+      precision.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFiveAdicCountermodel.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j2_i2_c4_local_five_pattern
+    statement: >-
+      The all-orders exceptional CRT fixture has the required local
+      five-owner residue pattern.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12CenteredSumResultant.lean
+    theorem: Erdos686.Erdos686Variant.k5_centered_sum_polynomial_division
+    statement: >-
+      The centered k equals five block equation has an exact polynomial
+      division by the centered sum coordinate.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12CenteredSumResultant.lean
+    theorem: Erdos686.Erdos686Variant.k5_centered_sum_sub_one_dvd_gap_resultant
+    statement: >-
+      The centered sum divides an explicit degree-five shifted-gap
+      resultant on every k equals five solution.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12CenteredSumResultant.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_remaining_complement_quotient_dvd_centered_resultant
+    statement: >-
+      The remaining G equals twelve complement quotient divides the
+      centered degree-five resultant after four forced owners cancel.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveScaleResultant.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_scale_residual_eq_zero
+    statement: >-
+      Primitive centered k equals five coordinates satisfy an exact
+      nonlinear residual equation after cancelling the forced scale.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveScaleResultant.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_scale_z_dvd_cubic
+    statement: >-
+      The primitive lower scale divides an explicit cubic endpoint
+      expression.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveScaleResultant.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_scale_t_dvd_quadratic
+    statement: >-
+      The primitive upper scale divides an explicit nonlinear endpoint
+      expression.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveScaleResultant.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_scale_gcd_dvd_three_hundred
+    statement: >-
+      Coprime primitive centered coordinates force the two scale parameters
+      to have common divisor dividing three hundred.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveScaleResultant.lean
+    theorem: Erdos686.Erdos686Variant.k5_odd_primitive_scale_gcd_dvd_seventy_five
+    statement: >-
+      When the lower scale is odd, its common divisor with the upper scale
+      divides seventy-five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
