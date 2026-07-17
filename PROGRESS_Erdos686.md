@@ -1167,6 +1167,30 @@ fails some row j ≤ 17.
    that its current size beats the surviving scale has been made. The
    remaining large-k obligation is still to eliminate the canonical support,
    not merely to repackage it.
+   The full-mass normalization loss has now been repaired exactly. Pairwise
+   canonical owner losses multiply into one common bound, so the complete
+   canonical grid square divides `((k-1)!)^3` times one osculation
+   evaluation. In particular, the former `n^(2*pi(k))` projection loss is
+   gone. The remaining large-k obstruction is now the dimension of the
+   support: bounded extraction from `m` nonunit cells needs
+   `binom(r+2,2)>=4m+1`, while the all-grid worst case `m=k^2` forces
+   `r` above `2k`, beyond the elementary evaluation-size range. Closure now
+   requires a support-sparsity theorem, a fixed divisor lowering the
+   effective degree, or a sharper bounded-kernel spanning argument.
+   The corrected bounded-space theorem records only the justified degree
+   budget, with a separate quotient-space upper-bound hypothesis; it does
+   not transfer the full rational jet-space bound to the bounded lattice.
+   The G=12 allocation now partitions all twenty-five owner cells and gives
+   the cofactor-free divisor
+   `blockProduct 5 n | 3*prod_{r=-4}^4 (d+r)`. Exact polynomial division,
+   however, proves the stronger profile-free divisor
+   `blockProduct 5 n | prod_{r=-4}^4 (d+r)` from the original equation
+   alone. Thus the aggregate window is algebraically redundant and is not
+   counted as an independent G=12 constraint; owner-level information is
+   still needed. In the G=24 branch, exact primitive global cubic identities,
+   designated quotient products, and the unique five-owner cube lift are
+   kernel-checked. The complete mod-625 placement scan leaves every placement
+   compatible, so this arithmetic layer does not close the branch.
 3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as
    equivalent packaging via `finalResidual_iff_tail1000_and_smooth`; do not
    report its isolation as mathematical progress.  Regenerate the manifest

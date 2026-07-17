@@ -10835,3 +10835,335 @@ proofs:
       crossing-product gcd bounded by a completely index-dependent product.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.reducedOwnerSquare_dvd_of_square_dvd_coefficient_mul
+    statement: >-
+      Exact gcd cancellation converts an owner-square divisor with a
+      coefficient into the corresponding reduced owner-square divisor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.ownerNormalizationLoss_product_dvd_common_bound
+    statement: >-
+      Pairwise-coprime owner normalization losses multiply into one common
+      coefficient bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.ownerSquareProduct_eq_loss_mul_reduced
+    statement: >-
+      The full owner-square product is exactly the product of its
+      normalization losses and reduced owner squares.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.full_ownerSquare_product_dvd_commonBound_mul_normalizedProduct
+    statement: >-
+      Full pairwise-coprime owner-square mass divides one common bound times
+      the product of normalized evaluations.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.reducedOwnerSquare_dvd_square
+    statement: >-
+      A reduced owner square always divides the square of the original owner.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.full_ownerSquare_product_dvd_commonBound_mul_commonValue
+    statement: >-
+      When all normalized evaluations divide one value, the complete
+      owner-square product divides one common bound times that value.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.osculation_owner_square_dvd_coefficient_mul_evaluation
+    statement: >-
+      Each osculation owner square divides its exact coefficient times the
+      common bivariate evaluation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.osculation_reducedOwnerSquare_dvd_evaluation
+    statement: >-
+      Exact coefficient cancellation makes each reduced osculation owner
+      square divide the common evaluation itself.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.osculation_full_ownerSquare_product_dvd_commonBound_mul_evaluation
+    statement: >-
+      The full osculation owner-square mass divides one coefficient bound
+      times one common evaluation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.canonical_allCells_square_dvd_cleaningLossSq_commonBound_mul_osculationEvaluation
+    statement: >-
+      The square of every canonical cell product divides the cleaning loss
+      squared times one common bound and osculation evaluation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.canonical_allCells_square_dvd_factorialCube_mul_osculationEvaluation
+    statement: >-
+      Canonical cleaning and normalization compress the complete grid square
+      divisor into a factorial cube times one osculation evaluation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.owner_square_reduced_normalized_dvd
+    statement: >-
+      An individual owner square divides its normalization loss times the
+      reduced normalized factor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.exists_matched_owner_reduced_normalized_square_dvd
+    statement: >-
+      Every matched owner supplies an exact reduced normalized square
+      divisor after coefficient cancellation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.canonical_allCells_square_dvd_cleaningLossSq_factorial_mul_normalizedProduct
+    statement: >-
+      The canonical grid square divides cleaning loss squared, one factorial,
+      and the normalized product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686FullMassNormalization.lean
+    theorem: Erdos686.Erdos686Variant.canonical_allCells_square_dvd_factorialCube_mul_normalizedProduct
+    statement: >-
+      The complete canonical grid square divides a factorial cube times the
+      normalized product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BoundedOsculationDegree.lean
+    theorem: Erdos686.Erdos686Variant.boundedOsculationSpace_finrank_lower_of_independent_family
+    statement: >-
+      An explicit independent bounded family gives the corresponding lower
+      bound on the rational bounded osculation space dimension.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BoundedOsculationDegree.lean
+    theorem: Erdos686.Erdos686Variant.boundedOsculationPolynomialSpace_finrank_lower_of_independent_family
+    statement: >-
+      Independent bounded osculation polynomials give an exact polynomial
+      space dimension lower bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BoundedOsculationDegree.lean
+    theorem: Erdos686.Erdos686Variant.boundedOsculationPolynomialSpace_finrank_lower_of_entry_bound
+    statement: >-
+      The corrected cube-fiber entry bound yields dimension at least
+      N minus four times the support size plus one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BoundedOsculationDegree.lean
+    theorem: Erdos686.Erdos686Variant.boundedFixedDivisor_degree_inequality_of_dimension_bounds
+    statement: >-
+      Separate lower and quotient-space upper dimension bounds imply the
+      exact quadratic degree budget for a bounded fixed divisor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BoundedOsculationDegree.lean
+    theorem: Erdos686.Erdos686Variant.boundedOsculationPolynomialSpace_fixedDivisor_degree_budget
+    statement: >-
+      A bounded osculation fixed divisor satisfies the corrected degree
+      budget when the required quotient-space bound is supplied explicitly.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12UncoveredAllocation.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_uncovered_ten_owner_product_dvd_five_gap_factors
+    statement: >-
+      The ten uncovered G=12 owners divide five exact shifted-gap factors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12UncoveredAllocation.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_controlled_ten_owner_product_dvd_three_gap_factors
+    statement: >-
+      The ten controlled G=12 owners divide three exact shifted-gap factors
+      without the complementary quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12UncoveredAllocation.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_exact_complete_owner_partition
+    statement: >-
+      The uncovered, diagonal, and controlled G=12 sets form an exact
+      partition of all twenty-five owner cells.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12UncoveredAllocation.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_reduced_complement_quotient_controls_eight_owners
+    statement: >-
+      The reduced complementary quotient controls eight specified G=12
+      owners.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12UncoveredAllocation.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_block_dvd_single_quotient_nine_gap_product
+    statement: >-
+      The lower five-term block divides one complementary quotient times the
+      complete nine-factor diagonal window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12UncoveredAllocation.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_block_dvd_nine_gap_product
+    statement: >-
+      G=12 owner allocation removes the remaining quotient and makes the
+      lower block divide the nine-factor diagonal window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12UncoveredAllocation.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_block_dvd_three_mul_diagonal_window
+    statement: >-
+      The complete G=12 allocation gives a cofactor-free lower-block divisor
+      of three times the diagonal window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5WindowDivisorCancellation.lean
+    theorem: Erdos686.Erdos686Variant.k5_signed_diagonal_window_polynomial_identity
+    statement: >-
+      The signed nine-gap window has an exact polynomial division identity
+      by the lower block and the original five-term equation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5WindowDivisorCancellation.lean
+    theorem: Erdos686.Erdos686Variant.k5_signed_diagonal_window_eq_block_mul_quartic
+    statement: >-
+      On a k=5 solution the signed diagonal window equals the lower block
+      times an explicit quartic cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5WindowDivisorCancellation.lean
+    theorem: Erdos686.Erdos686Variant.k5_block_dvd_diagonal_window_of_equation
+    statement: >-
+      Every k=5 solution, independently of its residual profile, makes the
+      lower block divide the nine-factor diagonal window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalEquationFacing.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_primitive_global_equation
+    statement: >-
+      The exceptional profile satisfies an exact primitive global equation
+      in the designated X, U, and D coordinates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalEquationFacing.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_row_cubic_sum_coordinate_table
+    statement: >-
+      The four relevant row cubic sums have exact coordinate formulas in X
+      and U.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalEquationFacing.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_i2_designated_quotient_global_cubic
+    statement: >-
+      The row-two designated square quotients satisfy exact cubic global
+      product identities.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalEquationFacing.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_i4_designated_quotient_global_cubic
+    statement: >-
+      The row-four designated square quotients satisfy their symmetric exact
+      cubic global product identities.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalEquationFacing.lean
+    theorem: Erdos686.Erdos686Variant.five_designated_global_factor_cube_lift
+    statement: >-
+      A uniquely placed five-owner lifts its selected designated global
+      factor from divisibility by twenty-five to divisibility by one hundred
+      twenty-five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFivePlacement.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j2_five_placement_cubic_table
+    statement: >-
+      The j=2 exceptional five-owner placements have the exact certified
+      residue and cubic-valuation table.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFivePlacement.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_j4_five_placement_cubic_table
+    statement: >-
+      The j=4 exceptional five-owner placements have the exact certified
+      residue and cubic-valuation table.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
