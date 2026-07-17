@@ -1,0 +1,12 @@
+import ErdosProblems.Erdos686BoundedOsculationSpace
+
+open Erdos686 Erdos686.Erdos686Variant
+
+#check osculation_constraint_row_count
+#check integralOsculationLattice
+#check boundedOsculationSpace
+#check boundedOsculationSpace_evaluate_eq_zero
+#check boundedOsculationSpace_evaluate_eq_zero_of_square_bound
+#check fullRationalJetSpace
+#check fullRationalJetSpace_finrank_lower
+#check BoundedSpaceSpansFullJet
