@@ -14,10 +14,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Installs elan from lean-toolchain, restores the Mathlib cache, runs `lake build`.
+      # Install the pinned Lean toolchain and restore the Mathlib cache.  The
+      # build is run explicitly below so a concise compiler tail is available
+      # when GitHub's action wrapper would otherwise hide it.
       - uses: leanprover/lean-action@v1
         with:
+          auto-config: false
+          build: false
           use-mathlib-cache: true
+
+      - name: Lake build
+        id: lake-build
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          lake build > /tmp/lake-build.log 2>&1
+
+      - name: Lake build diagnostics
+        if: steps.lake-build.outcome == 'failure'
+        shell: bash
+        run: |
+          echo '::group::Focused Lean compiler diagnostics'
+          grep -n -C 4 -E 'error:|failed to build|declaration uses|unknown constant|unsolved goals' /tmp/lake-build.log | tail -n 400 || true
+          echo '::endgroup::'
+          echo '::group::Final build log lines'
+          tail -n 240 /tmp/lake-build.log
+          echo '::endgroup::'
+          exit 1
 
       - name: Axiom audit (no sorry, kernel axioms only)
         run: bash scripts/check_axioms.sh
