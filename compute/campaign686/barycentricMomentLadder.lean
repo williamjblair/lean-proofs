@@ -1,11 +1,15 @@
-/- Kernel-audit entrypoint for the barycentric moment ladder. -/
-import ErdosProblems.Erdos686BarycentricMomentBlock
+/- Kernel-audit entrypoint for the exact barycentric moment ladder. -/
+import ErdosProblems.Erdos686BarycentricMomentDegree
 
 #print axioms Erdos686.Erdos686Variant.momentNumerator_recurrence
 #print axioms Erdos686.Erdos686Variant.momentNumerator_eq_X_pow_of_lower_moments
 #print axioms Erdos686.Erdos686Variant.normalizedMomentBlock_coeff
 #print axioms Erdos686.Erdos686Variant.normalizedMomentBlock_coeff_lt
 #print axioms Erdos686.Erdos686Variant.rational_momentDelta_eq_zero_iff
-#print axioms Erdos686.Erdos686Variant.momentPhi_natDegree
-#print axioms Erdos686.Erdos686Variant.momentQuotient_natDegree
 #print axioms Erdos686.Erdos686Variant.mu_vandermonde_termination
+#print axioms Erdos686.Erdos686Variant.momentForwardW_reflect
+#print axioms Erdos686.Erdos686Variant.momentForwardLeftFactor_reflect
+#print axioms Erdos686.Erdos686Variant.actualReverseLeftFactor_eq_X_pow_mul
+#print axioms Erdos686.Erdos686Variant.momentMatchingPhi_coeff_first_nonzero
+#print axioms Erdos686.Erdos686Variant.momentMatchingPhi_natDegree_first_nonzero
+#print axioms Erdos686.Erdos686Variant.momentMatchingQuotient_natDegree_first_nonzero
