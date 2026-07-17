@@ -169,10 +169,48 @@ structure CoprimeResidualPairCertificate
   second : V
   coprime : FactorCoprime (h.quotient first) (h.quotient second)
 
+/-- Support-specific Bézout/intersection certificate for a selected residual
+pair.  The degree bounds are explicit, and `projectiveIntersectionCount`
+counts projective intersections with multiplicity.  Its existence is not
+inferred from factor-coprimality alone. -/
+structure ResidualProjectiveIntersectionCertificate
+    {V : Submodule ℚ BivariateRatPolynomial}
+    (h : FixedDivisorPresentation V) (r e : ℕ) where
+  first : V
+  second : V
+  coprime : FactorCoprime (h.quotient first) (h.quotient second)
+  first_totalDegree_le :
+    (h.quotient first).totalDegree ≤ r - e
+  second_totalDegree_le :
+    (h.quotient second).totalDegree ≤ r - e
+  projectiveIntersectionCount : ℕ
+  bezout_bound : projectiveIntersectionCount ≤ (r - e) ^ 2
+
+/-- Corrected fixed-divisor dichotomy with a certificate-backed residual
+intersection bound.  The residual branch is not called eliminated: its
+integral points still have to be enumerated through an effective resultant
+certificate. -/
+theorem FixedDivisorPresentation.corrected_dichotomy
+    {V : Submodule ℚ BivariateRatPolynomial}
+    (h : FixedDivisorPresentation V)
+    {r e : ℕ}
+    (C : ResidualProjectiveIntersectionCertificate h r e)
+    (p : Fin 2 → ℚ)
+    (hzero : ∀ F : V, evalRatAt p F.1 = 0) :
+    evalRatAt p h.D = 0 ∨
+      (evalRatAt p (h.quotient C.first) = 0 ∧
+        evalRatAt p (h.quotient C.second) = 0 ∧
+        C.projectiveIntersectionCount ≤ (r - e) ^ 2) := by
+  rcases h.two_specialization_split C.first C.second p
+      (hzero C.first) (hzero C.second) with hD | hpair
+  · exact Or.inl hD
+  · exact Or.inr ⟨hpair.1, hpair.2, C.bezout_bound⟩
+
 #print axioms IsFixedDivisor.associated
 #print axioms IsFixedDivisor.of_associated
 #print axioms FixedDivisorPresentation.residual_has_no_common_nonunit
 #print axioms FixedDivisorPresentation.two_specialization_split
+#print axioms FixedDivisorPresentation.corrected_dichotomy
 
 end Erdos686Variant
 end Erdos686
