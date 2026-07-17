@@ -131,6 +131,375 @@ theorem canonicalLargeOwnerRowCofactor_product_eq_smallPart
       exact (kSmallPart_mul_kLargePart
         (ne_of_gt (blockProduct_pos k n))).symm
 
+/-- The cofactor left in a modified upper term after removing its complete
+large-owner column product. -/
+def canonicalLargeOwnerColumnCofactor
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t) (i : ℕ) : ℕ :=
+  upperTermAfterFour n d t i / canonicalLargeOwnerColumnProduct data i
+
+private theorem pairwise_coprime_finset_product_dvd
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (f : ι → ℕ) (z : ℕ)
+    (hpair : (s : Set ι).Pairwise (Function.onFun Nat.Coprime f))
+    (hdvd : ∀ x ∈ s, f x ∣ z) :
+    (∏ x ∈ s, f x) ∣ z := by
+  induction s using Finset.induction_on with
+  | empty => simp
+  | @insert a s ha ih =>
+      rw [Finset.prod_insert ha]
+      apply Nat.Coprime.mul_dvd_of_dvd_of_dvd
+      · apply Nat.Coprime.prod_right
+        intro b hb
+        exact hpair (by simp) (by simp [hb])
+          (Ne.symm (ne_of_mem_of_not_mem hb ha))
+      · exact hdvd a (by simp)
+      · apply ih
+        · intro x hx y hy hxy
+          exact hpair (by simp [hx]) (by simp [hy]) hxy
+        · intro x hx
+          exact hdvd x (by simp [hx])
+
+/-- The complete large-owner column product divides its modified upper term. -/
+theorem canonicalLargeOwnerColumnProduct_dvd_modifiedUpper
+    {k n d t i : ℕ} (data : CanonicalOwnerData k n d t)
+    (hi : i ∈ Finset.Icc 1 k) :
+    canonicalLargeOwnerColumnProduct data i ∣ upperTermAfterFour n d t i := by
+  rw [← canonicalLargeOwnerColumnSupport_product_eq data hi]
+  apply pairwise_coprime_finset_product_dvd
+  · intro e he f hf hef
+    exact canonicalLargeOwnerCells_pairwise_coprime data hef
+  · intro e he
+    have heColumn := (Finset.mem_filter.mp he).2
+    simpa [heColumn] using
+      (canonicalLargeOwnerCell_dvd_upper data (j := e.1) (i := e.2))
+
+/-- The modified upper term is exactly its large-owner column product times
+its column cofactor. -/
+theorem canonicalLargeOwner_modified_upper_term_factorization
+    {k n d t i : ℕ} (data : CanonicalOwnerData k n d t)
+    (hi : i ∈ Finset.Icc 1 k) :
+    upperTermAfterFour n d t i =
+      canonicalLargeOwnerColumnCofactor data i *
+        canonicalLargeOwnerColumnProduct data i := by
+  exact (Nat.div_mul_cancel
+    (canonicalLargeOwnerColumnProduct_dvd_modifiedUpper data hi)).symm
+
+/-- Exact upper-column analogue of the lower-row cofactor-mass identity.
+Whenever the four-removed upper block equals the lower block, the product of
+all large-owner column cofactors is the same small-prime mass. -/
+theorem canonicalLargeOwnerColumnCofactor_product_eq_smallPart
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (hblocks : upperBlockAfterFour k n d t = blockProduct k n) :
+    (∏ i ∈ Finset.Icc 1 k, canonicalLargeOwnerColumnCofactor data i) =
+      kSmallPart k (blockProduct k n) := by
+  apply Nat.mul_right_cancel
+    (Nat.pos_of_ne_zero (kLargePart_ne_zero k (blockProduct k n)))
+  calc
+    (∏ i ∈ Finset.Icc 1 k, canonicalLargeOwnerColumnCofactor data i) *
+          kLargePart k (blockProduct k n) =
+        (∏ i ∈ Finset.Icc 1 k, canonicalLargeOwnerColumnCofactor data i) *
+          (∏ i ∈ Finset.Icc 1 k,
+            canonicalLargeOwnerColumnProduct data i) := by
+      rw [← canonicalLargeOwnerSupport_product_eq_kLargePart,
+        canonicalLargeOwnerSupport_product_eq_columnProducts]
+    _ = ∏ i ∈ Finset.Icc 1 k,
+        (canonicalLargeOwnerColumnCofactor data i *
+          canonicalLargeOwnerColumnProduct data i) := by
+      rw [Finset.prod_mul_distrib]
+    _ = upperBlockAfterFour k n d t := by
+      unfold upperBlockAfterFour
+      apply Finset.prod_congr rfl
+      intro i hi
+      exact (canonicalLargeOwner_modified_upper_term_factorization
+        data hi).symm
+    _ = blockProduct k n := hblocks
+    _ = kSmallPart k (blockProduct k n) *
+        kLargePart k (blockProduct k n) := by
+      exact (kSmallPart_mul_kLargePart
+        (ne_of_gt (blockProduct_pos k n))).symm
+
+/-- Exact degree-weighted row-cofactor product on the large-owner support. -/
+theorem canonicalLargeOwnerSupport_rowCofactor_product_eq_weighted
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t) :
+    (∏ e ∈ canonicalLargeOwnerSupport data,
+      canonicalLargeOwnerRowCofactor data e.1) =
+      ∏ j ∈ Finset.Icc 1 k,
+        (canonicalLargeOwnerRowCofactor data j) ^
+          (canonicalLargeOwnerRowSupport data j).card := by
+  classical
+  symm
+  calc
+    (∏ j ∈ Finset.Icc 1 k,
+        (canonicalLargeOwnerRowCofactor data j) ^
+          (canonicalLargeOwnerRowSupport data j).card) =
+      ∏ j ∈ Finset.Icc 1 k,
+        ∏ e ∈ canonicalLargeOwnerSupport data with e.1 = j,
+          canonicalLargeOwnerRowCofactor data j := by
+      apply Finset.prod_congr rfl
+      intro j hj
+      simp [canonicalLargeOwnerRowSupport, Finset.prod_const]
+    _ = ∏ e ∈ canonicalLargeOwnerSupport data,
+        canonicalLargeOwnerRowCofactor data e.1 := by
+      apply Finset.prod_fiberwise_of_maps_to'
+      intro e he
+      exact (Finset.mem_product.mp (Finset.mem_filter.mp he).1).1
+
+/-- Exact degree-weighted column-cofactor product on the large-owner support. -/
+theorem canonicalLargeOwnerSupport_columnCofactor_product_eq_weighted
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t) :
+    (∏ e ∈ canonicalLargeOwnerSupport data,
+      canonicalLargeOwnerColumnCofactor data e.2) =
+      ∏ i ∈ Finset.Icc 1 k,
+        (canonicalLargeOwnerColumnCofactor data i) ^
+          (canonicalLargeOwnerColumnSupport data i).card := by
+  classical
+  symm
+  calc
+    (∏ i ∈ Finset.Icc 1 k,
+        (canonicalLargeOwnerColumnCofactor data i) ^
+          (canonicalLargeOwnerColumnSupport data i).card) =
+      ∏ i ∈ Finset.Icc 1 k,
+        ∏ e ∈ canonicalLargeOwnerSupport data with e.2 = i,
+          canonicalLargeOwnerColumnCofactor data i := by
+      apply Finset.prod_congr rfl
+      intro i hi
+      simp [canonicalLargeOwnerColumnSupport, Finset.prod_const]
+    _ = ∏ e ∈ canonicalLargeOwnerSupport data,
+        canonicalLargeOwnerColumnCofactor data e.2 := by
+      apply Finset.prod_fiberwise_of_maps_to'
+      intro e he
+      exact (Finset.mem_product.mp (Finset.mem_filter.mp he).1).2
+
+/-- In the exactly two-regular row regime, every row cofactor occurs twice
+on the support, so the support-weighted product is the square of the complete
+small-prime mass. -/
+theorem canonicalLargeOwnerSupport_rowCofactor_product_eq_smallPart_sq
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (hrowTwo : ∀ j ∈ Finset.Icc 1 k,
+      (canonicalLargeOwnerRowSupport data j).card = 2) :
+    (∏ e ∈ canonicalLargeOwnerSupport data,
+      canonicalLargeOwnerRowCofactor data e.1) =
+      (kSmallPart k (blockProduct k n)) ^ 2 := by
+  rw [canonicalLargeOwnerSupport_rowCofactor_product_eq_weighted]
+  calc
+    (∏ j ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerRowCofactor data j ^
+          (canonicalLargeOwnerRowSupport data j).card) =
+      ∏ j ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerRowCofactor data j ^ 2 := by
+      apply Finset.prod_congr rfl
+      intro j hj
+      rw [hrowTwo j hj]
+    _ = (∏ j ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerRowCofactor data j) ^ 2 := by
+      rw [Finset.prod_pow]
+    _ = (kSmallPart k (blockProduct k n)) ^ 2 := by
+      rw [canonicalLargeOwnerRowCofactor_product_eq_smallPart]
+
+/-- The column analogue in the exactly two-regular regime. -/
+theorem canonicalLargeOwnerSupport_columnCofactor_product_eq_smallPart_sq
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (hblocks : upperBlockAfterFour k n d t = blockProduct k n)
+    (hcolumnTwo : ∀ i ∈ Finset.Icc 1 k,
+      (canonicalLargeOwnerColumnSupport data i).card = 2) :
+    (∏ e ∈ canonicalLargeOwnerSupport data,
+      canonicalLargeOwnerColumnCofactor data e.2) =
+      (kSmallPart k (blockProduct k n)) ^ 2 := by
+  rw [canonicalLargeOwnerSupport_columnCofactor_product_eq_weighted]
+  calc
+    (∏ i ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerColumnCofactor data i ^
+          (canonicalLargeOwnerColumnSupport data i).card) =
+      ∏ i ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerColumnCofactor data i ^ 2 := by
+      apply Finset.prod_congr rfl
+      intro i hi
+      rw [hcolumnTwo i hi]
+    _ = (∏ i ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerColumnCofactor data i) ^ 2 := by
+      rw [Finset.prod_pow]
+    _ = (kSmallPart k (blockProduct k n)) ^ 2 := by
+      rw [canonicalLargeOwnerColumnCofactor_product_eq_smallPart data hblocks]
+
+/-- With two owners in every row and every column, the product over support
+of the row-column cofactor load is exactly the fourth power of the small
+prime mass. -/
+theorem canonicalLargeOwnerSupport_rowColumnCofactor_product_eq_smallPart_pow_four
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (hblocks : upperBlockAfterFour k n d t = blockProduct k n)
+    (hrowTwo : ∀ j ∈ Finset.Icc 1 k,
+      (canonicalLargeOwnerRowSupport data j).card = 2)
+    (hcolumnTwo : ∀ i ∈ Finset.Icc 1 k,
+      (canonicalLargeOwnerColumnSupport data i).card = 2) :
+    (∏ e ∈ canonicalLargeOwnerSupport data,
+      (canonicalLargeOwnerRowCofactor data e.1 *
+        canonicalLargeOwnerColumnCofactor data e.2)) =
+      (kSmallPart k (blockProduct k n)) ^ 4 := by
+  rw [Finset.prod_mul_distrib,
+    canonicalLargeOwnerSupport_rowCofactor_product_eq_smallPart_sq
+      data hrowTwo,
+    canonicalLargeOwnerSupport_columnCofactor_product_eq_smallPart_sq
+      data hblocks hcolumnTwo]
+  ring
+
+/-- The other-owner product in the row through a support cell.  In an exact
+two-owner row this is literally the owner at the other cell. -/
+def canonicalLargeOwnerRowPartnerProduct
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (e : ℕ × ℕ) : ℕ :=
+  canonicalLargeOwnerRowAggregate data e.1 /
+    canonicalLargeOwnerCell data e.1 e.2
+
+/-- The row-partner product is bounded by the local row/diagonal collision
+defect. -/
+theorem canonicalLargeOwnerRowPartnerProduct_le_localCollisionDefect
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (e : ℕ × ℕ) :
+    canonicalLargeOwnerRowPartnerProduct data e ≤
+      canonicalLargeOwnerLocalCollisionDefect data e := by
+  unfold canonicalLargeOwnerRowPartnerProduct
+    canonicalLargeOwnerLocalCollisionDefect
+    canonicalLargeOwnerCollisionEnvelope
+  exact Nat.div_le_div_right (le_max_left _ _)
+
+/-- Exact degree-weighted row-aggregate product on the support. -/
+theorem canonicalLargeOwnerSupport_rowAggregate_product_eq_weighted
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t) :
+    (∏ e ∈ canonicalLargeOwnerSupport data,
+      canonicalLargeOwnerRowAggregate data e.1) =
+      ∏ j ∈ Finset.Icc 1 k,
+        (canonicalLargeOwnerRowAggregate data j) ^
+          (canonicalLargeOwnerRowSupport data j).card := by
+  classical
+  symm
+  calc
+    (∏ j ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerRowAggregate data j ^
+          (canonicalLargeOwnerRowSupport data j).card) =
+      ∏ j ∈ Finset.Icc 1 k,
+        ∏ e ∈ canonicalLargeOwnerSupport data with e.1 = j,
+          canonicalLargeOwnerRowAggregate data j := by
+      apply Finset.prod_congr rfl
+      intro j hj
+      simp [canonicalLargeOwnerRowSupport, Finset.prod_const]
+    _ = ∏ e ∈ canonicalLargeOwnerSupport data,
+        canonicalLargeOwnerRowAggregate data e.1 := by
+      apply Finset.prod_fiberwise_of_maps_to'
+      intro e he
+      exact (Finset.mem_product.mp (Finset.mem_filter.mp he).1).1
+
+/-- In the exactly two-regular row regime, the product of the row-partner
+products is exactly the complete large-prime mass. -/
+theorem canonicalLargeOwnerRowPartnerProduct_product_eq_mass
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (hrowTwo : ∀ j ∈ Finset.Icc 1 k,
+      (canonicalLargeOwnerRowSupport data j).card = 2) :
+    (∏ e ∈ canonicalLargeOwnerSupport data,
+      canonicalLargeOwnerRowPartnerProduct data e) =
+      kLargePart k (blockProduct k n) := by
+  let M := kLargePart k (blockProduct k n)
+  have hMpos : 0 < M := Nat.pos_of_ne_zero
+    (kLargePart_ne_zero k (blockProduct k n))
+  apply Nat.mul_left_cancel hMpos
+  calc
+    M * (∏ e ∈ canonicalLargeOwnerSupport data,
+        canonicalLargeOwnerRowPartnerProduct data e) =
+      (∏ e ∈ canonicalLargeOwnerSupport data,
+          canonicalLargeOwnerCell data e.1 e.2) *
+        (∏ e ∈ canonicalLargeOwnerSupport data,
+          canonicalLargeOwnerRowPartnerProduct data e) := by
+      rw [canonicalLargeOwnerSupport_product_eq_kLargePart]
+    _ = ∏ e ∈ canonicalLargeOwnerSupport data,
+        (canonicalLargeOwnerCell data e.1 e.2 *
+          canonicalLargeOwnerRowPartnerProduct data e) := by
+      rw [Finset.prod_mul_distrib]
+    _ = ∏ e ∈ canonicalLargeOwnerSupport data,
+        canonicalLargeOwnerRowAggregate data e.1 := by
+      apply Finset.prod_congr rfl
+      intro e he
+      unfold canonicalLargeOwnerRowPartnerProduct
+      exact Nat.mul_div_cancel'
+        (canonicalLargeOwnerCell_dvd_rowAggregate data he)
+    _ = ∏ j ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerRowAggregate data j ^
+          (canonicalLargeOwnerRowSupport data j).card :=
+      canonicalLargeOwnerSupport_rowAggregate_product_eq_weighted data
+    _ = ∏ j ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerRowAggregate data j ^ 2 := by
+      apply Finset.prod_congr rfl
+      intro j hj
+      rw [hrowTwo j hj]
+    _ = (∏ j ∈ Finset.Icc 1 k,
+        canonicalLargeOwnerRowAggregate data j) ^ 2 := by
+      rw [Finset.prod_pow]
+    _ = M * M := by
+      rw [canonicalLargeOwnerRowAggregate_product_eq_mass]
+      simp only [M, pow_two]
+
+/-- Exact two-regular collision stability bound.  If every lower row has two
+nontrivial large owners, the global collision defect is at least the entire
+large-prime mass.  Equivalently the collision product is at least the square
+of that mass. -/
+theorem canonicalLargeOwner_mass_le_collisionDefect_of_rowTwo
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (hrowTwo : ∀ j ∈ Finset.Icc 1 k,
+      (canonicalLargeOwnerRowSupport data j).card = 2) :
+    kLargePart k (blockProduct k n) ≤
+      canonicalLargeOwnerCollisionDefect data := by
+  rw [← canonicalLargeOwnerRowPartnerProduct_product_eq_mass data hrowTwo]
+  unfold canonicalLargeOwnerCollisionDefect
+  apply Finset.prod_le_prod
+  · intro e he
+    exact Nat.zero_le _
+  · intro e he
+    exact canonicalLargeOwnerRowPartnerProduct_le_localCollisionDefect data e
+
+/-- Collision-product form of the same exact stability estimate. -/
+theorem canonicalLargeOwner_mass_sq_le_collisionProduct_of_rowTwo
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (hrowTwo : ∀ j ∈ Finset.Icc 1 k,
+      (canonicalLargeOwnerRowSupport data j).card = 2) :
+    (kLargePart k (blockProduct k n)) ^ 2 ≤
+      canonicalLargeOwnerCollisionProduct data := by
+  rw [canonicalLargeOwnerCollisionProduct_eq_mass_mul_defect, pow_two]
+  exact Nat.mul_le_mul_left _
+    (canonicalLargeOwner_mass_le_collisionDefect_of_rowTwo data hrowTwo)
+
+/-- Consolidated exact weighted stability package for a support with two
+large owners in every row and every column.  It records the sharp global
+cofactor exponents together with the unavoidable collision lower bound. -/
+theorem canonicalLargeOwner_twoRegular_weighted_stability
+    {k n d t : ℕ} (data : CanonicalOwnerData k n d t)
+    (hblocks : upperBlockAfterFour k n d t = blockProduct k n)
+    (hrowTwo : ∀ j ∈ Finset.Icc 1 k,
+      (canonicalLargeOwnerRowSupport data j).card = 2)
+    (hcolumnTwo : ∀ i ∈ Finset.Icc 1 k,
+      (canonicalLargeOwnerColumnSupport data i).card = 2) :
+    ((∏ e ∈ canonicalLargeOwnerSupport data,
+        canonicalLargeOwnerRowCofactor data e.1) =
+        (kSmallPart k (blockProduct k n)) ^ 2) ∧
+      ((∏ e ∈ canonicalLargeOwnerSupport data,
+        canonicalLargeOwnerColumnCofactor data e.2) =
+        (kSmallPart k (blockProduct k n)) ^ 2) ∧
+      ((∏ e ∈ canonicalLargeOwnerSupport data,
+        canonicalLargeOwnerRowCofactor data e.1 *
+          canonicalLargeOwnerColumnCofactor data e.2) =
+        (kSmallPart k (blockProduct k n)) ^ 4) ∧
+      ((∏ e ∈ canonicalLargeOwnerSupport data,
+        canonicalLargeOwnerRowPartnerProduct data e) =
+        kLargePart k (blockProduct k n)) ∧
+      kLargePart k (blockProduct k n) ≤
+        canonicalLargeOwnerCollisionDefect data := by
+  exact ⟨
+    canonicalLargeOwnerSupport_rowCofactor_product_eq_smallPart_sq
+      data hrowTwo,
+    canonicalLargeOwnerSupport_columnCofactor_product_eq_smallPart_sq
+      data hblocks hcolumnTwo,
+    canonicalLargeOwnerSupport_rowColumnCofactor_product_eq_smallPart_pow_four
+      data hblocks hrowTwo hcolumnTwo,
+    canonicalLargeOwnerRowPartnerProduct_product_eq_mass data hrowTwo,
+    canonicalLargeOwner_mass_le_collisionDefect_of_rowTwo data hrowTwo⟩
+
 /-- If two coprime factors `P,C` divide the sum of two quantities carrying
 the common factor `P`, then the partner `C` divides the sum after `P` is
 removed.  This is the exact secant relation among the three local cofactors. -/
@@ -355,6 +724,20 @@ theorem canonicalLargeOwner_tangent_cofactor_dvd
 #print axioms canonicalLargeOwner_lower_term_factorization
 #print axioms canonicalLargeOwnerRowAggregate_product_eq_mass
 #print axioms canonicalLargeOwnerRowCofactor_product_eq_smallPart
+#print axioms canonicalLargeOwnerColumnProduct_dvd_modifiedUpper
+#print axioms canonicalLargeOwner_modified_upper_term_factorization
+#print axioms canonicalLargeOwnerColumnCofactor_product_eq_smallPart
+#print axioms canonicalLargeOwnerSupport_rowCofactor_product_eq_weighted
+#print axioms canonicalLargeOwnerSupport_columnCofactor_product_eq_weighted
+#print axioms canonicalLargeOwnerSupport_rowCofactor_product_eq_smallPart_sq
+#print axioms canonicalLargeOwnerSupport_columnCofactor_product_eq_smallPart_sq
+#print axioms canonicalLargeOwnerSupport_rowColumnCofactor_product_eq_smallPart_pow_four
+#print axioms canonicalLargeOwnerRowPartnerProduct_le_localCollisionDefect
+#print axioms canonicalLargeOwnerSupport_rowAggregate_product_eq_weighted
+#print axioms canonicalLargeOwnerRowPartnerProduct_product_eq_mass
+#print axioms canonicalLargeOwner_mass_le_collisionDefect_of_rowTwo
+#print axioms canonicalLargeOwner_mass_sq_le_collisionProduct_of_rowTwo
+#print axioms canonicalLargeOwner_twoRegular_weighted_stability
 #print axioms square_dvd_owner_mul_iff_owner_dvd_int
 #print axioms normalized_square_implies_owner_dvd_column_cofactor_defect
 #print axioms two_regular_local_cofactor_relations

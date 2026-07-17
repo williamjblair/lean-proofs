@@ -42,7 +42,11 @@ Accepted interfaces:
 - canonical partner extraction and tangent specialization.
 
 SHA-256:
-`b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002`
+`d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da`
+
+The module now also contains the exact two-regular row/column weighted
+identities audited separately in
+`two_regular_and_four_crossing_import_report.md`.
 
 ### contiguous integral Chebyshev tail
 

@@ -245,8 +245,10 @@ The independently verified candidate minimal suffix is
 `K0 = 18986`,
 
 with `k=18985` the last failure. This remains conditional on the pairing
-product upper bound and the symbolic analytic tail beginning at
-`k=1000000`.
+product upper bound. The symbolic analytic input beginning at `k=1000000`
+is now kernel-banked, but the finite threshold scan is still an independently
+verified exact artifact rather than a single Lean theorem covering every
+integer from `18986` through `999999`.
 
 ## Exact verifier policy
 
@@ -259,16 +261,23 @@ product upper bound and the symbolic analytic tail beginning at
 - exact cleared integer comparison whenever an interval contains zero.
 
 Binary floating-point logarithms are not acceptance conditions. The
-analytic prime-counting estimate beyond the finite scan is an imported
-mathematical theorem and must be kernel-banked before the final tail
-exclusion can be called formal.
+analytic prime-counting dependency beyond the finite scan is now
+kernel-banked in
+`ErdosProblems/Erdos686MatchingTailIntegralChebyshev.lean`. Eight exact
+dyadic estimates on `[2,512]`, propagated by a differential comparison,
+prove
 
-An axiom-clean Chebyshev replacement has now been banked, including
-`8*pi(k)<k` for every `k>=10^10`.  It is not contiguous with the exact scan:
-direct use of the formal Chebyshev expression becomes favorable only around
-`k=342471419`, while the convenient rational bound starts at `10^10`.
-Therefore it leaves a genuine uncovered interval beginning at `10^6` and is
-recorded only as a valid tail input, not as acceptance of Claim 10.
+`integral_2^x dt/log(t)^2 <= (5/2)*x/log(x)^2`.
+
+Together with formal Abel summation, Chebyshev's theta bound, and the exact
+integer comparison `2^33<10^10`, Lean proves
+
+`8 * Nat.primeCounting k < k`
+
+for every `k>=1000000`. This removes the former analytic gap. Claim 10 still
+does not follow: the canonical support stability/matching-mass theorem is
+open, and the finite exact threshold scan has not yet been translated into
+an ordinary-kernel Lean certificate.
 
 ## Independent artifact hashes
 

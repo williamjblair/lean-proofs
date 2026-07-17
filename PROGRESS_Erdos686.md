@@ -854,9 +854,16 @@ fails some row j ≤ 17.
    `gcd(P,|U*V|)` to divide the fixed coefficient `|kappa*epsilon|`, without
    inverting either quotient. The proper-global wrapper currently has an
    unbounded quadratic determinant in `n,d`; multiplying the four local fixed
-   bounds into one global bound still needs the owner-specific recenterings
-   and row-quotient coprimality bookkeeping. Thus no size or gcd argument yet
-   excludes all integral solutions.
+   bounds is now specialized at all four crossing vertices, and pairwise
+   coprimality combines them into one crossing-product gcd divisor with a
+   completely index-dependent coefficient. This is an upper bound only:
+   no theorem forces that gcd to be nontrivial. Moreover, the coefficient can
+   vanish. The exact admissible residual profile
+   `G=12`, lower `(2,1,2,1,3)`, upper `(1,2,1,2,3)` leaves the sole fully
+   owned grid on rows `{2,4}` and columns `{1,3}`, whose four local factors
+   include zero. Residual profiles and divisibility conditions alone
+   therefore do not select a nonzero coefficient. Thus no size or gcd
+   argument yet excludes all integral solutions.
    An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
@@ -1059,6 +1066,17 @@ fails some row j ≤ 17.
    congruence. These local cofactors are unbounded, and the local congruence
    system is CRT-compatible absent the global cofactor-product identity;
    the next stability step must use that exact small-prime mass globally.
+   The row/column weighted identities are now complete in the exactly
+   two-regular regime. The support-weighted row and column cofactor products
+   are each `smallPart^2`, their joint load is `smallPart^4`, and the product
+   of all row-partner owners is exactly the full large mass `M`. But the
+   induced collision inequality is the wrong way for exclusion:
+   `M <= E` and hence `M^2 <= Xi`. Explicit pairwise-coprime two-regular
+   configurations attain, or approach arbitrarily closely, the endpoint
+   `E=M`. Thus weighted row/column/diagonal capacities are exhausted even
+   after exact small-prime bookkeeping; the diffuse branch needs a
+   cycle-level additive or tangent resultant using the common `n,d`
+   equations.
    The matching-tail analytic dependency is now contiguous without importing
    Rosser--Schoenfeld. Eight exact dyadic integral bounds through `512`,
    propagated by a kernel-checked derivative comparison, prove

@@ -9874,3 +9874,148 @@ proofs:
       eight times pi(k) is less than k for every k at least one million.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerColumnProduct_dvd_modifiedUpper
+    statement: >-
+      The pairwise-coprime product of every nontrivial canonical large owner
+      in one column divides that column's modified upper term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_modified_upper_term_factorization
+    statement: >-
+      Each modified upper term factors exactly as its complete large-owner
+      column product times the remaining column cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerColumnCofactor_product_eq_smallPart
+    statement: >-
+      When the modified upper block equals the lower block, the product of
+      all column cofactors is exactly the lower block's k-small-prime part.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_rowCofactor_product_eq_weighted
+    statement: >-
+      The row-cofactor product over the owner support equals the rowwise
+      product with every cofactor raised to its exact support degree.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_columnCofactor_product_eq_weighted
+    statement: >-
+      The column-cofactor product over the owner support equals the
+      columnwise product with exact support-degree exponents.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_rowCofactor_product_eq_smallPart_sq
+    statement: >-
+      If every row has degree two, the support-weighted row-cofactor product
+      is exactly the square of the complete small-prime mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_columnCofactor_product_eq_smallPart_sq
+    statement: >-
+      If every column has degree two, its support-weighted cofactor product
+      is exactly the square of the complete small-prime mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_rowColumnCofactor_product_eq_smallPart_pow_four
+    statement: >-
+      In the row-and-column two-regular regime, the joint support cofactor
+      load is exactly the fourth power of the small-prime mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerRowPartnerProduct_le_localCollisionDefect
+    statement: >-
+      The product of all other owners in a cell's row is bounded above by
+      that cell's exact row-diagonal collision defect.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_rowAggregate_product_eq_weighted
+    statement: >-
+      The row-aggregate product over support equals the rowwise product
+      weighted by exact support degrees.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerRowPartnerProduct_product_eq_mass
+    statement: >-
+      With exactly two owners in every row, the product of all row-partner
+      products is exactly the full above-k owner mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_mass_le_collisionDefect_of_rowTwo
+    statement: >-
+      In the row two-regular regime, the complete large-prime mass is at
+      most the global collision defect.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_mass_sq_le_collisionProduct_of_rowTwo
+    statement: >-
+      Equivalently, row degree two forces the square of the large-prime mass
+      below the full collision product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_twoRegular_weighted_stability
+    statement: >-
+      The consolidated row-and-column two-regular package records both
+      exact small-prime cofactor squares and the sharp collision lower bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5FourCrossingSecantGCD.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_four_crossing_secant_gcds_dvd_coefficients
+    statement: >-
+      Each vertex of a fully owned proper-global k=5 crossing grid gives an
+      exact gcd divisor whose coefficient depends only on the four indices,
+      with no division by a secant quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5FourCrossingSecantGCD.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_crossing_product_secant_gcd_dvd_coefficient_product
+    statement: >-
+      Pairwise coprimality combines the four local k=5 gcd divisors into one
+      crossing-product gcd bounded by a completely index-dependent product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

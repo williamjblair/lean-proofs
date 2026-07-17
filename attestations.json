@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:f96d8ab6752171009bb2ca7f5d5c001808ee8e6bdaf0ef189df35f5f8051a755",
+  "verifier_output_hash": "sha256:6f65a8de436b390ce488fe6cacaa3dc31147050b31ea4d0ff28886b083667f9b",
   "attestations": [
     {
       "problem": 154,
@@ -12639,7 +12639,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerRowAggregate_eq_allCells",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -12651,7 +12651,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwner_lower_term_factorization",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -12663,7 +12663,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerRowAggregate_product_eq_mass",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -12675,7 +12675,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerRowCofactor_product_eq_smallPart",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -12687,7 +12687,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.coprime_partner_dvd_cofactor_sum",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -12698,7 +12698,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.square_dvd_owner_mul_iff_owner_dvd_int",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -12710,7 +12710,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.normalized_square_implies_owner_dvd_column_cofactor_defect",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -12722,7 +12722,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.two_regular_local_cofactor_relations",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -12734,7 +12734,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwner_exists_partner_cofactors",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -12746,7 +12746,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwner_tangent_cofactor_dvd",
       "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
-      "proof_hash": "sha256:b85afcda71db160677d3c8933628b0f35429e0ee10705a75ccf574e322763002",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -12795,6 +12795,198 @@
       "theorem": "Erdos686.Erdos686Variant.eight_mul_primeCounting_lt_of_million_le",
       "file": "ErdosProblems/Erdos686MatchingTailIntegralChebyshev.lean",
       "proof_hash": "sha256:23176fcdb06c775aa7cb1a9971b0e3b525f66c38a4b25cc330325ecb1fec113f",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerColumnProduct_dvd_modifiedUpper",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwner_modified_upper_term_factorization",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerColumnCofactor_product_eq_smallPart",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_rowCofactor_product_eq_weighted",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_columnCofactor_product_eq_weighted",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_rowCofactor_product_eq_smallPart_sq",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_columnCofactor_product_eq_smallPart_sq",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_rowColumnCofactor_product_eq_smallPart_pow_four",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerRowPartnerProduct_le_localCollisionDefect",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_rowAggregate_product_eq_weighted",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerRowPartnerProduct_product_eq_mass",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwner_mass_le_collisionDefect_of_rowTwo",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwner_mass_sq_le_collisionProduct_of_rowTwo",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwner_twoRegular_weighted_stability",
+      "file": "ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean",
+      "proof_hash": "sha256:d113e0c1d599a3d682262526367d1e327fb1710998537789ac583aaa261a73da",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_proper_global_four_crossing_secant_gcds_dvd_coefficients",
+      "file": "ErdosProblems/Erdos686K5FourCrossingSecantGCD.lean",
+      "proof_hash": "sha256:0d85f0e28655cbdb7c41cce3844f9c8551ff6390970ba9ea06894e6288cb1d68",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_proper_global_crossing_product_secant_gcd_dvd_coefficient_product",
+      "file": "ErdosProblems/Erdos686K5FourCrossingSecantGCD.lean",
+      "proof_hash": "sha256:0d85f0e28655cbdb7c41cce3844f9c8551ff6390970ba9ea06894e6288cb1d68",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
