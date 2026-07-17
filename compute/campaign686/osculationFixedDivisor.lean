@@ -1,0 +1,13 @@
+import ErdosProblems.Erdos686OsculationFixedDivisor
+
+open Erdos686 Erdos686.Erdos686Variant
+
+#check FixedDivisorCertificate
+#check boundedOsculationFixedDivisor
+#check fixedDivisor_independent_of_selected_family
+#check fixedDivisor_independent_of_basis_change
+#check fixedDivisor_independent_of_scalar_normalization
+#check fixedDivisor_independent_of_detecting_pair
+#check residualSystem_has_no_nonunit_common_divisor
+#check corrected_fixed_divisor_dichotomy
+#check fullJet_fixedDivisor_degree_bound
