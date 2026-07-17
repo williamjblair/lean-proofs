@@ -861,6 +861,59 @@ fails some row j ≤ 17.
    ordinary kernel arithmetic. Given an integer interpolation polynomial,
    Lean additionally proves every owner divides the common resultant and
    combines pairwise-coprime owners to obtain the full product divisor.
+   The low-degree bivariate osculation audit is now banked through its exact
+   foundational interface. The concrete total-degree monomial basis has
+   cardinality `binom(r+2,2)`, the selected least degree supplies at least
+   `4m+1` coefficients, and the corrected constraint matrix has `2m` rows:
+   one value row and one normalized directional-derivative row per support
+   owner. Lean identifies both row dot products exactly. The source package's
+   `4m`-row bounded-family claim is rejected; the intended
+   `N_r-4m+1` family must instead come from the separate finite-cube fiber
+   argument applied to the actual `2m` rows. The first exact finite-cube
+   layer is also kernel-banked: translated row images lie in
+   `(D*L+1)^(2m)` boxes, equality of codes is exactly equality of matrix
+   images, and the corrected square-radius inequality produces a nonzero
+   integer kernel vector with every coordinate bounded by `D`. Lean also
+   proves the terminal `(D+1)^t` cube-subset bound once restriction to `t`
+   coordinates is injective, constructs exactly `finrank` pivot coordinates
+   detecting every rational subspace vector, and derives the sharp
+   `(D+1)^finrank` affine-cube intersection bound. A strict large fiber then
+   supplies `N-2q+1` rationally independent bounded integer kernel
+   differences. Specializing `q=2m` gives exactly the required
+   `N-4m+1` family for the corrected osculation matrix. This is a genuine
+   finite-cube independence proof, not a nullity count. The exact normalized
+   value and directional matrix entries are now also bounded by
+   `3*r*2^k*k^(r-1)` under the already banked reduced-binomial coefficient
+   bounds, giving the advertised independent-family coefficient radius
+   `12*N_r*r*2^k*k^(r-1)`. The repaired barycentric fallback is also
+   kernel-banked through its node values, exact denominator-cleared
+   derivative system, and both degree branches. Lean proves that the
+   degree-`k*|S|` coefficient is `(c+v)^k-4v^k` and, over the integers for
+   `k>=3`, it vanishes exactly when `c=v=0`; it is not mislabeled as an
+   unconditional leading coefficient.
+   The exact root identity and its first effective branch are now banked:
+   each support fraction lies in the strict `(2k-1)/(n+1)` envelope around
+   `d/n`, and when the total weight vanishes but `c` does not, Lean proves
+   `n+1 < (2k-1)*sum|w_j|/|c|`. The final `v!=0` rearrangement remains open.
+   The local-to-global square layer is now closed as well. Lean proves the
+   exact bivariate first-order Taylor congruence modulo `P^2`, audits the
+   displacement from `(j,rho)` to `(-n,-d)` as
+   `(-n-j,-d-rho)`, cancels the normalized coefficient modulo a composite
+   owner square only using explicit coprimality, and combines pairwise-coprime
+   owners to obtain `M^2 | F(-n,-d)`.
+   The post-cancellation algebraic split is banked at its exact current
+   strength: a primitive integral common-factor presentation specializes to
+   either a vanishing common component or simultaneous quotient zeros; a
+   unit factor forces the quotient branch, whose rational quotients have no
+   common nonunit factor. No multivariate Bézout or `r_m^2` intersection
+   bound is claimed yet.
+   The nonzero barycentric residual is also kernel-banked:
+   `Lambda*(U(-n)+dV(-n))=(-1)^m*M*S_S`, and the unscaled global square
+   divisor implies `M|S_S` with no coprimality assumption on `Lambda`. Its
+   exact height is bounded by
+   `(|gamma|+sum|omega_j|)*B^m`. Row-cofactor `k`-smoothness is exposed only
+   behind the precise full-large-part owner hypothesis, not inferred from a
+   partial matching owner.
    The square-Hermite,
    osculation, and ordinary matching-resultant designs are viable
    formalization targets, but the advertised verifier and certificate files

@@ -4076,6 +4076,479 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.OsculationMonomial.totalDegree_le
+    statement: >-
+      Every monomial in the concrete bivariate osculation basis has total
+      degree at most the declared degree.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculationMonomialBasis_card
+    statement: >-
+      The concrete bivariate total-degree basis has exactly binom(r+2,2)
+      monomials.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculationDegree_spec
+    statement: >-
+      The least osculation degree supplies at least 4m+1 coefficients for
+      the corrected 2m-row finite-cube construction.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculationDegree_minimal
+    statement: >-
+      The selected osculation degree is no larger than any degree whose
+      total-degree basis contains at least 4m+1 monomials.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculationMonomialDX_natAbs_le
+    statement: >-
+      The formal X derivative of a total-degree-r monomial is bounded by
+      r*k^(r-1) on the integer box of radius k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculationMonomialDY_natAbs_le
+    statement: >-
+      The formal Y derivative of a total-degree-r monomial is bounded by
+      r*k^(r-1) on the integer box of radius k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculationMonomialValue_natAbs_le
+    statement: >-
+      A total-degree-r monomial is bounded by k^r on the integer box of
+      radius k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculationDirectionEntry_natAbs_le
+    statement: >-
+      The normalized directional matrix entry obeys the exact
+      3*r*2^k*k^(r-1) envelope under the reduced-binomial coefficient bounds.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculationValueEntry_natAbs_le
+    statement: >-
+      Every value row entry obeys the same
+      3*r*2^k*k^(r-1) osculation envelope.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculation_value_row_dotProduct
+    statement: >-
+      Each value row of the exact 2m-row osculation matrix is polynomial
+      evaluation at its support point.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LowDegreeOsculation.lean
+    theorem: Erdos686.Erdos686Variant.osculation_direction_row_dotProduct
+    statement: >-
+      Each directional row of the exact 2m-row osculation matrix is the
+      normalized linear combination b times d/dX plus A times d/dY.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.cube_subset_card_le_of_restrict_injective
+    statement: >-
+      A finite coordinate-cube subset is bounded by (D+1)^t whenever
+      restriction to a selected set of t coordinates is injective.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.affine_cube_subset_card_le_of_subspace_restrict_injective
+    statement: >-
+      An affine cube fiber whose pairwise differences lie in a rational
+      subspace has at most (D+1)^t points when t selected coordinates detect
+      every vector in that subspace.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.exists_coordinate_finset_restrict_injective
+    statement: >-
+      Every rational coordinate subspace admits exactly finrank many pivot
+      coordinates whose restriction map is injective.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.affine_cube_subset_card_le_finrank
+    statement: >-
+      A finite coordinate-cube subset whose pairwise differences lie in a
+      rational subspace W has cardinality at most (D+1)^finrank(W).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.adjustedCubeRow_nonneg
+    statement: >-
+      Translating an integer matrix row by its negative coefficient mass
+      makes every image of the nonnegative coefficient cube nonnegative.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.adjustedCubeRow_le
+    statement: >-
+      Under a row l1 bound L, every translated cube-row image is at most
+      D times L.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.cubeImageCode_eq_iff_mulVec_eq
+    statement: >-
+      Two finite-cube coefficient vectors have equal translated image codes
+      exactly when their integer matrix images are equal.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.exists_nonzero_bounded_integer_kernel_vector_of_card_lt
+    statement: >-
+      A strict finite cube image-cardinality inequality produces a nonzero
+      integer kernel vector with coordinatewise absolute value at most D.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.exists_nonzero_bounded_integer_kernel_vector
+    statement: >-
+      If the column count exceeds twice the row count and
+      D*L+1 < (D+1)^2, the integer matrix has a nonzero kernel vector bounded
+      coordinatewise by D.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.exists_bounded_independent_integer_kernel_family
+    statement: >-
+      Under the corrected square-radius inequality, a q by N integer matrix
+      with N above 2q has N-2q+1 rationally independent bounded integer
+      kernel vectors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.exists_bounded_independent_osculation_kernel_family
+    statement: >-
+      A corrected 2m-row osculation matrix with at least 4m+1 columns has
+      exactly the required N-4m+1 rationally independent bounded integer
+      kernel vectors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.four_mul_rowBound_radius
+    statement: >-
+      The conservative coefficient radius four times the positive row bound
+      satisfies the exact square-radius inequality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.exists_bounded_independent_osculation_kernel_family_of_entry_bound
+    statement: >-
+      An entrywise H bound yields the full independent osculation-kernel
+      family with coefficient radius exactly 4*N*H.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationKernel.lean
+    theorem: Erdos686.Erdos686Variant.exists_bounded_independent_osculation_kernel_family_advertised
+    statement: >-
+      The full corrected osculation family has the advertised coefficient
+      bound 12*N*r*2^k*k^(r-1).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationTaylor.lean
+    theorem: Erdos686.Erdos686Variant.power_first_order_remainder_dvd
+    statement: >-
+      The exact first-order Taylor remainder of an integer monomial is
+      divisible by P squared whenever the displacement is divisible by P.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationTaylor.lean
+    theorem: Erdos686.Erdos686Variant.osculation_first_order_remainder_dvd
+    statement: >-
+      Every low-degree coefficient vector satisfies the exact bivariate
+      first-order Taylor congruence modulo P squared.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationTaylor.lean
+    theorem: Erdos686.Erdos686Variant.osculation_owner_square_dvd
+    statement: >-
+      The normalized owner-square congruence and directional condition force
+      one osculation value at (-n,-d) to be divisible by the composite owner
+      square, with cancellation justified by explicit coprimality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationTaylor.lean
+    theorem: Erdos686.Erdos686Variant.pairwise_coprime_product_square_dvd
+    statement: >-
+      Pairwise-coprime local square divisors multiply to the square of their
+      full support product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationTaylor.lean
+    theorem: Erdos686.Erdos686Variant.osculation_support_product_square_dvd
+    statement: >-
+      For every pairwise-coprime owner support, the square of its full product
+      divides the low-degree osculation value at (-n,-d).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationTaylor.lean
+    theorem: Erdos686.Erdos686Variant.integer_eq_zero_of_square_dvd_of_natAbs_lt
+    statement: >-
+      An integer whose absolute value is strictly below a natural square
+      dividing it must vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationTaylor.lean
+    theorem: Erdos686.Erdos686Variant.osculation_evaluate_eq_zero_of_product_square_bound
+    statement: >-
+      The global square divisor and a strict coefficient-height bound force
+      the osculation polynomial to vanish at (-n,-d).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.rationalize_specialize
+    statement: >-
+      Mapping an integral bivariate polynomial to rational coefficients
+      commutes exactly with specialization at an integral point.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.bivariate_specialization_split
+    statement: >-
+      Two displayed common-factor identities at a common integral zero split
+      exactly into a vanishing common factor or simultaneous quotient zeros.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.PrimitiveRationalGCDPresentation.specialization_split
+    statement: >-
+      A primitive rational-gcd presentation exposes the exact common-component
+      or quotient-pair branch at every common integral specialization.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.PrimitiveRationalGCDPresentation.quotientPairAt_of_isUnit_G
+    statement: >-
+      A unit common factor has no specialization zero, so every common zero
+      lies in the quotient-pair branch.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationDichotomy.lean
+    theorem: Erdos686.Erdos686Variant.PrimitiveRationalGCDPresentation.coprime_quotient_interface
+    statement: >-
+      Every common rational polynomial factor of the residual quotients is a
+      unit, without incorrectly asserting multivariate comaximality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMatching.lean
+    theorem: Erdos686.Erdos686Variant.derivative_defect_at_node
+    statement: >-
+      The barycentric derivative defect at a support node equals the exact
+      denominator-cleared weighted secant expression.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMatching.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_derivative_system_iff
+    statement: >-
+      The square-Hermite derivative system is exactly equivalent to its
+      integral denominator-cleared barycentric identity.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMatching.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_matchingPhi_coeff_eq_zero_iff
+    statement: >-
+      For k at least three, the degree-k|S| coefficient of the matching
+      polynomial vanishes exactly when c and the total weight v both vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMatching.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_quotient_natDegree_nonzero_branch
+    statement: >-
+      When c or v is nonzero and W squared divides the matching polynomial,
+      the quotient has exact degree |S|(k-2).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMatching.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_quotient_natDegree_zero_branch
+    statement: >-
+      In the c=v=0 branch and k at least four, the matching quotient degree
+      is at most |S|(k-2)-k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMatching.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_root_identity
+    statement: >-
+      A root of U(-n)+dV(-n) gives the exact rational identity
+      c=sum w_j(d+rho_j)/(n+j), with only the displayed row denominators.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMatching.lean
+    theorem: Erdos686.Erdos686Variant.support_fraction_deviation_bound
+    statement: >-
+      Each support fraction differs from d/n by less than the explicit
+      (2k-1)/(n+1) envelope.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMatching.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_weighted_root_deviation
+    statement: >-
+      The barycentric root satisfies the strict weighted l1 deviation bound
+      around d/n whenever at least one support weight is nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMatching.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_zero_total_weight_root_bound
+    statement: >-
+      If the total weight vanishes but c is nonzero, then n+1 is strictly
+      below (2k-1) times the weight l1 norm divided by |c|.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ResidualDivisor.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_residual_exact_factorization
+    statement: >-
+      Scaling the barycentric value and extracting all owner factors gives
+      exactly (-1)^m times M times the explicit residual cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ResidualDivisor.lean
+    theorem: Erdos686.Erdos686Variant.scaled_barycentric_residual_exact_factorization
+    statement: >-
+      The residual factorization has a direct denominator-cleared integral
+      interface in the gamma and omega coordinates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ResidualDivisor.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_residual_cofactor_dvd
+    statement: >-
+      If M squared divides the scaled barycentric value and M is nonzero,
+      then M divides the exact residual cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ResidualDivisor.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_residual_cofactor_dvd_of_unscaled_square
+    statement: >-
+      The unscaled owner-square divisor also forces M to divide the residual,
+      without any coprimality assumption on the barycentric denominator.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ResidualDivisor.lean
+    theorem: Erdos686.Erdos686Variant.row_cofactor_kSmooth_of_containsFullLargePrimePart
+    statement: >-
+      A row cofactor is k-smooth under the explicit hypothesis that its owner
+      contains the entire greater-than-k part, including multiplicity.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686ResidualDivisor.lean
+    theorem: Erdos686.Erdos686Variant.barycentric_residual_cofactor_natAbs_le
+    statement: >-
+      The residual cofactor is bounded by the exact coefficient mass
+      (|gamma|+sum|omega|) times B^m.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686PadicLift.lean
     theorem: Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
     statement: >-
