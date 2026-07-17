@@ -5621,6 +5621,364 @@ proofs:
       SE1 and SE2.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/23.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalCrossingSquare.lean
+    theorem: Erdos686.Erdos686Variant.k5_even_crossing_owner_sq_dvd_linear_defect
+    statement: >-
+      At every even-even k=5 crossing, explicit cancellation of the composite
+      coefficient six makes the owner square divide the primitive linear defect.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalCrossingSquare.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_crossing_owner_sq_dvd_linear_defect
+    statement: >-
+      The primitive crossing-square defect applies to an actual canonical
+      exceptional owner cell without a primality assumption.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalCrossingSquare.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_crossing_owner_sq_lt_three_lower
+    statement: >-
+      The centered k=5 window bounds the exceptional crossing owner square
+      strictly below three times its fully owned lower term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalCrossingSquare.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_crossing_square_bound
+    statement: >-
+      All four exact exceptional placements carry the corresponding strict
+      crossing-square bound together with their exact gap residue.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalIntersection.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_row_column_gcd_eq_crossings
+    statement: >-
+      The gcd of the two fully owned row product and two modified-column
+      product equals exactly the product of their four crossing owners.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalIntersection.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwnerCell_sq_dvd_k5OwnerSquareDefect
+    statement: >-
+      Every composite canonical k=5 owner square divides its explicit signed
+      tangent defect, with no high-prime or invertibility shortcut.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalIntersection.lean
+    theorem: Erdos686.Erdos686Variant.k5OwnerSquareDefect_ne_zero_of_solution
+    statement: >-
+      The exact centered ratio window rules out the zero tangent-defect branch
+      at every one of the twenty-five k=5 owner cells.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalIntersection.lean
+    theorem: Erdos686.Erdos686Variant.k5OwnerSquareDefect_natAbs_le
+    statement: >-
+      Every k=5 owner tangent defect has absolute value at most 240 times n.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalIntersection.lean
+    theorem: Erdos686.Erdos686Variant.k5_crossing_product_sq_dvd_four_tangent_defects
+    statement: >-
+      The square of the four-crossing product divides the product of the four
+      explicit nonzero tangent defects.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalIntersection.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_four_terms_sq_dvd_window_sq_mul_tangent_defects
+    statement: >-
+      Squaring the exact intersection divisor and substituting tangent
+      congruences removes all owner variables from the proper-global bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalIntersection.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_four_terms_le_window_mul_tangent_height
+    statement: >-
+      The four proper-global consecutive terms are bounded by the degree-nine
+      diagonal window times the exact squared tangent-height loss.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalIntersection.lean
+    theorem: Erdos686.Erdos686Variant.k5_tail_proper_global_intersection_corrected_window
+    statement: >-
+      Every proper k=5 tail solution supplies two rows, two columns, exact
+      crossing intersection, owner-free square divisibility, and height bounds.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CollinearSupport.lean
+    theorem: Erdos686.Erdos686Variant.secantLine_coefficients_bounded
+    statement: >-
+      Two distinct matching cells construct a primitive affine secant line
+      with exact coefficient bounds inside the k by k owner square.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CollinearSupport.lean
+    theorem: Erdos686.Erdos686Variant.support_product_dvd_affineLineResultant
+    statement: >-
+      Pairwise-coprime owner moduli on one affine line multiply into the
+      line's value at the translated solution point.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CollinearSupport.lean
+    theorem: Erdos686.Erdos686Variant.collinear_support_card_le_two_of_resultant_eq_zero
+    statement: >-
+      The zero affine-line resultant branch has at most two cells by the
+      kernel-checked zero-secant maximum-degree-one theorem.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CollinearSupport.lean
+    theorem: Erdos686.Erdos686Variant.affineLineResultant_natAbs_lt_three_k_sq_mul_d
+    statement: >-
+      A bounded primitive support line has translated resultant of absolute
+      value strictly below three times k squared times d.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CollinearSupport.lean
+    theorem: Erdos686.Erdos686Variant.collinear_matching_support_excluded_of_nat_mass
+    statement: >-
+      Natural owner mass exceeding the exact affine-line height excludes every
+      collinear row-diagonal matching support of at least three cells.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CollinearSupport.lean
+    theorem: Erdos686.Erdos686Variant.collinear_matching_support_excluded_of_secantLine_nat_mass
+    statement: >-
+      The constructive secant-line specialization closes both zero and
+      nonzero collinear branches from the exact natural mass comparison.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwnerExponent_eq_block_factorization_of_large
+    statement: >-
+      At every prime above k, canonical cleaning retains the complete lower
+      block exponent because the factorial residual has zero valuation.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerCell_dvd_shiftedDifference
+    statement: >-
+      Each projected high-prime canonical owner cell divides its exact shifted
+      diagonal difference.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerCells_pairwise_coprime
+    statement: >-
+      Distinct projected high-prime canonical owner cells are pairwise coprime.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_allCells_eq_kLargePart
+    statement: >-
+      The product over every projected canonical cell equals exactly the full
+      above-k prime part of the lower block.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_product_eq_kLargePart
+    statement: >-
+      Removing unit cells preserves exact equality between support product and
+      the complete high-prime block mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_spec
+    statement: >-
+      The canonical high-prime support simultaneously packages exact mass,
+      nontriviality, cell bounds, divisibilities, and pairwise coprimality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_row_diagonal_capacity
+    statement: >-
+      Every row and every signed diagonal contains at most k projected
+      high-prime support cells, without connectivity assumptions.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_signed_divisibility
+    statement: >-
+      Canonical high-prime support cells divide both signed row terms and
+      signed diagonal terms in the exact integer interfaces used by matching.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.exists_fixedColumn_matching_product_pow_ge_kLargePart
+    statement: >-
+      Some fixed-column row-diagonal matching has product whose k-th power
+      dominates the complete canonical high-prime mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSupport.lean
+    theorem: Erdos686.Erdos686Variant.exists_fixedColumn_canonicalLarge_matching
+    statement: >-
+      Every canonical owner system supplies a genuine fixed-column
+      row-diagonal matching with exact mass, coprimality, and signed divisors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFullSquareSystem.lean
+    theorem: Erdos686.Erdos686Variant.k5_even_fullyOwned_row_square_defect_system
+    statement: >-
+      Every cell of an exceptional fully owned row carries its primitive
+      square defect after exact cancellation of the coefficients 24, 6, or 4.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFullSquareSystem.lean
+    theorem: Erdos686.Erdos686Variant.k5_even_fullyOwned_column_square_defect_system
+    statement: >-
+      Every cell of an exceptional fully owned column carries its primitive
+      square defect using only composite-owner coprimality with six.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFullSquareSystem.lean
+    theorem: Erdos686.Erdos686Variant.k5_fullyOwned_row_sq_dvd_defect_product
+    statement: >-
+      The square of a fully owned exceptional row term divides the product of
+      its five primitive row defects.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFullSquareSystem.lean
+    theorem: Erdos686.Erdos686Variant.k5_fullyOwned_column_sq_dvd_defect_product
+    statement: >-
+      The square of a fully owned exceptional column term divides the product
+      of its five primitive column defects.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalFullSquareSystem.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_full_square_star
+    statement: >-
+      Each of the four exceptional placements carries all nine distinct
+      primitive row-column square congruences simultaneously.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalAggregateNoGo.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_row_aggregate_collapse
+    statement: >-
+      The product of the five exceptional row defects is the block equation
+      defect plus the row square times an explicit cubic.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalAggregateNoGo.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_column_aggregate_collapse
+    statement: >-
+      The product of the five exceptional column defects is minus 8192 times
+      the equation defect plus the column square times an explicit cubic.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalAggregateNoGo.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_aggregate_squares_of_equation
+    statement: >-
+      Both aggregate square divisibilities already follow from the original
+      k=5 equation alone, proving that product aggregation loses the local data.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalAggregateNoGo.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_crossing_cofactor_resultant_zero
+    statement: >-
+      At all four exceptional placements the shared-crossing row and column
+      cubic cofactors are identically proportional, so their resultant route is zero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalTangentCancellation.lean
+    theorem: Erdos686.Erdos686Variant.bipartite_tangent_product_ideal_identity
+    statement: >-
+      The four K2,2 tangent forms satisfy an explicit integer vertex-cover
+      ideal identity with displayed quadratic cofactors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalTangentCancellation.lean
+    theorem: Erdos686.Erdos686Variant.k5_four_tangent_defects_ideal_identity
+    statement: >-
+      The four proper-global k=5 tangent defects lie exactly in the ideal of
+      the two selected lower and two selected upper term products.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ProperGlobalTangentCancellation.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_crossing_dvd_coprime_cofactor_tangent_combination
+    statement: >-
+      After exact crossing cancellation, the two row-column cofactors are
+      coprime and the crossing product divides their explicit tangent combination.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 730
     source: erdosproblems
     file: ErdosProblems/Erdos730NearAffinePayment.lean

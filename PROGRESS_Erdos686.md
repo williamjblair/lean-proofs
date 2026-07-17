@@ -812,7 +812,35 @@ fails some row j ≤ 17.
    both coprime lower-row products, both coprime modified-upper products, and
    their joint lcm divide the single nine-diagonal window
    `(d-4)(d-3)...(d+4)`, while the four exact crossing gcds are retained.
-   Neither statement yet supplies the required absolute contradiction.
+   The exceptional crossing also carries the primitive square defect
+   `P^2 | d+i-j-3(n+j)` after explicit cancellation of the composite
+   coefficient six; the centered window gives `P^2<3(n+j)` in all four exact
+   placements. In the proper branch the gcd of the two-row and two-column
+   products is exactly the four-crossing product. Every one of those
+   composite crossing owners has a nonzero explicit tangent defect of
+   absolute value at most `240n`, and Lean eliminates the owner variables to
+   prove that the square of the four consecutive-term modulus divides the
+   square of the degree-nine window times the four tangent defects. This
+   improves the coarse degree-thirteen size bound to
+   `T <= W*(240n)^2`, but its degree is still too large for an absolute
+   cutoff. Neither square-level statement yet supplies the required
+   contradiction; the live need is cancellation between the diagonal window
+   and tangent-defect factors, or an independent global resultant.
+   The exceptional branch now retains all five primitive row defects and all
+   five primitive column defects, hence a nine-distinct-cell square star in
+   every exact placement. Two tempting eliminants are formally dead:
+   multiplying a whole row or column collapses to the original block equation
+   plus the corresponding term square times a cubic, and the shared-crossing
+   row and column cubics satisfy the exact proportionality
+   `Q_column(x,3x)=-512*Q_row(x,3x)`. Thus aggregation and the first cofactor
+   resultant add no independent equation. In the proper branch the four
+   tangent forms satisfy an explicit `K2,2` ideal identity
+   `product defects=(row product)*U+(column product)*V`. Cancelling the exact
+   crossing intersection leaves coprime row/column cofactors and a genuine
+   divisibility of their displayed tangent combination by the crossing
+   product, but the naive resultant is structurally zero. Both branches now
+   require a second non-syzygetic row/column relation; repeating product
+   aggregation is ruled out in Lean.
    An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
@@ -977,6 +1005,23 @@ fails some row j ≤ 17.
    normalized composite-owner congruence. Exact division `R=M*U`, cancellation
    of one owner, explicit Bézout inversion modulo that owner, and finite CRT
    assembly with a representative below `M` are kernel-checked.
+   The formerly missing high-prime support bridge is now exact. Projecting
+   every canonical cell to prime bases above `k` gives a pairwise-coprime
+   support whose product is literally
+   `kLargePart k (blockProduct k n)`; every projected cell retains its lower,
+   upper, and signed-diagonal divisibilities. Lean proves row and signed
+   diagonal capacities at most `k`, without connectedness or minimum degree.
+   Partitioning by columns extracts a genuine fixed-column row-diagonal
+   matching whose product to the `k`th power dominates the entire high-prime
+   mass. The `k`th-power loss is the sharp unconditional column-cover bound,
+   so a stronger stability theorem is still needed to retain enough mass.
+   The affine-line matching branch is independently closed at exact current
+   strength: a zero line resultant contains at most two support cells by the
+   zero-secant degree-one theorem, while a nonzero line is impossible as soon
+   as the support product exceeds `3*k^2*d`. Constructive secant-line
+   coefficients and the natural canonical-owner interface are kernel-checked;
+   the remaining noncollinear branch still needs the mass/stability
+   comparison.
    Finally, a support-dependent effective intersection
    certificate now has a kernel interface covering integer shear, nonzero
    resultant roots, fiber-gcd roots, finite candidate lists, a root bound,

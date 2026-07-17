@@ -2,7 +2,9 @@
 
 Date: 2026-07-16
 
-Status: in progress. Claims 1–4 are kernel-checked. No large-\(k\) exclusion theorem is claimed yet.
+Status: in progress. Claims 1–8 are kernel-checked.  Claim 9 is
+kernel-checked after separating its exact mass premise.  No unconditional
+large-\(k\) exclusion theorem is claimed yet.
 
 ## Source provenance
 
@@ -165,12 +167,49 @@ and lies below the exact product modulus.
 
 ### 9. Collinear-support exclusion
 
-Pending. The source argument depends on the support-size lower bound and the
-mass comparison, neither of which has yet been imported from this package.
+Accepted after repair and kernel-checked.
+
+Lean interfaces:
+
+- `Erdos686.Erdos686Variant.secantLine_coefficients_bounded`
+- `Erdos686.Erdos686Variant.support_product_dvd_affineLineResultant`
+- `Erdos686.Erdos686Variant.collinear_support_card_le_two_of_resultant_eq_zero`
+- `Erdos686.Erdos686Variant.affineLineResultant_natAbs_lt_three_k_sq_mul_d`
+- `Erdos686.Erdos686Variant.collinear_matching_support_excluded_of_nat_mass`
+- `Erdos686.Erdos686Variant.collinear_matching_support_excluded_of_secantLine_nat_mass`
+
+The zero-resultant branch is closed internally: a common line through the
+translated solution point would make every secant zero, so the
+maximum-degree-one theorem limits the line to two support cells.  The nonzero
+branch is excluded from the exact natural comparison
+
+`3*k^2*d < product owner`.
+
+No residual zero/nonzero hypothesis remains.
 
 ### 10. Large-\(k\) tail exclusion
 
 Not accepted yet.
+
+The previously missing canonical support bridge is now kernel-checked:
+
+- `canonicalLargeOwnerSupport_product_eq_kLargePart` proves that the product
+  of the projected nonunit owner cells is exactly the complete above-\(k\)
+  part of the lower block;
+- projected cells retain lower, upper, and signed-diagonal divisibility and
+  are pairwise coprime;
+- row and signed-diagonal support capacities are at most \(k\), with no
+  connectedness or minimum-degree assumption;
+- `exists_fixedColumn_canonicalLarge_matching` extracts an actual
+  row-diagonal matching whose product \(X\) satisfies
+  `kLargePart <= X^k`.
+
+The \(k\)-th-power loss is the sharp unconditional fixed-column cover bound
+and is far too large for the advertised matching mass comparison.  Thus the
+remaining mathematical gap is now a precise stability theorem extracting a
+matching with substantially more mass, followed by the exact threshold
+comparison; it is not a missing equality between the canonical owner matrix
+and `kLargePart`.
 
 The exact finite comparison has been independently reduced to
 
@@ -219,3 +258,7 @@ exclusion can be called formal.
   `6f6b7c1efcd5bdf8be080f41a8b298e65febb5fd3ed4597adb5d52dac0212958`
 - `Erdos686TangentDefectCRT.lean`:
   `e68902eaa2e7cd21fbb9220abd765f281c1eefb40d6b20fbe0e2996acbb0626a`
+- `Erdos686CollinearSupport.lean`:
+  `e9ac40d3d66bdcb06d3ae80e2b5742e0c13e2d0bf2d30e55a517ce440506e578`
+- `Erdos686CanonicalLargeOwnerSupport.lean`:
+  `913ff85aed35f34d22a5b58e218fbd593e8c7f2722c184011c00163207ff80a4`
