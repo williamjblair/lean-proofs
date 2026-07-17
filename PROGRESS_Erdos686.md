@@ -847,8 +847,16 @@ fails some row j ≤ 17.
    `a,b` and integer secant quotients `Uplus,Uminus` satisfying
    `Uplus*Uminus=r^2*mu1*mu2*b-s^2*a`. This preserves the adjacent row and
    column equations that vanish in the tangent-product syzygy. It is a new
-   exact global constraint, but no size, congruence, or gcd argument yet
-   excludes all of its integral solutions.
+   exact global constraint. Combining it with the banked tangent relation now
+   gives a determinant gcd divisor with the zero determinant branch kept
+   explicit. At one crossing, a cancelled owner-square tangent congruence and
+   the opposite secant congruence also force
+   `gcd(P,|U*V|)` to divide the fixed coefficient `|kappa*epsilon|`, without
+   inverting either quotient. The proper-global wrapper currently has an
+   unbounded quadratic determinant in `n,d`; multiplying the four local fixed
+   bounds into one global bound still needs the owner-specific recenterings
+   and row-quotient coprimality bookkeeping. Thus no size or gcd argument yet
+   excludes all integral solutions.
    An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
@@ -1042,15 +1050,23 @@ fails some row j ≤ 17.
    proving that exponent two is sharp for capacity information alone. Thus
    the diffuse branch cannot be closed by strengthening the same row/diagonal
    relaxation; it needs simultaneous arithmetic excluding the two-regular
-   collision core.
-   The matching-tail analytic dependency has also been narrowed without
-   importing Rosser--Schoenfeld. An axiom-clean formal Chebyshev theorem now
-   yields the exact consequences `8*pi(k)<k` for every `k>=10^10` and again
-   by an independent coarser proof for `k>=10^12`. This is a valid symbolic
-   tail input, but it does not replace the current conditional threshold:
-   direct substitution becomes favorable only far above `10^6`, and the
-   interval from the existing exact scan to the Chebyshev tail remains
-   uncovered. No contiguous large-k exclusion is claimed.
+   collision core. The first simultaneous arithmetic layer is now exact.
+   Every lower term factors as its complete nontrivial large-owner row
+   aggregate times a row cofactor, and the product of all row cofactors is
+   exactly the `k`-small-prime part of the lower block. At an actual
+   row/diagonal/column partner configuration, cancelling the common owner
+   gives both an exact secant cofactor divisor and the normalized tangent
+   congruence. These local cofactors are unbounded, and the local congruence
+   system is CRT-compatible absent the global cofactor-product identity;
+   the next stability step must use that exact small-prime mass globally.
+   The matching-tail analytic dependency is now contiguous without importing
+   Rosser--Schoenfeld. Eight exact dyadic integral bounds through `512`,
+   propagated by a kernel-checked derivative comparison, prove
+   `integral_2^x dt/log(t)^2 <= (5/2)x/log(x)^2`. Abel summation and the exact
+   integer inequality `2^33<10^10` then give `8*pi(k)<k` for every
+   `k>=10^6`. This closes the former interval between the exact threshold scan
+   and the symbolic Chebyshev tail. It does not itself eliminate the
+   surviving canonical support, so no global large-k exclusion is claimed.
    Finally, a support-dependent effective intersection
    certificate now has a kernel interface covering integer shear, nonzero
    resultant roots, fiber-gcd roots, finite candidate lists, a root bound,

@@ -9708,3 +9708,169 @@ proofs:
       than k from one trillion onward.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentGCD.lean
+    theorem: Erdos686.Erdos686Variant.coprime_cofactor_determinant_gcd_dvd
+    statement: >-
+      Two integral linear relations in coprime natural cofactors force the
+      common modulus and secant determinant to divide the coefficient
+      determinant, without any modular inversion.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentGCD.lean
+    theorem: Erdos686.Erdos686Variant.local_tangent_opposite_secant_gcd_dvd_coefficient
+    statement: >-
+      A cancelled owner-square tangent congruence and an opposite secant
+      congruence bound the common owner/secant-quotient gcd by the fixed
+      tangent-secant coefficient, without dividing either quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentGCD.lean
+    theorem: Erdos686.Erdos686Variant.local_tangent_opposite_secant_gcd_zero_or_le_coefficient
+    statement: >-
+      The local tangent/opposite-secant divisor yields the exact dichotomy
+      that its fixed coefficient vanishes or the common gcd is bounded by
+      its absolute value.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentGCD.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_opposite_secant_tangent_determinant_gcd
+    statement: >-
+      Fully owned proper-global k=5 rows and columns combine their opposite
+      secant cofactor identity with the tangent relation to give an exact
+      determinant gcd divisor and an explicit zero branch.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerRowAggregate_eq_allCells
+    statement: >-
+      Removing trivial canonical large-owner cells from a row leaves its
+      complete row product unchanged.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_lower_term_factorization
+    statement: >-
+      Every lower consecutive term is exactly its complete nontrivial
+      large-owner row aggregate times the remaining row cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerRowAggregate_product_eq_mass
+    statement: >-
+      The product of the complete row aggregates is exactly the full
+      above-k prime part of the lower block product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerRowCofactor_product_eq_smallPart
+    statement: >-
+      The product of all lower-row cofactors left after deleting every
+      large owner is exactly the k-small-prime part of the lower block.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.coprime_partner_dvd_cofactor_sum
+    statement: >-
+      Cancelling a common owner from a row-diagonal column relation shows
+      that the coprime column partner divides the exact cofactor sum.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.square_dvd_owner_mul_iff_owner_dvd_int
+    statement: >-
+      Over the integers, a nonzero owner square divides the owner times a
+      quantity exactly when one copy of the owner divides that quantity.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.normalized_square_implies_owner_dvd_column_cofactor_defect
+    statement: >-
+      The normalized composite owner-square congruence cancels to an exact
+      tangent relation between the upper-column and lower-row cofactors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.two_regular_local_cofactor_relations
+    statement: >-
+      A two-regular owner cell simultaneously supplies its secant cofactor
+      divisor and its normalized tangent-defect divisor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_exists_partner_cofactors
+    statement: >-
+      Actual canonical row, signed-diagonal, and column partners produce
+      exact natural cofactors and the column-partner secant divisibility.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerTwoRegularArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_tangent_cofactor_dvd
+    statement: >-
+      Factored canonical row and column products specialize the normalized
+      square theorem to the exact owner tangent-cofactor congruence.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingTailIntegralChebyshev.lean
+    theorem: Erdos686.Erdos686Variant.integral_one_div_log_sq_le_at_512
+    statement: >-
+      Exact dyadic interval estimates bound the logarithmic integral from
+      two to 512 by five halves times 512 divided by log(512) squared.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingTailIntegralChebyshev.lean
+    theorem: Erdos686.Erdos686Variant.integral_one_div_log_sq_le_five_halves
+    statement: >-
+      Differential propagation of the dyadic base estimate proves the
+      logarithmic integral bound (5/2)x/log(x)^2 for every x at least 512.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingTailIntegralChebyshev.lean
+    theorem: Erdos686.Erdos686Variant.integral_theta_div_log_sq_le_five_halves
+    statement: >-
+      Chebyshev's theta estimate transfers the refined logarithmic integral
+      bound to the exact Abel-summation remainder.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingTailIntegralChebyshev.lean
+    theorem: Erdos686.Erdos686Variant.eight_mul_primeCounting_lt_of_million_le
+    statement: >-
+      Exact dyadic integration and 2^33 below 10^10 prove
+      eight times pi(k) is less than k for every k at least one million.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
