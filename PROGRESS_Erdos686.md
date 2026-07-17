@@ -914,15 +914,30 @@ fails some row j ≤ 17.
    `(|gamma|+sum|omega_j|)*B^m`. Row-cofactor `k`-smoothness is exposed only
    behind the precise full-large-part owner hypothesis, not inferred from a
    partial matching owner.
-   The square-Hermite,
-   osculation, and ordinary matching-resultant designs are viable
-   formalization targets, but the advertised verifier and certificate files
-   were not attached, the uniform `B_{>k}>3(n+1)` step was not proved, and no
-   binomial-specialized square congruence, Hermite construction, or resultant
-   branch from that package is yet manifest-banked. The remaining large-k
-   obligation is to eliminate that
-   canonical support, for example through a proved near-permutation/diffuse
-   mass-structure dichotomy.
+   The adversarial fixed-divisor correction is banked without the false claim
+   that a gcd inherits all support jets. Lean proves the exact product rule
+   and all three local factor-allocation cases. It defines the canonical
+   bounded space `V_B` as the span of every bounded integral lattice point,
+   proves `V_B <= K_r`, extends cancellation to that span basis-independently,
+   and proves `dim K_r >= binom(r+2,2)-2m`. The full-space dimension
+   hypotheses imply the exact degree inequality
+   `e*(2r-e+3) <= 4m`, but this is not transferred to `V_B` without a
+   spanning theorem. A fixed-divisor universal-property presentation is
+   invariant under bases, generating families, and associated scalar
+   normalizations; its residual family has no common nonunit factor. Existence
+   of that multivariate gcd and extraction of a coprime residual pair remain
+   explicit certificate obligations.
+   The moment-ladder core is also banked: the exact generating recurrence,
+   lower-moment `X^q` factorization, first surviving coefficient,
+   rational `Delta_q` zero classification, and Vandermonde termination. The
+   reversal to the original `matchingPhi` and the advertised exact degree
+   formulas remain open. Finally, a support-dependent effective intersection
+   certificate now has a kernel interface covering integer shear, nonzero
+   resultant roots, fiber-gcd roots, finite candidate lists, a root bound,
+   and original-curve verification. No concrete support instance or claim
+   that its current size beats the surviving scale has been made. The
+   remaining large-k obligation is still to eliminate the canonical support,
+   not merely to repackage it.
 3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as
    equivalent packaging via `finalResidual_iff_tail1000_and_smooth`; do not
    report its isolation as mathematical progress.  Regenerate the manifest

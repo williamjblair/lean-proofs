@@ -1,0 +1,4 @@
+/- Kernel-audit entrypoint for effective integral intersection certificates. -/
+import ErdosProblems.Erdos686EffectiveIntersectionInterface
+
+#print axioms Erdos686.Erdos686Variant.EffectiveIntersectionCertificate.common_zero_enumerated

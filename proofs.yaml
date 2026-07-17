@@ -4549,6 +4549,196 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686EffectiveIntersectionInterface.lean
+    theorem: Erdos686.Erdos686Variant.unshearPoint_sheared_coordinate
+    statement: >-
+      The inverse integer shear reconstructs a point with exact coordinate
+      T=X+lambda*Y.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686EffectiveIntersectionInterface.lean
+    theorem: Erdos686.Erdos686Variant.EffectiveIntersectionCertificate.common_zero_enumerated
+    statement: >-
+      A nonzero sheared resultant certificate with complete T and fiber-Y
+      root lists captures every common integral zero and verifies it on the
+      original curve.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LocalJetFactorAllocation.lean
+    theorem: Erdos686.Erdos686Variant.supportDifferential_mul
+    statement: >-
+      The support differential b*d/dX+A*d/dY obeys the exact polynomial
+      Leibniz rule.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LocalJetFactorAllocation.lean
+    theorem: Erdos686.Erdos686Variant.local_jet_product_identities
+    statement: >-
+      A factored polynomial with a full support jet satisfies the exact value
+      product and directional Leibniz identities at the support point.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LocalJetFactorAllocation.lean
+    theorem: Erdos686.Erdos686Variant.local_jet_allocates_to_right_of_left_value_ne_zero
+    statement: >-
+      If the left factor is nonzero at the support point, the right factor
+      inherits both value and directional jet conditions.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LocalJetFactorAllocation.lean
+    theorem: Erdos686.Erdos686Variant.local_jet_simple_left_factor_forces_right_value
+    statement: >-
+      If the left factor has a simple directional zero, the product jet forces
+      only the right factor value to vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LocalJetFactorAllocation.lean
+    theorem: Erdos686.Erdos686Variant.product_has_full_jet_of_left_and_right_values_zero
+    statement: >-
+      Two vanishing factor values give the product a full support jet without
+      restricting the right factor derivative.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LocalJetFactorAllocation.lean
+    theorem: Erdos686.Erdos686Variant.product_has_full_jet_of_left_full_jet
+    statement: >-
+      A left factor carrying the full support jet makes the right factor
+      locally unrestricted.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.momentNumerator_recurrence
+    statement: >-
+      The reverse barycentric generating numerator satisfies the exact
+      recurrence G_q=mu_q*Wbar+X*G_(q+1).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.momentNumerator_eq_X_pow_of_lower_moments
+    statement: >-
+      Vanishing of the lower moments factors the generating numerator by the
+      exact power X^q.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.momentNumerator_coeff_of_lower_moments
+    statement: >-
+      Under lower-moment cancellation, the coefficient at the first surviving
+      degree is exactly mu_q.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.rational_momentDelta_eq_zero_iff
+    statement: >-
+      For k at least three, the rational candidate moment block vanishes
+      exactly when mu_q and nu_(q-1) both vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.mu_vandermonde_termination
+    statement: >-
+      At distinct rational nodes, vanishing of the first m weighted moments
+      forces all m weights to vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BoundedOsculationSpace.lean
+    theorem: Erdos686.Erdos686Variant.boundedOsculationSpace_le_rationalOsculationKernel
+    statement: >-
+      The canonical span of every bounded integral lattice point lies in the
+      full rational jet kernel, with no reverse inclusion assumed.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BoundedOsculationSpace.lean
+    theorem: Erdos686.Erdos686Variant.linear_specialization_vanishes_on_boundedOsculationSpace
+    statement: >-
+      A linear specialization vanishing on all bounded lattice points
+      vanishes on their canonical rational span independently of generators.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BoundedOsculationSpace.lean
+    theorem: Erdos686.Erdos686Variant.rationalOsculationKernel_finrank_lower_basis
+    statement: >-
+      The full rational jet kernel has dimension at least
+      binom(r+2,2)-2m for the exact 2m-row osculation matrix.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BoundedOsculationSpace.lean
+    theorem: Erdos686.Erdos686Variant.fixedDivisor_degree_inequality_of_dimension_bounds
+    statement: >-
+      The full-space lower and quotient upper dimension bounds imply the
+      exact cleared divisor-degree inequality e(2r-e+3)≤4m.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.IsFixedDivisor.associated
+    statement: >-
+      Fixed divisors of the same polynomial subspace are associated and
+      therefore independent of basis, generators, and scalar normalization.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.IsFixedDivisor.of_associated
+    statement: >-
+      Replacing a fixed divisor by an associated polynomial preserves its
+      universal fixed-divisor property.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.residual_has_no_common_nonunit
+    statement: >-
+      Dividing the whole bounded polynomial space by a presented fixed divisor
+      leaves a residual family with no common nonunit factor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.two_specialization_split
+    statement: >-
+      Two vanishing bounded-space elements specialize to either a vanishing
+      fixed divisor or two vanishing residual quotients, without jet inheritance.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686PadicLift.lean
     theorem: Erdos686.Erdos686Variant.gap_eq_primePower_exists_concentrated_factor
     statement: >-
