@@ -1,0 +1,12 @@
+import ErdosProblems.Erdos686EffectiveIntersectionInterface
+
+open Erdos686 Erdos686.Erdos686Variant
+
+#check shearCoordinate
+#check EffectiveIntersectionCertificate
+#check integral_intersection_gives_resultant_root
+#check integral_intersection_gives_fiber_gcd_root
+#check integral_intersection_mem_rawCandidates
+#check verifiedCurveCandidates_sound
+#check verifiedCurveCandidates_complete
+#check integral_intersection_shear_natAbs_le
