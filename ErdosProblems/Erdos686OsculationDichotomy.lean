@@ -115,6 +115,14 @@ def PrimitiveRationalGCDPresentation.ResidualPairAt
     (p : Fin 2 → ℤ) : Prop :=
   evalIntAt p h.Q₁ = 0 ∧ evalIntAt p h.Q₂ = 0
 
+/-- Source-compatible name for the same value-level residual pair.  This alias
+carries no support jet and no effective intersection claim. -/
+def PrimitiveRationalGCDPresentation.QuotientPairAt
+    {F₁ F₂ : BivariateIntPolynomial}
+    (h : PrimitiveRationalGCDPresentation F₁ F₂)
+    (p : Fin 2 → ℤ) : Prop :=
+  h.ResidualPairAt p
+
 /-- Evaluation of two product identities in an integral domain gives the
 exact fixed-factor/residual-pair split. -/
 theorem evaluated_product_split
@@ -179,9 +187,8 @@ theorem PrimitiveRationalGCDPresentation.specialization_split
 /-- If the displayed fixed factor is a unit polynomial, its specialization
 cannot vanish, so every common zero lies in the residual-pair branch.
 
-The theorem name is retained for source compatibility with the frozen
-919-theorem checkpoint; its conclusion uses the corrected `ResidualPairAt`
-terminology. -/
+The theorem name and conclusion alias are retained for source compatibility
+with the frozen 919-theorem checkpoint. -/
 theorem PrimitiveRationalGCDPresentation.quotientPairAt_of_isUnit_G
     {F₁ F₂ : BivariateIntPolynomial}
     (h : PrimitiveRationalGCDPresentation F₁ F₂)
@@ -189,7 +196,8 @@ theorem PrimitiveRationalGCDPresentation.quotientPairAt_of_isUnit_G
     (hunit : IsUnit h.G)
     (hz₁ : evalIntAt p F₁ = 0)
     (hz₂ : evalIntAt p F₂ = 0) :
-    h.ResidualPairAt p := by
+    h.QuotientPairAt p := by
+  change h.ResidualPairAt p
   rcases h.specialization_split p hz₁ hz₂ with hzero | hquot
   · exact False.elim ((hunit.map (evalIntAt p)).ne_zero hzero)
   · exact hquot
