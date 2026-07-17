@@ -1,0 +1,13 @@
+import ErdosProblems.Erdos686BarycentricMomentLadder
+
+open Erdos686 Erdos686.Erdos686Variant
+
+#check barycentricMoment
+#check barycentricRhoMoment
+#check normalizedMomentBlock_coeff
+#check normalizedMomentBlock_coeff_lt
+#check momentBlockDelta_eq_zero_iff
+#check momentBlockDelta_ne_zero_of_first_nonzero
+#check momentPhi_natDegree
+#check momentQuotient_natDegree
+#check barycentricMoment_vandermonde_termination
