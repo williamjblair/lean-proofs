@@ -1236,16 +1236,23 @@ fails some row j ≤ 17.
    are already absorbed by the three gap factors. Thus comparing `E8`
    directly with `23040` would be invalid.
    Exact residual parity and the full row-one/column-four complement now
-   sharpen this substantially: `8` never divides `J`, the centered target is
-   coprime to three, and Lean proves
-   `J in {1,2,4,5,10,20}`. Substitution back into the exact complement
-   factorization improves the selected-owner inequality to
-   `n+4 < 10*P^2*Q*A*B`. This is a strict finite-cofactor reduction, but no
-   independent equation yet excludes all six values. Independently, the
+   sharpen this substantially. Lean first proves `J in {1,2,4,5,10,20}`.
+   The independent row-one and column-four equations then give
+   `2*(RB+4*CB)=P^2*Q*A*J`; the coefficient and `RB+4*CB` are odd, so
+   `J` is exactly twice an odd number. Hence only `J=2` and `J=10` remain.
+   The complementary row/column cofactors also satisfy
+   `gcd(P*Q*A*B*J,(d-3)/P)=2`, with coprime half-sum and half-difference.
+   Substitution into the exact complement factorization gives
+   `n+4 < 10*P^2*Q*A*B`. This is a strict two-cofactor reduction, but no
+   independent equation yet excludes both values. Independently, the
    primitive convergent branch now has an exact Euclidean filter:
    `(5*A3)/A5=g^2`, `(5*A3)%A5=4*t`, the quotient is an odd square, and the
-   quotient/remainder gcd lies in `{1,3,5,15,25,75}`. An effective all-index
-   exclusion for this computable convergent filter remains open.
+   quotient/remainder gcd lies in `{1,3,5,15,25,75}`. Primitivity also
+   cancels the variable `v^3` from the nonlinear scale resultant:
+   `t | 60*(5-17*g^2*v^2)`. Thus every prime divisor of the normalized
+   remainder away from `2,3,5` makes `85` a square modulo that prime. An
+   effective all-index exclusion for this stronger computable convergent
+   filter remains open.
    The corrected bounded-osculation dichotomy is now complete through its
    honest zero-dimensional interface. Finite avoidance of irreducible-factor
    divisibility subspaces selects two factor-coprime residual elements from
@@ -1268,13 +1275,17 @@ fails some row j ≤ 17.
    Dense closure must add an independent global equation or genuinely
    transverse higher-order information.
    In the diffuse large-k lane, a genuine row-diagonal four-cycle now carries
-   four exact upper-quotient additive equations. Combining them with the
-   normalized owner-square congruences gives a new cycle-level alternative:
+   four exact upper-quotient additive equations. The abstract theorem is now
+   instantiated on an actual canonical four-cycle: prime support,
+   reduced-binomial coprimality, row and signed-diagonal factorizations,
+   upper quotients, and all four normalized squares are discharged from the
+   canonical data. The resulting cycle-level alternative says:
    either the four-owner mass is bounded by the product of four tangent
    defects, or the two diagonal cofactors contain the ordinary owner mass
    times a second copy of one cycle owner. This avoids the tautological
    complementary-modulus lift, but the nonzero tangent product is not yet
-   globally bounded and canonical cycle coverage remains open.
+   globally bounded and not every two-regular component is forced to contain
+   a four-cycle.
 3. [pipeline] Keep `FinalResidual686Hypothesis` explicitly audited as
    equivalent packaging via `finalResidual_iff_tail1000_and_smooth`; do not
    report its isolation as mathematical progress.  Regenerate the manifest

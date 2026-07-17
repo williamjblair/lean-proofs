@@ -12209,3 +12209,156 @@ proofs:
       product versus repeated-owner diagonal crowding dichotomy.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12PrimitiveComplementSplit.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_primitive_complement_split
+    statement: >-
+      The exceptional complement sum and exterior gap quotient have gcd
+      exactly two, yielding coprime half-sum and half-difference parameters.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12EvenCofactor.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_fixed_cofactor_two_values
+    statement: >-
+      Independent row-one and column-four equations force the exceptional
+      fixed cofactor to be exactly twice an odd number, leaving only two or
+      ten.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveRemainderSplitting.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_scale_quotient_coprime_denominator
+    statement: >-
+      Primitivity makes the first scale quotient coprime to the reduced
+      denominator.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveRemainderSplitting.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_scale_quotient_dvd_reduced_quadratic
+    statement: >-
+      Cancelling the primitive denominator removes the variable cubic factor
+      from the scale resultant divisor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveRemainderSplitting.lean
+    theorem: Erdos686.Erdos686Variant.k5_primitive_remainder_prime_splits_eighty_five
+    statement: >-
+      Every normalized remainder prime away from two, three, and five makes
+      eighty-five a quadratic residue.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveRemainderSplitting.lean
+    theorem: Erdos686.Erdos686Variant.k5_odd_primitive_convergent_reduced_resultant_filter
+    statement: >-
+      The computed continued-fraction remainder divides the scale-free
+      reduced quadratic resultant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5PrimitiveRemainderSplitting.lean
+    theorem: Erdos686.Erdos686Variant.k5_odd_primitive_convergent_remainder_splitting_filter
+    statement: >-
+      The normalized Euclidean remainder satisfies the exact prime-splitting
+      filter for eighty-five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerCell_primeSupport
+    statement: >-
+      Every prime divisor of a canonical large-owner cell is strictly larger
+      than the row length.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerCell_coprime_factorial
+    statement: >-
+      Every canonical large-owner cell is coprime to the row factorial.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.reducedMatchingRight_dvd_factorial
+    statement: >-
+      Each reduced right matching coefficient divides the row factorial.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerCell_coprime_reducedMatchingRight
+    statement: >-
+      Canonical large-owner cells are coprime to all reduced right matching
+      coefficients.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_upper_quotient_factorization
+    statement: >-
+      A canonical support cell gives an exact upper-term quotient
+      factorization.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_row_pair_factorization
+    statement: >-
+      A two-owner canonical row has the exact pair-owner cofactor
+      factorization.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_diagonal_pair_factorization
+    statement: >-
+      A two-owner canonical signed diagonal has the exact pair-owner
+      cofactor factorization.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_normalized_square_dvd
+    statement: >-
+      Every canonical large-owner support cell satisfies the normalized
+      owner-square congruence.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_upper_eq_lower_add_diagonal
+    statement: >-
+      At a canonical support cell the upper term is the lower term plus its
+      nonnegative shifted-diagonal term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerFourCycleTangent.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerFourCycle_normalizedSquares_tangentProduct_or_crowding
+    statement: >-
+      An actual canonical large-owner four-cycle satisfies the tangent
+      product versus repeated-owner diagonal crowding dichotomy with all
+      normalization hypotheses discharged.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
