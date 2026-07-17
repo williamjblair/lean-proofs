@@ -1105,6 +1105,61 @@ fails some row j ≤ 17.
    `R<C`, `2*C<3*R`, `2*(P*Q)<5*R`, and `15<=P*Q`.
    This is a genuine S-unit-style constraint, but a second independent
    relation is still required for contradiction.
+   The complete ratio correction is now banked as well. The centered
+   equation proves `40*d<13*n`; on that exact cone an ordinary-kernel finite
+   certificate checks all 400 ordered row/column pairs and hence all 2,000
+   distinguished-factor configurations. Thus the proper-global tangent
+   coefficient is nonzero throughout the live tail, and the former
+   determinant theorem now has a zero-free gcd-bound wrapper. This does not
+   supply a gcd lower bound: a kernel-checked local countermodel with owners
+   `5,7,11,13` satisfies all four square defects, both secant
+   factorizations, and the same ratio cone while the crossing product is
+   coprime to the secant-quotient product.
+   The exact residual-profile dispatch now isolates every remaining case:
+   a proper bounded 2x2 grid outside G=12, the exact G=12 zero profile, or a
+   G=24 one-unit profile `{1,2,2,2,3}` on at least one side. The intended
+   binary dispatch is valid only after excluding that G=24 exceptional
+   branch. In the G=12 branch, a second independent tangent relation proves
+   `gcd(Q,K)|5`; if `5|Q` and `5|K`, the centered quintic modulo 25 proves
+   `25` does not divide `K`. This rigidifies but does not eliminate the
+   characteristic-five branch.
+   Finally, the four-cycle globalization obstruction is kernel-checked:
+   for every `k>=3` an explicit row/signed-diagonal support has degree two at
+   every row and used offset but no four-cycle. A genuinely non-tautological
+   C6 invariant is now banked instead. Its nonzero cyclic secant bounds the
+   square of an alternating owner mass; its zero branch forces an owner
+   square plus both neighbours into diagonal cofactors. Global long-cycle
+   aggregation remains open.
+   Magma V2.29-8's new `RationalPointsGenus2` driver was also tested
+   externally on the reduced genus-two curve. It returns the same 36
+   projective points, the explicit completeness flag `false`, and bound
+   `20000`. Direct `Degree2Subcovers` and `Degree3Subcovers` calls both return
+   zero objects. Thus the new rank-zero elliptic-subcover fallback does not
+   repair the rank-five rational-point completeness gap. This is recorded
+   only as an external diagnostic, not as a Lean theorem or certificate.
+   The G=24 exceptional branch is now reduced through all five owners in its
+   unique fully owned row. Lean proves exact row splitting, five designated
+   owner-square congruences, the full row-square product divisor, and both
+   complete orientation-specific remainder tables. Owners coprime to six
+   cannot cross-allocate to another target; divisibility by two and three
+   transfers exactly to the designated square quotient. The target quotients
+   remain unbounded, so this is not yet a contradiction.
+   In the G=12 branch, the forced structure now covers ten distinct cells
+   across the primitive quotient and three normalized shifted gaps. The five
+   uncovered diagonal cells give a product `M|d` with
+   `gcd(M,d/M)|432`, an exact unitary-overlap decomposition, and a squared
+   tangent-product divisor. This is stronger than first-order diagonal
+   capacity but still requires a second global equation to control the
+   remaining cofactor.
+   The large-k two-regular component lane is now global and length-uniform.
+   Raw support produces alternating components; one arbitrary finite cyclic
+   theorem covers C4, C6, C8, and every longer cycle. Applied to the whole
+   support permutation, it yields either a global cyclic-secant bound for the
+   square of the complete large-owner mass or an actual owner-square crowding
+   divisor inside two shifted-diagonal terms. The remaining quantitative
+   obstruction is exact: the secant height retains n-degree `2k`, whereas
+   the current mass lower bound has n-degree `2k-2*pi(k)`. Prime counting
+   alone cannot close that gap.
    Finally, a support-dependent effective intersection
    certificate now has a kernel interface covering integer shear, nonzero
    resultant roots, fiber-gcd roots, finite candidate lists, a root bound,

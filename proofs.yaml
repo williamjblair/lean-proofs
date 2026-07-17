@@ -34,6 +34,382 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12ResidualWeightedGap.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_residual_weighted_gap_diagonal_product_dvd_half_gap
+    statement: >-
+      Four owners on the positive-one shifted diagonal divide the normalized
+      half-gap in the G=12 profile.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12ResidualWeightedGap.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_opposite_residual_weighted_gap_products
+    statement: >-
+      The opposite residual-weighted shifted diagonal supplies exact half-gap
+      and full-gap owner product divisors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12ResidualWeightedGap.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_positive_three_diagonal_product_dvd_half_gap
+    statement: >-
+      The positive-three shifted diagonal owner product divides its normalized
+      half-gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12ResidualWeightedGap.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_ten_distinct_owner_product_dvd_global_quotient_product
+    statement: >-
+      Ten distinct G=12 owners jointly divide the product of K and three
+      normalized shifted gaps.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalMatchingTangent.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_diagonal_matching_tangent_product_explicit
+    statement: >-
+      The five uncovered diagonal tangent defects collapse to one explicit
+      product of affine translates.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalMatchingTangent.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_diagonal_owner_gap_quotient_gcds_fixed
+    statement: >-
+      Each uncovered diagonal owner has a fixed 2-3-primary gcd bound with
+      its complementary gap quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalMatchingTangent.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_diagonal_matching_owner_product_dvd_gap
+    statement: >-
+      The complete five-cell diagonal matching owner product divides the gap.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalMatchingTangent.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_diagonal_matching_gap_quotient_gcd_dvd_432
+    statement: >-
+      The diagonal matching product and its complementary gap quotient have
+      gcd dividing 432.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalMatchingTangent.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_diagonal_matching_unitary_overlap_decomposition
+    statement: >-
+      The G=12 gap has an exact square-overlap decomposition with overlap
+      bounded by 432 and coprime remaining factors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalMatchingTangent.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_diagonal_matching_square_dvd_tangent_product_and_height
+    statement: >-
+      The squared uncovered diagonal owner mass divides the five tangent
+      defects and satisfies their exact uniform height bound.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalMatchingTangent.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_diagonal_matching_unitary_overlap_and_tangent_product
+    statement: >-
+      The unitary part of the diagonal matching product retains its square
+      divisor inside the explicit tangent product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSixCycle.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_diagonal_term_factorization
+    statement: >-
+      A two-owner signed diagonal has an exact canonical cofactor
+      factorization.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerSixCycle.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSixCycle_secant_or_crowding
+    statement: >-
+      An actual canonical six-cycle has either a cyclic secant bound or one
+      of three owner-square diagonal crowding divisors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalAlternatingComponents.lean
+    theorem: Erdos686.Erdos686Variant.exists_canonicalLargeOwnerAlternatingComponent_of_degree_two
+    statement: >-
+      Every nonempty row-and-diagonal degree-two canonical support contains a
+      finite alternating component.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalAlternatingComponents.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerAlternatingComponent_trichotomy
+    statement: >-
+      An alternating component is a four-cycle, a six-cycle, or has at least
+      eight edges.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalAlternatingComponents.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_degree_two_trichotomy
+    statement: >-
+      The component trichotomy is extracted directly from every nonempty
+      degree-two canonical support.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalCyclicSecant.lean
+    theorem: Erdos686.Erdos686Variant.cyclic_adjacent_secant_factorization
+    statement: >-
+      Every adjacent pair in an arbitrary finite alternating cycle has an
+      exact secant factorization.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalCyclicSecant.lean
+    theorem: Erdos686.Erdos686Variant.cyclicSecantProduct_factorization
+    statement: >-
+      The full cyclic secant product factors through the square of one
+      alternating owner mass at every component length.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalCyclicSecant.lean
+    theorem: Erdos686.Erdos686Variant.cyclic_alternatingMass_sq_le_secantProduct_natAbs
+    statement: >-
+      A nonzero arbitrary-length cyclic secant bounds the squared alternating
+      owner mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalCyclicSecant.lean
+    theorem: Erdos686.Erdos686Variant.cyclic_secant_or_ownerSquare_crowding
+    statement: >-
+      Every finite alternating cycle has either a nonzero mass bound or an
+      indexed owner-square cofactor crowding divisor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerCyclicSecant.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerAlternatingComponent_cyclic_secant_or_crowding
+    statement: >-
+      The arbitrary-length cyclic dichotomy is instantiated on every actual
+      canonical alternating component.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerCyclicSecant.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerEightCycle_secant_or_crowding
+    statement: >-
+      The first high-girth C8 component has an explicit canonical
+      secant-or-crowding theorem.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalGlobalCyclicSecant.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_degreeTwo_global_secant_or_diagonal_crowding
+    statement: >-
+      The entire degree-two canonical support has either a global squared
+      mass secant bound or an actual enlarged diagonal crowding divisor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12CharacteristicFive.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_characteristic_five_exact_gcd_and_valuation
+    statement: >-
+      In the characteristic-five G=12 branch the primitive quotient has gcd
+      exactly five with Q and is not divisible by twenty-five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_lower_exact_profile
+    statement: >-
+      A lower G=24 exceptional profile is one of two exact vectors with its
+      corresponding residue class modulo six.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_upper_exact_profile
+    statement: >-
+      An upper G=24 exceptional profile belongs to one of six exact CRT
+      classes with its complete residual vector.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_both_exact_profile_classification
+    statement: >-
+      Simultaneous exceptional lower and upper profiles form the exact
+      two-by-six class product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_crossing_primitive_quotient
+    statement: >-
+      The exceptional unit crossing yields coprime exact quotients and the
+      primitive divisor P divides four R minus C.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_crossing_middle_primitive_system
+    statement: >-
+      The middle owner supplies a second independent square congruence and
+      determinant-one coupling in every exceptional crossing.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_cancelled_cofactor_system
+    statement: >-
+      Cancelling the middle and outer owner squares exposes the exact
+      remaining row cofactor system and strict quotient bounds.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_five_owner_primitive_system
+    statement: >-
+      All five owners in the exceptional unit row have designated square
+      targets whose product contains the complete row square.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.g24_small_remainder_cross_coprime
+    statement: >-
+      A small fixed remainder gives an explicit Bezout certificate excluding
+      cross-allocation for owners coprime to six.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.g24_i2_five_target_remainder_table
+    statement: >-
+      The unit-column-two exceptional system has an exact complete
+      five-target cross-remainder table.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.g24_i4_five_target_remainder_table
+    statement: >-
+      The unit-column-four exceptional system has the symmetric exact
+      five-target cross-remainder table.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.five_designated_square_quotient_product_identity
+    statement: >-
+      Dividing the five designated targets by their owner squares gives an
+      exact quotient-product identity.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.small_prime_dvd_designated_square_quotient_iff
+    statement: >-
+      For owners coprime to six, two- and three-divisibility transfer exactly
+      from a designated target to its square quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.two_three_allocation_to_designated_quotient
+    statement: >-
+      The exact two- and three-primary allocation is confined to each
+      designated exceptional quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ExceptionalProfileClassification.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_middle_primitive_dispatch
+    statement: >-
+      Every simultaneous G=24 exceptional class receives the complete
+      five-owner primitive system.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalOwners.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_anti_diagonal_owner_product_dvd_complement_quotient
+    statement: >-
+      Two anti-diagonal G=12 owners divide the primitive complement quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalOwners.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_owner_gcd_complement_quotient_dvd_antidiagonal_offset
+    statement: >-
+      Every owner intersection with the G=12 complement quotient divides its
+      exact anti-diagonal offset.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalOwners.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_adjacent_antidiagonal_owner_product_coprime_complement_quotient
+    statement: >-
+      The eight adjacent anti-diagonal owners are jointly coprime to the G=12
+      complement quotient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12DiagonalOwners.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_forced_antidiagonal_owner_product_upper
+    statement: >-
+      The forced anti-diagonal product divides K and satisfies the exact live
+      tail comparison with the crossing complement.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686.lean
     theorem: Erdos686.Erdos686Variant.erdos686_iff_square_representable
     statement: >-
@@ -10161,6 +10537,204 @@ proofs:
     statement: >-
       Every support owner cell is coprime to every canonical lower-row
       cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentRatio.lean
+    theorem: Erdos686.Erdos686Variant.k5ProperTangentCombination_eq_multiplier_mul_normalized
+    statement: >-
+      Removing the distinguished upper factor four scales the proper
+      tangent coefficient by two explicit positive multipliers.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentRatio.lean
+    theorem: Erdos686.Erdos686Variant.forty_gap_lt_thirteen_start_of_k5_solution
+    statement: >-
+      Every sufficiently large k=5 block equation satisfies the sharp
+      rational cone inequality forty times the gap is below thirteen times
+      the start.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentRatio.lean
+    theorem: Erdos686.Erdos686Variant.k5NormalizedTangentCombination_ne_zero_of_ratio
+    statement: >-
+      All 400 normalized ordered proper crossing coefficients are nonzero on
+      the exact equation-derived cone.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentRatio.lean
+    theorem: Erdos686.Erdos686Variant.k5ProperTangentCombination_ne_zero_of_ratio
+    statement: >-
+      Restoring the distinguished factor gives nonvanishing for all 2000
+      proper ratio configurations.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentRatio.lean
+    theorem: Erdos686.Erdos686Variant.k5ProperTangentCombination_ne_zero_of_solution
+    statement: >-
+      The actual k=5 equation supplies nonvanishing of every proper tangent
+      coefficient on the surviving scale.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantTangentBound.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_opposite_secant_tangent_gcd_bound
+    statement: >-
+      The proper-global opposite-secant determinant has an exact gcd divisor
+      and height bound with its formerly possible zero branch removed.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5SecantSquareCountermodel.lean
+    theorem: Erdos686.Erdos686Variant.k5_local_square_secant_no_forced_crossing_factor_witness
+    statement: >-
+      An exact local witness satisfies the four square defects and both
+      secant factorizations while its crossing mass is coprime to the
+      quotient product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ResidualProfileDispatch.lean
+    theorem: Erdos686.Erdos686Variant.k5_equation_residual_profile_dispatch
+    statement: >-
+      Every k=5 equation profile dispatches exhaustively to a proper bounded
+      grid, the exact G=12 zero profile, or a G=24 one-unit exceptional side.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ResidualProfileDispatch.lean
+    theorem: Erdos686.Erdos686Variant.k5_equation_residual_profile_binary_dispatch_of_no_G24_exceptional
+    statement: >-
+      Excluding the precise G=24 one-unit profile gives the desired binary
+      proper-grid or G=12 dispatch.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12PrimitiveQuotient.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_exceptional_complement_quotient_gcd_Q_dvd_five
+    statement: >-
+      The G=12 complement quotient satisfies exact adjacent equations and an
+      independent tangent congruence forcing its gcd with Q to divide five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12CharacteristicFive.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_characteristic_five_K_not_dvd_twenty_five
+    statement: >-
+      In the surviving characteristic-five G=12 branch, the primitive
+      complement quotient is not divisible by twenty-five.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleObstruction.lean
+    theorem: Erdos686.Erdos686Variant.longCycleOffset_injective
+    statement: >-
+      The explicit long-cycle construction uses pairwise distinct signed
+      offsets.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleObstruction.lean
+    theorem: Erdos686.Erdos686Variant.longCycleRowOffset_realizable
+    statement: >-
+      Every displayed long-cycle row and offset incidence is realized by a
+      cell inside the owner square.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleObstruction.lean
+    theorem: Erdos686.Erdos686Variant.longCycleRowOffsets_card
+    statement: >-
+      Every row in the explicit long-cycle support has degree exactly two.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleObstruction.lean
+    theorem: Erdos686.Erdos686Variant.longCycleRowsAtOffset_eq_pair
+    statement: >-
+      Each used signed-offset fibre is exactly its two adjacent cycle rows.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleObstruction.lean
+    theorem: Erdos686.Erdos686Variant.longCycleRowsAtOffset_card
+    statement: >-
+      Every used signed offset in the explicit long-cycle support has degree
+      exactly two.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycleObstruction.lean
+    theorem: Erdos686.Erdos686Variant.longCycle_no_four_cycle
+    statement: >-
+      No two distinct rows in the long-cycle support share two distinct
+      signed offsets, so the support has no four-cycle.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalSixCycle.lean
+    theorem: Erdos686.Erdos686Variant.sixCycle_adjacent_secant_factorization
+    statement: >-
+      One adjacent pair in a row and signed-diagonal six-cycle has an exact
+      five-owner secant factorization.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalSixCycle.lean
+    theorem: Erdos686.Erdos686Variant.sixCycle_secantProduct_factorization
+    statement: >-
+      The complete C6 secant product factors as the square of one alternating
+      owner mass times three unweighted local quotients.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalSixCycle.lean
+    theorem: Erdos686.Erdos686Variant.sixCycle_alternatingMass_sq_le_secantProduct_natAbs
+    statement: >-
+      In the nonzero C6 branch, the square of an alternating owner mass is at
+      most the cyclic secant product height.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalSixCycle.lean
+    theorem: Erdos686.Erdos686Variant.sixCycle_zero_localQuotient_forces_crowding
+    statement: >-
+      A zero C6 local quotient forces the middle owner square and its two
+      neighbours into two diagonal cofactors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalSixCycle.lean
+    theorem: Erdos686.Erdos686Variant.sixCycle_secant_or_ownerSquare_crowding
+    statement: >-
+      Every exact C6 has either a nonzero alternating-mass secant bound or
+      one of three owner-square cofactor crowding divisors.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
