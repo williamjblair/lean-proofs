@@ -211,6 +211,23 @@ matching with substantially more mass, followed by the exact threshold
 comparison; it is not a missing equality between the canonical owner matrix
 and `kLargePart`.
 
+The next multiplicative-capacity layer is now kernel-checked:
+
+- every row-fibre product divides its single lower consecutive term;
+- every signed-diagonal-fibre product divides its single centered-window
+  term;
+- the complete high-prime mass divides both the lower-block lcm and the
+  centered `(2*k-1)`-term product;
+- the collision product has the exact integral factorization `Xi=M*E`;
+- `E=1`, equivalently `Xi=M`, forces the complete support to be a
+  row-diagonal matching.
+
+This does not prove the required weighted matching theorem.  Moreover, the
+kernel-checked uniform two-regular endpoint has `Xi=M^2` and a matching
+product `X` with `X^2=M`.  Therefore the exponent-two diffuse loss is sharp
+for row/diagonal capacities alone.  Any valid global closure must add
+arithmetic that excludes or destabilizes this two-regular collision core.
+
 The exact finite comparison has been independently reduced to
 
 \[
@@ -246,6 +263,13 @@ analytic prime-counting estimate beyond the finite scan is an imported
 mathematical theorem and must be kernel-banked before the final tail
 exclusion can be called formal.
 
+An axiom-clean Chebyshev replacement has now been banked, including
+`8*pi(k)<k` for every `k>=10^10`.  It is not contiguous with the exact scan:
+direct use of the formal Chebyshev expression becomes favorable only around
+`k=342471419`, while the convenient rational bound starts at `10^10`.
+Therefore it leaves a genuine uncovered interval beginning at `10^6` and is
+recorded only as a valid tail input, not as acceptance of Claim 10.
+
 ## Independent artifact hashes
 
 - `secant_pairing_certificate.json`:
@@ -262,3 +286,9 @@ exclusion can be called formal.
   `e9ac40d3d66bdcb06d3ae80e2b5742e0c13e2d0bf2d30e55a517ce440506e578`
 - `Erdos686CanonicalLargeOwnerSupport.lean`:
   `913ff85aed35f34d22a5b58e218fbd593e8c7f2722c184011c00163207ff80a4`
+- `Erdos686CanonicalLargeOwnerCapacity.lean`:
+  `a23c0ab4df12b00f31bc5da1b9997ecdc1fc7e613ab1c14dc7eea54e0103b56b`
+- `Erdos686LargeOwnerCollisionStability.lean`:
+  `3e8581f36837874ce94019f61a5d08cba3fe576a2b50433d27df28daa54d2a10`
+- `Erdos686MatchingTailChebyshev.lean`:
+  `8939d16c75b814b83a0cd5c5b35d57cda0df4066db13e2a3b37511d58c5c9127`

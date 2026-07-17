@@ -9544,3 +9544,167 @@ proofs:
       family.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/730.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerRowSupport_product_dvd_lower
+    statement: >-
+      The pairwise-coprime product of all nontrivial above-k canonical owners
+      in a fixed row divides the single lower consecutive term in that row.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean
+    theorem: Erdos686.Erdos686Variant.centeredDiffTerm_eq_shiftedDifference
+    statement: >-
+      The natural signed-diagonal index converts exactly to the corresponding
+      shifted difference term in the centered 2k-1 window.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerDiagonalSupport_product_dvd_centeredTerm
+    statement: >-
+      The pairwise-coprime product of all nontrivial above-k canonical owners
+      on one signed diagonal divides its single centered-window term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean
+    theorem: Erdos686.Erdos686Variant.kLargePart_dvd_lowerBlockLcm
+    statement: >-
+      The complete above-k prime part of the lower block divides the least
+      common multiple of all lower consecutive terms.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean
+    theorem: Erdos686.Erdos686Variant.kLargePart_dvd_centeredDiffProduct
+    statement: >-
+      Under the quotient-four equation, the complete above-k owner mass
+      divides the single centered product from d-k+1 through d+k-1.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerCollisionStability.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerCollisionProduct_eq_mass_mul_defect
+    statement: >-
+      The product of all row-diagonal collision envelopes factors exactly as
+      the complete above-k owner mass times the integral collision defect.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerCollisionStability.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerCollisionProduct_eq_mass_iff_defect_eq_one
+    statement: >-
+      Equality between collision product and owner mass is equivalent to the
+      global collision defect being one.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerCollisionStability.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_matching_of_collisionDefect_eq_one
+    statement: >-
+      Unit collision defect forces the entire nontrivial large-owner support
+      to be injective in both rows and signed diagonals.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerCollisionStability.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_matching_of_collisionProduct_eq_mass
+    statement: >-
+      Collision-product equality supplies an owner-facing sufficient
+      condition for the complete support to be a row-diagonal matching.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686LargeOwnerCollisionStability.lean
+    theorem: Erdos686.Erdos686Variant.uniform_two_regular_collision_sharpness
+    statement: >-
+      A uniform two-regular support attains collision product equal to mass
+      squared and matching product squared equal to mass, proving that the
+      exponent-two diffuse endpoint is sharp for capacities alone.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantCofactor.lean
+    theorem: Erdos686.Erdos686Variant.opposite_secant_product_identity
+    statement: >-
+      The two opposite secant forms multiply exactly to the difference of
+      the row and column quadratic products.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantCofactor.lean
+    theorem: Erdos686.Erdos686Variant.opposite_secant_quotient_cofactor_identity
+    statement: >-
+      Removing the common four-crossing product converts the two secant
+      quotients into an exact linear combination of row and column cofactors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantCofactor.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_k5_opposite_crossing_products_dvd_secants
+    statement: >-
+      The two opposite products of canonical k=5 crossing cells divide their
+      explicit signed secants by composite-owner coprimality.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5OppositeSecantCofactor.lean
+    theorem: Erdos686.Erdos686Variant.k5_fullyOwned_opposite_secant_cofactor_identity
+    statement: >-
+      Two fully owned k=5 rows and columns supply coprime residual cofactors
+      and opposite secant quotients whose product is their exact independent
+      quadratic combination.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingTailChebyshev.lean
+    theorem: Erdos686.Erdos686Variant.primeCounting_le_chebyshev_log4
+    statement: >-
+      The fully formal Chebyshev estimate gives an explicit natural-input
+      upper bound for pi(k) using log 4, log sqrt(k), and sqrt(k).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingTailChebyshev.lean
+    theorem: Erdos686.Erdos686Variant.seven_mul_primeCounting_lt_of_ten_billion_le
+    statement: >-
+      From ten billion onward, the axiom-clean Chebyshev estimate proves the
+      exact rational bound seven times pi(k) is less than k.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingTailChebyshev.lean
+    theorem: Erdos686.Erdos686Variant.eight_mul_primeCounting_lt_of_ten_billion_le
+    statement: >-
+      The exact comparison 2 to the 33 is below ten billion sharpens the
+      Chebyshev tail to eight times pi(k) less than k from ten billion onward.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686MatchingTailChebyshev.lean
+    theorem: Erdos686.Erdos686Variant.eight_mul_primeCounting_lt_of_trillion_le
+    statement: >-
+      An independent logarithmic estimate also proves eight times pi(k) less
+      than k from one trillion onward.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean

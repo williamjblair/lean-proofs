@@ -840,7 +840,15 @@ fails some row j ≤ 17.
    divisibility of their displayed tangent combination by the crossing
    product, but the naive resultant is structurally zero. Both branches now
    require a second non-syzygetic row/column relation; repeating product
-   aggregation is ruled out in Lean.
+   aggregation is ruled out in Lean. A genuinely independent relation is now
+   kernel-banked for the proper-global branch. The two opposite crossing
+   products divide two explicit signed secants, and after cancelling the
+   exact four-crossing gcd Lean constructs coprime row and column cofactors
+   `a,b` and integer secant quotients `Uplus,Uminus` satisfying
+   `Uplus*Uminus=r^2*mu1*mu2*b-s^2*a`. This preserves the adjacent row and
+   column equations that vanish in the tangent-product syzygy. It is a new
+   exact global constraint, but no size, congruence, or gcd argument yet
+   excludes all of its integral solutions.
    An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
@@ -1022,6 +1030,27 @@ fails some row j ≤ 17.
    coefficients and the natural canonical-owner interface are kernel-checked;
    the remaining noncollinear branch still needs the mass/stability
    comparison.
+   The multiplicative capacity layer is now exact as well. In every lower
+   row, the product of all nontrivial above-`k` owners divides its one lower
+   term; on every signed diagonal, the corresponding product divides its one
+   centered-window term. Globally the entire above-`k` mass divides both the
+   lower-block lcm and the single `(2k-1)`-term centered difference product.
+   Lean also defines the local row/diagonal collision envelope and proves the
+   exact factorization `Xi=M*E`. The endpoint `E=1` forces the full support
+   itself to be a row-diagonal matching. Conversely, an abstract uniform
+   two-regular construction attains `Xi=M^2` and matching mass `sqrt(M)`,
+   proving that exponent two is sharp for capacity information alone. Thus
+   the diffuse branch cannot be closed by strengthening the same row/diagonal
+   relaxation; it needs simultaneous arithmetic excluding the two-regular
+   collision core.
+   The matching-tail analytic dependency has also been narrowed without
+   importing Rosser--Schoenfeld. An axiom-clean formal Chebyshev theorem now
+   yields the exact consequences `8*pi(k)<k` for every `k>=10^10` and again
+   by an independent coarser proof for `k>=10^12`. This is a valid symbolic
+   tail input, but it does not replace the current conditional threshold:
+   direct substitution becomes favorable only far above `10^6`, and the
+   interval from the existing exact scan to the Chebyshev tail remains
+   uncovered. No contiguous large-k exclusion is claimed.
    Finally, a support-dependent effective intersection
    certificate now has a kernel interface covering integer shear, nonzero
    resultant roots, fiber-gcd roots, finite candidate lists, a root bound,

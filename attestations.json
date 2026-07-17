@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:10279c7b9c74ea0895c1fba5770e380e20b2ac0ec3d05aa18eb24e8714faeb5f",
+  "verifier_output_hash": "sha256:a6ac2e07cbbd6e629b0a55352acd51b75606a347424ffa2a4d867665b09f8203",
   "attestations": [
     {
       "problem": 154,
@@ -12366,6 +12366,220 @@
       "theorem": "Erdos730.FullDensityTheorem.pairSet_infinite",
       "file": "ErdosProblems/Erdos730FullDensityTheorem.lean",
       "proof_hash": "sha256:7f341400b34cd3241007dce7365aa84c367546ffda0acf164d7a32e003f98ba0",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerRowSupport_product_dvd_lower",
+      "file": "ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean",
+      "proof_hash": "sha256:a23c0ab4df12b00f31bc5da1b9997ecdc1fc7e613ab1c14dc7eea54e0103b56b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.centeredDiffTerm_eq_shiftedDifference",
+      "file": "ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean",
+      "proof_hash": "sha256:a23c0ab4df12b00f31bc5da1b9997ecdc1fc7e613ab1c14dc7eea54e0103b56b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerDiagonalSupport_product_dvd_centeredTerm",
+      "file": "ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean",
+      "proof_hash": "sha256:a23c0ab4df12b00f31bc5da1b9997ecdc1fc7e613ab1c14dc7eea54e0103b56b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.kLargePart_dvd_lowerBlockLcm",
+      "file": "ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean",
+      "proof_hash": "sha256:a23c0ab4df12b00f31bc5da1b9997ecdc1fc7e613ab1c14dc7eea54e0103b56b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.kLargePart_dvd_centeredDiffProduct",
+      "file": "ErdosProblems/Erdos686CanonicalLargeOwnerCapacity.lean",
+      "proof_hash": "sha256:a23c0ab4df12b00f31bc5da1b9997ecdc1fc7e613ab1c14dc7eea54e0103b56b",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerCollisionProduct_eq_mass_mul_defect",
+      "file": "ErdosProblems/Erdos686LargeOwnerCollisionStability.lean",
+      "proof_hash": "sha256:3e8581f36837874ce94019f61a5d08cba3fe576a2b50433d27df28daa54d2a10",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerCollisionProduct_eq_mass_iff_defect_eq_one",
+      "file": "ErdosProblems/Erdos686LargeOwnerCollisionStability.lean",
+      "proof_hash": "sha256:3e8581f36837874ce94019f61a5d08cba3fe576a2b50433d27df28daa54d2a10",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_matching_of_collisionDefect_eq_one",
+      "file": "ErdosProblems/Erdos686LargeOwnerCollisionStability.lean",
+      "proof_hash": "sha256:3e8581f36837874ce94019f61a5d08cba3fe576a2b50433d27df28daa54d2a10",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalLargeOwnerSupport_matching_of_collisionProduct_eq_mass",
+      "file": "ErdosProblems/Erdos686LargeOwnerCollisionStability.lean",
+      "proof_hash": "sha256:3e8581f36837874ce94019f61a5d08cba3fe576a2b50433d27df28daa54d2a10",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.uniform_two_regular_collision_sharpness",
+      "file": "ErdosProblems/Erdos686LargeOwnerCollisionStability.lean",
+      "proof_hash": "sha256:3e8581f36837874ce94019f61a5d08cba3fe576a2b50433d27df28daa54d2a10",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.opposite_secant_product_identity",
+      "file": "ErdosProblems/Erdos686K5OppositeSecantCofactor.lean",
+      "proof_hash": "sha256:68d2feb4d09e574acc09c1838691514c06bd71755d0f413ac639097ca41743b7",
+      "axiom_footprint": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.opposite_secant_quotient_cofactor_identity",
+      "file": "ErdosProblems/Erdos686K5OppositeSecantCofactor.lean",
+      "proof_hash": "sha256:68d2feb4d09e574acc09c1838691514c06bd71755d0f413ac639097ca41743b7",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalOwner_k5_opposite_crossing_products_dvd_secants",
+      "file": "ErdosProblems/Erdos686K5OppositeSecantCofactor.lean",
+      "proof_hash": "sha256:68d2feb4d09e574acc09c1838691514c06bd71755d0f413ac639097ca41743b7",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_fullyOwned_opposite_secant_cofactor_identity",
+      "file": "ErdosProblems/Erdos686K5OppositeSecantCofactor.lean",
+      "proof_hash": "sha256:68d2feb4d09e574acc09c1838691514c06bd71755d0f413ac639097ca41743b7",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.primeCounting_le_chebyshev_log4",
+      "file": "ErdosProblems/Erdos686MatchingTailChebyshev.lean",
+      "proof_hash": "sha256:8939d16c75b814b83a0cd5c5b35d57cda0df4066db13e2a3b37511d58c5c9127",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.seven_mul_primeCounting_lt_of_ten_billion_le",
+      "file": "ErdosProblems/Erdos686MatchingTailChebyshev.lean",
+      "proof_hash": "sha256:8939d16c75b814b83a0cd5c5b35d57cda0df4066db13e2a3b37511d58c5c9127",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.eight_mul_primeCounting_lt_of_ten_billion_le",
+      "file": "ErdosProblems/Erdos686MatchingTailChebyshev.lean",
+      "proof_hash": "sha256:8939d16c75b814b83a0cd5c5b35d57cda0df4066db13e2a3b37511d58c5c9127",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.eight_mul_primeCounting_lt_of_trillion_le",
+      "file": "ErdosProblems/Erdos686MatchingTailChebyshev.lean",
+      "proof_hash": "sha256:8939d16c75b814b83a0cd5c5b35d57cda0df4066db13e2a3b37511d58c5c9127",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
