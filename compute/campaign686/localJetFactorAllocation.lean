@@ -1,0 +1,10 @@
+import ErdosProblems.Erdos686LocalJetFactorAllocation
+
+open Erdos686 Erdos686.Erdos686Variant
+
+#check BivariateSupportFunctional.delta_mul
+#check local_support_product_rule
+#check local_factor_allocation_of_left_value_ne_zero
+#check local_factor_allocation_of_left_simple_zero
+#check local_factor_allocation_of_left_full_jet
+#check local_factor_allocation_trichotomy
