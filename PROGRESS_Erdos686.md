@@ -1,6 +1,6 @@
 # PROGRESS.md - Erdős Problem #686
 
-Date: 2026-07-13 (full-solution campaign checkpoint)
+Date: 2026-07-16 (full-solution campaign checkpoint)
 Formal lane: refute the universal positive statement by proving `N = 4` has no
 quotient representation. Previous plan archived in
 `PROGRESS_Erdos686_gptpro_archive.md`.
@@ -790,7 +790,22 @@ fails some row j ≤ 17.
    divided-by-four upper index is odd, its modified residual equals two, and
    the original distinguished upper term is divisible by eight. This is a
    strict parity and placement narrowing of the exceptional profile, not a
-   closure of the k=5 tail.
+   closure of the k=5 tail. The even positions are now exact as well: the
+   lower residual pair at positions `2,4` is `(1,3)` or `(3,1)` with its
+   orientation determined by `n mod 6`; the upper side has six exact CRT
+   placements combining `t`, `(n+d) mod 24`, and its even residual pair.
+   Same lower/upper orientations force `d mod 6=0`, while crossed
+   orientations force `d mod 6=2` or `4` with exact orientation.
+   Full owned rows and columns now divide their complete shifted-diagonal
+   products, and at every nondistinguished crossing Lean identifies
+   `gcd(n+j,d+i-j)` exactly with the crossing owner. The proper-global branch
+   supplies two ordered fully owned lower rows with coprime bases, offset
+   between one and four, and independent adjacent equations. The exceptional
+   branch is reduced to the four crossings `(2,2),(2,4),(4,2),(4,4)` with
+   gap residues `0,2,4,0 mod 6`; every cell in the unit row is at least five,
+   coprime to six, and divides its own shifted diagonal, while both full
+   row and column product divisibilities remain available. This is an exact
+   simultaneous row/column narrowing, not a closure of the k=5 tail.
    An invariant
    scout still ranks
    `p=107` first only if a new finite height bound later makes another packet
@@ -924,14 +939,29 @@ fails some row j ≤ 17.
    `e*(2r-e+3) <= 4m`, but this is not transferred to `V_B` without a
    spanning theorem. A fixed-divisor universal-property presentation is
    invariant under bases, generating families, and associated scalar
-   normalizations; its residual family has no common nonunit factor. Existence
-   of that multivariate gcd and extraction of a coprime residual pair remain
-   explicit certificate obligations.
+   normalizations; its residual family has no common nonunit factor. A genuine
+   multivariate fixed divisor is now constructed for every nonzero
+   finite-dimensional polynomial space, including every nonzero bounded
+   osculation polynomial space. The exact bounded-kernel entry/column
+   hypotheses now prove that this space is nonzero and therefore supply the
+   fixed divisor and quotient presentation without an extra nonzero
+   assumption. Residual division is linear, and the residual quotients of a
+   finite basis have unit gcd; this still does not select a coprime pair.
+   Effective concrete computation and extraction of a coprime residual pair
+   remain explicit certificate obligations.
    The moment-ladder core is also banked: the exact generating recurrence,
    lower-moment `X^q` factorization, first surviving coefficient,
-   rational `Delta_q` zero classification, and Vandermonde termination. The
-   reversal to the original `matchingPhi` and the advertised exact degree
-   formulas remain open. Finally, a support-dependent effective intersection
+   rational `Delta_q` zero classification, Vandermonde termination, the
+   exact degree-`k|S|` reflection bridge to the original `matchingPhi`, and
+   the actual `Delta_q` coefficient in both the reflected and original
+   matching products. If `Delta_q` is the first nonzero block, Lean now proves
+   `deg matchingPhi = k*(|S|-q)` and, after a certified
+   `matchingPhi=W_S^2*Q` factorization,
+   `deg Q = k*(|S|-q)-2|S|` exactly. For distinct integral nodes, nonzero
+   weights, the essential zero branch `mu_0=0`, and `k>=3`, finite
+   Vandermonde termination now produces a least `1<=q<=|S|` with
+   `Delta_q!=0`; hence `matchingPhi` is nonzero and has that exact degree.
+   Finally, a support-dependent effective intersection
    certificate now has a kernel interface covering integer shear, nonzero
    resultant roots, fiber-gcd roots, finite candidate lists, a root bound,
    and original-curve verification. No concrete support instance or claim

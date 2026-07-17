@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:154b4fc05db952402f1ec53f7fc7e024b5651ffcfe8d0d5ed64537a089ca0c7a",
+  "verifier_output_hash": "sha256:2cbd8d59b46bc3f4cb6863a0420e605773dee8a07af2afd6b6a7b566febbb552",
   "attestations": [
     {
       "problem": 154,
@@ -4527,7 +4527,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_lower_residual_profile_of_global_eq_twenty_four",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4539,7 +4539,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_upper_residual_profile_of_global_eq_twenty_four",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4551,7 +4551,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.canonicalOwner_row_column_gcd_eq_cell",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4563,7 +4563,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_gcd_modifiedUpper_eq_cell",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4575,7 +4575,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_gcd_upper_eq_cell_of_ne",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4587,7 +4587,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4599,7 +4599,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.exists_two_k5_unit_upper_residuals_of_global_ne_twenty_four",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4611,7 +4611,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_tail_proper_global_two_by_two_gcd_grid",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4623,7 +4623,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_tail_proper_global_common_upper_two_coprime_gcds",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4635,7 +4635,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_tail_unit_cross_factorizations",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4647,7 +4647,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_exceptional_lower_base_odd",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4659,7 +4659,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_exceptional_upper_base_odd",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4671,7 +4671,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_exceptional_both_force_even_gap",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4683,7 +4683,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_exceptional_lower_twos_eq_odd_positions",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4695,7 +4695,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_exceptional_upper_twos_eq_odd_positions",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4707,7 +4707,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_exceptional_upper_residual_two_at_distinguished",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -4719,7 +4719,139 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.k5_exceptional_upper_eight_dvd_distinguished",
       "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
-      "proof_hash": "sha256:0deb2a7fe2a4770f10e9a12083c23721d08c25a5b4810efc0ec694d26d2c002d",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_exceptional_lower_even_allocation_mod_six",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_exceptional_upper_exact_mod_twenty_four",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_exceptional_row_column_gap_mod_six",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_lower_dvd_diagonalProduct",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_upper_dvd_diagonalProduct_of_ne",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_gcd_shiftedDifference_eq_cell_of_ne",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalOwner_two_fullyOwned_lower_rows_coprime_offset",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_proper_global_two_coprime_lower_adjacent_equations",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalOwner_two_fullyOwned_upper_columns_coprime_offset",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.canonicalOwner_row_coprime_six_large_diagonal_factors",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.k5_exceptional_exact_unit_crossing_constraints",
+      "file": "ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean",
+      "proof_hash": "sha256:f6b922572f68e8b9e8819a0eb5d3ce29a4c7a091b0f5ad27d104a4695a951436",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -5921,7 +6053,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.momentNumerator_recurrence",
       "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
-      "proof_hash": "sha256:204c45ef87ad12c75b13b3a5f0417c998bfac8e3836cf88ad2e1b107f9e2a3de",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -5933,7 +6065,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.momentNumerator_eq_X_pow_of_lower_moments",
       "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
-      "proof_hash": "sha256:204c45ef87ad12c75b13b3a5f0417c998bfac8e3836cf88ad2e1b107f9e2a3de",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -5945,7 +6077,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.momentNumerator_coeff_of_lower_moments",
       "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
-      "proof_hash": "sha256:204c45ef87ad12c75b13b3a5f0417c998bfac8e3836cf88ad2e1b107f9e2a3de",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -5957,7 +6089,31 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.rational_momentDelta_eq_zero_iff",
       "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
-      "proof_hash": "sha256:204c45ef87ad12c75b13b3a5f0417c998bfac8e3836cf88ad2e1b107f9e2a3de",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.integer_momentDelta_eq_zero_iff",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.mu_vandermonde_termination_domain",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -5969,7 +6125,151 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.mu_vandermonde_termination",
       "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
-      "proof_hash": "sha256:204c45ef87ad12c75b13b3a5f0417c998bfac8e3836cf88ad2e1b107f9e2a3de",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_nonzero_integral_moment_pair",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_first_nonzero_integral_moment_block",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reflect_matchingPhi",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reverseMatchingPhi_moment_factorization",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.reverseMatchingPhi_coeff_momentDelta",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchingPhi_coeff_momentDelta",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchingPhi_natDegree_le_first_moment_block",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchingPhi_natDegree_eq_first_nonzero_moment_block",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchingPhi_degree_eq_first_nonzero_moment_block",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.matchingPhi_quotient_natDegree_eq_first_nonzero_moment_block",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fin_matchingPhi_exists_first_nonzero_block_and_exact_degree",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.fin_matchingPhi_ne_zero_of_injective_nonzero_weights",
+      "file": "ErdosProblems/Erdos686BarycentricMomentLadder.lean",
+      "proof_hash": "sha256:539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6029,7 +6329,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.IsFixedDivisor.associated",
       "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
-      "proof_hash": "sha256:cec380f6661b38f14142ac9549ced8730a71ce2913c763b7ed306ce9ff1915c9",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6041,7 +6341,139 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.IsFixedDivisor.of_associated",
       "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
-      "proof_hash": "sha256:cec380f6661b38f14142ac9549ced8730a71ce2913c763b7ed306ce9ff1915c9",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.finitePolynomialFamilyGCD_isFixedDivisor_span",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_isFixedDivisor_of_finiteDimensional",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_isFixedDivisor_boundedOsculationPolynomialSpace",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_fixedDivisorPresentation_of_finiteDimensional",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.osculationCoeffToRatPolynomial_injective",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.boundedOsculationPolynomialSpace_ne_bot_of_entry_bound",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_isFixedDivisor_boundedOsculationPolynomialSpace_of_entry_bound",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.exists_fixedDivisorPresentation_boundedOsculation_of_entry_bound",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.FixedDivisorPresentation.quotient_add",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.FixedDivisorPresentation.quotient_smul",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 686,
+      "theorem": "Erdos686.Erdos686Variant.FixedDivisorPresentation.isUnit_gcd_basis_quotients",
+      "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6053,7 +6485,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.FixedDivisorPresentation.residual_has_no_common_nonunit",
       "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
-      "proof_hash": "sha256:cec380f6661b38f14142ac9549ced8730a71ce2913c763b7ed306ce9ff1915c9",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -6065,7 +6497,7 @@
       "problem": 686,
       "theorem": "Erdos686.Erdos686Variant.FixedDivisorPresentation.two_specialization_split",
       "file": "ErdosProblems/Erdos686OsculationFixedDivisor.lean",
-      "proof_hash": "sha256:cec380f6661b38f14142ac9549ced8730a71ce2913c763b7ed306ce9ff1915c9",
+      "proof_hash": "sha256:08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

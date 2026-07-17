@@ -924,6 +924,527 @@ theorem k5_exceptional_upper_eight_dvd_distinguished
   rw [canonical_upper_term_factorization data hfour, if_pos rfl, htwo]
   exact dvd_mul_right 8 (canonicalOwnerColumn data t)
 
+private theorem exceptional_profile_even_allocation
+    {f : ℕ → ℕ}
+    (hprofile : K5ExceptionalResidualProfile f)
+    (htwos : (Finset.Icc 1 5).filter (fun j => f j = 2) = {1, 3, 5}) :
+    (f 2 = 1 ∧ f 4 = 3) ∨ (f 2 = 3 ∧ f 4 = 1) := by
+  have hf1 : f 1 = 2 := by
+    have : 1 ∈ (Finset.Icc 1 5).filter (fun j => f j = 2) := by
+      rw [htwos]
+      simp
+    exact (Finset.mem_filter.mp this).2
+  have hf3 : f 3 = 2 := by
+    have : 3 ∈ (Finset.Icc 1 5).filter (fun j => f j = 2) := by
+      rw [htwos]
+      simp
+    exact (Finset.mem_filter.mp this).2
+  have hf5 : f 5 = 2 := by
+    have : 5 ∈ (Finset.Icc 1 5).filter (fun j => f j = 2) := by
+      rw [htwos]
+      simp
+    exact (Finset.mem_filter.mp this).2
+  rcases hprofile with ⟨hone, _, hthree⟩
+  obtain ⟨a, ha⟩ := Finset.card_eq_one.mp hone
+  obtain ⟨b, hb⟩ := Finset.card_eq_one.mp hthree
+  have haMem : a ∈ (Finset.Icc 1 5).filter (fun j => f j = 1) := by
+    rw [ha]
+    simp
+  have hbMem : b ∈ (Finset.Icc 1 5).filter (fun j => f j = 3) := by
+    rw [hb]
+    simp
+  have haIcc := (Finset.mem_filter.mp haMem).1
+  have hfa := (Finset.mem_filter.mp haMem).2
+  have hbIcc := (Finset.mem_filter.mp hbMem).1
+  have hfb := (Finset.mem_filter.mp hbMem).2
+  have ha1 : 1 ≤ a := (Finset.mem_Icc.mp haIcc).1
+  have ha5 : a ≤ 5 := (Finset.mem_Icc.mp haIcc).2
+  have hb1 : 1 ≤ b := (Finset.mem_Icc.mp hbIcc).1
+  have hb5 : b ≤ 5 := (Finset.mem_Icc.mp hbIcc).2
+  interval_cases a <;> interval_cases b <;> simp_all
+
+private theorem exceptional_even_allocation_mod_three
+    {base : ℕ} {f : ℕ → ℕ}
+    (halloc : (f 2 = 1 ∧ f 4 = 3) ∨ (f 2 = 3 ∧ f 4 = 1))
+    (hdvd : ∀ j, j ∈ Finset.Icc 1 5 → f j ∣ base + j) :
+    (base % 3 = 2 ∧ f 2 = 1 ∧ f 4 = 3) ∨
+      (base % 3 = 1 ∧ f 2 = 3 ∧ f 4 = 1) := by
+  rcases halloc with halloc | halloc
+  · left
+    refine ⟨?_, halloc⟩
+    have h3 : 3 ∣ base + 4 := by
+      simpa [halloc.2] using hdvd 4 (by norm_num)
+    have hmod : (base + 4) % 3 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp h3
+    rw [Nat.add_mod] at hmod
+    have := Nat.mod_lt base (by norm_num : 0 < 3)
+    omega
+  · right
+    refine ⟨?_, halloc⟩
+    have h3 : 3 ∣ base + 2 := by
+      simpa [halloc.1] using hdvd 2 (by norm_num)
+    have hmod : (base + 2) % 3 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp h3
+    rw [Nat.add_mod] at hmod
+    have := Nat.mod_lt base (by norm_num : 0 < 3)
+    omega
+
+private theorem eight_dvd_odd_offset_mod_eight
+    {base t : ℕ}
+    (htodd : t ∈ ({1, 3, 5} : Finset ℕ))
+    (h8 : 8 ∣ base + t) :
+    (t = 1 ∧ base % 8 = 7) ∨
+      (t = 3 ∧ base % 8 = 5) ∨
+      (t = 5 ∧ base % 8 = 3) := by
+  simp only [Finset.mem_insert, Finset.mem_singleton] at htodd
+  rcases htodd with rfl | rfl | rfl
+  · left
+    refine ⟨rfl, ?_⟩
+    have hmod : (base + 1) % 8 = 0 := Nat.dvd_iff_mod_eq_zero.mp h8
+    rw [Nat.add_mod] at hmod
+    have := Nat.mod_lt base (by norm_num : 0 < 8)
+    omega
+  · right; left
+    refine ⟨rfl, ?_⟩
+    have hmod : (base + 3) % 8 = 0 := Nat.dvd_iff_mod_eq_zero.mp h8
+    rw [Nat.add_mod] at hmod
+    have := Nat.mod_lt base (by norm_num : 0 < 8)
+    omega
+  · right; right
+    refine ⟨rfl, ?_⟩
+    have hmod : (base + 5) % 8 = 0 := Nat.dvd_iff_mod_eq_zero.mp h8
+    rw [Nat.add_mod] at hmod
+    have := Nat.mod_lt base (by norm_num : 0 < 8)
+    omega
+
+/-- The exceptional lower profile has an exact even-position allocation.
+The position carrying the residual `3` also determines the lower base
+modulo six. -/
+theorem k5_exceptional_lower_even_allocation_mod_six
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (hprofile : K5ExceptionalResidualProfile (canonicalLowerResidual data)) :
+    (n % 6 = 5 ∧ canonicalLowerResidual data 2 = 1 ∧
+        canonicalLowerResidual data 4 = 3) ∨
+      (n % 6 = 1 ∧ canonicalLowerResidual data 2 = 3 ∧
+        canonicalLowerResidual data 4 = 1) := by
+  have halloc := exceptional_profile_even_allocation hprofile
+    (k5_exceptional_lower_twos_eq_odd_positions data hprofile)
+  have hmod3 := exceptional_even_allocation_mod_three halloc
+    (fun j hj =>
+      ⟨canonicalOwnerRow data j,
+        canonical_lower_term_factorization data⟩)
+  have hodd := k5_exceptional_lower_base_odd data hprofile
+  rcases hmod3 with hmod3 | hmod3
+  · left
+    refine ⟨?_, hmod3.2⟩
+    omega
+  · right
+    refine ⟨?_, hmod3.2⟩
+    omega
+
+/-- On the upper side, the even-position allocation modulo three and the
+distinguished eight-divisibility combine by CRT.  This gives the exact six
+possible placements modulo `24`, with no floating or search assumption. -/
+theorem k5_exceptional_upper_exact_mod_twenty_four
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (ht : t ∈ Finset.Icc 1 5)
+    (hfour : 4 ∣ n + d + t)
+    (hprofile : K5ExceptionalResidualProfile (canonicalUpperResidual data)) :
+    (t = 1 ∧ (n + d) % 24 = 23 ∧
+        canonicalUpperResidual data 2 = 1 ∧
+        canonicalUpperResidual data 4 = 3) ∨
+      (t = 3 ∧ (n + d) % 24 = 5 ∧
+        canonicalUpperResidual data 2 = 1 ∧
+        canonicalUpperResidual data 4 = 3) ∨
+      (t = 5 ∧ (n + d) % 24 = 11 ∧
+        canonicalUpperResidual data 2 = 1 ∧
+        canonicalUpperResidual data 4 = 3) ∨
+      (t = 1 ∧ (n + d) % 24 = 7 ∧
+        canonicalUpperResidual data 2 = 3 ∧
+        canonicalUpperResidual data 4 = 1) ∨
+      (t = 3 ∧ (n + d) % 24 = 13 ∧
+        canonicalUpperResidual data 2 = 3 ∧
+        canonicalUpperResidual data 4 = 1) ∨
+      (t = 5 ∧ (n + d) % 24 = 19 ∧
+        canonicalUpperResidual data 2 = 3 ∧
+        canonicalUpperResidual data 4 = 1) := by
+  have htwos :=
+    k5_exceptional_upper_twos_eq_odd_positions data hfour hprofile
+  have halloc := exceptional_profile_even_allocation hprofile htwos
+  have hmod3 := exceptional_even_allocation_mod_three halloc
+    (fun i hi => dvd_trans
+      ⟨canonicalOwnerColumn data i,
+        canonical_modified_upper_term_factorization data⟩
+      (upperTermAfterFour_dvd_original hfour))
+  have htTwo := k5_exceptional_upper_residual_two_at_distinguished
+    data ht hfour hprofile
+  have htodd : t ∈ ({1, 3, 5} : Finset ℕ) := by
+    have htmem : t ∈ (Finset.Icc 1 5).filter
+        (fun i => canonicalUpperResidual data i = 2) :=
+      Finset.mem_filter.mpr ⟨ht, htTwo⟩
+    rwa [htwos] at htmem
+  have hmod8 := eight_dvd_odd_offset_mod_eight htodd
+    (k5_exceptional_upper_eight_dvd_distinguished
+      data ht hfour hprofile)
+  rcases hmod3 with hmod3 | hmod3
+  · rcases hmod8 with hmod8 | hmod8 | hmod8
+    · exact Or.inl ⟨hmod8.1, by omega, hmod3.2⟩
+    · exact Or.inr (Or.inl ⟨hmod8.1, by omega, hmod3.2⟩)
+    · exact Or.inr (Or.inr (Or.inl ⟨hmod8.1, by omega, hmod3.2⟩))
+  · rcases hmod8 with hmod8 | hmod8 | hmod8
+    · exact Or.inr (Or.inr (Or.inr
+        (Or.inl ⟨hmod8.1, by omega, hmod3.2⟩)))
+    · exact Or.inr (Or.inr (Or.inr
+        (Or.inr (Or.inl ⟨hmod8.1, by omega, hmod3.2⟩))))
+    · exact Or.inr (Or.inr (Or.inr
+        (Or.inr (Or.inr ⟨hmod8.1, by omega, hmod3.2⟩))))
+
+/-- Simultaneous lower and upper exceptional profiles determine the gap
+modulo six from the two even-position residual allocations.  Matching
+placements force `6 | d`; the two crossed placements force residues `2`
+and `4`, respectively. -/
+theorem k5_exceptional_row_column_gap_mod_six
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (ht : t ∈ Finset.Icc 1 5)
+    (hfour : 4 ∣ n + d + t)
+    (hlower : K5ExceptionalResidualProfile (canonicalLowerResidual data))
+    (hupper : K5ExceptionalResidualProfile (canonicalUpperResidual data)) :
+    (d % 6 = 0 ∧ canonicalLowerResidual data 2 = 1 ∧
+        canonicalLowerResidual data 4 = 3 ∧
+        canonicalUpperResidual data 2 = 1 ∧
+        canonicalUpperResidual data 4 = 3) ∨
+      (d % 6 = 2 ∧ canonicalLowerResidual data 2 = 1 ∧
+        canonicalLowerResidual data 4 = 3 ∧
+        canonicalUpperResidual data 2 = 3 ∧
+        canonicalUpperResidual data 4 = 1) ∨
+      (d % 6 = 4 ∧ canonicalLowerResidual data 2 = 3 ∧
+        canonicalLowerResidual data 4 = 1 ∧
+        canonicalUpperResidual data 2 = 1 ∧
+        canonicalUpperResidual data 4 = 3) ∨
+      (d % 6 = 0 ∧ canonicalLowerResidual data 2 = 3 ∧
+        canonicalLowerResidual data 4 = 1 ∧
+        canonicalUpperResidual data 2 = 3 ∧
+        canonicalUpperResidual data 4 = 1) := by
+  have hl := k5_exceptional_lower_even_allocation_mod_six data hlower
+  have hu := k5_exceptional_upper_exact_mod_twenty_four
+    data ht hfour hupper
+  rcases hl with hl | hl <;>
+    rcases hu with hu | hu | hu | hu | hu | hu
+  all_goals simp_all only [true_and, and_true]
+  all_goals omega
+
+/-! ## Global diagonal-product and adjacent-equation interfaces -/
+
+/-- A fully owned row divides the product of its shifted diagonals.  This is
+the first basis-free global use of all five row owners together: each cell
+divides its own `d+i-j`, and the full row product is exactly `n+j`. -/
+theorem canonicalOwner_fullyOwned_lower_dvd_diagonalProduct
+    {k n d t j : ℕ}
+    (data : CanonicalOwnerData k n d t)
+    (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 k)
+    (hfour : 4 ∣ n + d + t)
+    (hlower : canonicalLowerResidual data j = 1) :
+    n + j ∣ ∏ i ∈ Finset.Icc 1 k, (d + i - j) := by
+  rw [canonical_lower_term_factorization data, hlower, one_mul,
+    ← canonicalOwner_row_cell_product data]
+  exact Finset.prod_dvd_prod_of_dvd _ _ fun i hi =>
+    canonicalOwnerCell_dvd_shiftedDifference data hd hj hi hfour
+
+/-- A fully owned nondistinguished column divides the product of its five
+shifted diagonals.  The nondistinguished hypothesis removes the exceptional
+factor four, so the original upper term is exactly the column owner product. -/
+theorem canonicalOwner_fullyOwned_upper_dvd_diagonalProduct_of_ne
+    {k n d t i : ℕ}
+    (data : CanonicalOwnerData k n d t)
+    (hd : k ≤ d) (hi : i ∈ Finset.Icc 1 k)
+    (hit : i ≠ t) (hfour : 4 ∣ n + d + t)
+    (hupper : canonicalUpperResidual data i = 1) :
+    n + d + i ∣ ∏ j ∈ Finset.Icc 1 k, (d + i - j) := by
+  have hfactor := canonical_upper_term_factorization data hfour (i := i)
+  simp only [if_neg hit, one_mul, hupper] at hfactor
+  rw [hfactor, ← canonicalOwner_column_cell_product data]
+  exact Finset.prod_dvd_prod_of_dvd _ _ fun j hj =>
+    canonicalOwnerCell_dvd_shiftedDifference data hd hj hi hfour
+
+/-- At a fully owned nondistinguished crossing, the owner is not merely a
+divisor of the shifted difference: it is its exact gcd with the lower term. -/
+theorem canonicalOwner_fullyOwned_gcd_shiftedDifference_eq_cell_of_ne
+    {k n d t j i : ℕ}
+    (data : CanonicalOwnerData k n d t)
+    (hd : k ≤ d)
+    (hj : j ∈ Finset.Icc 1 k) (hi : i ∈ Finset.Icc 1 k)
+    (hit : i ≠ t)
+    (hlower : canonicalLowerResidual data j = 1)
+    (hupper : canonicalUpperResidual data i = 1) :
+    Nat.gcd (n + j) (d + i - j) = canonicalOwnerCell data j i := by
+  have hji : j ≤ d + i := by
+    have hjk : j ≤ k := (Finset.mem_Icc.mp hj).2
+    have hi1 : 1 ≤ i := (Finset.mem_Icc.mp hi).1
+    omega
+  have hadd : n + d + i = (d + i - j) + (n + j) := by omega
+  have hg := canonicalOwner_fullyOwned_gcd_upper_eq_cell_of_ne
+    data hj hi hit hlower hupper
+  rw [hadd, Nat.gcd_add_self_right] at hg
+  exact hg
+
+/-- Two distinct fully owned lower rows are coprime.  Replacing the second
+row by its adjacent difference shows that the first term is also coprime to
+the exact row offset. -/
+theorem canonicalOwner_two_fullyOwned_lower_rows_coprime_offset
+    {k n d t j₁ j₂ : ℕ}
+    (data : CanonicalOwnerData k n d t)
+    (hj₁ : j₁ ∈ Finset.Icc 1 k) (hj₂ : j₂ ∈ Finset.Icc 1 k)
+    (hneq : j₁ ≠ j₂) (hle : j₁ ≤ j₂)
+    (h₁ : canonicalLowerResidual data j₁ = 1)
+    (h₂ : canonicalLowerResidual data j₂ = 1) :
+    Nat.Coprime (n + j₁) (n + j₂) ∧
+      Nat.Coprime (n + j₁) (j₂ - j₁) := by
+  have hrow₁ :
+      n + j₁ = ∏ i ∈ Finset.Icc 1 k, canonicalOwnerCell data j₁ i := by
+    rw [canonical_lower_term_factorization data, h₁, one_mul,
+      canonicalOwner_row_cell_product data]
+  have hrow₂ :
+      n + j₂ = ∏ i ∈ Finset.Icc 1 k, canonicalOwnerCell data j₂ i := by
+    rw [canonical_lower_term_factorization data, h₂, one_mul,
+      canonicalOwner_row_cell_product data]
+  have hcop : Nat.Coprime (n + j₁) (n + j₂) := by
+    rw [hrow₁, hrow₂]
+    apply Nat.Coprime.prod_left
+    intro i₁ hi₁
+    apply Nat.Coprime.prod_right
+    intro i₂ hi₂
+    apply canonicalOwnerCells_pairwise_coprime data
+    intro heq
+    have : j₁ = j₂ := congrArg Prod.fst heq
+    exact hneq this
+  refine ⟨hcop, ?_⟩
+  have hadd : n + j₂ = (n + j₁) + (j₂ - j₁) := by omega
+  rw [hadd] at hcop
+  simpa using (Nat.coprime_self_add_right.mp hcop)
+
+/-- On every proper-global-residual branch, two fully owned lower rows can
+be ordered so that their exact adjacent equation has offset between one and
+four, and the earlier lower term is coprime to both the later term and the
+offset. -/
+theorem k5_proper_global_two_coprime_lower_adjacent_equations
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (hGne : canonicalOwnerResidual data ≠ 24) :
+    ∃ j₁, j₁ ∈ Finset.Icc 1 5 ∧
+      ∃ j₂, j₂ ∈ Finset.Icc 1 5 ∧ j₁ < j₂ ∧
+        canonicalLowerResidual data j₁ = 1 ∧
+        canonicalLowerResidual data j₂ = 1 ∧
+        Nat.Coprime (n + j₁) (n + j₂) ∧
+        Nat.Coprime (n + j₁) (j₂ - j₁) ∧
+        1 ≤ j₂ - j₁ ∧ j₂ - j₁ ≤ 4 := by
+  obtain ⟨a, ha, b, hb, hba, haone, hbone⟩ :=
+    exists_two_k5_unit_lower_residuals_of_global_ne_twenty_four data hGne
+  rcases lt_or_gt_of_ne hba with hba' | hab
+  · obtain ⟨hcop, hoff⟩ :=
+      canonicalOwner_two_fullyOwned_lower_rows_coprime_offset
+        data hb ha hba hba'.le hbone haone
+    refine ⟨b, hb, a, ha, hba', hbone, haone, hcop, hoff, ?_, ?_⟩
+    · omega
+    · have ha5 := (Finset.mem_Icc.mp ha).2
+      have hb1 := (Finset.mem_Icc.mp hb).1
+      omega
+  · obtain ⟨hcop, hoff⟩ :=
+      canonicalOwner_two_fullyOwned_lower_rows_coprime_offset
+        data ha hb hba.symm hab.le haone hbone
+    refine ⟨a, ha, b, hb, hab, haone, hbone, hcop, hoff, ?_, ?_⟩
+    · omega
+    · have hb5 := (Finset.mem_Icc.mp hb).2
+      have ha1 := (Finset.mem_Icc.mp ha).1
+      omega
+
+/-- Two distinct fully owned nondistinguished upper columns are coprime, and
+the first upper term is coprime to the exact column offset. -/
+theorem canonicalOwner_two_fullyOwned_upper_columns_coprime_offset
+    {k n d t i₁ i₂ : ℕ}
+    (data : CanonicalOwnerData k n d t)
+    (hi₁ : i₁ ∈ Finset.Icc 1 k) (hi₂ : i₂ ∈ Finset.Icc 1 k)
+    (hneq : i₁ ≠ i₂) (hle : i₁ ≤ i₂)
+    (hi₁t : i₁ ≠ t) (hi₂t : i₂ ≠ t)
+    (hfour : 4 ∣ n + d + t)
+    (h₁ : canonicalUpperResidual data i₁ = 1)
+    (h₂ : canonicalUpperResidual data i₂ = 1) :
+    Nat.Coprime (n + d + i₁) (n + d + i₂) ∧
+      Nat.Coprime (n + d + i₁) (i₂ - i₁) := by
+  have hcol₁ :
+      n + d + i₁ = ∏ j ∈ Finset.Icc 1 k, canonicalOwnerCell data j i₁ := by
+    have hfactor := canonical_upper_term_factorization data hfour (i := i₁)
+    simp only [if_neg hi₁t, one_mul, h₁] at hfactor
+    rw [hfactor, canonicalOwner_column_cell_product data]
+  have hcol₂ :
+      n + d + i₂ = ∏ j ∈ Finset.Icc 1 k, canonicalOwnerCell data j i₂ := by
+    have hfactor := canonical_upper_term_factorization data hfour (i := i₂)
+    simp only [if_neg hi₂t, one_mul, h₂] at hfactor
+    rw [hfactor, canonicalOwner_column_cell_product data]
+  have hcop : Nat.Coprime (n + d + i₁) (n + d + i₂) := by
+    rw [hcol₁, hcol₂]
+    apply Nat.Coprime.prod_left
+    intro j₁ hj₁
+    apply Nat.Coprime.prod_right
+    intro j₂ hj₂
+    apply canonicalOwnerCells_pairwise_coprime data
+    intro heq
+    have : i₁ = i₂ := congrArg Prod.snd heq
+    exact hneq this
+  refine ⟨hcop, ?_⟩
+  have hadd : n + d + i₂ = (n + d + i₁) + (i₂ - i₁) := by omega
+  rw [hadd] at hcop
+  simpa using (Nat.coprime_self_add_right.mp hcop)
+
+private lemma five_le_of_one_lt_and_coprime_six
+    {a : ℕ} (ha : 1 < a) (hcop : Nat.Coprime a 6) : 5 ≤ a := by
+  by_contra hnot
+  have ha4 : a ≤ 4 := by omega
+  interval_cases a <;> norm_num [Nat.Coprime] at hcop
+
+/-- If a lower term is coprime to six, complete support upgrades every cell
+in its row to a shifted-diagonal divisor at least five. -/
+theorem canonicalOwner_row_coprime_six_large_diagonal_factors
+    {k n d t j : ℕ}
+    (data : CanonicalOwnerData k n d t)
+    (hd : k ≤ d) (hj : j ∈ Finset.Icc 1 k)
+    (hfour : 4 ∣ n + d + t)
+    (hterm : Nat.Coprime (n + j) 6)
+    (hcells : ∀ i ∈ Finset.Icc 1 k, 1 < canonicalOwnerCell data j i) :
+    ∀ i ∈ Finset.Icc 1 k,
+      5 ≤ canonicalOwnerCell data j i ∧
+      Nat.Coprime (canonicalOwnerCell data j i) 6 ∧
+      canonicalOwnerCell data j i ∣ d + i - j := by
+  intro i hi
+  have hcop := hterm.of_dvd_left
+    (canonicalOwnerCell_dvd_lower data (j := j) (i := i))
+  exact ⟨five_le_of_one_lt_and_coprime_six (hcells i hi) hcop, hcop,
+    canonicalOwnerCell_dvd_shiftedDifference data hd hj hi hfour⟩
+
+/-- The exact symbolic payload carried by an exceptional fully owned
+row/column crossing.  Besides the two unit residuals it records the exact
+shifted gcd and both independent five-diagonal product divisibilities. -/
+def K5ExceptionalUnitCrossingConstraint
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t) (j i : ℕ) : Prop :=
+  i ≠ t ∧
+  canonicalLowerResidual data j = 1 ∧
+  canonicalUpperResidual data i = 1 ∧
+  1 < canonicalOwnerCell data j i ∧
+  Nat.Coprime (canonicalOwnerCell data j i) 6 ∧
+  (∀ i' ∈ Finset.Icc 1 5,
+    5 ≤ canonicalOwnerCell data j i' ∧
+    Nat.Coprime (canonicalOwnerCell data j i') 6 ∧
+    canonicalOwnerCell data j i' ∣ d + i' - j) ∧
+  Nat.gcd (n + j) (d + i - j) = canonicalOwnerCell data j i ∧
+  n + j ∣ ∏ i' ∈ Finset.Icc 1 5, (d + i' - j) ∧
+  n + d + i ∣ ∏ j' ∈ Finset.Icc 1 5, (d + i - j')
+
+/-- In the simultaneous exceptional branch there are only four possible
+fully owned crossings.  In every case the crossing is nontrivial, coprime
+to six, is the exact gcd with `d+i-j`, and the complete row and column give
+independent five-diagonal product divisibilities. -/
+theorem k5_exceptional_exact_unit_crossing_constraints
+    {n d t : ℕ} (data : CanonicalOwnerData 5 n d t)
+    (ht : t ∈ Finset.Icc 1 5)
+    (hfour : 4 ∣ n + d + t)
+    (hblocks : upperBlockAfterFour 5 n d t = blockProduct 5 n)
+    (htail : 10 ^ 1000 ≤ d)
+    (heq : blockProduct 5 (n + d) = 4 * blockProduct 5 n)
+    (hlower : K5ExceptionalResidualProfile (canonicalLowerResidual data))
+    (hupper : K5ExceptionalResidualProfile (canonicalUpperResidual data)) :
+    (d % 6 = 0 ∧ K5ExceptionalUnitCrossingConstraint data 2 2) ∨
+      (d % 6 = 2 ∧ K5ExceptionalUnitCrossingConstraint data 2 4) ∨
+      (d % 6 = 4 ∧ K5ExceptionalUnitCrossingConstraint data 4 2) ∨
+      (d % 6 = 0 ∧ K5ExceptionalUnitCrossingConstraint data 4 4) := by
+  have hfive : 5 ≤ 10 ^ 1000 := by
+    rw [show 1000 = 999 + 1 by omega, pow_succ]
+    have hp : 0 < 10 ^ 999 := pow_pos (by norm_num) _
+    have hp1 : 1 ≤ 10 ^ 999 := hp
+    calc
+      5 ≤ 1 * 10 := by norm_num
+      _ ≤ 10 ^ 999 * 10 := Nat.mul_le_mul_right 10 hp1
+  have hd : 5 ≤ d := le_trans hfive htail
+  have hcells := (k5_tail_complete_support_unit_cross
+    data ht hfour hblocks htail heq).1
+  have htodd : t % 2 = 1 := by
+    have hbase := k5_exceptional_upper_base_odd data hfour hupper
+    have hsum : (n + d + t) % 2 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp (dvd_trans (by norm_num : 2 ∣ 4) hfour)
+    omega
+  have hl := k5_exceptional_lower_even_allocation_mod_six data hlower
+  have hcases := k5_exceptional_row_column_gap_mod_six
+    data ht hfour hlower hupper
+  have hcop2 (hn : n % 6 = 5) : Nat.Coprime (n + 2) 6 := by
+    apply Nat.coprime_of_mul_modEq_one 1
+    change ((n + 2) * 1) % 6 = 1 % 6
+    omega
+  have hcop4 (hn : n % 6 = 1) : Nat.Coprime (n + 4) 6 := by
+    apply Nat.coprime_of_mul_modEq_one 5
+    change ((n + 4) * 5) % 6 = 1 % 6
+    omega
+  rcases hl with hl | hl
+  · have hrowcop := hcop2 hl.1
+    rcases hcases with hc | hc | hc | hc
+    · left
+      refine ⟨hc.1, ?_⟩
+      have hit : 2 ≠ t := by omega
+      refine ⟨hit, hc.2.1, hc.2.2.2.1, hcells 2 (by norm_num) 2 (by norm_num),
+        hrowcop.of_dvd_left (canonicalOwnerCell_dvd_lower data),
+        canonicalOwner_row_coprime_six_large_diagonal_factors
+          data hd (by norm_num) hfour hrowcop (hcells 2 (by norm_num)), ?_, ?_, ?_⟩
+      · exact canonicalOwner_fullyOwned_gcd_shiftedDifference_eq_cell_of_ne
+          data hd (by norm_num) (by norm_num) hit hc.2.1 hc.2.2.2.1
+      · exact canonicalOwner_fullyOwned_lower_dvd_diagonalProduct
+          data hd (by norm_num) hfour hc.2.1
+      · exact canonicalOwner_fullyOwned_upper_dvd_diagonalProduct_of_ne
+          data hd (by norm_num) hit hfour hc.2.2.2.1
+    · right; left
+      refine ⟨hc.1, ?_⟩
+      have hit : 4 ≠ t := by omega
+      refine ⟨hit, hc.2.1, hc.2.2.2.2,
+        hcells 2 (by norm_num) 4 (by norm_num),
+        hrowcop.of_dvd_left (canonicalOwnerCell_dvd_lower data),
+        canonicalOwner_row_coprime_six_large_diagonal_factors
+          data hd (by norm_num) hfour hrowcop (hcells 2 (by norm_num)), ?_, ?_, ?_⟩
+      · exact canonicalOwner_fullyOwned_gcd_shiftedDifference_eq_cell_of_ne
+          data hd (by norm_num) (by norm_num) hit hc.2.1 hc.2.2.2.2
+      · exact canonicalOwner_fullyOwned_lower_dvd_diagonalProduct
+          data hd (by norm_num) hfour hc.2.1
+      · exact canonicalOwner_fullyOwned_upper_dvd_diagonalProduct_of_ne
+          data hd (by norm_num) hit hfour hc.2.2.2.2
+    · omega
+    · omega
+  · have hrowcop := hcop4 hl.1
+    rcases hcases with hc | hc | hc | hc
+    · omega
+    · omega
+    · right; right; left
+      refine ⟨hc.1, ?_⟩
+      have hit : 2 ≠ t := by omega
+      refine ⟨hit, hc.2.2.1, hc.2.2.2.1,
+        hcells 4 (by norm_num) 2 (by norm_num),
+        hrowcop.of_dvd_left (canonicalOwnerCell_dvd_lower data),
+        canonicalOwner_row_coprime_six_large_diagonal_factors
+          data hd (by norm_num) hfour hrowcop (hcells 4 (by norm_num)), ?_, ?_, ?_⟩
+      · exact canonicalOwner_fullyOwned_gcd_shiftedDifference_eq_cell_of_ne
+          data hd (by norm_num) (by norm_num) hit hc.2.2.1 hc.2.2.2.1
+      · exact canonicalOwner_fullyOwned_lower_dvd_diagonalProduct
+          data hd (by norm_num) hfour hc.2.2.1
+      · exact canonicalOwner_fullyOwned_upper_dvd_diagonalProduct_of_ne
+          data hd (by norm_num) hit hfour hc.2.2.2.1
+    · right; right; right
+      refine ⟨hc.1, ?_⟩
+      have hit : 4 ≠ t := by omega
+      refine ⟨hit, hc.2.2.1, hc.2.2.2.2,
+        hcells 4 (by norm_num) 4 (by norm_num),
+        hrowcop.of_dvd_left (canonicalOwnerCell_dvd_lower data),
+        canonicalOwner_row_coprime_six_large_diagonal_factors
+          data hd (by norm_num) hfour hrowcop (hcells 4 (by norm_num)), ?_, ?_, ?_⟩
+      · exact canonicalOwner_fullyOwned_gcd_shiftedDifference_eq_cell_of_ne
+          data hd (by norm_num) (by norm_num) hit hc.2.2.1 hc.2.2.2.2
+      · exact canonicalOwner_fullyOwned_lower_dvd_diagonalProduct
+          data hd (by norm_num) hfour hc.2.2.1
+      · exact canonicalOwner_fullyOwned_upper_dvd_diagonalProduct_of_ne
+          data hd (by norm_num) hit hfour hc.2.2.2.2
+
 #print axioms exists_k5_unit_lower_residual
 #print axioms exists_k5_unit_upper_residual
 #print axioms k5_lower_residual_profile_of_global_eq_twenty_four
@@ -944,6 +1465,17 @@ theorem k5_exceptional_upper_eight_dvd_distinguished
 #print axioms k5_exceptional_upper_twos_eq_odd_positions
 #print axioms k5_exceptional_upper_residual_two_at_distinguished
 #print axioms k5_exceptional_upper_eight_dvd_distinguished
+#print axioms k5_exceptional_lower_even_allocation_mod_six
+#print axioms k5_exceptional_upper_exact_mod_twenty_four
+#print axioms k5_exceptional_row_column_gap_mod_six
+#print axioms canonicalOwner_fullyOwned_lower_dvd_diagonalProduct
+#print axioms canonicalOwner_fullyOwned_upper_dvd_diagonalProduct_of_ne
+#print axioms canonicalOwner_fullyOwned_gcd_shiftedDifference_eq_cell_of_ne
+#print axioms canonicalOwner_two_fullyOwned_lower_rows_coprime_offset
+#print axioms k5_proper_global_two_coprime_lower_adjacent_equations
+#print axioms canonicalOwner_two_fullyOwned_upper_columns_coprime_offset
+#print axioms canonicalOwner_row_coprime_six_large_diagonal_factors
+#print axioms k5_exceptional_exact_unit_crossing_constraints
 
 end Erdos686Variant
 end Erdos686

@@ -3705,6 +3705,106 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_lower_even_allocation_mod_six
+    statement: >-
+      The exceptional lower residuals at positions two and four are exactly
+      one and three, with their orientation determined by n modulo six.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_upper_exact_mod_twenty_four
+    statement: >-
+      The upper exceptional profile and distinguished eight-divisibility give
+      the exact six CRT placements modulo twenty-four.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_row_column_gap_mod_six
+    statement: >-
+      Simultaneous lower and upper exceptional allocations determine the gap
+      modulo six, including exact same and crossed orientations.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_lower_dvd_diagonalProduct
+    statement: >-
+      A fully owned lower row divides the product of all five associated
+      shifted diagonal differences.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_upper_dvd_diagonalProduct_of_ne
+    statement: >-
+      A fully owned nondistinguished upper column divides its complete
+      shifted diagonal product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_fullyOwned_gcd_shiftedDifference_eq_cell_of_ne
+    statement: >-
+      At a fully owned nondistinguished row-column crossing, the gcd of the
+      lower term and shifted difference is exactly the crossing owner cell.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_two_fullyOwned_lower_rows_coprime_offset
+    statement: >-
+      Two fully owned lower rows have coprime bases and an exact positive
+      offset bounded by four.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_proper_global_two_coprime_lower_adjacent_equations
+    statement: >-
+      The proper-global k=5 branch yields two ordered unit rows with coprime
+      bases, bounded offset, and simultaneous term and offset coprimalities.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_two_fullyOwned_upper_columns_coprime_offset
+    statement: >-
+      Two fully owned nondistinguished upper columns have coprime modified
+      bases with their exact bounded column offset.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.canonicalOwner_row_coprime_six_large_diagonal_factors
+    statement: >-
+      Every cell in the exceptional fully owned row is at least five,
+      coprime to six, and divides its own shifted diagonal.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5CompleteSupportArithmetic.lean
+    theorem: Erdos686.Erdos686Variant.k5_exceptional_exact_unit_crossing_constraints
+    statement: >-
+      The exceptional branch reduces to four exact unit crossings with fixed
+      gap residues, exact crossing gcds, and simultaneous full row-column
+      diagonal divisibilities.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686SparseJetCertificate.lean
     theorem: Erdos686.Erdos686Variant.sparseBivariate_pow_dvd_natAbs_eval_of_order
     statement: >-
@@ -4659,10 +4759,137 @@ proofs:
   - problem: 686
     source: erdosproblems
     file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.integer_momentDelta_eq_zero_iff
+    statement: >-
+      For k at least three, the integral moment defect vanishes exactly when
+      its two integer moment arguments vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.mu_vandermonde_termination_domain
+    statement: >-
+      Over any integral domain, distinct nodes and vanishing of the first m
+      weighted moments force all m weights to vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
     theorem: Erdos686.Erdos686Variant.mu_vandermonde_termination
     statement: >-
       At distinct rational nodes, vanishing of the first m weighted moments
       forces all m weights to vanish.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.exists_nonzero_integral_moment_pair
+    statement: >-
+      Nonzero integral weights at distinct nodes force a nonzero mu or nu
+      moment among the finite first-moment range.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.exists_first_nonzero_integral_moment_block
+    statement: >-
+      In the integral zero branch there is a least moment block between one
+      and m whose exact defect Delta is nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.reflect_matchingPhi
+    statement: >-
+      Reflecting the original matching polynomial through degree k|S| gives
+      exactly the reverse generating-series matching polynomial.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.reverseMatchingPhi_moment_factorization
+    statement: >-
+      Lower mu and nu moment vanishings factor the reverse matching product
+      by the exact power X^(qk).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.reverseMatchingPhi_coeff_momentDelta
+    statement: >-
+      The first coefficient after the exact reverse-product factorization is
+      the integer moment defect Delta_q.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.matchingPhi_coeff_momentDelta
+    statement: >-
+      The coefficient of the original matching polynomial in degree
+      k(|S|-q) is exactly the integer moment defect Delta_q.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.matchingPhi_natDegree_le_first_moment_block
+    statement: >-
+      Vanishing lower moment blocks give the sharp matching-polynomial degree
+      upper bound k(|S|-q).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.matchingPhi_natDegree_eq_first_nonzero_moment_block
+    statement: >-
+      A nonzero first moment defect makes the matching-polynomial natural
+      degree exactly k(|S|-q).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.matchingPhi_degree_eq_first_nonzero_moment_block
+    statement: >-
+      The exact degree-valued form of the first nonzero moment-block theorem
+      is deg matchingPhi = k(|S|-q).
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.matchingPhi_quotient_natDegree_eq_first_nonzero_moment_block
+    statement: >-
+      If matchingPhi factors as W_S squared times Q, the residual quotient
+      has exact natural degree k(|S|-q)-2|S|.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.fin_matchingPhi_exists_first_nonzero_block_and_exact_degree
+    statement: >-
+      Distinct finite integral nodes and nonzero weights in the zero branch
+      produce a nonzero first moment block, a nonzero matching polynomial,
+      and its exact degree.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686BarycentricMomentLadder.lean
+    theorem: Erdos686.Erdos686Variant.fin_matchingPhi_ne_zero_of_injective_nonzero_weights
+    statement: >-
+      The finite integral matching polynomial is nonzero for injective nodes,
+      nonzero weights, the zero moment branch, and k at least three.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
@@ -4717,6 +4944,106 @@ proofs:
     statement: >-
       Replacing a fixed divisor by an associated polynomial preserves its
       universal fixed-divisor property.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.finitePolynomialFamilyGCD_isFixedDivisor_span
+    statement: >-
+      The normalized gcd of a nonzero finite polynomial family is a fixed
+      divisor of the rational span of that family.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.exists_isFixedDivisor_of_finiteDimensional
+    statement: >-
+      Every nonzero finite-dimensional rational multivariate polynomial
+      subspace has a fixed divisor with the exact universal property.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.exists_isFixedDivisor_boundedOsculationPolynomialSpace
+    statement: >-
+      Every nonzero canonical bounded osculation polynomial space has a
+      genuine multivariate fixed divisor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.exists_fixedDivisorPresentation_of_finiteDimensional
+    statement: >-
+      Every nonzero finite-dimensional polynomial space admits a fixed
+      divisor presentation with pointwise residual quotients.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.osculationCoeffToRatPolynomial_injective
+    statement: >-
+      The canonical coefficient-to-bivariate-polynomial map on bounded
+      osculation monomials is injective.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.boundedOsculationPolynomialSpace_ne_bot_of_entry_bound
+    statement: >-
+      The exact bounded-kernel entry and column hypotheses force the canonical
+      bounded osculation polynomial space to be nonzero.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.exists_isFixedDivisor_boundedOsculationPolynomialSpace_of_entry_bound
+    statement: >-
+      The exact bounded-kernel hypotheses produce a genuine fixed divisor of
+      the bounded osculation polynomial space without a separate nonzero
+      assumption.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.exists_fixedDivisorPresentation_boundedOsculation_of_entry_bound
+    statement: >-
+      The exact entry and column bounds produce a full bounded-osculation
+      fixed-divisor quotient presentation with the certified coefficient
+      radius.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.quotient_add
+    statement: >-
+      Residual quotients in a fixed-divisor presentation preserve addition.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.quotient_smul
+    statement: >-
+      Residual quotients in a fixed-divisor presentation preserve rational
+      scalar multiplication.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686OsculationFixedDivisor.lean
+    theorem: Erdos686.Erdos686Variant.FixedDivisorPresentation.isUnit_gcd_basis_quotients
+    statement: >-
+      Residual quotients of any finite basis have unit multivariate gcd,
+      without asserting that a pair is coprime.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686

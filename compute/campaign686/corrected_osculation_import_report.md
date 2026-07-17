@@ -20,9 +20,9 @@ SHA-256:
 - `Erdos686BoundedOsculationSpace.lean`:
   `a329226113be2ac5b682fe925066ebac8b2a227972f5f5eac2aeab520d0e2683`.
 - `Erdos686OsculationFixedDivisor.lean`:
-  `cec380f6661b38f14142ac9549ced8730a71ce2913c763b7ed306ce9ff1915c9`.
+  `08e7bfb814cfba8cb493df4e0fe890b7ddbf6369c040eceaa394cef38619bba4`.
 - `Erdos686BarycentricMomentLadder.lean`:
-  `204c45ef87ad12c75b13b3a5f0417c998bfac8e3836cf88ad2e1b107f9e2a3de`.
+  `539e34a0deb2db574fadb3d5b5ad21bc3fcfa9f51f1a09dff80750615037203d`.
 - `Erdos686EffectiveIntersectionInterface.lean`:
   `6c6700eb2cc7d38953f9a926b2244d6b1e47ba4f3496f08582212829897be4ba`.
 
@@ -78,6 +78,20 @@ SHA-256:
   `(mu_q+nu_(q-1))^k-4*mu_q^k` vanishes exactly when both moments vanish.
 - Vandermonde termination: vanishing of `mu_0,...,mu_(m-1)` at distinct
   rational nodes forces every weight to vanish.
+- The exact reflection bridge from the original `matchingPhi` at degree
+  `k*|S|` to the reverse generating-series matching polynomial.
+- Under the lower moment vanishings, the reverse matching product factors by
+  `X^(q*k)` and its first surviving coefficient is exactly `Delta_q`.
+- The coefficient of the original `matchingPhi` at `k*(|S|-q)` is therefore
+  exactly `Delta_q`.
+- If `Delta_q` is the first nonzero moment block, then
+  `deg matchingPhi = k*(|S|-q)` exactly.
+- After a certified factorization `matchingPhi=W_S^2*Q`, the residual degree
+  is exactly `k*(|S|-q)-2|S|`.
+- For distinct integral nodes, nonzero integral weights, `mu_0=0`, and
+  `k>=3`, a least block `1<=q<=|S|` with `Delta_q!=0` exists. Consequently
+  `matchingPhi` is nonzero and has the exact first-block degree. This is a
+  direct moment proof of the required nonvanishing branch.
 - `Lambda_r(S)`, the canonical bounded set, and `V_B(S)` as the rational
   span of all bounded integral lattice points.
 - `V_B(S) <= K_r` and the basis-free cancellation extension from bounded
@@ -88,6 +102,16 @@ SHA-256:
   bound. It is not transferred to `V_B`.
 - The universal fixed-divisor property is invariant under basis changes,
   spanning-family changes, and associated scalar normalization.
+- A genuine multivariate fixed divisor exists for every nonzero
+  finite-dimensional polynomial subspace, using the gcd of a finite basis.
+- In particular, every nonzero bounded osculation polynomial space has a
+  fixed divisor and a pointwise quotient presentation.
+- The exact entry and column bounds from the bounded-kernel construction
+  prove that this bounded polynomial space is nonzero, so fixed-divisor
+  existence and a full presentation no longer require a separate nonzero
+  hypothesis.
+- Residual division is linear, and the residual quotients of a finite basis
+  have unit gcd. No pairwise coprimality is inferred.
 - A presented fixed divisor leaves a residual family with no common
   nonunit factor and gives the exact specialization split.
 
@@ -99,18 +123,14 @@ SHA-256:
 
 ## Still unclaimed
 
-- Existence/effective computation of the multivariate fixed divisor with the
-  stated universal property. Mathlib does not currently supply this
-  construction; the presentation interface and all its consequences are
-  kernel-checked.
+- An effective coefficient-level computation of the multivariate fixed
+  divisor for a concrete support. Existence and its universal property are
+  kernel-checked under the exact bounded-kernel hypotheses.
 - Extraction of two coprime residual elements from the whole residual space.
   Absence of a common divisor for the family does not by itself select a
   coprime pair; this remains a separate certificate interface.
 - The `(r-e)^2` projective intersection bound in the exact formal interface.
 - Transfer of the full-jet divisor-degree bound to the bounded space.
-- The reversal identity connecting the generating numerator to the original
-  `matchingPhi`, the resulting actual `Delta_q` coefficient theorem, and the
-  exact `deg Phi` and `deg Q` conclusions.
 - Any concrete support-specific instance of the effective intersection
   interface. The interface itself does not claim its root bound beats the
   surviving arithmetic scale.
