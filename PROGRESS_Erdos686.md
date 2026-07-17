@@ -1077,6 +1077,16 @@ fails some row j ≤ 17.
    after exact small-prime bookkeeping; the diffuse branch needs a
    cycle-level additive or tangent resultant using the common `n,d`
    equations.
+   The first cycle audit is now exact. A genuine common-modulus transfer
+   gives the expected monodromy resultant, but lifting distinct local owner
+   moduli by complementary products is formally tautological: for every
+   cycle of at least two pairwise-coprime owners, the lifted resultant is
+   already divisible by the total owner product. A separate row/signed-
+   diagonal four-cycle does expose new arithmetic. Its nonzero secant bounds
+   an opposite crossing product, while its zero branch forces the two
+   opposite owner squares into the diagonal cofactors and gives the crowding
+   divisor `ownerMass*(crossProduct)^2 | y1*y2`. No global cycle cover or
+   stability conclusion is yet claimed.
    The matching-tail analytic dependency is now contiguous without importing
    Rosser--Schoenfeld. Eight exact dyadic integral bounds through `512`,
    propagated by a kernel-checked derivative comparison, prove
@@ -1085,6 +1095,16 @@ fails some row j ≤ 17.
    `k>=10^6`. This closes the former interval between the exact threshold scan
    and the symbolic Chebyshev tail. It does not itself eliminate the
    surviving canonical support, so no global large-k exclusion is claimed.
+   On the k=5 side, the unique `G=12` residual profile that defeats a
+   universal nonzero four-crossing coefficient now has an exact complementary
+   treatment. The zero crossing owner divides the minus-secant quotient; the
+   profile itself proves coprimality with `24`, so the full owner survives
+   cancellation. Writing the associated row and column complements as
+   `R,C` and the two crossing owners as `P,Q`, Lean proves the primitive
+   relation `P*Q | R+C`, `Coprime (P*Q) (R*C)`,
+   `R<C`, `2*C<3*R`, `2*(P*Q)<5*R`, and `15<=P*Q`.
+   This is a genuine S-unit-style constraint, but a second independent
+   relation is still required for contradiction.
    Finally, a support-dependent effective intersection
    certificate now has a kernel interface covering integer shear, nonzero
    resultant roots, fiber-gcd roots, finite candidate lists, a root bound,

@@ -10012,6 +10012,248 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/686.lean
   - problem: 686
     source: erdosproblems
+    file: ErdosProblems/Erdos686K5ZeroSecantGCDLower.lean
+    theorem: Erdos686.Erdos686Variant.reduced_modulus_dvd_of_dvd_coefficient_mul_coprime
+    statement: >-
+      Exact natural cancellation removes a coprime factor and retains the
+      part of an owner modulus not already present in the fixed coefficient.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5ZeroSecantGCDLower.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_zero_crossing_owner_dvd_minus_secant_and_gcd
+    statement: >-
+      In the exceptional G=12 profile, the zero crossing owner is coprime to
+      24 and divides the complete minus-secant quotient and its owner gcd.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686K5G12SecantComplement.lean
+    theorem: Erdos686.Erdos686Variant.k5_G12_zero_crossing_product_dvd_complement_sum
+    statement: >-
+      The exceptional k=5 crossing product divides the sum of two coprime
+      exact row and column complements, with strict centered-window bounds.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.kSmallPart_coprime_kLargePart
+    statement: >-
+      The small-prime and above-k projections of every nonzero natural are
+      coprime.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerRowCofactor_coprime_mass
+    statement: >-
+      Every canonical lower-row cofactor is coprime to the total large-owner
+      mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwner_cycleRowCofactor_isCoprime_mass
+    statement: >-
+      Any finite product of canonical row cofactors remains a unit modulo the
+      total large-owner mass.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.cycleComplementaryProduct_mul
+    statement: >-
+      One local modulus times its complementary product is the exact total
+      modulus.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.cycleTotalProduct_dvd_product_complements
+    statement: >-
+      For at least two pairwise-coprime local moduli, the product of all
+      complementary products already contains the total modulus.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.cycleTransferResultant_smul
+    statement: >-
+      Scaling every cyclic transfer scales its monodromy resultant by the
+      product of the local scales.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.finset_prod_comp_eq_of_maps_injective
+    statement: >-
+      An injective self-map of a finite support preserves the product of any
+      weight around that support.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.cycleTransferResultant_mul_variables_dvd
+    statement: >-
+      Common-modulus cyclic transfers force the monodromy resultant times
+      the complete cycle-variable product to vanish modulo that modulus.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.cycleTransferResultant_dvd_of_isCoprime_variables
+    statement: >-
+      If the cycle-variable product is a unit modulo the common modulus, the
+      modulus divides the bare monodromy resultant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.cycleTransferResultant_zero_or_modulus_le
+    statement: >-
+      A common-modulus cycle resultant is either zero or has absolute value
+      at least the absolute value of its modulus.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.scaled_cycleTransferResultant_zero
+    statement: >-
+      If the product of all local scales contains the common modulus, the
+      scaled cycle resultant vanishes modulo that modulus automatically.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.varying_modulus_cycle_lift_zero_branch
+    statement: >-
+      Lifting varying local moduli to a common modulus proves the formal
+      monodromy while exposing the exact tautological zero branch.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686TwoRegularCycleMonodromy.lean
+    theorem: Erdos686.Erdos686Variant.pairwise_owner_cycle_lift_zero_branch
+    statement: >-
+      Complementary lifting of pairwise-coprime owner moduli makes every
+      cycle resultant automatically divisible by their total product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.canonicalLargeOwnerCell_coprime_rowCofactor
+    statement: >-
+      Every support owner cell is coprime to every canonical lower-row
+      cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.rowDiagonal_fourCycle_secant_factorization
+    statement: >-
+      A row and signed-diagonal four-cycle has an exact cross-owner secant
+      factorization exposing the opposite square-weighted cofactors.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.rowDiagonal_fourCycle_crossingProduct_dvd_secant
+    statement: >-
+      The opposite crossing-owner product divides the four-cycle secant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.rowDiagonal_fourCycle_crossingProduct_le_secant_natAbs
+    statement: >-
+      In the nonzero branch, the crossing-owner product is bounded by the
+      exact absolute four-cycle secant.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_zero_quotient_forces_left_square_dvd_diagonalCofactor
+    statement: >-
+      In the zero four-cycle branch, the left opposite owner square divides
+      its diagonal cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_zero_quotient_forces_right_square_dvd_diagonalCofactor
+    statement: >-
+      In the zero four-cycle branch, the right opposite owner square divides
+      the other diagonal cofactor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_zero_quotient_forces_crossSquare_dvd_diagonalProduct
+    statement: >-
+      The square of the opposite cross product divides the product of the two
+      diagonal cofactors in the zero branch.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_zero_quotient_forces_left_diagonal_crowding
+    statement: >-
+      The zero branch forces the left diagonal term to contain the full
+      owner product and an additional opposite-owner square.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_zero_quotient_forces_right_diagonal_crowding
+    statement: >-
+      The symmetric zero-branch crowding divisor holds for the right
+      diagonal term.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.fourCycle_zero_quotient_forces_ownerMass_mul_crossSquare_dvd_diagonalProduct
+    statement: >-
+      The product of both diagonal terms contains the four-cycle owner mass
+      times the square of the opposite cross product.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
+    file: ErdosProblems/Erdos686RowDiagonalFourCycle.lean
+    theorem: Erdos686.Erdos686Variant.rowDiagonal_fourCycle_secant_or_ownerSquare_crowding
+    statement: >-
+      Every exact row and signed-diagonal four-cycle has either a nonzero
+      secant bound or a zero-branch owner-square crowding divisor.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/686.lean
+  - problem: 686
+    source: erdosproblems
     file: ErdosProblems/Erdos686K5FourCrossingSecantGCD.lean
     theorem: Erdos686.Erdos686Variant.k5_proper_global_crossing_product_secant_gcd_dvd_coefficient_product
     statement: >-
