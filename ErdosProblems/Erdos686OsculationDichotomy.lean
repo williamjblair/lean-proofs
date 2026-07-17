@@ -2,20 +2,24 @@
 import ErdosProblems.Erdos686SparseJetCertificate
 
 /-!
-# Erdős 686: the algebraic split after bivariate osculation
+# Erdős 686: fixed-factor specialization after bivariate osculation
 
-This file deliberately records only the part of the common-component
-argument which is valid without an effective multivariate Bezout theorem.
-If two integral bivariate polynomials have a displayed common factor, then
-at a common integral zero either the common factor vanishes or both displayed
-quotients vanish.
+This file records only the value-level factor-specialization statement valid
+without an effective multivariate Bézout theorem.  If two integral bivariate
+polynomials have a displayed fixed factor, then at a common integral zero
+either that fixed factor vanishes or both displayed residual quotients vanish.
+
+This split says nothing about allocation of a support derivative jet.  In
+particular, it does not say that the fixed factor inherits the value and
+directional-derivative conditions.  The exact three-case product-rule theorem
+is provided by `Erdos686LocalJetFactorAllocation`.
 
 The factorization interface below also says exactly what is meant by a
-"primitive rational gcd presentation": the integral common factor is
+"primitive rational gcd presentation": the integral fixed factor is
 primitive, and its two quotients have no common nonunit factor after mapping
-their coefficients to `ℚ`.  We do *not* identify the quotient branch with a
-finite intersection here.  Such a conclusion needs a separate effective
-resultant or dimension theorem.
+their coefficients to `ℚ`.  We do not identify the residual branch with an
+effectively enumerated finite intersection here.  That requires a separate
+resultant certificate.
 -/
 
 namespace Erdos686
@@ -51,12 +55,13 @@ ideal. -/
 def FactorCoprime {R : Type*} [CommRing R] (P Q : R) : Prop :=
   ∀ D : R, D ∣ P → D ∣ Q → IsUnit D
 
-/-- A precise integral presentation of a rational common gcd, up to rational
+/-- A precise integral presentation of a rational fixed gcd, up to rational
 units.  The factor equations are integral; primitiveness fixes the scalar
 content of `G`; factor-coprimality of the rationalized quotients says no
 further nonunit polynomial factor remains common over `ℚ`.
 
-No claim about Bezout coefficients is bundled into this structure. -/
+No claim about Bézout coefficients or inherited support jets is bundled into
+this structure. -/
 structure PrimitiveRationalGCDPresentation
     (F₁ F₂ : BivariateIntPolynomial) where
   G : BivariateIntPolynomial
@@ -81,7 +86,7 @@ theorem rationalize_specialize (p : Fin 2 → ℤ)
     (MvPolynomial.eval₂_comp_right
       (algebraMap ℤ ℚ) (RingHom.id ℤ) p F).symm
 
-/-- A displayed integral common factor remains a common factor over `ℚ`. -/
+/-- A displayed integral fixed factor remains a common factor over `ℚ`. -/
 theorem PrimitiveRationalGCDPresentation.rational_common_factor
     {F₁ F₂ : BivariateIntPolynomial}
     (h : PrimitiveRationalGCDPresentation F₁ F₂) :
@@ -95,23 +100,23 @@ theorem PrimitiveRationalGCDPresentation.rational_common_factor
     simpa only [map_mul] using
       congrArg rationalize h.factor_second
 
-/-- The common-factor branch at an integral specialization. -/
-def PrimitiveRationalGCDPresentation.CommonComponentAt
+/-- The fixed-divisor branch at an integral specialization. -/
+def PrimitiveRationalGCDPresentation.FixedFactorAt
     {F₁ F₂ : BivariateIntPolynomial}
     (h : PrimitiveRationalGCDPresentation F₁ F₂)
     (p : Fin 2 → ℤ) : Prop :=
   evalIntAt p h.G = 0
 
-/-- The remaining quotient-pair branch at an integral specialization.
-This name intentionally avoids asserting that the branch is zero-dimensional. -/
-def PrimitiveRationalGCDPresentation.QuotientPairAt
+/-- The residual-pair branch at an integral specialization.  This name does
+not assert zero-dimensionality or effective elimination. -/
+def PrimitiveRationalGCDPresentation.ResidualPairAt
     {F₁ F₂ : BivariateIntPolynomial}
     (h : PrimitiveRationalGCDPresentation F₁ F₂)
     (p : Fin 2 → ℤ) : Prop :=
   evalIntAt p h.Q₁ = 0 ∧ evalIntAt p h.Q₂ = 0
 
 /-- Evaluation of two product identities in an integral domain gives the
-exact common-factor/quotient-pair split. -/
+exact fixed-factor/residual-pair split. -/
 theorem evaluated_product_split
     {R : Type*} [CommRing R] [IsDomain R]
     {F₁ F₂ G Q₁ Q₂ : R}
@@ -126,7 +131,7 @@ theorem evaluated_product_split
     · exact (mul_eq_zero.mp (h₂ ▸ hz₂)).resolve_left hG
 
 /-- Direct polynomial specialization form of `evaluated_product_split`.  It
-requires only the two displayed factorizations and makes no gcd claim. -/
+requires only the displayed factorizations and makes no gcd or jet claim. -/
 theorem bivariate_specialization_split
     {F₁ F₂ G Q₁ Q₂ : BivariateIntPolynomial}
     (h₁ : F₁ = G * Q₁) (h₂ : F₂ = G * Q₂)
@@ -145,7 +150,7 @@ theorem bivariate_specialization_split
   · exact hz₁
   · exact hz₂
 
-/-- Unit common factors contribute no zero locus, including after integral
+/-- Unit fixed factors contribute no zero locus, including after integral
 specialization. -/
 theorem bivariate_quotients_vanish_of_isUnit_common_factor
     {F₁ F₂ G Q₁ Q₂ : BivariateIntPolynomial}
@@ -160,33 +165,33 @@ theorem bivariate_quotients_vanish_of_isUnit_common_factor
   · exact hquot
 
 /-- Specializing a primitive rational gcd presentation at a common integral
-zero produces the exact algebraic dichotomy used by the osculation campaign. -/
+zero produces the exact value-level dichotomy used by the osculation campaign. -/
 theorem PrimitiveRationalGCDPresentation.specialization_split
     {F₁ F₂ : BivariateIntPolynomial}
     (h : PrimitiveRationalGCDPresentation F₁ F₂)
     (p : Fin 2 → ℤ)
     (hz₁ : evalIntAt p F₁ = 0)
     (hz₂ : evalIntAt p F₂ = 0) :
-    h.CommonComponentAt p ∨ h.QuotientPairAt p := by
+    h.FixedFactorAt p ∨ h.ResidualPairAt p := by
   exact bivariate_specialization_split
     h.factor_first h.factor_second p hz₁ hz₂
 
-/-- If the displayed common factor is a unit polynomial, its specialization
-cannot vanish, so every common zero lies in the quotient-pair branch. -/
-theorem PrimitiveRationalGCDPresentation.quotientPairAt_of_isUnit_G
+/-- If the displayed fixed factor is a unit polynomial, its specialization
+cannot vanish, so every common zero lies in the residual-pair branch. -/
+theorem PrimitiveRationalGCDPresentation.residualPairAt_of_isUnit_G
     {F₁ F₂ : BivariateIntPolynomial}
     (h : PrimitiveRationalGCDPresentation F₁ F₂)
     (p : Fin 2 → ℤ)
     (hunit : IsUnit h.G)
     (hz₁ : evalIntAt p F₁ = 0)
     (hz₂ : evalIntAt p F₂ = 0) :
-    h.QuotientPairAt p := by
+    h.ResidualPairAt p := by
   rcases h.specialization_split p hz₁ hz₂ with hzero | hquot
   · exact False.elim ((hunit.map (evalIntAt p)).ne_zero hzero)
   · exact hquot
 
-/-- Public interface for the rational factor-coprimality of the residual
-quotients.  This is weaker than a Bezout identity and is stable under the
+/-- Public interface for rational factor-coprimality of the residual
+quotients.  This is weaker than a Bézout identity and is stable under the
 intended multivariate interpretation. -/
 theorem PrimitiveRationalGCDPresentation.coprime_quotient_interface
     {F₁ F₂ : BivariateIntPolynomial}
@@ -202,7 +207,7 @@ theorem PrimitiveRationalGCDPresentation.coprime_quotient_interface
 #print axioms bivariate_specialization_split
 #print axioms bivariate_quotients_vanish_of_isUnit_common_factor
 #print axioms PrimitiveRationalGCDPresentation.specialization_split
-#print axioms PrimitiveRationalGCDPresentation.quotientPairAt_of_isUnit_G
+#print axioms PrimitiveRationalGCDPresentation.residualPairAt_of_isUnit_G
 #print axioms PrimitiveRationalGCDPresentation.coprime_quotient_interface
 
 end Erdos686Variant
