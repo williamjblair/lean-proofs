@@ -18,7 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: set
-        run: echo "matrix=$(jq -c '{target: .}' scripts/build-targets.json)" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "matrix=$(jq -c '{target: .}' scripts/build-targets.json)" >> "$GITHUB_OUTPUT"
 
   build:
     needs: targets
