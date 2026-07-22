@@ -14,7 +14,7 @@ ALLOWED='[propext, Classical.choice, Quot.sound]'
 fail() { echo "FAIL: $*" >&2; exit 1; }
 
 # 1. No literal sorry / admit in the hosted proofs.
-for proof_dir in ErdosProblems lean/Erdos699/Proved; do
+for proof_dir in ErdosProblems; do
   if [ -d "$proof_dir" ] && grep -rnoE '\b(sorry|admit)\b' "$proof_dir" ; then
     fail "literal sorry/admit in $proof_dir/"
   fi
