@@ -12,19 +12,34 @@ re-checkable guarantee, not a one-time assertion.
 
 ## Layout
 
+Each Erdős problem owns a subtree under `ErdosProblems/`. The problem's root
+file stays at `ErdosProblems/ErdosN.lean`; everything else for it lives under
+`ErdosProblems/ErdosN/`, and `ErdosProblems/ErdosN/All.lean` imports the whole
+subtree so `lake build ErdosProblems.ErdosN.All` builds one problem in isolation.
+
 ```
-ErdosProblems/          one Lean file per problem
-Audit.lean              #print axioms for proof targets and conditional surfaces
-proofs.yaml             machine-readable index (consumed by erdos-fc-sync)
-scripts/check_axioms.sh the verification gate
-scripts/check_manifest.sh keeps proofs.yaml in sync with the audit
+ErdosProblems/
+  Erdos730/…                 #730 full-density proof, with Audit/ companions
+  Erdos686.lean              #686 root
+  Erdos686/Core/             hand-written #686 mathematics
+  Erdos686/EvenK/K22/…       generated even-k certificate tables (see GENERATED.md)
+  Erdos686/K5/P33/…          generated k=5 shards
+  Erdos699/…                 folded in from the old lean/ library
+  Erdos23/…  Erdos154/…      the remaining problems
+ErdosProblems.lean         library root: one import per problem
+Audit.lean                 #print axioms for proof targets and conditional surfaces
+proofs.yaml                machine-readable index (consumed by erdos-fc-sync)
+scripts/gen_aggregates.py  regenerates the All.lean modules and the library root
+scripts/check_axioms.sh    the verification gate
+scripts/check_manifest.sh  keeps proofs.yaml in sync with the audit
 ```
 
 ## Verify locally
 
 ```bash
 lake exe cache get
-lake build
+lake build                              # the whole library
+lake build ErdosProblems.Erdos730.All   # or one problem
 bash scripts/check_axioms.sh
 ```
 
