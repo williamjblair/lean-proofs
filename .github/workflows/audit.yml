@@ -1,0 +1,35 @@
+name: audit
+
+on:
+  schedule:
+    - cron: "0 7 * * *"   # nightly, 07:00 UTC
+  workflow_dispatch:
+
+# The axiom audit: `#print axioms` over every headline theorem, checked against
+# the allowed kernel set, plus the tamper-evident attestations. It needs the
+# whole library built and co-located, so it runs as one job rather than the
+# per-subtree matrix in verify.yml. If a single runner cannot hold the full
+# build, move this to a larger runner via `runs-on`.
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+
+      - name: Axiom audit (no sorry, kernel axioms only)
+        run: bash scripts/check_axioms.sh
+
+      - name: Manifest is in sync
+        run: bash scripts/check_manifest.sh
+
+      # Regenerate attestations.json (file + lake-manifest + audit-output hashes,
+      # axiom footprint) and fail if the committed copy drifted.
+      - name: Proof attestations are in sync
+        run: |
+          pip install --quiet pyyaml
+          python3 scripts/emit_attestations.py
+          git diff --exit-code attestations.json

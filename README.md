@@ -4,11 +4,13 @@ A small, self-checking index of formal Lean 4 proofs of solved research problems
 hosted as stable `formal_proof` targets for
 [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures).
 
-Every push runs the same gate the proofs are claimed to pass: the whole library
-builds against a pinned Mathlib, and a `#print axioms` audit fails the build if
-any headline theorem uses `sorry` or any axiom outside the kernel set
-`[propext, Classical.choice, Quot.sound]`. A green badge here is a standing,
-re-checkable guarantee, not a one-time assertion.
+Every push builds the whole library against a pinned Mathlib and checks that no
+hosted proof contains `sorry` and that `proofs.yaml` matches the audited theorem
+set. The build runs one job per problem subtree, since the library is too large
+for a single runner to compile at once. Nightly, a `#print axioms` audit runs
+over every headline theorem and fails if any depends on an axiom outside the
+kernel set `[propext, Classical.choice, Quot.sound]`. Both are standing,
+re-checkable guarantees, not one-time assertions.
 
 ## Layout
 

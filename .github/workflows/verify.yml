@@ -6,30 +6,49 @@ on:
   pull_request:
   workflow_dispatch:
 
-# A green run is a standing guarantee: every hosted proof compiles against the
-# pinned Mathlib and depends only on [propext, Classical.choice, Quot.sound].
+# Every push builds the whole library and checks the manifest.  The build is
+# matrixed one job per problem subtree (scripts/build-targets.json) because the
+# library is too large for a single runner to compile at once.  The axiom audit,
+# which needs the whole library built and co-located, runs nightly (audit.yml).
 jobs:
-  verify:
+  targets:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
+      - id: set
+        run: echo "matrix=$(jq -c '{target: .}' scripts/build-targets.json)" >> "$GITHUB_OUTPUT"
 
-      # Installs elan from lean-toolchain, restores the Mathlib cache, runs `lake build`.
+  build:
+    needs: targets
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.targets.outputs.matrix) }}
+    runs-on: ubuntu-latest
+    name: build ${{ matrix.target }}
+    steps:
+      - uses: actions/checkout@v4
+      # Installs elan from lean-toolchain, restores the Mathlib cache, then
+      # `lake build <target>` for this subtree only.
       - uses: leanprover/lean-action@v1
         with:
           use-mathlib-cache: true
+          build-args: ${{ matrix.target }}
 
-      - name: Axiom audit (no sorry, kernel axioms only)
-        run: bash scripts/check_axioms.sh
-
-      - name: Manifest is in sync
-        run: bash scripts/check_manifest.sh
-
-      # Tamper-evident proof evidence: regenerate attestations.json (file +
-      # lake-manifest + audit-output hashes, axiom footprint) and fail if the
-      # committed copy drifted. Reproducible across machines, so no auto-commit.
-      - name: Proof attestations are in sync
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No literal sorry / admit in the hosted proofs
         run: |
-          pip install --quiet pyyaml
-          python3 scripts/emit_attestations.py
-          git diff --exit-code attestations.json
+          if grep -rnoE '\b(sorry|admit)\b' ErdosProblems ; then
+            echo "FAIL: literal sorry/admit above" >&2 ; exit 1
+          fi
+      - name: proofs.yaml and Audit.lean agree on the tracked theorem set
+        run: bash scripts/check_manifest.sh
+      - name: Aggregates and build targets are up to date
+        run: |
+          python3 scripts/gen_aggregates.py
+          git diff --exit-code -- ErdosProblems.lean scripts/build-targets.json \
+            'ErdosProblems/**/All.lean' 'ErdosProblems/**/Loose.lean'
