@@ -714,3 +714,20 @@ proofs:
     faithful: true
     verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
     fc_target: FormalConjectures/ErdosProblems/394.lean
+  - problem: 796
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-796/Research/CanonicalTail.lean
+    theorem: Erdos796.erdos796_statement
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    depends_on:
+      - "PrimeNumberTheoremAnd @ a7eb3a8 (substituted for the vendored copy omitted from the Star Fleet bundle)"
+    statement: >-
+      affirmative answer: g_3(n) = (loglog n / log n) n + (c + o(1)) n/log n for
+      some constant c, where g_k(n) is the largest A in {1..n} such that every m
+      has fewer than k representations m = a_1 a_2 with a_1 < a_2 in A
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build from source + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/796.lean
