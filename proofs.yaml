@@ -674,3 +674,43 @@ proofs:
     faithful: true
     verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
     fc_target: FormalConjectures/ErdosProblems/538.lean
+
+  - problem: 130
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-130/Research/Basic.lean
+    theorem: Erdos130.erdos130_infinite_chromatic
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      positive answer: there is an infinite general-position set (no 3 collinear, no 4 concyclic) whose integer-distance graph has infinite chromatic number
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/130.lean
+  - problem: 394
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-394/Research/FirstQuestion.lean
+    theorem: Research.erdos394_first_question_proved
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      affirmative answer to the first question: sum_{n<=x} t_2(n) = O(x^2 / (log x)^c) for c = 1/2048
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/394.lean
+  - problem: 394
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-394/Research/DenseHierarchyLittleO.lean
+    theorem: Research.erdos394_second_target_proved
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      affirmative answer to the second question: sum t_{k+1}(n) = o(sum t_k(n)) for every k >= 2
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/394.lean
