@@ -1,0 +1,51 @@
+name: starfleet-verify
+
+on:
+  push:
+    branches: [main]
+    paths: ['starfleet/**', '.github/workflows/starfleet.yml']
+  pull_request:
+    paths: ['starfleet/**', '.github/workflows/starfleet.yml']
+  workflow_dispatch:
+
+# Independent reproduction of the Star Fleet Math (Colin Snyder) Lean proofs
+# hosted here as formal_proof targets: build each pinned project against its
+# pinned Mathlib and audit the terminal theorem's axioms.  Green + the PASS line
+# = the proof checks and depends only on the kernel axioms.
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        problem: [254, 267, 489, 521, 538, 130, 394]
+    runs-on: ubuntu-latest
+    name: erdos-${{ matrix.problem }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+          lake-package-directory: starfleet/erdos-${{ matrix.problem }}
+      - name: Axiom audit
+        run: |
+          cd starfleet/erdos-${{ matrix.problem }}
+          bash "$GITHUB_WORKSPACE/starfleet/scripts/check_axioms.sh"
+
+  # 796 substitutes upstream PrimeNumberTheoremAnd for the vendored dep Star Fleet
+  # omitted; its dependency graph has no prebuilt Mathlib cache, so it installs
+  # elan and builds from source (~30 min) instead of the matrix's cached flow.
+  verify-796:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Build (committed manifest, no update) and audit
+        run: |
+          cd starfleet/erdos-796
+          for i in 1 2 3; do lake exe cache get && break; sleep 15; done
+          lake build
+          bash "$GITHUB_WORKSPACE/starfleet/scripts/check_axioms.sh"

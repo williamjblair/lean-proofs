@@ -605,3 +605,129 @@ proofs:
       family.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/730.lean
+
+  # --- Star Fleet Math (Colin Snyder, starfleetmath.com): independently
+  # rebuilt on CI and read for faithfulness; each is a claimed resolution of an
+  # open problem, hosted here as an FC formal_proof target with attribution. ---
+  - problem: 254
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-254/Research/Basic.lean
+    theorem: Erdos254.erdos_254
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      positive answer: every large integer is a sum of distinct elements of a thin, phase-dense set
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/254.lean
+  - problem: 267
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-267/Research/Basic.lean
+    theorem: Research.erdos_problem_267
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      positive answer: sum of reciprocal Fibonacci over a ratio-gap sequence is irrational
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/267.lean
+  - problem: 489
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-489/F061/Erdos489.lean
+    theorem: Erdos489.erdos489_statement
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      positive answer: the normalized squared-gap sum has a finite limit (matches FC's erdos_489 statement verbatim)
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/489.lean
+  - problem: 521
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-521/Research/LateFourthFinal.lean
+    theorem: Erdos521.erdos_521_negative
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      negative answer: it is NOT a.s. true that R_n/log n -> 2/pi for real roots of a random +-1 polynomial
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/521.lean
+  - problem: 538
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-538/Research/FinalMatchingOrder.lean
+    theorem: Erdos538.erdos538_matching_order
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      the reciprocal-mass bound has matching order Theta(log N / log log N)
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/538.lean
+
+  - problem: 130
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-130/Research/Basic.lean
+    theorem: Erdos130.erdos130_infinite_chromatic
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      positive answer: there is an infinite general-position set (no 3 collinear, no 4 concyclic) whose integer-distance graph has infinite chromatic number
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/130.lean
+  - problem: 394
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-394/Research/FirstQuestion.lean
+    theorem: Research.erdos394_first_question_proved
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      affirmative answer to the first question: sum_{n<=x} t_2(n) = O(x^2 / (log x)^c) for c = 1/2048
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/394.lean
+  - problem: 394
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-394/Research/DenseHierarchyLittleO.lean
+    theorem: Research.erdos394_second_target_proved
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      affirmative answer to the second question: sum t_{k+1}(n) = o(sum t_k(n)) for every k >= 2
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/394.lean
+  - problem: 796
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-796/Research/CanonicalTail.lean
+    theorem: Erdos796.erdos796_statement
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    depends_on:
+      - "PrimeNumberTheoremAnd @ a7eb3a8 (substituted for the vendored copy omitted from the Star Fleet bundle)"
+    statement: >-
+      affirmative answer: g_3(n) = (loglog n / log n) n + (c + o(1)) n/log n for
+      some constant c, where g_k(n) is the largest A in {1..n} such that every m
+      has fewer than k representations m = a_1 a_2 with a_1 < a_2 in A
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build from source + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/796.lean
