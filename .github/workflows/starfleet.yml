@@ -49,3 +49,21 @@ jobs:
           for i in 1 2 3; do lake exe cache get && break; sleep 15; done
           lake build
           bash "$GITHUB_WORKSPACE/starfleet/scripts/check_axioms.sh"
+
+  # 959 also depends on PrimeNumberTheoremAnd (substituted @ a7eb3a8) and shares
+  # 796's uncached dependency graph, so it builds from source the same way.
+  verify-959:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Build (committed manifest, no update) and audit
+        run: |
+          cd starfleet/erdos-959
+          for i in 1 2 3; do lake exe cache get && break; sleep 15; done
+          lake build
+          bash "$GITHUB_WORKSPACE/starfleet/scripts/check_axioms.sh"

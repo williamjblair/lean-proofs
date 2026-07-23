@@ -775,3 +775,22 @@ proofs:
     faithful: true
     verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
     fc_target: FormalConjectures/ErdosProblems/450.lean
+
+  - problem: 959
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-959/Research/FinalLowerBound.lean
+    theorem: Erdos959.erdos959_superlinear_lower_bound
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    depends_on:
+      - "PrimeNumberTheoremAnd @ a7eb3a8 (substituted for the vendored copy omitted from the Star Fleet bundle)"
+    statement: >-
+      superlinear lower bound: there is a c > 0 such that for all large n the
+      extremal gap max(f(d_1) - f(d_2)) over n-point planar sets is at least
+      n^(1 + c/loglog n); a proved lower bound, not the full estimate
+    axioms_clean: true
+    faithful: true
+    partial: lower bound only (the exact order of the extremal gap is open)
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build from source + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/959.lean

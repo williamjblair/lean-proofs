@@ -1,0 +1,15 @@
+name = "Research"
+defaultTargets = ["Research"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+version = "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+
+[[require]]
+name = "PrimeNumberTheoremAnd"
+git = "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd.git"
+rev = "a7eb3a8ae4bde79292fb5f04c32cd5ab6d8f226c"
+
+[[lean_lib]]
+name = "Research"
