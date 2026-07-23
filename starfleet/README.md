@@ -23,3 +23,4 @@ against erdosproblems.com / FC).
 | 538 | order | `Erdos538.erdos538_matching_order` |
 | 130 | positive | `Erdos130.erdos130_infinite_chromatic` |
 | 394 | positive | `Research.erdos394_first_question_proved` (+ second) |
+| 796 | positive | `Erdos796.erdos796_statement` (built from source; PNT substituted) |
