@@ -7,7 +7,16 @@
 set -euo pipefail
 fail() { echo "FAIL: $*" >&2; exit 1; }
 
-manifest_thms="$(grep -E '^[[:space:]]*theorem:' proofs.yaml | sed -E 's/.*theorem:[[:space:]]*//; s/"//g' | sort -u)"
+# Only the proofs hosted in the ErdosProblems library are audited in Audit.lean.
+# Externally-pinned sources (e.g. starfleet/, a different toolchain) are audited
+# by their own CI (see .github/workflows/starfleet.yml), so exclude them here by
+# keying on each entry's `file:` prefix.
+manifest_thms="$(awk '
+  /^[[:space:]]*-[[:space:]]*problem:/ { file=""; thm="" }
+  /^[[:space:]]*file:/    { f=$0; sub(/^[[:space:]]*file:[[:space:]]*/,"",f); file=f }
+  /^[[:space:]]*theorem:/ { t=$0; sub(/^[[:space:]]*theorem:[[:space:]]*/,"",t); gsub(/"/,"",t); thm=t
+                            if (file ~ /^ErdosProblems\//) print thm }
+  ' proofs.yaml | sort -u)"
 audited_thms="$(
   awk '
     /^-- Manifest-tracked formal proof targets[.]$/ { in_manifest = 1; next }
