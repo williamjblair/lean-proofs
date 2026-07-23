@@ -760,3 +760,18 @@ proofs:
     faithful: true
     verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
     fc_target: FormalConjectures/ErdosProblems/1188.lean
+  - problem: 450
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-450/Research/TuranAnswer.lean
+    theorem: Erdos450.turanLinearAnswer_isSufficientScale
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      a translate-uniform linear scale y = C(eps)*n suffices: for the count of
+      integers in (x,x+y) with a divisor in (n,2n) to be at most eps*y for all x,
+      it is enough that y is a fixed constant (depending on eps) times n
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/450.lean
