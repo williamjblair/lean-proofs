@@ -731,3 +731,18 @@ proofs:
     faithful: true
     verified_by: williamjblair/lean-proofs starfleet-verify CI (build from source + #print axioms)
     fc_target: FormalConjectures/ErdosProblems/796.lean
+  - problem: 522
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-522/Candidate.lean
+    theorem: Erdos522.erdos_522
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      positive answer: for i.i.d. uniform ±1 coefficients, almost surely
+      R_n / (n/2) -> 1, where R_n is the number of roots of the random polynomial
+      f(z) = sum_{k<=n} eps_k z^k in the closed unit disk
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/522.lean
