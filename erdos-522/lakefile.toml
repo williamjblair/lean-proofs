@@ -1,0 +1,16 @@
+name = "Erdos522ProofGate"
+defaultTargets = ["Candidate"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+version = "git#stable"
+
+[[lean_lib]]
+name = "Erdos522Statement"
+
+[[lean_lib]]
+name = "Candidate"
+
+[[lean_lib]]
+name = "Audit"
