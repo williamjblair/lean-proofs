@@ -746,3 +746,17 @@ proofs:
     faithful: true
     verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
     fc_target: FormalConjectures/ErdosProblems/522.lean
+  - problem: 1188
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-1188/Research/SparseAsymptotic.lean
+    theorem: Research.erdos1188_loglog_ratio_tendsto_one
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      estimate of F(x), the number of minimal distinct covering systems with all
+      moduli in [1,x]: log(log F(x)) / log x -> 1
+    axioms_clean: true
+    faithful: true
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/1188.lean
