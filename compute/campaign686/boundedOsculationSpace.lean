@@ -1,7 +1,0 @@
-/- Kernel-audit entrypoint for canonical bounded osculation spaces. -/
-import ErdosProblems.Erdos686BoundedOsculationSpace
-
-#print axioms Erdos686.Erdos686Variant.boundedOsculationSpace_le_rationalOsculationKernel
-#print axioms Erdos686.Erdos686Variant.linear_specialization_vanishes_on_boundedOsculationSpace
-#print axioms Erdos686.Erdos686Variant.rationalOsculationKernel_finrank_lower_basis
-#print axioms Erdos686.Erdos686Variant.fixedDivisor_degree_inequality_of_dimension_bounds

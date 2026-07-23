@@ -1,8 +1,0 @@
-/- Kernel-audit entrypoint for the nonzero-branch residual divisor. -/
-import ErdosProblems.Erdos686ResidualDivisor
-
-#print axioms Erdos686.Erdos686Variant.barycentric_residual_exact_factorization
-#print axioms Erdos686.Erdos686Variant.scaled_barycentric_residual_exact_factorization
-#print axioms Erdos686.Erdos686Variant.barycentric_residual_cofactor_dvd_of_unscaled_square
-#print axioms Erdos686.Erdos686Variant.row_cofactor_kSmooth_of_containsFullLargePrimePart
-#print axioms Erdos686.Erdos686Variant.barycentric_residual_cofactor_natAbs_le

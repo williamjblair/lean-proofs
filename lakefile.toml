@@ -1,7 +1,7 @@
 name = "lean-proofs"
 version = "0.1.0"
 keywords = ["math", "formal-proofs", "erdos"]
-defaultTargets = ["ErdosProblems", "Erdos699"]
+defaultTargets = ["ErdosProblems"]
 weakLeanArgs = ["-s", "65520"]
 
 [leanOptions]
@@ -23,6 +23,3 @@ rev = "v4.29.1"
 [[lean_lib]]
 name = "ErdosProblems"
 
-[[lean_lib]]
-name = "Erdos699"
-srcDir = "lean"

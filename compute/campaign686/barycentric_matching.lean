@@ -1,9 +1,0 @@
-/- Kernel-audit entrypoint for the repaired barycentric matching package. -/
-import ErdosProblems.Erdos686BarycentricMatching
-
-#print axioms Erdos686.Erdos686Variant.barycentric_derivative_system_iff
-#print axioms Erdos686.Erdos686Variant.barycentric_matchingPhi_coeff_eq_zero_iff
-#print axioms Erdos686.Erdos686Variant.barycentric_quotient_natDegree_nonzero_branch
-#print axioms Erdos686.Erdos686Variant.barycentric_quotient_natDegree_zero_branch
-#print axioms Erdos686.Erdos686Variant.barycentric_root_identity
-#print axioms Erdos686.Erdos686Variant.barycentric_zero_total_weight_root_bound

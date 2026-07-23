@@ -1,9 +1,0 @@
-/- Kernel-audit entrypoint for normalized osculation and matching degree. -/
-import ErdosProblems.Erdos686MatchingOsculationBridge
-
-#print axioms Erdos686.Erdos686Variant.osculationConstraintMatrix_entry_bound
-#print axioms Erdos686.Erdos686Variant.exists_fixedDivisorPresentation_normalizedOsculation
-#print axioms Erdos686.Erdos686Variant.W_sq_dvd_of_value_derivative_vanish
-#print axioms Erdos686.Erdos686Variant.fin_matchingPhi_zero_branch_nonzero_and_quotient_exact_degree
-#print axioms Erdos686.Erdos686Variant.fin_matchingPhi_zero_branch_exists_nonzero_quotient_exact_degree
-#print axioms Erdos686.Erdos686Variant.normalizedOsculation_and_matchingPhi_zero_branch
