@@ -1,0 +1,4 @@
+import Research
+
+#print axioms Erdos130.InfiniteAssembly.erdos130_infinite_chromatic_solution
+#print axioms Erdos130.erdos130_infinite_chromatic

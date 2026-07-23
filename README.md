@@ -2,7 +2,7 @@
 
 Lean 4 proofs from **Star Fleet Math** (Colin Snyder, starfleetmath.com),
 hosted here as `formal_proof` targets for Formal Conjectures. Each is a claimed
-resolution of an **open** Erdős problem; each was rebuilt on CI against its
+resolution of an **open** Erdős problem (7 verified: 130 254 267 394 489 521 538); each was rebuilt on CI against its
 pinned Mathlib and read for faithfulness before being added.
 
 These are **not** this repo's own work — see `proofs.yaml` (`source: starfleetmath`)
@@ -21,3 +21,5 @@ against erdosproblems.com / FC).
 | 489 | positive | `Erdos489.erdos489_statement` (= FC's statement verbatim) |
 | 521 | negative | `Erdos521.erdos_521_negative` |
 | 538 | order | `Erdos538.erdos538_matching_order` |
+| 130 | positive | `Erdos130.erdos130_infinite_chromatic` |
+| 394 | positive | `Research.erdos394_first_question_proved` (+ second) |
