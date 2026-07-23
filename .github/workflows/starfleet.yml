@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        problem: [254, 267, 489, 521, 538, 130, 394, 522, 1188, 450]
+        problem: [254, 267, 489, 521, 538, 130, 394, 522, 1188, 450, 769]
     runs-on: ubuntu-latest
     name: erdos-${{ matrix.problem }}
     steps:

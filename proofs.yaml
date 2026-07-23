@@ -794,3 +794,20 @@ proofs:
     partial: lower bound only (the exact order of the extremal gap is open)
     verified_by: williamjblair/lean-proofs starfleet-verify CI (build from source + #print axioms)
     fc_target: FormalConjectures/ErdosProblems/959.lean
+
+  - problem: 769
+    source: starfleetmath
+    author: Colin Snyder (starfleetmath.com)
+    file: starfleet/erdos-769/Research/Solution.lean
+    theorem: Erdos769.erdos769_lower_bound_false
+    toolchain: leanprover/lean4:v4.31.0
+    mathlib: "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+    statement: >-
+      negative answer to the highlighted conjecture: c(n), the minimal cutoff
+      such that the unit n-cube tiles into k homothetic cubes for all k >= c(n),
+      does NOT satisfy c(n) >> n^n (odd-dimensional tilings of size o(n^n) exist)
+    axioms_clean: true
+    faithful: true
+    partial: disproves the n^n lower-bound conjecture; exact bounds for c(n) remain open
+    verified_by: williamjblair/lean-proofs starfleet-verify CI (build + #print axioms)
+    fc_target: FormalConjectures/ErdosProblems/769.lean
