@@ -1,0 +1,114 @@
+name: verify-erdos23-two-defect
+
+on:
+  pull_request:
+    paths:
+      - 'ErdosProblems/Erdos23GapGBTwoDefectFinal.lean'
+      - 'scripts/agent_two_defect_patch.py'
+      - '.github/workflows/verify-erdos23-two-defect.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-two-defect:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/erdos23-two-defect-final
+          fetch-depth: 0
+          show-progress: false
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: true
+      - name: Apply candidate source patch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set +e
+          python3 - <<'PY' > /tmp/two-defect-patch.log 2>&1
+          import base64
+          import runpy
+
+          original_b64decode = base64.b64decode
+
+          def padded_b64decode(data, *args, **kwargs):
+              if isinstance(data, str):
+                  data = data + '=' * (-len(data) % 4)
+              elif isinstance(data, bytes):
+                  data = data + b'=' * (-len(data) % 4)
+              return original_b64decode(data, *args, **kwargs)
+
+          base64.b64decode = padded_b64decode
+          try:
+              runpy.run_path('scripts/agent_two_defect_patch.py', run_name='__main__')
+          except BaseException as exc:
+              print(type(exc).__name__ + ': ' + str(exc))
+              raise SystemExit(1)
+          PY
+          status=$?
+          cat /tmp/two-defect-patch.log
+          if [ "$status" -ne 0 ] && [ -n "$PR_NUMBER" ]; then
+            {
+              echo '### Source-patch failure'
+              echo
+              echo '```text'
+              cat /tmp/two-defect-patch.log
+              echo '```'
+            } > /tmp/two-defect-comment.md
+            gh pr comment "$PR_NUMBER" --edit-last --create-if-none --body-file /tmp/two-defect-comment.md
+          fi
+          exit "$status"
+      - name: Compile two-defect final module
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set +e
+          lake build ErdosProblems.Erdos23GapGBTwoDefectFinal > /tmp/two-defect.log 2>&1
+          status=$?
+          cat /tmp/two-defect.log
+          if [ "$status" -ne 0 ] && [ -n "$PR_NUMBER" ]; then
+            {
+              echo '### Targeted Lean compiler output'
+              echo
+              echo '```text'
+              tail -n 180 /tmp/two-defect.log
+              echo '```'
+            } > /tmp/two-defect-comment.md
+            gh pr comment "$PR_NUMBER" --edit-last --create-if-none --body-file /tmp/two-defect-comment.md
+          fi
+          exit "$status"
+      - name: Collect diagnostics
+        if: always()
+        run: |
+          mkdir -p /tmp/two-defect-artifact
+          cp ErdosProblems/Erdos23GapGBTwoDefectFinal.lean /tmp/two-defect-artifact/
+          cp /tmp/two-defect-patch.log /tmp/two-defect-artifact/ 2>/dev/null || true
+          cp /tmp/two-defect.log /tmp/two-defect-artifact/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: two-defect-diagnostics
+          path: /tmp/two-defect-artifact
+          retention-days: 1
+      - name: Commit kernel-checked patch
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ErdosProblems/Erdos23GapGBTwoDefectFinal.lean
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m 'Apply kernel-checked two-defect patch'
+          git push origin HEAD:codex/erdos23-two-defect-final
