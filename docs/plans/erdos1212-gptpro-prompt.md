@@ -94,7 +94,7 @@ $a^\ast$ is composite). **This implies YES.** Empirically the dead-run fraction
 falls $41.7\%\to11.7\%\to11.7\%\to1.7\%$ across scales $10^3\to10^9$, with
 escape columns per run growing $1.2\to18.9$. This is the statement to prove.
 
-**(9) BARRIER THEOREM — read this before choosing an approach.** Define
+**(9) BARRIER THEOREM — applies ONLY to anchored staircases; see (11), which evades it.** Define
 $\mathcal G(z)=\min\{G:$ every $G$ consecutive integers contain a composite $n$
 with $p^-(n)>z\}$. Call a construction *blind* if it locates anchors using only
 the guarantee "every window of length $\ge\mathcal G(z)$ contains an anchor of
@@ -111,7 +111,9 @@ $g(P(z))\asymp z\log z$ leaves a $\log z$ deficit against the hard cap $z$ from
 (6). **Consequence: any positive solution must exploit that the staircase
 chooses its own location — it must produce rough integers in windows far
 shorter than the worst-case gap, at positions constrained by earlier choices.
-Equivalently, it must beat Jacobsthal on a self-selected subsequence.**
+Equivalently, it must beat Jacobsthal on a self-selected subsequence. **But see
+(11): the band-extension scheme never needs a rough anchor and never approaches
+a wall, so this barrier does not apply to it.**
 
 **(10) Evidence the answer is YES.** Components of the induced subgraph on
 $[2,B]^2$ for $B=400,800,1600,3200,6400$: largest has
@@ -144,34 +146,84 @@ is itself a publishable partial result. Warning: below $B\approx800$ the data
 misleads — the largest component there is small and interior, reading as
 evidence for NO.
 
-**What I want.** A proof that the induced subgraph has an infinite component
-(or, if you become convinced otherwise, a disproof — but weigh (10) heavily).
-Given (7) and (9), a blind forward construction is dead. The most promising
-directions, in order:
+**(11) BAND EXTENSION — the live route, and the one to attack.** Two facts kill
+the framing above.
 
-- **Beat the barrier via self-selection.** Prove a version of (8) where the
-  anchor is not demanded at a worst-case position: use the freedom to choose
-  *which* run to ride and *where* in it to climb, so that you need rough
-  integers only at positions you select. A counting argument over many
-  candidate (column, row) pairs per run, rather than a single greedy choice,
-  is the natural shape. Quantify how many independent candidate pairs a run of
-  length $W$ offers and show one survives.
-- **Renormalization / percolation.** Blocks of $\mathbb N^2$, "good" blocks
-  crossing in all directions, supercritical cluster of good blocks.
-  Admissibility is determined by congruences mod small primes plus a controlled
-  large-prime contribution, so CRT gives quasi-independence — but the
-  constraints are deterministic and long-range correlated. Handle the
-  correlation; do not assume independence.
-- **Adapt known work.** Herzog–Stewart studied this graph (visible lattice
-  points); per the site's remark Erdős reports they proved it has a unique
-  infinite component and conjectured $(a,p)$ lies in it for $p\nmid a$. Report
-  precisely what does and does not transfer to the composite-restricted
-  subgraph.
+*Walls are astronomically far, hence irrelevant.* For the band of all rows in
+$[2,Y]$, every odd prime $p\le Y$ is itself a row whose only prime factor is
+$p$, so a wall needs $a\equiv-1\pmod p$ for all odd $p\le Y$: the first wall is
+at $\approx\frac12\prod_{3\le p\le Y}p=e^{(1+o(1))Y}$, i.e. $10^{161}$ for
+$Y=400$, $10^{565}$ for $Y=1358$, $10^{1698}$ for $Y=4000$. Band $1358$ carries
+a path to $x\approx10^5$, so its wall is $10^{560}$ times beyond the reachable
+range. Self-consistently, if the band needed to reach $A$ grows like $C\log A$
+the wall sits at $A^{C}$, never binding for $C>1$; measured $C\approx95$–$115$.
+
+*Every observed stall is a local connectivity trap, not a wall.* Of 391 traps
+recorded, **0 were Wall-Lemma columns**. A typical trap has ~98 open rows but
+only ~3 reachable, median row-distance 2 between the two sets. Walls do exist
+(81 below $10^7$ for $Y=400$, 8 for $Y=800$, exactly one for $Y=1000$ at
+$a=64\,822\,393$, none below $10^8$ for $Y\ge1200$) but searches die at local
+traps thousands of times before nearing one.
+
+*Escape cost is small and does not grow with $x$.* Define $\Delta Y$ = extra
+band width needed to get past a trap and sustain travel. Measured over 377
+events: median $\Delta Y=148$, p90 $454$, max $682$; as a fraction of the band,
+$0.068,0.148,0.062,0.154,0.097$ for $Y=800,1000,1200,1400,1600$. Flat in $x$ at
+fixed band ($Y=800$: $102,54,54,54$ across decades $10^4$–$10^7$). Bands only
+ever extend upward ($b=3$ is the floor). A ratchet from $Y_0=1400$ reached
+$x=2\times10^7$ with **two** extensions ($1399\to1685\to1849$); $Y_0=2000$
+reached $10^7$ with **none**; band 1600 crossed 1.5M columns over four decades
+with one trap. Trap density falls ~$10\times$ per 200–400 extra rows and
+decays in $x$ (gaps between traps grew $4.3\times10^5\to1.9\times10^6
+\to7.65\times10^6$ columns under the ratchet). Verified witness: a band-extension
+path of 1,413,051 vertices (band $1399$ to $x=866001$, then band $1685$ across
+the $a=868869$ trap to $x\approx10^6$), checked from the definition — 0 bad
+vertices, 0 bad steps, 0 repeats.
+
+*Mechanism.* 66.8% of traps have $3\mid a$, which kills **every** vertical move
+in that column (one of $b,b+1,b+2$ is always divisible by 3) — double the base
+rate, and 96% of frozen-frontier traps. Of the rest, $5\mid a$ and $7\mid a$ are
+over-represented by 12% and 44%, chopping the column's vertical runs. Escape
+therefore means backtracking to a nearby column with $3\nmid a$ and climbing
+there — which is exactly what extra band width buys.
+
+**What I want.** A proof that the induced subgraph has an infinite component.
+The target is now specific:
+
+> **Band Extension Lemma (to prove).** There is a function $\Delta(Y)=o(Y)$
+> (empirically $\Delta\approx0.06$–$0.15\,Y$, and possibly bounded) such that
+> from any position reachable within the band $[2,Y]$ that is locally trapped,
+> extending the band to $[2,Y+\Delta(Y)]$ restores travel.
+
+Iterating gives $Y\asymp C\log x$ and hence an infinite path, with walls never
+binding since $C>1$. This scheme uses no rough anchors, so the barrier in (9)
+does not apply to it.
+
+Suggested attack. At a trap the frontier sits at a column $a$ with $3\mid a$
+(two thirds of cases), so no vertical move exists there; the escape must occur
+at a nearby column $a'<a$ with $3\nmid a'$, climbing to a row $b'$ that is open
+at $a$ and beyond. Count: over the $\Theta(\Delta)$ new rows and the
+$\Theta(W)$ candidate columns in the current run, bound below the number of
+pairs $(a',b')$ with $\gcd(a',s)=1$ for $s\in(b,b']$ and
+$\gcd(b',a(a+1)(a+2))=1$. The constraints are congruences modulo distinct small
+primes, so CRT gives near-independence — but they are deterministic and
+correlated through the shared row set, so the dependency must be handled
+explicitly, not assumed. A second-moment or Lovász-local-lemma argument over
+these pairs is the natural shape.
+
+Fallbacks if that resists: (a) prove the weaker statement that trap density in
+$x$ decays fast enough that a Borel–Cantelli-style argument over scales gives an
+infinite path; (b) renormalization over blocks with the correlation handled;
+(c) adapt Herzog–Stewart, who per Erdős's report proved the unrestricted
+visible-lattice graph has a unique infinite component — report precisely what
+transfers to the composite-restricted subgraph.
 
 **Ground rules.** Referee standard: every lemma proved or cited with theorem
-number. No hand-waved independence in any probabilistic step — verify the
-dependency structure explicitly. If you cannot finish, give the sharpest fully
-proved partial result plus an exact statement of the remaining gap; that is far
-more useful than a plausible argument with a soft step. Flag every step where
-you are pattern-matching to a standard technique without checking its
-hypotheses hold here.
+number. No hand-waved independence — verify the dependency structure
+explicitly. If you cannot finish, give the sharpest fully proved partial result
+plus an exact statement of the remaining gap. Note the honest limits of my
+data: the $\Delta Y$ figures are upper bounds under a 1200-column backtrack
+budget; the rate $Y\approx95\ln x$ rests on only two extension events above
+$Y=1400$ (the bound $\Delta Y\lesssim300$ is far better supported); and nothing
+proves $\Delta Y$ is bounded — only that it never exceeded 682 across 391 traps
+spanning $x\in[10^4,2\times10^7]$.

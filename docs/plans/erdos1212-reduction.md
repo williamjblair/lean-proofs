@@ -172,3 +172,37 @@ tolerating backtracking — showing the admissible set percolates — rather tha
 an explicit forward construction. That is the open core.
 
 Verification script: see the campaign log; results reproduced above.
+
+
+## 9. The Wall Lemma is vacuous as an obstruction (2026-07-30, later)
+
+Quantifying §6. For the band of all rows in $[2,Y]$, every odd prime $p\le Y$
+is *itself* a row whose only prime factor is $p$, so a wall column must satisfy
+$a\equiv-1 \pmod p$ for every odd $p\le Y$. The first wall therefore sits at
+$a\approx\tfrac12\prod_{3\le p\le Y}p = e^{(1+o(1))Y}$:
+
+| band $Y$ | 100 | 400 | 800 | 1358 | 1400 | 2000 | 4000 |
+|---|---|---|---|---|---|---|---|
+| first wall | $10^{36}$ | $10^{161}$ | $10^{329}$ | $10^{565}$ | $10^{581}$ | $10^{842}$ | $10^{1698}$ |
+
+Measured, band $1358$ suffices to reach column $A\ge128001\approx10^5$. Its wall
+is at $10^{565}$ — **larger than the reachable range by a factor of
+$10^{560}$**. Self-consistency: if the band needed to reach $A$ grows like
+$C\log A$, the wall for that band lies at $e^{C\log A}=A^{C}$, so walls never
+bind whenever $C>1$; measured $C\approx115$.
+
+**Consequence.** The Wall Lemma is true but *vacuous as an obstruction*. It
+establishes only that $y$ must be unbounded; it says nothing about where the
+difficulty lies. Every stall observed in practice is a **local connectivity
+trap**, not a wall — the band-1400 search stalled at $a=868869$ with 300 rows
+open and 71 rows reachable and those sets disjoint ($3\mid868869$, so no
+vertical move existed there at all).
+
+This also means the Reach Barrier of §8, while correct, targets the wrong
+class: it kills anchored staircases that must locate rough anchors at
+worst-case positions. It says nothing against **band extension** — ride a band
+until a local trap, enlarge the band to escape, repeat — because that scheme
+never needs a rough anchor and never approaches a wall. Whether band extension
+works turns on a single measurable quantity: the extra band width $\Delta Y$
+needed to escape a trap. Bounded or slowly growing $\Delta Y$ would give an
+induction sidestepping §8 entirely.
