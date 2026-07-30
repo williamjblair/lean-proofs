@@ -1,0 +1,37 @@
+[Y=400 ratchet] seedbox a<=31999: start a=28083 rows=[317] spans to a=28445
+  TRAP a*=28445 band=399 run=181c open=22 reach=4 wall=False 3|a=False dY_pass=10 dY_L=452 (5s)
+  TRAP a*=30669 band=851 run=112c open=83 reach=6 wall=False 3|a=True dY_pass=48 dY_L=48 (9s)
+  TRAP a*=34161 band=899 run=746c open=255 reach=2 wall=False 3|a=True dY_pass=2 dY_L=2 (12s)
+  TRAP a*=37587 band=901 run=713c open=103 reach=2 wall=False 3|a=True dY_pass=60 dY_L=346 (22s)
+  TRAP a*=142599 band=1247 run=51506c open=110 reach=22 wall=False 3|a=True dY_pass=26 dY_L=26 (38s)
+   a=244579 band=1273 front=599 (48s)
+  TRAP a*=272367 band=1273 run=63884c open=200 reach=3 wall=False 3|a=True dY_pass=70 dY_L=70 (58s)
+   a=454331 band=1343 front=205 (74s)
+  TRAP a*=556867 band=1343 run=141250c open=168 reach=4 wall=False 3|a=False dY_pass=48 dY_L=54 (91s)
+   a=658847 band=1397 front=201 (101s)
+   a=858807 band=1397 front=275 (120s)
+  TRAP a*=868869 band=1397 run=155001c open=299 reach=71 wall=False 3|a=True dY_pass=284 dY_L=288 (126s)
+   a=1060831 band=1685 front=835 (147s)
+   a=1260791 band=1685 front=575 (177s)
+   a=1460751 band=1685 front=341 (203s)
+   a=1660711 band=1685 front=232 (230s)
+   a=1860671 band=1685 front=645 (259s)
+   a=2060631 band=1685 front=78 (288s)
+   a=2260591 band=1685 front=746 (314s)
+   a=2460551 band=1685 front=217 (344s)
+   a=2660511 band=1685 front=125 (376s)
+   a=2860471 band=1685 front=791 (402s)
+{
+ "Y": 400,
+ "Amax": 3000001,
+ "W": 5000,
+ "L": 1000,
+ "Ycap": 6000,
+ "mode": "ratchet",
+ "start": 28083,
+ "reach_max": 3000001,
+ "final_band": 1685,
+ "n_traps": 8,
+ "seconds": 421.6
+}
+wrote r400_ratchet.json

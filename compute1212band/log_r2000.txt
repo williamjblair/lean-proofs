@@ -1,0 +1,65 @@
+[Y=2000 ratchet] seedbox a<=31999: start a=1065 rows=[917, 919, 929, 931] spans to a=31999
+   a=201025 band=1999 front=577 (30s)
+   a=400985 band=1999 front=497 (58s)
+   a=600945 band=1999 front=378 (90s)
+   a=800905 band=1999 front=126 (143s)
+   a=1000865 band=1999 front=117 (193s)
+   a=1200825 band=1999 front=479 (219s)
+   a=1400785 band=1999 front=619 (244s)
+   a=1600745 band=1999 front=98 (271s)
+   a=1800705 band=1999 front=528 (297s)
+   a=2000665 band=1999 front=167 (323s)
+   a=2200625 band=1999 front=95 (347s)
+   a=2400585 band=1999 front=482 (372s)
+   a=2600545 band=1999 front=677 (396s)
+   a=2800505 band=1999 front=482 (417s)
+   a=3000465 band=1999 front=161 (441s)
+   a=3200425 band=1999 front=304 (463s)
+   a=3400385 band=1999 front=658 (487s)
+   a=3600345 band=1999 front=380 (511s)
+   a=3800305 band=1999 front=666 (534s)
+   a=4000265 band=1999 front=208 (554s)
+   a=4200225 band=1999 front=102 (573s)
+   a=4400185 band=1999 front=348 (592s)
+   a=4600145 band=1999 front=564 (624s)
+   a=4800105 band=1999 front=72 (649s)
+   a=5000065 band=1999 front=583 (674s)
+   a=5200025 band=1999 front=216 (701s)
+   a=5399985 band=1999 front=499 (727s)
+   a=5599945 band=1999 front=176 (747s)
+   a=5799905 band=1999 front=712 (770s)
+   a=5999865 band=1999 front=107 (791s)
+   a=6199825 band=1999 front=224 (811s)
+   a=6399785 band=1999 front=569 (833s)
+   a=6599745 band=1999 front=182 (854s)
+   a=6799705 band=1999 front=674 (876s)
+   a=6999665 band=1999 front=138 (897s)
+   a=7199625 band=1999 front=79 (918s)
+   a=7399585 band=1999 front=634 (938s)
+   a=7599545 band=1999 front=407 (958s)
+   a=7799505 band=1999 front=131 (976s)
+   a=7999465 band=1999 front=211 (994s)
+   a=8199425 band=1999 front=536 (1014s)
+   a=8399385 band=1999 front=319 (1035s)
+   a=8599345 band=1999 front=730 (1055s)
+   a=8799305 band=1999 front=630 (1076s)
+   a=8999265 band=1999 front=383 (1101s)
+   a=9199225 band=1999 front=566 (1122s)
+   a=9399185 band=1999 front=608 (1145s)
+   a=9599145 band=1999 front=507 (1163s)
+   a=9799105 band=1999 front=144 (1187s)
+   a=9999065 band=1999 front=518 (1209s)
+{
+ "Y": 2000,
+ "Amax": 10000001,
+ "W": 5000,
+ "L": 1000,
+ "Ycap": 8000,
+ "mode": "ratchet",
+ "start": 1065,
+ "reach_max": 10000001,
+ "final_band": 1999,
+ "n_traps": 0,
+ "seconds": 1208.8
+}
+wrote r2000_ratchet.json

@@ -1,0 +1,13 @@
+start (1065,917)
+  a=161065 b=913 band=1399 hubverts=117503
+  a=321065 b=709 band=1399 hubverts=230947
+  a=481065 b=719 band=1399 hubverts=344182
+  a=641065 b=703 band=1399 hubverts=457246
+  a=801065 b=763 band=1399 hubverts=570182
+  BAND EXTENDED to 1685 at a=849065 (stall)
+  a=961065 b=1079 band=1685 hubverts=680908
+G-path: 1413051 vertices, bad_vertices=0 bad_steps=0
+  x in [1065,1001065]  y in [667,1685]
+  max y before a=866001: 1399
+  max y after : 1685
+wrote witness_path.txt

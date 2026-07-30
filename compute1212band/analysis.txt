@@ -1,0 +1,130 @@
+==============================================================================
+RATCHET RUNS  (band starts at Y0, grows by the measured dY at each trap)
+==============================================================================
+file                      Y0      reach  traps  endband     sec
+r1400_ratchet.json      1400    5000001      2     1849   681.9
+r2000_ratchet.json      2000   10000001      0     1999  1208.8
+r400_ratchet.json        400    3000001      8     1685   421.6
+r1400_far.json          1400   20000001      2     1849  2027.3
+
+per-trap detail (ratchet):
+        a*  log10   band  run(cols)  dY_pass   dY_L  open  reach  wall  3|a*
+    868869   5.94   1399     433902      282    286   300     71 False  True
+   4690119   6.67   1685    1909625      164    164   115      4 False  True
+     28445   4.45    399        181       10    452    22      4 False False
+     30669   4.49    851        112       48     48    83      6 False  True
+     34161   4.53    899        746        2      2   255      2 False  True
+     37587   4.58    901        713       60    346   103      2 False  True
+    142599   5.15   1247      51506       26     26   110     22 False  True
+    272367   5.44   1273      63884       70     70   200      3 False  True
+    556867   5.75   1343     141250       48     54   168      4 False False
+    868869   5.94   1397     155001      284    288   299     71 False  True
+    868869   5.94   1399     433902      282    286   300     71 False  True
+   4690119   6.67   1685    1909625      164    164   115      4 False  True
+
+==============================================================================
+FIXED-BAND FLOOD RUNS  (maximally generous frontier, band never grows)
+==============================================================================
+    Y  dec     cols  traps     /1e5c   runmed    runmax  walls  dYLmed  dYLmax  dYL=inf
+ 1000   D4    45000      9      20.0     2829     10064      0   248.0     250        0
+ 1000   D5   321591     30     9.329     5703     45841      0   111.0     398        0
+ 1000   D6   399793     30     7.504     7033     59695      0   148.0     520        0
+ 1000   D7   500000     22       4.4    13952     70146      0   144.0     544        0
+ 1200   D4    45000      4     8.889     5727     21734      0    48.0      50        0
+ 1200   D5   450000     16     3.556    21906    107404      0    74.0     486        0
+ 1200   D6   500000     16       3.2    24080     97882      0    74.0     320        0
+ 1200   D7   500000      7       1.4    73259     97954      0   134.0     344        0
+ 1400   D4    45000      0       0.0     None      None      0    None    None        0
+ 1400   D5   450000      1     0.222   384434    384434      0   286.0     286        0
+ 1400   D6   500000      2       0.4   247140    420877      0   119.0     120        0
+ 1400   D7   500000      1       0.2   290108    290108      0   144.0     144        0
+ 1600   D4    45000      0       0.0     None      None      0    None    None        0
+ 1600   D5   450000      1     0.222   384434    384434      0    86.0      86        0
+ 1600   D6   500000      0       0.0     None      None      0    None    None        0
+ 1600   D7   500000      0       0.0     None      None      0    None    None        0
+  400   D4     1146     30  2617.801       28       105      0   452.0     502        9
+  400   D5     1710     30  1754.386       41       161      0   502.0     682        3
+  400   D6     2649     30  1132.503       66       347      0   454.0     608        1
+  400   D7     2586     30  1160.093       74       229      0   314.0     502        1
+  800   D4    11805     30    254.13      266      1326      0   102.0     450        0
+  800   D5    16830     30   178.253      411      1747      0    54.0     348        0
+  800   D6    35295     30    84.998      734      3930      0    54.0     564        0
+  800   D7    40254     30    74.527      850      5575      0    54.0     348        0
+
+==============================================================================
+TRAP MECHANISM CENSUS   (all 391 traps from every run)
+==============================================================================
+  traps                                   391
+  genuine Wall-Lemma columns (open==0)    0  (0.00%)
+  local traps (open>0, unreachable)       391  (100.00%)
+  3 | a*  (no vertical move in a* at all) 261  (66.8%)
+  frontier had NO vertical move at a*     271  (69.3%)
+     ... of those, because 3 | a*         261  (96.3%)
+  frontier COULD move vertically at a*    120  (30.7%)
+  open rows at a*:  median 98  mean 120.9  min 1  max 382
+  reachable rows at a*: median 3 mean 13.0 min 1 max 246
+  row distance frontier -> nearest open row: median 2 mean 3.3 max 28
+
+  spf(a*) distribution (smallest odd prime factor of the trap column):
+    spf=  3:   261 (66.8%)
+    spf=  5:    55 (14.1%)
+    spf=  7:    17 (4.3%)
+    spf= 11:     4 (1.0%)
+    spf= 13:     1 (0.3%)
+    spf=>13:    53 (13.6%)
+  divisibility of the column and its two successors:
+     3|a*:   261 (66.8%)   [odd a at random: 33.3%]
+     5|a*:    87 (22.3%)   [odd a at random: 20.0%]
+     7|a*:    81 (20.7%)   [odd a at random: 14.3%]
+
+==============================================================================
+ESCAPE COST dY  (all traps where it was measured)
+==============================================================================
+  dY_pass (reach a*+2):     n=377 mean=99.6 median=74 p90=248 max=520
+  dY_L    (sustain 1000c):  n=377 mean=220.5 median=148 p90=454 max=682
+  dY_L unbounded at the cap: 14
+
+  dY_L by base band Y:
+    band ~  400 n= 107 median=   452 mean=  437.7 max=  682  median(dY/Y)=1.133
+    band ~  800 n= 123 median=    54 mean=  120.6 max=  564  median(dY/Y)=0.068
+    band ~ 1000 n=  91 median=   148 mean=  160.3 max=  544  median(dY/Y)=0.148
+    band ~ 1200 n=  47 median=    74 mean=  111.1 max=  486  median(dY/Y)=0.062
+    band ~ 1400 n=   6 median=   215 mean=  206.7 max=  286  median(dY/Y)=0.154
+    band ~ 1600 n=   3 median=   164 mean=  138.0 max=  164  median(dY/Y)=0.097
+
+  dY_L by decade of a*:
+    10^4-10^5: n=  68 median=   248 mean=  253.8 max=  502
+    10^5-10^6: n= 111 median=   102 mean=  213.4 max=  682
+    10^6-10^7: n= 109 median=   158 mean=  231.9 max=  608
+    10^7-10^8: n=  89 median=   148 mean=  189.9 max=  544
+
+==============================================================================
+BAND TRAJECTORY UNDER THE RATCHET   Y(x) after each extension
+==============================================================================
+  r1400_ratchet.json:
+     x=      1065  log10 x= 3.03   band=1400
+     x=    868869  log10 x= 5.94   band=1685
+     x=   4690119  log10 x= 6.67   band=1849
+     x=   5000001  log10 x= 6.70   band=1849
+     least-squares fit  Y ~ 95*ln(x) + 381   (rows per e-fold of x: 95)
+  r2000_ratchet.json:
+     x=      1065  log10 x= 3.03   band=2000
+     x=  10000001  log10 x= 7.00   band=1999
+  r400_ratchet.json:
+     x=     28083  log10 x= 4.45   band=400
+     x=     28445  log10 x= 4.45   band=851
+     x=     30669  log10 x= 4.49   band=899
+     x=     34161  log10 x= 4.53   band=901
+     x=     37587  log10 x= 4.58   band=1247
+     x=    142599  log10 x= 5.15   band=1273
+     x=    272367  log10 x= 5.44   band=1343
+     x=    556867  log10 x= 5.75   band=1397
+     x=    868869  log10 x= 5.94   band=1685
+     x=   3000001  log10 x= 6.48   band=1685
+     least-squares fit  Y ~ 172*ln(x) + -812   (rows per e-fold of x: 172)
+  r1400_far.json:
+     x=      1065  log10 x= 3.03   band=1400
+     x=    868869  log10 x= 5.94   band=1685
+     x=   4690119  log10 x= 6.67   band=1849
+     x=  20000001  log10 x= 7.30   band=1849
+     least-squares fit  Y ~ 54*ln(x) + 977   (rows per e-fold of x: 54)

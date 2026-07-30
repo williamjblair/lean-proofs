@@ -1,0 +1,6 @@
+band Y=1000   columns scanned: 4999999  (a in [3,10000001])
+  min open(a,Y) = 3  at a = 1540539
+  histogram of open counts 0..15: [np.int64(0), np.int64(0), np.int64(0), np.int64(8), np.int64(1), np.int64(2), np.int64(12), np.int64(11), np.int64(16), np.int64(60), np.int64(70), np.int64(68), np.int64(17), np.int64(113), np.int64(88), np.int64(161)]
+  columns with open <= 40: 40581
+  theta(Y)=955.6 -> both-composite wall needs a >~ 10^138.3
+  theta(sqrt(Y))=25.3 -> prime-neighbour wall modulus 10^11.0, so density ~ 3^10/10^11.0

@@ -1,0 +1,4 @@
+Y=1600 D4 a in [10001,100001] cols=45000 traps=0 /1e5c=0.0 runmed=None walls=0 dYL med=None max=None none=0 (13.7s)
+Y=1600 D5 a in [100001,1000001] cols=450000 traps=1 /1e5c=0.222 runmed=384434 walls=0 dYL med=86.0 max=86 none=0 (146.8s)
+Y=1600 D6 a in [1000001,2000001] cols=500000 traps=0 /1e5c=0.0 runmed=None walls=0 dYL med=None max=None none=0 (141.8s)
+Y=1600 D7 a in [10000001,11000001] cols=500000 traps=0 /1e5c=0.0 runmed=None walls=0 dYL med=None max=None none=0 (128.4s)

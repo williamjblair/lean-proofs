@@ -1,0 +1,15 @@
+{
+ "Y": 2000,
+ "Amax": 10000001,
+ "W": 5000,
+ "L": 1000,
+ "Ycap": 8000,
+ "mode": "ratchet",
+ "start": 1065,
+ "reach_max": 10000001,
+ "final_band": 1999,
+ "n_traps": 0,
+ "traps": [],
+ "runs": [],
+ "seconds": 1208.8
+}
