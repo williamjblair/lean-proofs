@@ -103,3 +103,30 @@ verified witnesses to $x=867{,}999$ (band 1399) and $2$M-vertex paths at
 $10^9$–$10^{12}$; dead-run fraction $1.7\%$ and falling.
 **Open**: exactly the alignment statement above. The answer is, with high
 confidence, YES; the theorem awaits one genuinely new global input.
+
+
+## Literature verdict (probe of 2026-07-30, late)
+
+**Q1 (rarity of deserts).** No unconditional counting of near-Jacobsthal
+deserts exists. But three partial tools do: Montgomery–Vaughan (Ann. of Math.
+1986) gives per-period gap moments mod $P(z)$ with arbitrary fixed polynomial
+decay — deficient in (i) uniformity in the moment order and (ii) localization
+to dyadic windows (the period $e^{(1+o(1))z}$ dwarfs any window, so per-period
+counts do not constrain a single block). Gorodetsky (Math. Z. 2024) localizes
+the *variance* dyadically. Decisively, **Gafni–Tao (arXiv:2508.06463, which
+resolved Erdős #682 in Aug 2025) is a working template**: dyadically localized
+desert counting via Montgomery 1970 + Montgomery–Soundararajan 2004 moments of
+sifted sets, executed at gap scale $\log X$. The open question is exactly how
+far that method stretches in $T$ once the $k$-dependence of constants is
+tracked. Prompt v3 targets this.
+
+**Q2 (successors of Vardi).** Vardi's visible-lattice paper is *Deterministic
+percolation* (Comm. Math. Phys. 207 (1999) 43–66), not the Gaussian-moat
+paper. Only mathematical successor line: Martineau (ECP 2022) and Le
+Fourn–Liu–Martineau (arXiv:2509.08452, Sept 2025) — uniqueness of the infinite
+cluster and no-infinite-black-cluster for the *annealed* random coprime
+colouring; nothing deterministic, nothing on restricted subgraphs. Notably,
+**Herzog–Stewart's claimed unique-infinite-component theorem for the ambient
+graph appears in no published proof** (their 1971 Monthly paper contains
+pattern-realization results only) — even the ambient uniqueness rests on
+Vardi's later work and the 2025 annealed analogue.
