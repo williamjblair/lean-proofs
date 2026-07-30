@@ -1,0 +1,150 @@
+{
+  "cubic_all": {
+    "10": {
+      "c4_free": 3,
+      "c4c8_free": 0,
+      "graphs": 19,
+      "survivors": 0
+    },
+    "12": {
+      "c4_free": 8,
+      "c4c8_free": 0,
+      "graphs": 85,
+      "survivors": 0
+    },
+    "14": {
+      "c4_free": 36,
+      "c4c8_free": 0,
+      "graphs": 509,
+      "survivors": 0
+    },
+    "16": {
+      "c4_free": 269,
+      "c4c8_free": 0,
+      "graphs": 4060,
+      "survivors": 0
+    },
+    "18": {
+      "c4_free": 2761,
+      "c4c8_free": 0,
+      "graphs": 41301,
+      "survivors": 0
+    },
+    "20": {
+      "c4_free": 36101,
+      "c4c8_free": 0,
+      "graphs": 510489,
+      "survivors": 0
+    },
+    "22": {
+      "c4_free": 553227,
+      "c4c8_free": 0,
+      "graphs": 7319447,
+      "survivors": 0
+    },
+    "24": {
+      "c4_free": 9467449,
+      "c4c8_free": 4,
+      "graphs": 117940535,
+      "survivors": 0
+    },
+    "26": {
+      "c4_free": 176861701,
+      "c4c8_free": 23,
+      "graphs": 2094480864,
+      "survivors": 0
+    }
+  },
+  "general_c4free_mindeg3": {
+    "4": {
+      "graphs": 0,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "5": {
+      "graphs": 0,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "6": {
+      "graphs": 0,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "7": {
+      "graphs": 0,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "8": {
+      "graphs": 0,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "9": {
+      "graphs": 0,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "10": {
+      "graphs": 5,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "11": {
+      "graphs": 9,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "12": {
+      "graphs": 57,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "13": {
+      "graphs": 503,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "14": {
+      "graphs": 6059,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "15": {
+      "graphs": 91433,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "16": {
+      "graphs": 1655659,
+      "no_c4c8": 0,
+      "parts": 1,
+      "survivors": 0
+    },
+    "17": {
+      "graphs": 34758006,
+      "no_c4c8": 0,
+      "parts": 14,
+      "survivors": 0
+    },
+    "18": {
+      "graphs": 834711846,
+      "no_c4c8": 0,
+      "parts": 14,
+      "survivors": 0
+    }
+  }
+}

@@ -17,3 +17,19 @@ compute/artifacts/structure_hunt/t4_prefix_survivors.csv
 *.py[cod]
 **/.lake/
 starfleet/**/lake-packages/
+
+# Erdős campaign working directories: keep code, writeups and small certificates
+# only. Third-party papers, scraped pages, compiled binaries and regenerable bulk
+# data must never be committed (copyright + repo size).
+compute*/**/__pycache__/
+compute*/*.pdf
+compute*/*.html
+compute*/*.npy
+compute*/*.npz
+compute*/checkc
+compute*/checkc_v2
+compute64/wp2/
+compute64/wp3_28/
+compute1212search/trajectory_*.txt
+compute1212/path_escape.json
+compute848/finite_cert_*.json

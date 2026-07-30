@@ -1,0 +1,35 @@
+{
+ "start": [
+  1485738843,
+  1929583699
+ ],
+ "status": "reached",
+ "nodes": 2028712,
+ "backtracks": 16969,
+ "path_len": 2011743,
+ "violations": 0,
+ "dx": 2000000,
+ "dy": 11742,
+ "legs_summary": {
+  "horizontal_runs": {
+   "count": 2215,
+   "len_mean": 902.9345372460497,
+   "len_max": 32484,
+   "len_min": 2,
+   "anchor_pmin_mean": 277897792.65598196,
+   "anchor_pmin_max": 1929595391,
+   "anchor_pmin_min": 5,
+   "anchor_composite_frac": 0.8559819413092551
+  },
+  "vertical_climbs": {
+   "count": 2214,
+   "len_mean": 5.303523035230352,
+   "len_max": 34,
+   "len_min": 2,
+   "anchor_pmin_mean": 267257841.53206864,
+   "anchor_pmin_max": 1487731831,
+   "anchor_pmin_min": 5,
+   "anchor_composite_frac": 0.8202348690153568
+  }
+ }
+}
