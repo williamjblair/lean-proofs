@@ -98,3 +98,44 @@ This skeleton *sharpens* v3: GPT Pro should be pointed at L2 specifically
 (with L1 assumed or proved en route), told the exact $k$-range
 $k\asymp\log X/\log T$ (modest — uniformity is needed far below $\delta T$,
 which is easier than the general problem), and given the two traps.
+
+## 7. The β-framework for L2 (derived and verified 2026-07-30, late)
+
+Write $\beta_p(n)=1_{p\mid n}-1/p$. Then $1_{\mathrm{rough}}(n)=
+\prod_{p\le z}((1-1/p)-\beta_p(n))$, and expanding,
+$$N_T(x)-\delta T=\delta\sum_{d\mid P,\,d>1}(-1)^{\omega(d)}
+\prod_{p\mid d}(1-1/p)^{-1}\,W_d(x),\qquad
+W_d(x)=\sum_{i\le T}\prod_{p\mid d}\beta_p(x+i).$$
+Three verified structural facts (numerically checked for p ∈ {3,5,7,11,13},
+all exact):
+
+1. **Orthogonality / single-prime vanishing.** $\mathbb E_p[\beta_p]=0$, and
+   over full periods correlations factor over distinct primes (CRT). Hence in
+   any $k$-fold correlation, **a prime appearing in exactly one $d_j$ kills
+   the term**: only configurations where every prime is shared by ≥ 2 indices
+   survive. This is the source of the Gaussian structure.
+2. **Exact local factors.** For shifts occupying $r$ distinct residues mod
+   $p$ with multiplicities $m_1..m_r$:
+   $$\mathbb E_p\Big[\prod_s\beta_p^{m_s}(x{+}a_s)\Big]
+   =\sum_{s_0}\frac1p\Big(1-\frac1p\Big)^{m_{s_0}}
+   \prod_{s\ne s_0}\Big(-\frac1p\Big)^{m_s}
+   +\Big(1-\frac rp\Big)\prod_s\Big(-\frac1p\Big)^{m_s}.$$
+   In particular the pair value is $(1/p)(1-1/p)$ for congruent shifts and
+   $-1/p^2$ otherwise — each congruence collision costs one factor $1/p$.
+3. **Small-prime cancellation is pointwise, not statistical.**
+   $|W_p(x)|=|\#\{i\le T:p\mid x{+}i\}-T/p|<1$ for every $x,p,T$. The naive
+   fear that small primes contribute $(T/p)^m$-sized clusters is unfounded:
+   shift-sums must be performed inside the local factors, where the
+   $r$-collision structure carries the decay. (I fell into the $(T/2)^m$
+   trap before noticing this — recorded as trap #3.)
+
+**What remains for L2**, now fully specified: organize the $k$-fold sum over
+$(d_1..d_k)$ by the partition into connected prime-sharing clusters; bound
+each connected $m$-cluster's total mass by $m!\,C^m\,\delta T$-type cumulant
+estimates using the local factors above (the dominant mass is shift-collision
+pairings, total pair mass $=\sigma^2\asymp\delta T$); handle the
+window-vs-period truncation ($\mathrm{lcm}\le X^{1-\varepsilon}$ exact,
+tail via pointwise bounds and divisor counts); conclude
+$M_k\le(Ck\sigma^2)^{k/2}$ for $k\le\delta T/C$ by the standard
+cumulant-to-moment inequality. All four steps are standard-technique-shaped;
+the content is uniformity bookkeeping, no longer ideas.
