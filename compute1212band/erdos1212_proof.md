@@ -427,3 +427,26 @@ mixed theorem: row divisibility x close-pair incidence x switch ordering
 x min-cut geometry. Fifth reappearance of the core (expansion -> RSS/USE
 -> SGC -> GWT -> PSDC), now in sharpest form. STATUS: #1212 OPEN; the
 conditional chain PSDC => GWT => ... => YES is fully certified.
+
+## 18. Round 9 certified upgrades + DFTH attack via event-budget
+
+CERTIFIED round 9: cubic climb lemma (Iwaniec j(n) << omega^2 log^2, ell*n
+trick); dockable switches for any row pair <= Y^{1/3}/log^6 Y in EVERY
+window; semiprime reservoir R (pairwise coprime, disjoint supports, N >=
+c Y^{5/2-eta}/log Y in one Z/4-interval, Z = Y^{5/2-eta}); per-window
+blocked reservoir rows <= C Y^2/log Y with INJECTIVE charging; mesoscopic
+handoff (28). Residual: DFTH/NSC (sweeping cut through packets).
+
+DFTH ATTACK (event-budget): each row r = pq in R has block times in <= 4
+APs with moduli p, q >= Z: <= 20 block events per row per Z-span of
+columns. Separator global budget <= 20N events per Z-span. Sweep cost:
+kill K packets (size s, gap g, K = E/(s+g)) needs T >= K s/(Y^2 log Y)
+windows (per-window cap) and re-entry suppression ~ K*T*Y/g^3 events
+(cubic latency: opportunities every g^3/Y windows). Constraint E*s <=
+C(s+g)^2 g^3 Y at s ~ g gives feasibility only for g >= Y^{(3/2-eta)/5}
+= Y^{0.3-eta/5}; certified within-window switch radius Y^{1/3} > Y^{0.3}:
+NO feasible sweep scale. Note: GPT Pro's Sec. 8 fixed point 3/8 OMITS the
+per-row event cap — flag as the round-10 referee question: verify the
+suppression accounting (killed-packet re-entry bookkeeping, adjacency
+evolution, whether suppression can be avoided by re-killing on arrival)
+and the event cap constants. If it survives: DFTH => GWT => ... => YES.
