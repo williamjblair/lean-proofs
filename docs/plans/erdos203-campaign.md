@@ -111,3 +111,25 @@ NEXT SESSION CENTERPIECE — the recursive parallel-direction tree design
   minutes via g_h at targeted h).
 * Fallback: CP-SAT/ILP on the deepest two stages only, with the tree
   handling the top stages.
+
+## CRITICAL CORRECTION (2026-07-31, session 3)
+
+The session-1/2 "99.98% coverage / residual 2.3e-4" figures were ARTIFACTS
+of a bug in the cell-splitting kernel (incorrect kernel basis => dropped
+cells => overcounted coverage). A clean engine (lattice.py) was written and
+VALIDATED 300/300 against exhaustive point enumeration. On the validated
+engine, pure greedy + point-forced backtracking reaches only ~0.68 coverage
+(residual ~0.29) before cell counts explode (10^8 at depth 37). The prior
+"greedy ceiling near 1.0" was false.
+
+HONEST STATE: density of the pool is 1.81 (>=1, necessary condition holds),
+but greedy shift-selection reaches ~68% — the gap to a cover is STRUCTURAL,
+exactly the 2D analogue of why the 1D Sierpinski cover requires a designed
+nested construction, not greedy. This VALIDATES the recursive
+parallel-direction tree as the ONLY viable route (not merely the next
+optimization). No covering is claimed; nothing is solved.
+
+Engines: lattice.py (validated split/idx) is now canonical; full_search.py
+imports it; all prior residual numbers from full_search2/point_solver are
+retracted. Next session: implement the tree design on lattice.py from
+scratch; the density surplus (0.81) is the working margin.

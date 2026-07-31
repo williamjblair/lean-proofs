@@ -14,50 +14,7 @@ for p, n in sorted(pool.items(), key=lambda kv: kv[1]):
     TILES.append((p, u, v, n))
 #print(f"pool: {len(TILES)} tiles, density {sum(1/t[3] for t in TILES):.4f}", flush=True)
 
-def egcd(a, b):
-    if b == 0: return (a, 1, 0)
-    g, x, y = egcd(b, a % b); return (g, y, x - (a//b)*y)
-
-def split(cell, u, v, n, c):
-    a11,a12,a21,a22,b1,b2 = cell
-    g1 = (u*a11 + v*a21) % n; g2 = (u*a12 + v*a22) % n
-    phib = (u*b1 + v*b2) % n
-    g = math.gcd(math.gcd(g1, g2), n)
-    if (c - phib) % math.gcd(g, n) != 0: return None  # tile misses cell
-    d = n // g
-    if d == 1: return []                              # tile swallows cell
-    h1, h2 = (g1//g) % d, (g2//g) % d
-    # find t0 with psi0(t0) == 1 mod d
-    G, x, y = egcd(h1, d)
-    t0 = None
-    if G == 1: t0 = (x % d, 0)
-    else:
-        for yy in range(d):
-            r = (1 - h2*yy) % d
-            if r % G == 0:
-                xx = ((r//G) * pow(h1//G, -1, d//G)) % (d//G) if d//G > 1 else 0
-                if (h1*xx + h2*yy) % d == 1: t0 = (xx, yy); break
-    if t0 is None: return None
-    # kernel basis of psi0 mod d
-    w1 = (h2 % d if h2 else d, (-h1) % d if h1 else 0)
-    if (h1*w1[0] + h2*w1[1]) % d != 0 or w1 == (0,0): w1 = (h2, -h1)
-    w2 = (d, 0) if (h1*d) % d == 0 else (0, d)
-    det = w1[0]*w2[1] - w1[1]*w2[0]
-    if det == 0:
-        w1 = (0, d); w2 = (d, 0); det = -d*d
-    # target slab j*: phib + j*g == c mod n
-    jstar = ((c - phib) // g) % d if (c - phib) % g == 0 else None
-    out = []
-    for j in range(d):
-        if j == jstar: continue
-        nb1 = b1 + a11*(j*t0[0]) + a12*(j*t0[1])
-        nb2 = b2 + a21*(j*t0[0]) + a22*(j*t0[1])
-        na11 = a11*w1[0] + a12*w1[1]; na21 = a21*w1[0] + a22*w1[1]
-        na12 = a11*w2[0] + a12*w2[1]; na22 = a21*w2[0] + a22*w2[1]
-        out.append((na11,na12,na21,na22,nb1,nb2))
-    return out
-
-def idx(cell): return abs(cell[0]*cell[3] - cell[1]*cell[2])
+from lattice import split, idx
 
 def run(seed, tlimit):
     rng = random.Random(seed)
