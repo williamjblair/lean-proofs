@@ -129,3 +129,35 @@ modulus as the test; (3) LOSS-INFO branch: prove the draw exact by
 constructing, for SOME admissible pattern family, a CRT solution in range —
 which would show ASE needs the full interface conditions, not congruences
 alone, and would redirect the war to Front A/D permanently.
+
+## Front B — large sieve attack: ELIMINATED (2026-07-31)
+
+Formulation: chain base e_1 must satisfy e_1 mod p_i in Omega_i,
+|Omega_i| <= 3(2 S_i + 1), S_i = cumulative drift bound. Montgomery's
+arithmetic large sieve: N(L) <= (L + Q^2)/Sigma with
+Sigma = sum_{q <= Q squarefree} prod_{p|q} omega/(p - omega),
+per-prime saving factor ~ p_i/(6 S_i) =: W_i, W ~ log^2 Y/loglog Y.
+All three regimes fail structurally:
+1. L = Z (chain-range window): Q <= L^{1/2} = Z^{1/2} < p_i — NO modulus
+   fits; vacuous. The moduli exceed sqrt(interval): the classical
+   large-modulus wall.
+2. L = Z^2: Q = Z admits single primes only: Sigma ~ K W ~ Z/loglog Y
+   vs L = Z^2: short by Z*loglog.
+3. L = full shaft gap Y^25: Q = Y^{12.5} admits 5-prime products:
+   Sigma ~ K^5 W^5 ~ Y^{12.5 - 5 eta} polylog vs L = Y^25: short by Y^{12.5}.
+CONCLUSION: the large sieve cannot exploit more than ~L^{1/2}-worth of
+modulus product, while the pattern family's power is the K-fold product
+Z^K. Tool (1) eliminated with mechanism (not constants — structure).
+This sharpens the target for tool (2): any useful dispersion estimate must
+go BEYOND square-root cancellation in the modulus aspect, i.e. exploit the
+specific structure (consecutive-prime moduli, drift-nested windows) rather
+than generic well-spacing. Bilinear/Kloosterman route remains; also
+consider: the DUAL large sieve / Gallagher's larger sieve (which WINS when
+many residues are excluded per prime — here all but ~6S/Z of residues are
+excluded: exactly the larger-sieve regime!!). NEXT: Gallagher's larger
+sieve: N <= (Sigma log p - log L)^{-1}(Sigma log p ...) — with omega(p)
+ADMITTED residues ~ 6S_i: larger sieve bound
+N(L) <= (sum log p - log L) / (sum (log p)/omega(p) - log L)
+which for omega ~ 6S << p can beat L^{1/2}-barriers. COMPUTE THIS FIRST
+next session — the larger sieve is precisely designed for few-admitted-
+residues and has no Q <= L^{1/2} wall.
