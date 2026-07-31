@@ -205,3 +205,22 @@ latency machinery (or MV reduced-residue L^2, Front D) give a power-saving
 bound on the density of climb-free-aligned windows at a FIXED candidate
 trajectory? This is the sharpest, most winnable statement of the entire
 campaign.
+
+## Front B — self-referee of B1/B2 + new B3 (pre-round-12)
+
+B1 CORRECTION: Gallagher denominator positivity requires
+omega = 6R0+3 < K log Z/log L: B1 valid only for
+R0 <= Y^{5/2-eta}/(100 log^2 Y). Refinement available: nested
+Omega_i <= 3(2 min(R0, S_i)+1), S_i = sum_{j<i} D_j, improves N by log K.
+B2 checked: count-form of Lemma H applies to the subfamily; omega-cap
+arithmetic verified.
+**B3 (long-staircase exclusion, NEW).** R0 >= Y^{5/2-eta}/(100 log^2 Y)
+forces average drift >= ~4 log^2 Y; certified gap-tail (ingredient (i))
+makes gaps >= 4log^2 Y superpolynomially rare (density exp(-c log^2 Y/
+loglog Y)); rare-gap column measure over any polynomial range, times the
+omega-cap 0.6Y/log Y events/column, cannot host K ~ Y^{5/2-eta}/(4log^2 Y)
+steps. Long staircases impossible.
+TRICHOTOMY: short (< Y^{3/2-eta}/polylog) dead by B2; long
+(> Y^{5/2-eta}/polylog) dead by B3; middle pinned to <= 6R0+3 explicit
+candidates by B1. The war is now: kill polynomially many explicit
+candidates, each needing only a Y^{-3/2-} per-candidate bound.
