@@ -286,3 +286,26 @@ for the adaptively reached set, immune to first moments in both
 directions (column mass: round 6 §2-3; interface tameness: round 6 §6;
 short-interval CRT localization fails by Bonferroni saturation). Honest
 assessment: this is a genuine research-level open lemma, not bookkeeping.
+
+## 13. GWT attack architecture (proposed, 2026-07-31)
+
+Nested-scale mobility: for dyadic scales sigma in [4d, Y^{1/5}], tile the
+band into sigma-bands. (i) Lemma-E untame-run caps: runs of untame
+sigma-bands have length <= sigma^{1+eps} — an all-scale barrier of
+thickness T is impossible since its scale-T^{1/(1+eps)} sub-bands cannot
+all be untame; barriers self-destruct against their own sub-scales.
+(ii) Column-mass unkillability: denying switch supply of all tame
+sigma-bands over column-length L costs >= L Y^5 log(sigma)/(8^5 sigma^6)
+vs budget L Y/2 — impossible for sigma <= Y^{2/3}; within single windows
+the operative cap is sigma <= Y^{1/5}/16 (switch spacing (8 sigma)^5 <=
+Y/30). (iii) Per-column Lemma H keeps (1-o(1))M lanes open at every
+column; the state, vertically mobile at all scales <= Y^{1/5} everywhere,
+harvests them: |T_j(S)| >= (1-o(1))M for any nonempty S with vertical
+access. SOFT SPOTS (open): (a) small continents between mass
+concentrations hold few lanes — Lemma H's global fraction does not
+protect them; barrier/continent frequency bookkeeping incomplete;
+(b) crossing structures thicker than Y^{0.22} waits ~Y^{0.4} windows for
+a higher-scale switch column — the state's continent must survive the
+wait; (c) the Lemma-E cap must be proved at every dyadic scale with
+uniform constants (only sigma-band averages proved so far). If (a)-(c)
+close, GWT follows, and the chain completes the YES resolution.
