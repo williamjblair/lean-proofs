@@ -177,3 +177,43 @@ Status: the first-moment route is now reduced to exactly this one statement,
 with ingredient (i) supplied by certified machinery and the per-interface
 count elementary. This is the sharpest the problem has been, but it is not a
 proof, and the residual statement is genuinely hard.
+
+## 2026-07-31 (later): quadratic climb latency + the pursuit-game reduction
+
+**Quadratic climb lemma (NEW, improves certified cubic; to referee).** The
+climb condition "gcd(a, prod_{m in [r,r+h]} m) = 1" is ONE forbidden residue
+(0) per prime: all p <= h (each divides some m), plus <= 5h log Y/log h big
+primes with <= 1 multiple each per window. Linear sieve at level h^2 on a
+window of length T: count >= T/(2 log h) - h^2 - 10h log Y/log h > 0 for
+T >= C h^2 log h. Columns at scale x = e^{Y/2} are prime with density 2/Y --
+negligible; 2 | product forces oddness free. So EVERY window of length
+C h^2 log h contains an odd composite dockable climb column: latency h^2
+polylog, vs the certified cubic (which paid an extra factor for compositeness
+via the ell*n trick -- unnecessary since primes are density 1/log x at column
+scale, GPT Pro's own round-9 S5.1 observation). VERIFIED numerically:
+density 0.12-0.14 ~ 1/log h; max gaps 90-130 at h=12..48, far below h^2 log h.
+
+**The pursuit-game reduction (final structural picture).** Crossing a shaft
+gap is a pursuit game: the component (holding all reachable rails, mobile
+within radius Lambda(w) = (w Y/30)^{1/kappa} after w windows of patience at
+latency exponent kappa) vs a moving blocked frontier of thickness Theta
+(refreshed under the 6-events-per-rail-per-Z budget, forcing frontier
+velocity >= Theta/6 per window). Path beats frontiers with Theta^kappa < Y/C;
+adversary needs Theta >= (Y/C)^{1/kappa}. THE BUDGET IS SCALE-FREE: sweep
+cost = (duration)(events/window) = (6E/Theta)(Theta/10 log Y) ~ E/log Y ~
+budget, INDEPENDENT of Theta and kappa: no exponent improvement (even
+kappa = 1) breaks the draw; homogeneity extends it to multi-reservoir play.
+CONCLUSION: the game is critical -- decided by constants and by
+phase-realizability of coordinated frontiers, not by any counting or latency
+exponent. This is the precise, apparently irreducible core of #1212:
+* the answer is YES iff the actual prime multiples cannot realize a
+  constant-factor-perfect sweeping frontier;
+* every counting resource (mass, events, capacity) is EXACTLY balanced at
+  every scale -- explaining both why the problem is hard and why every
+  plausible-looking argument on both sides has failed;
+* a proof requires either winning the pursuit constants (sharpen 6-events,
+  frontier refresh, and latency constants jointly until the draw breaks) or
+  a phase/equidistribution input about multiples of the reservoir primes.
+
+This supersedes ASE as the sharpest formulation: ASE-with-constants IS the
+pursuit game.
