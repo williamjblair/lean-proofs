@@ -378,3 +378,38 @@ the coincidence class shrinks; the O(1)-floor scatters but persists.
 NEXT: iterate the cascade on the exceptional bases (their gap-coincidence
 structure is itself CRT-rigid — count ITS incidences), or hand the
 exceptional-base exclusion to the referee as the new minimal statement.
+
+## Cascade iteration (2026-07-31): RETRACTION + the conserved floor
+
+Iterating exposed that the previous round's key count is UNCERTIFIED.
+The claim "per-pair good-base count <= C0 = O(1)" assumed the B1 candidate
+set is generic mod the pair moduli p_i p_{i+1} — but the candidates are
+themselves CRT/Gallagher-defined with no control of their pair-moduli
+residues. Certified tools give only g_i <= ~3R0 (re-running Gallagher with
+one improved omega_i barely moves the harmonic sum). Hence:
+- the "generic bases closed, O(N) exceptional" claim: RETRACTED to
+  heuristic-grade;
+- the would-be iteration ("exceptional <= incidences/N = O(1)"): rests on
+  the same uncertified bound; does not stand.
+FOURTEENTH round of the pattern, and the pattern now has a name:
+**conservation of the O(1)-floor.** Through every formulation — staircase
+counting, GWT, pin-cost, event budgets, larger sieve, completion, reservoir
+averaging, pair-goodness — the same irreducible quantum survives: a sparse
+CRT-defined set (currently: the <= 6R0+3 Gallagher candidates) about which
+counting proves everything except its residue distribution mod one more
+modulus. THE MINIMAL STATEMENT, current sharpest form:
+  **(CD) Candidate dispersion.** The B1 candidate set (<= 6R0+3 integers,
+  defined by K congruence-window conditions to primes in [Z,2Z]) does not
+  concentrate, for most pairs i, in the O(polylog) gap-aligned residue
+  classes mod p_i p_{i+1}.
+CD => pair-goodness averaging closes => reservoir averaging closes => ASE
+=> YES. CD is a dispersion statement for a Gallagher-extremal set — related
+to the inverse/equality theory of the larger sieve (sets achieving
+Gallagher's bound are unions of few residue classes — Green-Harper-style
+inverse larger sieve!). NEXT and genuinely promising: the INVERSE LARGER
+SIEVE literature (Green, "On (not) computing the Mobius function...";
+Elsholtz-Harper): if the candidate set were concentrated mod pair moduli,
+it would be an extremal configuration for Gallagher — and inverse theorems
+say extremal sets have rigid multiplicative structure that can be tested
+against the DEFINING congruences (which use DIFFERENT primes). This is the
+first route where the literature has theorems ABOUT our exact obstruction.
