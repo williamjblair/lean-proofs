@@ -88,3 +88,23 @@ exactly the reduced-residues setting where MV is sharp.
   through the certified chain (win => ASE => GWT => SGC => percolation =>
   SCH' => Theorem D).
 EOF
+## Front B log — opening measurement (2026-07-31)
+
+Narrow reservoir p in [Z, 2Z], height ~1e9, columns [1e7, 1.4e7]:
+  Z=1200: K=7,  q_mean=0.033, logE[#stairs]=-12
+  Z=2400: K=19, q_mean=0.019, logE[#stairs]=-751
+q halves as Z doubles: q ~ c*D/Z confirmed on the narrow family (predicted
+q ~ 12D/p with p ~ Z). Narrow rows are sparser (K ~ E/log^2) but every rail
+has guaranteed events every <= 2Z/3 — the drift race is live: the chain's
+per-step drift budget D ~ loglog-scale vs per-step event spacing ~ Z/3.
+NEXT (proof side): formalize the drift race as a lattice count — chain of K
+congruences with coprime moduli p_i in [Z,2Z], windows of width D_i around a
+drifting center; the target inequality is that the count of K-chains is zero
+because total window volume prod(6 D_i / p_i) * L < 1 with the D_i drawn
+from the CERTIFIED tail (ingredient (i)) — the missing step remains the
+deterministic bridge from volume < 1 to nonexistence, which needs the
+dispersion/equidistribution of event positions mod the NEXT prime. On the
+narrow family this is a single-scale statement: multiples of p in [Z,2Z]
+within distance D of multiples of p' in [Z,2Z] — a Kloosterman-sum-adjacent
+bilinear count. Next session: attempt the bilinear estimate; surrogate says
+the truth is strongly on our side.
