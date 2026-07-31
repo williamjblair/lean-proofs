@@ -475,3 +475,28 @@ finite numerical check on explicit rationals, and the first pass lands
 2% margins move under refereeing; the campaign's history demands the
 expectation of a defect. REFEREE PACKAGE: pair-counting theorem +
 drift-refined W + the two sharpenings + this assembly, as round 13.
+
+## Closing-assembly write-up pass (2026-07-31, window end): margin NOT stable
+
+Attempting the rigorous assembly moved the constant, both ways:
+(1) **T-dependence.** The per-chunk contradiction with T concentrated
+bases reads (1-eps)(K/2)(T^2/4W - T) > T^2: criterion K > 12W/(1-eps)
+at T ~ K (not 8W), recovering toward 8W only for T >> K. First-pass c
+moves 2.67 -> ~4.0 > e at small T: THE 2% MARGIN IS NOT STABLE. The
+hypothesis strength (how many concentrated bases CD-failure provides per
+chunk) now matters quantitatively.
+(2) **Mixed-drift W-integrand.** Chains may mix tiny and large drifts;
+tiny-drift steps have W ~ 6*D0 trivially-aligned classes (small offsets
+fit inside almost any gap), large-drift steps have W ~ exponentially few.
+The per-chain criterion must integrate over the drift distribution under
+Sigma d_i = R0 — a convexity/optimization step not yet done. Could move
+the constant either way.
+HONEST STATUS: the closing inequality c < e is REAL and finite, but c is
+not yet pinned: current uncertainty range ~[2.3, 4.8] pending (1) the
+exact concentration-count hypothesis, (2) the drift-distribution
+optimization, (3) eps/diagonal/side-condition bookkeeping. The full
+careful document is the remaining work — pure constants, no new ideas —
+followed by round-13 refereeing. If c lands under e: #1212 = YES through
+the certified chain. If over: the identified slack (chunk-size choice
+between Z^2 and Z^3 varying m; event-class pruning; CS sharpening via
+higher moments — all untapped) is the next battleground, still finite.
