@@ -108,3 +108,24 @@ narrow family this is a single-scale statement: multiples of p in [Z,2Z]
 within distance D of multiples of p' in [Z,2Z] — a Kloosterman-sum-adjacent
 bilinear count. Next session: attempt the bilinear estimate; surrogate says
 the truth is strongly on our side.
+
+## Front B — bilinear opening analysis (2026-07-31, session end)
+
+Single-pair count is ELEMENTARY and asymptotic: for p != p' in [Z,2Z],
+events e = a mod p with e mod p' in a width-(2D+1) window: the sequence
+kp mod p' is a full-period AP (gcd=1), each residue hit floor/ceil(L/(pp'))
+times, so count = L(2D+1)/(pp') +- 36(2D+1), asymptotic once L >= 40 Z^2 D.
+No Kloosterman needed at the pair level. The K-fold chain count via CRT:
+<= 1 chain per (drift, residue) pattern (moduli product Z^K >> L), patterns
+exponential — so counting bounds CANNOT give nonexistence (re-confirmed;
+this is ground rule 3 in sharpest form). THE DETERMINISTIC BRIDGE, final
+statement: show that for the ACTUAL prime set, the <= 1 CRT solution per
+pattern lands OUTSIDE [A, A+L] for every admissible pattern — equivalently,
+a simultaneous-approximation/dispersion statement about the CRT lifts.
+Candidate tools for next session, in order: (1) the large sieve applied to
+the pattern family (the patterns' CRT solutions as a well-spaced set);
+(2) Weyl/Kloosterman dispersion on the two-term truncation with the third
+modulus as the test; (3) LOSS-INFO branch: prove the draw exact by
+constructing, for SOME admissible pattern family, a CRT solution in range —
+which would show ASE needs the full interface conditions, not congruences
+alone, and would redirect the war to Front A/D permanently.
