@@ -42,15 +42,29 @@ the horizontal extent donates its full shaft (Lemma B): the component
 reaches EVERY height ≤ H at that column, hence every box pair whose rows
 are open at a — and:
 
-**Hit-fraction bound (ELEMENTARY, the key count).** For a fixed column a,
-the four integers a−1..a+2 have total large-prime budget
-Σ_{p > y, p | (a−1)a(a+1)(a+2)} 1/p ≤ 4·log(log 2s/log y) + o(1)
-(Mertens-extremal packing). The fraction of y-rough rows R (in any height
-range) with gcd(R, (a±1)(a±2)) > 1 is ≤ (1+ε) times this budget:
-- y = z: budget ≤ 4 log 5 ≈ 6.4 — vacuous (an adversarial column CAN block
-  all z-rough pairs);
-- y = Y := 2 log 2s: budget ≤ 2/(5 log z) — 99.9% of Y-rough pairs are
-  open at EVERY column.
+**Lemma H (hit fraction) — PROVED.** Let F = Y-rough odd composites in an
+interval of length Y⁵ (|F| ≥ 0.1·Y⁵/log Y by P1), and a ≤ 2s any column,
+N = (a−1)a(a+1)(a+2). Then
+#{R ∈ F : gcd(R, N) > 1} / |F| ≤ 30C₂·Σ_{p|N, p>Y} 1/p + O(Y⁻¹),
+with C₂ the Selberg upper-sieve constant.
+*Proof.* A blocked R shares a prime p > Y with N. For Y < p ≤ Y³: R = p·m
+with R in the window ⟹ #{R ∈ F: p|R} ≤ #{Y-rough integers in an interval
+of length Y⁵/p ≥ Y²} ≤ C₂(Y⁵/p)/log Y (upper sieve, unconditional).
+Dividing by |F|: ≤ 10C₂/p·(1+o(1)). For p > Y³: at most Y²+1 multiples,
+and ω_{>Y³}(N) ≤ 4 log 2s/(3 log Y), giving total contribution
+≤ [4 log 2s/(3 log Y)]·(Y²+1)·(10 log Y)/Y⁵ = O(1/Y²) since
+log 2s = Y/2. Sum over p. ∎
+
+**Budget computation — PROVED (trivial but decisive).** For n ≤ 2s:
+ω_{>Y}(n) ≤ log n/log Y, so Σ_{p|n, p>Y} 1/p ≤ log n/(Y log Y). Hence for
+the 4-window N: Σ_{p|N, p>Y} 1/p ≤ 4 log 2s/(Y log Y).
+- Tier 0 (Y = z): the same computation gives only Σ ≤ 4 log(5 log z/log z)
+  ≈ 4 log 5 by Mertens-extremal packing — VACUOUS: adversarial columns can
+  block a constant (even full) fraction of z-rough pairs. This is why
+  tier 1 exists.
+- Tier 1 (Y = 2 log 2s): Σ ≤ 4·(Y/2)/(Y log Y) = 2/log Y. By Lemma H the
+  blocked fraction of tier-1 pairs at ANY column is ≤ 60C₂/log Y + o(1)
+  → 0. No column blocks tier 1.
 
 **Tier structure.** Tier 0: the z-box (heights ≤ 2z⁵), used ~always. Tier
 1 (last resort): Y-rough odd composite pairs, Y = 2 log 2s, at heights
@@ -70,30 +84,30 @@ Invariant: the component contains a hub at x-extent front F, on a good pair
 (i) *Advance*: run + sidestep (Lemma S) extends F rightward.
 (ii) *Twin block at x**: some other pair passes x* — if any tier-0 pair is
 open at [x*−2, x*+2], switch to it via any crossed shaft behind F (shaft
-density: one per z³⁶ ≪ visited extent) and continue. The fraction of
-columns at which a GIVEN pair is blocked is ≤ 30/z, and pairs ~ z⁵/log z,
-but adversarial columns blocking ALL tier-0 pairs are possible (budget
-6.4): at such x*, cross on a tier-1 pair — open there with margin
-(budget 2/(5 log z): the fraction of tier-1 pairs blocked at ANY fixed
-column is o(1); a fortiori some tier-1 pair is open at x* — indeed at
-every column of [x*−Y, x*+Y] simultaneously chosen per column). Reach
-tier 1 by a shaft behind F, run across the bad region on the tier-1 pair
-(its own twin blocks: same argument one level up — tier-1 blocking
-columns need budget ≥ 1 against Y-roughness: impossible, since the
-TOTAL budget is ≤ 4 log(log 2s/log Y) + ε = 4 log(z⁵/K / (5 log z·..)) —
-wait: log 2s/log Y = (z⁵/K)/(log(2z⁵/K)) ~ z⁵/(5K log z): budget
-4 log(z⁵/5K log z) ≈ 20 log z·(0/1)... CORRECTION: budget at tier 1 =
-4·log(log 2s / log Y) = 4 log(z⁵/K ÷ 5 log z·(1+o(1))) ≈ 4(5 log z −
-log log z) ≈ 20 log z?? — NO: Mertens: Σ_{Y<p≤T}1/p = log(log T/log Y);
-extremal T with θ(T)−θ(Y) ≤ log 2s: T ≈ log 2s = Y/2: T < Y means NO
-primes fit: an integer n ≤ 2s CANNOT have many primes > Y = 2 log 2s,
-since each exceeds Y and log n ≤ log 2s = Y/2 < log Y·(#) — precisely:
-ω_{>Y}(n) ≤ log n/log Y = (Y/2)/log Y, and Σ 1/p ≤ ω/Y ≤ 1/(2 log Y).
-Total 4-window budget at tier 1: ≤ 2/log Y = 2/(5 log z) — no column can
-block more than an o(1)-fraction of tier-1 pairs, and blocking a GIVEN
-tier-1 pair somewhere in a stretch still leaves the 1−o(1) rest: tier-1
-twin blocks are passed by switching among tier-1 pairs via tier-1-height
-shafts, and no third tier is ever needed.)
+density: one per z^36 ≪ visited extent) and continue. Adversarial columns
+blocking a constant fraction (possibly all) of tier-0 pairs exist (tier-0
+budget 4 log 5; Lemma H vacuous there). Call such columns z-hostile.
+
+**Lemma R (hostile runs — PROVED).** Runs of consecutive z-hostile columns
+have length ≤ C₃ log z. *Proof.* By Lemma H (tier-0 form), hostility at a
+forces Σ_{p | N(a), p > z} 1/p ≥ c₀ := 1/(60 C₂). Over a run of L columns,
+Σ_{a ∈ run} Σ_{p | N(a), p>z} 1/p ≤ 4 Σ_{m ∈ [a₁−1, a_L+2]} Σ_{p|m, p>z} 1/p
+= 4 Σ_{p>z} (1/p)·#{multiples of p in the stretch}
+≤ 4[(L+4) Σ_{p>z} 1/p² + Σ_{p | M, p>z} 1/p]
+≤ 4[(L+4)·1.1/(z log z) + log((log L + log log 2s + O(1))/log z)],
+extremal-packing the distinct primes of M = ∏ m (θ(T) ≤ (L+4) log 2s).
+For L ≤ 2s the last term is ≤ C₄·(1 + log log s/log z) = O(log z). Hence
+L c₀ ≤ 4.4 L/(z log z) + O(log z), so L ≤ C₃ log z. ∎
+
+At a hostile run: cross on a tier-1 pair. By Lemma H at tier 1 and a union
+over the ≤ C₃ log z columns of the run, the fraction of tier-1 pairs
+blocked SOMEWHERE on the run is ≤ C₃ log z·(60C₂+o(1))·(2/log Y)
+= O(log z·log z / z⁵) → 0: almost every tier-1 pair is open on the entire
+run, and a SINGLE tier-1 horizontal run (cap > Y/2 = log 2s ≫ C₃ log z)
+crosses it with no tier-1 sidestep needed. Reach tier 1 by a shaft behind
+F (shaft roughness > tier-1 heights; attachment succeeds for ≥ 94% of
+shaft columns per target pair), cross, shaft back down. No third tier is
+ever needed.
 (iii) *Return*: past the bad region, shaft back down to tier 0.
 (iv) *Ratchet*: z(x), Y(x) grow; O(1) height drift per doubling, absorbed
 by (ii)-(iii) moves; dying rows (p⁻ ∈ (z, z′]) abandoned by pair switch.
@@ -138,3 +152,27 @@ P1 constants (0.30 vs 0.10 needed); Lemma S killer averages (4× better
 than proven); Lemma E equidistribution (0 dead windows / 20k) — now
 optional but corroborating; witness band ~115 log x consistent with tier-0
 occupancy; giant-component data consistent with shaft connectivity.
+
+## 9. GPT Pro referee round 4 (2026-07-30) — synthesis
+
+They refereed the TIER-0-ONLY box (per the earlier addendum) and found:
+(a) P1 and Lemma S CONFIRMED, with better explicit constants (their Thm 2,
+Thm 4: c=1/10, C=12, d=10^4 log z, >=96% tame, explicit z_0 via
+Bordignon–Johnston–Starichkova + Dusart + Yamada). ADOPT THEIR CONSTANTS.
+(b) Prop 5 (composite-palette walls): every composite row <= Y has a factor
+<= sqrt(Y), so columns a == -1 mod 2*prod_{z<p<=sqrt(Y)} p block ALL
+composite rows at once; period exp(theta(sqrt(Y))). CORRECT — kills
+tier-0-only percolation (walls once sqrt(H) < log x, i.e. H < log^2 x) and
+sharpens the Wall Lemma. Also correct: my Iwaniec-composites slip (rough
+integers in Kz^2-windows may be prime; composite supply scale is z^5), and
+Prop 6 short traps + pair-graph connectivity gaps — all aimed at tier 0.
+(c) NONE of it reaches TIER 1: heights H1 = Y^5 = (2 log 2s)^5 give wall
+period exp(~1.4 log^{2.5} x) >> x — wall-free at every scale (verified
+numerically); the wall modulus's primes are all <= sqrt(2H1) << Y = tier-1
+roughness, so they cannot touch Y-rough rows; Lemma H's tier-1 budget
+2/log Y is uniform over ALL columns, so no tier-1-hostile column exists.
+Their proposed RSS/USE hypothesis is superseded: tier 1 IS the "expansion
+through the band" — realized by Y-roughness rather than prime lanes.
+REVISED architecture: tier 1 is primary (self-sufficient: Lemma S at scale
+Y, FL-valid since (60 log Y)^3 << Y/40), tier 0 optional. Next referee
+target: THIS document's tier-1 engine and Lemmas H/R.
