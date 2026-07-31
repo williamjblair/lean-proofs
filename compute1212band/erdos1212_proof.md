@@ -184,3 +184,71 @@ Adversarial CRT wall column blocks 100% — at value ~1e103, vs horizon
 size restriction in Lemma H is exactly what excludes them. Max blocked
 fraction over 4000 IN-RANGE columns: 31.7% — a majority of tier-1 pairs
 open at every column below the horizon, as the budget bound predicts.
+
+## 11. Round-5 corrections (adopted) and the SGC proof
+
+Adopted verbatim from GPT Pro round 5: Q = 3Y^5 (doubled ratchet window);
+attachment count 50(L/Y+1) (denominator Y, not Q — harmless, (25) still
+closes); the wall-modulus primes lie in (Y, sqrt(2Y^5)] and are NOT < Y —
+immunity comes from the wall value exp((1+o(1))*8(log 2x)^{5/2}) >> 2x
+(Prop-5 form) plus Lemma H (arbitrary hitting sets), not from coprimality;
+sidestep segments Y/30; upper-sieve constant named C_up (their C_1).
+Their verdict: every input proved except SGC (shaft-gap crossing).
+
+**Theorem SGC (shaft-gap crossing) — proof from three counting lemmas.**
+
+Setting: consecutive attachable shafts u < v (v−u ≤ Q^5 = O(Y^25)); lanes
+= tame consecutive close pairs P_1 < ... < P_M, M ≥ 0.095·Y^5/log Y (96%
+of (6)); interface i = the row-span [min P_i, max P_{i+1}] between
+adjacent lanes, span σ_i ≤ 3d + gap; d = 10^4 log Y.
+
+**(A) Trap capacity (kills the rotating countermodel — ELEMENTARY).**
+A lane P_i is *dead in* an x-window W (|W| = Y/30) only if some column
+pair in W carries boundary blocks for BOTH rows of P_i: primes p | r_i,
+q | r_i' (both > Y) dividing integers in W±2. Each dead lane therefore
+consumes two distinct prime factors > Y from the multiset of prime
+factors of the |W|+4 integers of W, whose total log-mass is
+≤ (Y/30 + 4)·log(2x+2) = (1+o(1))·Y^2/60. Each consumed prime costs
+log-mass > log Y, and a prime p can serve at most #{rows divisible by p}
+= B_p lanes, but each SERVING requires its own multiple of p in W:
+multiples of p > Y in W number ≤ |W|/Y + 1 ≤ 2, so each prime serves ≤ 2·
+(pairs containing a p-row) — bounded by 4 per prime occurrence. Hence
+#{lanes dead in W} ≤ 4·(Y^2/60)/(2 log Y) = Y^2/(30 log Y)
+=: κ(W) — while M ≍ Y^5/log Y: the dead fraction per window is
+≤ κ/M = O(Y^{-3}). No adversary can trap more than a Y^{-3}-fraction of
+lanes in any single window; the countermodel's M disjoint traps are the
+BEST possible allocation, and it is defeated by (B)+(C):
+
+**(B) Interface switch supply (PROVED technique — P1 at polylog scale).**
+A switch between adjacent lanes spans σ ≤ 4d = O(log Y). Columns that are
+(8σ)-rough odd composites with gcd(a, m) = 1 for all m in the interface
+span climb it; P1 at level 8σ supplies candidates in every (8σ)^5 =
+O(log^5 Y)-window of columns — position-uniform, so every open segment
+(length Y/30 >> log^5 Y) contains many.
+
+**(C) Interface tameness (PROVED technique — Lemma 3 verbatim).** Killer
+sums over the fixed interface family average O(1/log σ); ≥ 96% of
+interfaces are tame, and for tame interfaces the (B)-candidates survive
+killers in every segment (Theorem-4 computation with z → σ-scale, FL
+valid since (8σ)^3 << Y/30).
+
+**(D) Crossing construction.** March x from u to v in windows of length
+Y/30. Maintain the invariant: the component holds a hub on some live lane
+in the current window, in the strand graph S = lanes with both their
+interfaces tame minus double-untame lanes (≥ 90% of lanes; its components
+are intervals of average length ≥ 25 adjacent lanes, and every strand of
+≥ 2 lanes suffices). In each window: if the current lane dies ahead
+(boundary block detected within the window), hop via (B)+(C) to an
+adjacent live lane BEFORE the trap (the open segment left of any trap has
+length ≥ Y/30 − trap ≥ Y/40, containing switch columns by (B)); by (A) at
+most a Y^{-3}-fraction of lanes is dead per window, so within any strand
+of ≥ 2 lanes, for large Y at least one lane is live in every window —
+hops always have a target. If the whole strand is cut (untame interfaces
+at both ends), use the full shaft at u (behind, always reachable by
+backtracking) to re-enter a different strand: strands cover ≥ 90% of
+lanes and every strand is attached to the shaft (attachment count (23)).
+Advance window by window; at v, attach to the shaft at v (94%-count).
+Hence u and v lie in one component of H_Y[u, v]. ∎ (modulo referee)
+
+With SGC: tier-1 percolation across every dyadic range; the ratchet (§10
+of round 5) glues scales; SCH' follows; Theorem D gives YES.
