@@ -69,3 +69,17 @@ W5. On a find: Lean certificate (finite cover check + CRT witness +
   evidence negative). #366: searched to 10^22, ABC against. Decidable
   tags (#19 EFL, #547, #551, #556, #580, #742 Murty–Simon): all hide
   regularity-sized n₀ — infeasible finite checks.
+
+## Session 1 result (2026-07-31)
+
+Best runs: P1 greedy 13 tiles -> 99.88%; +closure to residual 2.3e-4
+(conservative accounting, 46 tiles) or 4.5e-5 (splitting accounting, ~35
+tiles) of Z^2 uncovered. STALL cause identified: no unused pool tile is
+CONSTANT on any residual cell — the residual cells' lattices (indices
+~1e8-4e9; top: 96997824 with multiplicity 72, 1616630400 x48, 2424945600
+x36) are incompatible with all 190 unused tiles' forms. NEXT SESSION
+OPENING MOVE: for each stall cell (A, b), compute the admissible new-tile
+classes {(u:v) mod n : u A1 + v A2 == 0 mod n} and mine g_h for exactly
+those orders (class-targeted harvest); alternatively hybrid accounting
+(bounded splitter budget below 3e-4). All engines checkpointed
+(best_full2.json, ckpt.json); seeds continue.

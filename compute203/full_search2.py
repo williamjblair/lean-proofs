@@ -21,17 +21,15 @@ def phase1(seed, tlimit, capcells=3000):
         best = None
         for i in avail:
             p, u, v, n = TILES[i]
-            gain = defaultdict(float)
+            info = []
             for cell in big:
                 a11,a12,a21,a22,b1,b2 = cell
                 g1=(u*a11+v*a21)%n; g2=(u*a12+v*a22)%n; phib=(u*b1+v*b2)%n
                 g = math.gcd(math.gcd(g1,g2),n)
-                w = (g/n)/idx(cell)
-                step = g
-                for j in range(n//g):
-                    gain[(phib + j*step) % n] += w
-            if gain:
-                c, val = max(gain.items(), key=lambda kv: kv[1])
+                info.append((phib, g, (g/n)/idx(cell)))
+            cands = {ph % n for ph, g, w in info[:40]}
+            for c in cands:
+                val = sum(w for ph, g, w in info if (c - ph) % g == 0)
                 if best is None or val > best[0]: best = (val, i, c)
         if best is None or best[0] < 1e-12: break
         _, i, c = best
@@ -41,11 +39,16 @@ def phase1(seed, tlimit, capcells=3000):
             r = split(cell, u, v, n, c)
             nc.append(cell) if r is None else nc.extend(r)
         cells = nc; avail.discard(i); placed.append((i, c))
+        print(f'  P1 step {len(placed)}: {len(cells)} cells, resid {sum(1.0/idx(x) for x in cells):.5f}', flush=True)
+        if len(cells) > 60000: break
     return cells, avail, placed
 
 def phase2(cells, avail, placed, rounds=400):
     """closure: swallow leftover cells via constant tiles; split stubborn ones."""
     for rnd in range(rounds):
+        if rnd % 10 == 0:
+            json.dump({'shifts': {str(TILES[i][0]): int(c) for i, c in placed}}, open('ckpt.json','w'))
+        if rnd % 10 == 0: print(f'  P2 round {rnd}: {len(cells)} cells, resid {sum(1.0/idx(x) for x in cells):.7f}', flush=True)
         if not cells: return cells, placed
         # group: (tile i, c) -> set of cell indices it swallows
         groups = defaultdict(list)
@@ -64,14 +67,17 @@ def phase2(cells, avail, placed, rounds=400):
         if groups:
             (i, c), members = max(groups.items(), key=lambda kv: sum(1.0/idx(cells[ci]) for ci in kv[1]))
             keep = [cell for ci, cell in enumerate(cells) if ci not in set(members)]
-            # tile also may split other cells at this c
-            nc = []
-            p,u,v,n = TILES[i]
-            for cell in keep:
-                r = split(cell, u, v, n, c)
-                nc.append(cell) if r is None else nc.extend(r)
-            cells = nc; avail.discard(i); placed.append((i, c))
-        elif splitters:
+            if sum(1.0/idx(x) for x in keep) > 3e-4:
+                nc = []
+                p,u,v,n = TILES[i]
+                for cell in keep:
+                    r = split(cell, u, v, n, c)
+                    nc.append(cell) if r is None else nc.extend(r)
+                cells = nc
+            else:
+                cells = keep   # endgame: conservative accounting, no growth
+            avail.discard(i); placed.append((i, c))
+        elif splitters and sum(1.0/idx(c) for c in cells) > 3e-4:
             (i, c, ci), _ = max(splitters.items(), key=lambda kv: kv[1])
             p,u,v,n = TILES[i]
             nc = []
@@ -80,6 +86,10 @@ def phase2(cells, avail, placed, rounds=400):
                 nc.append(cell) if r is None else nc.extend(r)
             cells = nc; avail.discard(i); placed.append((i, c))
         else:
+            import collections
+            need = collections.Counter()
+            for cell in cells[:200]: need[idx(cell)] += 1
+            print(f'  P2 STALL: {len(cells)} cells, resid {sum(1.0/idx(c) for c in cells):.2e}; top cell indices: {need.most_common(8)}', flush=True)
             return cells, placed
     return cells, placed
 
