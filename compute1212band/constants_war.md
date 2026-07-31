@@ -224,3 +224,28 @@ TRICHOTOMY: short (< Y^{3/2-eta}/polylog) dead by B2; long
 (> Y^{5/2-eta}/polylog) dead by B3; middle pinned to <= 6R0+3 explicit
 candidates by B1. The war is now: kill polynomially many explicit
 candidates, each needing only a Y^{-3/2-} per-candidate bound.
+
+## Front B — per-candidate endgame: the pair-moduli dispersion target
+
+Per candidate base (B1): each rail has <= ~3-6 events in range (R0 < p_i),
+so trajectories are NEARLY RIGID; each interface needs |e_i - e_{i+1}| <=
+P0 ~ log^4 Y (certified quadratic latency at rail spacing ~4log^2 Y) — an
+O(P0/Z) coincidence per interface among O(1) explicit pairs.
+Sharpening B1 with per-step adjacency: admitted set mod p_i p_{i+1} has
+size 9 R0 (2P0+1) — density gain P0/R0 per pair vs single-prime sieving —
+BUT: (a) Gallagher with pair moduli gives N <= omega_pair (worse — harmonic
+form can't exploit density); (b) Montgomery's large sieve now FITS
+(Q = Z^2 ~ Y^5 <= L^{1/2} = Y^{12.5}) but requires per-prime PRODUCT
+admitted sets, and ours is non-product (the adjacency couples the pair).
+THE FINAL ESTIMATE, exact form: a large-sieve/dispersion inequality over
+the K/2 pair moduli q = p_i p_{i+1} ~ Z^2 with non-product admitted sets of
+density 9 R0 P0/Z^2 — i.e., a Bombieri-Friedlander-Iwaniec-style dispersion
+statement. Any saving over the trivial bound by Y^{epsilon} closes ASE
+(needs per-candidate Y^{-5/2-eps}; trivial is ~Y^0; the heuristic truth is
+Y^{-large}). This is the sharpest and most standard-shaped final statement
+of the campaign: BFI dispersion with fixed well-factored moduli — the
+technology exists in the literature (BFI I-III, Zhang-style variations)
+and the moduli here are FLEXIBLY FACTORABLE BY CONSTRUCTION (we choose the
+reservoir), which is exactly the property that makes dispersion estimates
+provable. NEXT SESSION: set up the dispersion sum explicitly and check it
+against BFI Theorem shapes; engineer the p-window if needed.
