@@ -249,3 +249,53 @@ and the moduli here are FLEXIBLY FACTORABLE BY CONSTRUCTION (we choose the
 reservoir), which is exactly the property that makes dispersion estimates
 provable. NEXT SESSION: set up the dispersion sum explicitly and check it
 against BFI Theorem shapes; engineer the p-window if needed.
+
+## The dispersion sum — explicit setup (2026-07-31, session close)
+
+Moduli: q_i = p_i p_{i+1} ~ Z^2 for DISJOINT pairs (i odd), so the q_i are
+pairwise coprime. Admitted sets Omega_i mod q_i: |Omega_i| <= 9 R0 (2P0+1)
+(non-product: adjacency couples the pair). Trivial density sigma_i =
+|Omega_i|/q_i ~ 18 R0 P0/Z^2.
+
+Two shortcuts ELIMINATED with mechanism:
+(S1) Turan/variance over all n in [L]: CRT gives exact independence across
+coprime q_i, but the count bound bottoms at an additive O(1) — variance
+methods cannot certify < 1. (The O(1) floor, again.)
+(S2) Gallagher over pair moduli: N <= omega(q) ~ 18 R0 P0 — WORSE than
+single-prime B1 (harmonic form cannot see density, only cardinality).
+Positivity window also loses the top log^8 slice of the middle range.
+
+THE SUM. Let a_n := 1[n in [A, A+L] satisfies the ODD-pair conditions]
+(a CRT-sparse set, |supp a| <= 6 R0 + O(1) by B1). The needed estimate:
+  D := sum_{i even} sum_{omega in Omega_i}
+         ( sum_{n == omega (q_i)} a_n  -  |supp a| |Omega_i|/q_i )
+with target |D| <= |supp a| * (K/2) * Y^{-eps} — equivalently: the even-pair
+conditions thin the odd-survivors by their density, uniformly enough that
+after K/2 even tests fewer than 1 survivor remains:
+  #full-chain bases <= |supp a| * prod_{i even}(sigma_i + E_i),
+and ANY E_i <= Y^{-eps} * sigma-scale closes ASE.
+Structure available for a bilinear treatment (the BFI checklist):
+1. supp(a) is CRT-parametrized by the odd moduli — n = CRT(residue vector)
+   + m * (running modulus): explicit linear parametrization.
+2. The test moduli q_i are FLEXIBLY FACTORABLE (q_i = p_i * p_{i+1}, both
+   factors ~ Z, and WE CHOOSE the reservoir's p-window — can impose
+   p_i ~ Z^alpha, p_{i+1} ~ Z^{2-alpha} for any alpha if the dispersion
+   method wants unbalanced factorizations).
+3. The admitted sets Omega_i are unions of <= 9 intervals-in-progressions
+   (a x b + drift window): additive structure for completing sums /
+   Kloosterman.
+Reduction of the target to Kloosterman-type sums: opening 1[n == omega
+(q_i)] by additive characters e(h n / q_i), h < q_i, the sum over the
+CRT-parametrized supp(a) factors into products of geometric sums over the
+odd moduli — incomplete character sums with moduli products — the standard
+completion gives Kloosterman/Ramanujan sums with moduli q_i and arguments
+involving the inverses of the odd running modulus mod q_i. Weil bounds give
+square-root cancellation per modulus: heuristic total saving Z^{-1/2} per
+test — VASTLY more than the needed Y^{-eps}. The work: (a) the running
+modulus of supp(a) exceeds L (sparse regime) — completion must be done on
+the RESIDUE-VECTOR parametrization, not on n directly; (b) uniformity in
+the 9-interval structure of Omega_i; (c) summing errors over K/2 tests.
+This is a finite, explicitly-posed exponential-sum problem. NOTHING in the
+11-round record obstructs it: it is not a counting argument (it certifies
+cancellation, not cardinality), not dynamic, and phase-aware by nature —
+it IS the phase input, in provable form.
