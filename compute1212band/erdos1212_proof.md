@@ -450,3 +450,22 @@ per-row event cap — flag as the round-10 referee question: verify the
 suppression accounting (killed-packet re-entry bookkeeping, adjacency
 evolution, whether suppression can be avoided by re-killing on arrival)
 and the event cap constants. If it survives: DFTH => GWT => ... => YES.
+
+## 19. Round 10: event-budget sweep argument REFUTED; residual = ASE
+
+My suppression charge KTY/g^3 was invalid: the hub graph is STATIC — a
+dual staircase separator pays once per row (block events never expire)
+and once per interface (one climb-free slab), total cost N << 20N budget.
+My exponent algebra was also wrong (correct homogeneous form returns
+3/8 - eta/4). CERTIFIED from the exchange: 20-event cap per reservoir row
+per Z-span; one-window dead-lane bound Y^2/(120 log Y) with injective
+charging; straight rails need only single-entry. RESIDUAL (final form):
+**ASE (Arithmetic Staircase Exclusion)** — no top-to-bottom packet
+staircase with per-window capacity whose interface slabs all avoid the
+dockable-climb sets: a PHASE-CORRELATION theorem between block residues
+(mod the reservoir's large primes) and climb-column CRT sets. Marginal
+counts cannot prove it (10 rounds establish this). Sufficient stronger
+form: dockable climbs across every interface in every window overlap —
+needs sub-cubic latency, open. STATUS: #1212 OPEN. Certified conditional
+chain: ASE => DFTH => GWT => SGC => percolation => SCH' => Theorem D =>
+YES.
