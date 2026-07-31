@@ -10,6 +10,7 @@ from collections import defaultdict
 from sympy import primitive_root, discrete_log
 from full_search import TILES, split, idx   # reuse engine
 
+RESERVED = None  # set of tile indices reserved for P2
 def phase1(seed, tlimit, capcells=3000):
     rng = random.Random(seed)
     cells = [(1,0,0,1,0,0)]
@@ -20,6 +21,7 @@ def phase1(seed, tlimit, capcells=3000):
         big = sorted(cells, key=idx)[:400]   # score only the biggest cells
         best = None
         for i in avail:
+            if RESERVED and i in RESERVED: continue
             p, u, v, n = TILES[i]
             info = []
             for cell in big:
@@ -90,10 +92,21 @@ def phase2(cells, avail, placed, rounds=400):
             need = collections.Counter()
             for cell in cells[:200]: need[idx(cell)] += 1
             print(f'  P2 STALL: {len(cells)} cells, resid {sum(1.0/idx(c) for c in cells):.2e}; top cell indices: {need.most_common(8)}', flush=True)
+            json.dump({'cells': cells[:250000], 'placed': placed}, open('stall_cells.json','w'))
             return cells, placed
     return cells, placed
 
+def scarce(n):
+    # classes with thin supply, from the ledger: protect them for the endgame
+    return (n % 32 == 0 or n % 27 == 0 or n % 25 == 0 or n % 49 == 0 or
+            n % 11 == 0 or n % 13 == 0)
+def set_reserved():
+    global RESERVED
+    RESERVED = {i for i, t in enumerate(TILES) if scarce(t[3])}
+    print(f'reserved {len(RESERVED)}/{len(TILES)} scarce tiles for P2', flush=True)
+
 if __name__ == '__main__':
+    set_reserved()
     nseeds = int(sys.argv[1]) if len(sys.argv) > 1 else 10
     best = (1.0, None)
     for s in range(nseeds):

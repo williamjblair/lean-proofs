@@ -83,3 +83,31 @@ classes {(u:v) mod n : u A1 + v A2 == 0 mod n} and mine g_h for exactly
 those orders (class-targeted harvest); alternatively hybrid accounting
 (bounded splitter budget below 3e-4). All engines checkpointed
 (best_full2.json, ckpt.json); seeds continue.
+
+## Session 2 (2026-07-31): greedy ceiling found; tree design specified
+
+Results: three stall configurations, all at residual 2.3-2.8e-4 (99.97%+
+covered, 43-54 tiles) under different reservation policies (none / 11|n /
+all-scarce). Reservation relocates the starving class but greedy+swallow
+cannot close — the paradigm's ceiling. Targeted harvest works perfectly
+(+77 primes with 11|n from h=11j in minutes; pool 313 primes, density
+1.811; supply ledger computed per prime-power class).
+
+NEXT SESSION CENTERPIECE — the recursive parallel-direction tree design
+(the generalization of the actual 1D Sierpinski construction):
+* Node = (region R = product of q-adic slabs, tile budget B).
+* Step: choose prime q and a PARALLEL direction class (u:v) mod q among
+  tiles in B with q|n: q tiles with the same direction and the q distinct
+  shifts partition R into q sub-slabs, each assigned to one tile; recurse
+  into each sub-slab on that tile's REMAINING prime-power components (the
+  tile covers its sub-slab only where its other components hit; the
+  leftover within the sub-slab is the complement of a box — recurse with
+  remaining budget).
+* Feasibility inputs: supply ledger (in campaign log) + per-tile direction
+  table (u:v mod q^a for each q^a | n) — compute once.
+* The design search is combinatorial but SHALLOW (depth = number of prime
+  stages ~ 6) and the harvest can be re-targeted mid-design whenever a
+  node demands a class in short supply (proven: any class reachable in
+  minutes via g_h at targeted h).
+* Fallback: CP-SAT/ILP on the deepest two stages only, with the tree
+  handling the top stages.
