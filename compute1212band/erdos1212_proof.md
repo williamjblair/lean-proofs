@@ -176,3 +176,11 @@ through the band" — realized by Y-roughness rather than prime lanes.
 REVISED architecture: tier 1 is primary (self-sufficient: Lemma S at scale
 Y, FL-valid since (60 log Y)^3 << Y/40), tier 0 optional. Next referee
 target: THIS document's tier-1 engine and Lemmas H/R.
+
+## 10. Lemma H verification (surrogate Y=31, 4480 tier-1 rows)
+
+Adversarial CRT wall column blocks 100% — at value ~1e103, vs horizon
+2x ~ 1e7: wall columns need log a ~ Y^{2.5} >> log 2x = Y/2, confirming the
+size restriction in Lemma H is exactly what excludes them. Max blocked
+fraction over 4000 IN-RANGE columns: 31.7% — a majority of tier-1 pairs
+open at every column below the horizon, as the budget bound predicts.
