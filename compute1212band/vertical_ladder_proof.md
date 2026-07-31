@@ -154,10 +154,13 @@ With N_cp ≥ 0.27·z^5/log z close pairs (pigeonhole; verified 65–92%
 numerically), avg S ≤ 8.1/(60·log d) = 0.135/log d. Markov at 0.4/log d:
 bad fraction ≤ 0.34 < 1/3. ∎
 
-Notes: candidates may be prime (the hub (a,R′) has R′ composite); d-rough
-forces a odd and 3∤a, so vertical H-moves at a are legal; the climb sweeps
-gcd(a,m)=1 for m ∈ (R, R′] and the hub needs gcd(a,R)=1 — both covered by
-[R,R′]. Numerics (verify_ladder.py): avg S·log d ≈ 0.31–0.36 — 4× better
+Notes: d-rough forces a odd and 3∤a, so vertical H-moves at a are legal;
+the climb sweeps gcd(a,m)=1 for m ∈ (R, R′] and the hub needs gcd(a,R)=1 —
+both covered by [R,R′]. HYGIENE (referee catch): swept hubs (a, m) with m
+an odd PRIME in (R,R′) force a composite — so candidates are COMPOSITE
+d-rough integers. At x ~ s this costs only the prime density 1/log s =
+K/z^5 ≪ 1/log d (subtract via BT if x is small; at ladder positions x ~ s
+it is negligible). Same fix applies to all chain climb columns (level B). Numerics (verify_ladder.py): avg S·log d ≈ 0.31–0.36 — 4× better
 than the proven bound; 75–82% pass the stricter 0.5/log d.
 
 ## 5b. Verification results (2026-07-30 night)
@@ -204,16 +207,31 @@ unconditionally. VERIFIED (z=30, σ=100, cutoff 800): avg 0.109/log(8σ)
 (theory ≤0.14); 0% of 20k windows reach half the candidate density; max
 bad run 0.
 
-*Consequences.* (a) At every scale D, at least 3/4 of climb-steps of span D
-in any D^{1+ε}-stretch are good (killers below threshold), and good steps
-have surviving climb columns at density ≥ c/log D by the Lemma-S counting
-(with the D-analogue of the average taken over window positions — the family
-is the fixed tiling, not adaptively placed). (b) Bad runs at scale D are
-crossed by single steps at scale D^{1+ε}, giving the recursion
-ℓ_{k+1} = ℓ_k^{1+ε}: from ℓ_0 = d to any needed span in O(log log z)
-levels. (c) Killed columns are unions of arithmetic progressions mod P > D,
-so goodness is uniform in x up to ~P-spacing transients — no horizontal
-blocking line can form.
+*Consequences.* (a) At every scale σ, in any σ^{1+ε}-stretch at least half
+the σ-steps are good, and good steps have surviving (8σ)-rough climb
+columns at density ≥ 0.4/log(8σ). (b) Killed columns are unions of
+arithmetic progressions mod P > 8σ, so goodness is uniform in x up to
+~P-spacing transients — no horizontal blocking line can form.
+
+**The two-level design (supersedes the O(log log z) hierarchy).** The
+multi-level recursion is unnecessary; the hop/block race that motivated it
+is fatal for resting rows with many prime factors (unblocked runs ~ ρ/3ν =
+O(1) when ν ~ log z/log log z) and is solved outright by:
+
+*Resting rows are z^{1/2}-rough.* A row b ≤ z^6 with p⁻(b) > z^{1/2} has
+ω(b) ≤ 12 AUTOMATICALLY, so its blocked-column density is ≤ 36/z^{1/2} and
+its unblocked runs have length ≥ z^{1/2}/36 ≫ any hop (~log z). By Iwaniec
+(g(P(y)) ≤ Ky², effective, linear sieve), z^{1/2}-rough integers appear in
+EVERY interval of length Kz — so every vertical stretch has resting rows
+spaced ≤ Kz.
+
+Levels: **A** (sidesteps): span ≤ d = 60 log z between box rows (Lemma S,
+proved). **B** (chains): vertical spans up to z^6 crossed in steps of span
+≤ Kz between z^{1/2}-rough resting rows; climb columns (8Kz)-rough,
+supplied at density 1/log(8Kz) with Lemma-E-good steps selectable via two
+freedoms — the landing row within its Kz-window and the climb column within
+the current unblocked run (~z^{0.4} candidates per step). B-gaps in the box
+(worst case ≤ Kz² by Iwaniec at level z) are crossed in ≤ z chain steps.
 
 **Why the hierarchy terminates.** Cluster switches only ever need spans
 ~ the spacing of viable clusters. Cluster joint-blocks (all ~18
@@ -232,15 +250,21 @@ path, so no connection to the verified witness is required. O7 is void.
 ## 5d. Assembly status
 
 Proved here: P1 (supply), Lemma S (sidestep, constants explicit), Lemma E
-(equidistribution), joint-block rarity (modulo CRT error write-up).
-Remaining write-up obligations: (W1) the greedy chain construction at one
-scale (good-step selection + horizontal hops between candidate columns on
-resting rows — hop length ~ log D ≪ run cap D); (W2) the O(log log z)-level
-induction with constants; (W3) the ratchet z(x) → z(2x) via box overlap;
-(W4) H-graph hygiene at every move (parity, 3-divisibility, not-both-prime
-— all localized checks). No step faces the supply/diameter circularity:
-every climb span is ≤ polylog, every long crossing is horizontal (runs +
-sidesteps), and every average is over a fixed tiling family.
+(equidistribution, corrected cutoff), the two-level design resolving the
+hop/block race (W1 structural risk CLOSED: z^{1/2}-rough resting rows have
+ω ≤ 12 automatically, block density 36/z^{1/2}, Iwaniec spacing ≤ Kz),
+joint-block rarity (modulo CRT error write-up), climb-column compositeness
+hygiene. Remaining write-up obligations: (W2′) the formal chain lemma —
+greedy selection using the two freedoms (landing row, climb column) against
+Lemma-E bad steps, with the x-drift budget ≤ z^{1/2}/36 per resting row
+made explicit; (W3) the ratchet z(x) → z(2x) via box overlap in
+[z′², z²+z^5]; (W4) full H-graph hygiene audit of every move type; (W5)
+final constants pass (z_0 effective; z_0 ~ 10^13 from ℓ ≥ d^4 in Lemma S is
+the current bottleneck — harmless, the theorem needs no small z_0). No step
+faces the supply/diameter circularity: every climb span is ≤ Kz with
+(8Kz)-rough columns whose supply lives in (8Kz)^5 ≪ travel-budget windows,
+every long crossing is horizontal, and every average is over a fixed
+tiling family.
 
 ## 6. Failure modes to watch
 
