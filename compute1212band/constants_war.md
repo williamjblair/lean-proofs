@@ -87,7 +87,7 @@ exactly the reduced-residues setting where MV is sharp.
 - The prize at every front is total: any single win closes Erdős #1212 YES
   through the certified chain (win => ASE => GWT => SGC => percolation =>
   SCH' => Theorem D).
-EOF
+
 ## Front B log — opening measurement (2026-07-31)
 
 Narrow reservoir p in [Z, 2Z], height ~1e9, columns [1e7, 1.4e7]:
