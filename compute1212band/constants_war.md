@@ -444,3 +444,34 @@ NEXT: exact second-moment computation of climb-free gap lengths in the
 critical band (the certified desert machinery gives the tail; the mean is
 measured; the variance constant is the battle), and re-run B3's averaging
 with drift-distribution refinement inside the band.
+
+## Gap second moment (2026-07-31): measured, and the band collapses to constants
+
+MEASURED (6.8M gaps, Z=2400): mean mu=11.73, E[J^2]/(2mu^2) = 1.046 —
+within 4.6% of pure exponential; gaps >10*mean carry only 3.1% of E[J^2]:
+NO adversarial variance excess; the certified tail (ingredient (i))
+controls what remains.
+
+**Drift-refined CD.** For chains of mean drift D0, alignment needs gaps
+>= D0, so W(D0) ~ W * e^{-D0/mu} (exponential measured; tail certified):
+the pair-count criterion K > c*W(D0) becomes c*(D0/mu)e^{-D0/mu} < 1.
+With the first-pass constant c = 48: fails only for D0/mu in [1/226, 6].
+THE BAND IS CONSTANT-WIDE (B3 no longer needed for the upper range).
+
+**The closing assembly (KNIFE-EDGE, UNREFEREED).** Two identified exact
+sharpenings: (i) divisor constant m: 6 -> 1 by chunking into Z^3-windows
+(differences < Z^3 < q_i q_j: divisible by AT MOST ONE pair modulus);
+(ii) event choices 9 -> 3 (narrow reservoir, p-events only). Then
+c = 48 -> 8*(1/3)-adjusted ~ 2.67, and the band criterion needs
+c < min_{D0} [ (D0/mu) e^{-D0/mu} ]^{-1} = e = 2.718...:
+  **2.67 < 2.718 — closes by ~2%.**
+IF this assembly survives (epsilon bookkeeping, |S| >= 8W side condition,
+exact W integrand, window chunking, CS constant, diagonal terms), the
+chain completes: CD everywhere => pair-goodness => reservoir averaging =>
+ASE => GWT => SGC => percolation => SCH' => Theorem D => **#1212 = YES**.
+STATUS: for the first time in 16 rounds the closing inequality is a
+finite numerical check on explicit rationals, and the first pass lands
+2% inside. Every prior round was short by a power of Y or exp(K). But:
+2% margins move under refereeing; the campaign's history demands the
+expectation of a defect. REFEREE PACKAGE: pair-counting theorem +
+drift-refined W + the two sharpenings + this assembly, as round 13.
