@@ -354,3 +354,37 @@ R(sigma) < p — verify no double-count issue since budgets are computed
 per scale independently); K3's chaining bookkeeping (horizontal hops
 between switch columns ride rows of the current corridor — enumerate the
 row-openness requirements); K4's seam/guard details (round-6 §8).
+
+## 15. K1 strengthened to POINTWISE; K4 completed via pin-cost dynamics
+
+**K1' (pointwise, no averaging).** For ANY sigma-band B and R = R(sigma)
+= 2*10^4 sigma log Y: K(B) <= sum_{m in B} omega_{>R}(m)/R <=
+sigma * 5 log Y/(R log R) = 1/(4000 log R) < (1/100)*threshold.
+EVERY band at EVERY scale is tame, deterministically. (The n/100 averaging
+bound of Sec. 14 was an under-claim.) Hence K2 supplies climb columns for
+every span sigma in every R(sigma)^5-column-interval, unconditionally —
+a UNIVERSAL climbing lemma: any vertical span sigma anywhere is climbable
+at R(sigma)-rough composite columns dense at spacing R(sigma)^5, sweeping
+arbitrary rows (column R-rough kills p <= R; killers p > R subtracted via
+K1'; hubs fine since column composite). Consistent with all known
+obstructions: palette walls block horizontal edges only; traps block
+short windows << R^5; the supply/diameter circularity binds horizontal
+gap-crossing only.
+
+**K4' (pin-cost dynamics).** Islands := maximal lane-runs with gaps <=
+Y^{0.2}/polylog; ~Y^{2.9}+ islands, initialized ALL held (left shaft).
+Per guarded window: (i) a lane fully dead for the window costs >= ~2 log Y
+of column mass; window budget (Y/30)(Y/2) => full-window-dead lanes <=
+Y^2/(120 log Y) << M; (ii) an island stays lost only if pinned (all lanes
+killed in EVERY window until re-entry); pin cost >= I*Y/90 mass/window =>
+<= 1.5Y/I islands pinnable concurrently, an o(1) fraction; (iii) re-entry:
+within-island refill per window (spans <= Y^{0.2}/polylog, K2), adjacent-
+island refill every ~Y^{eps} windows (spans ~Y^{0.2}), full-range climbs
+every ~Y^{20} columns (spans <= Y^4 deserts) — all within the Y^25 gap.
+Hence the held set stays >= (1-o(1))M through every window: GWT strong
+form. REFEREE TARGETS: the pin-cost constants ((i)-(ii): can the
+adversary kill a lane for a window with less than ~2 primes? staggered
+traps kill without per-column blocks — cost of a trap ~2 primes: same
+order, verify); island-local sieve thresholds (island-local Lemma H
+needs island extent >= Y^{2.1}; small islands rely on pin-cost only);
+seam bookkeeping (round-6 Sec. 8).
