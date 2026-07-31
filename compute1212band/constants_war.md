@@ -161,3 +161,47 @@ N(L) <= (sum log p - log L) / (sum (log p)/omega(p) - log L)
 which for omega ~ 6S << p can beat L^{1/2}-barriers. COMPUTE THIS FIRST
 next session — the larger sieve is precisely designed for few-admitted-
 residues and has no Q <= L^{1/2} wall.
+
+## Front B — LARGER SIEVE YIELDS (2026-07-31, continued)
+
+Gallagher's larger sieve has no sqrt(L) wall and fits our regime exactly
+(few admitted residues per prime). Two new certified-grade results:
+
+**B1 (base-point dispersion).** Chains of total range R0 admit base points
+e_1 lying in <= 3(2 R0 + 1) residues mod EACH of the K primes p_i in [Z,2Z].
+Gallagher: N <= (K log Z - log L)/(K log Z/(6R0+3) - log L). With
+K log Z ~ Z/(2 log Y) >> log L = 25 log Y (any L up to the full gap):
+  **N(candidate bases in the ENTIRE shaft gap) <= 6 R0 + O(1).**
+The chain space is pinned to polynomially-few explicit locations — the
+first dispersion statement of the campaign, from pure Gallagher, no
+exponential sums.
+
+**B2 (forced range).** omega_{>Z}(a(a+1)(a+2)) <= 3 log(2x)/log Z =
+0.6 Y/log Y, so ONE column blocks <= 0.6Y/log Y rails, but the chain must
+cut K ~ Y^{5/2-eta}/(4 log^2 Y) rails: it needs >= K log Y/(0.6Y) distinct
+event columns; combined with the certified per-window capacity
+(Y^2/(120 log Y) rails per Y/30-window), the chain needs
+>= 30 K·(120 log Y)/Y^2 windows, hence
+  **R0 >= Y^{3/2-eta}/polylog — vertical and short staircases are
+  IMPOSSIBLE; every staircase is LONG.**
+
+Composition: candidate bases <= 6 R0, and each candidate must satisfy K
+interface conditions along its explicit trajectory. The war's state after
+B1+B2: the staircase lives at >= Y^{3/2-eta}/polylog range, at <= 6 R0 + 3
+identifiable base locations, cutting >= Y^{3/2-eta} distinct columns, each
+column serving <= 0.6Y/log Y rails. REMAINING: kill the <= 6R0+3 candidates.
+Each candidate is an EXPLICIT CRT datum; killing needs per-candidate
+certificates that some interface has a climb (positive statement about
+specific windows — back to phase, but now at polynomially many locations
+instead of exponentially many patterns: the problem has been reduced from
+exponential to polynomial. A union bound over Y^{3/2} candidates now only
+needs per-candidate failure probability Y^{-3/2-} — i.e., ANY power-saving
+equidistribution of climb columns in the relevant windows suffices, where
+before we needed super-exponential. THE BAR HAS DROPPED FROM
+exp(-cK) TO Y^{-3/2}.)
+
+NEXT: per-candidate interface analysis — does the certified quadratic-
+latency machinery (or MV reduced-residue L^2, Front D) give a power-saving
+bound on the density of climb-free-aligned windows at a FIXED candidate
+trajectory? This is the sharpest, most winnable statement of the entire
+campaign.
