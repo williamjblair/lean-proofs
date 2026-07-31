@@ -139,3 +139,55 @@ tail via pointwise bounds and divisor counts); conclude
 $M_k\le(Ck\sigma^2)^{k/2}$ for $k\le\delta T/C$ by the standard
 cumulant-to-moment inequality. All four steps are standard-technique-shaped;
 the content is uniformity bookkeeping, no longer ideas.
+
+## 8. Session-final state (2026-07-30, night): the minorant reformulation
+
+Salvaged from a 30-minute deep-reasoning attempt (agent transcript mined;
+its response overflowed but the reasoning survived):
+
+- **(S1) Endgame robustness.** The Markov endgame closes for every α<1 even
+  with moment bounds as weak as $(Ck\log k\,\delta T)^{k/2}$ and with the
+  $k$-range shrunk by polylog factors. The route has slack; only genuine
+  structure can kill it.
+- **(S2) Absolute values lose.** The off-diagonal absolute mass is
+  $\asymp\delta^2T^2$: any argument that bounds the correlation sums in
+  absolute value overshoots by a factor $\delta T$. Signed cancellation
+  per divisor is mandatory.
+- **(S3) The exact-centering wall.** Decomposing $1_{\mathrm{rough}}$ into a
+  level-$D$ approximant plus sparse remainder forces
+  $\log D\asymp\log^2z/\log\log z$ (the remainder's $k$-norm is dominated by
+  its mean), shrinking $k$ by $\log z/\log\log z$ — survivable for the
+  endgame but ugly.
+- **(S4) Tree elimination.** Sequential variable elimination with
+  cancellation works exactly on tree-structured interaction hypergraphs;
+  cycles couple the eliminated factors. Trees must dominate by cycle
+  suppression ($1/p$ per independent cycle), not by elimination alone.
+
+**The reformulation that dissolves (S3).** Do not decompose
+$1_{\mathrm{rough}}$ at all. Use a Brun/Bonferroni **minorant** of bounded
+level: $\theta_m(n)=\sum_{d\mid(n,P),\,\omega(d)\le m}\mu(d)$ with $m$ odd
+satisfies $\theta_m\le1_{\mathrm{rough}}$ **pointwise** (verified: 0
+violations on $[2,2\times10^5]$ at $z=31,m=3$), has level $\le z^m$ and mean
+$\mu_\theta\ge c_m\,\delta$ with $c_3\approx0.58$ measured. Then
+$$N_T(x)=0\ \Longrightarrow\ N_{\theta}(x)\le0\ \Longrightarrow\
+|N_\theta(x)-\mu_\theta T|\ge\mu_\theta T,$$
+and Markov needs only the central moments of $N_\theta$ — a divisor sum of
+**bounded level $z^{O(1)}$**, fully localizable with the full $k$-range
+$k\asymp\varepsilon\log X/\log z$ (joint moduli $\le z^{mk}\le X^{1-\varepsilon}$).
+No exact centering, no sparse tail, no fundamental-lemma accuracy demand
+beyond "mean bounded below" ($m=3$ suffices).
+
+**Empirical calibration** ($z=31$, $T=62$, 4000 windows at $10^7$):
+$\sigma^2=9.4\approx\delta T=9.5$; $M_k/(2k\sigma^2)^{k/2}=0.25,\ 0.075,\
+0.037$ for $k=2,4,6$ — Gaussian with growing margin.
+
+**The one remaining estimate**, in final form: for $\theta=\theta_3$ (level
+$z^3$, coefficients $\mu(d)$, $\omega(d)\le3$),
+$$\frac1X\sum_{X<x\le2X}\Big(\sum_{i\le T}\theta(x+i)-\mu_\theta T\Big)^{k}
+\le(Ck\,\delta T)^{k/2},\qquad k\le\varepsilon\frac{\log X}{\log z},$$
+proved via the β-framework (§7) cluster expansion: single-prime vanishing
+kills unshared primes; local factors are exact; trees dominate by (S4) with
+cycles suppressed by $1/p$ per cycle; window-vs-period error is
+$O(z^{3k}/X)$ per configuration. This is a classical-type moment estimate
+for a bounded-level sieve sum — the last opening between here and
+Erdős #1212.
