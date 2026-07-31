@@ -123,3 +123,57 @@ multiplicity, no resource charging.
 Next action: attempt (i) — the second-moment bound on climb-free gaps — using
 the certified desert machinery. This is the first ASE route whose every
 ingredient is either already certified or a standard sieve second moment.
+
+## Ingredient (i) — climb-free gap tail: ESSENTIALLY CLOSED
+
+**Parameter check.** Need density of climb-free gaps > D to be <= 1/(6 delta p),
+p >= Z = Y^{5/2-eta}. Certified desert-counting Thm 3 gives density
+<= (1/D)(C log z/D)^k with z ~ (vertical gap) ~ log Y, valid when
+log X >= Ck(log 2T + log_2 3z)log(3kz). CRITICAL: X is the column MAGNITUDE
+~ e^{Y/2}, not the shaft-gap length; so log X = Y/2 while the requirement is
+~ C log Y log log Y. Needed k ~ (5/2)log Y/log log Y. Verified:
+  Y=1e6: log X = 5e5 vs condition 5.8e3 — SATISFIED, margin 86x
+  Y=1e8: log X = 5e7 vs condition 7.0e3 — SATISFIED, margin 7194x
+Margin grows like Y/(log Y log log Y). Ingredient (i) is available from
+already-certified machinery.
+
+**Surrogate confirmation** (3.4M gaps over 38 interfaces, Z=1200): mean gap
+14.1 (delta=0.071); P(gap>D) tracks exp(-delta D) within 0.7-1.2x out to
+D=140, with the expected Jacobsthal heavy tail appearing at the far end
+(4.2x at D=200) — precisely why the polynomial-of-arbitrary-order form of
+Thm 3 is needed rather than a geometric model. At the surrogate's own
+required D=122, observed P=2e-4 vs required 4.3e-4: satisfied, 2x margin
+(the surrogate has Z/G ~ 10 vs Y^{5/2}/polylog at true scale, so this is the
+hardest possible case).
+
+## Ingredient (iii) — assembly: BLOCKED, and the blocker is sharp
+
+Per-interface the count works: pairs (c,c') with c in B_i, c' in B_{i+1},
+|c-c'| <= D is a CRT lattice count over coprime moduli, ~ 72DL/(p_i p_{i+1}),
+giving q_i ~ 12D/p_{i+1} << 1 — provided L >= p_i p_{i+1} ~ Y^{5-2eta} (true
+for long shaft gaps; short gaps must be handled separately, and have few
+blocks anyway).
+
+The chain does NOT assemble by iterating this. Two failed routes, both
+recorded so they are not re-attempted:
+* **l1 contraction fails.** sum_{c'} v_{i+1}(c') = sum_c v_i(c)|B_{i+1} n J(c)|
+  needs the MAX continuation count, not the average; the weight v_i can
+  concentrate on the few c with continuations.
+* **Crude drift bound fails.** Treating the chain as congruence conditions on
+  c_1 with drift <= jD makes the j-th condition a window of size ~2jD mod
+  p_{j+1}; these go vacuous once jD > Z, i.e. after j ~ Z/D steps, while the
+  chain has K ~ Z/log Y > Z/D rows. The product of densities then exceeds 1
+  (it behaves like (2D/(e log Y))^K).
+
+**The residual analytic statement** is therefore: the chain positions
+equidistribute modulo the successive row primes. Precisely — for the chain
+c_1 -> ... -> c_j determined by primes p_1..p_j, the value c_j mod p_{j+1}
+should be equidistributed (p_{j+1} being a distinct prime, coprime to all
+data defining c_j except through the climb sets). This is a multi-dimensional
+equidistribution / exponential-sum statement over a drifting chain, NOT a
+resource count and NOT a single-modulus equidistribution.
+
+Status: the first-moment route is now reduced to exactly this one statement,
+with ingredient (i) supplied by certified machinery and the per-interface
+count elementary. This is the sharpest the problem has been, but it is not a
+proof, and the residual statement is genuinely hard.
