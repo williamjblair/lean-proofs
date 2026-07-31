@@ -339,3 +339,42 @@ with 2N rails: the trichotomy tightens by the pool/reservoir ratio. This
 is a FINITE combinatorial-arithmetic computation with no known obstruction
 — and it is not a per-integer counting argument (it counts over OUR
 choices, which no adversary controls).
+
+## Coverage computation (run 2026-07-31, session close)
+
+CORRECTION to the lever as first stated: coverage does NOT penalize
+omissions — a chain for R only needs R's rails, and wider interfaces have
+SPARSER climb sets (more coprimality), so smaller reservoirs are EASIER to
+separate. The naive subset-coverage factor is wrong-way. The averaging
+survives in pair form:
+
+**Pair-goodness computation.** Fix a candidate base (B1: <= 6R0 of them;
+events then RIGID — each pool rail has O(1) events, offsets between
+adjacent rails are FIXED integers). Pool-pair (i,i+1) is separator-good
+iff its offset lies inside a common climb-free gap (needs offset <= G_max
+~ polylog, or a rare long gap). A random N-of-2N reservoir R needs ALL
+N-1 consecutive pairs good: P_R[chain] <= gamma^{c N} where gamma = good-
+pair fraction at that base. If gamma <= 1 - delta for all bases:
+sum over bases of P < 6R0 (1-delta)^{cN} << 1 ==> some R staircase-free
+==> ASE ==> YES.
+
+**Counting gamma over the base family:** good-incidences summed over all
+bases and pairs: per pair, the offset condition pins the base mod p_i
+p_{i+1}: #good bases per pair <= O(1) + 6R0 * (G-measure)/Z^2 ~ O(1).
+Total <= 2N * O(1): average good-fraction per base ~ O(N/R0)/N = O(1/R0):
+by Markov, all but O(N) EXCEPTIONAL bases have gamma = o(1) — for the
+generic base the averaging CLOSES.
+
+**Residual after this computation: O(N) exceptional candidate bases** —
+those where the O(1)-per-pair floor concentrates. The exceptional set is
+POLYNOMIAL (was 6R0 ~ Y^{5/2}, now O(N) ~ Y^{5/2}/log^2... same scale but
+each exceptional base now carries a STRONG certificate: >= half its 2N
+pair-offsets lie in climb-free gaps — 2N simultaneous gap-coincidences at
+one base, vs the chain's N-1 before. The exclusion needed has grown
+STRICTLY harder for the adversary at every round of this cascade:
+all-K chain -> per-candidate power saving -> half-of-2N offset
+coincidences at O(N) explicit bases. Each cascade step is certified-grade;
+the coincidence class shrinks; the O(1)-floor scatters but persists.
+NEXT: iterate the cascade on the exceptional bases (their gap-coincidence
+structure is itself CRT-rigid — count ITS incidences), or hand the
+exceptional-base exclusion to the referee as the new minimal statement.
