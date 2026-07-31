@@ -299,3 +299,43 @@ This is a finite, explicitly-posed exponential-sum problem. NOTHING in the
 11-round record obstructs it: it is not a counting argument (it certifies
 cancellation, not cardinality), not dynamic, and phase-aware by nature —
 it IS the phase input, in provable form.
+
+## Completion argument: FIXED-reservoir form FAILS; the reservoir-averaging lever
+
+ATTEMPTED, honest verdict: for a FIXED reservoir the completion fails by
+(log)^K. Mechanism: the point set n(omega) is LINEAR in the residue vector,
+so the per-factor exponential sums S_i(h) = sum_{omega in Omega_i}
+e(h c_i omega / q_i) are GEOMETRIC series — L1-average over h_i is
+~ 9 log q_i, not q_i^{1/2}: no Weil cancellation exists at fixed moduli
+(the frequencies never involve inverses). Smoothed-window/Erdos-Turan
+completion gives error ~ L (C log Z)^{K/2} >> 1. The earlier "Weil gives
+Z^{-1/2} per test" claim was WRONG — the sums are geometric, not
+Kloosterman. Logged as the 13th refuted route (self-refuted).
+
+**THE LEVER (new, never used in 12 rounds): the existential quantifier
+over reservoirs.** ASE/YES needs only: THERE EXISTS a reservoir R with no
+staircase. Average the staircase count over an explicit finite family of
+reservoir choices (which rails to include; which p-window; we have
+exponentially many valid choices, each certified to support the whole
+chain):
+  E_R[N_full(R)] < 1  ==>  some R is staircase-free  ==>  ASE(R) ==> YES.
+The average interchanges to a count over chain-data of how many reservoirs
+each chain serves — and HERE the Kloosterman/BFI structure genuinely
+enters: varying the moduli q_i varies the CRT coefficients c_i through
+modular INVERSES of the co-moduli — the exact mechanism (averaging over
+factorable moduli) that powers BFI dispersion. Additionally: a chain valid
+for R must cut EVERY rail of R; a chain-datum serves only reservoirs whose
+rail set is entirely covered by the chain's cut structure — inclusion is
+exponentially restrictive per omitted rail.
+NEXT (the decisive computation): (1) define the reservoir family cleanly
+(e.g. all subsets of size N of a 2N-rail pool, or independent p-window
+shifts); (2) compute E_R[N_full] = sum over chain-data of
+P_R[chain covers R]; (3) the coverage probability for the subset family is
+<= 2^{-(rails omitted by the chain)} — chains must be SUPERSETS of R's
+cuts: a chain of K' cut-events covers a random N-of-2N reservoir with
+probability <= (K'/2N choose N)-type factors: superexponentially small
+unless K' ~ 2N — forcing chains to cut the WHOLE POOL, re-entering B2/B3
+with 2N rails: the trichotomy tightens by the pool/reservoir ratio. This
+is a FINITE combinatorial-arithmetic computation with no known obstruction
+— and it is not a per-integer counting argument (it counts over OUR
+choices, which no adversary controls).
