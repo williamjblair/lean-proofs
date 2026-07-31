@@ -388,3 +388,23 @@ traps kill without per-column blocks — cost of a trap ~2 primes: same
 order, verify); island-local sieve thresholds (island-local Lemma H
 needs island extent >= Y^{2.1}; small islands rely on pin-cost only);
 seam bookkeeping (round-6 Sec. 8).
+
+## 16. Final self-referee pass (corrections to §15, conclusions intact)
+
+(1) K1' re-verified airtight: K(B) <= sigma*(5 log Y/log R)/R =
+1/(4000 log R) < threshold/100, pure omega-counting, rows <= 3Y^5. The
+linchpin holds; no attack found.
+(2) CORRECTED dead-lane count: incidences (prime > Y, multiple in W) number
+<= sum_{n in W} omega_{>Y}(n) <= Y^2/(60 log Y); each dead lane needs >= 1
+(shared rows: k consecutive dead lanes need >= k+1 hit rows). Dead lanes
+per window <= Y^2/(60 log Y) [was: /120] — still << M = Y^5/(10 log Y).
+(3) CORRECTED pin capacity: pinning an island of I lanes costs >=
+(I+1) log Y mass per window; budget Y^2/60 => concurrently pinnable
+islands <= Y^2/(120 (I+1) log^2...) — total pinned LANES <= Y^2/(120 log Y)
+regardless of island structure [was: 1.5Y/I islands]. Fraction o(M) ✓.
+Islands with I >= Y/60 are unpinnable outright. Trap cost verified >= 2
+prime incidences (small-prime climb-desert is positional, not mass —
+Prop-6 traps confirmed to cost the same 2 incidences).
+(4) Remaining non-self-checkable: seam/guard formalization (round-6 §8)
+and independent review of (2)-(3). Confidence: K1'/K2 — full; K3 — full
+(trivial given K1'); K4' — high, single-author.
