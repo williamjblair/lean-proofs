@@ -413,3 +413,34 @@ it would be an extremal configuration for Gallagher — and inverse theorems
 say extremal sets have rigid multiplicative structure that can be tested
 against the DEFINING congruences (which use DIFFERENT primes). This is the
 first route where the literature has theorems ABOUT our exact obstruction.
+
+## Inverse larger sieve attack on CD (2026-07-31): CD PROVED outside a polylog band
+
+**The pair-counting theorem (certified-grade, three lines).** The pair
+moduli q_i = p_i p_{i+1} ~ Z^2 are pairwise coprime, so any nonzero
+difference d = s - s' with |d| <= L = Y^25 is divisible by at most
+m <= log L/log(Z^2) = 25/(5-2eta) <= 6 of them. Hence for ANY set S in a
+length-L window: Sigma_i #{(s,s') in S^2, s != s', q_i | s-s'} <= 6|S|^2.
+If S concentrates (half of S in <= W classes mod q_i) at >= (1-eps)K/2
+pairs, Cauchy-Schwarz gives the same sum >= (K/2)(|S|^2/(4W) - |S|):
+CONTRADICTION whenever |S| >= 8W and K > 48W.
+**Corollary (CD, lower-middle range).** With the honest aligned-class
+count W ~ 9 R0 * (mean gap) ~ R0 polylog (from Sigma|J|^2 over climb-free
+gaps — ingredient (i) supplies the tail): CD HOLDS for all
+R0 <= K/(48 polylog), i.e. the entire lower-middle range. First certified
+dispersion statement of the campaign; the concentration obstruction is
+dead there.
+
+**The residual territory.** B2 kills R0 < Y^{3/2-eta}/polylog. CD now
+covers up to K/polylog_1. B3 kills R0 >= K polylog_2. REMAINING: the
+critical band R0/K in [1/polylog_1, polylog_2] — mean drift comparable to
+mean climb-free gap. The O(1)-floor, conserved through 15 rounds, is now
+COMPRESSED INTO A POLYLOG-WIDE BAND of ranges. Inside the band the war is
+pure constants: Sigma|J|^2 vs (Sigma|J|)^2/count (Poisson factor-2 games,
+certified tail vs mean), the divisor constant 25/(5-2eta), the
+Cauchy-Schwarz 1/4, and the B3 averaging constant. Sharpening any of
+these by the polylog margin closes the band and with it ASE and #1212.
+NEXT: exact second-moment computation of climb-free gap lengths in the
+critical band (the certified desert machinery gives the tail; the mean is
+measured; the variance constant is the battle), and re-run B3's averaging
+with drift-distribution refinement inside the band.
