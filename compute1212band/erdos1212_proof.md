@@ -252,3 +252,37 @@ Hence u and v lie in one component of H_Y[u, v]. ∎ (modulo referee)
 
 With SGC: tier-1 percolation across every dyadic range; the ratchet (§10
 of round 5) glues scales; SCH' follows; Theorem D gives YES.
+
+## 12. Round 6: §11 RETRACTED — the open core is GWT
+
+The SGC proof of §11 is WRONG, two ways (GPT Pro round 6, verified):
+(A) trap capacity Y^2/log Y is invalid — a single prime p ~ Y divides
+>> Y^4/log Y tier-1 rows (lower bound by the linear sieve on cofactors),
+so one prime occurrence in a window can participate in ~M/Y lane
+obstructions, and summing over P(W) gives nothing below M; (D) the strand
+induction fails even granting (A): strands may have O(1) size (every 25th
+interface untame) and be killed strand-per-window far below any global
+capacity; full shafts permit repeated attempts, not splicing of partial
+crossings. Components (B)/(C) survive in corrected form (their (25)):
+>= 96% of a bounded-overlap interface family has a switch in every
+R^5 = O(log^5 Y)-interval, R = 32d.
+
+CERTIFIED STACK (rounds 1-6, all independently refereed): reduction; P1
+supply (c=1/10, C=12, explicit z_0); Lemma S sidesteps (>=96% tame,
+position-uniform); Lemma H hostile-column immunity (uniform in a <= 2x);
+palette-wall analysis (walls real at height <= log^2 x, absent at tier-1
+heights); shaft supply and attachment (Q = 3Y^5, 50(L/Y+1)); ratchet
+overlap; interface switch theory (25). OPEN: exactly one statement —
+
+**GWT (guarded window-transfer).** For guarded tier-1 windows W_j and
+reachable lane-state sets S with |S| >= eta*M: |T_j(S)| >= eta*M,
+uniformly in position. GWT => SGC => percolation => SCH' => Theorem D
+=> YES.
+
+This is the same statement every route has terminated at (expansion
+|N(S)| >= (1+kappa)|S| in round 1; RSS/USE in round 4; SGC in round 5) —
+now in its sharpest form: a deterministic, time-respecting min-cut bound
+for the adaptively reached set, immune to first moments in both
+directions (column mass: round 6 §2-3; interface tameness: round 6 §6;
+short-interval CRT localization fails by Bonferroni saturation). Honest
+assessment: this is a genuine research-level open lemma, not bookkeeping.
