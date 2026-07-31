@@ -309,3 +309,48 @@ a higher-scale switch column — the state's continent must survive the
 wait; (c) the Lemma-E cap must be proved at every dyadic scale with
 uniform constants (only sigma-band averages proved so far). If (a)-(c)
 close, GWT follows, and the chain completes the YES resolution.
+
+## 14. GWT: the prime-size decoupling (proposed proof, 2026-07-31)
+
+**Scale-filtered cutoffs.** For a climb of span sigma, use climb columns
+that are R(sigma)-rough composites, R(sigma) := 2*10^4 * sigma * log Y.
+Such a column is AUTOMATICALLY immune to every prime <= R(sigma): the only
+killers for scale-sigma climbing are primes > R(sigma) dividing the range.
+
+**(K1) 1%-untameness at every scale, in every stretch (pure counting).**
+A sigma-band is sigma-untame if its killer sum at cutoff R(sigma) exceeds
+1/(40 log R). Per row-integer m <= 3Y^5: omega_{>R}(m) <= 5 log Y/log R
+(trivial), so Sigma 1/p <= 5 log Y/(R log R) per integer. A stretch of n
+sigma-bands carries scale-sigma-relevant mass <= n*sigma*5 log Y/(R log R);
+each untame band needs >= 1/(40 log R); hence
+#untame <= 200*n*sigma*log Y/R = n/100.
+NO equidistribution, no sieve: at every scale, >= 99% of bands are tame in
+EVERY stretch of >= C bands — untame runs are O(1) bands. Walls, barriers,
+corridors do not exist. This is why rounds 1-6 kept finding barriers: a
+single cutoff for all scales conflates small-prime mass (irrelevant to
+coarse climbs) with the true scale-sigma killers.
+
+**(K2) Tame-band switches (round-6 (25) verbatim per scale).** P1 at level
+R(sigma) gives >= 0.1 R^5/log R candidates per R^5-column-window; killed
+<= R^5/(40 log R) + o(.); docking O(1): survivors > 0. Valid for all
+sigma <= Y^{1/5}/(2*10^4 log Y) within a single guarded window; larger
+sigma up the gap.
+
+**(K3) Everywhere-vertical mobility.** By K1, any height-interval is
+climbable by chains of sigma-climbs with O(1)-band detours around untame
+bands (detour at scale 2 sigma, also 99% tame; nested detours converge
+geometrically). By K2 the needed switch columns exist within every guarded
+window at all scales <= Y^{1/5}/polylog.
+
+**(K4) GWT.** At every column, Lemma H (certified) keeps a (1-o(1))-
+fraction of lanes open; by K3 the reachable state refills across heights
+within each guarded window; hence |T_j(S)| >= (1-o(1))M for any nonempty
+S. GWT follows in the strong form, SGC follows, tier-1 percolation,
+SCH', Theorem D: YES.
+
+REFEREE TARGETS: K1's per-band accounting (mass concentration across
+scales double-spend? each prime p contributes to ALL scales with
+R(sigma) < p — verify no double-count issue since budgets are computed
+per scale independently); K3's chaining bookkeeping (horizontal hops
+between switch columns ride rows of the current corridor — enumerate the
+row-openness requirements); K4's seam/guard details (round-6 §8).
