@@ -70,3 +70,56 @@ repeatedly found room.
 
 Opened. No results yet. Prior probability of success unclear — this is the first
 attack aimed at the actual difficulty rather than around it.
+
+## MEASUREMENT RESULTS (2026-07-31) — ASE strongly supported; route (B) sharpened
+
+Surrogate: semiprime reservoir rows (both factors >= Z) in a height window of
+length Z at height ~1e9, exact block sets, exact dockable-climb sets, exact
+reachability DP over the dual-staircase condition. Boundary convention generous
+to the adversary. Columns [1e7, 1.4e7].
+
+  Z     K    q_mean   q_max   mean climb-free gap  median p   log E[#staircases]
+  300   27   0.0166   0.121   12.3                 4889       -1489
+  600   23   0.0078   0.032   13.2                 5930       -1477
+  1200  39   0.0082   0.032   14.1                 5345       -2241
+  2400  59   0.0060   0.031   16.0                 6911       -5779
+  4800  83   0.0045   0.021   18.5                 12603      -10712
+
+Findings:
+1. Direct DP: staircases die at depth 2 of up to 83 rows. No staircase exists
+   at any tested parameter.
+2. The per-interface survival probability obeys the predicted law
+   q ~ (mean climb-free gap) * 6 / p_min, measured within a factor <= 2 of
+   prediction at every Z. MECHANISM CONFIRMED.
+3. Scaling is decisive: log E[#staircases] = log|B_1| + sum_i log q_i grows more
+   negative with Z (-1489 -> -10712). At true scale p >= Z = Y^{5/2-eta} while
+   climb-free gaps stay polylog, and K ~ Z/log Y, so the first moment is
+   super-exponentially small.
+
+**Why this is not another dead resource count.** Rounds 6/8/10 refuted arguments
+that charge the adversary's *resources* (mass, prime occurrences, events). This
+is a first moment over the *configuration space of staircases*, a different
+object. Its key input is that consecutive reservoir rows have COPRIME moduli
+(factor-disjointness), so the continuation condition at each interface is a
+pair-correlation between two AP families with coprime moduli:
+
+  #continuable pairs = #{(c,c'): c = block of row i, c' = block of row i+1,
+                         |c - c'| <= |climb-free interval|}
+                     ~ L * (6/p_i)(6/p_{i+1}) * 2G  by CRT,
+
+giving q_i ~ 12G/p_{i+1} << 1 — elementary lattice-point counting, no sieve
+multiplicity, no resource charging.
+
+**Remaining ingredients for a proof (the sharpest the campaign has been):**
+(i) Replace the fixed G by the actual climb-free interval lengths: need
+    sum_J |J|^2 over climb-free intervals J, i.e. a SECOND MOMENT on
+    climb-free gaps. The certified desert-counting theorem (Thm 3) is exactly
+    the tool for this; block-sparsity gives |B ∩ J| <= 6|J|/Z + 6.
+(ii) Make the CRT pair count uniform over interfaces and rigorous with the
+    O(1) endpoint terms.
+(iii) Sum over the K interfaces and conclude E[#staircases] < 1, hence NO
+    staircase, hence ASE, hence #1212 = YES.
+
+Next action: attempt (i) — the second-moment bound on climb-free gaps — using
+the certified desert machinery. This is the first ASE route whose every
+ingredient is either already certified or a standard sieve second moment.
