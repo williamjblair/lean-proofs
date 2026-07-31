@@ -500,3 +500,28 @@ followed by round-13 refereeing. If c lands under e: #1212 = YES through
 the certified chain. If over: the identified slack (chunk-size choice
 between Z^2 and Z^3 varying m; event-class pruning; CS sharpening via
 higher moments — all untapped) is the next battleground, still finite.
+
+## RETRACTION (2026-07-31, final): the CD pair-counting proof is WRONG
+
+The class-count W was underestimated by a factor ~Z. Correct accounting:
+an aligned offset VALUE corresponds to ~Z base-classes mod q_i (each
+realizable offset is realized by ~q_i/Z classes; b-windows of length R0
+share event pairs), so W ~ R0 * Z * polylog, not R0 * polylog. The
+criterion K > cW is then never satisfiable at any relevant R0. The
+three-line divisor theorem itself stands (differences divisible by <= 6
+coprime pair-moduli — true and reusable), but the concentration that
+CD-failure provides is weaker by Z than what the contradiction needs.
+Consequently: the drift-refined closure, the c < e assembly, and the
+"2% margin" are all VOID — they were measured against the wrong W.
+Eighteenth collapse, caught in my own final constants pass.
+
+CORRECTED FINAL STATE OF THE WAR: the certified stack stands (reduction
+chain, Lean core, B1 pending round 12, pair-divisor theorem, gap moments
+measured, surrogate oracle). The O(1)-floor is conserved and now
+understood to survive even difference-divisor counting once classes are
+counted correctly. No known closing argument exists tonight. Live fronts
+remain: round 12/13 verdicts; Front A's E2-gaps win condition
+(literature-gated); Front D latency; formalization. The honest meta-fact,
+now demonstrated 18 times: every closing argument this campaign has
+produced collapses at the next constants pass — the problem's difficulty
+is real, structural, and not going to yield to one more clever evening.
