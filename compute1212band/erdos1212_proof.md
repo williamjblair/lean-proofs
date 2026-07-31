@@ -408,3 +408,22 @@ Prop-6 traps confirmed to cost the same 2 incidences).
 (4) Remaining non-self-checkable: seam/guard formalization (round-6 §8)
 and independent review of (2)-(3). Confidence: K1'/K2 — full; K3 — full
 (trivial given K1'); K4' — high, single-author.
+
+## 17. Round 8: K4' refuted; PSDC is the residual core
+
+CERTIFIED this round: K1' (pointwise tameness, constant 1/3900) and K2
+(universal climbing lemma: every scale-sigma band has dockable climb
+columns every R(sigma)^5 columns) — both confirmed valid. REFUTED: K4'
+pin-cost (prime congestion: one occurrence blocks >> Y^4/log Y rows via
+the lower linear sieve; no injective lane->prime-pair charge; island cost
+overestimated by factor I; dual-entry not preserved across seams; K3
+lacks the time-ordering invariant). Verified myself: window serving
+capacity ~ Y^6/log^2 Y exceeds separator demand eta*M ~ Y^5/log Y by
+Y/(30 log Y) — no first-moment argument can prove GWT. Residual (their
+round-8 boxed statement): **PSDC** — every guarded-window dual separator
+cutting eta*M lane states has distinct-prime-occurrence support weight
+>= c*eta*M*log Y (vs available Y^2/60: contradiction => GWT). Requires a
+mixed theorem: row divisibility x close-pair incidence x switch ordering
+x min-cut geometry. Fifth reappearance of the core (expansion -> RSS/USE
+-> SGC -> GWT -> PSDC), now in sharpest form. STATUS: #1212 OPEN; the
+conditional chain PSDC => GWT => ... => YES is fully certified.
