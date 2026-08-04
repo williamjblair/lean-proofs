@@ -137,7 +137,7 @@
       "faithfulness": {
         "status": "no-fc-statement",
         "definitions_compared": [],
-        "note": "Formal Conjectures has no statement for this problem, so there is nothing to compare against. The proof gate applies; the faithfulness gate needs an FC statement written first."
+        "note": "Formal Conjectures has no statement for this problem, so there is nothing to compare against. The proof gate applies; the faithfulness gate needs an FC statement written first. The distributed bundle ships Research/*.lean with no root module, so a generated Research.lean importing all 191 modules is added here."
       }
     },
     {
