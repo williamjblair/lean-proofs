@@ -18,8 +18,11 @@ ErdosProblems/Erdos730*.lean   Erdős #730: infinitely many consecutive central
 ErdosProblems/Erdos154*.lean   Erdős #154: Sidon sumset equidistribution (proved)
 compute730/                    exact-arithmetic provenance for the #730 proof
 Audit.lean                     #print axioms for the proof targets
+starfleet/                     third-party proofs by Star Fleet Math (Colin Snyder),
+                               13 self-contained lake projects on their own Lean pin
 proofs.yaml                    machine-readable index (consumed by erdos-fc-sync)
 scripts/check_axioms.sh        the verification gate
+NOTICE                         third-party material and its terms
 ```
 
 This repo hosts only **solved** problems with complete, kernel-clean proofs. The

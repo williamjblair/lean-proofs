@@ -1,0 +1,34 @@
+NOTICE
+
+This repository is MIT licensed (see LICENSE), Copyright (c) 2026 Will Blair.
+That grant covers the material authored here. It does not cover the third-party
+material listed below, which remains the property of its authors.
+
+
+starfleet/
+----------
+
+The Lean 4 sources under `starfleet/` were written by Colin Snyder
+(Star Fleet Math, https://starfleetmath.com). They are not this repository's
+work and are not covered by the MIT licence above. Copyright remains with the
+author.
+
+They are hosted here with the author's permission, so that Formal Conjectures
+can point `formal_proof` links at a pinned, CI-audited copy at a stable path.
+The author has confirmed the solutions are intended to be open for the
+community, and is adding a licence to his own solution bundles; when that
+licence is published it governs these files and this section should point at
+it.
+
+Each project under `starfleet/erdos-<N>/` is built and axiom-audited by
+`.github/workflows/starfleet.yml`. Per-problem attribution and verdicts are in
+`starfleet/README.md` and `starfleet/VERDICTS.md`, and in `proofs.yaml` under
+`source: starfleetmath`.
+
+
+Problem statements
+------------------
+
+Problem statements and commentary quoted in docstrings and in `proofs.yaml`
+(`source: erdosproblems`) are from https://www.erdosproblems.com, maintained by
+Thomas Bloom, and are used for identification and reference.
