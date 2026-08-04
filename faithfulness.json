@@ -93,6 +93,38 @@
       }
     },
     {
+      "problem": 320,
+      "source_class": "full",
+      "project": "starfleet/erdos-320",
+      "terminal_theorem": "ResearchPNT.exists_two_sided_full_product_estimate",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": null,
+        "pr": null
+      },
+      "faithfulness": {
+        "status": "no-fc-statement",
+        "definitions_compared": [],
+        "note": "Formal Conjectures has no statement for this problem, so there is nothing to compare against. Mirrored with upstream PrimeNumberTheoremAnd @ a7eb3a8 substituted for the vendored copy the bundle ships, following erdos-796."
+      }
+    },
+    {
+      "problem": 321,
+      "source_class": "full",
+      "project": "starfleet/erdos-321",
+      "terminal_theorem": "Erdos321.erdos321_asymptotic",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_321 (and .variants.isTheta, .variants.isBigO)",
+        "pr": null
+      },
+      "faithfulness": {
+        "status": "unchecked",
+        "definitions_compared": [],
+        "note": "Formal Conjectures does have a statement (`erdos_321`, all `research open`), but the two sides share no definition names, so faithfulness_diff.py cannot help and the statements need comparing directly. Not done yet. Mirrored with upstream PrimeNumberTheoremAnd @ a7eb3a8 substituted for the vendored copy, following erdos-796."
+      }
+    },
+    {
       "problem": 336,
       "source_class": "full",
       "project": "starfleet/erdos-336",
