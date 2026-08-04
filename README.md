@@ -19,7 +19,7 @@ ErdosProblems/Erdos154*.lean   Erdős #154: Sidon sumset equidistribution (prove
 compute730/                    exact-arithmetic provenance for the #730 proof
 Audit.lean                     #print axioms for the proof targets
 starfleet/                     third-party proofs by Star Fleet Math (Colin Snyder),
-                               16 self-contained lake projects on their own Lean pin
+                               18 self-contained lake projects on their own Lean pin
 proofs.yaml                    machine-readable index (consumed by erdos-fc-sync)
 scripts/check_axioms.sh        the verification gate
 NOTICE                         third-party material and its terms

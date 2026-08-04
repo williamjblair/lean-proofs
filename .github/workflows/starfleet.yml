@@ -50,6 +50,41 @@ jobs:
           lake build
           bash "$GITHUB_WORKSPACE/starfleet/scripts/check_axioms.sh"
 
+  # 320 and 321 vendor PrimeNumberTheoremAnd in the distributed bundle; both are
+  # mirrored with upstream PNT @ a7eb3a8 substituted in, so they share 796's
+  # uncached graph and build from source too.
+  verify-320:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Build (committed manifest, no update) and audit
+        run: |
+          cd starfleet/erdos-320
+          for i in 1 2 3; do lake exe cache get && break; sleep 15; done
+          lake build
+          bash "$GITHUB_WORKSPACE/starfleet/scripts/check_axioms.sh"
+
+  verify-321:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Build (committed manifest, no update) and audit
+        run: |
+          cd starfleet/erdos-321
+          for i in 1 2 3; do lake exe cache get && break; sleep 15; done
+          lake build
+          bash "$GITHUB_WORKSPACE/starfleet/scripts/check_axioms.sh"
+
   # 959 also depends on PrimeNumberTheoremAnd (substituted @ a7eb3a8) and shares
   # 796's uncached dependency graph, so it builds from source the same way.
   verify-959:

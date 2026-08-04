@@ -2,9 +2,9 @@
 
 Lean 4 proofs from **Star Fleet Math** (Colin Snyder, starfleetmath.com),
 hosted here as `formal_proof` targets for Formal Conjectures. Each is a claimed
-resolution of an **open** Erdős problem. All 16 are rebuilt on CI against their
+resolution of an **open** Erdős problem. All 18 are rebuilt on CI against their
 pinned Mathlib and read for faithfulness before being added:
-123, 130, 254, 267, 336, 394, 450, 489, 521, 522, 538, 662, 769, 796, 959, 1188.
+123, 130, 254, 267, 320, 321, 336, 394, 450, 489, 521, 522, 538, 662, 769, 796, 959, 1188.
 
 These are **not** this repo's own work. See `proofs.yaml` (`source: starfleetmath`)
 for attribution and `NOTICE` for terms; they are hosted here with the author's
