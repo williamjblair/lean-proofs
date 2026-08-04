@@ -1,0 +1,340 @@
+{
+  "schema": "lean-proofs.faithfulness.v0.1",
+  "about": "Per-problem record of the two gates. The proof gate is machine-checked by CI. The faithfulness gate is a human reading of the Lean statement against the informal problem, and cannot be automated away: a clean axiom audit says the theorem is proved, not that the theorem is the problem.",
+  "gates": {
+    "proof": "CI (starfleet/scripts/check_axioms.sh): project builds against its pinned Mathlib and the terminal theorem's `#print axioms` is a subset of [propext, Classical.choice, Quot.sound].",
+    "faithfulness": "Manual: the hosted statement is unfolded through any named Prop and compared definition by definition against the Formal Conjectures statement it is linked from. Statuses: match, match-with-note, unchecked, blocked."
+  },
+  "source": "starfleetmath",
+  "entries": [
+    {
+      "problem": 123,
+      "source_class": "full",
+      "project": "starfleet/erdos-123",
+      "terminal_theorem": "Erdos123.erdos_123",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_123",
+        "pr": null
+      },
+      "faithfulness": {
+        "status": "unchecked",
+        "definitions_compared": [],
+        "note": "Mirrored, not yet compared against FC's `erdos_123` (which already carries a plby link)."
+      }
+    },
+    {
+      "problem": 130,
+      "source_class": "partial",
+      "project": "starfleet/erdos-130",
+      "terminal_theorem": "Erdos130.InfiniteAssembly.erdos130_infinite_chromatic_solution",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_130",
+        "pr": 4578
+      },
+      "faithfulness": {
+        "status": "match",
+        "definitions_compared": [
+          "Point",
+          "sqDist",
+          "Collinear",
+          "Concyclic4",
+          "GeneralPosition",
+          "Adjacent",
+          "HasKColoring"
+        ],
+        "note": "Statement is the RHS of FC's verbatim; all 7 supporting definitions identical."
+      }
+    },
+    {
+      "problem": 254,
+      "source_class": "full",
+      "project": "starfleet/erdos-254",
+      "terminal_theorem": "Erdos254.erdos_254",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_254",
+        "pr": 4578
+      },
+      "faithfulness": {
+        "status": "match-with-note",
+        "definitions_compared": [
+          "IsSumOfDistinct/IsComplete",
+          "phasePartialSum"
+        ],
+        "note": "Hypothesis stated as divergent partial sums where FC has `¬ Summable` over the subtype. Bridged by `not_summable_subtype_iff_tendsto_sum_indicator` (ForMathlib) and instantiated in 254."
+      }
+    },
+    {
+      "problem": 267,
+      "source_class": "full",
+      "project": "starfleet/erdos-267",
+      "terminal_theorem": "Research.erdos_problem_267",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_267",
+        "pr": 4578
+      },
+      "faithfulness": {
+        "status": "match-with-note",
+        "definitions_compared": [
+          "reciprocalFibSeries",
+          "HasRatioGap"
+        ],
+        "note": "Hosted carries an explicit `0 < n k` that FC omits. FC does not need it: `n 0 = 0` makes the ratio hypothesis read `c <= n 1 / 0 = 0` against `c > 1`."
+      }
+    },
+    {
+      "problem": 336,
+      "source_class": "full",
+      "project": "starfleet/erdos-336",
+      "terminal_theorem": "Erdos336.problem336",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": null,
+        "pr": null
+      },
+      "faithfulness": {
+        "status": "unchecked",
+        "definitions_compared": [],
+        "note": "Mirrored, no FC statement yet."
+      }
+    },
+    {
+      "problem": 394,
+      "source_class": "full",
+      "project": "starfleet/erdos-394",
+      "terminal_theorem": "Research.erdos394_first_question_proved",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_394.parts.i, erdos_394.parts.ii",
+        "pr": 4578
+      },
+      "faithfulness": {
+        "status": "match",
+        "definitions_compared": [
+          "t",
+          "Tsum",
+          "FirstQuestion",
+          "SecondQuestion"
+        ],
+        "note": "`Tsum k x` unfolds to FC's inlined sum; `t` identical on both sides. Covers both parts."
+      }
+    },
+    {
+      "problem": 450,
+      "source_class": "full",
+      "project": "starfleet/erdos-450",
+      "terminal_theorem": "Erdos450.turanLinearAnswer_isSufficientScale",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_450.linear_scale_suffices",
+        "pr": 4588
+      },
+      "faithfulness": {
+        "status": "match",
+        "definitions_compared": [
+          "HasMediumDivisor",
+          "localCount",
+          "UniformlySparse",
+          "IsSufficientScale"
+        ],
+        "note": "FC inlines `localCount`; hosted routes via `badIntegers`, which unfolds to the same filter."
+      }
+    },
+    {
+      "problem": 489,
+      "source_class": "full",
+      "project": "starfleet/erdos-489",
+      "terminal_theorem": "Erdos489.erdos489_statement",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_489",
+        "pr": 4578
+      },
+      "faithfulness": {
+        "status": "match",
+        "definitions_compared": [
+          "sievedSet",
+          "GapSumSq/gapSumSq"
+        ],
+        "note": "`sum over range k` vs `sum over i < k` are the same; statements match."
+      }
+    },
+    {
+      "problem": 521,
+      "source_class": "prior-result",
+      "project": "starfleet/erdos-521",
+      "terminal_theorem": "Erdos521.erdos_521_negative",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_521",
+        "pr": 4578
+      },
+      "faithfulness": {
+        "status": "match-with-note",
+        "definitions_compared": [
+          "sign",
+          "fairCoin",
+          "rademacherMeasure",
+          "littlewoodPolynomial",
+          "realRootCount",
+          "Claim"
+        ],
+        "note": "`fairCoin` differs in form: hosted `bernoulliMeasure true false half`, FC `(2:ENNReal)^{-1} * (dirac true + dirac false)`. `bernoulliMeasure` is absent from FC's Mathlib, so `fairCoin_apply` and `fairCoin_isProbabilityMeasure` pin FC's to mass 1/2 on each sign."
+      }
+    },
+    {
+      "problem": 522,
+      "source_class": "prior-result",
+      "project": "starfleet/erdos-522",
+      "terminal_theorem": "Erdos522.erdos_522",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_522",
+        "pr": null
+      },
+      "faithfulness": {
+        "status": "blocked",
+        "definitions_compared": [],
+        "note": "FC's `erdos_522` quantifies over `KacCoefficients` whose `h_unif` uses the defaulted `volume` on a two-point subset of C, which nothing measurable satisfies. See google-deepmind/formal-conjectures#4386. Not linkable until fixed."
+      }
+    },
+    {
+      "problem": 538,
+      "source_class": "full",
+      "project": "starfleet/erdos-538",
+      "terminal_theorem": "Erdos538.erdos538_matching_order",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_538.matching_order",
+        "pr": 4588
+      },
+      "faithfulness": {
+        "status": "match",
+        "definitions_compared": [
+          "representations",
+          "Admissible",
+          "reciprocalMass"
+        ],
+        "note": "`x^s` vs `.product` is notation for the same operation."
+      }
+    },
+    {
+      "problem": 662,
+      "source_class": "full",
+      "project": "starfleet/erdos-662",
+      "terminal_theorem": "Research.triangular_shell_six_global_average_reading_false",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": null,
+        "pr": null
+      },
+      "faithfulness": {
+        "status": "unchecked",
+        "definitions_compared": [],
+        "note": "Mirrored from entry F-026, which supersedes F-025. No FC statement yet."
+      }
+    },
+    {
+      "problem": 769,
+      "source_class": "partial",
+      "project": "starfleet/erdos-769",
+      "terminal_theorem": "Erdos769.erdos769_lower_bound_false",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_769",
+        "pr": 4578
+      },
+      "faithfulness": {
+        "status": "match",
+        "definitions_compared": [
+          "Cube",
+          "Cube.Mem",
+          "InUnit",
+          "Cube.InsideUnit",
+          "IsTiling",
+          "Admissible",
+          "IsCutoff",
+          "Erdos769LowerBound"
+        ],
+        "note": "All 8 definitions identical to FC's."
+      }
+    },
+    {
+      "problem": 796,
+      "source_class": "full",
+      "project": "starfleet/erdos-796",
+      "terminal_theorem": "Erdos796.erdos796_statement",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_796",
+        "pr": 4578
+      },
+      "faithfulness": {
+        "status": "match",
+        "definitions_compared": [
+          "repCount",
+          "HasRepBound",
+          "g",
+          "normalizedError",
+          "Statement"
+        ],
+        "note": "`g` differs only by eta (`Finset.card` vs `fun A => A.card`)."
+      }
+    },
+    {
+      "problem": 959,
+      "source_class": "partial",
+      "project": "starfleet/erdos-959",
+      "terminal_theorem": "Erdos959.erdos959_superlinear_lower_bound",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_959.lower_bound",
+        "pr": 4588
+      },
+      "faithfulness": {
+        "status": "match",
+        "definitions_compared": [
+          "Point",
+          "sqDist",
+          "indexPairs",
+          "distanceValues",
+          "frequency",
+          "runnerUpFrequency",
+          "multiplicityGap",
+          "Admissible",
+          "AttainableGap",
+          "extremalGap"
+        ],
+        "note": "All 10 definitions identical to FC's."
+      }
+    },
+    {
+      "problem": 1188,
+      "source_class": "full",
+      "project": "starfleet/erdos-1188",
+      "terminal_theorem": "Research.erdos1188_loglog_ratio_tendsto_one",
+      "proof_gate": "ci",
+      "formal_conjectures": {
+        "theorem": "erdos_1188",
+        "pr": 4578
+      },
+      "faithfulness": {
+        "status": "match",
+        "definitions_compared": [
+          "CongruenceClass",
+          "ValidClass",
+          "Satisfies",
+          "Covers",
+          "HasDistinctModuli",
+          "IsMinimalDistinctCoveringSystem",
+          "ClassesUpTo",
+          "coveringCount"
+        ],
+        "note": "FC inlines `coveringCount`; hosted routes via `MinimalDistinctCoveringSystemsUpTo`, same unfolding."
+      }
+    }
+  ]
+}
