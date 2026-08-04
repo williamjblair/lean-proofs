@@ -2,13 +2,17 @@
 
 Lean 4 proofs from **Star Fleet Math** (Colin Snyder, starfleetmath.com),
 hosted here as `formal_proof` targets for Formal Conjectures. Each is a claimed
-resolution of an **open** Erdős problem (7 verified: 130 254 267 394 489 521 538); each was rebuilt on CI against its
-pinned Mathlib and read for faithfulness before being added.
+resolution of an **open** Erdős problem. All 13 are rebuilt on CI against their
+pinned Mathlib and read for faithfulness before being added:
+130, 254, 267, 394, 450, 489, 521, 522, 538, 769, 796, 959, 1188.
 
-These are **not** this repo's own work — see `proofs.yaml` (`source: starfleetmath`)
-for attribution. They pin Lean 4.31 / a different Mathlib than the main library,
-so each is a self-contained lake project under `starfleet/erdos-<N>/`, built and
-axiom-audited by `.github/workflows/starfleet.yml` (not part of `ErdosProblems`).
+These are **not** this repo's own work. See `proofs.yaml` (`source: starfleetmath`)
+for attribution and `NOTICE` for terms; they are hosted here with the author's
+permission and remain his copyright.
+
+They pin Lean 4.31 / a different Mathlib than the main library, so each is a
+self-contained lake project under `starfleet/erdos-<N>/`, built and axiom-audited
+by `.github/workflows/starfleet.yml` (not part of `ErdosProblems`).
 
 `VERDICTS.md` records the two gates per problem: proof (build + `#print axioms`
 ⊆ `[propext, Classical.choice, Quot.sound]`) and faithfulness (statement read
