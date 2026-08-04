@@ -3,7 +3,7 @@
   "about": "Per-problem record of the two gates. The proof gate is machine-checked by CI. The faithfulness gate is a human reading of the Lean statement against the informal problem, and cannot be automated away: a clean axiom audit says the theorem is proved, not that the theorem is the problem.",
   "gates": {
     "proof": "CI (starfleet/scripts/check_axioms.sh): project builds against its pinned Mathlib and the terminal theorem's `#print axioms` is a subset of [propext, Classical.choice, Quot.sound].",
-    "faithfulness": "Manual: the hosted statement is unfolded through any named Prop and compared definition by definition against the Formal Conjectures statement it is linked from. Statuses: match, match-with-note, unchecked, blocked."
+    "faithfulness": "Manual: the hosted statement is unfolded through any named Prop and compared definition by definition against the Formal Conjectures statement it is linked from. `scripts/faithfulness_diff.py` does the mechanical half, reporting which supporting definitions are shared by name and whether their bodies agree after normalisation; it over-reports, since definitions that are spelled differently but denote the same thing show as differing. Statuses: match, match-with-note, no-fc-statement, blocked."
   },
   "source": "starfleetmath",
   "entries": [
@@ -15,12 +15,19 @@
       "proof_gate": "ci",
       "formal_conjectures": {
         "theorem": "erdos_123",
-        "pr": null
+        "pr": null,
+        "note": "FC already carries a plby link on this theorem; Star Fleet's is a second independent proof and is not linked yet."
       },
       "faithfulness": {
-        "status": "unchecked",
-        "definitions_compared": [],
-        "note": "Mirrored, not yet compared against FC's `erdos_123` (which already carries a plby link)."
+        "status": "match",
+        "definitions_compared": [
+          "Smooth3 / powers",
+          "PairwiseCoprime3 / PairwiseCoprime",
+          "IsPrimitive / IsAntichain (· ∣ ·)",
+          "IsDComplete",
+          "IntendedStatement"
+        ],
+        "note": "Every supporting definition is spelled differently on the two sides but denotes the same thing, so faithfulness_diff.py reports both shared names as differing. Checked by hand: `Smooth3 a b c` is `{x | exists k l m, x = a^k b^l c^m}`, the same set as FC's pointwise product of `powers`; `PairwiseCoprime3` is the three pairwise Coprime conjuncts, the same as FC's `Pairwise` form; hosted `IsPrimitive s` is `IsAntichain (· ∣ ·) s` written out; and `forall^f n in atTop` is FC's spelling of the hosted `exists N, forall n >= N`. `IntendedStatement` unfolds to FC's right-hand side."
       }
     },
     {
@@ -96,9 +103,9 @@
         "pr": null
       },
       "faithfulness": {
-        "status": "unchecked",
+        "status": "no-fc-statement",
         "definitions_compared": [],
-        "note": "Mirrored, no FC statement yet."
+        "note": "Formal Conjectures has no statement for this problem, so there is nothing to compare against. The proof gate applies; the faithfulness gate needs an FC statement written first."
       }
     },
     {
@@ -232,9 +239,9 @@
         "pr": null
       },
       "faithfulness": {
-        "status": "unchecked",
+        "status": "no-fc-statement",
         "definitions_compared": [],
-        "note": "Mirrored from entry F-026, which supersedes F-025. No FC statement yet."
+        "note": "Formal Conjectures has no statement for this problem, so there is nothing to compare against. The proof gate applies; the faithfulness gate needs an FC statement written first. Mirrored from entry F-026, which supersedes F-025."
       }
     },
     {
