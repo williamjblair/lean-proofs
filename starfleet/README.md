@@ -14,7 +14,10 @@ They pin Lean 4.31 / a different Mathlib than the main library, so each is a
 self-contained lake project under `starfleet/erdos-<N>/`, built and axiom-audited
 by `.github/workflows/starfleet.yml` (not part of `ErdosProblems`).
 
-`VERDICTS.md` records the two gates per problem: proof (build + `#print axioms`
+`faithfulness.json` is the machine-readable version of the same two gates, one
+entry per problem: terminal theorem, which FC theorem it is linked from, and
+the faithfulness status (`match`, `match-with-note`, `unchecked`, `blocked`)
+with the definitions compared. `VERDICTS.md` records the two gates per problem: proof (build + `#print axioms`
 ⊆ `[propext, Classical.choice, Quot.sound]`) and faithfulness (statement read
 against erdosproblems.com / FC).
 
