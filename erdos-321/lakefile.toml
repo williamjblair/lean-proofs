@@ -15,8 +15,12 @@ name = "PrimeNumberTheoremAnd"
 git = "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd.git"
 rev = "a7eb3a8ae4bde79292fb5f04c32cd5ab6d8f226c"
 
-[[lean_lib]]
-name = "Architect"
+# The bundle also ships an `Architect` library, which the proof does not import: nothing under
+# `Research/`, nor `Audit.lean` or `Erdos321Statement.lean`, mentions it. Upstream PNT pulls in
+# `LeanArchitect`, which provides the same `Architect.*` modules, so declaring the vendored copy
+# as a library here makes the two packages ambiguous and the build fails with
+# "could not disambiguate the module `Architect.Basic`". The sources are left in place, they are
+# just not a build target.
 
 [[lean_lib]]
 name = "Research"
