@@ -1,0 +1,17 @@
+name = "Research"
+defaultTargets = ["Research"]
+
+# Mathlib provides the math machinery you build proofs on. First build in an
+# experiment: `lake exe cache get` (downloads prebuilt Mathlib — fast, not a
+# from-scratch compile) then `lake build`. If versions drift, run `lake update`
+# and sync `lean-toolchain` to the toolchain Mathlib pins.
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+version = "git#stable"
+
+[[lean_lib]]
+name = "Research"
+# The distributed bundle ships Research/*.lean with no root module, so build the
+# whole tree rather than requiring a Research.lean that does not exist.
+globs = ["Research.+"]
