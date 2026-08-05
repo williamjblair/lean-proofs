@@ -115,13 +115,18 @@
       "terminal_theorem": "Erdos321.erdos321_asymptotic",
       "proof_gate": "ci",
       "formal_conjectures": {
-        "theorem": "erdos_321 (and .variants.isTheta, .variants.isBigO)",
+        "theorem": "erdos_321 (and .variants.isTheta, .variants.isBigO, .variants.isLittleO)",
         "pr": null
       },
       "faithfulness": {
-        "status": "unchecked",
-        "definitions_compared": [],
-        "note": "Formal Conjectures does have a statement (`erdos_321`, all `research open`), but the two sides share no definition names, so faithfulness_diff.py cannot help and the statements need comparing directly. Not done yet. Mirrored with upstream PrimeNumberTheoremAnd @ a7eb3a8 substituted for the vendored copy, following erdos-796."
+        "status": "match-with-note",
+        "definitions_compared": [
+          "Valid / Set.InjOn on the powerset",
+          "reciprocalSubsetSum",
+          "Admissible / A ⊆ Finset.Icc 1 N",
+          "extremalSize / R"
+        ],
+        "note": "Definitions agree. Star Fleet's `Valid A` is FC's `Set.InjOn (fun S => ∑ n ∈ S, (1 : ℚ) / n) A.powerset` written out as a double quantifier, and `reciprocalSubsetSum S = ∑ n ∈ S, (n : ℚ)⁻¹` is the same sum. Both range over `A ⊆ Finset.Icc 1 N`. `extremalSize N` takes `Finset.sup card` over `(Icc 1 N).powerset.filter Valid` where FC's `R N` takes `sSup` of the cardinalities; the family is finite and contains `∅`, so the two agree. The statements do not line up as directly. FC's `erdos_321` asks for the exact value of `R N` and is not answered here. `erdos321_asymptotic` gives a two-sided bound `c * terminalReciprocalScale n d ≤ extremalSize n ≤ C * terminalReciprocalScale n d` for every large `n`, with `d` determined by `IsTerminalLogDepth B n d`, so it supplies a candidate answer for `erdos_321.variants.isTheta` rather than matching a fixed statement: that variant's right-hand side is still `answer(sorry)`. The scale is explicit, `n / log n` times an iterated-logarithm tail product, so this is not one of the trivial instantiations the FC file's formalisation note warns about."
       }
     },
     {
