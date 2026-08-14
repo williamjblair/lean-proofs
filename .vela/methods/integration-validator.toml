@@ -1,5 +1,5 @@
 schema = "vela.integration-method.v0.1"
-method_root = "sha256:546365b093a0b2886ec3c8995aa4d186ed2c26be3ed7052c5cd0a8a73b27f86b"
+method_root = "sha256:3e0e19612953ee1f65129c5bf5151a127bcd252a4fbb6cd4660c4b25d88e3800"
 method_id = "integration-validator"
 version = "0.1"
 inputs = [
@@ -10,6 +10,7 @@ inputs = [
 outputs = ["scoped integration conformance result", "optional verification input"]
 limitations = [
   "This source-local validator implements the Phase 0 draft and is not a Protocol 1 verifier.",
+  "The emitted verification input uses a source-owned unrooted schema, binds exact inputs only, and records no outcome or availability; INT-00 defines no shared check-result document or fifth root domain.",
 ]
 nonclaims = [
   "Integration conformance is not scientific acceptance, a Vela Decision, or Standing.",
@@ -18,7 +19,7 @@ authority_effect = "none"
 
 [implementation]
 path = "scripts/check_vela_integration.py"
-digest = "sha256:c0282275aaf402330da73727d3fe20d02d713e7f105ca4d8b1acbf8490fd78a2"
+digest = "sha256:7366ddef78c99f816f2ff7b8f6c62535b6aee62e82a00d10ea6b52ceadcb4469"
 
 [environment]
 kind = "exact"

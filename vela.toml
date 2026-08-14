@@ -1,5 +1,5 @@
 schema = "vela.integration-manifest.v0.1"
-manifest_root = "sha256:ae23f6b3d4b074fe4bc663420746117044328c01f332d681b6c03e855d05e03a"
+manifest_root = "sha256:af09cd762db00af7acdc94a92aa2f63ec1d2b4cdeb6d70c11888ccab616c4b0d"
 outputs = ["exact_reference", "submission_draft", "verification_input"]
 authority_effect = "none"
 
@@ -22,11 +22,11 @@ root = "sha256:8358edad46299b717673061f21a607be30ecb8f2224a438163489870edd5d2d0"
 
 [[bindings]]
 path = ".vela/bindings/lean-project.toml"
-root = "sha256:7a35440f54c73eab85e22bc395466dd1b627f656d6a94b532109667c0fb0ba08"
+root = "sha256:e726145c67dd845600203eaaf2a4de095f1dc2bdb70210da8056c1681eee0153"
 
 [[bindings]]
 path = ".vela/bindings/formal-proof.toml"
-root = "sha256:6583c79d612de336f01f08bf9328b576717e1147866f747508fedbcdc84b7200"
+root = "sha256:52e616471a7888895bb952d1605042a8bca2df0108027f7d52a4f7257dd9fc06"
 
 [[methods]]
 id = "lean-build"
@@ -41,7 +41,7 @@ root = "sha256:1ee9b6d7d629e673639992a66b944a2a789664b999086d9fe1f7343c6296649c"
 [[methods]]
 id = "integration-validator"
 path = ".vela/methods/integration-validator.toml"
-root = "sha256:546365b093a0b2886ec3c8995aa4d186ed2c26be3ed7052c5cd0a8a73b27f86b"
+root = "sha256:3e0e19612953ee1f65129c5bf5151a127bcd252a4fbb6cd4660c4b25d88e3800"
 
 [rights]
 license = "NOASSERTION"

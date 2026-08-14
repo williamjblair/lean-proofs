@@ -61,6 +61,12 @@ the rooted contracts and the portable Erdős 154 example with:
 python3 scripts/check_vela_integration.py
 ```
 
+The optional emitted verification input uses the source-owned, unrooted
+`lean-proofs.verification-input.v0.1` schema. INT-00 adds no generic result
+document or fifth root domain. The input binds the exact subject, Method, and
+artifact closure, but contains no outcome or evidence-availability claim; an
+executed check must continue through Vela's existing Verification machinery.
+
 From a fresh clone with no project cache, the cold-consumer gate is:
 
 ```bash

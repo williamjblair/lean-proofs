@@ -69,7 +69,7 @@ class IntegrationHostileTests(unittest.TestCase):
     def test_wrong_or_short_manifest_root_refuses(self) -> None:
         replace_once(
             self.root / "vela.toml",
-            "sha256:ae23f6b3d4b074fe4bc663420746117044328c01f332d681b6c03e855d05e03a",
+            "sha256:af09cd762db00af7acdc94a92aa2f63ec1d2b4cdeb6d70c11888ccab616c4b0d",
             "sha256:1234",
         )
         self.assert_refused("manifest root")
@@ -81,6 +81,67 @@ class IntegrationHostileTests(unittest.TestCase):
             "theorem: Erdos154.not_the_selected_theorem",
         )
         self.assert_refused("theorem drift")
+
+    def test_coherently_rerooted_fake_binding_reference_refuses(self) -> None:
+        packet = CHECK.validate_repository(self.root)
+        binding = copy.deepcopy(packet["bindings"]["formal-proof-index"])
+        reference = binding["references"][0]
+        reference["native_identity"]["identifier"] = "Erdos154.nonexistent"
+        reference["selector"]["value"] = "Erdos154.nonexistent"
+        reference["content_fixity"]["digest"] = "sha256:" + "0" * 64
+        binding["binding_root"] = CHECK.document_root("binding", binding)
+        CHECK.validate_rooted("binding", binding)
+        _, proofs = CHECK.validate_proof_index(self.root)
+        with self.assertRaisesRegex(CHECK.ValidationError, "exact proofs.yaml identity"):
+            CHECK.validate_binding(
+                self.root, binding, packet["profiles"], packet["methods"],
+                CHECK.EXPECTED_NATIVE_REVISION, proofs,
+            )
+
+    def test_coherently_fake_external_reference_refuses(self) -> None:
+        reference = copy.deepcopy(CHECK.EXPECTED_EXTERNAL_REFERENCE)
+        reference["native_identity"]["identifier"] = "FormalConjectures.nonexistent"
+        reference["selector"]["value"] = "FormalConjectures.nonexistent"
+        reference["content_fixity"]["digest"] = "sha256:" + "0" * 64
+        CHECK.validate_reference(
+            reference, "96eeecf40bc06ddc8bae6d106f461d4fd774858a"
+        )
+        with self.assertRaisesRegex(CHECK.ValidationError, "external Formal Conjectures"):
+            CHECK.validate_external_reference(reference)
+
+    def test_coherent_namespace_and_fixity_drift_refuses(self) -> None:
+        packet = CHECK.validate_repository(self.root)
+        binding = copy.deepcopy(packet["bindings"]["formal-proof-index"])
+        source = self.root / "ErdosProblems" / "Erdos154Sumset.lean"
+        replace_once(source, "namespace Erdos154", "namespace WrongNamespace")
+        reference = binding["references"][0]
+        reference["content_fixity"]["digest"] = CHECK.sha256_file(source)
+        reference["content_fixity"]["size"] = source.stat().st_size
+        binding["binding_root"] = CHECK.document_root("binding", binding)
+        CHECK.validate_rooted("binding", binding)
+        _, proofs = CHECK.parse_proofs(self.root / "proofs.yaml")
+        with self.assertRaisesRegex(CHECK.ValidationError, "declaration drift"):
+            CHECK.validate_binding(
+                self.root, binding, packet["profiles"], packet["methods"],
+                CHECK.EXPECTED_NATIVE_REVISION, proofs,
+            )
+
+    def test_coherently_rerooted_locator_drift_refuses(self) -> None:
+        packet = CHECK.validate_repository(self.root)
+        binding = copy.deepcopy(packet["bindings"]["formal-proof-index"])
+        reference = binding["references"][0]
+        reference["locator"]["uri"] = (
+            "https://example.invalid/wrong-owner/wrong-repo/blob/"
+            f"{CHECK.EXPECTED_NATIVE_REVISION}/ErdosProblems/Erdos154Sumset.lean"
+        )
+        binding["binding_root"] = CHECK.document_root("binding", binding)
+        CHECK.validate_rooted("binding", binding)
+        _, proofs = CHECK.validate_proof_index(self.root)
+        with self.assertRaisesRegex(CHECK.ValidationError, "locator does not resolve"):
+            CHECK.validate_binding(
+                self.root, binding, packet["profiles"], packet["methods"],
+                CHECK.EXPECTED_NATIVE_REVISION, proofs,
+            )
 
     def test_toolchain_drift_refuses(self) -> None:
         replace_once(
@@ -116,18 +177,38 @@ class IntegrationHostileTests(unittest.TestCase):
         )
         self.assert_refused("private path")
 
-    def test_unavailable_evidence_cannot_become_pass_fail_or_zero(self) -> None:
+    def test_direct_emission_cannot_claim_unperformed_result(self) -> None:
         packet = CHECK.validate_repository(self.root)
         method_root = packet["methods"]["axiom-audit"]["method_root"]
         reference = packet["example"]["reference"]
-        for outcome in ("pass", "fail", 0):
-            with self.subTest(outcome=outcome):
-                result = CHECK.build_result(reference, method_root)
-                result["evidence_availability"] = "unavailable"
-                result["outcome"] = outcome
-                result["result_root"] = CHECK.document_root("result", result)
-                with self.assertRaisesRegex(CHECK.ValidationError, "unavailable evidence"):
-                    CHECK.validate_result(result, reference, method_root)
+        artifacts = packet["example"]["closure"]
+        result = CHECK.build_verification_input(reference, method_root, artifacts)
+        self.assertNotIn("observed_outcome", result)
+        self.assertNotIn("evidence_availability", result)
+        for field, value in (("observed_outcome", "pass"), ("evidence_availability", "available")):
+            with self.subTest(field=field):
+                mutated = copy.deepcopy(result)
+                mutated[field] = value
+                with self.assertRaisesRegex(CHECK.ValidationError, "unknown"):
+                    CHECK.validate_verification_input(
+                        mutated, reference, method_root, artifacts
+                    )
+
+    def test_portable_output_is_source_owned_and_unrooted(self) -> None:
+        packet = CHECK.validate_repository(self.root)
+        output = CHECK.build_verification_input(
+            packet["example"]["reference"],
+            packet["methods"]["axiom-audit"]["method_root"],
+            packet["example"]["closure"],
+        )
+        CHECK.validate_verification_input(
+            output, packet["example"]["reference"],
+            packet["methods"]["axiom-audit"]["method_root"],
+            packet["example"]["closure"],
+        )
+        self.assertEqual(output["schema"], "lean-proofs.verification-input.v0.1")
+        self.assertNotIn("result_root", output)
+        self.assertNotIn("verification_input_root", output)
 
     def test_authority_state_refuses(self) -> None:
         authority = self.root / ".vela" / "repository.json"

@@ -26,9 +26,9 @@ SCHEMAS = {
     "profile": "vela.integration-profile.v0.1",
     "binding": "vela.integration-binding.v0.1",
     "method": "vela.integration-method.v0.1",
-    "result": "vela.integration-check-result.v0.1",
 }
 ROOT_FIELDS = {kind: f"{kind}_root" for kind in SCHEMAS}
+OUTPUT_SCHEMA = "lean-proofs.verification-input.v0.1"
 FULL_ROOT = re.compile(r"sha256:[0-9a-f]{64}\Z")
 COMMIT = re.compile(r"[0-9a-f]{40}\Z")
 MAPPINGS = {"exact", "close", "broader", "narrower", "related"}
@@ -43,6 +43,80 @@ AUTHORITY_FIELDS = {
 }
 EXPECTED_REPOSITORY = "https://github.com/williamjblair/lean-proofs.git"
 EXPECTED_NATIVE_REVISION = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
+EXPECTED_LOCAL_REFERENCES = {
+    "lakefile.toml": {
+        "schema": "vela.exact-reference.v0.1",
+        "native_identity": {
+            "system": "git+lean4",
+            "object_kind": "project_configuration",
+            "identifier": "lakefile.toml",
+        },
+        "revision": {"kind": "git_commit", "value": EXPECTED_NATIVE_REVISION},
+        "content_fixity": {
+            "media_type": "application/toml",
+            "digest": "sha256:59cdf241ac34e762631b3c7d0c39d51a27146eff6405a4b86caaff739be90ef1",
+            "size": 586,
+        },
+        "selector": {"kind": "path", "value": "lakefile.toml"},
+        "locator": {
+            "uri": (
+                "https://github.com/williamjblair/lean-proofs/blob/"
+                f"{EXPECTED_NATIVE_REVISION}/lakefile.toml"
+            ),
+            "mutable": False,
+            "authentication": "public",
+        },
+    },
+    "Erdos154.erdos_154_sumset": {
+        "schema": "vela.exact-reference.v0.1",
+        "native_identity": {
+            "system": "git+lean4",
+            "object_kind": "theorem",
+            "identifier": "Erdos154.erdos_154_sumset",
+        },
+        "revision": {"kind": "git_commit", "value": EXPECTED_NATIVE_REVISION},
+        "content_fixity": {
+            "media_type": "text/x-lean",
+            "digest": "sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457",
+            "size": 25003,
+        },
+        "selector": {
+            "kind": "lean_declaration",
+            "value": "Erdos154.erdos_154_sumset",
+        },
+        "locator": {
+            "uri": (
+                "https://github.com/williamjblair/lean-proofs/blob/"
+                f"{EXPECTED_NATIVE_REVISION}/ErdosProblems/Erdos154Sumset.lean"
+            ),
+            "mutable": False,
+            "authentication": "public",
+        },
+    },
+}
+EXPECTED_EXTERNAL_REFERENCE = {
+    "schema": "vela.exact-reference.v0.1",
+    "native_identity": {
+        "system": "git+lean4",
+        "object_kind": "theorem",
+        "identifier": "FormalConjectures.erdos_154",
+    },
+    "revision": {
+        "kind": "git_commit",
+        "value": "96eeecf40bc06ddc8bae6d106f461d4fd774858a",
+    },
+    "content_fixity": {
+        "media_type": "text/x-lean",
+        "digest": "sha256:cb6c207f5a6d9710a50b876e5719a13498315b2f539a34230ca4ec6813136032",
+        "size": 3752,
+    },
+    "selector": {"kind": "lean_declaration", "value": "FormalConjectures.erdos_154"},
+    "locator": {
+        "uri": "https://github.com/williamjblair/formal-conjectures/blob/96eeecf40bc06ddc8bae6d106f461d4fd774858a/FormalConjectures/ErdosProblems/154.lean",
+        "mutable": False,
+        "authentication": "public",
+    },
+}
 
 
 class ValidationError(ValueError):
@@ -153,6 +227,52 @@ def validate_reference(reference: dict[str, Any], expected_revision: str) -> Non
         raise ValidationError("locator does not carry exact revision")
 
 
+def validate_local_reference(
+    root: Path, reference: dict[str, Any], proofs: list[dict[str, Any]]
+) -> None:
+    """Resolve a Binding reference to exact repository-owned bytes."""
+
+    identity = reference["native_identity"]
+    selector = reference["selector"]
+    if identity["system"] != "git+lean4":
+        raise ValidationError("unsupported local reference system")
+    if identity["object_kind"] == "project_configuration":
+        if identity["identifier"] != "lakefile.toml" or selector != {
+            "kind": "path", "value": "lakefile.toml"
+        }:
+            raise ValidationError("project reference identity drift")
+        source_path = "lakefile.toml"
+    elif identity["object_kind"] == "theorem":
+        if selector.get("kind") != "lean_declaration":
+            raise ValidationError("theorem selector kind drift")
+        matches = [proof for proof in proofs if proof.get("theorem") == identity["identifier"]]
+        if len(matches) != 1:
+            raise ValidationError("Binding theorem is not an exact proofs.yaml identity")
+        source_path = str(matches[0]["file"])
+        source = local_file(root, source_path).read_text(encoding="utf-8")
+        if not declaration_is_present(source, identity["identifier"]):
+            raise ValidationError("Binding theorem declaration drift")
+    else:
+        raise ValidationError("unsupported local reference object kind")
+    source = local_file(root, source_path)
+    expected_fixity = {
+        "media_type": reference["content_fixity"]["media_type"],
+        "digest": sha256_file(source),
+        "size": source.stat().st_size,
+    }
+    if reference["content_fixity"] != expected_fixity:
+        raise ValidationError("Binding content fixity does not resolve to source bytes")
+    expected_uri = (
+        f"{EXPECTED_REPOSITORY.removesuffix('.git')}/blob/"
+        f"{EXPECTED_NATIVE_REVISION}/{source_path}"
+    )
+    if reference["locator"]["uri"] != expected_uri:
+        raise ValidationError("Binding locator does not resolve to source path")
+    expected_reference = EXPECTED_LOCAL_REFERENCES.get(identity["identifier"])
+    if expected_reference is None or reference != expected_reference:
+        raise ValidationError("local Exact Reference drift from pinned source revision")
+
+
 def parse_scalar(raw: str) -> Any:
     raw = raw.strip()
     if len(raw) >= 2 and raw[0] == raw[-1] == '"':
@@ -208,8 +328,29 @@ def audit_targets(path: Path) -> set[str]:
 
 
 def declaration_is_present(source: str, theorem: str) -> bool:
-    leaf = re.escape(theorem.rsplit(".", 1)[-1])
-    return bool(re.search(rf"(?m)^\s*(?:theorem|lemma)\s+{leaf}(?:\s|:|\()", source))
+    """Resolve a qualified Lean name within its explicit namespace block."""
+
+    namespace: list[str] = []
+    for line in source.splitlines():
+        opened = re.match(r"^\s*namespace\s+([A-Za-z_][A-Za-z0-9_'.]*(?:\.[A-Za-z_][A-Za-z0-9_']*)*)\s*$", line)
+        if opened:
+            namespace.extend(opened.group(1).split("."))
+            continue
+        declaration = re.match(
+            r"^\s*(?:theorem|lemma)\s+([A-Za-z_][A-Za-z0-9_']*)(?:\s|:|\(|$)",
+            line,
+        )
+        if declaration and ".".join([*namespace, declaration.group(1)]) == theorem:
+            return True
+        closed_namespace = re.match(
+            r"^\s*end\s+([A-Za-z_][A-Za-z0-9_'.]*(?:\.[A-Za-z_][A-Za-z0-9_']*)*)\s*$",
+            line,
+        )
+        if closed_namespace:
+            parts = closed_namespace.group(1).split(".")
+            if namespace[-len(parts):] == parts:
+                del namespace[-len(parts):]
+    return False
 
 
 def validate_proof_index(root: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
@@ -306,8 +447,9 @@ def validate_profile(profile: dict[str, Any]) -> None:
 
 
 def validate_binding(
-    binding: dict[str, Any], profiles: dict[str, dict[str, Any]],
+    root: Path, binding: dict[str, Any], profiles: dict[str, dict[str, Any]],
     methods: dict[str, dict[str, Any]], revision: str,
+    proofs: list[dict[str, Any]],
 ) -> None:
     closed(
         binding,
@@ -328,6 +470,7 @@ def validate_binding(
         raise ValidationError("Binding has no Exact Reference")
     for reference in binding["references"]:
         validate_reference(reference, revision)
+        validate_local_reference(root, reference, proofs)
     for mapping in binding["mappings"]:
         closed(mapping, {"source", "target", "relation"}, "mapping")
         if mapping["relation"] not in MAPPINGS:
@@ -345,11 +488,14 @@ def validate_binding(
         raise ValidationError("authority output")
 
 
-def validate_example(root: Path, revision: str) -> dict[str, Any]:
+def validate_example(
+    root: Path, revision: str, proofs: list[dict[str, Any]]
+) -> dict[str, Any]:
     example = load_toml(root, ".vela/examples/erdos-154-exact-reference.toml")
     closed(example, {"reference", "closure", "external_reference", "mapping", "translation", "availability", "nonclaims"}, "example")
     validate_reference(example["reference"], revision)
-    validate_reference(example["external_reference"], "96eeecf40bc06ddc8bae6d106f461d4fd774858a")
+    validate_local_reference(root, example["reference"], proofs)
+    validate_external_reference(example["external_reference"])
     if example["mapping"] != {"relation": "close"} or example["translation"] != {"disposition": "normalized"}:
         raise ValidationError("example mapping and translation collapse")
     if example["availability"].get("class") != "public" or example["availability"].get("private_context_required") is not False:
@@ -367,49 +513,98 @@ def validate_example(root: Path, revision: str) -> dict[str, Any]:
     return example
 
 
-def validate_result(result: dict[str, Any], reference: dict[str, Any], method_root: str) -> None:
-    validate_rooted("result", result)
+def validate_external_reference(reference: dict[str, Any]) -> None:
+    validate_reference(reference, "96eeecf40bc06ddc8bae6d106f461d4fd774858a")
+    if reference != EXPECTED_EXTERNAL_REFERENCE:
+        raise ValidationError("external Formal Conjectures Exact Reference drift")
+
+
+def validate_verification_input(
+    result: dict[str, Any], reference: dict[str, Any], method_root: str,
+    artifacts: list[dict[str, Any]],
+) -> None:
     closed(
         result,
         {
-            "schema", "result_root", "subject", "method_root", "evidence_availability",
-            "outcome", "scope", "nonclaims", "provenance", "authority_effect",
+            "schema", "document_kind", "subject", "method_root",
+            "artifacts", "check_request", "scope", "nonclaims", "provenance",
+            "authority_effect",
         },
-        "result",
+        "source-owned verification input",
     )
+    if result["schema"] != OUTPUT_SCHEMA or result["document_kind"] != "source_owned_verification_input":
+        raise ValidationError("unsupported source-owned verification input")
+    if result["authority_effect"] != "none":
+        raise ValidationError("verification input authority effect")
+    reject_authority_fields(result)
     if result["subject"] != reference or result["method_root"] != method_root:
-        raise ValidationError("result subject or Method drift")
-    if result["evidence_availability"] == "unavailable" and result["outcome"] != "unavailable":
-        raise ValidationError("unavailable evidence converted to result")
-    if result["outcome"] not in {"pass", "fail", "inconclusive", "error", "unavailable"}:
-        raise ValidationError("check result presented as acceptance")
+        raise ValidationError("verification input subject or Method drift")
+    if result["artifacts"] != artifacts:
+        raise ValidationError("verification input artifact closure drift")
+    if result["check_request"] != {
+        "method_id": "axiom-audit",
+        "command": ["bash", "scripts/check_axioms.sh"],
+        "expected_exit_code": 0,
+    }:
+        raise ValidationError("verification input check request drift")
     if not result["nonclaims"]:
-        raise ValidationError("missing result nonclaims")
+        raise ValidationError("missing verification input nonclaims")
     closed(result["provenance"], {"agent", "activity", "entities", "role"}, "provenance")
 
 
-def build_result(reference: dict[str, Any], method_root: str) -> dict[str, Any]:
+def build_verification_input(
+    reference: dict[str, Any], method_root: str, artifacts: list[dict[str, Any]]
+) -> dict[str, Any]:
     result = {
-        "schema": SCHEMAS["result"],
-        "result_root": "",
+        "schema": OUTPUT_SCHEMA,
+        "document_kind": "source_owned_verification_input",
         "subject": reference,
         "method_root": method_root,
-        "evidence_availability": "available",
-        "outcome": "pass",
-        "scope": "Pinned Lean build and selected declaration axiom audit",
+        "artifacts": artifacts,
+        "check_request": {
+            "method_id": "axiom-audit",
+            "command": ["bash", "scripts/check_axioms.sh"],
+            "expected_exit_code": 0,
+        },
+        "scope": "Request a pinned axiom audit of the selected declaration",
         "nonclaims": [
-            "This scoped check is not scientific acceptance, a Vela Decision, or Standing."
+            "This input records no check outcome or evidence availability.",
+            "Any resulting scoped check is not scientific acceptance, a Vela Decision, or Standing.",
         ],
         "provenance": {
-            "agent": "local:cold-consumer",
-            "activity": "lean-build-and-axiom-audit",
-            "entities": ["tool:leanprover/lean4:v4.29.1", f"method:{method_root}"],
-            "role": "verifier",
+            "agent": "local:verification-input-builder",
+            "activity": "construct-verification-input",
+            "entities": [f"method:{method_root}"],
+            "role": "producer",
         },
         "authority_effect": "none",
     }
-    result["result_root"] = document_root("result", result)
     return result
+
+
+def validate_selected_binding(
+    binding: dict[str, Any], example: dict[str, Any], proofs: list[dict[str, Any]]
+) -> None:
+    if len(binding["references"]) != 1 or binding["references"][0] != example["reference"]:
+        raise ValidationError("selected example and formal-proof Binding reference drift")
+    selected = [proof for proof in proofs if proof.get("problem") == 154]
+    if len(selected) != 1 or selected[0].get("theorem") != "Erdos154.erdos_154_sumset":
+        raise ValidationError("selected Erdos 154 proof index drift")
+    if selected[0].get("fc_target") != "FormalConjectures/ErdosProblems/154.lean":
+        raise ValidationError("selected Erdos 154 external target drift")
+    expected_target = (
+        "williamjblair/formal-conjectures@96eeecf40bc06ddc8bae6d106f461d4fd774858a:"
+        "FormalConjectures.erdos_154"
+    )
+    if not any(
+        mapping == {
+            "source": "Erdos154.erdos_154_sumset",
+            "target": expected_target,
+            "relation": "close",
+        }
+        for mapping in binding["mappings"]
+    ):
+        raise ValidationError("selected Erdos 154 semantic mapping drift")
 
 
 def validate_repository(root: Path = ROOT) -> dict[str, Any]:
@@ -464,18 +659,24 @@ def validate_repository(root: Path = ROOT) -> dict[str, Any]:
             raise ValidationError("Method inventory drift")
         methods[method["method_id"]] = method
 
+    _, proofs = validate_proof_index(root)
     bindings: dict[str, dict[str, Any]] = {}
     for item in manifest["bindings"]:
         closed(item, {"path", "root"}, "Binding inventory")
         binding = load_toml(root, item["path"])
         validate_rooted("binding", binding)
-        validate_binding(binding, profiles, methods, repository["revision"])
+        validate_binding(
+            root, binding, profiles, methods, repository["revision"], proofs
+        )
         if item["root"] != binding["binding_root"]:
             raise ValidationError("Binding inventory drift")
         bindings[binding["binding_id"]] = binding
 
-    validate_proof_index(root)
-    example = validate_example(root, repository["revision"])
+    example = validate_example(root, repository["revision"], proofs)
+    selected_binding = bindings.get("formal-proof-index")
+    if selected_binding is None:
+        raise ValidationError("missing selected formal-proof Binding")
+    validate_selected_binding(selected_binding, example, proofs)
     return {"manifest": manifest, "profiles": profiles, "methods": methods, "bindings": bindings, "example": example}
 
 
@@ -487,11 +688,16 @@ def main() -> int:
     try:
         packet = validate_repository(args.root.resolve())
         if args.emit:
-            result = build_result(
+            result = build_verification_input(
                 packet["example"]["reference"],
                 packet["methods"]["axiom-audit"]["method_root"],
+                packet["example"]["closure"],
             )
-            validate_result(result, packet["example"]["reference"], packet["methods"]["axiom-audit"]["method_root"])
+            validate_verification_input(
+                result, packet["example"]["reference"],
+                packet["methods"]["axiom-audit"]["method_root"],
+                packet["example"]["closure"],
+            )
             args.emit.write_text(
                 json.dumps(result, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
                 encoding="utf-8",
