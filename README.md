@@ -39,6 +39,7 @@ lake exe cache get
 lake build
 bash scripts/check_axioms.sh
 bash scripts/check_manifest.sh
+vela integration check . --json
 python3 scripts/check_vela_integration.py
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
@@ -54,10 +55,13 @@ Manifest -> Profile -> Binding -> Method
 
 The integration is optional and has `authority_effect: none`; ignoring these
 files does not change the Lean project. It publishes exact references and
-verification inputs, never Decisions, Events, acceptance, or Standing. Check
-the rooted contracts and the portable Erdős 154 example with:
+verification inputs, never Decisions, Events, acceptance, or Standing. Vela
+Core owns the shared rooted waist; the repository validator retains only
+`proofs.yaml`, Lean declaration/build/axiom, external-identity, and portable
+example semantics. Check both layers with:
 
 ```bash
+vela integration check . --json
 python3 scripts/check_vela_integration.py
 ```
 
@@ -67,7 +71,8 @@ document or fifth root domain. The input binds the exact subject, Method, and
 artifact closure, but contains no outcome or evidence-availability claim; an
 executed check must continue through Vela's existing Verification machinery.
 
-From a fresh clone with no project cache, the cold-consumer gate is:
+From a fresh clone with no project cache, the cold-consumer gate requires a
+Vela Core CLI containing `integration check`:
 
 ```bash
 bash scripts/cold_consume_erdos154.sh

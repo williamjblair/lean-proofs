@@ -12,17 +12,21 @@ fail() { echo "FAIL: $*" >&2; exit 1; }
 
 unset SSH_AUTH_SOCK GITHUB_TOKEN GH_TOKEN || true
 
+vela_bin="${VELA_BIN:-vela}"
+command -v "$vela_bin" >/dev/null 2>&1 || fail "Vela Core CLI is required for the shared integration waist"
+
 output="${1:-erdos-154-verification-input.json}"
 repeat_output="$(mktemp -t lean-proofs-erdos154.XXXXXX)"
 trap 'rm -f "$repeat_output"' EXIT
 
-python3 scripts/check_vela_integration.py
+"$vela_bin" integration check . --json
+python3 scripts/check_vela_integration.py --vela-bin "$vela_bin"
 lake exe cache get
 lake build
 bash scripts/check_axioms.sh
 bash scripts/check_manifest.sh
-python3 scripts/check_vela_integration.py --emit "$output"
-python3 scripts/check_vela_integration.py --emit "$repeat_output"
+python3 scripts/check_vela_integration.py --vela-bin "$vela_bin" --emit "$output"
+python3 scripts/check_vela_integration.py --vela-bin "$vela_bin" --emit "$repeat_output"
 cmp "$output" "$repeat_output"
 
 echo "PASS: cold-consumed Erdős 154 without Math, authority credentials, or hosted Vela"
