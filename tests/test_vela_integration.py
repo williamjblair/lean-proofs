@@ -29,7 +29,8 @@ def replace_once(path: Path, old: str, new: str) -> None:
 class IntegrationHostileTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory(prefix="lean-proofs-integration-test-")
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name) / "repo"
+        self.root.mkdir()
         shutil.copytree(SOURCE / ".vela", self.root / ".vela")
         for raw in (
             "vela.toml",
@@ -71,12 +72,21 @@ class IntegrationHostileTests(unittest.TestCase):
     def test_clean_packet_passes_through_core_and_source_checks(self) -> None:
         packet = self.validate()
         self.assertTrue(packet["core"]["ok"])
+        self.assertEqual(packet["core"]["schema"], "vela.cli.integration-check.v1")
+        self.assertEqual(packet["core"]["authority_effect"], "none")
         self.assertEqual(len(packet["proofs"]), 79)
+
+    def test_retained_proof_index_symlink_escape_refuses(self) -> None:
+        outside = Path(self.temp.name) / "outside-proofs.yaml"
+        proof_index = self.root / "proofs.yaml"
+        proof_index.replace(outside)
+        proof_index.symlink_to(outside)
+        self.assert_refused("retained file must not be a symlink")
 
     def test_core_owns_shared_root_refusal(self) -> None:
         replace_once(
             self.root / "vela.toml",
-            "sha256:94a392249ca6170e5b09f3c92e91e531cf6925654cb331d9382c99a71054f8c2",
+            "sha256:e6d3a4f0c47efbffb69028dd95326e5e46a43675de283137a7f04a68d4bd5327",
             "sha256:1234",
         )
         self.assert_refused("Vela Core integration check failed")

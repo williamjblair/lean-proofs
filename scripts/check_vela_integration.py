@@ -9,6 +9,7 @@ import json
 import os
 from pathlib import Path
 import re
+import stat
 import subprocess
 import sys
 import tomllib
@@ -141,8 +142,40 @@ def sha256_file(path: Path) -> str:
     return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def retained_file(root: Path, raw: str | Path) -> Path:
+    """Resolve a source-owned retained input without following repository links."""
+
+    raw_text = str(raw)
+    relative = Path(raw_text)
+    rendered = relative.as_posix()
+    if (
+        relative.is_absolute()
+        or rendered in {"", "."}
+        or any(part in {"", ".", ".."} for part in relative.parts)
+        or raw_text != rendered
+    ):
+        raise ValidationError(f"non-canonical retained path: {raw}")
+    repository = root.resolve(strict=True)
+    candidate = repository / relative
+    current = repository
+    for part in relative.parts:
+        current = current / part
+        if current.is_symlink():
+            raise ValidationError(f"retained file must not be a symlink: {rendered}")
+    try:
+        resolved = candidate.resolve(strict=True)
+        resolved.relative_to(repository)
+    except (FileNotFoundError, ValueError) as error:
+        raise ValidationError(
+            f"retained file is missing or escapes repository: {rendered}"
+        ) from error
+    if not stat.S_ISREG(candidate.lstat().st_mode):
+        raise ValidationError(f"retained path is not a regular file: {rendered}")
+    return candidate
+
+
 def load_toml(root: Path, relative: str) -> dict[str, Any]:
-    with (root / relative).open("rb") as handle:
+    with retained_file(root, relative).open("rb") as handle:
         return tomllib.load(handle)
 
 
@@ -169,7 +202,12 @@ def run_core_check(root: Path, vela_bin: str) -> dict[str, Any]:
         raise ValidationError(
             "Vela Core integration check returned non-JSON output"
         ) from error
-    if result.get("ok") is not True or result.get("command") != "integration check":
+    if (
+        result.get("schema") != "vela.cli.integration-check.v1"
+        or result.get("ok") is not True
+        or result.get("command") != "integration check"
+        or result.get("authority_effect") != "none"
+    ):
         raise ValidationError(
             "Vela Core integration check did not return a successful check result"
         )
@@ -255,15 +293,14 @@ def proof_source(root: Path, raw: str) -> Path:
         raise ValidationError(f"unsupported proof source path: {raw}")
     if not (raw.startswith("ErdosProblems/") or raw.startswith("starfleet/")):
         raise ValidationError(f"unsupported proof source path: {raw}")
-    path = root / relative
-    if not path.is_file():
-        raise ValidationError(f"missing proof source: {raw}")
-    return path
+    return retained_file(root, relative)
 
 
 def validate_proof_index(root: Path) -> list[dict[str, Any]]:
-    header, proofs = parse_proofs(root / "proofs.yaml")
-    toolchain = (root / "lean-toolchain").read_text(encoding="utf-8").strip()
+    header, proofs = parse_proofs(retained_file(root, "proofs.yaml"))
+    toolchain = (
+        retained_file(root, "lean-toolchain").read_text(encoding="utf-8").strip()
+    )
     if header != {
         "repo": "williamjblair/lean-proofs",
         "toolchain": toolchain,
@@ -272,7 +309,9 @@ def validate_proof_index(root: Path) -> list[dict[str, Any]]:
         raise ValidationError(f"proof index header drift: {header}")
     if toolchain != EXPECTED_TOOLCHAIN or len(proofs) != 79:
         raise ValidationError("toolchain or proof index count drift")
-    manifest = json.loads((root / "lake-manifest.json").read_text(encoding="utf-8"))
+    manifest = json.loads(
+        retained_file(root, "lake-manifest.json").read_text(encoding="utf-8")
+    )
     packages = {package["name"]: package for package in manifest["packages"]}
     if packages.get("mathlib", {}).get("rev") != EXPECTED_MATHLIB:
         raise ValidationError("root Mathlib revision drift")
@@ -285,7 +324,7 @@ def validate_proof_index(root: Path) -> list[dict[str, Any]]:
         "axioms_clean",
         "fc_target",
     }
-    root_audit = audit_targets(root / "Audit.lean")
+    root_audit = audit_targets(retained_file(root, "Audit.lean"))
     root_theorems: set[str] = set()
     for proof in proofs:
         missing = required - set(proof)
@@ -318,13 +357,17 @@ def validate_proof_index(root: Path) -> list[dict[str, Any]]:
         else:
             project = Path(*Path(source_path).parts[:2])
             project_toolchain = (
-                (root / project / "lean-toolchain").read_text(encoding="utf-8").strip()
+                retained_file(root, project / "lean-toolchain")
+                .read_text(encoding="utf-8")
+                .strip()
             )
             if proof.get("toolchain") != project_toolchain:
                 raise ValidationError(f"Starfleet toolchain drift for {theorem}")
             if proof.get("mathlib") != "git#fabf563a7c95a166b8d7b6efca11c8b4dc9d911f":
                 raise ValidationError(f"Starfleet Mathlib drift for {theorem}")
-            project_audit = (root / project / "Audit.lean").read_text(encoding="utf-8")
+            project_audit = retained_file(root, project / "Audit.lean").read_text(
+                encoding="utf-8"
+            )
             if f"#print axioms {theorem}" not in project_audit:
                 raise ValidationError(
                     f"missing Starfleet axiom audit coverage: {theorem}"
@@ -353,7 +396,7 @@ def validate_local_reference(
         source_text = proof_source(root, source_path).read_text(encoding="utf-8")
         if not declaration_is_present(source_text, str(identifier)):
             raise ValidationError("Binding theorem declaration drift")
-    source = root / source_path
+    source = retained_file(root, source_path)
     fixity = reference["content_fixity"]
     if (
         sha256_file(source) != fixity["digest"]
@@ -379,7 +422,7 @@ def validate_example(root: Path, proofs: list[dict[str, Any]]) -> dict[str, Any]
     if example["closure"] != EXPECTED_CLOSURE:
         raise ValidationError("selected portable closure drift")
     for item in EXPECTED_CLOSURE:
-        path = root / item["path"]
+        path = retained_file(root, item["path"])
         if sha256_file(path) != item["digest"] or path.stat().st_size != item["size"]:
             raise ValidationError(f"closure drift: {item['path']}")
     encoded = json.dumps(example, ensure_ascii=False).encode("utf-8")

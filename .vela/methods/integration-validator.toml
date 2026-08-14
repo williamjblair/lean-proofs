@@ -1,5 +1,5 @@
 schema = "vela.integration-method.v0.1"
-method_root = "sha256:033e93bb6a42a03cb14994c9f7283f1e276c76c6fd2e5ed0ea6b68b5d0f11277"
+method_root = "sha256:c39c3d493ebe49145d9cee872df46a5ac26eca5058e1a312b921fb0a3c090a8d"
 method_id = "integration-validator"
 version = "0.1"
 inputs = [
@@ -20,7 +20,7 @@ authority_effect = "none"
 
 [implementation]
 path = "scripts/check_vela_integration.py"
-digest = "sha256:d78a606ae88c0204337a5364b7a637d187bddbac586fe93f2e526d533dbbe808"
+digest = "sha256:26839722bb474a2b081cff80ef147d97d0912d9b7a7729f09c6f988327e05c98"
 
 [environment]
 kind = "exact"
