@@ -13,6 +13,22 @@ the curated corpus, not acceptance or Standing. Only reviewed proof source and
 its provenance should be promoted, narrowly. Failed, retracted, conditional,
 and exploratory work remains useful exact evidence at its original commit.
 
+## Workspace reference mapping
+
+The portable mapping uses existing Exact Reference and provenance concepts; it
+does not add a Branch object to Vela Core:
+
+| Native fact | Portable representation | Workspace use |
+| --- | --- | --- |
+| Repository identity | Canonical Git remote identity | Identify the source owner without transferring authority. |
+| Workstream state | Exact commit revision plus Git tree fixity; selected files additionally use SHA-256 fixity | An Attempt, Session, or Research Block may cite the immutable revision as an Entity. |
+| Branch name | Optional mutable selector and provenance label only | Locate continuing native work; never present the name as immutable identity. |
+| Performer or tool action | Separate Agent, Activity, Entity, and Role attribution | Record who or what produced, reviewed, or checked the cited revision without treating actor kind as evidence quality. |
+| Native merge | New exact commit reference in the curated corpus | Record publication lineage; do not translate merge, review, or CI into a Vela Decision or Standing. |
+
+The Workspace reference is therefore a link to source-owned evidence, not a
+copy of the branch, a new protocol object, or an authority-bearing admission.
+
 ## Curated and integration refs
 
 | Ref | Exact tip | Behind / ahead | Disposition |
