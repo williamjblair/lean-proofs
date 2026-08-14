@@ -7,8 +7,9 @@ hosted as stable `formal_proof` targets for
 Every push runs the same gate the proofs are claimed to pass: the whole library
 builds against a pinned Mathlib, and a `#print axioms` audit fails the build if
 any headline theorem uses `sorry` or any axiom outside the kernel set
-`[propext, Classical.choice, Quot.sound]`. A green badge here is a standing,
-re-checkable guarantee, not a one-time assertion.
+`[propext, Classical.choice, Quot.sound]`. A green badge is a scoped,
+re-checkable build and axiom result. It is not scientific acceptance, a Vela
+Decision, or Standing in any Repository.
 
 ## Layout
 
@@ -37,7 +38,39 @@ in-progress campaigns moved to their own homes:
 lake exe cache get
 lake build
 bash scripts/check_axioms.sh
+bash scripts/check_manifest.sh
+python3 scripts/check_vela_integration.py
+python3 -m unittest discover -s tests -p 'test_*.py'
 ```
+
+## Native Vela integration
+
+`vela.toml` and `.vela/` expose the source-owned proof index through the draft
+non-authoritative integration chain:
+
+```text
+Manifest -> Profile -> Binding -> Method
+```
+
+The integration is optional and has `authority_effect: none`; ignoring these
+files does not change the Lean project. It publishes exact references and
+verification inputs, never Decisions, Events, acceptance, or Standing. Check
+the rooted contracts and the portable Erdős 154 example with:
+
+```bash
+python3 scripts/check_vela_integration.py
+```
+
+From a fresh clone with no project cache, the cold-consumer gate is:
+
+```bash
+bash scripts/cold_consume_erdos154.sh
+```
+
+The non-destructive [branch disposition inventory](.vela/BRANCH_DISPOSITION.md)
+records the repository's other native workstreams separately. Branches remain
+revision locators and evidence custody boundaries; they are not Vela Attempts
+or Standing state, and no merge-all or cleanup is part of this integration.
 
 ## Erdős #730 full-density proof
 

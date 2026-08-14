@@ -1,0 +1,26 @@
+schema = "vela.integration-method.v0.1"
+method_root = "sha256:546365b093a0b2886ec3c8995aa4d186ed2c26be3ed7052c5cd0a8a73b27f86b"
+method_id = "integration-validator"
+version = "0.1"
+inputs = [
+  "vela.toml and its rooted Profile, Binding, and Method inventory",
+  "proofs.yaml with 79 source-owned proof mappings",
+  ".vela/examples/erdos-154-exact-reference.toml and its exact closure",
+]
+outputs = ["scoped integration conformance result", "optional verification input"]
+limitations = [
+  "This source-local validator implements the Phase 0 draft and is not a Protocol 1 verifier.",
+]
+nonclaims = [
+  "Integration conformance is not scientific acceptance, a Vela Decision, or Standing.",
+]
+authority_effect = "none"
+
+[implementation]
+path = "scripts/check_vela_integration.py"
+digest = "sha256:c0282275aaf402330da73727d3fe20d02d713e7f105ca4d8b1acbf8490fd78a2"
+
+[environment]
+kind = "exact"
+revision = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
+runtime = "Python 3.11+ standard library"

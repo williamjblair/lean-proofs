@@ -1,0 +1,25 @@
+schema = "vela.integration-profile.v0.1"
+profile_root = "sha256:8358edad46299b717673061f21a607be30ecb8f2224a438163489870edd5d2d0"
+profile_id = "https://github.com/williamjblair/lean-proofs/profiles/formal-proof/v0.1"
+version = "0.1"
+conformance = [
+  "Every proof index entry resolves to an exact source path, Lean declaration selector, toolchain, external problem identity, and native check.",
+  "Every axioms_clean claim is recomputed by an exact axiom-audit Method and missing coverage refuses.",
+  "Semantic mapping relation and translation disposition remain separate.",
+  "Unavailable or private evidence remains unavailable and cannot be converted to pass, fail, or zero.",
+]
+limitations = [
+  "Statement fidelity is a separate attributed review activity and is not implied by kernel checking.",
+  "Star Fleet sources are hosted with permission but do not yet have a published source license.",
+  "This source-local draft is not yet a shared Core Profile.",
+]
+nonclaims = [
+  "A kernel-clean theorem is not scientific acceptance, endorsement, a Vela Decision, or Standing.",
+]
+authority_effect = "none"
+
+[rights]
+license = "NOASSERTION"
+repository_authored_license = "MIT"
+dependencies = "repository-authored files are MIT; third-party terms and permissions are in NOTICE"
+redistribution = "repository-authored content permitted; third-party reuse requires its own terms"

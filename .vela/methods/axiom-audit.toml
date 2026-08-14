@@ -1,0 +1,30 @@
+schema = "vela.integration-method.v0.1"
+method_root = "sha256:1ee9b6d7d629e673639992a66b944a2a789664b999086d9fe1f7343c6296649c"
+method_id = "axiom-audit"
+version = "0.1"
+inputs = [
+  "git:a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0",
+  "proofs.yaml@sha256:c3902930f1e3a910fc2bf4a10397fda769c84e0b1b7b84de0cb109d5488110a3",
+  "Audit.lean@sha256:59df59b5cf150b3048a32a85f843dd4d07fbe91eb086a2f1cda8d20b93aebc65",
+  "ErdosProblems/Erdos154Sumset.lean@sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457",
+  "ErdosProblems/Erdos154.lean@sha256:985900ccba24e5ba4d145e74da5b84ceb94338ba627b41688fc3892cae091822",
+]
+outputs = ["scoped declaration axiom report"]
+limitations = [
+  "The audit checks the selected declaration's axiom dependency cone and does not perform semantic peer review.",
+  "The permitted kernel set is propext, Classical.choice, and Quot.sound.",
+]
+nonclaims = [
+  "A clean axiom report is not acceptance, a Vela Decision, or Standing.",
+]
+authority_effect = "none"
+
+[implementation]
+path = "scripts/check_axioms.sh"
+digest = "sha256:8461fe3a4ef3fce4782ced486af753f83115e710ccd556b27fc05106a781e15d"
+
+[environment]
+kind = "exact"
+revision = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
+toolchain = "leanprover/lean4:v4.29.1"
+allowed_axioms = ["propext", "Classical.choice", "Quot.sound"]

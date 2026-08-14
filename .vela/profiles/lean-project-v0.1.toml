@@ -1,0 +1,21 @@
+schema = "vela.integration-profile.v0.1"
+profile_root = "sha256:3c9f08205adf4059b7ea06ce547b78989075d0582d542270de86bd68248539ac"
+profile_id = "https://github.com/williamjblair/lean-proofs/profiles/lean-project/v0.1"
+version = "0.1"
+conformance = [
+  "The repository is pinned by a full Git commit and exposes an exact Lean toolchain.",
+  "The committed Lake manifest resolves every dependency to an exact Git revision.",
+  "The native build Method runs without Vela authority state.",
+]
+limitations = [
+  "This source-local draft describes this repository's Lean project and is not yet a shared Core Profile.",
+]
+nonclaims = [
+  "A successful build is not scientific acceptance, a Vela Decision, or Standing.",
+]
+authority_effect = "none"
+
+[rights]
+license = "MIT"
+dependencies = "disclosed in lake-manifest.json and NOTICE"
+redistribution = "subject to each dependency's license"

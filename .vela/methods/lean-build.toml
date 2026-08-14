@@ -1,0 +1,28 @@
+schema = "vela.integration-method.v0.1"
+method_root = "sha256:d758f77d782611e23e633f1bb4640004d39f5ce61df50f6890a17f030fba09f9"
+method_id = "lean-build"
+version = "0.1"
+inputs = [
+  "git:a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0",
+  "lean-toolchain@sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+  "lakefile.toml@sha256:59cdf241ac34e762631b3c7d0c39d51a27146eff6405a4b86caaff739be90ef1",
+  "lake-manifest.json@sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
+]
+outputs = ["scoped native build result"]
+limitations = [
+  "The build establishes elaboration against the pinned dependency graph, not statement fidelity or scientific validity.",
+]
+nonclaims = [
+  "A passing build is not acceptance, a Vela Decision, or Standing.",
+]
+authority_effect = "none"
+
+[implementation]
+path = "lakefile.toml"
+digest = "sha256:59cdf241ac34e762631b3c7d0c39d51a27146eff6405a4b86caaff739be90ef1"
+
+[environment]
+kind = "exact"
+revision = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
+toolchain = "leanprover/lean4:v4.29.1"
+mathlib_revision = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"

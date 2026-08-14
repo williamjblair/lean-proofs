@@ -124,7 +124,7 @@ def main() -> int:
         "toolchain": doc.get("toolchain"),
         "mathlib": doc.get("mathlib"),
         "verifier_method": "lean_kernel",
-        "verifier_actor": "ci:github-actions:willblair0708/lean-proofs",
+        "verifier_actor": "ci:github-actions:williamjblair/lean-proofs",
         "lake_manifest_hash": sha256_file(ROOT / "lake-manifest.json"),
         "verifier_output_hash": sha256_text(manifest_report),
         "attestations": [],

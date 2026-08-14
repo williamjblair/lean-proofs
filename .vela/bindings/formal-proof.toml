@@ -1,0 +1,68 @@
+schema = "vela.integration-binding.v0.1"
+binding_root = "sha256:6583c79d612de336f01f08bf9328b576717e1147866f747508fedbcdc84b7200"
+binding_id = "formal-proof-index"
+outputs = ["exact_reference", "verification_input"]
+authority_effect = "none"
+
+[profile]
+id = "https://github.com/williamjblair/lean-proofs/profiles/formal-proof/v0.1"
+version = "0.1"
+root = "sha256:8358edad46299b717673061f21a607be30ecb8f2224a438163489870edd5d2d0"
+
+[[references]]
+schema = "vela.exact-reference.v0.1"
+
+[references.native_identity]
+system = "git+lean4"
+object_kind = "theorem"
+identifier = "Erdos154.erdos_154_sumset"
+
+[references.revision]
+kind = "git_commit"
+value = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
+
+[references.content_fixity]
+media_type = "text/x-lean"
+digest = "sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457"
+size = 25003
+
+[references.selector]
+kind = "lean_declaration"
+value = "Erdos154.erdos_154_sumset"
+
+[references.locator]
+uri = "https://github.com/williamjblair/lean-proofs/blob/a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0/ErdosProblems/Erdos154Sumset.lean"
+mutable = false
+authentication = "public"
+
+[[mappings]]
+source = "proofs.yaml#proofs[*].problem"
+target = "https://www.erdosproblems.com/{problem}"
+relation = "exact"
+
+[[mappings]]
+source = "Erdos154.erdos_154_sumset"
+target = "williamjblair/formal-conjectures@96eeecf40bc06ddc8bae6d106f461d4fd774858a:FormalConjectures.erdos_154"
+relation = "close"
+
+[[translations]]
+source = "proofs.yaml proof entries"
+target = "Exact Reference native identity, revision, fixity, selector, and Method inputs"
+disposition = "preserved"
+
+[[translations]]
+source = "Erdos154.erdos_154_sumset"
+target = "FormalConjectures.erdos_154"
+disposition = "normalized"
+
+[[methods]]
+id = "lean-build"
+root = "sha256:d758f77d782611e23e633f1bb4640004d39f5ce61df50f6890a17f030fba09f9"
+
+[[methods]]
+id = "axiom-audit"
+root = "sha256:1ee9b6d7d629e673639992a66b944a2a789664b999086d9fe1f7343c6296649c"
+
+[[methods]]
+id = "integration-validator"
+root = "sha256:546365b093a0b2886ec3c8995aa4d186ed2c26be3ed7052c5cd0a8a73b27f86b"
