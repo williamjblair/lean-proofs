@@ -20,6 +20,9 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_SCHEMA = "lean-proofs.verification-input.v0.1"
 EXPECTED_REPOSITORY = "https://github.com/williamjblair/lean-proofs.git"
 EXPECTED_NATIVE_REVISION = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
+EXPECTED_CORE_REPOSITORY = "https://github.com/vela-science/vela.git"
+EXPECTED_CORE_REVISION = "bea4ec2af0772e366a0670d49a10b7085a4c73c1"
+EXPECTED_CORE_VERSION = "0.974.2"
 EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.29.1"
 EXPECTED_MATHLIB = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
 SELECTED_THEOREM = "Erdos154.erdos_154_sumset"
@@ -183,6 +186,18 @@ def run_core_check(root: Path, vela_bin: str) -> dict[str, Any]:
     """Delegate the shared Manifest/Profile/Binding/Method waist to Core."""
 
     try:
+        version = subprocess.run(
+            [vela_bin, "--version"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if version.returncode != 0 or version.stdout.strip() != (
+            f"vela {EXPECTED_CORE_VERSION}"
+        ):
+            raise ValidationError(
+                "Vela Core binary version drift from the pinned published checker"
+            )
         completed = subprocess.run(
             [vela_bin, "integration", "check", str(root), "--json"],
             check=False,
@@ -487,6 +502,18 @@ def validate_method_semantics(root: Path) -> dict[str, dict[str, Any]]:
         raise ValidationError("axiom audit environment drift")
     if audit.get("allowed_axioms") != ["propext", "Classical.choice", "Quot.sound"]:
         raise ValidationError("axiom audit policy drift")
+    integration = methods["integration-validator"]
+    expected_core_input = f"Vela Core integration checker@{EXPECTED_CORE_REVISION}"
+    if expected_core_input not in integration["inputs"]:
+        raise ValidationError("integration validator Core input revision drift")
+    if integration["environment"].get("core") != {
+        "repository": EXPECTED_CORE_REPOSITORY,
+        "revision": EXPECTED_CORE_REVISION,
+        "binary": "vela",
+        "version": EXPECTED_CORE_VERSION,
+        "command": "vela integration check <repository> --json",
+    }:
+        raise ValidationError("integration validator Core environment drift")
     return methods
 
 

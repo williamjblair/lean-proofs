@@ -71,8 +71,9 @@ document or fifth root domain. The input binds the exact subject, Method, and
 artifact closure, but contains no outcome or evidence-availability claim; an
 executed check must continue through Vela's existing Verification machinery.
 
-From a fresh clone with no project cache, the cold-consumer gate requires a
-Vela Core CLI containing `integration check`:
+From a fresh clone with no project cache, the cold-consumer gate requires the
+`vela` 0.974.2 binary built from published Vela Core commit
+`bea4ec2af0772e366a0670d49a10b7085a4c73c1`:
 
 ```bash
 bash scripts/cold_consume_erdos154.sh

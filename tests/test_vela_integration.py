@@ -86,7 +86,7 @@ class IntegrationHostileTests(unittest.TestCase):
     def test_core_owns_shared_root_refusal(self) -> None:
         replace_once(
             self.root / "vela.toml",
-            "sha256:e6d3a4f0c47efbffb69028dd95326e5e46a43675de283137a7f04a68d4bd5327",
+            "sha256:b56bc2cd1107c0e85f414a8c15d4a1dd561c36b61e6d5dad98ff6c274281a434",
             "sha256:1234",
         )
         self.assert_refused("Vela Core integration check failed")
@@ -152,6 +152,18 @@ class IntegrationHostileTests(unittest.TestCase):
             "leanprover/lean4:v4.29.0",
         )
         self.assert_refused("toolchain")
+
+    def test_source_closes_published_core_revision(self) -> None:
+        method = self.root / ".vela/methods/integration-validator.toml"
+        replace_once(
+            method,
+            CHECK.EXPECTED_CORE_REVISION,
+            "0" * 40,
+        )
+        with self.assertRaisesRegex(
+            CHECK.ValidationError, "integration validator Core input revision drift"
+        ):
+            CHECK.validate_method_semantics(self.root)
 
     def test_missing_audit_coverage_refuses(self) -> None:
         replace_once(

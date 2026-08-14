@@ -26,6 +26,16 @@ jobs:
       - name: Manifest is in sync
         run: bash scripts/check_manifest.sh
 
+      - name: Build the published Vela Core integration checker
+        env:
+          VELA_CORE_REVISION: bea4ec2af0772e366a0670d49a10b7085a4c73c1
+        run: |
+          git clone --filter=blob:none https://github.com/vela-science/vela.git "$RUNNER_TEMP/vela-core"
+          git -C "$RUNNER_TEMP/vela-core" checkout --detach "$VELA_CORE_REVISION"
+          rustup toolchain install 1.97.1 --profile minimal
+          cargo +1.97.1 build --locked -p vela-cli --manifest-path "$RUNNER_TEMP/vela-core/Cargo.toml"
+          echo "VELA_BIN=$RUNNER_TEMP/vela-core/target/debug/vela" >> "$GITHUB_ENV"
+
       - name: Native integration contracts are exact
         run: |
           python3 scripts/check_vela_integration.py

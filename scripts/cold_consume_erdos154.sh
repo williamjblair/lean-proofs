@@ -14,6 +14,7 @@ unset SSH_AUTH_SOCK GITHUB_TOKEN GH_TOKEN || true
 
 vela_bin="${VELA_BIN:-vela}"
 command -v "$vela_bin" >/dev/null 2>&1 || fail "Vela Core CLI is required for the shared integration waist"
+[ "$("$vela_bin" --version)" = "vela 0.974.2" ] || fail "Vela Core CLI version must be 0.974.2 from published commit bea4ec2af0772e366a0670d49a10b7085a4c73c1"
 
 output="${1:-erdos-154-verification-input.json}"
 repeat_output="$(mktemp -t lean-proofs-erdos154.XXXXXX)"
