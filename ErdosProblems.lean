@@ -1,6 +1,7 @@
--- Library root: solved problems only (Erdős 730, 154).
+-- Library root: solved proof targets only.
 import ErdosProblems.Erdos154
 import ErdosProblems.Erdos154Sumset
+import ErdosProblems.Erdos94SumMultiplicity
 import ErdosProblems.Erdos730AnalyticInputs
 import ErdosProblems.Erdos730BranchEvents
 import ErdosProblems.Erdos730BranchEventsAudit

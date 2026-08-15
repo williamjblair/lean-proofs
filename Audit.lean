@@ -10,6 +10,7 @@ axiom outside `[propext, Classical.choice, Quot.sound]`.
 
 -- Manifest-tracked formal proof targets.
 #print axioms Erdos154.erdos_154_sumset
+#print axioms Erdos94.variants.sum_multiplicity
 #print axioms Erdos730.eight_mul_sq_le_succ_cube
 #print axioms Erdos730.nearEnvelope_forces_high_exponent
 #print axioms Erdos730.nearEnvelope_prime_power_clearance
