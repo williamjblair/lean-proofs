@@ -72,11 +72,11 @@ artifact closure, but contains no outcome or evidence-availability claim; an
 executed check must continue through Vela's existing Verification machinery.
 
 From a fresh clone with no project cache, the cold-consumer gate requires the
-`vela` 0.974.2 binary built from published Vela Core commit
-`bea4ec2af0772e366a0670d49a10b7085a4c73c1`:
+signed `vela` 0.976.1 binary from release commit
+`329487f29ad4c6313a2be7c091d46085b61ff03b`:
 
 ```bash
-bash scripts/cold_consume_erdos154.sh
+bash scripts/cold_consume_erdos94.sh
 ```
 
 The non-destructive [branch disposition inventory](.vela/BRANCH_DISPOSITION.md)

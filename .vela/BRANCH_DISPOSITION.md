@@ -82,4 +82,4 @@ This tranche does not perform those scans or delete them.
   been checked.
 
 This inventory is informational and does not participate in the selected
-Erdos 154 cold-consumer check.
+Erdős 94 cold-consumer check.

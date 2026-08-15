@@ -1,12 +1,12 @@
 schema = "vela.integration-method.v0.1"
-method_root = "sha256:fc96ed80cbdfc29461c3551896b3f46c00249add3dd0e62b2b40a5343586d893"
+method_root = "sha256:e9ffaf71692093d9430485a6de9b43a6b1e7ddacd5b623093841a078641edd1e"
 method_id = "integration-validator"
 version = "0.1"
 inputs = [
-  "Vela Core integration checker@bea4ec2af0772e366a0670d49a10b7085a4c73c1",
+  "Vela Core integration checker@329487f29ad4c6313a2be7c091d46085b61ff03b",
   "vela.toml and its rooted Profile, Binding, and Method inventory",
-  "proofs.yaml with 79 source-owned proof mappings",
-  ".vela/examples/erdos-154-exact-reference.toml and its exact closure",
+  "proofs.yaml with 80 source-owned proof mappings",
+  ".vela/examples/erdos-94-exact-reference.toml and its exact closure",
 ]
 outputs = ["scoped integration conformance result", "optional verification input"]
 limitations = [
@@ -21,16 +21,16 @@ authority_effect = "none"
 
 [implementation]
 path = "scripts/check_vela_integration.py"
-digest = "sha256:d0a9a49127c0cf136da619e95fe498f589e3d908771928ed65462a9d75f0ba1f"
+digest = "sha256:53c35a4a5b0ac05dc088455929ca6bb73da56ce00463d26121f88c3b20da4ca0"
 
 [environment]
 kind = "exact"
-revision = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
+revision = "423344341fbfdf4f8f684a302c5d05379125e7dc"
 runtime = "Python 3.11+ standard library"
 
 [environment.core]
 repository = "https://github.com/vela-science/vela.git"
-revision = "bea4ec2af0772e366a0670d49a10b7085a4c73c1"
+revision = "329487f29ad4c6313a2be7c091d46085b61ff03b"
 binary = "vela"
-version = "0.974.2"
+version = "0.976.1"
 command = "vela integration check <repository> --json"

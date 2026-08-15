@@ -19,14 +19,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_SCHEMA = "lean-proofs.verification-input.v0.1"
 EXPECTED_REPOSITORY = "https://github.com/williamjblair/lean-proofs.git"
-EXPECTED_NATIVE_REVISION = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
+EXPECTED_NATIVE_REVISION = "423344341fbfdf4f8f684a302c5d05379125e7dc"
 EXPECTED_CORE_REPOSITORY = "https://github.com/vela-science/vela.git"
-EXPECTED_CORE_REVISION = "bea4ec2af0772e366a0670d49a10b7085a4c73c1"
-EXPECTED_CORE_VERSION = "0.974.2"
+EXPECTED_CORE_REVISION = "329487f29ad4c6313a2be7c091d46085b61ff03b"
+EXPECTED_CORE_VERSION = "0.976.1"
 EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.29.1"
 EXPECTED_MATHLIB = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
-SELECTED_THEOREM = "Erdos154.erdos_154_sumset"
-SELECTED_SOURCE = "ErdosProblems/Erdos154Sumset.lean"
+SELECTED_THEOREM = "Erdos94.variants.sum_multiplicity"
+SELECTED_SOURCE = "ErdosProblems/Erdos94SumMultiplicity.lean"
 EXPECTED_LOCAL_REFERENCES = {
     "lakefile.toml": {
         "schema": "vela.exact-reference.v0.1",
@@ -61,8 +61,8 @@ EXPECTED_LOCAL_REFERENCES = {
         "revision": {"kind": "git_commit", "value": EXPECTED_NATIVE_REVISION},
         "content_fixity": {
             "media_type": "text/x-lean",
-            "digest": "sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457",
-            "size": 25003,
+            "digest": "sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
+            "size": 5527,
         },
         "selector": {"kind": "lean_declaration", "value": SELECTED_THEOREM},
         "locator": {
@@ -80,44 +80,42 @@ EXPECTED_EXTERNAL_REFERENCE = {
     "native_identity": {
         "system": "git+lean4",
         "object_kind": "theorem",
-        "identifier": "FormalConjectures.erdos_154",
+        "identifier": "Erdos94.erdos_94.variants.sum_multiplicity",
     },
     "revision": {
         "kind": "git_commit",
-        "value": "96eeecf40bc06ddc8bae6d106f461d4fd774858a",
+        "value": "94a278e06a8bcbc2e4f2935e491c0c115ec832e0",
     },
     "content_fixity": {
         "media_type": "text/x-lean",
-        "digest": "sha256:cb6c207f5a6d9710a50b876e5719a13498315b2f539a34230ca4ec6813136032",
-        "size": 3752,
+        "digest": "sha256:ba09a21af6257987afed3733e9edc737bfe4d1f132f1cb07ca6f5fe216337d3b",
+        "size": 3215,
     },
-    "selector": {"kind": "lean_declaration", "value": "FormalConjectures.erdos_154"},
+    "selector": {
+        "kind": "lean_declaration",
+        "value": "Erdos94.erdos_94.variants.sum_multiplicity",
+    },
     "locator": {
-        "uri": "https://github.com/williamjblair/formal-conjectures/blob/96eeecf40bc06ddc8bae6d106f461d4fd774858a/FormalConjectures/ErdosProblems/154.lean",
+        "uri": "https://github.com/williamjblair/formal-conjectures/blob/94a278e06a8bcbc2e4f2935e491c0c115ec832e0/FormalConjectures/ErdosProblems/94.lean",
         "mutable": False,
         "authentication": "public",
     },
 }
 EXPECTED_CLOSURE = [
     {
-        "path": "ErdosProblems/Erdos154Sumset.lean",
-        "digest": "sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457",
-        "size": 25003,
-    },
-    {
-        "path": "ErdosProblems/Erdos154.lean",
-        "digest": "sha256:985900ccba24e5ba4d145e74da5b84ceb94338ba627b41688fc3892cae091822",
-        "size": 76921,
+        "path": "ErdosProblems/Erdos94SumMultiplicity.lean",
+        "digest": "sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
+        "size": 5527,
     },
     {
         "path": "proofs.yaml",
-        "digest": "sha256:c3902930f1e3a910fc2bf4a10397fda769c84e0b1b7b84de0cb109d5488110a3",
-        "size": 35553,
+        "digest": "sha256:38c4ed4e02091a837f8bafeb9770485b7421f4abe68624020796b8e652c2cd03",
+        "size": 35942,
     },
     {
         "path": "Audit.lean",
-        "digest": "sha256:59df59b5cf150b3048a32a85f843dd4d07fbe91eb086a2f1cda8d20b93aebc65",
-        "size": 4412,
+        "digest": "sha256:bf5fe15cfa625e1d083cad4fc6d700eb2413a481ca773448f5cd9ccd0eb6533c",
+        "size": 4460,
     },
     {
         "path": "lean-toolchain",
@@ -322,7 +320,7 @@ def validate_proof_index(root: Path) -> list[dict[str, Any]]:
         "mathlib": "v4.29.1",
     }:
         raise ValidationError(f"proof index header drift: {header}")
-    if toolchain != EXPECTED_TOOLCHAIN or len(proofs) != 79:
+    if toolchain != EXPECTED_TOOLCHAIN or len(proofs) != 80:
         raise ValidationError("toolchain or proof index count drift")
     manifest = json.loads(
         retained_file(root, "lake-manifest.json").read_text(encoding="utf-8")
@@ -421,12 +419,12 @@ def validate_local_reference(
 
 
 def validate_example(root: Path, proofs: list[dict[str, Any]]) -> dict[str, Any]:
-    example = load_toml(root, ".vela/examples/erdos-154-exact-reference.toml")
+    example = load_toml(root, ".vela/examples/erdos-94-exact-reference.toml")
     validate_local_reference(root, example["reference"], proofs)
     if example["external_reference"] != EXPECTED_EXTERNAL_REFERENCE:
         raise ValidationError("external Formal Conjectures Exact Reference drift")
-    if example["mapping"] != {"relation": "close"} or example["translation"] != {
-        "disposition": "normalized"
+    if example["mapping"] != {"relation": "exact"} or example["translation"] != {
+        "disposition": "preserved"
     }:
         raise ValidationError("selected semantic mapping or translation drift")
     if (
@@ -458,21 +456,21 @@ def validate_source_bindings(
         raise ValidationError(
             "selected example and formal-proof Binding reference drift"
         )
-    selected = [proof for proof in proofs if proof.get("problem") == 154]
+    selected = [proof for proof in proofs if proof.get("problem") == 94]
     if len(selected) != 1 or selected[0].get("theorem") != SELECTED_THEOREM:
-        raise ValidationError("selected Erdos 154 proof index drift")
-    if selected[0].get("fc_target") != "FormalConjectures/ErdosProblems/154.lean":
-        raise ValidationError("selected Erdos 154 external target drift")
+        raise ValidationError("selected Erdos 94 proof index drift")
+    if selected[0].get("fc_target") != "FormalConjectures/ErdosProblems/94.lean":
+        raise ValidationError("selected Erdos 94 external target drift")
     expected_target = (
-        "williamjblair/formal-conjectures@96eeecf40bc06ddc8bae6d106f461d4fd774858a:"
-        "FormalConjectures.erdos_154"
+        "williamjblair/formal-conjectures@94a278e06a8bcbc2e4f2935e491c0c115ec832e0:"
+        "Erdos94.erdos_94.variants.sum_multiplicity"
     )
     if not any(
         mapping
-        == {"source": SELECTED_THEOREM, "target": expected_target, "relation": "close"}
+        == {"source": SELECTED_THEOREM, "target": expected_target, "relation": "exact"}
         for mapping in formal["mappings"]
     ):
-        raise ValidationError("selected Erdos 154 semantic mapping drift")
+        raise ValidationError("selected Erdos 94 semantic mapping drift")
     if {method["id"] for method in formal["methods"]} != {
         "lean-build",
         "axiom-audit",
@@ -619,7 +617,7 @@ def main() -> int:
                 encoding="utf-8",
             )
         print(
-            "Vela Core waist + lean-proofs semantics: ok (79 proofs; authority_effect none)"
+            "Vela Core waist + lean-proofs semantics: ok (80 proofs; authority_effect none)"
         )
         return 0
     except (

@@ -1,5 +1,5 @@
 schema = "vela.integration-binding.v0.1"
-binding_root = "sha256:2a896bdc0a1ff5ac188c8a9bf5a2c5dad3a042af851d7ecefefc4f95221c19ef"
+binding_root = "sha256:5e5996d421c82931fbcba6e5f3da1e76e7a00bec1aeb6b5270b646af2eb7d016"
 binding_id = "formal-proof-index"
 outputs = ["exact_reference", "verification_input"]
 authority_effect = "none"
@@ -15,23 +15,23 @@ schema = "vela.exact-reference.v0.1"
 [references.native_identity]
 system = "git+lean4"
 object_kind = "theorem"
-identifier = "Erdos154.erdos_154_sumset"
+identifier = "Erdos94.variants.sum_multiplicity"
 
 [references.revision]
 kind = "git_commit"
-value = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
+value = "423344341fbfdf4f8f684a302c5d05379125e7dc"
 
 [references.content_fixity]
 media_type = "text/x-lean"
-digest = "sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457"
-size = 25003
+digest = "sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0"
+size = 5527
 
 [references.selector]
 kind = "lean_declaration"
-value = "Erdos154.erdos_154_sumset"
+value = "Erdos94.variants.sum_multiplicity"
 
 [references.locator]
-uri = "https://github.com/williamjblair/lean-proofs/blob/a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0/ErdosProblems/Erdos154Sumset.lean"
+uri = "https://github.com/williamjblair/lean-proofs/blob/423344341fbfdf4f8f684a302c5d05379125e7dc/ErdosProblems/Erdos94SumMultiplicity.lean"
 mutable = false
 authentication = "public"
 
@@ -41,9 +41,9 @@ target = "https://www.erdosproblems.com/{problem}"
 relation = "exact"
 
 [[mappings]]
-source = "Erdos154.erdos_154_sumset"
-target = "williamjblair/formal-conjectures@96eeecf40bc06ddc8bae6d106f461d4fd774858a:FormalConjectures.erdos_154"
-relation = "close"
+source = "Erdos94.variants.sum_multiplicity"
+target = "williamjblair/formal-conjectures@94a278e06a8bcbc2e4f2935e491c0c115ec832e0:Erdos94.erdos_94.variants.sum_multiplicity"
+relation = "exact"
 
 [[translations]]
 source = "proofs.yaml proof entries"
@@ -51,18 +51,18 @@ target = "Exact Reference native identity, revision, fixity, selector, and Metho
 disposition = "preserved"
 
 [[translations]]
-source = "Erdos154.erdos_154_sumset"
-target = "FormalConjectures.erdos_154"
-disposition = "normalized"
+source = "Erdos94.variants.sum_multiplicity"
+target = "Erdos94.erdos_94.variants.sum_multiplicity"
+disposition = "preserved"
 
 [[methods]]
 id = "lean-build"
-root = "sha256:d758f77d782611e23e633f1bb4640004d39f5ce61df50f6890a17f030fba09f9"
+root = "sha256:2909fbed9313c9a94013ca71ae738fee8ef9eece32b458ca6e7e68b82d383bbf"
 
 [[methods]]
 id = "axiom-audit"
-root = "sha256:1ee9b6d7d629e673639992a66b944a2a789664b999086d9fe1f7343c6296649c"
+root = "sha256:04859d610c26549ddb0d62a4ce907cdc43832c4ba7c9bd18b20df3c9ed063b00"
 
 [[methods]]
 id = "integration-validator"
-root = "sha256:fc96ed80cbdfc29461c3551896b3f46c00249add3dd0e62b2b40a5343586d893"
+root = "sha256:e9ffaf71692093d9430485a6de9b43a6b1e7ddacd5b623093841a078641edd1e"
