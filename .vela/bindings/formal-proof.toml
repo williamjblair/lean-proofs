@@ -1,5 +1,5 @@
 schema = "vela.integration-binding.v0.1"
-binding_root = "sha256:2a896bdc0a1ff5ac188c8a9bf5a2c5dad3a042af851d7ecefefc4f95221c19ef"
+binding_root = "sha256:3a1ae25764b7480a091f88ecf0b1c245be031819cc721415016596901b326ae4"
 binding_id = "formal-proof-index"
 outputs = ["exact_reference", "verification_input"]
 authority_effect = "none"
@@ -65,4 +65,4 @@ root = "sha256:1ee9b6d7d629e673639992a66b944a2a789664b999086d9fe1f7343c6296649c"
 
 [[methods]]
 id = "integration-validator"
-root = "sha256:fc96ed80cbdfc29461c3551896b3f46c00249add3dd0e62b2b40a5343586d893"
+root = "sha256:687b2b618a386ad92b6a1ff1fde13fb2839ce38332d2d74f65e7bfc1fdae49f8"

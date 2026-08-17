@@ -72,8 +72,8 @@ artifact closure, but contains no outcome or evidence-availability claim; an
 executed check must continue through Vela's existing Verification machinery.
 
 From a fresh clone with no project cache, the cold-consumer gate requires the
-`vela` 0.974.2 binary built from published Vela Core commit
-`bea4ec2af0772e366a0670d49a10b7085a4c73c1`:
+signed `vela` 0.976.1 binary from release commit
+`329487f29ad4c6313a2be7c091d46085b61ff03b`:
 
 ```bash
 bash scripts/cold_consume_erdos154.sh
@@ -83,6 +83,24 @@ The non-destructive [branch disposition inventory](.vela/BRANCH_DISPOSITION.md)
 records the repository's other native workstreams separately. Branches remain
 revision locators and evidence custody boundaries; they are not Vela Attempts
 or Standing state, and no merge-all or cleanup is part of this integration.
+
+## Native branches and bounded results
+
+`main` contains completed repository work that has passed ordinary review and
+repository gates. Scientific work in progress stays on ordinary Git branches
+and worktrees; it does not need to be merged for Vela to reference an exact
+commit. A branch is an approach and mutable selector, not an authority object.
+
+When an approach yields a bounded result worth carrying forward, retain the
+result as a source artifact with its exact commit, files, declaration selector,
+toolchain, Method, environment, rights, and provenance. That artifact may later
+support an ordinary Vela Submission. Build success, actor kind, branch naming,
+or merge status does not itself establish quality, acceptance, or Standing.
+
+Generic agent sessions and checkpoints belong in source-owned tooling such as
+Entire when it is available. This repository and Vela store no duplicate
+session, attempt, or checkpoint database; portable provenance may link an
+Entire checkpoint and the exact Git commit without copying either one.
 
 ## Erdős #730 full-density proof
 

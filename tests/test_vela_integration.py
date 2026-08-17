@@ -86,7 +86,7 @@ class IntegrationHostileTests(unittest.TestCase):
     def test_core_owns_shared_root_refusal(self) -> None:
         replace_once(
             self.root / "vela.toml",
-            "sha256:b56bc2cd1107c0e85f414a8c15d4a1dd561c36b61e6d5dad98ff6c274281a434",
+            "sha256:b02b963f1064916052491737e810bc001b2363fba443c340c1ff5f1399548c42",
             "sha256:1234",
         )
         self.assert_refused("Vela Core integration check failed")

@@ -28,7 +28,7 @@ jobs:
 
       - name: Build the published Vela Core integration checker
         env:
-          VELA_CORE_REVISION: bea4ec2af0772e366a0670d49a10b7085a4c73c1
+          VELA_CORE_REVISION: 329487f29ad4c6313a2be7c091d46085b61ff03b
         run: |
           git clone --filter=blob:none https://github.com/vela-science/vela.git "$RUNNER_TEMP/vela-core"
           git -C "$RUNNER_TEMP/vela-core" checkout --detach "$VELA_CORE_REVISION"
