@@ -125,6 +125,14 @@ revision, content root, and declaration selector, so a fingerprint collision,
 normalization change, or heuristic match cannot merge two results or override
 their exact provenance.
 
+The native repository is the canonical path because a real result may require
+many Lean modules, generated certificates, and retained computation files.
+The exact subject and its multi-file artifact closure travel together; no
+single-file upload is assumed, and private or unavailable bytes are never
+silently replaced. A workbench may offer simpler onboarding or parameter-family
+and feasibility views, but those views derive scope from the exact target and
+report bounded cost rather than inventing free-form status labels.
+
 ## Erdős #730 full-density proof
 
 Erdős #730 is unconditionally kernel-proved.  The terminal theorem is

@@ -203,6 +203,13 @@ class IntegrationHostileTests(unittest.TestCase):
             method_root,
             packet["example"]["closure"],
         )
+        self.assertEqual(value["subject"], packet["example"]["reference"])
+        self.assertEqual(value["artifacts"], packet["example"]["closure"])
+        self.assertGreater(len(value["artifacts"]), 1)
+        self.assertEqual(
+            value["subject"]["selector"],
+            {"kind": "lean_declaration", "value": CHECK.SELECTED_THEOREM},
+        )
         for forbidden in (
             "result_root",
             "verification_input_root",
