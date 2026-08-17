@@ -102,6 +102,29 @@ Entire when it is available. This repository and Vela store no duplicate
 session, attempt, or checkpoint database; portable provenance may link an
 Entire checkpoint and the exact Git commit without copying either one.
 
+### Bounded result summary
+
+A reusable result summary may describe a proof, partial lemma, counterexample,
+failed route, or other negative result. Keep it small and source-owned, and
+include:
+
+- the target question or declaration;
+- the approach and the scope actually explored;
+- assumptions and unresolved conditions;
+- the resource budget and exact toolchain/environment;
+- exact artifact and evidence references, including commit, path, selector,
+  fixity, and the Method used;
+- the scoped outcome, including partial, negative, inconclusive, or proved;
+- the condition under which retrying the approach would be informative.
+
+This summary is the reusable artifact; raw search trajectories, agent turns,
+and checkpoints stay in Entire or another source-owned activity system. A
+proof-state canonicalizer or similarity fingerprint must name its algorithm
+and version and remain advisory. Exact identity continues to come from the Git
+revision, content root, and declaration selector, so a fingerprint collision,
+normalization change, or heuristic match cannot merge two results or override
+their exact provenance.
+
 ## Erdős #730 full-density proof
 
 Erdős #730 is unconditionally kernel-proved.  The terminal theorem is

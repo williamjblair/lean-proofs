@@ -30,6 +30,7 @@ does not add a Branch object to Vela Core:
 | Performer or tool action | Separate performer, Method, environment, activity, artifact, and role attribution | Record human, AI, organization, or deterministic-tool provenance without treating actor kind as evidence quality. |
 | Native merge | New exact commit reference in the curated corpus | Record publication lineage; do not translate merge, review, or CI into a Vela Decision or Standing. |
 | Bounded result | Exact source artifact at a commit, with selector, fixity, rights, Method, environment, and provenance | May later support an ordinary Vela Submission; it is not created by treating the branch itself as a result. |
+| Proof-state fingerprint | Named canonicalization or fingerprint algorithm plus version | Advisory comparison aid only; exact commit, content root, and selector remain identity. |
 
 The Workspace reference is therefore a link to source-owned evidence, not a
 copy of the branch, a new protocol object, or an authority-bearing admission.
