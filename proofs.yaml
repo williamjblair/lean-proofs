@@ -23,6 +23,15 @@ proofs:
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/154.lean
     fc_pr: https://github.com/google-deepmind/formal-conjectures/pull/4340
+  - problem: 94
+    source: erdosproblems
+    file: ErdosProblems/Erdos94SumMultiplicity.lean
+    theorem: Erdos94.variants.sum_multiplicity
+    statement: >-
+      The sum of the multiplicities of all distances determined by a finite
+      planar point set is the number of unordered pairs of distinct points.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/94.lean
   - problem: 730
     source: erdosproblems
     file: ErdosProblems/Erdos730NearAffinePayment.lean
