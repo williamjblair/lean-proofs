@@ -41,7 +41,6 @@ class IntegrationHostileTests(unittest.TestCase):
             "lake-manifest.json",
             "scripts/check_axioms.sh",
             "scripts/check_vela_integration.py",
-            "ErdosProblems/Erdos154.lean",
         ):
             target = self.root / raw
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -74,7 +73,7 @@ class IntegrationHostileTests(unittest.TestCase):
         self.assertTrue(packet["core"]["ok"])
         self.assertEqual(packet["core"]["schema"], "vela.cli.integration-check.v1")
         self.assertEqual(packet["core"]["authority_effect"], "none")
-        self.assertEqual(len(packet["proofs"]), 79)
+        self.assertEqual(len(packet["proofs"]), 80)
 
     def test_retained_proof_index_symlink_escape_refuses(self) -> None:
         outside = Path(self.temp.name) / "outside-proofs.yaml"
@@ -86,7 +85,7 @@ class IntegrationHostileTests(unittest.TestCase):
     def test_core_owns_shared_root_refusal(self) -> None:
         replace_once(
             self.root / "vela.toml",
-            "sha256:b02b963f1064916052491737e810bc001b2363fba443c340c1ff5f1399548c42",
+            "sha256:6768749539afa5d01588a75d7275d5e9d32114a0f4c3e1a1dc48128ec80e4088",
             "sha256:1234",
         )
         self.assert_refused("Vela Core integration check failed")
@@ -94,8 +93,8 @@ class IntegrationHostileTests(unittest.TestCase):
     def test_theorem_drift_refuses(self) -> None:
         replace_once(
             self.root / "proofs.yaml",
-            "theorem: Erdos154.erdos_154_sumset",
-            "theorem: Erdos154.not_the_selected_theorem",
+            "theorem: Erdos94.variants.sum_multiplicity",
+            "theorem: Erdos94.variants.not_the_selected_theorem",
         )
         self.assert_refused("theorem drift")
 
@@ -104,8 +103,8 @@ class IntegrationHostileTests(unittest.TestCase):
         reference = copy.deepcopy(
             CHECK.EXPECTED_LOCAL_REFERENCES[CHECK.SELECTED_THEOREM]
         )
-        reference["native_identity"]["identifier"] = "Erdos154.nonexistent"
-        reference["selector"]["value"] = "Erdos154.nonexistent"
+        reference["native_identity"]["identifier"] = "Erdos94.variants.nonexistent"
+        reference["selector"]["value"] = "Erdos94.variants.nonexistent"
         reference["content_fixity"]["digest"] = "sha256:" + "0" * 64
         with self.assertRaisesRegex(
             CHECK.ValidationError, "local Exact Reference drift"
@@ -117,7 +116,7 @@ class IntegrationHostileTests(unittest.TestCase):
         reference["native_identity"]["identifier"] = "FormalConjectures.nonexistent"
         reference["selector"]["value"] = "FormalConjectures.nonexistent"
         example = CHECK.load_toml(
-            self.root, ".vela/examples/erdos-154-exact-reference.toml"
+            self.root, ".vela/examples/erdos-94-exact-reference.toml"
         )
         example["external_reference"] = reference
         _, proofs = CHECK.parse_proofs(self.root / "proofs.yaml")
@@ -133,7 +132,7 @@ class IntegrationHostileTests(unittest.TestCase):
 
     def test_coherent_namespace_and_fixity_drift_refuses(self) -> None:
         source = self.root / CHECK.SELECTED_SOURCE
-        replace_once(source, "namespace Erdos154", "namespace WrongNamespace")
+        replace_once(source, "namespace Erdos94", "namespace WrongNamespace")
         _, proofs = CHECK.parse_proofs(self.root / "proofs.yaml")
         reference = copy.deepcopy(
             CHECK.EXPECTED_LOCAL_REFERENCES[CHECK.SELECTED_THEOREM]
@@ -168,7 +167,7 @@ class IntegrationHostileTests(unittest.TestCase):
     def test_missing_audit_coverage_refuses(self) -> None:
         replace_once(
             self.root / "Audit.lean",
-            "#print axioms Erdos154.erdos_154_sumset\n",
+            "#print axioms Erdos94.variants.sum_multiplicity\n",
             "",
         )
         self.assert_refused("missing axiom audit coverage")
@@ -183,10 +182,10 @@ class IntegrationHostileTests(unittest.TestCase):
         self.assert_refused("false axioms_clean claim")
 
     def test_private_unavailable_path_refuses(self) -> None:
-        example = self.root / ".vela/examples/erdos-154-exact-reference.toml"
+        example = self.root / ".vela/examples/erdos-94-exact-reference.toml"
         replace_once(
             example,
-            "The Erdős 730 original local attachment is outside this selected proof and is not converted to a result.",
+            "The main cubic Erdős 94 theorem is outside this bounded contribution and is not converted into a result.",
             "/Users/private/.codex/attachments/evidence.txt",
         )
         self.assert_refused("private path")

@@ -1,7 +1,8 @@
 # Native branch disposition inventory
 
-Observed 2026-08-17 against the curated `main` commit
-`a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0`. Counts below are
+Refreshed 2026-08-19 against `origin/main` commit
+`7db39922c50e82e5e4ab289ef8b394414e2697cf` before the Erdős 94 promotion.
+Counts below are
 `behind main / ahead of main`, as reported by `git rev-list --left-right
 --count main...<ref>`. This is a non-destructive inventory, not an instruction
 to merge, prune, delete, or rewrite any ref.
@@ -39,8 +40,9 @@ copy of the branch, a new protocol object, or an authority-bearing admission.
 
 | Ref | Exact tip | Behind / ahead | Disposition |
 | --- | --- | ---: | --- |
-| `main`, `origin/main`, `origin/HEAD` | `a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0` | 0 / 0 | Curated published proof corpus. |
-| `codex/native-repository-integration`, `origin/codex/native-repository-integration` | `06d1322e62aa28b860da1ec66465d913c1902c78` | 0 / 7 | Qualified source-owned integration packet. Its repository contract is completed work, separate from scientific proof-status judgments; the current alignment branch updates its pinned Core release and branch model before publication to `main`. |
+| `main`, `origin/main`, `origin/HEAD` at refresh | `7db39922c50e82e5e4ab289ef8b394414e2697cf` | 0 / 0 | Curated published proof corpus before this tranche. |
+| `codex/native-workflow-alignment`, `origin/codex/native-workflow-alignment` | `7db39922c50e82e5e4ab289ef8b394414e2697cf` | 0 / 0 | Completed and published native workflow/Core alignment. |
+| `codex/native-repository-integration`, `origin/codex/native-repository-integration` | `06d1322e62aa28b860da1ec66465d913c1902c78` | 3 / 0 | Superseded merged ancestor retained as integration lineage. |
 
 ## Genuinely active workstreams
 
@@ -49,8 +51,7 @@ at observation time. Activity is a custody fact, not a quality judgment.
 
 | Ref | Exact tip | Behind / ahead | Disposition |
 | --- | --- | ---: | --- |
-| `codex/native-workflow-alignment` | `06d1322e62aa28b860da1ec66465d913c1902c78` at branch creation | 0 / 7 | Current repository-alignment workstream. Complete and merge only after the focused and cold gates pass. |
-| `codex/pilot-ext-01-erdos94-sum-multiplicity`, `origin/codex/pilot-ext-01-erdos94-sum-multiplicity` | `c23bda1584fa496363f93b4ee783f3e0d1ee116e` | 0 / 9 | Clean linked scientific worktree containing a bounded Erdős 94 theorem and an exact-reference pilot. Preserve as an active native approach; do not merge merely to expose it to Vela. Scientific review and ordinary repository acceptance remain separate gates. |
+| `codex/erdos94-flagship-handoff` | `6d5c46d14d68e994ebb3ffd554d6a6fdc75f81af` at source merge | 0 / 2 | Current narrow promotion. It preserves exact proof commit `423344341fbfdf4f8f684a302c5d05379125e7dc` as a parent and reconstructs only the current source-owned handoff layer. |
 
 ## Custody-only diverged workstreams
 
@@ -60,6 +61,7 @@ exact tips; selective promotion requires a fresh, problem-specific review.
 
 | Ref | Exact tip | Behind / ahead | Disposition |
 | --- | --- | ---: | --- |
+| `codex/pilot-ext-01-erdos94-sum-multiplicity`, `origin/codex/pilot-ext-01-erdos94-sum-multiplicity` | `c23bda1584fa496363f93b4ee783f3e0d1ee116e` | 3 / 2 | Superseded pilot custody. Its exact proof parent is promoted without rewriting; its older integration rewrite and session context are not merged. Preserve until external exact citations no longer require this ref. |
 | `erdos-campaign-2026-07-30`, `origin/erdos-campaign-2026-07-30` | `94fde841ea6ad90437bd66a91953bfeba13dba0f` | 9 / 53 | Multi-problem campaign containing corrections and retractions. Registered temporary worktrees are prunable because their directories are absent, so the branch is custody-only here. Preserve and reference exactly; **do not merge all**. Review and promote individual proof/provenance packets only. |
 | `origin/codex/erdos23-two-defect-final` | `2d98b64d6a9c26593609260868f6731831bbc850` | 59 / 15 | Problem-specific proof workstream. Preserve exact evidence; review any narrow promotion independently. |
 | `origin/codex/erdos686-corrected-bounded-osculation` | `dcd582945fa9fff0197484c1b0785b1f3ca2b668` | 37 / 12 | Corrective proof workstream. Preserve exact lineage; do not replace it with a green-build summary. |
@@ -92,9 +94,10 @@ This tranche does not perform those scans or delete them.
   `85006fc4d9018fa353f8c280a8de8ea1be5157ea` retains 405 source, research,
   computation, and reference files. Keep it as exact WIP evidence; do not drop
   or apply it wholesale.
-- The primary linked worktree is clean on the qualified integration branch.
-- The Erdős 94 pilot has a separate clean linked worktree and remains unmerged.
-- The current Codex worktree is isolated on `codex/native-workflow-alignment`.
+- The primary linked worktree is clean on the superseded integration ancestor.
+- The Erdős 94 pilot has a separate clean linked worktree and remains retained
+  as exact custody; only its proof parent is promoted.
+- The current Codex worktree is isolated on `codex/erdos94-flagship-handoff`.
 - Three registered temporary worktrees point at
   `94fde841ea6ad90437bd66a91953bfeba13dba0f`: one names
   `erdos-campaign-2026-07-30`, and two are detached. Their private temporary
@@ -104,4 +107,4 @@ This tranche does not perform those scans or delete them.
   been checked.
 
 This inventory is informational and does not participate in the selected
-Erdős 154 cold-consumer check.
+bounded Erdős 94 cold-consumer check.

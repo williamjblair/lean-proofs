@@ -1,9 +1,8 @@
 # Machine-readable index of the verified proofs hosted in this repo.
 #
-# Consumed by willblair0708/erdos-fc-sync as a proof *source* (alongside
-# plby/lean-proofs and Jayyhk/erdos-lean): when this repo hosts a clean proof
-# for a problem that Formal Conjectures does not yet link, the sync surfaces it
-# as a contribution target.
+# This repository-native file is the canonical machine-readable index. External
+# tools may consume an exact Git revision, but no downstream service is required
+# to discover, build, or audit the proofs.
 #
 # `axioms_clean: true` is enforced by scripts/check_axioms.sh on every push.
 repo: williamjblair/lean-proofs

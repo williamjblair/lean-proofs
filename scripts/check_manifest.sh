@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Keeps proofs.yaml (the machine-readable index that erdos-fc-sync ingests)
-# honest: every theorem advertised in the manifest must actually be audited in
+# Keeps proofs.yaml (the repository-native machine-readable index) honest:
+# every theorem advertised in the manifest must actually be audited in
 # the manifest-tracked section of Audit.lean, and every theorem in that section
 # must be advertised. Conditional research surfaces in Audit.lean are excluded
 # from the solved-proof manifest.

@@ -17,20 +17,24 @@ Decision, or Standing in any Repository.
 ErdosProblems/Erdos730*.lean   Erdős #730: infinitely many consecutive central
                                binomial coefficients share prime support (SOLVED)
 ErdosProblems/Erdos154*.lean   Erdős #154: Sidon sumset equidistribution (proved)
+ErdosProblems/Erdos94*.lean    Erdős #94 bounded sum-multiplicity identity (proved)
 compute730/                    exact-arithmetic provenance for the #730 proof
 Audit.lean                     #print axioms for the proof targets
 starfleet/                     third-party proofs by Star Fleet Math (Colin Snyder),
                                18 self-contained lake projects on their own Lean pin
-proofs.yaml                    machine-readable index (consumed by erdos-fc-sync)
+proofs.yaml                    canonical repository-native machine-readable index
 scripts/check_axioms.sh        the verification gate
 NOTICE                         third-party material and its terms
 ```
 
-This repo hosts only **solved** problems with complete, kernel-clean proofs. The
-in-progress campaigns moved to their own homes:
+This repo hosts only completed, kernel-clean declarations. A bounded variant is
+listed with its exact scope; it does not imply that its enclosing research
+problem is solved. In-progress campaigns live outside `main`:
 
-- **Erdős 686** — [erdos-686](https://github.com/williamjblair/erdos-686)
 - **Erdős 23, 617, 699, 727** — [erdos-frontier](https://github.com/vela-science/erdos-frontier)
+- Other historical and custody-only work remains on the exact native refs in
+  the [branch disposition inventory](.vela/BRANCH_DISPOSITION.md); no private
+  repository is presented as a newcomer handoff.
 
 ## Verify locally
 
@@ -72,11 +76,11 @@ artifact closure, but contains no outcome or evidence-availability claim; an
 executed check must continue through Vela's existing Verification machinery.
 
 From a fresh clone with no project cache, the cold-consumer gate requires the
-signed `vela` 0.976.1 binary from release commit
-`329487f29ad4c6313a2be7c091d46085b61ff03b`:
+signed `vela` 0.977.2 binary from release commit
+`c1a34373c2cdd937ed34fd128174a66fa12be71a`:
 
 ```bash
-bash scripts/cold_consume_erdos154.sh
+bash scripts/cold_consume_erdos94.sh
 ```
 
 The non-destructive [branch disposition inventory](.vela/BRANCH_DISPOSITION.md)
@@ -133,6 +137,27 @@ silently replaced. A workbench may offer simpler onboarding or parameter-family
 and feasibility views, but those views derive scope from the exact target and
 report bounded cost rather than inventing free-form status labels.
 
+## Erdős #94 bounded identity
+
+The canonical source proof is
+[`Erdos94.variants.sum_multiplicity`](ErdosProblems/Erdos94SumMultiplicity.lean)
+at exact proof commit
+`423344341fbfdf4f8f684a302c5d05379125e7dc`, preserved in `main` history. For
+every finite planar point set, it proves that the sum of the multiplicities of
+its distinct determined distances is `P.card.choose 2`. The proof explicitly
+shows that each unordered non-diagonal pair has exactly the two ordered
+representatives `(a, b)` and `(b, a)` before dividing the ordered fiber by two.
+
+This is the elementary
+[`sum_multiplicity`](https://github.com/williamjblair/formal-conjectures/blob/94a278e06a8bcbc2e4f2935e491c0c115ec832e0/FormalConjectures/ErdosProblems/94.lean)
+variant at exact Formal Conjectures commit
+`94a278e06a8bcbc2e4f2935e491c0c115ec832e0`. It does **not** prove the cubic
+distance-multiplicity theorem, the no-three-on-a-line theorem, or the regular
+polygon conjecture in that file. See the
+[bounded result summary](.vela/results/erdos-94-sum-multiplicity.md) for exact
+roots, environment, provenance, limits, and retry conditions. Native merge,
+CI, and external Repository Standing remain distinct facts.
+
 ## Erdős #730 full-density proof
 
 Erdős #730 is unconditionally kernel-proved.  The terminal theorem is
@@ -169,14 +194,15 @@ package-global hygiene qualification rather than a gap in the proof.
 
 | Problem | Theorem | Statement | FC |
 |--------:|---------|-----------|----|
+| [94](https://www.erdosproblems.com/94) | `Erdos94.variants.sum_multiplicity` | The sum of the multiplicities of all distinct determined distances is the number of unordered point pairs. | [exact bounded target](https://github.com/williamjblair/formal-conjectures/blob/94a278e06a8bcbc2e4f2935e491c0c115ec832e0/FormalConjectures/ErdosProblems/94.lean) |
 | [154](https://www.erdosproblems.com/154) | `Erdos154.erdos_154_sumset` | For a Sidon set `A` with `\|A\| ~ √N`, the sumset `A+A` is equidistributed over residue classes mod `m`. | [#4340](https://github.com/google-deepmind/formal-conjectures/pull/4340) |
 | [730](https://www.erdosproblems.com/730) | `Erdos730.FullDensityTheorem.pairSet_infinite` | Infinitely many consecutive central binomial coefficients have identical prime support. | [target](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/730.lean) |
 
 ## Relationship to the rest of the ecosystem
 
-- **erdos-fc-sync** reads `proofs.yaml` as a proof source. When a problem has a
-  clean proof here that Formal Conjectures does not yet link, the sync surfaces
-  it as a contribution target.
+- `proofs.yaml` is the canonical machine-readable proof index. Newcomers and
+  downstream tools can inspect an exact public Git revision without a private
+  repository, archived campaign page, or separate synchronization service.
 - Proofs that build on existing formalizations carry that lineage in their
   headers and in `proofs.yaml`. The 154 sumset proof builds on the Lindström
   residue-distribution theorem for `A` (formal authors Aristotle and Wouter van
