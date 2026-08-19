@@ -16,8 +16,8 @@ vela_bin="${VELA_BIN:-vela}"
 command -v "$vela_bin" >/dev/null 2>&1 || fail "Vela Core CLI is required for the shared integration waist"
 [ "$("$vela_bin" --version)" = "vela 0.977.2" ] || fail "Vela Core CLI version must be 0.977.2 from signed release commit c1a34373c2cdd937ed34fd128174a66fa12be71a"
 
-output="${1:-erdos-94-verification-input.json}"
 consumer_state="$(mktemp -d -t lean-proofs-erdos94.XXXXXX)"
+output="${1:-$consumer_state/erdos-94-verification-input.json}"
 repeat_output="$consumer_state/repeat-output.json"
 export XDG_CACHE_HOME="$consumer_state/cache"
 trap 'rm -rf -- "$consumer_state"' EXIT
