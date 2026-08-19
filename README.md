@@ -155,8 +155,13 @@ variant at exact Formal Conjectures commit
 distance-multiplicity theorem, the no-three-on-a-line theorem, or the regular
 polygon conjecture in that file. See the
 [bounded result summary](.vela/results/erdos-94-sum-multiplicity.md) for exact
-roots, environment, provenance, limits, and retry conditions. Native merge,
-CI, and external Repository Standing remain distinct facts.
+roots, environment, provenance, limits, and retry conditions. A
+[non-publishing external-check snapshot](external/palomar/erdos94-sum-multiplicity/README.md)
+provides an exact Challenge/Solution pair, Comparator configuration,
+`formalization.yaml`, dependency lock, and byte digests for a potential later
+Palomar check. It is readiness material only: no submission or registration
+has occurred. Native merge, CI, external mechanical checking, and Vela
+Standing remain distinct facts.
 
 ## Erdős #730 full-density proof
 

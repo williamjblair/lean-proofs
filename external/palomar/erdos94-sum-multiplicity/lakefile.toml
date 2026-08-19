@@ -1,0 +1,13 @@
+name = "Erdos94PalomarSnapshot"
+version = "0.1.0"
+
+[[require]]
+name = "lean-proofs"
+path = "../../.."
+
+[[lean_lib]]
+name = "Challenge"
+
+[[lean_lib]]
+name = "Solution"
+

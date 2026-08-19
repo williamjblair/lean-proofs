@@ -80,3 +80,19 @@ Retry or revise this bounded result only if the target definitions, selected
 declaration, pinned dependency graph, or exact source bytes change. Work on the
 cubic Erdős 94 theorem is a separate scientific target and must not be reported
 as a retry or failure of this completed identity.
+
+## External mechanical-check readiness
+
+`external/palomar/erdos94-sum-multiplicity/` freezes a minimal trusted
+`Challenge.lean`, proved `Solution.lean`, exact Comparator configuration,
+bundle-local `formalization.yaml`, toolchain and dependency lock, and SHA-256
+inventory. Both Lean files elaborate locally in the pinned repository
+environment; the challenge's single `sorry` is the intentional Comparator
+hole. A real Comparator replay with a Linux `landrun` sandbox is not available
+on this Darwin host and remains an external gate.
+
+This preparation is not a Palomar submission or registration, and no status
+URL, credential, or external communication is retained. A future registration
+requires explicit authorization at action time and would be external evidence
+only—not organizational independence, peer review, novelty, importance, or a
+Vela Decision, Event, or Standing change.

@@ -1,0 +1,131 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Erdős 94 bounded sum-multiplicity identity"
+  authors:
+    - "OpenAI Codex Producer"
+  responsible_maintainers:
+    - "Will Blair (lean-proofs repository owner and custodian; not the author of the proof commit)"
+  license: "MIT"
+
+repository:
+  substantive_formalization:
+    id: "https://github.com/williamjblair/lean-proofs"
+    revision: "423344341fbfdf4f8f684a302c5d05379125e7dc"
+
+sources:
+  - title: "Formal Conjectures Erdős problem 94, sum_multiplicity variant"
+    authors:
+      - "Formal Conjectures contributors"
+    id: "https://github.com/williamjblair/formal-conjectures/blob/94a278e06a8bcbc2e4f2935e491c0c115ec832e0/FormalConjectures/ErdosProblems/94.lean"
+    type: "formal-statement"
+    location: "Erdos94.erdos_94.variants.sum_multiplicity"
+    relationship: "formalizes"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "vcl_6763ba247d40303408a268b226c3e27d7a753b63fca3eb0de99619d509346bfb"
+    relationship: "other"
+    note: "Accepted Vela Claim for this exact bounded result; external registry checking remains separate"
+
+classification:
+  arxiv:
+    - "math.CO"
+  msc2020:
+    - "05A15"
+
+status:
+  scope: >-
+    Proves only that the sum of the multiplicities of all distances determined
+    by a finite point set equals the number of unordered pairs. It does not
+    prove the cubic distance-multiplicity theorem, the no-three-on-a-line
+    variant, or the regular-polygon conjecture grouped under Erdős problem 94.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+    - "propext"
+    - "Classical.choice"
+    - "Quot.sound"
+  main_results:
+    - declaration: "Erdos94.variants.sum_multiplicity"
+      file: "ErdosProblems/Erdos94SumMultiplicity.lean"
+      sorry_count: 0
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
+      comparator_config: "external/palomar/erdos94-sum-multiplicity/config.json"
+      literature_dependencies: []
+  limitations: >-
+    This is a repository-owned readiness snapshot, not a Palomar submission or
+    registration. No external registry check, human peer review, source-author
+    endorsement, novelty assessment, or importance assessment has occurred.
+
+automation:
+  methods:
+    - method: "agent"
+      models:
+        - "OpenAI Codex (exact model identifier unavailable from the producer harness)"
+      framework: "Codex producer harness"
+      tool_setup: "Repository-native Lean, Lake, Mathlib cache, and axiom audit"
+      cost:
+        wall_time: "1444 seconds"
+        spend_usd: "not recorded"
+        hardware: "darwin-arm64"
+      prompting_notes: "Raw session trajectory is not copied into this snapshot."
+    - method: "agent"
+      models:
+        - "OpenAI Codex (exact model identifier unavailable from the review harness)"
+      framework: "Codex repository audit"
+      tool_setup: >-
+        Fresh public checkout, full pinned build, axiom audit, hostile native
+        integration tests, no-mutation check, and Formal Conjectures transplant.
+      cost:
+        wall_time: "not separately metered"
+        spend_usd: "not recorded"
+        hardware: "darwin-arm64"
+      prompting_notes: "Review was bounded to the selected theorem and repository custody boundary."
+  spend_usd: "not recorded"
+  notes: >-
+    Agent provenance is descriptive, not a quality score. Generic work/session
+    history remains in native activity tooling rather than this result snapshot.
+
+fidelity:
+  divergences: >-
+    The source theorem is the elementary sum_multiplicity variant only. For the
+    older Formal Conjectures Lean 4.27.0 checkout, the proof needs the mechanical
+    Sym2.mk.uncurry-to-Sym2.mk spelling adaptation and its source scope context;
+    the mathematical statement and permitted axioms are unchanged.
+
+review:
+  status: "agent-reviewed; no external or human scientific review"
+  reviewers:
+    - "OpenAI Codex repository audit (performer distinct from the original producer run; organizational independence not claimed)"
+  notes: >-
+    Review covered the exact statement boundary, ordered/unordered-pair counting,
+    division by two, boundary cases, pinned builds, axioms, source compatibility,
+    and repository custody. Palomar remains a potential later external mechanical
+    check and would not imply Vela authority, novelty, importance, or peer review.
+
+alignment:
+  namespace: "Erdos94.variants"
+  statements:
+    - source: "Formal Conjectures Erdős 94 sum_multiplicity variant"
+      lean: "Erdos94.variants.sum_multiplicity"
+      module: "ErdosProblems/Erdos94SumMultiplicity.lean"
+      status: "proved"
+      note: "Exact source commit 423344341fbfdf4f8f684a302c5d05379125e7dc"
+
+snapshot:
+  public_repository: "https://github.com/williamjblair/lean-proofs"
+  proof_commit: "423344341fbfdf4f8f684a302c5d05379125e7dc"
+  proof_tree: "eae3c8d1941c997f1055f5ea561cb719088b9202"
+  lean: "4.29.1"
+  mathlib_commit: "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
+  prime_number_theorem_and_commit: "d7f9e2bfdcc7e34dfb9328b7494a6d424ff50c96"
+  proof_source_sha256: "412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0"
+  formal_conjectures_commit: "94a278e06a8bcbc2e4f2935e491c0c115ec832e0"
+  formal_conjectures_file_sha256: "ba09a21af6257987afed3733e9edc737bfe4d1f132f1cb07ca6f5fe216337d3b"
+
+acknowledgements: "Mathlib and Formal Conjectures provide the pinned library and target context."
