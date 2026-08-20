@@ -5,10 +5,13 @@ For each proof in proofs.yaml this records the sha256 of the proof file, the
 axiom footprint reported by `lake env lean Audit.lean`, and whether it is
 kernel-clean; it also pins the lake-manifest hash and the audit-output hash.
 
-This is a CI attestation (the proof compiled clean against the pinned Mathlib
-with kernel-only axioms), NOT an independent reproduction. Run it after
-`lake build` (it invokes `lake env lean Audit.lean`). CI verifies that the
-committed attestations.json matches a fresh regeneration, so it never drifts.
+This is a deterministic, locally generated evidence projection, NOT an
+independent reproduction or a claim that CI performed the verification. Run it
+after `lake build` (it invokes `lake env lean Audit.lean`). The committed
+projection records the Lean kernel as the verification method and OpenAI Codex
+as the local evidence generator. A hosted workflow may compare a fresh
+projection with the committed bytes, but that workflow's performer and outcome
+belong in its own run receipt.
 
 No timestamp is recorded: the file changes only when the proofs or their axiom
 footprints change, so a green tree commits no churn.
@@ -25,6 +28,9 @@ import yaml
 ALLOWED = ["Classical.choice", "Quot.sound", "propext"]
 ALLOWED_SET = set(ALLOWED)
 ROOT = Path(__file__).resolve().parent.parent
+SCHEMA = "lean-proofs.attestations.v0.2"
+VERIFICATION_METHOD = "lean_kernel"
+EVIDENCE_GENERATOR = "local:openai-codex"
 
 
 def sha256_file(path: Path) -> str:
@@ -83,6 +89,20 @@ def axiom_footprint_is_clean(footprint: list[str]) -> bool:
     return set(footprint).issubset(ALLOWED_SET)
 
 
+def attestation_metadata(doc: dict, manifest_report: str) -> dict[str, str | None]:
+    """Build actor-honest metadata for the committed local projection."""
+    return {
+        "schema": SCHEMA,
+        "repo": doc.get("repo"),
+        "toolchain": doc.get("toolchain"),
+        "mathlib": doc.get("mathlib"),
+        "verification_method": VERIFICATION_METHOD,
+        "evidence_generator": EVIDENCE_GENERATOR,
+        "lake_manifest_hash": sha256_file(ROOT / "lake-manifest.json"),
+        "verifier_output_hash": sha256_text(manifest_report),
+    }
+
+
 def main() -> int:
     doc = yaml.safe_load((ROOT / "proofs.yaml").read_text()) or {}
     report = subprocess.run(
@@ -118,17 +138,7 @@ def main() -> int:
         if footprint is not None:
             manifest_report += f"'{theorem}' depends on axioms: [{', '.join(footprint)}]\n"
 
-    out = {
-        "schema": "lean-proofs.attestations.v0.1",
-        "repo": doc.get("repo"),
-        "toolchain": doc.get("toolchain"),
-        "mathlib": doc.get("mathlib"),
-        "verifier_method": "lean_kernel",
-        "verifier_actor": "ci:github-actions:williamjblair/lean-proofs",
-        "lake_manifest_hash": sha256_file(ROOT / "lake-manifest.json"),
-        "verifier_output_hash": sha256_text(manifest_report),
-        "attestations": [],
-    }
+    out = {**attestation_metadata(doc, manifest_report), "attestations": []}
     for proof in proofs:
         theorem = proof["theorem"]
         footprint = axioms_by_theorem.get(theorem)
