@@ -73,7 +73,10 @@ class IntegrationHostileTests(unittest.TestCase):
         self.assertTrue(packet["core"]["ok"])
         self.assertEqual(packet["core"]["schema"], "vela.cli.integration-check.v1")
         self.assertEqual(packet["core"]["authority_effect"], "none")
-        self.assertEqual(len(packet["proofs"]), 80)
+        self.assertEqual(
+            len(packet["proofs"]),
+            CHECK.EXPECTED_ROOT_PROOF_COUNT + CHECK.EXPECTED_STARFLEET_PROOF_COUNT,
+        )
 
     def test_retained_proof_index_symlink_escape_refuses(self) -> None:
         outside = Path(self.temp.name) / "outside-proofs.yaml"
@@ -85,7 +88,7 @@ class IntegrationHostileTests(unittest.TestCase):
     def test_core_owns_shared_root_refusal(self) -> None:
         replace_once(
             self.root / "vela.toml",
-            "sha256:6768749539afa5d01588a75d7275d5e9d32114a0f4c3e1a1dc48128ec80e4088",
+            "sha256:01a3c62e404848e0a828426877373e090d9847e8f3747ca3f145a9518a2c5d78",
             "sha256:1234",
         )
         self.assert_refused("Vela Core integration check failed")
@@ -97,6 +100,46 @@ class IntegrationHostileTests(unittest.TestCase):
             "theorem: Erdos94.variants.not_the_selected_theorem",
         )
         self.assert_refused("theorem drift")
+
+    def test_dotted_native_declaration_is_present(self) -> None:
+        source = (self.root / "ErdosProblems/Erdos399Cambie.lean").read_text(
+            encoding="utf-8"
+        )
+        self.assertTrue(
+            CHECK.declaration_is_present(
+                source, "Erdos399.erdos_399.variants.cambie"
+            )
+        )
+
+    def test_commented_dotted_declaration_is_not_present(self) -> None:
+        source = """/- outer
+/- nested -/
+theorem Erdos399.erdos_399.variants.cambie : True := by trivial
+-/
+-- theorem Erdos399.erdos_399.variants.cambie : True := by trivial
+"theorem Erdos399.erdos_399.variants.cambie : True := by trivial"
+"""
+        self.assertFalse(
+            CHECK.declaration_is_present(
+                source, "Erdos399.erdos_399.variants.cambie"
+            )
+        )
+
+    def test_root_to_starfleet_inventory_repartition_refuses(self) -> None:
+        replace_once(
+            self.root / "proofs.yaml",
+            "file: ErdosProblems/Erdos399Cambie.lean",
+            "file: starfleet/hostile/Erdos399Cambie.lean",
+        )
+        self.assert_refused("proof index inventory drift")
+
+    def test_uncategorized_inventory_entry_refuses(self) -> None:
+        replace_once(
+            self.root / "proofs.yaml",
+            "file: ErdosProblems/Erdos399Cambie.lean",
+            "file: hostile/Erdos399Cambie.lean",
+        )
+        self.assert_refused("proof index inventory drift")
 
     def test_coherently_fake_local_reference_refuses(self) -> None:
         _, proofs = CHECK.parse_proofs(self.root / "proofs.yaml")

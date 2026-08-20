@@ -25,6 +25,8 @@ EXPECTED_CORE_REVISION = "c1a34373c2cdd937ed34fd128174a66fa12be71a"
 EXPECTED_CORE_VERSION = "0.977.2"
 EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.29.1"
 EXPECTED_MATHLIB = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
+EXPECTED_ROOT_PROOF_COUNT = 67
+EXPECTED_STARFLEET_PROOF_COUNT = 14
 SELECTED_THEOREM = "Erdos94.variants.sum_multiplicity"
 SELECTED_SOURCE = "ErdosProblems/Erdos94SumMultiplicity.lean"
 EXPECTED_LOCAL_REFERENCES = {
@@ -109,13 +111,13 @@ EXPECTED_CLOSURE = [
     },
     {
         "path": "proofs.yaml",
-        "digest": "sha256:4134d19c41f20c8594b0cf17b913850466a945cf44f26033eebaf009ce428246",
-        "size": 35887,
+        "digest": "sha256:13152bb20fb63eeeba1584de91965364356c70544d0ff4c007ec0f7011ce510c",
+        "size": 36674,
     },
     {
         "path": "Audit.lean",
-        "digest": "sha256:bf5fe15cfa625e1d083cad4fc6d700eb2413a481ca773448f5cd9ccd0eb6533c",
-        "size": 4460,
+        "digest": "sha256:e5f84a7e3200d36c0e603cad7b04c28e9a60c87aff810367de0893cb8946a3dd",
+        "size": 4509,
     },
     {
         "path": "lean-toolchain",
@@ -279,15 +281,65 @@ def audit_targets(path: Path) -> set[str]:
     return targets
 
 
+def strip_lean_comments_and_strings(source: str) -> str:
+    """Mask nested Lean comments and string contents while preserving lines."""
+    masked: list[str] = []
+    index = 0
+    block_depth = 0
+    in_string = False
+    escaped = False
+    while index < len(source):
+        if block_depth:
+            if source.startswith("/-", index):
+                block_depth += 1
+                masked.extend("  ")
+                index += 2
+            elif source.startswith("-/", index):
+                block_depth -= 1
+                masked.extend("  ")
+                index += 2
+            else:
+                masked.append("\n" if source[index] == "\n" else " ")
+                index += 1
+        elif in_string:
+            character = source[index]
+            masked.append("\n" if character == "\n" else " ")
+            index += 1
+            if escaped:
+                escaped = False
+            elif character == "\\":
+                escaped = True
+            elif character == '"':
+                in_string = False
+        elif source.startswith("--", index):
+            while index < len(source) and source[index] != "\n":
+                masked.append(" ")
+                index += 1
+        elif source.startswith("/-", index):
+            block_depth = 1
+            masked.extend("  ")
+            index += 2
+        else:
+            character = source[index]
+            masked.append(character)
+            index += 1
+            if character == '"':
+                in_string = True
+                escaped = False
+    return "".join(masked)
+
+
 def declaration_is_present(source: str, theorem: str) -> bool:
     namespace: list[str] = []
-    for line in source.splitlines():
+    for line in strip_lean_comments_and_strings(source).splitlines():
         opened = re.match(r"^\s*namespace\s+([A-Za-z_][A-Za-z0-9_'.]*)\s*$", line)
         if opened:
             namespace.extend(opened.group(1).split("."))
             continue
         declaration = re.match(
-            r"^\s*(?:theorem|lemma)\s+([A-Za-z_][A-Za-z0-9_']*)(?:\s|:|\(|$)",
+            r"^\s*(?:theorem|lemma)\s+"
+            r"([A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)*)"
+            r"(?:\s|:|\(|$)",
             line,
         )
         if declaration and ".".join([*namespace, declaration.group(1)]) == theorem:
@@ -320,8 +372,20 @@ def validate_proof_index(root: Path) -> list[dict[str, Any]]:
         "mathlib": "v4.29.1",
     }:
         raise ValidationError(f"proof index header drift: {header}")
-    if toolchain != EXPECTED_TOOLCHAIN or len(proofs) != 80:
-        raise ValidationError("toolchain or proof index count drift")
+    if toolchain != EXPECTED_TOOLCHAIN:
+        raise ValidationError("root toolchain drift")
+    root_count = sum(
+        str(proof.get("file", "")).startswith("ErdosProblems/") for proof in proofs
+    )
+    starfleet_count = sum(
+        str(proof.get("file", "")).startswith("starfleet/") for proof in proofs
+    )
+    if (
+        root_count != EXPECTED_ROOT_PROOF_COUNT
+        or starfleet_count != EXPECTED_STARFLEET_PROOF_COUNT
+        or len(proofs) != root_count + starfleet_count
+    ):
+        raise ValidationError("proof index inventory drift")
     manifest = json.loads(
         retained_file(root, "lake-manifest.json").read_text(encoding="utf-8")
     )
@@ -617,7 +681,9 @@ def main() -> int:
                 encoding="utf-8",
             )
         print(
-            "Vela Core waist + lean-proofs semantics: ok (80 proofs; authority_effect none)"
+            "Vela Core waist + lean-proofs semantics: ok "
+            f"({EXPECTED_ROOT_PROOF_COUNT} root + "
+            f"{EXPECTED_STARFLEET_PROOF_COUNT} Starfleet proofs; authority_effect none)"
         )
         return 0
     except (

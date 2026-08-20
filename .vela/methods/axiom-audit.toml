@@ -1,11 +1,11 @@
 schema = "vela.integration-method.v0.1"
-method_root = "sha256:64ac640977ce421094dbdf5a6984f40642e41b43547979dede1b8c0d87d797dc"
+method_root = "sha256:2f95a25174f5f1a82a4f9ff045cdf93fbb0b2c09836287f43902eb909f3428ca"
 method_id = "axiom-audit"
 version = "0.1"
 inputs = [
   "git:423344341fbfdf4f8f684a302c5d05379125e7dc",
-  "proofs.yaml@sha256:4134d19c41f20c8594b0cf17b913850466a945cf44f26033eebaf009ce428246",
-  "Audit.lean@sha256:bf5fe15cfa625e1d083cad4fc6d700eb2413a481ca773448f5cd9ccd0eb6533c",
+  "proofs.yaml@sha256:13152bb20fb63eeeba1584de91965364356c70544d0ff4c007ec0f7011ce510c",
+  "Audit.lean@sha256:e5f84a7e3200d36c0e603cad7b04c28e9a60c87aff810367de0893cb8946a3dd",
   "ErdosProblems/Erdos94SumMultiplicity.lean@sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
 ]
 outputs = ["scoped declaration axiom report"]
