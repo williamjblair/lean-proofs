@@ -2,6 +2,7 @@
 import ErdosProblems.Erdos154
 import ErdosProblems.Erdos154Sumset
 import ErdosProblems.Erdos399Cambie
+import ErdosProblems.Erdos1074EHSNumbers
 import ErdosProblems.Erdos94SumMultiplicity
 import ErdosProblems.Erdos730AnalyticInputs
 import ErdosProblems.Erdos730BranchEvents

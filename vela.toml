@@ -1,5 +1,5 @@
 schema = "vela.integration-manifest.v0.1"
-manifest_root = "sha256:01a3c62e404848e0a828426877373e090d9847e8f3747ca3f145a9518a2c5d78"
+manifest_root = "sha256:ea57c1232eac12abe8d2f3afd7f6135cad847be256e59a1c4aa88d01d8a5844a"
 outputs = ["exact_reference", "submission_draft", "verification_input"]
 authority_effect = "none"
 
@@ -22,11 +22,11 @@ root = "sha256:8358edad46299b717673061f21a607be30ecb8f2224a438163489870edd5d2d0"
 
 [[bindings]]
 path = ".vela/bindings/lean-project.toml"
-root = "sha256:74231dd016fbbdee16f6f895dcf7d6c4a20383c08e2546b0078d06a35dbaf5c6"
+root = "sha256:4566a928ec9a04a39b701680d805c723e7348e5b3784e9d35e914fbd672c8227"
 
 [[bindings]]
 path = ".vela/bindings/formal-proof.toml"
-root = "sha256:bf9f763404102bfb8498641cdc543845d21982b4acab2a45b47cf5c81565b8f2"
+root = "sha256:698f16f61d86395b4197d3a5e912400658317664b46816a69856c5c212bfb42e"
 
 [[methods]]
 id = "lean-build"
@@ -36,12 +36,12 @@ root = "sha256:2909fbed9313c9a94013ca71ae738fee8ef9eece32b458ca6e7e68b82d383bbf"
 [[methods]]
 id = "axiom-audit"
 path = ".vela/methods/axiom-audit.toml"
-root = "sha256:2f95a25174f5f1a82a4f9ff045cdf93fbb0b2c09836287f43902eb909f3428ca"
+root = "sha256:4aee38924a2cf1125ec8c36d7c1e1b70a676842918b99d00177040d9f242732b"
 
 [[methods]]
 id = "integration-validator"
 path = ".vela/methods/integration-validator.toml"
-root = "sha256:cd686971ed316611a77dd97f7bb7d654c051c0225cc1a145bf40aad9ffe260d0"
+root = "sha256:c3a2aac6862f32f34f4729797c6cde70db842e1a477bd8b72e9b5c2e9b042955"
 
 [rights]
 license = "NOASSERTION"

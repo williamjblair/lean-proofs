@@ -1,0 +1,1 @@
+'Erdos1074.erdos_1074.variants.EHSNumbers_init' depends on axioms: [propext, Classical.choice, Quot.sound]

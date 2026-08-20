@@ -25,7 +25,7 @@ EXPECTED_CORE_REVISION = "c1a34373c2cdd937ed34fd128174a66fa12be71a"
 EXPECTED_CORE_VERSION = "0.977.2"
 EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.29.1"
 EXPECTED_MATHLIB = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
-EXPECTED_ROOT_PROOF_COUNT = 67
+EXPECTED_ROOT_PROOF_COUNT = 68
 EXPECTED_STARFLEET_PROOF_COUNT = 14
 SELECTED_THEOREM = "Erdos94.variants.sum_multiplicity"
 SELECTED_SOURCE = "ErdosProblems/Erdos94SumMultiplicity.lean"
@@ -111,13 +111,13 @@ EXPECTED_CLOSURE = [
     },
     {
         "path": "proofs.yaml",
-        "digest": "sha256:13152bb20fb63eeeba1584de91965364356c70544d0ff4c007ec0f7011ce510c",
-        "size": 36674,
+        "digest": "sha256:1ca8e1bccd2c76a275385e306a109e6927ff513a9b7da48ba9480f49ca75b6f0",
+        "size": 37710,
     },
     {
         "path": "Audit.lean",
-        "digest": "sha256:e5f84a7e3200d36c0e603cad7b04c28e9a60c87aff810367de0893cb8946a3dd",
-        "size": 4509,
+        "digest": "sha256:58b32f6a70af17d563d5f8dfa5b3d6aaaebe4c2190582e5326edde8ce4b37a09",
+        "size": 4569,
     },
     {
         "path": "lean-toolchain",

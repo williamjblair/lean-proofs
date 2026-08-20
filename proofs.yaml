@@ -46,6 +46,24 @@ proofs:
     candidate_sha256: ea3d15995219e918c862d01353cbff12c2a74c924335143b0a01366b597dafb6
     evaluation_commit: 08b6fa7c3db48e1cb2fdda1e71c7c7e601e38fd2
     rights: Original proof bytes MIT; exact Formal Conjectures target Apache-2.0
+  - problem: 1074
+    source: erdosproblems
+    file: ErdosProblems/Erdos1074EHSNumbers.lean
+    theorem: Erdos1074.erdos_1074.variants.EHSNumbers_init
+    statement: >-
+      The first seven EHS numbers, enumerated by Nat.nth, are exactly
+      8, 9, 13, 14, 15, 16, and 17.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/1074.lean
+    fc_commit: 9c4d5821819656af53c5473ded2116ea14a7ff1c
+    fc_source_sha256: 72b74c90c3fbdf66fedcd744d6c90da05fdfc7e87673a016787ae4586c705c45
+    producer_commit: 082a118ea6ce7c9ca6a62f72aa425373228f7efe
+    evaluation_commit: be883fe7808e1860373ce19d12d0cb38b409a687
+    handoff_commit: beb0b4e6e68a4646c0d7da96597e1f175e2a8d22
+    certificate_sha256: aa18c73e7d44b4b45210256370f4d04fce97b5239a37caf7df55be7b223d0637
+    certificate_stdout_sha256: 32dbde16b9754e8d3c8419b93bfd95f766e7930967103a1a3b80c8c11e1a0685
+    certificate_role: Computational evidence only; not a Lean proof
+    rights: Original proof and certificate bytes MIT; exact Formal Conjectures target Apache-2.0
   - problem: 730
     source: erdosproblems
     file: ErdosProblems/Erdos730NearAffinePayment.lean

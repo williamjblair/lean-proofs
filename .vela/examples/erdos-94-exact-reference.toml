@@ -36,13 +36,13 @@ size = 5527
 
 [[closure]]
 path = "proofs.yaml"
-digest = "sha256:13152bb20fb63eeeba1584de91965364356c70544d0ff4c007ec0f7011ce510c"
-size = 36674
+digest = "sha256:1ca8e1bccd2c76a275385e306a109e6927ff513a9b7da48ba9480f49ca75b6f0"
+size = 37710
 
 [[closure]]
 path = "Audit.lean"
-digest = "sha256:e5f84a7e3200d36c0e603cad7b04c28e9a60c87aff810367de0893cb8946a3dd"
-size = 4509
+digest = "sha256:58b32f6a70af17d563d5f8dfa5b3d6aaaebe4c2190582e5326edde8ce4b37a09"
+size = 4569
 
 [[closure]]
 path = "lean-toolchain"
