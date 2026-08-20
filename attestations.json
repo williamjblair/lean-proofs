@@ -6,7 +6,7 @@
   "verifier_method": "lean_kernel",
   "verifier_actor": "ci:github-actions:williamjblair/lean-proofs",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:ac575a30c98ba6180fc84f8bcc5b38e6b3cd77d8d8a60b7b9882b5bea58c4225",
+  "verifier_output_hash": "sha256:7aef30014408f5a6f980826686eeb8b2efb549825d2d6d5fa27d02f9962dff5e",
   "attestations": [
     {
       "problem": 154,
@@ -25,6 +25,18 @@
       "theorem": "Erdos94.variants.sum_multiplicity",
       "file": "ErdosProblems/Erdos94SumMultiplicity.lean",
       "proof_hash": "sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 399,
+      "theorem": "Erdos399.erdos_399.variants.cambie",
+      "file": "ErdosProblems/Erdos399Cambie.lean",
+      "proof_hash": "sha256:4edae3c97056d2d5409de10bcdd32d7492a81420738d16d213ee2b2ba11188be",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

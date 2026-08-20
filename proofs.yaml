@@ -31,6 +31,21 @@ proofs:
       planar point set is the number of unordered pairs of distinct points.
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/94.lean
+  - problem: 399
+    source: erdosproblems
+    file: ErdosProblems/Erdos399Cambie.lean
+    theorem: Erdos399.erdos_399.variants.cambie
+    statement: >-
+      If x and y are coprime natural numbers with 1 < x*y, then no factorial
+      is the sum of their fourth powers.
+    axioms_clean: true
+    fc_target: FormalConjectures/ErdosProblems/399.lean
+    fc_commit: 9c4d5821819656af53c5473ded2116ea14a7ff1c
+    fc_source_sha256: 79c50670ecacbd211abb8211814729c8e3aacc5c7055f3790842e381e53f36be
+    producer_commit: badf9efb9723561d096defbfb7a4567c38fdeb24
+    candidate_sha256: ea3d15995219e918c862d01353cbff12c2a74c924335143b0a01366b597dafb6
+    evaluation_commit: 08b6fa7c3db48e1cb2fdda1e71c7c7e601e38fd2
+    rights: Original proof bytes MIT; exact Formal Conjectures target Apache-2.0
   - problem: 730
     source: erdosproblems
     file: ErdosProblems/Erdos730NearAffinePayment.lean
