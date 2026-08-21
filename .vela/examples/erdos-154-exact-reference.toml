@@ -17,8 +17,8 @@ value = "a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0"
 
 [reference.content_fixity]
 media_type = "text/x-lean"
-digest = "sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457"
-size = 25003
+digest = "sha256:8a2a1efd09a6d2810bf41375471d5d1cd1cd9c47db7f7bcf2f797f1cad09780a"
+size = 25013
 
 [reference.selector]
 kind = "lean_declaration"
@@ -31,8 +31,8 @@ authentication = "public"
 
 [[closure]]
 path = "ErdosProblems/Erdos154/Sumset.lean"
-digest = "sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457"
-size = 25003
+digest = "sha256:8a2a1efd09a6d2810bf41375471d5d1cd1cd9c47db7f7bcf2f797f1cad09780a"
+size = 25013
 
 [[closure]]
 path = "ErdosProblems/Erdos154/Lindstrom.lean"
@@ -41,8 +41,8 @@ size = 76921
 
 [[closure]]
 path = "proofs.yaml"
-digest = "sha256:cb8ddb524d8e6278426dcf81ac3f5a0176072baa0575702636dee2775faae831"
-size = 28517
+digest = "sha256:57eb91e27a4f9c1aa5761d36fd3b5ca3df38b0f9ebe9ef7d781a6f94eee1876b"
+size = 28562
 
 [[closure]]
 path = "Audit.lean"

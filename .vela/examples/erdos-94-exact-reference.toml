@@ -13,7 +13,7 @@ identifier = "Erdos94.variants.sum_multiplicity"
 
 [reference.revision]
 kind = "git_commit"
-value = "423344341fbfdf4f8f684a302c5d05379125e7dc"
+value = "0af24bf7bbb5abedd663783adfc3872f2a936f59"
 
 [reference.content_fixity]
 media_type = "text/x-lean"
@@ -25,7 +25,7 @@ kind = "lean_declaration"
 value = "Erdos94.variants.sum_multiplicity"
 
 [reference.locator]
-uri = "https://github.com/williamjblair/lean-proofs/blob/423344341fbfdf4f8f684a302c5d05379125e7dc/ErdosProblems/Erdos94.lean"
+uri = "https://github.com/williamjblair/lean-proofs/blob/0af24bf7bbb5abedd663783adfc3872f2a936f59/ErdosProblems/Erdos94.lean"
 mutable = false
 authentication = "public"
 
@@ -36,8 +36,8 @@ size = 5527
 
 [[closure]]
 path = "proofs.yaml"
-digest = "sha256:cb8ddb524d8e6278426dcf81ac3f5a0176072baa0575702636dee2775faae831"
-size = 28517
+digest = "sha256:57eb91e27a4f9c1aa5761d36fd3b5ca3df38b0f9ebe9ef7d781a6f94eee1876b"
+size = 28562
 [[closure]]
 path = "Audit.lean"
 digest = "sha256:9fcc8078dbdefdac2acceccf24d832b22f7038a6c303f4b67721d45b2a5a87aa"

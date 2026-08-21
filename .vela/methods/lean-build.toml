@@ -1,9 +1,9 @@
 schema = "vela.integration-method.v0.1"
-method_root = "sha256:2edc5e5c65e8d2b75e8a0c5c3fdacc53df23f56cf4ffb6c0f0c946fba189aa19"
+method_root = "sha256:d67886ea765b2f539f85a10e74170defa368d7ad5952907a11076bdd499f98a4"
 method_id = "lean-build"
 version = "0.1"
 inputs = [
-  "git:423344341fbfdf4f8f684a302c5d05379125e7dc",
+  "git:0af24bf7bbb5abedd663783adfc3872f2a936f59",
   "lean-toolchain@sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
   "lakefile.toml@sha256:5ee303c6dfa3b76a7afe4dfe21f00b2ef9acea491e41b87bf95aee9e7a88ef26",
   "lake-manifest.json@sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
@@ -23,6 +23,6 @@ digest = "sha256:5ee303c6dfa3b76a7afe4dfe21f00b2ef9acea491e41b87bf95aee9e7a88ef2
 
 [environment]
 kind = "exact"
-revision = "423344341fbfdf4f8f684a302c5d05379125e7dc"
+revision = "0af24bf7bbb5abedd663783adfc3872f2a936f59"
 toolchain = "leanprover/lean4:v4.29.1"
 mathlib_revision = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"

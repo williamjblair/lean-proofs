@@ -1,12 +1,12 @@
 schema = "vela.integration-manifest.v0.1"
-manifest_root = "sha256:4e1c05b26899391cf7ea67da0f1c858abfc9530ef223b78af02aa3c732f1662f"
+manifest_root = "sha256:b1a952c41fd22df0d514747a3aadb8056330e9f913fbc712a0977cb2809dfc83"
 outputs = ["exact_reference", "submission_draft", "verification_input"]
 authority_effect = "none"
 
 [repository]
 identity = "https://github.com/williamjblair/lean-proofs.git"
 revision_policy = "exact_git_commit"
-revision = "423344341fbfdf4f8f684a302c5d05379125e7dc"
+revision = "0af24bf7bbb5abedd663783adfc3872f2a936f59"
 
 [[profiles]]
 id = "https://github.com/williamjblair/lean-proofs/profiles/lean-project/v0.1"
@@ -22,26 +22,26 @@ root = "sha256:8358edad46299b717673061f21a607be30ecb8f2224a438163489870edd5d2d0"
 
 [[bindings]]
 path = ".vela/bindings/lean-project.toml"
-root = "sha256:58078b381a2bf133ebbf7393eab6e3c20404782db745b36c2e997ecc300990ba"
+root = "sha256:70c505dbd6491a06d4cbbac45d30f478e8045f90005a00b23b2ecd71ff9d5716"
 
 [[bindings]]
 path = ".vela/bindings/formal-proof.toml"
-root = "sha256:817715d4180540ae4c682c38d9a4c7b5f2e70bc5330bfc1c743f15ccb24e7904"
+root = "sha256:5fa0dc627fe66a05f94a43e54746e8852e0e556a609f7e36e2d9f5e1e8b96903"
 
 [[methods]]
 id = "lean-build"
 path = ".vela/methods/lean-build.toml"
-root = "sha256:2edc5e5c65e8d2b75e8a0c5c3fdacc53df23f56cf4ffb6c0f0c946fba189aa19"
+root = "sha256:d67886ea765b2f539f85a10e74170defa368d7ad5952907a11076bdd499f98a4"
 
 [[methods]]
 id = "axiom-audit"
 path = ".vela/methods/axiom-audit.toml"
-root = "sha256:5d18df791d145500879b9febcb93f0e61e604bbabd226e0ac1438a1416f21efc"
+root = "sha256:a7aa8ced6d80fb4b105a1a7729733ca29072e1672232b825b4c76738306a2dff"
 
 [[methods]]
 id = "integration-validator"
 path = ".vela/methods/integration-validator.toml"
-root = "sha256:37c4624c19b0a137e968194fb2840968809d848948d5b7a87f0821d5216c8484"
+root = "sha256:15b369d6d10962803887c8028d074f928039d4c37210096e3b6aa114a5ccddf4"
 
 [rights]
 license = "NOASSERTION"
