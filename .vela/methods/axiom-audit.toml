@@ -6,7 +6,7 @@ inputs = [
   "git:423344341fbfdf4f8f684a302c5d05379125e7dc",
   "proofs.yaml@sha256:cb8ddb524d8e6278426dcf81ac3f5a0176072baa0575702636dee2775faae831",
   "Audit.lean@sha256:9fcc8078dbdefdac2acceccf24d832b22f7038a6c303f4b67721d45b2a5a87aa",
-  "ErdosProblems/Erdos94SumMultiplicity.lean@sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
+  "ErdosProblems/Erdos94.lean@sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
 ]
 outputs = ["scoped declaration axiom report"]
 limitations = [

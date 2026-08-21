@@ -30,7 +30,7 @@ EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.29.1"
 EXPECTED_MATHLIB = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
 EXPECTED_ROOT_PROOF_COUNT = 69
 SELECTED_THEOREM = "Erdos94.variants.sum_multiplicity"
-SELECTED_SOURCE = "ErdosProblems/Erdos94SumMultiplicity.lean"
+SELECTED_SOURCE = "ErdosProblems/Erdos94.lean"
 EXPECTED_LOCAL_REFERENCES = {
     "lakefile.toml": {
         "schema": "vela.exact-reference.v0.1",
@@ -107,7 +107,7 @@ EXPECTED_EXTERNAL_REFERENCE = {
 }
 EXPECTED_CLOSURE = [
     {
-        "path": "ErdosProblems/Erdos94SumMultiplicity.lean",
+        "path": "ErdosProblems/Erdos94.lean",
         "digest": "sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
         "size": 5527,
     },

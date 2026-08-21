@@ -25,12 +25,12 @@ kind = "lean_declaration"
 value = "Erdos94.variants.sum_multiplicity"
 
 [reference.locator]
-uri = "https://github.com/williamjblair/lean-proofs/blob/423344341fbfdf4f8f684a302c5d05379125e7dc/ErdosProblems/Erdos94SumMultiplicity.lean"
+uri = "https://github.com/williamjblair/lean-proofs/blob/423344341fbfdf4f8f684a302c5d05379125e7dc/ErdosProblems/Erdos94.lean"
 mutable = false
 authentication = "public"
 
 [[closure]]
-path = "ErdosProblems/Erdos94SumMultiplicity.lean"
+path = "ErdosProblems/Erdos94.lean"
 digest = "sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0"
 size = 5527
 

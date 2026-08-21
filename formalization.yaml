@@ -76,7 +76,7 @@ sources:
 related_formalizations:
   - id: "https://github.com/Woett/Lean-files/blob/main/ErdosProblem154.lean"
     relationship: "builds-on"
-    note: "Lindström's residue-distribution theorem for the Sidon set itself, formalised by Aristotle (Harmonic) and Wouter van Doorn; reproduced as ErdosProblems/Erdos154.lean with its header, and extended to the sumset statement in ErdosProblems/Erdos154Sumset.lean. No licence is published upstream; see NOTICE."
+    note: "Lindström's residue-distribution theorem for the Sidon set itself, formalised by Aristotle (Harmonic) and Wouter van Doorn; reproduced as ErdosProblems/Erdos154/Lindstrom.lean with its header, and extended to the sumset statement in ErdosProblems/Erdos154/Sumset.lean. No licence is published upstream; see NOTICE."
   - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
     relationship: "builds-on"
     note: "Pinned proof dependency supplying the prime number theorem in arithmetic progressions used by the #730 proof; not in any Challenge's import closure."
@@ -125,9 +125,9 @@ automation:
       framework: "Codex and Claude Code agent sessions"
       tool_setup: >-
         The #730 development was produced in AI-agent sessions directed and audited by the
-        author, with an exact-arithmetic certificate suite (compute730/) checking the
+        author, with an exact-arithmetic certificate suite (ErdosProblems/Erdos730/compute/) checking the
         numerical constants independently of Lean and hostile-audit plans retained under
-        docs/plans/. The #94 identity was produced by an OpenAI Codex agent session. The
+        ErdosProblems/Erdos730/plans/. The #94 identity was produced by an OpenAI Codex agent session. The
         #154 sumset extension was produced in agent sessions over the third-party Lindström
         formalisation named in related_formalizations. Exact model identifiers and
         per-session costs were not recorded at the time and are not reconstructed here.
@@ -136,7 +136,7 @@ automation:
         model (GPT Pro, per the cited comment); its full text is a private document not
         linked publicly, so the formalisation was built from the public gist, the linked
         route mapping, and the author's own reconstruction of the analytic sections
-        (compute730/audit.md records the audit).
+        (ErdosProblems/Erdos730/compute/audit.md records the audit).
   spend_usd: "not reconstructed"
   notes: >-
     Every tracked theorem is rebuilt and axiom-audited on every push

@@ -12,19 +12,19 @@ mathlib: v4.29.1
 proofs:
   - problem: 154
     source: erdosproblems
-    file: ErdosProblems/Erdos154Sumset.lean
+    file: ErdosProblems/Erdos154/Sumset.lean
     theorem: Erdos154.erdos_154_sumset
     statement: >-
       For Sidon sets A with |A| ~ N^{1/2}, the sumset A+A is equidistributed
       over residue classes mod m: each class holds ~1/m of A+A.
     depends_on:
-      - "ErdosProblems/Erdos154.lean (Lindström residue distribution for A; formal authors Aristotle and Wouter van Doorn, via plby/lean-proofs)"
+      - "ErdosProblems/Erdos154/Lindstrom.lean (Lindström residue distribution for A; formal authors Aristotle and Wouter van Doorn, via plby/lean-proofs)"
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/154.lean
     fc_pr: https://github.com/google-deepmind/formal-conjectures/pull/4340
   - problem: 94
     source: erdosproblems
-    file: ErdosProblems/Erdos94SumMultiplicity.lean
+    file: ErdosProblems/Erdos94.lean
     theorem: Erdos94.variants.sum_multiplicity
     statement: >-
       The sum of the multiplicities of all distances determined by a finite
@@ -33,7 +33,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/94.lean
   - problem: 399
     source: erdosproblems
-    file: ErdosProblems/Erdos399Cambie.lean
+    file: ErdosProblems/Erdos399.lean
     theorem: Erdos399.erdos_399.variants.cambie
     statement: >-
       If x and y are coprime natural numbers with 1 < x*y, then no factorial
@@ -48,7 +48,7 @@ proofs:
     rights: Original proof bytes MIT; exact Formal Conjectures target Apache-2.0
   - problem: 1074
     source: erdosproblems
-    file: ErdosProblems/Erdos1074EHSNumbers.lean
+    file: ErdosProblems/Erdos1074.lean
     theorem: Erdos1074.erdos_1074.variants.EHSNumbers_init
     statement: >-
       The first seven EHS numbers, enumerated by Nat.nth, are exactly
@@ -66,7 +66,7 @@ proofs:
     rights: Original proof and certificate bytes MIT; exact Formal Conjectures target Apache-2.0
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FullDensityTheorem.lean
+    file: ErdosProblems/Erdos730/FullDensityTheorem.lean
     theorem: Erdos730.FullDensityTheorem.pairSet_infinite
     statement: >-
       Erdős #730, answered affirmatively: there are infinitely many pairs n < m
@@ -77,7 +77,7 @@ proofs:
     palomar_config: Palomar/Erdos730/comparator.json
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.eight_mul_sq_le_succ_cube
     statement: >-
       For every p at least five, the exact cubic inequality
@@ -86,7 +86,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.nearEnvelope_forces_high_exponent
     statement: >-
       The rational near-affine envelope forces exponent a at least two and
@@ -95,7 +95,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.nearEnvelope_prime_power_clearance
     statement: >-
       The near envelope gives the exact powered comparison between the next
@@ -104,7 +104,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.powered_threshold_of_near_maximal
     statement: >-
       Quantified residue-count maximality and the near envelope imply the
@@ -113,7 +113,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.finite_prime_power_pair_count
     statement: >-
       A finite exponent-bounded prime-power family obeys the explicit square-
@@ -122,7 +122,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.finite_reciprocal_tail_from_root_envelopes
     statement: >-
       Finite prime-power pair and threshold hypotheses give an exact rational
@@ -131,7 +131,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.finite_geometric_prime_power_tail
     statement: >-
       Every finite exponent tail from a base at least two is bounded by twice
@@ -140,7 +140,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.finite_reciprocal_square_tail
     statement: >-
       Finite reciprocal-square tails satisfy the explicit telescoping upper
@@ -149,7 +149,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.dyadicThresholdBase_strictMono_step
     statement: >-
       The exact rational lower-threshold base increases from one dyadic range
@@ -158,7 +158,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.endpoint_powered_threshold_certificate
     statement: >-
       Exact rational powering certifies the 1210239 threshold at the initial
@@ -167,7 +167,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.endpoint_payment_identity
     statement: >-
       The endpoint tail and boundary envelopes assemble to the recorded exact
@@ -176,7 +176,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730NearAffinePayment.lean
+    file: ErdosProblems/Erdos730/NearAffinePayment.lean
     theorem: Erdos730.endpoint_payment_lt_one_percent
     statement: >-
       The exact endpoint rational payment is strictly below one percent.
@@ -184,7 +184,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    file: ErdosProblems/Erdos730/HalfBandPayment.lean
     theorem: Erdos730.halfBandEnvelope_forces_high_exponent
     statement: >-
       The enlarged half-band condition forces a valuation exponent at least
@@ -193,7 +193,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    file: ErdosProblems/Erdos730/HalfBandPayment.lean
     theorem: Erdos730.halfBandEnvelope_prime_power_clearance
     statement: >-
       The half-band exponent relation gives the powered comparison needed to
@@ -202,7 +202,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    file: ErdosProblems/Erdos730/HalfBandPayment.lean
     theorem: Erdos730.powered_threshold_of_halfBand_maximal
     statement: >-
       Maximal block length in the enlarged half band forces the exact powered
@@ -211,7 +211,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    file: ErdosProblems/Erdos730/HalfBandPayment.lean
     theorem: Erdos730.halfBand_endpoint_powered_threshold_certificate
     statement: >-
       Exact rational powers certify the enlarged endpoint threshold floor
@@ -220,7 +220,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730HalfBandPayment.lean
+    file: ErdosProblems/Erdos730/HalfBandPayment.lean
     theorem: Erdos730.halfBand_endpoint_payment_lt_one_percent
     statement: >-
       The enlarged half-band endpoint payment remains strictly below one
@@ -229,7 +229,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.unitBandEnvelope_forces_high_exponent
     statement: >-
       The full strict high-valuation band forces exponent at least two and
@@ -238,7 +238,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.unitBandEnvelope_prime_power_clearance
     statement: >-
       The strict-band exponent clearance gives p to r plus one at most p to a.
@@ -246,7 +246,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.cutoff_lt_of_unitBand_maximal
     statement: >-
       Residue count and maximal block length force the clean threshold X
@@ -255,7 +255,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.unitBandDyadicThresholdBase_strictMono_step
     statement: >-
       The exact dyadic threshold base for the full strict band increases from
@@ -264,7 +264,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.unitBand_endpoint_threshold_certificate
     statement: >-
       Exact integer squares certify the endpoint threshold floor 3441480 at
@@ -273,7 +273,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.unitBand_endpoint_sqrt_floor_certificate
     statement: >-
       Exact squares certify the square-root floor used in the endpoint tail.
@@ -281,7 +281,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.unitBand_endpoint_cuberoot_floor_certificate
     statement: >-
       Exact cubes certify the cube-root floor used in the endpoint tail.
@@ -289,7 +289,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.unitBand_endpoint_payment_identity
     statement: >-
       The reciprocal tail and boundary terms assemble to one exact rational
@@ -298,7 +298,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.unitBand_endpoint_payment_lt_one_percent
     statement: >-
       The full strict-band endpoint payment is strictly below one percent.
@@ -306,7 +306,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPayment.lean
+    file: ErdosProblems/Erdos730/UnitBandPayment.lean
     theorem: Erdos730.unitBand_endpoint_payment_margin
     statement: >-
       Exact subtraction records the positive cleared one-percent margin.
@@ -314,7 +314,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPaymentAudit.lean
+    file: ErdosProblems/Erdos730/UnitBandPaymentAudit.lean
     theorem: Erdos730.audit_unitBandEnvelope_iff
     statement: >-
       For positive r, the paid strict band is exactly equivalent to r plus
@@ -323,7 +323,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPaymentAudit.lean
+    file: ErdosProblems/Erdos730/UnitBandPaymentAudit.lean
     theorem: Erdos730.audit_unitBand_complement_iff
     statement: >-
       For positive r, the unpaid complement is exactly a at most r.
@@ -331,7 +331,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitBandPaymentAudit.lean
+    file: ErdosProblems/Erdos730/UnitBandPaymentAudit.lean
     theorem: Erdos730.audit_unitBand_slack_ge_iff
     statement: >-
       The same unpaid complement is equivalent to the natural slack being at
@@ -340,7 +340,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitRangeBlock.lean
+    file: ErdosProblems/Erdos730/UnitRangeBlock.lean
     theorem: Erdos730.UnitRangeBlock.quadratic_block_expansion
     statement: >-
       Every quadratic branch has an exact Taylor expansion across an aligned
@@ -349,7 +349,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitRangeBlock.lean
+    file: ErdosProblems/Erdos730/UnitRangeBlock.lean
     theorem: Erdos730.UnitRangeBlock.quadratic_block_difference_dvd_sq
     statement: >-
       After removing the affine block-index term, the aligned quadratic
@@ -358,7 +358,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitRangeBlock.lean
+    file: ErdosProblems/Erdos730/UnitRangeBlock.lean
     theorem: Erdos730.UnitRangeBlock.normalized_block_cover_cross_bound
     statement: >-
       The critical-length, root-class, and aligned-cover hypotheses imply
@@ -367,7 +367,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730UnitRangeBlock.lean
+    file: ErdosProblems/Erdos730/UnitRangeBlock.lean
     theorem: Erdos730.UnitRangeBlock.higher_prime_power_payment_ceiling_lt_half
     statement: >-
       The exact rational ceiling for the audited higher-prime-power payment
@@ -376,7 +376,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.first_power_fixed_upper_slope
     statement: >-
       At first power, subtracting the fixed block shift leaves a multiple of
@@ -385,7 +385,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.normalized_block_cover_six_fifths
     statement: >-
       The sharpened critical length gives the exact cleared six-fifths block
@@ -394,7 +394,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.q_top_low_digit_large
     statement: >-
       The Q-branch top equation and small cofactor force its low digit above
@@ -403,7 +403,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.s_top_low_digit_large
     statement: >-
       The S-branch top equation and small cofactor force its low digit above
@@ -412,7 +412,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.q_top_small_cofactor_of_square_lt
     statement: >-
       The Q-branch two-digit square bound implies the small-cofactor
@@ -421,7 +421,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.s_top_small_cofactor_of_square_lt
     statement: >-
       The S-branch two-digit square bound implies the small-cofactor
@@ -430,7 +430,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.q_top_two_digit_large
     statement: >-
       Beyond the finite Q threshold, the two-digit top regime is excluded by
@@ -439,7 +439,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.s_top_two_digit_large
     statement: >-
       Beyond the finite S threshold, the two-digit top regime is excluded by
@@ -448,7 +448,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.improved_higher_power_ceiling_lt_three_tenths
     statement: >-
       The sharpened higher-prime-power payment ceiling 174 over 625 is below
@@ -457,7 +457,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FirstPowerRoutes.lean
+    file: ErdosProblems/Erdos730/FirstPowerRoutes.lean
     theorem: Erdos730.FirstPowerRoutes.remaining_first_power_budget
     statement: >-
       After strict-band and higher-power payments, the exact remaining budget
@@ -466,7 +466,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730KummerTransition.lean
+    file: ErdosProblems/Erdos730/KummerTransition.lean
     theorem: Erdos730.KummerTransition.not_dvd_centralBinom_iff_lowerHalfDigits
     statement: >-
       For every odd prime p, p is absent from the central binomial
@@ -477,7 +477,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FullDensityCore.lean
+    file: ErdosProblems/Erdos730/FullDensityCore.lean
     theorem: Erdos730.FullDensityCore.product_identity
     statement: >-
       The explicit four-linear-form family satisfies the exact product
@@ -486,7 +486,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FullDensityCore.lean
+    file: ErdosProblems/Erdos730/FullDensityCore.lean
     theorem: Erdos730.FullDensityCore.branches_pairwise_coprime
     statement: >-
       The four branch values P(x), Q(x), R(x), and S(x) in the explicit
@@ -495,7 +495,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FullDensityCore.lean
+    file: ErdosProblems/Erdos730/FullDensityCore.lean
     theorem: Erdos730.FullDensityCore.switching_allowed_class_count_certificate
     statement: >-
       Exact finite enumeration certifies 20160 allowed reduced classes modulo
@@ -505,7 +505,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730PadicIsometry.lean
+    file: ErdosProblems/Erdos730/PadicIsometry.lean
     theorem: Erdos730.padicBranchMap_bijective
     statement: >-
       A quadratic branch map whose quadratic part is divisible by p and whose
@@ -515,7 +515,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730PadicIsometry.lean
+    file: ErdosProblems/Erdos730/PadicIsometry.lean
     theorem: Erdos730.restrictedDigitBox_card
     statement: >-
       Removing one allowed endpoint from the first digit of a depth-d digit
@@ -524,7 +524,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FullDensityBudget.lean
+    file: ErdosProblems/Erdos730/FullDensityBudget.lean
     theorem: Erdos730.densityBudget_final_lt
     statement: >-
       The complete infinite logarithmic-series certificate proves that four
@@ -534,7 +534,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FixedDepthParity.lean
+    file: ErdosProblems/Erdos730/FixedDepthParity.lean
     theorem: Erdos730.halfDigitParity_probabilityError
     statement: >-
       For the odd half-digit alphabet, the exact normalized even-parity
@@ -544,7 +544,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730HigherPowerCount.lean
+    file: ErdosProblems/Erdos730/HigherPowerCount.lean
     theorem: Erdos730.padicBranchAllowedCount_le
     statement: >-
       A consecutive parameter interval meets an allowed p-adic branch-map
@@ -554,7 +554,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    file: ErdosProblems/Erdos730/ObstructionMaps.lean
     theorem: Erdos730.ObstructionMaps.PhiP_root_progression
     statement: >-
       Substitution along a P-branch prime-power root progression gives the
@@ -563,7 +563,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    file: ErdosProblems/Erdos730/ObstructionMaps.lean
     theorem: Erdos730.ObstructionMaps.PhiQ_root_progression
     statement: >-
       Substitution along a Q-branch prime-power root progression gives the
@@ -572,7 +572,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    file: ErdosProblems/Erdos730/ObstructionMaps.lean
     theorem: Erdos730.ObstructionMaps.PhiR_root_progression
     statement: >-
       Substitution along an R-branch prime-power root progression gives the
@@ -581,7 +581,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    file: ErdosProblems/Erdos730/ObstructionMaps.lean
     theorem: Erdos730.ObstructionMaps.PhiS_root_progression
     statement: >-
       Substitution along an S-branch prime-power root progression gives the
@@ -590,7 +590,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730ObstructionMaps.lean
+    file: ErdosProblems/Erdos730/ObstructionMaps.lean
     theorem: Erdos730.ObstructionMaps.prime_dvd_residual_support
     statement: >-
       Every prime divisor of the four residual linear coefficients belongs to
@@ -599,7 +599,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730HigherPowerCount.lean
+    file: ErdosProblems/Erdos730/HigherPowerCount.lean
     theorem: Erdos730.higherPrimePowerPairs_card_le
     statement: >-
       The finite number of prime-power pairs with exponent at least two and
@@ -609,7 +609,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730ConsecutiveTransition.lean
+    file: ErdosProblems/Erdos730/ConsecutiveTransition.lean
     theorem: Erdos730.ConsecutiveTransition.consecutive_primeFactors_eq_iff_transitionConditions
     statement: >-
       For every positive n, equality of the prime-factor sets of the two
@@ -619,7 +619,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730ConsecutiveTransition.lean
+    file: ErdosProblems/Erdos730/ConsecutiveTransition.lean
     theorem: Erdos730.ConsecutiveTransition.exists_obstruction_of_primeFactors_ne
     statement: >-
       If the two consecutive central binomial coefficients have different
@@ -629,7 +629,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730DominatedLimit.lean
+    file: ErdosProblems/Erdos730/DominatedLimit.lean
     theorem: Erdos730.tendsto_tsum_higherPower_of_dominated
     statement: >-
       Tannery dominated convergence applies to nonnegative higher-prime-power
@@ -639,7 +639,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730DominatedLimit.lean
+    file: ErdosProblems/Erdos730/DominatedLimit.lean
     theorem: Erdos730.tendsto_higherPrimePowerPairs_card_div
     statement: >-
       The number of prime-power pairs with exponent at least two and value at
@@ -648,7 +648,7 @@ proofs:
     fc_target: FormalConjectures/ErdosProblems/730.lean
   - problem: 730
     source: erdosproblems
-    file: ErdosProblems/Erdos730FullDensityTheorem.lean
+    file: ErdosProblems/Erdos730/FullDensityTheorem.lean
     theorem: Erdos730.FullDensityTheorem.pairSet_infinite
     statement: >-
       There are infinitely many pairs m less than n whose central binomial

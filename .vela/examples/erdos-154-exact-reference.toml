@@ -25,17 +25,17 @@ kind = "lean_declaration"
 value = "Erdos154.erdos_154_sumset"
 
 [reference.locator]
-uri = "https://github.com/williamjblair/lean-proofs/blob/a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0/ErdosProblems/Erdos154Sumset.lean"
+uri = "https://github.com/williamjblair/lean-proofs/blob/a8c2872a27cf8d11cf6744ca4a2c5b49ace5fea0/ErdosProblems/Erdos154/Sumset.lean"
 mutable = false
 authentication = "public"
 
 [[closure]]
-path = "ErdosProblems/Erdos154Sumset.lean"
+path = "ErdosProblems/Erdos154/Sumset.lean"
 digest = "sha256:9ac3fc83bbeba2df4739b5f3d69130876d99ea09c47d0c30977339904d74f457"
 size = 25003
 
 [[closure]]
-path = "ErdosProblems/Erdos154.lean"
+path = "ErdosProblems/Erdos154/Lindstrom.lean"
 digest = "sha256:985900ccba24e5ba4d145e74da5b84ceb94338ba627b41688fc3892cae091822"
 size = 76921
 

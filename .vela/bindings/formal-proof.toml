@@ -31,7 +31,7 @@ kind = "lean_declaration"
 value = "Erdos94.variants.sum_multiplicity"
 
 [references.locator]
-uri = "https://github.com/williamjblair/lean-proofs/blob/423344341fbfdf4f8f684a302c5d05379125e7dc/ErdosProblems/Erdos94SumMultiplicity.lean"
+uri = "https://github.com/williamjblair/lean-proofs/blob/423344341fbfdf4f8f684a302c5d05379125e7dc/ErdosProblems/Erdos94.lean"
 mutable = false
 authentication = "public"
 
