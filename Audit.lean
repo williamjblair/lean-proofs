@@ -9,6 +9,7 @@ axiom outside `[propext, Classical.choice, Quot.sound]`.
 -/
 
 -- Manifest-tracked formal proof targets.
+#print axioms Erdos730.FullDensityTheorem.pairSet_infinite
 #print axioms Erdos154.erdos_154_sumset
 #print axioms Erdos399.erdos_399.variants.cambie
 #print axioms Erdos1074.erdos_1074.variants.EHSNumbers_init

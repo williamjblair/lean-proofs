@@ -25,8 +25,7 @@ EXPECTED_CORE_REVISION = "c1a34373c2cdd937ed34fd128174a66fa12be71a"
 EXPECTED_CORE_VERSION = "0.977.2"
 EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.29.1"
 EXPECTED_MATHLIB = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
-EXPECTED_ROOT_PROOF_COUNT = 68
-EXPECTED_STARFLEET_PROOF_COUNT = 14
+EXPECTED_ROOT_PROOF_COUNT = 69
 SELECTED_THEOREM = "Erdos94.variants.sum_multiplicity"
 SELECTED_SOURCE = "ErdosProblems/Erdos94SumMultiplicity.lean"
 EXPECTED_LOCAL_REFERENCES = {
@@ -356,7 +355,7 @@ def proof_source(root: Path, raw: str) -> Path:
     relative = Path(raw)
     if relative.is_absolute() or ".." in relative.parts:
         raise ValidationError(f"unsupported proof source path: {raw}")
-    if not (raw.startswith("ErdosProblems/") or raw.startswith("starfleet/")):
+    if not raw.startswith("ErdosProblems/"):
         raise ValidationError(f"unsupported proof source path: {raw}")
     return retained_file(root, relative)
 
@@ -377,14 +376,7 @@ def validate_proof_index(root: Path) -> list[dict[str, Any]]:
     root_count = sum(
         str(proof.get("file", "")).startswith("ErdosProblems/") for proof in proofs
     )
-    starfleet_count = sum(
-        str(proof.get("file", "")).startswith("starfleet/") for proof in proofs
-    )
-    if (
-        root_count != EXPECTED_ROOT_PROOF_COUNT
-        or starfleet_count != EXPECTED_STARFLEET_PROOF_COUNT
-        or len(proofs) != root_count + starfleet_count
-    ):
+    if root_count != EXPECTED_ROOT_PROOF_COUNT or len(proofs) != root_count:
         raise ValidationError("proof index inventory drift")
     manifest = json.loads(
         retained_file(root, "lake-manifest.json").read_text(encoding="utf-8")

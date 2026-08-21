@@ -7,10 +7,8 @@
 set -euo pipefail
 fail() { echo "FAIL: $*" >&2; exit 1; }
 
-# Only the proofs hosted in the ErdosProblems library are audited in Audit.lean.
-# Externally-pinned sources (e.g. starfleet/, a different toolchain) are audited
-# by their own CI (see .github/workflows/starfleet.yml), so exclude them here by
-# keying on each entry's `file:` prefix.
+# Every proof hosted here lives in the ErdosProblems library and is audited in
+# Audit.lean; key on each entry's `file:` prefix so a stray entry cannot pass.
 manifest_thms="$(awk '
   /^[[:space:]]*-[[:space:]]*problem:/ { file=""; thm="" }
   /^[[:space:]]*file:/    { f=$0; sub(/^[[:space:]]*file:[[:space:]]*/,"",f); file=f }

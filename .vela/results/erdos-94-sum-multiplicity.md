@@ -83,7 +83,7 @@ as a retry or failure of this completed identity.
 
 ## External mechanical-check readiness
 
-`external/palomar/erdos94-sum-multiplicity/` freezes a minimal trusted
+`Palomar/Erdos94/` (which superseded `external/palomar/erdos94-sum-multiplicity/`) holds a minimal trusted
 `Challenge.lean`, proved `Solution.lean`, exact Comparator configuration,
 bundle-local `formalization.yaml`, toolchain and dependency lock, and SHA-256
 inventory. Both Lean files elaborate locally in the pinned repository

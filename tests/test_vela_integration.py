@@ -51,12 +51,6 @@ class IntegrationHostileTests(unittest.TestCase):
             target = self.root / raw
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(SOURCE / raw, target)
-            if raw.startswith("starfleet/"):
-                project = Path(*Path(raw).parts[:2])
-                for name in ("Audit.lean", "lean-toolchain"):
-                    project_target = self.root / project / name
-                    project_target.parent.mkdir(parents=True, exist_ok=True)
-                    shutil.copy2(SOURCE / project / name, project_target)
 
     def tearDown(self) -> None:
         self.temp.cleanup()
@@ -124,14 +118,6 @@ theorem Erdos399.erdos_399.variants.cambie : True := by trivial
                 source, "Erdos399.erdos_399.variants.cambie"
             )
         )
-
-    def test_root_to_starfleet_inventory_repartition_refuses(self) -> None:
-        replace_once(
-            self.root / "proofs.yaml",
-            "file: ErdosProblems/Erdos399Cambie.lean",
-            "file: starfleet/hostile/Erdos399Cambie.lean",
-        )
-        self.assert_refused("proof index inventory drift")
 
     def test_uncategorized_inventory_entry_refuses(self) -> None:
         replace_once(
