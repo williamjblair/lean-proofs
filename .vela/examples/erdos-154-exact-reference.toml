@@ -41,13 +41,13 @@ size = 76921
 
 [[closure]]
 path = "proofs.yaml"
-digest = "sha256:c3902930f1e3a910fc2bf4a10397fda769c84e0b1b7b84de0cb109d5488110a3"
-size = 35553
+digest = "sha256:cb8ddb524d8e6278426dcf81ac3f5a0176072baa0575702636dee2775faae831"
+size = 28517
 
 [[closure]]
 path = "Audit.lean"
-digest = "sha256:59df59b5cf150b3048a32a85f843dd4d07fbe91eb086a2f1cda8d20b93aebc65"
-size = 4412
+digest = "sha256:9fcc8078dbdefdac2acceccf24d832b22f7038a6c303f4b67721d45b2a5a87aa"
+size = 4628
 
 [[closure]]
 path = "lean-toolchain"
@@ -56,8 +56,8 @@ size = 25
 
 [[closure]]
 path = "lakefile.toml"
-digest = "sha256:59cdf241ac34e762631b3c7d0c39d51a27146eff6405a4b86caaff739be90ef1"
-size = 586
+digest = "sha256:5ee303c6dfa3b76a7afe4dfe21f00b2ef9acea491e41b87bf95aee9e7a88ef26"
+size = 974
 
 [[closure]]
 path = "lake-manifest.json"

@@ -67,10 +67,7 @@ class IntegrationHostileTests(unittest.TestCase):
         self.assertTrue(packet["core"]["ok"])
         self.assertEqual(packet["core"]["schema"], "vela.cli.integration-check.v1")
         self.assertEqual(packet["core"]["authority_effect"], "none")
-        self.assertEqual(
-            len(packet["proofs"]),
-            CHECK.EXPECTED_ROOT_PROOF_COUNT + CHECK.EXPECTED_STARFLEET_PROOF_COUNT,
-        )
+        self.assertEqual(len(packet["proofs"]), CHECK.EXPECTED_ROOT_PROOF_COUNT)
 
     def test_retained_proof_index_symlink_escape_refuses(self) -> None:
         outside = Path(self.temp.name) / "outside-proofs.yaml"
@@ -80,11 +77,10 @@ class IntegrationHostileTests(unittest.TestCase):
         self.assert_refused("retained file must not be a symlink")
 
     def test_core_owns_shared_root_refusal(self) -> None:
-        replace_once(
-            self.root / "vela.toml",
-            "sha256:ea57c1232eac12abe8d2f3afd7f6135cad847be256e59a1c4aa88d01d8a5844a",
-            "sha256:1234",
-        )
+        # The manifest root changes whenever the integration is re-sealed, so
+        # read the current one rather than pinning it here.
+        manifest_root = CHECK.load_toml(self.root, "vela.toml")["manifest_root"]
+        replace_once(self.root / "vela.toml", manifest_root, "sha256:1234")
         self.assert_refused("Vela Core integration check failed")
 
     def test_theorem_drift_refuses(self) -> None:

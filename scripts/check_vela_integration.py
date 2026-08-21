@@ -20,6 +20,9 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_SCHEMA = "lean-proofs.verification-input.v0.1"
 EXPECTED_REPOSITORY = "https://github.com/williamjblair/lean-proofs.git"
 EXPECTED_NATIVE_REVISION = "423344341fbfdf4f8f684a302c5d05379125e7dc"
+# lakefile.toml was last changed in this commit (the Palomar library); the
+# theorem reference above stays at the commit that introduced the proof.
+EXPECTED_LAKEFILE_REVISION = "cb3522fdca1961a90c97d170ca0322823bc020e8"
 EXPECTED_CORE_REPOSITORY = "https://github.com/vela-science/vela.git"
 EXPECTED_CORE_REVISION = "c1a34373c2cdd937ed34fd128174a66fa12be71a"
 EXPECTED_CORE_VERSION = "0.977.2"
@@ -36,17 +39,17 @@ EXPECTED_LOCAL_REFERENCES = {
             "object_kind": "project_configuration",
             "identifier": "lakefile.toml",
         },
-        "revision": {"kind": "git_commit", "value": EXPECTED_NATIVE_REVISION},
+        "revision": {"kind": "git_commit", "value": EXPECTED_LAKEFILE_REVISION},
         "content_fixity": {
             "media_type": "application/toml",
-            "digest": "sha256:59cdf241ac34e762631b3c7d0c39d51a27146eff6405a4b86caaff739be90ef1",
-            "size": 586,
+            "digest": "sha256:5ee303c6dfa3b76a7afe4dfe21f00b2ef9acea491e41b87bf95aee9e7a88ef26",
+            "size": 974,
         },
         "selector": {"kind": "path", "value": "lakefile.toml"},
         "locator": {
             "uri": (
                 "https://github.com/williamjblair/lean-proofs/blob/"
-                f"{EXPECTED_NATIVE_REVISION}/lakefile.toml"
+                f"{EXPECTED_LAKEFILE_REVISION}/lakefile.toml"
             ),
             "mutable": False,
             "authentication": "public",
@@ -110,13 +113,13 @@ EXPECTED_CLOSURE = [
     },
     {
         "path": "proofs.yaml",
-        "digest": "sha256:1ca8e1bccd2c76a275385e306a109e6927ff513a9b7da48ba9480f49ca75b6f0",
-        "size": 37710,
+        "digest": "sha256:cb8ddb524d8e6278426dcf81ac3f5a0176072baa0575702636dee2775faae831",
+        "size": 28517,
     },
     {
         "path": "Audit.lean",
-        "digest": "sha256:58b32f6a70af17d563d5f8dfa5b3d6aaaebe4c2190582e5326edde8ce4b37a09",
-        "size": 4569,
+        "digest": "sha256:9fcc8078dbdefdac2acceccf24d832b22f7038a6c303f4b67721d45b2a5a87aa",
+        "size": 4628,
     },
     {
         "path": "lean-toolchain",
@@ -125,8 +128,8 @@ EXPECTED_CLOSURE = [
     },
     {
         "path": "lakefile.toml",
-        "digest": "sha256:59cdf241ac34e762631b3c7d0c39d51a27146eff6405a4b86caaff739be90ef1",
-        "size": 586,
+        "digest": "sha256:5ee303c6dfa3b76a7afe4dfe21f00b2ef9acea491e41b87bf95aee9e7a88ef26",
+        "size": 974,
     },
     {
         "path": "lake-manifest.json",
@@ -674,8 +677,7 @@ def main() -> int:
             )
         print(
             "Vela Core waist + lean-proofs semantics: ok "
-            f"({EXPECTED_ROOT_PROOF_COUNT} root + "
-            f"{EXPECTED_STARFLEET_PROOF_COUNT} Starfleet proofs; authority_effect none)"
+            f"({EXPECTED_ROOT_PROOF_COUNT} proofs; authority_effect none)"
         )
         return 0
     except (
