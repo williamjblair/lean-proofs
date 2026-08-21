@@ -19,8 +19,8 @@ class AttestationAttributionTests(unittest.TestCase):
         metadata = EMIT.attestation_metadata(
             {
                 "repo": "williamjblair/lean-proofs",
-                "toolchain": "leanprover/lean4:v4.29.1",
-                "mathlib": "v4.29.1",
+                "toolchain": "leanprover/lean4:v4.29.0",
+                "mathlib": "8a178386ffc0f5fef0b77738bb5449d50efeea95",
             },
             "audit output\n",
         )
