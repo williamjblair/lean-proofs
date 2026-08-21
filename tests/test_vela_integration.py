@@ -173,7 +173,7 @@ theorem Erdos399.erdos_399.variants.cambie : True := by trivial
         replace_once(
             self.root / "lean-toolchain",
             "leanprover/lean4:v4.29.0",
-            "leanprover/lean4:v4.29.0",
+            "leanprover/lean4:v4.29.1",
         )
         self.assert_refused("toolchain")
 
