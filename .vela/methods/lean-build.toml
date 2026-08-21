@@ -24,5 +24,5 @@ digest = "sha256:5ee303c6dfa3b76a7afe4dfe21f00b2ef9acea491e41b87bf95aee9e7a88ef2
 [environment]
 kind = "exact"
 revision = "0af24bf7bbb5abedd663783adfc3872f2a936f59"
-toolchain = "leanprover/lean4:v4.29.1"
-mathlib_revision = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
+toolchain = "leanprover/lean4:v4.29.0"
+mathlib_revision = "8a178386ffc0f5fef0b77738bb5449d50efeea95"

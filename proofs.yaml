@@ -6,8 +6,8 @@
 #
 # `axioms_clean: true` is enforced by scripts/check_axioms.sh on every push.
 repo: williamjblair/lean-proofs
-toolchain: leanprover/lean4:v4.29.1
-mathlib: v4.29.1
+toolchain: leanprover/lean4:v4.29.0
+mathlib: 8a178386ffc0f5fef0b77738bb5449d50efeea95
 
 proofs:
   - problem: 154

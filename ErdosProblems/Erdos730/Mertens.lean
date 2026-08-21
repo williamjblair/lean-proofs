@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.1  mathlib v4.29.1 -/
+/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
 import ErdosProblems.Erdos730.AnalyticInputs
 import Mathlib.NumberTheory.Harmonic.Bounds
 import Mathlib.Analysis.SpecialFunctions.Log.InvLog
@@ -136,7 +136,7 @@ The following factorial argument is adapted from
 `02fba13be7487cc51315f68d8fa7ef277633d3c8`, file
 `PrimitiveSetsAboveX/PreliminariesMertens.lean` (Apache-2.0).  The source
 targets Lean `v4.30.0-rc1`; the proof below has been ported and checked against
-this repository's pinned Lean/Mathlib `v4.29.1`.
+this repository's pinned Lean `v4.29.0` and Mathlib `8a178386`.
 
 This is the classical first Mertens theorem for the von Mangoldt weight.  It
 is strictly weaker than the reciprocal-prime asymptotic, but it is the

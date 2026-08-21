@@ -26,8 +26,8 @@ EXPECTED_LAKEFILE_REVISION = "0af24bf7bbb5abedd663783adfc3872f2a936f59"
 EXPECTED_CORE_REPOSITORY = "https://github.com/vela-science/vela.git"
 EXPECTED_CORE_REVISION = "c1a34373c2cdd937ed34fd128174a66fa12be71a"
 EXPECTED_CORE_VERSION = "0.977.2"
-EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.29.1"
-EXPECTED_MATHLIB = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
+EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.29.0"
+EXPECTED_MATHLIB = "8a178386ffc0f5fef0b77738bb5449d50efeea95"
 EXPECTED_ROOT_PROOF_COUNT = 69
 SELECTED_THEOREM = "Erdos94.variants.sum_multiplicity"
 SELECTED_SOURCE = "ErdosProblems/Erdos94.lean"
@@ -371,7 +371,7 @@ def validate_proof_index(root: Path) -> list[dict[str, Any]]:
     if header != {
         "repo": "williamjblair/lean-proofs",
         "toolchain": toolchain,
-        "mathlib": "v4.29.1",
+        "mathlib": EXPECTED_MATHLIB,
     }:
         raise ValidationError(f"proof index header drift: {header}")
     if toolchain != EXPECTED_TOOLCHAIN:

@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.1  mathlib v4.29.1 -/
+/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
 import ErdosProblems.Erdos730.LowerHalfFourier
 
 /-! Independent audit surface for the concrete lower-half Fourier box. -/

@@ -1,18 +1,18 @@
 {
   "schema": "lean-proofs.attestations.v0.2",
   "repo": "williamjblair/lean-proofs",
-  "toolchain": "leanprover/lean4:v4.29.1",
-  "mathlib": "v4.29.1",
+  "toolchain": "leanprover/lean4:v4.29.0",
+  "mathlib": "8a178386ffc0f5fef0b77738bb5449d50efeea95",
   "verification_method": "lean_kernel",
   "evidence_generator": "local:openai-codex",
-  "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
+  "lake_manifest_hash": "sha256:d9d3b61461551c6ecf4b0866d965360f0779058cf6ada8c9a70a0b6c5a67c72b",
   "verifier_output_hash": "sha256:4c8bdd8bc118a9281352597b90b844905d47afe9373db7affe1c28cfd1c7773e",
   "attestations": [
     {
       "problem": 154,
       "theorem": "Erdos154.erdos_154_sumset",
       "file": "ErdosProblems/Erdos154/Sumset.lean",
-      "proof_hash": "sha256:8a2a1efd09a6d2810bf41375471d5d1cd1cd9c47db7f7bcf2f797f1cad09780a",
+      "proof_hash": "sha256:f5d2e975a78526c1ec4bf9aa8bd2270eafba45f41feec2834c663c309f16e52e",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -60,7 +60,7 @@
       "problem": 730,
       "theorem": "Erdos730.FullDensityTheorem.pairSet_infinite",
       "file": "ErdosProblems/Erdos730/FullDensityTheorem.lean",
-      "proof_hash": "sha256:c3afd4adcb2a7e050be29f3a0341b62616e5d140c737cd57b864c1edc189391a",
+      "proof_hash": "sha256:e54e0185064e4065e96ada337f3616ca04f99155ca8fc9ce194a8fe1a32d3eb5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -72,7 +72,7 @@
       "problem": 730,
       "theorem": "Erdos730.eight_mul_sq_le_succ_cube",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -83,7 +83,7 @@
       "problem": 730,
       "theorem": "Erdos730.nearEnvelope_forces_high_exponent",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -95,7 +95,7 @@
       "problem": 730,
       "theorem": "Erdos730.nearEnvelope_prime_power_clearance",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -107,7 +107,7 @@
       "problem": 730,
       "theorem": "Erdos730.powered_threshold_of_near_maximal",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -119,7 +119,7 @@
       "problem": 730,
       "theorem": "Erdos730.finite_prime_power_pair_count",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -131,7 +131,7 @@
       "problem": 730,
       "theorem": "Erdos730.finite_reciprocal_tail_from_root_envelopes",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -143,7 +143,7 @@
       "problem": 730,
       "theorem": "Erdos730.finite_geometric_prime_power_tail",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -155,7 +155,7 @@
       "problem": 730,
       "theorem": "Erdos730.finite_reciprocal_square_tail",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -167,7 +167,7 @@
       "problem": 730,
       "theorem": "Erdos730.dyadicThresholdBase_strictMono_step",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -179,7 +179,7 @@
       "problem": 730,
       "theorem": "Erdos730.endpoint_powered_threshold_certificate",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -191,7 +191,7 @@
       "problem": 730,
       "theorem": "Erdos730.endpoint_payment_identity",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -203,7 +203,7 @@
       "problem": 730,
       "theorem": "Erdos730.endpoint_payment_lt_one_percent",
       "file": "ErdosProblems/Erdos730/NearAffinePayment.lean",
-      "proof_hash": "sha256:8608c3cd4dc64ae6f15411e3ad1a0845064d858b23033e39785de073b2f834cd",
+      "proof_hash": "sha256:1b13fe8db2c61b2e0d02bb94992f6cc74aa30292e434f82772a4202adf11df12",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -215,7 +215,7 @@
       "problem": 730,
       "theorem": "Erdos730.halfBandEnvelope_forces_high_exponent",
       "file": "ErdosProblems/Erdos730/HalfBandPayment.lean",
-      "proof_hash": "sha256:479a8c2fe0b921fa91132ea744d647f076a625799f5910dd2d301f5e11043b9b",
+      "proof_hash": "sha256:5debb945b7d260b3c95ebfe8fc3fdb6551e9e91a211ae4965b118b588898d6f5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -227,7 +227,7 @@
       "problem": 730,
       "theorem": "Erdos730.halfBandEnvelope_prime_power_clearance",
       "file": "ErdosProblems/Erdos730/HalfBandPayment.lean",
-      "proof_hash": "sha256:479a8c2fe0b921fa91132ea744d647f076a625799f5910dd2d301f5e11043b9b",
+      "proof_hash": "sha256:5debb945b7d260b3c95ebfe8fc3fdb6551e9e91a211ae4965b118b588898d6f5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -239,7 +239,7 @@
       "problem": 730,
       "theorem": "Erdos730.powered_threshold_of_halfBand_maximal",
       "file": "ErdosProblems/Erdos730/HalfBandPayment.lean",
-      "proof_hash": "sha256:479a8c2fe0b921fa91132ea744d647f076a625799f5910dd2d301f5e11043b9b",
+      "proof_hash": "sha256:5debb945b7d260b3c95ebfe8fc3fdb6551e9e91a211ae4965b118b588898d6f5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -251,7 +251,7 @@
       "problem": 730,
       "theorem": "Erdos730.halfBand_endpoint_powered_threshold_certificate",
       "file": "ErdosProblems/Erdos730/HalfBandPayment.lean",
-      "proof_hash": "sha256:479a8c2fe0b921fa91132ea744d647f076a625799f5910dd2d301f5e11043b9b",
+      "proof_hash": "sha256:5debb945b7d260b3c95ebfe8fc3fdb6551e9e91a211ae4965b118b588898d6f5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -263,7 +263,7 @@
       "problem": 730,
       "theorem": "Erdos730.halfBand_endpoint_payment_lt_one_percent",
       "file": "ErdosProblems/Erdos730/HalfBandPayment.lean",
-      "proof_hash": "sha256:479a8c2fe0b921fa91132ea744d647f076a625799f5910dd2d301f5e11043b9b",
+      "proof_hash": "sha256:5debb945b7d260b3c95ebfe8fc3fdb6551e9e91a211ae4965b118b588898d6f5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -275,7 +275,7 @@
       "problem": 730,
       "theorem": "Erdos730.unitBandEnvelope_forces_high_exponent",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -287,7 +287,7 @@
       "problem": 730,
       "theorem": "Erdos730.unitBandEnvelope_prime_power_clearance",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -299,7 +299,7 @@
       "problem": 730,
       "theorem": "Erdos730.cutoff_lt_of_unitBand_maximal",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -311,7 +311,7 @@
       "problem": 730,
       "theorem": "Erdos730.unitBandDyadicThresholdBase_strictMono_step",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -323,7 +323,7 @@
       "problem": 730,
       "theorem": "Erdos730.unitBand_endpoint_threshold_certificate",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -335,7 +335,7 @@
       "problem": 730,
       "theorem": "Erdos730.unitBand_endpoint_sqrt_floor_certificate",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -347,7 +347,7 @@
       "problem": 730,
       "theorem": "Erdos730.unitBand_endpoint_cuberoot_floor_certificate",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -359,7 +359,7 @@
       "problem": 730,
       "theorem": "Erdos730.unitBand_endpoint_payment_identity",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -371,7 +371,7 @@
       "problem": 730,
       "theorem": "Erdos730.unitBand_endpoint_payment_lt_one_percent",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -383,7 +383,7 @@
       "problem": 730,
       "theorem": "Erdos730.unitBand_endpoint_payment_margin",
       "file": "ErdosProblems/Erdos730/UnitBandPayment.lean",
-      "proof_hash": "sha256:e953c3791013327eecb7a186429aaa429c180746172356c1f58fd2b6200fa1b8",
+      "proof_hash": "sha256:c267b076c87e7c6c95c6a1f2d1ea91c28fa80bc65c16d150b2dc2b3427c8c391",
       "axiom_footprint": [
         "propext"
       ],
@@ -393,7 +393,7 @@
       "problem": 730,
       "theorem": "Erdos730.audit_unitBandEnvelope_iff",
       "file": "ErdosProblems/Erdos730/UnitBandPaymentAudit.lean",
-      "proof_hash": "sha256:b5481343bf49ad47d4e5d11b671af808207d08f349ca075dfaee4c5b620defba",
+      "proof_hash": "sha256:ed9b119fa180d40ff91f25e22ddf6cba33c1324a5b35b01004b54c52b48aaa83",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -405,7 +405,7 @@
       "problem": 730,
       "theorem": "Erdos730.audit_unitBand_complement_iff",
       "file": "ErdosProblems/Erdos730/UnitBandPaymentAudit.lean",
-      "proof_hash": "sha256:b5481343bf49ad47d4e5d11b671af808207d08f349ca075dfaee4c5b620defba",
+      "proof_hash": "sha256:ed9b119fa180d40ff91f25e22ddf6cba33c1324a5b35b01004b54c52b48aaa83",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -417,7 +417,7 @@
       "problem": 730,
       "theorem": "Erdos730.audit_unitBand_slack_ge_iff",
       "file": "ErdosProblems/Erdos730/UnitBandPaymentAudit.lean",
-      "proof_hash": "sha256:b5481343bf49ad47d4e5d11b671af808207d08f349ca075dfaee4c5b620defba",
+      "proof_hash": "sha256:ed9b119fa180d40ff91f25e22ddf6cba33c1324a5b35b01004b54c52b48aaa83",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -429,7 +429,7 @@
       "problem": 730,
       "theorem": "Erdos730.UnitRangeBlock.quadratic_block_expansion",
       "file": "ErdosProblems/Erdos730/UnitRangeBlock.lean",
-      "proof_hash": "sha256:f1df0d32fdced6794f7c11948841a816779512f1f173dc58745074b6733b9930",
+      "proof_hash": "sha256:dcafd752288d5732207cf0a67fea3b79a0b3f857a37c8b344f60c9b2a299ae20",
       "axiom_footprint": [
         "propext"
       ],
@@ -439,7 +439,7 @@
       "problem": 730,
       "theorem": "Erdos730.UnitRangeBlock.quadratic_block_difference_dvd_sq",
       "file": "ErdosProblems/Erdos730/UnitRangeBlock.lean",
-      "proof_hash": "sha256:f1df0d32fdced6794f7c11948841a816779512f1f173dc58745074b6733b9930",
+      "proof_hash": "sha256:dcafd752288d5732207cf0a67fea3b79a0b3f857a37c8b344f60c9b2a299ae20",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -450,7 +450,7 @@
       "problem": 730,
       "theorem": "Erdos730.UnitRangeBlock.normalized_block_cover_cross_bound",
       "file": "ErdosProblems/Erdos730/UnitRangeBlock.lean",
-      "proof_hash": "sha256:f1df0d32fdced6794f7c11948841a816779512f1f173dc58745074b6733b9930",
+      "proof_hash": "sha256:dcafd752288d5732207cf0a67fea3b79a0b3f857a37c8b344f60c9b2a299ae20",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -461,7 +461,7 @@
       "problem": 730,
       "theorem": "Erdos730.UnitRangeBlock.higher_prime_power_payment_ceiling_lt_half",
       "file": "ErdosProblems/Erdos730/UnitRangeBlock.lean",
-      "proof_hash": "sha256:f1df0d32fdced6794f7c11948841a816779512f1f173dc58745074b6733b9930",
+      "proof_hash": "sha256:dcafd752288d5732207cf0a67fea3b79a0b3f857a37c8b344f60c9b2a299ae20",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -473,7 +473,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.first_power_fixed_upper_slope",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -484,7 +484,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.normalized_block_cover_six_fifths",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Quot.sound"
@@ -495,7 +495,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.q_top_low_digit_large",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -507,7 +507,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.s_top_low_digit_large",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -519,7 +519,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.q_top_small_cofactor_of_square_lt",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -531,7 +531,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.s_top_small_cofactor_of_square_lt",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -543,7 +543,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.q_top_two_digit_large",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -555,7 +555,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.s_top_two_digit_large",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -567,7 +567,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.improved_higher_power_ceiling_lt_three_tenths",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -579,7 +579,7 @@
       "problem": 730,
       "theorem": "Erdos730.FirstPowerRoutes.remaining_first_power_budget",
       "file": "ErdosProblems/Erdos730/FirstPowerRoutes.lean",
-      "proof_hash": "sha256:009fbbb19978fb554dc35d4063e572e28f0766d936020a1d47cbddb0e67c760d",
+      "proof_hash": "sha256:427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -591,7 +591,7 @@
       "problem": 730,
       "theorem": "Erdos730.KummerTransition.not_dvd_centralBinom_iff_lowerHalfDigits",
       "file": "ErdosProblems/Erdos730/KummerTransition.lean",
-      "proof_hash": "sha256:d3f40912e6485df5c41544a928efab9da5b0ef81197150d4eeffe4d58fbeea30",
+      "proof_hash": "sha256:fd04e373e91e0f40b5715c7aaf83dab4188a48dddd0341578d84bb869f3b9107",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -603,7 +603,7 @@
       "problem": 730,
       "theorem": "Erdos730.FullDensityCore.product_identity",
       "file": "ErdosProblems/Erdos730/FullDensityCore.lean",
-      "proof_hash": "sha256:ede9fea84a7f522ee737fa0b76d8caa7301e704decfd74e086e4c8fe7ae5dbe4",
+      "proof_hash": "sha256:24358af0e367c498c158432da4450c53f66a6df4aa5a72e54d7fbaffd147a4e8",
       "axiom_footprint": [
         "propext"
       ],
@@ -613,7 +613,7 @@
       "problem": 730,
       "theorem": "Erdos730.FullDensityCore.branches_pairwise_coprime",
       "file": "ErdosProblems/Erdos730/FullDensityCore.lean",
-      "proof_hash": "sha256:ede9fea84a7f522ee737fa0b76d8caa7301e704decfd74e086e4c8fe7ae5dbe4",
+      "proof_hash": "sha256:24358af0e367c498c158432da4450c53f66a6df4aa5a72e54d7fbaffd147a4e8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -625,7 +625,7 @@
       "problem": 730,
       "theorem": "Erdos730.FullDensityCore.switching_allowed_class_count_certificate",
       "file": "ErdosProblems/Erdos730/FullDensityCore.lean",
-      "proof_hash": "sha256:ede9fea84a7f522ee737fa0b76d8caa7301e704decfd74e086e4c8fe7ae5dbe4",
+      "proof_hash": "sha256:24358af0e367c498c158432da4450c53f66a6df4aa5a72e54d7fbaffd147a4e8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -637,7 +637,7 @@
       "problem": 730,
       "theorem": "Erdos730.padicBranchMap_bijective",
       "file": "ErdosProblems/Erdos730/PadicIsometry.lean",
-      "proof_hash": "sha256:a9129736d6aa2c395d4d0166db04e085f6bcb7789c944948d2b3f1f31890be52",
+      "proof_hash": "sha256:7da2c04b336b916e25d9305c6d386633d1920466508f210786d06d5eb4882c3d",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -649,7 +649,7 @@
       "problem": 730,
       "theorem": "Erdos730.restrictedDigitBox_card",
       "file": "ErdosProblems/Erdos730/PadicIsometry.lean",
-      "proof_hash": "sha256:a9129736d6aa2c395d4d0166db04e085f6bcb7789c944948d2b3f1f31890be52",
+      "proof_hash": "sha256:7da2c04b336b916e25d9305c6d386633d1920466508f210786d06d5eb4882c3d",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -661,7 +661,7 @@
       "problem": 730,
       "theorem": "Erdos730.densityBudget_final_lt",
       "file": "ErdosProblems/Erdos730/FullDensityBudget.lean",
-      "proof_hash": "sha256:40b7da6cf5f9db0302f8084c98298b32019e9d0af8e8c76dcaa4290b59305292",
+      "proof_hash": "sha256:6572c6c97d49829f901b9242949501cb183ec43cd1e4a305a4d6638526a1850d",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -673,7 +673,7 @@
       "problem": 730,
       "theorem": "Erdos730.halfDigitParity_probabilityError",
       "file": "ErdosProblems/Erdos730/FixedDepthParity.lean",
-      "proof_hash": "sha256:86b672b51d22755b63c9607e1e5adecdf84c32f6f6e5e0b5775119f65e8eec9f",
+      "proof_hash": "sha256:58afe75facc883c0893c9ee6d69a15840c7ffdb5ea46c046db72acdc6153afe8",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -685,7 +685,7 @@
       "problem": 730,
       "theorem": "Erdos730.padicBranchAllowedCount_le",
       "file": "ErdosProblems/Erdos730/HigherPowerCount.lean",
-      "proof_hash": "sha256:8c5fed2f10d50644e549e97864f33de170020b2bb109b2041cab57a6ebe66be2",
+      "proof_hash": "sha256:01d44bf162f2c0265f43e8b9a92c7dfd071ef654dd859fcdb49919a8f2add243",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -697,7 +697,7 @@
       "problem": 730,
       "theorem": "Erdos730.ObstructionMaps.PhiP_root_progression",
       "file": "ErdosProblems/Erdos730/ObstructionMaps.lean",
-      "proof_hash": "sha256:a2212c20498e6a0ab16d1796a201cb3e6761a949f657219380fb79317fb2aff6",
+      "proof_hash": "sha256:692f12bacff7d24d28ede3a0c97c38b1aea705703537e41d5ed9448a5f9ad663",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -709,7 +709,7 @@
       "problem": 730,
       "theorem": "Erdos730.ObstructionMaps.PhiQ_root_progression",
       "file": "ErdosProblems/Erdos730/ObstructionMaps.lean",
-      "proof_hash": "sha256:a2212c20498e6a0ab16d1796a201cb3e6761a949f657219380fb79317fb2aff6",
+      "proof_hash": "sha256:692f12bacff7d24d28ede3a0c97c38b1aea705703537e41d5ed9448a5f9ad663",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -721,7 +721,7 @@
       "problem": 730,
       "theorem": "Erdos730.ObstructionMaps.PhiR_root_progression",
       "file": "ErdosProblems/Erdos730/ObstructionMaps.lean",
-      "proof_hash": "sha256:a2212c20498e6a0ab16d1796a201cb3e6761a949f657219380fb79317fb2aff6",
+      "proof_hash": "sha256:692f12bacff7d24d28ede3a0c97c38b1aea705703537e41d5ed9448a5f9ad663",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -733,7 +733,7 @@
       "problem": 730,
       "theorem": "Erdos730.ObstructionMaps.PhiS_root_progression",
       "file": "ErdosProblems/Erdos730/ObstructionMaps.lean",
-      "proof_hash": "sha256:a2212c20498e6a0ab16d1796a201cb3e6761a949f657219380fb79317fb2aff6",
+      "proof_hash": "sha256:692f12bacff7d24d28ede3a0c97c38b1aea705703537e41d5ed9448a5f9ad663",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -745,7 +745,7 @@
       "problem": 730,
       "theorem": "Erdos730.ObstructionMaps.prime_dvd_residual_support",
       "file": "ErdosProblems/Erdos730/ObstructionMaps.lean",
-      "proof_hash": "sha256:a2212c20498e6a0ab16d1796a201cb3e6761a949f657219380fb79317fb2aff6",
+      "proof_hash": "sha256:692f12bacff7d24d28ede3a0c97c38b1aea705703537e41d5ed9448a5f9ad663",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -757,7 +757,7 @@
       "problem": 730,
       "theorem": "Erdos730.higherPrimePowerPairs_card_le",
       "file": "ErdosProblems/Erdos730/HigherPowerCount.lean",
-      "proof_hash": "sha256:8c5fed2f10d50644e549e97864f33de170020b2bb109b2041cab57a6ebe66be2",
+      "proof_hash": "sha256:01d44bf162f2c0265f43e8b9a92c7dfd071ef654dd859fcdb49919a8f2add243",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -769,7 +769,7 @@
       "problem": 730,
       "theorem": "Erdos730.ConsecutiveTransition.consecutive_primeFactors_eq_iff_transitionConditions",
       "file": "ErdosProblems/Erdos730/ConsecutiveTransition.lean",
-      "proof_hash": "sha256:c2d1be243a71297cdd323d265e7dc8913f7f05ab06dffb9227e48c65d50925d8",
+      "proof_hash": "sha256:17a67cc9ffa409f9bb463c28f27ec8cccddd0667ce6abad9f9ace5053dd86042",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -781,7 +781,7 @@
       "problem": 730,
       "theorem": "Erdos730.ConsecutiveTransition.exists_obstruction_of_primeFactors_ne",
       "file": "ErdosProblems/Erdos730/ConsecutiveTransition.lean",
-      "proof_hash": "sha256:c2d1be243a71297cdd323d265e7dc8913f7f05ab06dffb9227e48c65d50925d8",
+      "proof_hash": "sha256:17a67cc9ffa409f9bb463c28f27ec8cccddd0667ce6abad9f9ace5053dd86042",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -793,7 +793,7 @@
       "problem": 730,
       "theorem": "Erdos730.tendsto_tsum_higherPower_of_dominated",
       "file": "ErdosProblems/Erdos730/DominatedLimit.lean",
-      "proof_hash": "sha256:8f28458502cd661dc47a8202a3e8b2f47bc6647198386f5811e5a72a49a0f5a1",
+      "proof_hash": "sha256:6054f1aa225e5b7fd359a25d262961292733915c52051b2eaff9fdba0216b130",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -805,7 +805,7 @@
       "problem": 730,
       "theorem": "Erdos730.tendsto_higherPrimePowerPairs_card_div",
       "file": "ErdosProblems/Erdos730/DominatedLimit.lean",
-      "proof_hash": "sha256:8f28458502cd661dc47a8202a3e8b2f47bc6647198386f5811e5a72a49a0f5a1",
+      "proof_hash": "sha256:6054f1aa225e5b7fd359a25d262961292733915c52051b2eaff9fdba0216b130",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
@@ -817,7 +817,7 @@
       "problem": 730,
       "theorem": "Erdos730.FullDensityTheorem.pairSet_infinite",
       "file": "ErdosProblems/Erdos730/FullDensityTheorem.lean",
-      "proof_hash": "sha256:c3afd4adcb2a7e050be29f3a0341b62616e5d140c737cd57b864c1edc189391a",
+      "proof_hash": "sha256:e54e0185064e4065e96ada337f3616ca04f99155ca8fc9ce194a8fe1a32d3eb5",
       "axiom_footprint": [
         "propext",
         "Classical.choice",
