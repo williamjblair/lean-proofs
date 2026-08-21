@@ -78,8 +78,25 @@ jobs:
           git -C "$RUNNER_TEMP/lean4export" checkout "$TOOLCHAIN_TAG"
           (cd "$RUNNER_TEMP/lean4export" && lake build)
           mkdir -p "$RUNNER_TEMP/bin"
-          chmod +x "$RUNNER_TEMP/comparator/scripts/fake-landrun.sh"
-          ln -s "$RUNNER_TEMP/comparator/scripts/fake-landrun.sh" "$RUNNER_TEMP/bin/landrun"
+          # A landrun stand-in: accepts and drops landrun's flags, then runs the
+          # command unsandboxed. This is not a sandbox; the registry's own
+          # verifier runs real landrun.
+          cat > "$RUNNER_TEMP/bin/landrun" <<'SHIM'
+          #!/usr/bin/env bash
+          set -euo pipefail
+          while [[ $# -gt 0 ]]; do
+            case "$1" in
+              --) shift; break ;;
+              --ro|--rox|--rw|--rwx|--bind-tcp|--connect-tcp|--log-level|--env) shift 2 ;;
+              -*) shift ;;
+              *) break ;;
+            esac
+          done
+          [[ $# -gt 0 ]] || { echo "landrun stand-in: no command given" >&2; exit 2; }
+          echo "landrun stand-in: running unsandboxed: $*" >&2
+          exec "$@"
+          SHIM
+          chmod +x "$RUNNER_TEMP/bin/landrun"
           ln -s "$RUNNER_TEMP/lean4export/.lake/build/bin/lean4export" "$RUNNER_TEMP/bin/lean4export"
           echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
           echo "COMPARATOR_BIN=$RUNNER_TEMP/comparator/.lake/build/bin/comparator" >> "$GITHUB_ENV"
