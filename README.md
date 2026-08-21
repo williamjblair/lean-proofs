@@ -1,40 +1,79 @@
 # lean-proofs
 
-A small, self-checking index of formal Lean 4 proofs of solved research problems,
-hosted as stable `formal_proof` targets for
-[Formal Conjectures](https://github.com/google-deepmind/formal-conjectures).
+Formal Lean 4 proofs of solved research problems, hosted as stable `formal_proof`
+targets for [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures)
+and prepared for registration on [Palomar](https://palomar-registry.org), the registry
+of machine-checked Lean results.
 
-Every push runs the same gate the proofs are claimed to pass: the whole library
-builds against a pinned Mathlib, and a `#print axioms` audit fails the build if
-any headline theorem uses `sorry` or any axiom outside the kernel set
-`[propext, Classical.choice, Quot.sound]`. A green badge is a scoped,
-re-checkable build and axiom result. It is not scientific acceptance, a Vela
-Decision, or Standing in any Repository.
+Every push runs the gate the proofs are claimed to pass: the whole library builds
+against a pinned Mathlib, and a `#print axioms` audit fails the build if any tracked
+theorem uses `sorry` or any axiom outside `[propext, Classical.choice, Quot.sound]`.
+A green badge is a scoped, re-checkable build and axiom result. It is not scientific
+acceptance, a Vela Decision, or Standing in any Repository.
+
+## Results
+
+| Problem | Theorem | Statement | Status |
+|--------:|---------|-----------|--------|
+| [730](https://www.erdosproblems.com/730) | `Erdos730.FullDensityTheorem.pairSet_infinite` | Infinitely many pairs `n < m` (in fact consecutive pairs) whose central binomial coefficients have identical prime support — the affirmative answer to Erdős #730. | kernel-proved; registry statement in `Palomar/Erdos730/` |
+| [154](https://www.erdosproblems.com/154) | `Erdos154.erdos_154_sumset` | For Sidon sets `A` with `\|A\| ~ √N`, the sumset `A + A` is equidistributed over residue classes mod `m`. | kernel-proved; registry statement in `Palomar/Erdos154/`; registration waits on the upstream licence of the Lindström formalisation it builds on (see `NOTICE`) |
+| [94](https://www.erdosproblems.com/94) | `Erdos94.variants.sum_multiplicity` | The multiplicities of the distinct distances of a finite planar point set sum to `(\|P\| choose 2)`. | kernel-proved bounded identity; statement in `Palomar/Erdos94/`; below a registry's research-interest floor and not a candidate |
+| [399](https://www.erdosproblems.com/399) | `Erdos399.erdos_399.variants.cambie` | Coprime `x, y` with `1 < xy`: no factorial is `x⁴ + y⁴`. | kernel-proved bounded variant |
+| [1074](https://www.erdosproblems.com/1074) | `Erdos1074.erdos_1074.variants.EHSNumbers_init` | The first seven EHS numbers are `8, 9, 13, 14, 15, 16, 17`. | kernel-proved finite computation |
+
+`proofs.yaml` is the machine-readable index of every tracked theorem, including the
+component lemmas of the #730 development; `Audit.lean` prints the axioms of each.
 
 ## Layout
 
 ```
-ErdosProblems/Erdos730*.lean   Erdős #730: infinitely many consecutive central
-                               binomial coefficients share prime support (SOLVED)
-ErdosProblems/Erdos154*.lean   Erdős #154: Sidon sumset equidistribution (proved)
-ErdosProblems/Erdos94*.lean    Erdős #94 bounded sum-multiplicity identity (proved)
-compute730/                    exact-arithmetic provenance for the #730 proof
-Audit.lean                     #print axioms for the proof targets
-starfleet/                     third-party proofs by Star Fleet Math (Colin Snyder),
-                               18 self-contained lake projects on their own Lean pin
-proofs.yaml                    canonical repository-native machine-readable index
-scripts/check_axioms.sh        the verification gate
-NOTICE                         third-party material and its terms
+Palomar/<Problem>/            registry statements: Challenge.lean (imports Mathlib
+                              only), Solution.lean (delegates to the proof here),
+                              comparator.json (what Comparator compares)
+ErdosProblems/                the proofs
+Audit.lean                    #print axioms for every tracked theorem
+proofs.yaml                   machine-readable index (consumed by erdos-fc-sync)
+formalization.yaml            provenance, sources, automation, review (the
+                              mathlib-initiative self-reporting standard; Palomar
+                              reads it)
+compute730/                   exact-arithmetic provenance for the #730 proof
+evidence/                     retained computational certificates
+docs/                         plans, and the Vela integration contract
+scripts/, tests/              the verification gate and its tests
+.vela/, vela.toml             optional Vela integration (docs/vela-integration.md)
+NOTICE                        third-party material and its terms
 ```
 
-This repo hosts only completed, kernel-clean declarations. A bounded variant is
-listed with its exact scope; it does not imply that its enclosing research
-problem is solved. In-progress campaigns live outside `main`:
+In-progress campaigns live in their own repositories:
+[erdos-686](https://github.com/williamjblair/erdos-686) and
+[erdos-frontier](https://github.com/vela-science/erdos-frontier). The third-party
+Star Fleet Math proofs that were hosted under `starfleet/` have moved out as well;
+existing commit-pinned links to them remain valid.
 
-- **Erdős 23, 617, 699, 727** — [erdos-frontier](https://github.com/vela-science/erdos-frontier)
-- Other historical and custody-only work remains on the exact native refs in
-  the [branch disposition inventory](.vela/BRANCH_DISPOSITION.md); no private
-  repository is presented as a newcomer handoff.
+## Registry statements
+
+Each `Palomar/<Problem>/` directory is one Comparator comparison in the shape the
+[Palomar submission standard](https://github.com/PalomarRegistry/PalomarPolicy/blob/main/CONTRIBUTING.md)
+asks for: a `Challenge.lean` that imports only Mathlib and states the result in a
+single auditable declaration, a `Solution.lean` that proves the same declaration
+from the development in `ErdosProblems/`, and a `comparator.json` permitting only the
+three standard axioms. Challenge and Solution declare the same names by design, so
+the `Palomar` library builds each module on its own.
+
+To reproduce the registry's mechanical check locally, with
+[Comparator](https://github.com/leanprover/comparator) and a `lean4export` built at
+this repository's Lean version on `PATH` (on macOS, Comparator's
+`scripts/fake-landrun.sh` stands in for the Linux sandbox and is not adversarial):
+
+```bash
+lake exe cache get
+lake build
+lake env comparator Palomar/Erdos730/comparator.json
+```
+
+Which statements are candidates for registration, and why, is recorded in
+`formalization.yaml` (`status.main_results`). Registration is a deliberate, separate
+act: nothing in this repository submits anything.
 
 ## Verify locally
 
@@ -43,127 +82,15 @@ lake exe cache get
 lake build
 bash scripts/check_axioms.sh
 bash scripts/check_manifest.sh
-vela integration check . --json
-python3 scripts/check_vela_integration.py
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-## Native Vela integration
-
-`vela.toml` and `.vela/` expose the source-owned proof index through the draft
-non-authoritative integration chain:
-
-```text
-Manifest -> Profile -> Binding -> Method
-```
-
-The integration is optional and has `authority_effect: none`; ignoring these
-files does not change the Lean project. It publishes exact references and
-verification inputs, never Decisions, Events, acceptance, or Standing. Vela
-Core owns the shared rooted waist; the repository validator retains only
-`proofs.yaml`, Lean declaration/build/axiom, external-identity, and portable
-example semantics. Check both layers with:
-
-```bash
-vela integration check . --json
-python3 scripts/check_vela_integration.py
-```
-
-The optional emitted verification input uses the source-owned, unrooted
-`lean-proofs.verification-input.v0.1` schema. INT-00 adds no generic result
-document or fifth root domain. The input binds the exact subject, Method, and
-artifact closure, but contains no outcome or evidence-availability claim; an
-executed check must continue through Vela's existing Verification machinery.
-
-From a fresh clone with no project cache, the cold-consumer gate requires the
-signed `vela` 0.977.2 binary from release commit
-`c1a34373c2cdd937ed34fd128174a66fa12be71a`:
-
-```bash
-bash scripts/cold_consume_erdos94.sh
-```
-
-The non-destructive [branch disposition inventory](.vela/BRANCH_DISPOSITION.md)
-records the repository's other native workstreams separately. Branches remain
-revision locators and evidence custody boundaries; they are not Vela Attempts
-or Standing state, and no merge-all or cleanup is part of this integration.
-
-## Native branches and bounded results
-
-`main` contains completed repository work that has passed ordinary review and
-repository gates. Scientific work in progress stays on ordinary Git branches
-and worktrees; it does not need to be merged for Vela to reference an exact
-commit. A branch is an approach and mutable selector, not an authority object.
-
-When an approach yields a bounded result worth carrying forward, retain the
-result as a source artifact with its exact commit, files, declaration selector,
-toolchain, Method, environment, rights, and provenance. That artifact may later
-support an ordinary Vela Submission. Build success, actor kind, branch naming,
-or merge status does not itself establish quality, acceptance, or Standing.
-
-Generic agent sessions and checkpoints belong in source-owned tooling such as
-Entire when it is available. This repository and Vela store no duplicate
-session, attempt, or checkpoint database; portable provenance may link an
-Entire checkpoint and the exact Git commit without copying either one.
-
-### Bounded result summary
-
-A reusable result summary may describe a proof, partial lemma, counterexample,
-failed route, or other negative result. Keep it small and source-owned, and
-include:
-
-- the target question or declaration;
-- the approach and the scope actually explored;
-- assumptions and unresolved conditions;
-- the resource budget and exact toolchain/environment;
-- exact artifact and evidence references, including commit, path, selector,
-  fixity, and the Method used;
-- the scoped outcome, including partial, negative, inconclusive, or proved;
-- the condition under which retrying the approach would be informative.
-
-This summary is the reusable artifact; raw search trajectories, agent turns,
-and checkpoints stay in Entire or another source-owned activity system. A
-proof-state canonicalizer or similarity fingerprint must name its algorithm
-and version and remain advisory. Exact identity continues to come from the Git
-revision, content root, and declaration selector, so a fingerprint collision,
-normalization change, or heuristic match cannot merge two results or override
-their exact provenance.
-
-The native repository is the canonical path because a real result may require
-many Lean modules, generated certificates, and retained computation files.
-The exact subject and its multi-file artifact closure travel together; no
-single-file upload is assumed, and private or unavailable bytes are never
-silently replaced. A workbench may offer simpler onboarding or parameter-family
-and feasibility views, but those views derive scope from the exact target and
-report bounded cost rather than inventing free-form status labels.
-
-## Erdős #94 bounded identity
-
-The canonical source proof is
-[`Erdos94.variants.sum_multiplicity`](ErdosProblems/Erdos94SumMultiplicity.lean)
-at exact proof commit
-`423344341fbfdf4f8f684a302c5d05379125e7dc`, preserved in `main` history. For
-every finite planar point set, it proves that the sum of the multiplicities of
-its distinct determined distances is `P.card.choose 2`. The proof explicitly
-shows that each unordered non-diagonal pair has exactly the two ordered
-representatives `(a, b)` and `(b, a)` before dividing the ordered fiber by two.
-
-This is the elementary
-[`sum_multiplicity`](https://github.com/williamjblair/formal-conjectures/blob/94a278e06a8bcbc2e4f2935e491c0c115ec832e0/FormalConjectures/ErdosProblems/94.lean)
-variant at exact Formal Conjectures commit
-`94a278e06a8bcbc2e4f2935e491c0c115ec832e0`. It does **not** prove the cubic
-distance-multiplicity theorem, the no-three-on-a-line theorem, or the regular
-polygon conjecture in that file. See the
-[bounded result summary](.vela/results/erdos-94-sum-multiplicity.md) for exact
-roots, environment, provenance, limits, and retry conditions. A
-[non-publishing external-check snapshot](external/palomar/erdos94-sum-multiplicity/README.md)
-provides an exact Challenge/Solution pair, Comparator configuration,
-`formalization.yaml`, dependency lock, and byte digests for a potential later
-Palomar check. It is readiness material only: no submission or registration
-has occurred. Native merge, CI, external mechanical checking, and Vela
-Standing remain distinct facts.
+The optional Vela integration checks (`vela integration check . --json`,
+`python3 scripts/check_vela_integration.py`) are described in
+[docs/vela-integration.md](docs/vela-integration.md).
 
 ## Erdős #730 full-density proof
+
 
 Erdős #730 is unconditionally kernel-proved.  The terminal theorem is
 `Erdos730.FullDensityTheorem.pairSet_infinite`: infinitely many consecutive
@@ -172,8 +99,8 @@ formalizes the explicit positive-density family, Kummer digit criterion,
 four-range event ledger, fixed-depth Fourier estimate, uniform depth tail,
 Mertens input, fixed-modulus PNT in arithmetic progressions, divisor
 switching, exact density budget, and density-to-infinitude bridge.  See
-`compute730/full_density/` and
-`ErdosProblems/Erdos730FullDensityTheorem.lean`.
+`compute730/full_density/`, `ErdosProblems/Erdos730FullDensityTheorem.lean`, and the
+registry statement `Palomar/Erdos730/Challenge.lean`.
 
 The hostile-audit certificate includes 119 passing exact-arithmetic tests and
 the strict rational bound
@@ -195,26 +122,27 @@ transitive dependency cone of the theorem used here.  The active PNT-AP route
 and the Erdős #730 terminal theorem do not depend on `sorryAx`, so this is a
 package-global hygiene qualification rather than a gap in the proof.
 
-## Index
+## Erdős #154 sumset equidistribution
 
-| Problem | Theorem | Statement | FC |
-|--------:|---------|-----------|----|
-| [94](https://www.erdosproblems.com/94) | `Erdos94.variants.sum_multiplicity` | The sum of the multiplicities of all distinct determined distances is the number of unordered point pairs. | [exact bounded target](https://github.com/williamjblair/formal-conjectures/blob/94a278e06a8bcbc2e4f2935e491c0c115ec832e0/FormalConjectures/ErdosProblems/94.lean) |
-| [154](https://www.erdosproblems.com/154) | `Erdos154.erdos_154_sumset` | For a Sidon set `A` with `\|A\| ~ √N`, the sumset `A+A` is equidistributed over residue classes mod `m`. | [#4340](https://github.com/google-deepmind/formal-conjectures/pull/4340) |
-| [730](https://www.erdosproblems.com/730) | `Erdos730.FullDensityTheorem.pairSet_infinite` | Infinitely many consecutive central binomial coefficients have identical prime support. | [target](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/730.lean) |
+`Erdos154.erdos_154_sumset` proves that along Sidon sets `A k ⊆ [0, N k]` with
+`N k → ∞` and `|A k| / √(N k) → 1`, the sumset `A k + A k` is equidistributed modulo
+every `m ≥ 2`. It is proved from Lindström's residue-distribution theorem for `A`
+itself (J. Number Theory 1998), whose formalisation in `ErdosProblems/Erdos154.lean`
+is by Aristotle (Harmonic) and Wouter van Doorn via
+[Woett/Lean-files](https://github.com/Woett/Lean-files); see `NOTICE` for its terms.
+The statement is the one Formal Conjectures records for the problem
+([#4340](https://github.com/google-deepmind/formal-conjectures/pull/4340)).
 
 ## Relationship to the rest of the ecosystem
 
-- `proofs.yaml` is the canonical machine-readable proof index. Newcomers and
-  downstream tools can inspect an exact public Git revision without a private
-  repository, archived campaign page, or separate synchronization service.
-- Proofs that build on existing formalizations carry that lineage in their
-  headers and in `proofs.yaml`. The 154 sumset proof builds on the Lindström
-  residue-distribution theorem for `A` (formal authors Aristotle and Wouter van
-  Doorn, hosted via `plby/lean-proofs`) and transfers it to `A+A` using the
-  Sidon property.
+- **erdos-fc-sync** reads `proofs.yaml` as a proof source. When a problem has a
+  clean proof here that Formal Conjectures does not yet link, the sync surfaces it
+  as a contribution target.
+- Proofs that build on existing formalisations carry that lineage in their headers,
+  in `proofs.yaml`, and in `formalization.yaml`'s `related_formalizations`.
 
 ## Adding a proof
+
 
 1. Add `ErdosProblems/Erdos<n>.lean`, building cleanly against the pinned Mathlib.
 2. Add its module import and a `#print axioms` line to the manifest-tracked
@@ -224,6 +152,5 @@ package-global hygiene qualification rather than a gap in the proof.
 
 ## License
 
-Original contributions in this repository are MIT licensed (see `LICENSE`).
-Third-party formalizations included as build dependencies retain their original
-licenses, noted in their file headers; Mathlib is Apache-2.0.
+MIT for the material authored here; see `LICENSE`, and `NOTICE` for the third-party
+material this grant does not cover.

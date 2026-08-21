@@ -1,9 +1,0 @@
-import Research.AsymptoticPalette
-import Research.PaletteRelabeling
-import Research.WeightedPalette
-import Research.DaisyPalettePattern
-import Research.IntegerLinearLayer
-import Research.LinearLayerUnion
-import Research.LinearTruncation
-import Research.ExplicitLinearBaseline
-import Research.FinalMatchingOrder

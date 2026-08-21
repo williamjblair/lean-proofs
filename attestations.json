@@ -6,7 +6,7 @@
   "verification_method": "lean_kernel",
   "evidence_generator": "local:openai-codex",
   "lake_manifest_hash": "sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
-  "verifier_output_hash": "sha256:0b8bcf16d44443296539261914a2bc2f13a61d2c5a9dfb4d8994191e25b2c0e1",
+  "verifier_output_hash": "sha256:4c8bdd8bc118a9281352597b90b844905d47afe9373db7affe1c28cfd1c7773e",
   "attestations": [
     {
       "problem": 154,
@@ -49,6 +49,18 @@
       "theorem": "Erdos1074.erdos_1074.variants.EHSNumbers_init",
       "file": "ErdosProblems/Erdos1074EHSNumbers.lean",
       "proof_hash": "sha256:4088fd824ad2dffe1cec725f42a08a2abe02fc87f63c4c86ef7d29d635faf046",
+      "axiom_footprint": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_clean": true
+    },
+    {
+      "problem": 730,
+      "theorem": "Erdos730.FullDensityTheorem.pairSet_infinite",
+      "file": "ErdosProblems/Erdos730FullDensityTheorem.lean",
+      "proof_hash": "sha256:7f341400b34cd3241007dce7365aa84c367546ffda0acf164d7a32e003f98ba0",
       "axiom_footprint": [
         "propext",
         "Classical.choice",

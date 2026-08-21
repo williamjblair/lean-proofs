@@ -1,7 +1,7 @@
 name = "lean-proofs"
 version = "0.1.0"
 keywords = ["math", "formal-proofs", "erdos"]
-defaultTargets = ["ErdosProblems"]
+defaultTargets = ["ErdosProblems", "Palomar"]
 weakLeanArgs = ["-s", "65520"]
 
 [leanOptions]
@@ -23,3 +23,12 @@ rev = "v4.29.1"
 [[lean_lib]]
 name = "ErdosProblems"
 
+[[lean_lib]]
+name = "Palomar"
+# Challenge and Solution declare the same names by design (Comparator compares
+# them), so there is no aggregating root module; each is built on its own.
+roots = [
+  "Palomar.Erdos730.Challenge", "Palomar.Erdos730.Solution",
+  "Palomar.Erdos154.Challenge", "Palomar.Erdos154.Solution",
+  "Palomar.Erdos94.Challenge", "Palomar.Erdos94.Solution",
+]

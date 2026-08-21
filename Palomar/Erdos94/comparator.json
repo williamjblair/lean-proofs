@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Palomar.Erdos94.Challenge",
+  "solution_module": "Palomar.Erdos94.Solution",
+  "theorem_names": ["Palomar.Erdos94.sum_multiplicity"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": false
+}

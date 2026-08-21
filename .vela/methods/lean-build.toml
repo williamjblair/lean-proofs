@@ -1,11 +1,11 @@
 schema = "vela.integration-method.v0.1"
-method_root = "sha256:2909fbed9313c9a94013ca71ae738fee8ef9eece32b458ca6e7e68b82d383bbf"
+method_root = "sha256:2edc5e5c65e8d2b75e8a0c5c3fdacc53df23f56cf4ffb6c0f0c946fba189aa19"
 method_id = "lean-build"
 version = "0.1"
 inputs = [
   "git:423344341fbfdf4f8f684a302c5d05379125e7dc",
   "lean-toolchain@sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
-  "lakefile.toml@sha256:59cdf241ac34e762631b3c7d0c39d51a27146eff6405a4b86caaff739be90ef1",
+  "lakefile.toml@sha256:5ee303c6dfa3b76a7afe4dfe21f00b2ef9acea491e41b87bf95aee9e7a88ef26",
   "lake-manifest.json@sha256:f4c3e1fea9e745548c15b78b91015489277625c3dee15ab1ebe8bf6acf57b320",
 ]
 outputs = ["scoped native build result"]
@@ -19,7 +19,7 @@ authority_effect = "none"
 
 [implementation]
 path = "lakefile.toml"
-digest = "sha256:59cdf241ac34e762631b3c7d0c39d51a27146eff6405a4b86caaff739be90ef1"
+digest = "sha256:5ee303c6dfa3b76a7afe4dfe21f00b2ef9acea491e41b87bf95aee9e7a88ef26"
 
 [environment]
 kind = "exact"

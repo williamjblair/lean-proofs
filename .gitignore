@@ -16,4 +16,3 @@ compute617/tools/
 compute/artifacts/structure_hunt/t4_prefix_survivors.csv
 *.py[cod]
 **/.lake/
-starfleet/**/lake-packages/

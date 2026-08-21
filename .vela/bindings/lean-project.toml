@@ -1,5 +1,5 @@
 schema = "vela.integration-binding.v0.1"
-binding_root = "sha256:4566a928ec9a04a39b701680d805c723e7348e5b3784e9d35e914fbd672c8227"
+binding_root = "sha256:58078b381a2bf133ebbf7393eab6e3c20404782db745b36c2e997ecc300990ba"
 binding_id = "lean-project"
 outputs = ["exact_reference", "verification_input"]
 authority_effect = "none"
@@ -19,19 +19,18 @@ identifier = "lakefile.toml"
 
 [references.revision]
 kind = "git_commit"
-value = "423344341fbfdf4f8f684a302c5d05379125e7dc"
+value = "cb3522fdca1961a90c97d170ca0322823bc020e8"
 
 [references.content_fixity]
 media_type = "application/toml"
-digest = "sha256:59cdf241ac34e762631b3c7d0c39d51a27146eff6405a4b86caaff739be90ef1"
-size = 586
-
+digest = "sha256:5ee303c6dfa3b76a7afe4dfe21f00b2ef9acea491e41b87bf95aee9e7a88ef26"
+size = 974
 [references.selector]
 kind = "path"
 value = "lakefile.toml"
 
 [references.locator]
-uri = "https://github.com/williamjblair/lean-proofs/blob/423344341fbfdf4f8f684a302c5d05379125e7dc/lakefile.toml"
+uri = "https://github.com/williamjblair/lean-proofs/blob/cb3522fdca1961a90c97d170ca0322823bc020e8/lakefile.toml"
 mutable = false
 authentication = "public"
 
@@ -47,8 +46,8 @@ disposition = "preserved"
 
 [[methods]]
 id = "lean-build"
-root = "sha256:2909fbed9313c9a94013ca71ae738fee8ef9eece32b458ca6e7e68b82d383bbf"
+root = "sha256:2edc5e5c65e8d2b75e8a0c5c3fdacc53df23f56cf4ffb6c0f0c946fba189aa19"
 
 [[methods]]
 id = "integration-validator"
-root = "sha256:c3a2aac6862f32f34f4729797c6cde70db842e1a477bd8b72e9b5c2e9b042955"
+root = "sha256:37c4624c19b0a137e968194fb2840968809d848948d5b7a87f0821d5216c8484"

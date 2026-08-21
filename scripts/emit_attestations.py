@@ -113,10 +113,8 @@ def main() -> int:
         check=True,
     ).stdout
 
-    # Only proofs hosted in the ErdosProblems library are audited by Audit.lean.
-    # Externally-pinned sources (e.g. starfleet/, on a different toolchain) are
-    # attested by their own CI (see .github/workflows/starfleet.yml), so exclude
-    # them here by keying on each entry's `file:` prefix.
+    # Every proof hosted here lives in the ErdosProblems library and is audited
+    # by Audit.lean; key on each entry's `file:` prefix so a stray entry cannot pass.
     proofs = [p for p in doc.get("proofs", [])
               if str(p.get("file", "")).startswith("ErdosProblems/")]
     axioms_by_theorem = parse_axiom_report(report)
