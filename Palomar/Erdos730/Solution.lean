@@ -1,4 +1,4 @@
-import ErdosProblems.Erdos730FullDensityTheorem
+import ErdosProblems.Erdos730.FullDensityTheorem
 
 namespace Palomar.Erdos730
 

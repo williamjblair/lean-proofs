@@ -19,10 +19,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_SCHEMA = "lean-proofs.verification-input.v0.1"
 EXPECTED_REPOSITORY = "https://github.com/williamjblair/lean-proofs.git"
-EXPECTED_NATIVE_REVISION = "423344341fbfdf4f8f684a302c5d05379125e7dc"
+EXPECTED_NATIVE_REVISION = "0af24bf7bbb5abedd663783adfc3872f2a936f59"
 # lakefile.toml was last changed in this commit (the Palomar library); the
 # theorem reference above stays at the commit that introduced the proof.
-EXPECTED_LAKEFILE_REVISION = "cb3522fdca1961a90c97d170ca0322823bc020e8"
+EXPECTED_LAKEFILE_REVISION = "0af24bf7bbb5abedd663783adfc3872f2a936f59"
 EXPECTED_CORE_REPOSITORY = "https://github.com/vela-science/vela.git"
 EXPECTED_CORE_REVISION = "c1a34373c2cdd937ed34fd128174a66fa12be71a"
 EXPECTED_CORE_VERSION = "0.977.2"
@@ -30,7 +30,7 @@ EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.29.1"
 EXPECTED_MATHLIB = "5e932f97dd25535344f80f9dd8da3aab83df0fe6"
 EXPECTED_ROOT_PROOF_COUNT = 69
 SELECTED_THEOREM = "Erdos94.variants.sum_multiplicity"
-SELECTED_SOURCE = "ErdosProblems/Erdos94SumMultiplicity.lean"
+SELECTED_SOURCE = "ErdosProblems/Erdos94.lean"
 EXPECTED_LOCAL_REFERENCES = {
     "lakefile.toml": {
         "schema": "vela.exact-reference.v0.1",
@@ -107,14 +107,14 @@ EXPECTED_EXTERNAL_REFERENCE = {
 }
 EXPECTED_CLOSURE = [
     {
-        "path": "ErdosProblems/Erdos94SumMultiplicity.lean",
+        "path": "ErdosProblems/Erdos94.lean",
         "digest": "sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
         "size": 5527,
     },
     {
         "path": "proofs.yaml",
-        "digest": "sha256:cb8ddb524d8e6278426dcf81ac3f5a0176072baa0575702636dee2775faae831",
-        "size": 28517,
+        "digest": "sha256:57eb91e27a4f9c1aa5761d36fd3b5ca3df38b0f9ebe9ef7d781a6f94eee1876b",
+        "size": 28562,
     },
     {
         "path": "Audit.lean",

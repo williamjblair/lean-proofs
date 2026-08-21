@@ -92,7 +92,7 @@ class IntegrationHostileTests(unittest.TestCase):
         self.assert_refused("theorem drift")
 
     def test_dotted_native_declaration_is_present(self) -> None:
-        source = (self.root / "ErdosProblems/Erdos399Cambie.lean").read_text(
+        source = (self.root / "ErdosProblems/Erdos399.lean").read_text(
             encoding="utf-8"
         )
         self.assertTrue(
@@ -118,7 +118,7 @@ theorem Erdos399.erdos_399.variants.cambie : True := by trivial
     def test_uncategorized_inventory_entry_refuses(self) -> None:
         replace_once(
             self.root / "proofs.yaml",
-            "file: ErdosProblems/Erdos399Cambie.lean",
+            "file: ErdosProblems/Erdos399.lean",
             "file: hostile/Erdos399Cambie.lean",
         )
         self.assert_refused("proof index inventory drift")

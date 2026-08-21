@@ -13,9 +13,11 @@ set -euo pipefail
 ALLOWED='[propext, Classical.choice, Quot.sound]'
 fail() { echo "FAIL: $*" >&2; exit 1; }
 
-# 1. No literal sorry / admit in the hosted proofs.
+# 1. No literal sorry / admit in the hosted proofs. Each problem's directory
+#    also holds its computational provenance and plans, whose prose may use
+#    the word; only Lean sources are proofs.
 for proof_dir in ErdosProblems lean/Erdos699/Proved; do
-  if [ -d "$proof_dir" ] && grep -rnoE '\b(sorry|admit)\b' "$proof_dir" ; then
+  if [ -d "$proof_dir" ] && grep -rnoE --include='*.lean' '\b(sorry|admit)\b' "$proof_dir" ; then
     fail "literal sorry/admit in $proof_dir/"
   fi
 done

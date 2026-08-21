@@ -1,4 +1,4 @@
-import ErdosProblems.Erdos154Sumset
+import ErdosProblems.Erdos154.Sumset
 
 namespace Palomar.Erdos154
 

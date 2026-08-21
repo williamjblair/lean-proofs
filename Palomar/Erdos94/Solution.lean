@@ -1,4 +1,4 @@
-import ErdosProblems.Erdos94SumMultiplicity
+import ErdosProblems.Erdos94
 
 open scoped BigOperators Finset
 

@@ -5,14 +5,14 @@ That grant covers the material authored here. It does not cover the third-party
 material listed below, which remains the property of its authors.
 
 
-ErdosProblems/Erdos154.lean
+ErdosProblems/Erdos154/Lindstrom.lean
 ---------------------------
 
 The Lindström residue-distribution formalisation in this file was written by
 Aristotle (Harmonic) and Wouter van Doorn, and is reproduced from
 https://github.com/Woett/Lean-files/blob/main/ErdosProblem154.lean with its
 original header. That repository publishes no licence; the file is retained
-here with attribution, for `ErdosProblems/Erdos154Sumset.lean` to build on,
+here with attribution, for `ErdosProblems/Erdos154/Sumset.lean` to build on,
 and is not covered by the MIT licence above. Copyright remains with its
 authors. Until its terms are clarified, results depending on it are not
 submitted to any registry.

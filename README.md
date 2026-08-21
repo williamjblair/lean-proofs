@@ -26,20 +26,26 @@ component lemmas of the #730 development; `Audit.lean` prints the axioms of each
 
 ## Layout
 
+One directory per problem, holding everything that problem owns.
+
 ```
+ErdosProblems/
+  Erdos730/                   the #730 development (74 modules), with its
+    compute/                  exact-arithmetic provenance and certificate suite
+    plans/                    the hostile-audit and formalisation plans it followed
+  Erdos154/                   Lindstrom.lean (third-party; see NOTICE) and Sumset.lean
+  Erdos1074/evidence/         the retained finite-computation certificate
+  Erdos94.lean, Erdos399.lean, Erdos1074.lean
 Palomar/<Problem>/            registry statements: Challenge.lean (imports Mathlib
-                              only), Solution.lean (delegates to the proof here),
+                              only), Solution.lean (delegates to the proof above),
                               comparator.json (what Comparator compares)
-ErdosProblems/                the proofs
 Audit.lean                    #print axioms for every tracked theorem
 proofs.yaml                   machine-readable index (consumed by erdos-fc-sync)
 formalization.yaml            provenance, sources, automation, review (the
                               mathlib-initiative self-reporting standard; Palomar
                               reads it)
-compute730/                   exact-arithmetic provenance for the #730 proof
-evidence/                     retained computational certificates
-docs/                         plans, and the Vela integration contract
 scripts/, tests/              the verification gate and its tests
+docs/                         the Vela integration contract
 .vela/, vela.toml             optional Vela integration (docs/vela-integration.md)
 NOTICE                        third-party material and its terms
 ```
@@ -99,7 +105,7 @@ formalizes the explicit positive-density family, Kummer digit criterion,
 four-range event ledger, fixed-depth Fourier estimate, uniform depth tail,
 Mertens input, fixed-modulus PNT in arithmetic progressions, divisor
 switching, exact density budget, and density-to-infinitude bridge.  See
-`compute730/full_density/`, `ErdosProblems/Erdos730FullDensityTheorem.lean`, and the
+`ErdosProblems/Erdos730/compute/full_density/`, `ErdosProblems/Erdos730/FullDensityTheorem.lean`, and the
 registry statement `Palomar/Erdos730/Challenge.lean`.
 
 The hostile-audit certificate includes 119 passing exact-arithmetic tests and
@@ -127,7 +133,7 @@ package-global hygiene qualification rather than a gap in the proof.
 `Erdos154.erdos_154_sumset` proves that along Sidon sets `A k ⊆ [0, N k]` with
 `N k → ∞` and `|A k| / √(N k) → 1`, the sumset `A k + A k` is equidistributed modulo
 every `m ≥ 2`. It is proved from Lindström's residue-distribution theorem for `A`
-itself (J. Number Theory 1998), whose formalisation in `ErdosProblems/Erdos154.lean`
+itself (J. Number Theory 1998), whose formalisation in `ErdosProblems/Erdos154/Lindstrom.lean`
 is by Aristotle (Harmonic) and Wouter van Doorn via
 [Woett/Lean-files](https://github.com/Woett/Lean-files); see `NOTICE` for its terms.
 The statement is the one Formal Conjectures records for the problem

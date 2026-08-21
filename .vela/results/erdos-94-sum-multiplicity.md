@@ -3,7 +3,7 @@
 ## Target and outcome
 
 - Target: `Erdos94.variants.sum_multiplicity` in
-  `ErdosProblems/Erdos94SumMultiplicity.lean`.
+  `ErdosProblems/Erdos94.lean`.
 - Outcome: proved for every finite `P : Finset ℝ²`:
   `∑ u ∈ distanceSet P, distanceMultiplicity P u = P.card.choose 2`.
 - Scope: the elementary sum identity only. It does not prove the cubic
