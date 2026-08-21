@@ -78,6 +78,7 @@ jobs:
           git -C "$RUNNER_TEMP/lean4export" checkout "$TOOLCHAIN_TAG"
           (cd "$RUNNER_TEMP/lean4export" && lake build)
           mkdir -p "$RUNNER_TEMP/bin"
+          chmod +x "$RUNNER_TEMP/comparator/scripts/fake-landrun.sh"
           ln -s "$RUNNER_TEMP/comparator/scripts/fake-landrun.sh" "$RUNNER_TEMP/bin/landrun"
           ln -s "$RUNNER_TEMP/lean4export/.lake/build/bin/lean4export" "$RUNNER_TEMP/bin/lean4export"
           echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
