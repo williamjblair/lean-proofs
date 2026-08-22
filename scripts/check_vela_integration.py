@@ -19,10 +19,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_SCHEMA = "lean-proofs.verification-input.v0.1"
 EXPECTED_REPOSITORY = "https://github.com/williamjblair/lean-proofs.git"
-EXPECTED_NATIVE_REVISION = "9167a4e6694ee0f780d9c9089b416d01dd615ce0"
+EXPECTED_NATIVE_REVISION = "957eeda763b00dd53c75b66095ec3d16a8ebd427"
 # lakefile.toml was last changed in this commit (the Palomar library); the
 # theorem reference above stays at the commit that introduced the proof.
-EXPECTED_LAKEFILE_REVISION = "9167a4e6694ee0f780d9c9089b416d01dd615ce0"
+EXPECTED_LAKEFILE_REVISION = "957eeda763b00dd53c75b66095ec3d16a8ebd427"
 EXPECTED_CORE_REPOSITORY = "https://github.com/vela-science/vela.git"
 EXPECTED_CORE_REVISION = "c1a34373c2cdd937ed34fd128174a66fa12be71a"
 EXPECTED_CORE_VERSION = "0.977.2"
@@ -42,8 +42,8 @@ EXPECTED_LOCAL_REFERENCES = {
         "revision": {"kind": "git_commit", "value": EXPECTED_LAKEFILE_REVISION},
         "content_fixity": {
             "media_type": "application/toml",
-            "digest": "sha256:4ea56ff5268db5e07734e415bff1067860470c4b865d6cdc4dfd15179ede5082",
-            "size": 1007,
+            "digest": "sha256:dc6494f3a546691b7d3601cacc8068986379c8a62296ee2f1bc55520ef6cb46b",
+            "size": 940,
         },
         "selector": {"kind": "path", "value": "lakefile.toml"},
         "locator": {
@@ -113,7 +113,7 @@ EXPECTED_CLOSURE = [
     },
     {
         "path": "proofs.yaml",
-        "digest": "sha256:50db80e227e9649604192228c7c88f4d3e535ec4bb0c48595a68c6906cbc366a",
+        "digest": "sha256:5717467bae5e61ba7e0cfe62da165fdbcc5873d7e41ed15537c67d51864bb548",
         "size": 28595,
     },
     {
@@ -123,18 +123,18 @@ EXPECTED_CLOSURE = [
     },
     {
         "path": "lean-toolchain",
-        "digest": "sha256:651c8accb402b0c071cd336e9d3dc0a55516b1bfb434ddc4801f14936785b1d2",
+        "digest": "sha256:302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
         "size": 25,
     },
     {
         "path": "lakefile.toml",
-        "digest": "sha256:4ea56ff5268db5e07734e415bff1067860470c4b865d6cdc4dfd15179ede5082",
-        "size": 1007,
+        "digest": "sha256:dc6494f3a546691b7d3601cacc8068986379c8a62296ee2f1bc55520ef6cb46b",
+        "size": 940,
     },
     {
         "path": "lake-manifest.json",
-        "digest": "sha256:d9d3b61461551c6ecf4b0866d965360f0779058cf6ada8c9a70a0b6c5a67c72b",
-        "size": 4756,
+        "digest": "sha256:a81ef40554be38a473d0339b81e220c9d013226aae49d29305417f2e091bf482",
+        "size": 4722,
     },
 ]
 

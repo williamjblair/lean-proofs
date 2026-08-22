@@ -1,5 +1,5 @@
 schema = "vela.integration-binding.v0.1"
-binding_root = "sha256:84370690f4dc524df9abccac241a90cbf4d1e480f57f959d45942253a9a2bf19"
+binding_root = "sha256:e9c5beee7d24a2924ec8e0b45fc9dfeaa97611b48fc16d1653de7956d5eeef45"
 binding_id = "formal-proof-index"
 outputs = ["exact_reference", "verification_input"]
 authority_effect = "none"
@@ -19,7 +19,7 @@ identifier = "Erdos94.variants.sum_multiplicity"
 
 [references.revision]
 kind = "git_commit"
-value = "9167a4e6694ee0f780d9c9089b416d01dd615ce0"
+value = "957eeda763b00dd53c75b66095ec3d16a8ebd427"
 
 [references.content_fixity]
 media_type = "text/x-lean"
@@ -31,7 +31,7 @@ kind = "lean_declaration"
 value = "Erdos94.variants.sum_multiplicity"
 
 [references.locator]
-uri = "https://github.com/williamjblair/lean-proofs/blob/9167a4e6694ee0f780d9c9089b416d01dd615ce0/ErdosProblems/Erdos94.lean"
+uri = "https://github.com/williamjblair/lean-proofs/blob/957eeda763b00dd53c75b66095ec3d16a8ebd427/ErdosProblems/Erdos94.lean"
 mutable = false
 authentication = "public"
 
@@ -57,12 +57,12 @@ disposition = "preserved"
 
 [[methods]]
 id = "lean-build"
-root = "sha256:631c3f93dcb6efaafe763b59f97c91c49c13e4162d49e77a91fe1fbd406191a8"
+root = "sha256:ff164ad62bcc725d4a961c3622eaf1b4ba2ba5fde4c801cb0a2b1106bc724325"
 
 [[methods]]
 id = "axiom-audit"
-root = "sha256:b745685bbab8c32847c22f498c6b235d06e4da6b183a3e97f1a62aa3425caa2b"
+root = "sha256:e4c42220697949454f0d3439c8b0184d8f1a950957f21c23ea6678722a953d61"
 
 [[methods]]
 id = "integration-validator"
-root = "sha256:f47bad056a0043856d1be74cfa6ea33f5da6883e7d848572a66ea243e09e66ea"
+root = "sha256:fd77896b2beb3dc83ce5017f5dd1a9b1440d1c0f6b17f7bb3b4bba154e471d06"

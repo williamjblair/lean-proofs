@@ -1,10 +1,10 @@
 schema = "vela.integration-method.v0.1"
-method_root = "sha256:b745685bbab8c32847c22f498c6b235d06e4da6b183a3e97f1a62aa3425caa2b"
+method_root = "sha256:e4c42220697949454f0d3439c8b0184d8f1a950957f21c23ea6678722a953d61"
 method_id = "axiom-audit"
 version = "0.1"
 inputs = [
-  "git:9167a4e6694ee0f780d9c9089b416d01dd615ce0",
-  "proofs.yaml@sha256:50db80e227e9649604192228c7c88f4d3e535ec4bb0c48595a68c6906cbc366a",
+  "git:957eeda763b00dd53c75b66095ec3d16a8ebd427",
+  "proofs.yaml@sha256:5717467bae5e61ba7e0cfe62da165fdbcc5873d7e41ed15537c67d51864bb548",
   "Audit.lean@sha256:9fcc8078dbdefdac2acceccf24d832b22f7038a6c303f4b67721d45b2a5a87aa",
   "ErdosProblems/Erdos94.lean@sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
 ]
@@ -24,6 +24,6 @@ digest = "sha256:01abf748a6edd4e6e2b27213b8ab5be21cea2fadd0d76af6c152d1c8d9084fd
 
 [environment]
 kind = "exact"
-revision = "9167a4e6694ee0f780d9c9089b416d01dd615ce0"
+revision = "957eeda763b00dd53c75b66095ec3d16a8ebd427"
 toolchain = "leanprover/lean4:v4.33.0"
 allowed_axioms = ["propext", "Classical.choice", "Quot.sound"]
