@@ -100,19 +100,19 @@ status:
   axioms: ["propext", "Classical.choice", "Quot.sound"]
   main_results:
     - declaration: "Palomar.Erdos730.erdos_730_infinite"
-      file: "Palomar/Erdos730/Solution.lean"
+      file: "PalomarSolutions/Erdos730.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       comparator_config: "Palomar/Erdos730/comparator.json"
       literature_dependencies: []
     - declaration: "Palomar.Erdos154.erdos_154_sumset"
-      file: "Palomar/Erdos154/Solution.lean"
+      file: "PalomarSolutions/Erdos154.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       comparator_config: "Palomar/Erdos154/comparator.json"
       literature_dependencies: []
     - declaration: "Palomar.Erdos94.sum_multiplicity"
-      file: "Palomar/Erdos94/Solution.lean"
+      file: "PalomarSolutions/Erdos94.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       comparator_config: "Palomar/Erdos94/comparator.json"

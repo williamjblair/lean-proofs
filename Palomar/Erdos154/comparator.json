@@ -1,6 +1,6 @@
 {
   "challenge_module": "Palomar.Erdos154.Challenge",
-  "solution_module": "Palomar.Erdos154.Solution",
+  "solution_module": "PalomarSolutions.Erdos154",
   "theorem_names": ["Palomar.Erdos154.erdos_154_sumset"],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": false

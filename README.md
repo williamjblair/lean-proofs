@@ -37,8 +37,10 @@ ErdosProblems/
   Erdos1074/evidence/         the retained finite-computation certificate
   Erdos94.lean, Erdos399.lean, Erdos1074.lean
 Palomar/<Problem>/            registry statements: Challenge.lean (imports Mathlib
-                              only), Solution.lean (delegates to the proof above),
-                              comparator.json (what Comparator compares)
+                              only) and comparator.json (what Comparator compares)
+PalomarSolutions/<Problem>.lean
+                              the Solution for each Challenge (delegates to the
+                              proof above); a separate root module on purpose
 Audit.lean                    #print axioms for every tracked theorem
 proofs.yaml                   machine-readable index (consumed by erdos-fc-sync)
 formalization.yaml            provenance, sources, automation, review (the
@@ -61,10 +63,14 @@ existing commit-pinned links to them remain valid.
 Each `Palomar/<Problem>/` directory is one Comparator comparison in the shape the
 [Palomar submission standard](https://github.com/PalomarRegistry/PalomarPolicy/blob/main/CONTRIBUTING.md)
 asks for: a `Challenge.lean` that imports only Mathlib and states the result in a
-single auditable declaration, a `Solution.lean` that proves the same declaration
-from the development in `ErdosProblems/`, and a `comparator.json` permitting only the
-three standard axioms. Challenge and Solution declare the same names by design, so
-the `Palomar` library builds each module on its own.
+single auditable declaration, and a `comparator.json` permitting only the three
+standard axioms. The matching Solution, `PalomarSolutions/<Problem>.lean`, proves the
+same declaration from the development in `ErdosProblems/`. Challenge and Solution
+declare the same names by design, so each module is built on its own. Solutions sit
+under their own root module rather than under `Palomar/`: the registry's verifier
+puts its recompiled Challenge first on `LEAN_PATH`, and Lean resolves every module
+sharing that root directory there
+([PalomarSubmission#108](https://github.com/PalomarRegistry/PalomarSubmission/issues/108)).
 
 To reproduce the registry's mechanical check locally, with
 [Comparator](https://github.com/leanprover/comparator) and a `lean4export` built at
