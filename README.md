@@ -15,7 +15,7 @@ acceptance, a Vela Decision, or Standing in any Repository.
 
 | Problem | Theorem | Statement | Status |
 |--------:|---------|-----------|--------|
-| [730](https://www.erdosproblems.com/730) | `Erdos730.FullDensityTheorem.pairSet_infinite` | Infinitely many pairs `n < m` (in fact consecutive pairs) whose central binomial coefficients have identical prime support — the affirmative answer to Erdős #730. | kernel-proved; registry statement in `Palomar/Erdos730/` |
+| [730](https://www.erdosproblems.com/730) | `Erdos730.FullDensityTheorem.pairSet_infinite` | Infinitely many pairs `n < m` (in fact consecutive pairs) whose central binomial coefficients have identical prime support — the affirmative answer to Erdős #730. | kernel-proved; registered with the [Palomar registry](https://palomar-registry.org/entry.html?id=PALOMAR-2026-08-22-000001&version=1) as `PALOMAR-2026-08-22-000001` (22 August 2026) |
 | [154](https://www.erdosproblems.com/154) | `Erdos154.erdos_154_sumset` | For Sidon sets `A` with `\|A\| ~ √N`, the sumset `A + A` is equidistributed over residue classes mod `m`. | kernel-proved; registry statement in `Palomar/Erdos154/`; registration waits on the upstream licence of the Lindström formalisation it builds on (see `NOTICE`) |
 | [94](https://www.erdosproblems.com/94) | `Erdos94.variants.sum_multiplicity` | The multiplicities of the distinct distances of a finite planar point set sum to `(\|P\| choose 2)`. | kernel-proved bounded identity; statement in `Palomar/Erdos94/`; below a registry's research-interest floor and not a candidate |
 | [399](https://www.erdosproblems.com/399) | `Erdos399.erdos_399.variants.cambie` | Coprime `x, y` with `1 < xy`: no factorial is `x⁴ + y⁴`. | kernel-proved bounded variant |
@@ -104,7 +104,9 @@ The optional Vela integration checks (`vela integration check . --json`,
 ## Erdős #730 full-density proof
 
 
-Erdős #730 is unconditionally kernel-proved.  The terminal theorem is
+Erdős #730 is unconditionally kernel-proved, and the registry statement
+`Palomar/Erdos730/Challenge.lean` is registered with Palomar as
+`PALOMAR-2026-08-22-000001` (both kernels, no findings in review).  The terminal theorem is
 `Erdos730.FullDensityTheorem.pairSet_infinite`: infinitely many consecutive
 central binomial coefficients have identical prime support.  The proof
 formalizes the explicit positive-density family, Kummer digit criterion,
