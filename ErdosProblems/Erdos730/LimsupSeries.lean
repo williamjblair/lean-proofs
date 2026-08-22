@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import Mathlib.Topology.Algebra.InfiniteSum.Real
 import Mathlib.Topology.Algebra.Order.LiminfLimsup
 
@@ -29,7 +29,7 @@ theorem isBoundedUnder_le_finset_sum
   | @insert i s hi ih =>
       have hiBdd := hbdd i (Finset.mem_insert_self i s)
       have hsBdd := ih fun j hj ↦ hbdd j (Finset.mem_insert_of_mem hj)
-      simpa [Finset.sum_insert, hi] using isBoundedUnder_le_add hiBdd hsBdd
+      simpa [Finset.sum_insert, hi] using! isBoundedUnder_le_add hiBdd hsBdd
 
 theorem limsup_finset_sum_le_sum_limsup
     (s : Finset ι) (u : ι → κ → ℝ)

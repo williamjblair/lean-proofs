@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.BranchEvents
 import ErdosProblems.Erdos730.DigitBoxes
 import ErdosProblems.Erdos730.ObstructionMaps
@@ -318,7 +318,7 @@ theorem branchTestValue_root_progression
   have hmod : x ≡ x₀ [MOD q] := by
     simpa [q] using localBranchRoots_modEq h h₀
   have hrem : x % q = s := by
-    simpa [s] using hmod
+    simpa [s, Nat.ModEq] using hmod
   have hxProgression : x = s + q * k := by
     calc
       x = q * (x / q) + x % q := (Nat.div_add_mod x q).symm
@@ -363,7 +363,7 @@ theorem branchTestValue_root_progression
       have hphi := PhiP_root_progression hbaseZ (k : ℤ)
       rw [htest, htest₀, hxProgression, hdProgression]
       simpa [commonQuadraticCoefficient, branchUCoefficient,
-        branchResidualCoefficient, branchSlope, Tz_eq] using hphi
+        branchResidualCoefficient, branchSlope, Tz_eq] using! hphi
   | Q =>
       have hbaseZ : (q : ℤ) * (c₀ : ℤ) = Qz s := by
         rw [(branch_casts s).2.1]
@@ -371,7 +371,7 @@ theorem branchTestValue_root_progression
       have hphi := PhiQ_root_progression hbaseZ (k : ℤ)
       rw [htest, htest₀, hxProgression, hdProgression]
       simpa [commonQuadraticCoefficient, branchUCoefficient,
-        branchResidualCoefficient, branchSlope, Tz_eq] using hphi
+        branchResidualCoefficient, branchSlope, Tz_eq] using! hphi
   | R =>
       have hbaseZ : (q : ℤ) * (c₀ : ℤ) = Rz s := by
         rw [(branch_casts s).2.2.1]
@@ -379,7 +379,7 @@ theorem branchTestValue_root_progression
       have hphi := PhiR_root_progression hbaseZ (k : ℤ)
       rw [htest, htest₀, hxProgression, hdProgression]
       simpa [commonQuadraticCoefficient, branchUCoefficient,
-        branchResidualCoefficient, branchSlope, Tz_eq] using hphi
+        branchResidualCoefficient, branchSlope, Tz_eq] using! hphi
   | S =>
       have hbaseZ : (q : ℤ) * (c₀ : ℤ) = Sz s := by
         rw [(branch_casts s).2.2.2]
@@ -387,7 +387,7 @@ theorem branchTestValue_root_progression
       have hphi := PhiS_root_progression hbaseZ (k : ℤ)
       rw [htest, htest₀, hxProgression, hdProgression]
       simpa [commonQuadraticCoefficient, branchUCoefficient,
-        branchResidualCoefficient, branchSlope, Tz_eq] using hphi
+        branchResidualCoefficient, branchSlope, Tz_eq] using! hphi
 
 /-- Equation (16) in the exact `padicBranchMap` form used by the finite block
 count.  It is valid at every output depth, including depth zero. -/
@@ -638,9 +638,8 @@ theorem higherPowerPairIndex_injOn (Z : ℕ) :
   rintro ⟨p, a⟩ hpa ⟨q, b⟩ hqb heq
   rcases mem_higherPrimePowerPairs_iff.mp hpa with ⟨hp, ha2, _hpaZ⟩
   rcases mem_higherPrimePowerPairs_iff.mp hqb with ⟨hq, hb2, _hqbZ⟩
-  simp only [higherPowerPairIndex, dif_pos hp, dif_pos hq,
-    Prod.mk.injEq] at heq
-  rcases heq with ⟨hpq, hab⟩
+  simp only [higherPowerPairIndex, dif_pos hp, dif_pos hq] at heq
+  obtain ⟨hpq, hab⟩ := Prod.mk.inj heq
   have hpq' : p = q := congrArg Subtype.val hpq
   subst q
   have : a = b := by omega
@@ -671,7 +670,7 @@ theorem localHigherPowerFiber_normalized_le_two_envelope
     exact Nat.div_pos hqX hqPos
   have hPPos : 0 < P := pow_pos hp.pos r
   have hPleU : P ≤ U := by
-    simpa [P, r] using Nat.pow_log_le_self p hUPos.ne'
+    simpa [P, r] using! Nat.pow_log_le_self p hUPos.ne'
   have hDPos : 0 < D := Nat.div_pos hPleU hPPos
   have hcoeff : (U + 1) / P + 1 ≤ 4 * D := by
     have hsucc := succ_div_le_div_add_one U P

@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import Mathlib.Analysis.Fourier.ZMod
 import Mathlib.Data.Nat.Digits.Lemmas
 import Mathlib.Data.Nat.Factorization.Basic

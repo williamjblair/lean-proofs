@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.AnalyticInputs
 import PrimeNumberTheoremAnd.Consequences
 
@@ -103,7 +103,7 @@ lemma primeAPCountingReal_eq_thetaAP_div_log_add_integral
         ∫ u in 2..x, f u * -(u * Real.log u ^ 2)⁻¹ :=
       intervalIntegral.integral_congr fun u _ => by
         simp [Real.deriv_inv_log, field]
-    simp [int_deriv, b, Set.indicator_apply, Finset.sum_filter, thetaAP]
+    simp [-Real.deriv_inv_log, int_deriv, b, Set.indicator_apply, Finset.sum_filter, thetaAP]
     grind
   · intro z ⟨hz, _⟩
     have hz0 : z ≠ 0 := by linarith
@@ -111,8 +111,8 @@ lemma primeAPCountingReal_eq_thetaAP_div_log_add_integral
       apply Real.log_ne_zero_of_pos_of_ne_one <;> linarith
     fun_prop (disch := assumption)
   · refine ContinuousOn.integrableOn_Icc fun z ⟨hz, _⟩ =>
-      ContinuousWithinAt.congr ?_ (fun _ _ => Real.deriv_inv_log)
-        Real.deriv_inv_log
+      ContinuousWithinAt.congr ?_ (fun _ _ => Real.deriv_inv_log_apply)
+        Real.deriv_inv_log_apply
     have hz0 : z ≠ 0 := by linarith
     have hzlog : Real.log z ^ 2 ≠ 0 := by
       refine pow_ne_zero 2 <| Real.log_ne_zero_of_pos_of_ne_one ?_ ?_ <;> linarith
@@ -165,7 +165,7 @@ lemma integral_thetaAP_div_log_sq_isLittleO (A a : ℕ) :
 lemma thetaAP_asymptotic {A a : ℕ} (hA : 0 < A) (ha : a.Coprime A)
     (haA : a < A) :
     thetaAP A a ~[atTop] (fun x : ℝ => x / A.totient) := by
-  simpa only [thetaAP] using chebyshev_asymptotic_pnt hA ha haA
+  simpa only [thetaAP] using! chebyshev_asymptotic_pnt hA ha haA
 
 lemma thetaAP_div_id_tendsto {A a : ℕ} (hA : 0 < A) (ha : a.Coprime A)
     (haA : a < A) :

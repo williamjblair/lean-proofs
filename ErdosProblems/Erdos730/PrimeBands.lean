@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.Mertens
 import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
@@ -273,7 +273,7 @@ theorem transitionPrimeBand_loglog_sub_eq {X : ℝ}
 private theorem tendsto_log_log_div_log_atTop :
     Tendsto (fun X : ℝ ↦ Real.log (Real.log X) / Real.log X)
       atTop (𝓝 0) := by
-  simpa using
+  simpa using!
     (Real.tendsto_pow_log_div_mul_add_atTop 1 0 1 one_ne_zero).comp
       Real.tendsto_log_atTop
 
@@ -294,7 +294,7 @@ theorem tendsto_transitionPrimeBand_loglog_sub :
       (fun X : ℝ ↦
         Real.log (1 + 4 * Real.log (Real.log X) / Real.log X))
       atTop (𝓝 0) := by
-    simpa using (Real.continuousAt_log one_ne_zero).tendsto.comp hinside
+    simpa using! (Real.continuousAt_log one_ne_zero).tendsto.comp hinside
   apply hlog.congr'
   filter_upwards [eventually_gt_atTop (Real.exp 1)] with X hX
   exact (transitionPrimeBand_loglog_sub_eq hX).symm

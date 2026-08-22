@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import Mathlib
 
 /-!
@@ -231,11 +231,14 @@ theorem densityBudget_tail_le :
   have hg : HasSum g ((1 : ℝ) / 98304) := by
     have hgeom := hasSum_geometric_of_lt_one (r := (1 / 4 : ℝ)) (by norm_num) (by norm_num)
     have hscaled := hgeom.mul_left ((1 / 8 : ℝ) * (1 / 4 : ℝ) ^ 7)
-    convert hscaled using 1
-    · ext n
+    have hfun : g = fun i ↦ (1 / 8 : ℝ) * (1 / 4 : ℝ) ^ 7 * (1 / 4 : ℝ) ^ i := by
+      funext n
       simp only [g, pow_add]
       ring
-    · norm_num
+    have hval : (1 : ℝ) / 98304 = (1 / 8 : ℝ) * (1 / 4 : ℝ) ^ 7 * (1 - 1 / 4)⁻¹ := by
+      norm_num
+    rw [hfun, hval]
+    exact hscaled
   calc
     (∑' n : ℕ, densityBudgetTerm (n + 7)) ≤ ∑' n : ℕ, g n := by
       exact ((summable_nat_add_iff 7).2 densityBudgetTerm_summable).tsum_le_tsum

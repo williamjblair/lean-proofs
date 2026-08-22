@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.BranchEvents
 import ErdosProblems.Erdos730.PNTAP
 import ErdosProblems.Erdos730.PrimeBands
@@ -965,7 +965,7 @@ private theorem tendsto_log_log_div_log_nat :
   have hreal : Tendsto
       (fun X : ℝ => Real.log (Real.log X) / Real.log X)
       atTop (𝓝 0) := by
-    simpa using
+    simpa using!
       (Real.tendsto_pow_log_div_mul_add_atTop 1 0 1 one_ne_zero).comp
         Real.tendsto_log_atTop
   exact hreal.comp tendsto_natCast_atTop_atTop
@@ -1542,10 +1542,10 @@ theorem eventually_normalizedTopPrimeWitnessCount_le_majorant
   rw [RangeAssembly.normalizedTopPrimeWitnessCount,
     ← topPrimeCut_eq_transitionTopCut]
   apply normalizedTopPrimeWitnessCount_le_majorant X hX hcut hlarge hle ε
-  · simpa [Nat.totient] using h71X
-  · simpa [Nat.totient] using h76X
-  · simpa [Nat.totient] using h141X
-  · simpa [Nat.totient] using h1413X
+  · simpa [show Nat.totient 7 = 6 by decide] using h71X
+  · simpa [show Nat.totient 7 = 6 by decide] using h76X
+  · simpa [show Nat.totient 14 = 6 by decide] using h141X
+  · simpa [show Nat.totient 14 = 6 by decide] using h1413X
 
 theorem eventually_normalizedTopPrimeWitnessCount_lt
     {y : ℝ} (hy : (2 / 3 : ℝ) * Real.log 2 < y) :

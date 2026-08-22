@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.BranchEvents
 import ErdosProblems.Erdos730.DensityAssembly
 import ErdosProblems.Erdos730.TransitionDensity
@@ -141,7 +141,7 @@ theorem limsup_badDensity_le_budget_of_range_estimates
     exact isBoundedUnder_of
       ⟨0, normalizedTopPrimeWitnessCount_nonneg⟩
   have hprincipalBdd : IsBoundedUnder (· ≤ ·) atTop principal := by
-    simpa only [principal] using isBoundedUnder_le_add hsmallBdd htopBdd
+    simpa only [principal] using! isBoundedUnder_le_add hsmallBdd htopBdd
   have hprincipalCob : IsCoboundedUnder (· ≤ ·) atTop principal := by
     exact isCoboundedUnder_le_of_le atTop fun X ↦ by
       dsimp only [principal]
@@ -153,7 +153,7 @@ theorem limsup_badDensity_le_budget_of_range_estimates
       limsup principal atTop ≤
           limsup normalizedSmallPrimeWitnessCount atTop +
             limsup normalizedTopPrimeWitnessCount atTop := by
-        simpa only [principal] using
+        simpa only [principal] using!
           (limsup_add_le (f := atTop)
             (u := normalizedSmallPrimeWitnessCount)
             (v := normalizedTopPrimeWitnessCount)

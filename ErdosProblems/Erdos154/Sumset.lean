@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos154.Lindstrom
 
 open Filter Finset
@@ -178,7 +178,7 @@ private lemma tendsto_orderedPairCount_mod_div_card_sq
         ((residueCount (A k) m r : ℝ) / ((A k).card : ℝ)) *
           ((residueCount (A k) m ((i : ZMod m) - r) : ℝ) / ((A k).card : ℝ)))
       atTop (nhds (∑ _r : ZMod m, (1 / (m : ℝ)) * (1 / (m : ℝ)))) := by
-    refine tendsto_finset_sum (Finset.univ : Finset (ZMod m)) ?_
+    refine tendsto_finsetSum (Finset.univ : Finset (ZMod m)) ?_
     intro r _
     exact (hres r).mul (hres ((i : ZMod m) - r))
   have hlimit : (∑ _r : ZMod m, (1 / (m : ℝ)) * (1 / (m : ℝ))) = 1 / (m : ℝ) := by
@@ -498,7 +498,7 @@ private lemma lindstrom_implies_sumset_distribution :
         (tendsto_card_atTop_of_tendsto_card_div_sqrt hN hcard).inv_tendsto_atTop
     have hnum := hordered.add hdiag
     have hquot := hnum.div hden (by norm_num : (1 + 0 : ℝ) ≠ 0)
-    simpa using hquot
+    simpa using! hquot
   refine Tendsto.congr' ?_ hlimit
   filter_upwards [hA_pos] with k hA
   let C : ℝ := ((A k).card : ℝ)

@@ -25,5 +25,5 @@ digest = "sha256:01abf748a6edd4e6e2b27213b8ab5be21cea2fadd0d76af6c152d1c8d9084fd
 [environment]
 kind = "exact"
 revision = "9167a4e6694ee0f780d9c9089b416d01dd615ce0"
-toolchain = "leanprover/lean4:v4.29.0"
+toolchain = "leanprover/lean4:v4.33.0"
 allowed_axioms = ["propext", "Classical.choice", "Quot.sound"]
