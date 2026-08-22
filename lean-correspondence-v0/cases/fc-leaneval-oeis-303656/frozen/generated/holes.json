@@ -1,0 +1,12 @@
+{
+  "id": "OeisA303656_conjecture",
+  "module": "OeisA303656_conjecture",
+  "holes": [
+    {
+      "name": "conjecture",
+      "basename": "conjecture",
+      "kind": "theorem",
+      "body": "theorem conjecture (n : \u2115) (hn : 1 < n) : A n := by\n  sorry"
+    }
+  ]
+}

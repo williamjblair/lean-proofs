@@ -1,0 +1,35 @@
+{
+  "apply_arguments": [
+    "n",
+    "hn"
+  ],
+  "category": "research open",
+  "digests": {
+    "files": {},
+    "module": "e893b5dd9bc7be54d042a8123ddd60dbc5476181e5d3e3e77b3ecb844a594cbe"
+  },
+  "holes": [],
+  "id": "OeisA303656.conjecture",
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "qualified_theorem": "OeisA303656.conjecture",
+  "schema_version": 1,
+  "source": {
+    "blob_sha": "8ea7925d8a07edad8e492404b673f4cb77ce6f12",
+    "commit": "9f5ee773841921f460b4a26a3552f5eca4accaa0",
+    "copied_dependencies": [
+      "OeisA303656.A"
+    ],
+    "declaration": "OeisA303656.conjecture",
+    "lean_toolchain": "leanprover/lean4:v4.27.0",
+    "mathlib_revision": "a3a10db0e9d66acbebf76c5e6a135066525ac900",
+    "module": "FormalConjectures.OEIS.«303656»",
+    "original_declaration": "/--\n**Zhi-Wei Sun's Conjecture (A303656)**: Any integer $n > 1$ can be written as the sum of two\nsquares, a power of 3, and a power of 5.\n-/\n@[category research open, AMS 11]\ntheorem conjecture (n : ℕ) (hn : 1 < n) : A n := by\n  sorry",
+    "path": "FormalConjectures/OEIS/303656.lean",
+    "repository": "https://github.com/google-deepmind/formal-conjectures"
+  },
+  "theorem": "conjecture"
+}

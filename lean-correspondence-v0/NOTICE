@@ -1,0 +1,5 @@
+The files under cases/fc-leaneval-oeis-303656/frozen are retained output or
+request bytes derived from the Formal Conjectures adapter and source at the
+commits named in packet.json. Formal Conjectures is licensed under Apache-2.0.
+The lean-eval-generator revision named in packet.json produced the generated
+workspace bytes. Retention here is for provenance and deterministic replay.
