@@ -1,5 +1,5 @@
 schema = "vela.integration-binding.v0.1"
-binding_root = "sha256:841c187b7b2fee02cc33c1436c623bdf04cf1d7343e04cdf45df6f5a512835f8"
+binding_root = "sha256:a18bd1dfc9afd6c5c5740567ab2133cf198dba4356dc63645b05a01a83c816c6"
 binding_id = "lean-project"
 outputs = ["exact_reference", "verification_input"]
 authority_effect = "none"
@@ -50,4 +50,4 @@ root = "sha256:fdc78601fbdf655f0df5512f77e4d2ad69d66ac399f363bab1cc71558a11255b"
 
 [[methods]]
 id = "integration-validator"
-root = "sha256:1c5bed6851785362585f35bba711714e81d2333abca3d7c3c5e98ad6b00ca0c0"
+root = "sha256:0a7f3fc0fd4c99f68862401211d5031505d8fb744d7a40378ced2bd4843c7c04"

@@ -75,6 +75,10 @@ proofs:
     axioms_clean: true
     fc_target: FormalConjectures/ErdosProblems/730.lean
     palomar_config: Palomar/Erdos730/comparator.json
+    palomar_entry: PALOMAR-2026-08-22-000001
+    palomar_entry_version: 1
+    palomar_entry_url: https://palomar-registry.org/entry.html?id=PALOMAR-2026-08-22-000001&version=1
+    palomar_registered_commit: 03729c9cbb0b602f5a828bb850c85e84c5a6d460
   - problem: 730
     source: erdosproblems
     file: ErdosProblems/Erdos730/NearAffinePayment.lean

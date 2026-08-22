@@ -41,8 +41,8 @@ size = 76972
 
 [[closure]]
 path = "proofs.yaml"
-digest = "sha256:5717467bae5e61ba7e0cfe62da165fdbcc5873d7e41ed15537c67d51864bb548"
-size = 28595
+digest = "sha256:0a5785bd94a7363a0b796ee1e1fffd73fef363ded5e724c234fc06d6d61bbd1c"
+size = 28843
 
 [[closure]]
 path = "Audit.lean"

@@ -1,10 +1,10 @@
 schema = "vela.integration-method.v0.1"
-method_root = "sha256:ed25c14a4439f2e101113431f938d3058ee1185487b8a53b79633b61e1cc8129"
+method_root = "sha256:d377c8df355a4ff441bc5b296df4501b8e5b7635f7d03fd21eed7e0ba6e90521"
 method_id = "axiom-audit"
 version = "0.1"
 inputs = [
   "git:d33dd6063f58861df857893dbf40103495d42179",
-  "proofs.yaml@sha256:5717467bae5e61ba7e0cfe62da165fdbcc5873d7e41ed15537c67d51864bb548",
+  "proofs.yaml@sha256:0a5785bd94a7363a0b796ee1e1fffd73fef363ded5e724c234fc06d6d61bbd1c",
   "Audit.lean@sha256:9fcc8078dbdefdac2acceccf24d832b22f7038a6c303f4b67721d45b2a5a87aa",
   "ErdosProblems/Erdos94.lean@sha256:412975add8b6963bb44378f5d8ef41fd1f860b9ec06495432ab97e8ca60ffbe0",
 ]
