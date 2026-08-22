@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.DensityEvents
 
 /-!
@@ -80,7 +80,7 @@ theorem finite_bad_union_bound_audit (X : ℕ) :
         EntryObstruction (n w.1) w.2.1 w.2.2.1 w.2.2.2).card := by
   simpa [badParametersUpTo, parameterRange, GoodParameter,
     dropWitnessesUpTo, entryWitnessesUpTo, witnessParameter,
-    witnessPrime, witnessExponent, witnessCofactor] using
+    witnessPrime, witnessExponent, witnessCofactor] using!
     bad_card_le_witnessed_obstruction_count X
 
 /-- Independent partition audit: Good and Bad are complementary and have

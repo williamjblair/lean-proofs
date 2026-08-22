@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.AnalyticInputs
 import Mathlib.NumberTheory.Harmonic.Bounds
 import Mathlib.Analysis.SpecialFunctions.Log.InvLog
@@ -136,7 +136,7 @@ The following factorial argument is adapted from
 `02fba13be7487cc51315f68d8fa7ef277633d3c8`, file
 `PrimitiveSetsAboveX/PreliminariesMertens.lean` (Apache-2.0).  The source
 targets Lean `v4.30.0-rc1`; the proof below has been ported and checked against
-this repository's pinned Lean `v4.29.0` and Mathlib `8a178386`.
+this repository's pinned Lean `v4.33.0` and Mathlib `db584cd6`.
 
 This is the classical first Mertens theorem for the von Mangoldt weight.  It
 is strictly weaker than the reciprocal-prime asymptotic, but it is the
@@ -581,8 +581,8 @@ private theorem integrable_const_div_mul_log_sq {x : ℝ} (c : ℝ) (hx : 2 ≤ 
     have hlog : Real.log t ≠ 0 := by simp; grind
     have hdiff : DifferentiableAt ℝ (fun y => -(Real.log y)⁻¹) t := by
       fun_prop (disch := grind)
-    convert hdiff.hasDerivAt using 1
-    simp [deriv_inv_log]
+    refine hdiff.hasDerivAt.congr_deriv ?_
+    simp [deriv_inv_log_apply]
     field
   · intro t ht
     simp only [Set.mem_Ioi] at ht
@@ -652,13 +652,13 @@ private theorem integral_const_div_mul_log_sq {x : ℝ} (c : ℝ) (hx : 2 ≤ x)
   · grind
   · intro t ht
     simp at ht
-    convert HasDerivAt.fun_div (hasDerivAt_const _ (-c))
-      (hasDerivAt_log (by linarith)) ?_ using 1
+    refine (HasDerivAt.fun_div (hasDerivAt_const _ (-c))
+      (hasDerivAt_log (by linarith)) ?_).congr_deriv ?_
+    · simp
+      grind
     · grind
-    simp
-    grind
-  · convert Real.tendsto_log_atTop.inv_tendsto_atTop.const_mul (-c) using 1
-    simp
+  · have h := Real.tendsto_log_atTop.inv_tendsto_atTop.const_mul (-c)
+    simpa [div_eq_mul_inv] using! h
 
 /-- Reciprocal-prime partial sums with a real cutoff. -/
 noncomputable def reciprocalPrimeSumReal (x : ℝ) : ℝ :=

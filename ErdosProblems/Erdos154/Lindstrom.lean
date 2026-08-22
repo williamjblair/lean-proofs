@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 /-
 This is a Lean formalization of a solution to Erdős Problem 154.
 https://www.erdosproblems.com/forum/thread/154
@@ -280,7 +280,7 @@ def B_finset_new (A : Finset ℕ) (m i : ℕ) : Finset ℕ :=
 
 theorem B_finset_new_eq_B (A : Finset ℕ) (m i : ℕ) (hm : m > 0) :
   (B_finset_new A m i : Set ℕ) = B (A : Set ℕ) m i := by
-    convert B_finset_eq_B A m i hm using 1
+    exact B_finset_eq_B A m i hm
 
 /-
 The number of differences from all B_i is the sum of the number of differences from each B_i.
@@ -426,7 +426,7 @@ theorem sum_diffs_order_eq_complement (A : Finset ℕ) (s : ℕ) (hs : s < A.car
         exact Finset.pairwise_sort A (· ≤ ·);
       rw [ List.pairwise_iff_get ] at h_sorted;
       convert h_sorted ⟨ i, by simp ⟩ ⟨ j, by simp ⟩ hij using 1 <;> simp +decide;
-    convert h_sorted ⟨ i, by linarith [ Fin.is_lt i, Nat.sub_add_cancel ( show A.card - ( ‹_› + 1 ) ≤ A.card from Nat.sub_le _ _ ) ] ⟩ ⟨ i + ( A.card - ( ‹_› + 1 ) ), by linarith [ Fin.is_lt i, Nat.sub_add_cancel ( show A.card - ( ‹_› + 1 ) ≤ A.card from Nat.sub_le _ _ ) ] ⟩ ( Nat.lt_add_of_pos_right ( Nat.sub_pos_of_lt ( by linarith [ Finset.mem_range.mp ‹_› ] ) ) ) using 1
+    convert h_sorted ⟨ i, by linarith [ Fin.is_lt i, Nat.sub_add_cancel ( show A.card - ( ‹_› + 1 ) ≤ A.card from Nat.sub_le _ _ ) ] ⟩ ⟨ i + ( A.card - ( ‹_› + 1 ) ), by linarith [ Fin.is_lt i, Nat.sub_add_cancel ( show A.card - ( ‹_› + 1 ) ≤ A.card from Nat.sub_le _ _ ) ] ⟩ ( Nat.lt_add_of_pos_right ( Nat.sub_pos_of_lt ( by linarith [ Finset.mem_range.mp ‹_› ] ) ) ) using 1 <;> rfl
 
 /-
 The sum of differences equals the sum of the set of differences for a Sidon set.
@@ -448,8 +448,15 @@ theorem sum_diffs_le_s_eq_sum_set (A : Finset ℕ) (s : ℕ) (hA : IsSidonSetNat
     rw [ Finset.sum_biUnion ];
     · refine Finset.sum_congr rfl fun v hv => ?_;
       rw [ Finset.sum_image ];
-      intro j hj j' hj' h_eq; specialize h_inj ( v + 1 ) ( v + 1 ) j j'; simp_all +decide ;
-      exact h_inj ( by omega ) ( by omega ) ( by omega ) ( by simpa [ List.getElem?_eq_getElem ( show j + ( v + 1 ) < List.length ( A.sort ( fun x1 x2 => x1 ≤ x2 ) ) from by simpa using by omega ), List.getElem?_eq_getElem ( show j < List.length ( A.sort ( fun x1 x2 => x1 ≤ x2 ) ) from by simpa using by omega ), List.getElem?_eq_getElem ( show j' + ( v + 1 ) < List.length ( A.sort ( fun x1 x2 => x1 ≤ x2 ) ) from by simpa using by omega ), List.getElem?_eq_getElem ( show j' < List.length ( A.sort ( fun x1 x2 => x1 ≤ x2 ) ) from by simpa using by omega ) ] using h_eq );
+      intro j hj j' hj' h_eq
+      rw [ Finset.mem_coe, Finset.mem_range ] at hj hj'
+      have hv' : v < s := Finset.mem_range.mp hv
+      have hlen : (A.sort (· ≤ ·)).length = A.card := Finset.length_sort (s := A) (· ≤ ·)
+      rw [ hlen ] at hj hj'
+      have h1 : j + (v + 1) < (A.sort (· ≤ ·)).length := by omega
+      have h3 : j' + (v + 1) < (A.sort (· ≤ ·)).length := by omega
+      exact (h_inj (v + 1) (v + 1) j j' (by omega) (by omega) (by omega) (by omega) hj hj'
+        (by simp [ List.getElem?_eq_getElem h1 ]) (by simp [ List.getElem?_eq_getElem h3 ]) h_eq).2
     · intros v hv w hw hvw;
       rw [ Function.onFun, Finset.disjoint_left ];
       simp +zetaDelta at *;
@@ -599,11 +606,11 @@ lemma cluster_point_is_const_fin (m : ℕ) (hm : 2 ≤ m)
       exact Filter.subseq_tendsto_of_neBot hρ;
     convert rho_equality_fin m hm ρ _ _ _ using 1;
     · exact fun i => le_of_tendsto_of_tendsto' tendsto_const_nhds ( tendsto_pi_nhds.mp hk_j.2 i ) fun j => h_nonneg _ _;
-    · exact tendsto_nhds_unique ( tendsto_finset_sum _ fun i _ => tendsto_pi_nhds.mp hk_j.2 i ) ( h_sum.comp hk_j.1.tendsto_atTop );
+    · exact tendsto_nhds_unique ( tendsto_finsetSum _ fun i _ => tendsto_pi_nhds.mp hk_j.2 i ) ( h_sum.comp hk_j.1.tendsto_atTop );
     · -- Since $\rho$ is a cluster point of $v$, we have $\sum_{i} \rho_i^{3/2} \leq \limsup_{k} \sum_{i} v_k i^{3/2}$.
       have h_sum_le_limsup : (∑ i, (ρ i) ^ (3 / 2 : ℝ)) ^ 2 ≤ Filter.limsup (fun k => (∑ i, (v k i) ^ (3 / 2 : ℝ)) ^ 2) Filter.atTop := by
         have h_sum_le_limsup : Filter.Tendsto (fun j => (∑ i, (v (k_j j) i) ^ (3 / 2 : ℝ)) ^ 2) Filter.atTop (nhds ((∑ i, (ρ i) ^ (3 / 2 : ℝ)) ^ 2)) := by
-          exact Filter.Tendsto.pow ( tendsto_finset_sum _ fun i _ => Filter.Tendsto.rpow ( tendsto_pi_nhds.mp hk_j.2 i ) tendsto_const_nhds <| by norm_num ) _;
+          exact Filter.Tendsto.pow ( tendsto_finsetSum _ fun i _ => Filter.Tendsto.rpow ( tendsto_pi_nhds.mp hk_j.2 i ) tendsto_const_nhds <| by norm_num ) _;
         refine le_csInf ?_ ?_ <;> norm_num;
         · have h_bounded : ∃ M, ∀ k, (∑ i, (v k i) ^ (3 / 2 : ℝ)) ^ 2 ≤ M := by
             have h_bounded : ∃ M, ∀ k, (∑ i, (v k i) ^ (3 / 2 : ℝ)) ≤ M := by
@@ -619,6 +626,7 @@ lemma cluster_point_is_const_fin (m : ℕ) (hm : 2 ≤ m)
         · exact fun b x hx => le_of_tendsto h_sum_le_limsup ( Filter.eventually_atTop.mpr ⟨ x, fun j hj => hx _ ( hk_j.1.id_le _ |> le_trans hj ) ⟩ );
       refine le_trans ( mul_le_mul_of_nonneg_left h_sum_le_limsup <| Nat.cast_nonneg _ ) ?_;
       convert h_ineq using 1;
+      · rfl
       rw [ Filter.limsup_eq, Filter.limsup_eq ];
       rw [ ← smul_eq_mul, ← Real.sInf_smul_of_nonneg ];
       · congr with x ; simp +decide [Set.mem_smul_set];
@@ -663,7 +671,7 @@ theorem sequence_convergence_to_constant_fin (m : ℕ) (hm : 2 ≤ m)
     have h_cluster_const : ρ = fun _ => 1 / (m : ℝ) := by
       apply cluster_point_is_const_fin m hm v h_nonneg h_sum h_ineq ρ h_cluster;
     have := hρ.comp hsubseq'.1.tendsto_atTop; simp_all +decide [ tendsto_pi_nhds ] ;
-    exact absurd ( this i ) ( by intro H; exact absurd ( H.eventually ( Metric.ball_mem_nhds _ hε_pos ) ) fun h => by obtain ⟨ k, hk ⟩ := h.exists; exact not_lt_of_ge ( hsubseq.2 ( subseq' ( subseq' k ) ) ) ( by simpa using hk ) )
+    exact absurd ( this i ) ( by intro H; exact absurd ( H.eventually ( Metric.ball_mem_nhds _ hε_pos ) ) fun h => by obtain ⟨ k, hk ⟩ := h.exists; exact not_lt_of_ge ( hsubseq.2 ( subseq' ( subseq' k ) ) ) ( by simpa using! hk ) )
 
 /-
 Cardinality of the subset of differences.
@@ -680,7 +688,9 @@ theorem card_total_diffs_subset (A : Finset ℕ) (m : ℕ) (hm : 2 ≤ m) (s : �
     have h_card_union : (Finset.biUnion I (fun i => diffs_le_s_set (B_finset_new A m i) (s i))).card = ∑ i ∈ I, (diffs_le_s_set (B_finset_new A m i) (s i)).card := by
       exact Finset.card_biUnion fun ⦃x⦄ a ⦃y⦄ => h_union_disjoint x y a;
     convert h_card_union using 2;
-    convert Eq.symm ( card_diffs_le_s_set _ _ _ _ ) using 1;
+    · rfl
+    rename_i x hx
+    convert Eq.symm ( card_diffs_le_s_set (B_finset_new A m x) (s x) ?_ ?_ ) using 1;
     · convert B_is_sidon A m ‹_› _ _ using 1;
       · exact B_finset_new_eq_B _ _ _ ( by linarith );
       · linarith;
@@ -715,7 +725,7 @@ lemma eventually_inequality_premises
         have h_card_inf : Filter.Tendsto (fun k => (A_seq k).card : ℕ → ℝ) Filter.atTop Filter.atTop := by
           have h_card_large : Filter.Tendsto (fun k => (A_seq k).card / Real.sqrt (n_seq k) * Real.sqrt (n_seq k)) Filter.atTop Filter.atTop := by
             apply Filter.Tendsto.pos_mul_atTop;
-            exacts [ zero_lt_one, h_card_tendsto, by simpa only [ Real.sqrt_eq_rpow ] using tendsto_rpow_atTop ( by norm_num ) |> Filter.Tendsto.comp <| h_n_tendsto ];
+            exacts [ zero_lt_one, h_card_tendsto, by simpa only [ Real.sqrt_eq_rpow ] using! tendsto_rpow_atTop ( by norm_num ) |> Filter.Tendsto.comp <| h_n_tendsto ];
           exact h_card_large.congr' ( by filter_upwards [ h_n_tendsto.eventually_gt_atTop 0 ] with k hk using by rw [ div_mul_cancel₀ _ ( ne_of_gt ( Real.sqrt_pos.mpr ( Nat.cast_pos.mpr ( Nat.pos_of_ne_zero ( by aesop ) ) ) ) ) ] );
         exact Filter.eventually_atTop.mp ( h_card_inf.eventually_ge_atTop ( 4 * m ) ) |> fun ⟨ K, hK ⟩ ↦ ⟨ K, fun k hk ↦ by exact_mod_cast hK k hk ⟩;
       obtain ⟨ K, hK ⟩ := h_card_bound;

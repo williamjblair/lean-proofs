@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.DigitBoxes
 import ErdosProblems.Erdos730.FixedDepthFourier
 import ErdosProblems.Erdos730.PrimeBands
@@ -246,7 +246,7 @@ theorem tendsto_reciprocalSquareTail_zero :
   have h := tendsto_sum_nat_add
     (f := fun n : ℕ ↦ (((n : ℕ) : ℝ) ^ 2)⁻¹)
   have h' := h.comp (tendsto_add_atTop_nat 1)
-  simpa only [reciprocalSquareTail, Nat.add_assoc] using h'
+  simpa only [reciprocalSquareTail, Nat.add_assoc] using! h'
 
 /-- The exact weighted relaxed-density correction over the depth band. -/
 def fixedDepthDensityCorrection (r X : ℕ) : ℝ :=
@@ -712,7 +712,7 @@ theorem tendsto_reciprocalFiveQuarterTail_zero :
   have h := tendsto_sum_nat_add
     (f := fun n : ℕ ↦ (n : ℝ) ^ (-(5 / 4 : ℝ)))
   have h' := h.comp (tendsto_add_atTop_nat 1)
-  simpa only [reciprocalFiveQuarterTail, Nat.add_assoc] using h'
+  simpa only [reciprocalFiveQuarterTail, Nat.add_assoc] using! h'
 
 theorem fixedDepthFourierBandError_nonneg (r X : ℕ) :
     0 ≤ fixedDepthFourierBandError r X := by
@@ -775,7 +775,7 @@ theorem tendsto_fixedDepthFourierBandError_zero (r : ℕ) :
 
 theorem tendsto_fixedDepthFourierError_zero (r : ℕ) :
     Tendsto (fixedDepthFourierError r) atTop (𝓝 0) := by
-  simpa [fixedDepthFourierError] using
+  simpa [fixedDepthFourierError] using!
     (tendsto_fixedDepthFourierBandError_zero r).const_mul
       (fixedDepthFourierErrorConstant r)
 
@@ -1011,7 +1011,7 @@ theorem tendsto_fixedDepthAnalyticMajorant
     (tendsto_fixedDepthFourierError_zero r)).add
       (tendsto_fixedDepthTerminalBlockError_zero r)).add
         (tendsto_fixedDepthUnitError_zero r hr)
-  simpa only [fixedDepthAnalyticMajorant, add_zero] using h
+  simpa only [fixedDepthAnalyticMajorant, add_zero] using! h
 
 /-- Quantified limsup form: any normalized count eventually dominated by the
 concrete analytic majorant is eventually below the limiting constant plus an

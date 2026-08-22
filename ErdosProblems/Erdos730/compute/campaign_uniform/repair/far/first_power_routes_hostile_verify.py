@@ -26,7 +26,7 @@ REPO_ROOT = Path(__file__).resolve().parents[6]
 
 PRODUCER_HASHES = {
     "ErdosProblems/Erdos730/FirstPowerRoutes.lean": (
-        "427d82b1851d82838a71290eced4c87110cae2ad18483497b7fb2247a972f3a5"
+        "23865bbbf205f33207b8645f6f97bfe84d2b322f5364edf87efd8fe15d80a812"
     ),
     "ErdosProblems/Erdos730/compute/campaign_uniform/repair/far/first_power_routes.py": (
         "02f8a77e6c68bfc0df77b6592f3962a416aedf1659ee9b17a471c54ab6d8f5ab"

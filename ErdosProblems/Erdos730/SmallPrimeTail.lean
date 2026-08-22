@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.FullDensityBudget
 import ErdosProblems.Erdos730.PrimeBands
 
@@ -283,7 +283,7 @@ theorem tendsto_uniformMertensErrorMajorant_zero :
       tendsto_natCast_atTop_atTop
   have hscaled := hlogInv.const_mul
     (2 * reciprocalPrimeMertensErrorConstant * uniformMertensWeightSeries)
-  simpa only [uniformMertensErrorMajorant, div_eq_mul_inv, mul_zero] using hscaled
+  simpa only [uniformMertensErrorMajorant, div_eq_mul_inv, mul_zero] using! hscaled
 
 /-- Quantitative equation (44), after multiplying by the uniform geometric
 depth weight. -/

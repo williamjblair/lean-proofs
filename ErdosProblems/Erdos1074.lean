@@ -165,35 +165,36 @@ private theorem mem17 : EHSNumbers 17 := by
 noncomputable local instance : DecidablePred EHSNumbers := fun _ => Classical.propDecidable _
 
 private theorem nth0 : nth EHSNumbers 0 = 8 := by
-  simpa [Nat.count_succ, notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
-    notMem6, notMem7] using Nat.nth_count mem8
+  simpa [Nat.count_succ (p := EHSNumbers), notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
+    notMem6, notMem7] using! Nat.nth_count mem8
 
 private theorem nth1 : nth EHSNumbers 1 = 9 := by
-  simpa [Nat.count_succ, notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
-    notMem6, notMem7, mem8] using Nat.nth_count mem9
+  simpa [Nat.count_succ (p := EHSNumbers), notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
+    notMem6, notMem7, mem8] using! Nat.nth_count mem9
 
 private theorem nth2 : nth EHSNumbers 2 = 13 := by
-  simpa [Nat.count_succ, notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
-    notMem6, notMem7, mem8, mem9, notMem10, notMem11, notMem12] using
+  simpa [Nat.count_succ (p := EHSNumbers), notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
+    notMem6, notMem7, mem8, mem9, notMem10, notMem11, notMem12] using!
       Nat.nth_count mem13
 
 private theorem nth3 : nth EHSNumbers 3 = 14 := by
-  simpa [Nat.count_succ, notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
-    notMem6, notMem7, mem8, mem9, notMem10, notMem11, notMem12, mem13] using
+  simpa [Nat.count_succ (p := EHSNumbers), notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
+    notMem6, notMem7, mem8, mem9, notMem10, notMem11, notMem12, mem13] using!
       Nat.nth_count mem14
 
 private theorem nth4 : nth EHSNumbers 4 = 15 := by
-  simpa [Nat.count_succ, notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
-    notMem6, notMem7, mem8, mem9, notMem10, notMem11, notMem12, mem13, mem14] using
+  simpa [Nat.count_succ (p := EHSNumbers), notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
+    notMem6, notMem7, mem8, mem9, notMem10, notMem11, notMem12, mem13, mem14] using!
       Nat.nth_count mem15
 
 private theorem nth5 : nth EHSNumbers 5 = 16 := by
-  simpa [Nat.count_succ, notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
+  simpa [Nat.count_succ (p := EHSNumbers), notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
     notMem6, notMem7, mem8, mem9, notMem10, notMem11, notMem12, mem13, mem14,
-    mem15] using Nat.nth_count mem16
+    mem15] using! Nat.nth_count mem16
 
 private theorem nth6 : nth EHSNumbers 6 = 17 := by
-  simpa [Nat.count_succ, notMem0, notMem1, notMem2, notMem3, notMem4, notMem5,
+  simpa [Nat.count_succ (p := EHSNumbers), Nat.count_zero (p := EHSNumbers), notMem0, notMem1,
+    notMem2, notMem3, notMem4, notMem5,
     notMem6, notMem7, mem8, mem9, notMem10, notMem11, notMem12, mem13, mem14,
     mem15, mem16] using Nat.nth_count mem17
 

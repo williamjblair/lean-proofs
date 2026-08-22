@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.HigherPowerCount
 import Mathlib.Analysis.Normed.Group.Tannery
 import Mathlib.Analysis.PSeries
@@ -56,7 +56,7 @@ theorem higherPowerMajorant_summable : Summable higherPowerMajorant := by
   have hp : Summable (fun p : Nat.Primes ↦ 2 * (p : ℝ)⁻¹ ^ 2) := by
     have h := hpNat.comp_injective (i := fun p : Nat.Primes ↦ (p : ℕ))
       Subtype.val_injective
-    simpa [inv_pow] using h
+    simpa [inv_pow] using! h
   have ha : Summable (fun k : ℕ ↦ ((2 : ℝ)⁻¹) ^ k) := by
     exact summable_geometric_of_lt_one (by positivity) (by norm_num)
   have hprod : Summable (fun i : HigherPowerIndex ↦
@@ -164,7 +164,7 @@ theorem tendsto_higherPrimePower_boxBound_div :
       atTop (𝓝 0) := by
     have htop : Tendsto (fun Z : ℕ ↦ Real.sqrt (Z : ℝ)) atTop atTop :=
       Real.tendsto_sqrt_atTop.comp tendsto_natCast_atTop_atTop
-    simpa only [Real.sqrt_div_self] using htop.inv_tendsto_atTop
+    simpa only [Real.sqrt_div_self] using! htop.inv_tendsto_atTop
   have hcubelog : Tendsto (fun Z : ℕ ↦
       ((Z : ℝ) ^ (1 / 3 : ℝ) * Real.logb 2 (Z : ℝ)) / (Z : ℝ))
       atTop (𝓝 0) :=

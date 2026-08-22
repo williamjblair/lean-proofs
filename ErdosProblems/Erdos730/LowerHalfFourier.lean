@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.DigitBoxes
 import ErdosProblems.Erdos730.FixedDepthFourier
 
@@ -119,9 +119,8 @@ theorem lowerHalfTupleResidues_card
       ((i : Fin d) → (lowerHalfDigitIntervals p d i)) =
     halfDigitCount p ^ d
   rw [Fintype.card_pi]
-  simp only [lowerHalfDigitIntervals, Fintype.card_coe,
-    Finset.card_range, Finset.prod_const, Finset.card_univ,
-    Fintype.card_fin]
+  simp only [Fintype.card_coe]
+  simp [lowerHalfDigitIntervals]
 
 /-- The list-based and tuple-based presentations are exactly equal. -/
 theorem lowerHalfTupleResidues_eq_lowerHalfResidues

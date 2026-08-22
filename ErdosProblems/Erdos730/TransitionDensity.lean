@@ -1,4 +1,4 @@
-/- leanprover/lean4:v4.29.0  mathlib 8a178386 (master, the commit the v4.29.1 tag was cut from) -/
+/- leanprover/lean4:v4.33.0  mathlib db584cd6 (master, the commit the v4.33.0 tag is cut from) -/
 import ErdosProblems.Erdos730.BranchEvents
 import ErdosProblems.Erdos730.PrimeBands
 import ErdosProblems.Erdos730.PNTAP
@@ -340,7 +340,7 @@ theorem tendsto_transitionPrimeBandUpper_div :
   have hbase : Tendsto
       (fun X : ℝ ↦ Real.log (Real.sqrt X) ^ 2 / Real.sqrt X)
       atTop (𝓝 0) := by
-    simpa using
+    simpa using!
       (Real.tendsto_pow_log_div_mul_add_atTop 1 0 2 one_ne_zero).comp
         Real.tendsto_sqrt_atTop
   have hscaled : Tendsto
@@ -371,7 +371,7 @@ private theorem tendsto_transitionPrimeCounting_normalized :
   have h := (primeAPCountingReal_normalized_tendsto
     (A := 1) (a := 0) (by norm_num) (by norm_num) (by norm_num)).comp
       tendsto_transitionPrimeBandUpper_nat_atTop
-  simpa using h
+  simpa using! h
 
 private theorem tendsto_transitionPNTScale :
     Tendsto (fun X : ℕ ↦
