@@ -19,10 +19,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_SCHEMA = "lean-proofs.verification-input.v0.1"
 EXPECTED_REPOSITORY = "https://github.com/williamjblair/lean-proofs.git"
-EXPECTED_NATIVE_REVISION = "957eeda763b00dd53c75b66095ec3d16a8ebd427"
+EXPECTED_NATIVE_REVISION = "d33dd6063f58861df857893dbf40103495d42179"
 # lakefile.toml was last changed in this commit (the Palomar library); the
 # theorem reference above stays at the commit that introduced the proof.
-EXPECTED_LAKEFILE_REVISION = "957eeda763b00dd53c75b66095ec3d16a8ebd427"
+EXPECTED_LAKEFILE_REVISION = "d33dd6063f58861df857893dbf40103495d42179"
 EXPECTED_CORE_REPOSITORY = "https://github.com/vela-science/vela.git"
 EXPECTED_CORE_REVISION = "c1a34373c2cdd937ed34fd128174a66fa12be71a"
 EXPECTED_CORE_VERSION = "0.977.2"
@@ -42,8 +42,8 @@ EXPECTED_LOCAL_REFERENCES = {
         "revision": {"kind": "git_commit", "value": EXPECTED_LAKEFILE_REVISION},
         "content_fixity": {
             "media_type": "application/toml",
-            "digest": "sha256:dc6494f3a546691b7d3601cacc8068986379c8a62296ee2f1bc55520ef6cb46b",
-            "size": 940,
+            "digest": "sha256:c91c743cb55f4bc430e0686b5ab56f3eee6ec6bfd185ba23b5f9860c04c19468",
+            "size": 1341,
         },
         "selector": {"kind": "path", "value": "lakefile.toml"},
         "locator": {
@@ -128,8 +128,8 @@ EXPECTED_CLOSURE = [
     },
     {
         "path": "lakefile.toml",
-        "digest": "sha256:dc6494f3a546691b7d3601cacc8068986379c8a62296ee2f1bc55520ef6cb46b",
-        "size": 940,
+        "digest": "sha256:c91c743cb55f4bc430e0686b5ab56f3eee6ec6bfd185ba23b5f9860c04c19468",
+        "size": 1341,
     },
     {
         "path": "lake-manifest.json",

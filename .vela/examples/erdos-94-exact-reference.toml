@@ -13,7 +13,7 @@ identifier = "Erdos94.variants.sum_multiplicity"
 
 [reference.revision]
 kind = "git_commit"
-value = "957eeda763b00dd53c75b66095ec3d16a8ebd427"
+value = "d33dd6063f58861df857893dbf40103495d42179"
 
 [reference.content_fixity]
 media_type = "text/x-lean"
@@ -25,7 +25,7 @@ kind = "lean_declaration"
 value = "Erdos94.variants.sum_multiplicity"
 
 [reference.locator]
-uri = "https://github.com/williamjblair/lean-proofs/blob/957eeda763b00dd53c75b66095ec3d16a8ebd427/ErdosProblems/Erdos94.lean"
+uri = "https://github.com/williamjblair/lean-proofs/blob/d33dd6063f58861df857893dbf40103495d42179/ErdosProblems/Erdos94.lean"
 mutable = false
 authentication = "public"
 
@@ -49,8 +49,8 @@ size = 25
 
 [[closure]]
 path = "lakefile.toml"
-digest = "sha256:dc6494f3a546691b7d3601cacc8068986379c8a62296ee2f1bc55520ef6cb46b"
-size = 940
+digest = "sha256:c91c743cb55f4bc430e0686b5ab56f3eee6ec6bfd185ba23b5f9860c04c19468"
+size = 1341
 [[closure]]
 path = "lake-manifest.json"
 digest = "sha256:a81ef40554be38a473d0339b81e220c9d013226aae49d29305417f2e091bf482"

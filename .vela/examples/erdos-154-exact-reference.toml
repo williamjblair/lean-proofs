@@ -56,8 +56,8 @@ size = 25
 
 [[closure]]
 path = "lakefile.toml"
-digest = "sha256:dc6494f3a546691b7d3601cacc8068986379c8a62296ee2f1bc55520ef6cb46b"
-size = 940
+digest = "sha256:c91c743cb55f4bc430e0686b5ab56f3eee6ec6bfd185ba23b5f9860c04c19468"
+size = 1341
 
 [[closure]]
 path = "lake-manifest.json"
