@@ -1,0 +1,34 @@
+name: apply-two-defect-patch
+
+on:
+  push:
+    branches:
+      - codex/erdos23-two-defect-final
+    paths:
+      - scripts/agent_two_defect_patch.py
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/erdos23-two-defect-final
+          fetch-depth: 0
+          show-progress: false
+      - name: Apply deterministic source patch
+        run: python3 scripts/agent_two_defect_patch.py
+      - name: Commit patched Lean source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ErdosProblems/Erdos23GapGBTwoDefectFinal.lean
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m 'Apply two-defect source patch'
+          git push origin HEAD:codex/erdos23-two-defect-final
