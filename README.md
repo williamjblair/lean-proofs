@@ -125,6 +125,16 @@ package-global hygiene qualification rather than a gap in the proof.
 
 ## Relationship to the rest of the ecosystem
 
+This proof library is a scientific owner in the broader
+[science-factory programme](https://github.com/williamjblair/autonomous-science/blob/master/VISION.md).
+The [repository map](https://github.com/williamjblair/autonomous-science/blob/master/docs/REPOSITORY_MAP.md)
+separates maintained proofs, open campaigns, upstream statement repositories,
+contribution tools and historical checkouts. The programme can use these proofs
+and checks in repeatable research handoffs; it does not replace this repository's
+proof index or upstream acceptance. The links in `FRONTIER.md` include historical
+campaign locations: follow each destination's current ownership/archive notice
+before continuing work there.
+
 - **erdos-fc-sync** reads `proofs.yaml` as a proof source. When a problem has a
   clean proof here that Formal Conjectures does not yet link, the sync surfaces
   it as a contribution target.
